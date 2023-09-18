@@ -14,7 +14,9 @@ CREATE TABLE Staff (
 	Sex NVARCHAR(20),
 	Email NVARCHAR(50), 
 	Adress NVARCHAR(50),
-	BirthDate DATE
+	BirthDate DATE,
+	Username NVARCHAR(50),
+	Password NVARCHAR(50)
 )
 
 CREATE TABLE Customer (
@@ -44,6 +46,7 @@ CREATE TABLE Inventory (
 	InventoryID NVARCHAR(20) NOT NULL PRIMARY KEY,
 	ImportDate DATE,
 	Quantity INT,
+	Unit INT,
 	Description NVARCHAR(MAX)
 )
 
@@ -85,10 +88,9 @@ CREATE TABLE CageMaterial (
 CREATE TABLE Admin (
 	AdminID NVARCHAR(20) NOT NULL PRIMARY KEY,
 	Name NVARCHAR(50),
-	PhoneNumber NVARCHAR(20),
-	UserName NVARCHAR(20),
-	Password NVARCHAR(20),
-	Email NVARCHAR(50)
+	Email NVARCHAR(50),
+	Username NVARCHAR(50),
+	Password NVARCHAR(50)
 )
 
 CREATE TABLE Manager (
@@ -96,6 +98,8 @@ CREATE TABLE Manager (
 	Name NVARCHAR(50),
 	PhoneNumber NVARCHAR(20),
 	Address NVARCHAR(50),
-	Email NVARCHAR(50)
+	Email NVARCHAR(50),
+	Username NVARCHAR(50),
+	Password NVARCHAR(50)
 )
 
