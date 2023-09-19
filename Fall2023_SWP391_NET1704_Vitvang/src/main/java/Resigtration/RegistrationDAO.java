@@ -5,7 +5,7 @@
  */
 package Resigtration;
 
-import Database.DBUtils;
+import Database.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class RegistrationDAO implements Serializable {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            con = DBUtils.makeConnection();
+            con = DBHelper.makeConnection();
             // tra ra null or k.
             if (con != null) {
                 String sql = "Select username, password From Registration"
@@ -66,7 +66,7 @@ public class RegistrationDAO implements Serializable {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            con = DBUtils.makeConnection();
+            con = DBHelper.makeConnection();
             // tra ra null or k.
             if (con != null) {
                 String sql = "Select username, password, lastname, isAdmin   From Registration"
@@ -106,7 +106,7 @@ public class RegistrationDAO implements Serializable {
        Connection con = null;
         PreparedStatement stm = null;
         try {
-            con = DBUtils.makeConnection();
+            con = DBHelper.makeConnection();
             // tra ra null or k.
             if (con != null) {
                 String sql = "Delete From Registration Where username = ?";
@@ -136,7 +136,7 @@ public class RegistrationDAO implements Serializable {
         Connection con = null;
         PreparedStatement stm = null;
         try {
-            con = DBUtils.makeConnection();
+            con = DBHelper.makeConnection();
             // tra ra null or k.
             if (con != null) {
                 String sql = "Update Registration set password= ?, isAdmin= ?, lastname= ? "
@@ -168,7 +168,7 @@ public class RegistrationDAO implements Serializable {
        Connection con = null;
         PreparedStatement stm = null;
         try {
-            con = DBUtils.makeConnection();
+            con = DBHelper.makeConnection();
             // tra ra null or k.
             if (con != null) {
                 String sql = "Insert into Registration (username, password, lastname, isAdmin) values(?,?,?,?)";
