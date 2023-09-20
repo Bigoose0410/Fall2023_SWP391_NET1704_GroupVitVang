@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login
-    Created on : Sep 19, 2023, 4:46:01 PM
-    Author     : Admin
+Document   : login
+Created on : Sep 19, 2023, 4:46:01 PM
+Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -36,12 +36,12 @@
                                                 <input class="form-control" id="inputPassword" name="Password" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
-<!--                                            <div class="form-check mb-3">
+                                            <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                                            </div>-->
+                                            </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <!--<a class="small" href="password.html">Forgot Password?</a>-->
+                                                <a class="small" href="password.html">Forgot Password?</a>
                                                 <!--<a class="btn btn-primary" href="index.html">Login</a>-->
                                                 <input class="btn btn-primary" type="submit" value="Login" name="btAction" />
                                             </div>
