@@ -33,7 +33,6 @@ CREATE TABLE Orderr (
 	EndDate DATE,
 	Quantity INT,
 	Price INT,
-	Delivery NVARCHAR(20),
 	Address NVARCHAR(50),
 	StatusProcess NVARCHAR(20),
 	StaffID NVARCHAR(20),
