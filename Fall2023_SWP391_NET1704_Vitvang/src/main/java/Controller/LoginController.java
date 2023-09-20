@@ -31,8 +31,8 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String username = request.getParameter("Username");
+            String password = request.getParameter("Password");
             out.println(username + password);
         }
     }
