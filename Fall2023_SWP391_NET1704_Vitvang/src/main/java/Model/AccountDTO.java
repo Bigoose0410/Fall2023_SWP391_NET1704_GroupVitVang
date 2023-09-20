@@ -2,15 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Account;
-
-import java.io.Serializable;
+package Model;
 
 /**
  *
  * @author Admin
  */
-public class AccountDTO implements Serializable{
+public class AccountDTO {
+
         private String AccountID;
         private String Password;
         private String FullName;
@@ -87,7 +86,4 @@ public class AccountDTO implements Serializable{
         public void setStatus(String Status) {
                 this.Status = Status;
         }
-        
-        
-        
 }

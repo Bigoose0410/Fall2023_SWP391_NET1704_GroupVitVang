@@ -17,11 +17,8 @@
     </properties>
     
     <dependencies>
-<<<<<<< HEAD
+
         <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
-=======
-       
->>>>>>> af1ff65eb0961b44ad44b62c31747dd027dcac69
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
@@ -49,18 +46,11 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
-<<<<<<< HEAD
-            <!--giup ket noi java csdl-->
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>11.2.3.jre17</version>
+            <version>10.2.1.jre17</version>
         </dependency>
-=======
-    <groupId>com.microsoft.sqlserver</groupId>
-    <artifactId>mssql-jdbc</artifactId>
-    <version>10.2.1.jre17</version>
-</dependency>
->>>>>>> af1ff65eb0961b44ad44b62c31747dd027dcac69
+
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -69,7 +59,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-<<<<<<< HEAD
+
             <groupId>cloud.piranha.core</groupId>
             <artifactId>piranha-core-servlet-api</artifactId>
             <version>22.6.0</version>
@@ -77,12 +67,23 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
       
-=======
+        <dependency>
             <groupId>opensymphony</groupId>
             <artifactId>sitemesh</artifactId>
             <version>${sitemesh.version}</version>
         </dependency>
->>>>>>> af1ff65eb0961b44ad44b62c31747dd027dcac69
+        
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

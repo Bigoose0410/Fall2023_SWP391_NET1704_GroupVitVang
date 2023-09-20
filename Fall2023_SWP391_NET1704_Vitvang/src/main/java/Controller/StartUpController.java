@@ -5,7 +5,7 @@
 package Controller;
 
 import Account.AccountDAO;
-import Account.AccountDTO;
+import Model.AccountDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,9 +25,9 @@ import javax.naming.NamingException;
 @WebServlet(name = "StartUpController", urlPatterns = {"/StartUpController"})
 public class StartUpController extends HttpServlet {
 
-        private static final String AdminPage = "index.html";
-        private static final String StaffPage = "index.html";
-        private static final String ManagerPage = "index.html";
+        private static final String AdminPage = "Adminpage.html";
+        private static final String StaffPage = "Adminpage.html";
+        private static final String ManagerPage = "Adminpage.html";
 
         /**
          * Processes requests for both HTTP <code>GET</code>
@@ -42,7 +42,7 @@ public class StartUpController extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String url = "errorPageLogin.html";
+                String url = "login.jsp";
                 try {
                         //1. get all cookie 
                         Cookie[] cookies = request.getCookies();

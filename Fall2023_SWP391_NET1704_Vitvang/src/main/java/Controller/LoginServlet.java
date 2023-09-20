@@ -5,11 +5,11 @@
 package Controller;
 
 import Account.AccountDAO;
-import Account.AccountDTO;
+import Account.AccountLoginError;
+import Model.AccountDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,9 +27,10 @@ import javax.naming.NamingException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "index.html";
-        private static final String StaffPage = "index.html";
-        private static final String ManagerPage = "index.html";
+        private static final String AdminPage = "Adminpage.html";
+        private static final String StaffPage = "header.jsp";
+        private static final String ManagerPage = "header.jsp";
+        private static final String LoginPage = "login.jsp";
 
         /**
          * Processes requests for both HTTP <code>GET</code>
@@ -46,31 +47,47 @@ public class LoginServlet extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 String username = request.getParameter("txtUsername");
                 String password = request.getParameter("txtPassword");
-
                 String url = "errorPageLogin.html";
                 try {
-                        // kiem tra xem ng ta nhan dung parameter chua roi moi can cac filt sau do
-                        //1.Call model - DAO
-                        //1.1 new object
-                        AccountDAO dao = new AccountDAO();
-                        //1.2 Call method
-                        AccountDTO result = dao.checkLogin(username, password);
-                        switch (result.getRoleID()) {
-                                case 1:
-                                        url = AdminPage;
-                                        break;
-                                case 2:
-                                        url = ManagerPage;
-                                        break;
-                                default:
-                                        url = StaffPage;
-                                        break;
+                        AccountLoginError error = new AccountLoginError();
+                        boolean foundErr = false;
+                        if (username.isEmpty()) { // if userame empty
+                                // found error 
+                                foundErr = true;
+                                error.setIsEmptyUsername("Please enter username");
                         }
-                        HttpSession session = request.getSession();
-                        session.setAttribute("USER", result);
-                        Cookie cookie = new Cookie(username, password);
-                        cookie.setMaxAge(60 * 3);
-                        response.addCookie(cookie);
+                        if (password.isEmpty()) { // if password empty
+                                // found error 
+                                foundErr = true;
+                                error.setIsEmptyPassword("Please enter password");
+                        }
+                        if (foundErr) {
+                                request.setAttribute("LOGIN_ERRORS", error); 
+                                url = LoginPage;
+                        } else {
+                                // kiem tra xem ng ta nhan dung parameter chua roi moi can cac filt sau do
+                                //1.Call model - DAO
+                                //1.1 new object
+                                AccountDAO dao = new AccountDAO();
+                                //1.2 Call method
+                                AccountDTO result = dao.checkLogin(username, password);
+                                switch (result.getRoleID()) {
+                                        case 1:
+                                                url = AdminPage;
+                                                break;
+                                        case 2:
+                                                url = ManagerPage;
+                                                break;
+                                        default:
+                                                url = StaffPage;
+                                                break;
+                                }
+                                HttpSession session = request.getSession();
+                                session.setAttribute("USER", result);
+//                                Cookie cookie = new Cookie(username, password);
+//                                cookie.setMaxAge(60 * 3);
+//                                response.addCookie(cookie);
+                        } // no error input 
                 } catch (SQLException ex) {
                         log("LOGINSERVLET _ SQL" + ex.getMessage());
                 } catch (NamingException ex) {

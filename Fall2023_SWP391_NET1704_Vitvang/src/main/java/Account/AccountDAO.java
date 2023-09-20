@@ -4,11 +4,12 @@
  */
 package Account;
 
+import Model.AccountDTO;
 import Util.DBHelper;
-import jakarta.resource.cci.ResultSet;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 public class AccountDAO implements  Serializable{
@@ -23,16 +24,16 @@ public class AccountDAO implements  Serializable{
             con = (Connection) DBHelper.makeConnection();
             if (con != null) {
                 //2. create SQL statement string
-                String sql = "Select * " // phai co cach sau username
+                String sql = "Select AccountID, FullName, Email, CategaryBy, RoleID, Status " // phai co cach sau username
                         + "From Account "
                         + "Where AccountID = ? "
-                        + "And Password = ?";
+                        + "And Password = ? ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, AccountID);
                 stm.setString(2, Password);
                 //4. Excute query
-                rs = (ResultSet) stm.executeQuery();
+                rs = stm.executeQuery();
                 //5. Process
                 if (rs.next()) {
 //                    
@@ -43,7 +44,7 @@ public class AccountDAO implements  Serializable{
                     int RoleID = rs.getInt("RoleID"); 
                     String Status = rs.getString("Status"); 
                     
-                    result = new AccountDTO(AccountID, Password, FullName, Email, CategaryBy, RoleID, Status);
+                    result = new AccountDTO(AccountID, null, FullName, Email, CategaryBy, RoleID, Status);
                     
                     
                 }//end username and password are checked
@@ -58,6 +59,7 @@ public class AccountDAO implements  Serializable{
             }
             if (con != null) {
                 con.close();
+                DBHelper.closeConnection(con);
             }
         }
         return result;
