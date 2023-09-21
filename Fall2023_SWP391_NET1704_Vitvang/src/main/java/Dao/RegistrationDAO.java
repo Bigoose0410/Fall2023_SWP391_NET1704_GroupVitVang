@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Resigtration;
+package Dao;
 
 import Database.DBHelper;
 import java.io.Serializable;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class RegistrationDAO implements Serializable {
+    public class    RegistrationDAO implements Serializable {
 
     public boolean checkLogin(String username, String password) throws SQLException {
         Connection con = null;
