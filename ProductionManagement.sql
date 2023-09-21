@@ -101,4 +101,3 @@ CREATE TABLE Manager (
 	Username NVARCHAR(50),
 	Password NVARCHAR(50)
 )
-

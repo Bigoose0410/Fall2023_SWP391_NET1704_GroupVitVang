@@ -3,43 +3,59 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controller;
-import jakarta.servlet.RequestDispatcher;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  *
  * @author Admin
  */
-public class MainController extends HttpServlet {
+@WebServlet(name = "LogOutServlet", urlPatterns = {"/LogOutServlet"})
+public class LogOutServlet extends HttpServlet {
 
+        private static final String loginPage = "loginPage.html";
 
-        private final String LoginController = "LoginServlet";
-        private final String StartUpController = "StartUpController";
-        private final String LogOutController = "LogOutServlet";
+        /**
+         * Processes requests for both HTTP <code>GET</code>
+         * and <code>POST</code> methods.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific
+         * error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        String url = loginPage;
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String url = "errorPageLogin";
+                String cookiekey = request.getParameter("cookiekey");
+
                 try {
-                        /* TODO output your page here. You may use following sample code. */
-                        String button = request.getParameter("btAction");
-                        if (button == null) {
-                                url = StartUpController;
-                        } else if (button.equals("Login")) {
-                                url = LoginController;
-                        } else if (button.equals("LogOut")) {
-                                url = LogOutController;
+                        Cookie[] cookies = request.getCookies();
+                        for (Cookie cooky : cookies) {
+                                if(cooky.getName().equals(cookiekey)) {
+                                        if(cooky.getName().equals(cookiekey)){
+                                                cooky.setMaxAge(0);
+                                                response.addCookie(cooky);
+                                        }
+                                }
                         }
+                        HttpSession session = request.getSession(false);
+                        if(session != null) {
+                                session.invalidate();
+                        }
+                        
                 } finally {
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
+                        response.sendRedirect(url);
                 }
         }
 
@@ -83,6 +99,5 @@ public class MainController extends HttpServlet {
         public String getServletInfo() {
                 return "Short description";
         }// </editor-fold>
-
 
 }
