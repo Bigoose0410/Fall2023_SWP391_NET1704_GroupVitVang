@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,21 +15,25 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class MainController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
-    private final String LOGINCONTROLLER = "LoginController";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String button = request.getParameter("btAction");
-            String url = "";
-            if (button.equals("Login")) {
-                url = LOGINCONTROLLER;
-            }
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            out.println(username + password);
         }
     }
 
