@@ -24,9 +24,10 @@ public class MainController extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String url = "errorPageLogin";
                 String button = request.getParameter("btAction");
+                String url = "errorPageLogin";
                 try {
+                        /* TODO output your page here. You may use following sample code. */
                         if (button == null) {
                                 url = StartUpController;
                         } else if (button.equals("Login")) {
