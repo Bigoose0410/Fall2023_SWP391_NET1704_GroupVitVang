@@ -11,14 +11,18 @@ package Account;
 public class AccountLoginError {
         private String isEmptyUsername;
         private String isEmptyPassword;
+        private String isWrongAccount;
 
         public AccountLoginError() {
         }
 
-        public AccountLoginError(String isEmptyUsername, String isEmptyPassword) {
+        public AccountLoginError(String isEmptyUsername, String isEmptyPassword, String isWrongAccount) {
                 this.isEmptyUsername = isEmptyUsername;
                 this.isEmptyPassword = isEmptyPassword;
+                this.isWrongAccount = isWrongAccount;
         }
+
+        
 
         public String getIsEmptyUsername() {
                 return isEmptyUsername;
@@ -35,5 +39,14 @@ public class AccountLoginError {
         public void setIsEmptyPassword(String isEmptyPassword) {
                 this.isEmptyPassword = isEmptyPassword;
         }
+
+        public String getIsWrongAccount() {
+                return isWrongAccount;
+        }
+
+        public void setIsWrongAccount(String isWrongAccount) {
+                this.isWrongAccount = isWrongAccount;
+        }
+        
 
 }
