@@ -11,7 +11,7 @@
         <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Order</title>
-    <link rel="stylesheet" href="css\index.css" />
+    <link rel="stylesheet" href="css\addOrder.css" />
     </head>
    <body>
     <header>
@@ -45,7 +45,7 @@
       <!-- <h2>Them thong tin san pham</h2> -->
 
       <main>
-        <div class="main-Info">
+<!--        <div class="main-Info">
           <div class="search-container">
             <input
               type="text"
@@ -57,7 +57,7 @@
           <div class="text-right">
             <button class="add-button">Add</button>
           </div>
-        </div>
+        </div>-->
         <h2>Them thong tin san pham</h2>
         <div class="main-content">
           <ul>
