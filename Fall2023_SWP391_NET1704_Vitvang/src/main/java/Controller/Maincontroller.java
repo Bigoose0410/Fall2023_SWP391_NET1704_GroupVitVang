@@ -20,20 +20,23 @@ public class MainController extends HttpServlet {
         private final String LoginController = "LoginServlet";
         private final String StartUpController = "StartUpController";
         private final String LogOutController = "LogOutServlet";
+        private final String SearchOrderController = "SearchOrderController";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
+
                 String button = request.getParameter("btAction");
-                String url = "errorPageLogin";
+                String url = "errorPageLogin.html";
                 try {
-                        /* TODO output your page here. You may use following sample code. */
                         if (button == null) {
                                 url = StartUpController;
                         } else if (button.equals("Login")) {
                                 url = LoginController;
                         } else if (button.equals("LogOut")) {
                                 url = LogOutController;
+                        } else if (button.equals("Search")) {
+                                url = SearchOrderController;
                         }
                 } finally {
                         RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -82,4 +85,9 @@ public class MainController extends HttpServlet {
                 return "Short description";
         }// </editor-fold>
 
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
 }

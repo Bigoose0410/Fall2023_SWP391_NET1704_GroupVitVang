@@ -28,7 +28,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "Adminpage.html";
+        private static final String AdminPage = "searchOrder.html";
         private static final String StaffPage = "header.jsp";
         private static final String ManagerPage = "header.jsp";
         private static final String LoginPage = "login.jsp";
@@ -85,16 +85,17 @@ public class LoginServlet extends HttpServlet {
                                                         url = StaffPage;
                                                         break;
                                         }
+                                        HttpSession session = request.getSession();
+                                        session.setAttribute("USER", result);
+                                        Cookie cookie = new Cookie(username, password);
+                                        cookie.setMaxAge(60 * 3);
+                                        response.addCookie(cookie);
                                 } else {
                                         error.setIsWrongAccount("Wrong username or password");
                                         request.setAttribute("LOGIN_ERRORS", error);
                                         url = LoginPage;
                                 }
-                                HttpSession session = request.getSession();
-                                session.setAttribute("USER", result);
-                                Cookie cookie = new Cookie(username, password);
-                                cookie.setMaxAge(60 * 3);
-                                response.addCookie(cookie);
+                                
                         } // no error input 
                 } catch (SQLException ex) {
                         log("LOGINSERVLET _ SQL" + ex.getMessage());
