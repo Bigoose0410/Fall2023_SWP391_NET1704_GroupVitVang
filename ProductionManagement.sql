@@ -1,0 +1,118 @@
+﻿USE [master]
+GO
+
+CREATE DATABASE [ProductionManagement]
+GO
+
+USE [ProductionManagement]
+GO
+
+CREATE TABLE Role (
+	RoleID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Rolename NVARCHAR(20)
+)
+
+CREATE TABLE Account (
+	AccountID NVARCHAR(20) NOT  NULL PRIMARY KEY,
+	Password NVARCHAR(50),
+	RoleID NVARCHAR(20),
+	FOREIGN KEY(RoleID) REFERENCES Role(RoleID)
+)
+
+CREATE TABLE Staff (
+	StaffID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	PhoneNumber NVARCHAR(20),
+	Sex NVARCHAR(20),
+	Adress NVARCHAR(50),
+	Email NVARCHAR(50), 
+	BirthDate DATE,
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
+)
+
+CREATE TABLE Customer (
+	CustomerID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	PhoneNumber NVARCHAR(20),
+	Adress NVARCHAR(50),
+	Email NVARCHAR(50),
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
+)
+
+CREATE TABLE Admin (
+	AdminID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	PhoneNumber NVARCHAR(20),
+	Email NVARCHAR(50),
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
+)
+
+CREATE TABLE Manager (
+	ManagerID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	PhoneNumber NVARCHAR(20),
+	Address NVARCHAR(50),
+	Email NVARCHAR(50),
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
+)
+
+CREATE TABLE Orderr (
+	OrderID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	StartDate DATE,
+	EndDate DATE,
+	TotalPrice INT,
+	Address NVARCHAR(50),
+	StatusProgress NVARCHAR(20),
+	CustomerID NVARCHAR(20),
+	FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID)
+)
+
+CREATE TABLE Cage (
+	CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	Price INT,
+	Origin NVARCHAR(20),
+	Description NVARCHAR(MAX),
+)
+
+CREATE TABLE Inventory (
+	InventoryID NVARCHAR(20) NOT NULL,
+	CageID NVARCHAR(20) NOT NULL,
+	ImportDate DATE,
+	Quantity INT,
+	Unit NVARCHAR(20),
+	Description NVARCHAR(MAX),
+	PRIMARY KEY(InventoryID, CageID),
+	FOREIGN KEY(CageID) REFERENCES Cage(CageID)
+)
+
+CREATE TABLE DetailOrder (
+	OrderID NVARCHAR(20) NOT NULL,
+	CageID NVARCHAR(20) NOT NULL,
+	Quantity INT,
+	PRIMARY KEY(OrderID, CageID),
+	FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
+	FOREIGN KEY(CageID) REFERENCES Cage(CageID)
+)
+
+CREATE TABLE Material (
+	MaterialID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	Origin NVARCHAR(20),
+	Price INT,
+	Quantity INT,
+	Unit NVARCHAR(20)
+)
+
+CREATE TABLE CageMaterial (
+	CageID NVARCHAR(20) NOT NULL,
+	MaterialID NVARCHAR(20) NOT NULL,
+	Quantity INT,
+	PRIMARY KEY(CageID, MaterialID),
+	FOREIGN KEY(CageID) REFERENCES Cage(CageID),
+	FOREIGN KEY(MaterialID) REFERENCES Material(MaterialID)
+)
