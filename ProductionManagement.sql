@@ -7,16 +7,28 @@ GO
 USE [ProductionManagement]
 GO
 
+CREATE TABLE Role (
+	RoleID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Rolename NVARCHAR(20)
+)
+
+CREATE TABLE Account (
+	AccountID NVARCHAR(20) NOT  NULL PRIMARY KEY,
+	Password NVARCHAR(50),
+	RoleID NVARCHAR(20),
+	FOREIGN KEY(RoleID) REFERENCES Role(RoleID)
+)
+
 CREATE TABLE Staff (
 	StaffID NVARCHAR(20) NOT NULL PRIMARY KEY,
 	Name NVARCHAR(50),
 	PhoneNumber NVARCHAR(20),
 	Sex NVARCHAR(20),
-	Email NVARCHAR(50), 
 	Adress NVARCHAR(50),
+	Email NVARCHAR(50), 
 	BirthDate DATE,
-	Username NVARCHAR(50),
-	Password NVARCHAR(50)
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 )
 
 CREATE TABLE Customer (
@@ -24,29 +36,39 @@ CREATE TABLE Customer (
 	Name NVARCHAR(50),
 	PhoneNumber NVARCHAR(20),
 	Adress NVARCHAR(50),
-	Email NVARCHAR(50)
+	Email NVARCHAR(50),
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
+)
+
+CREATE TABLE Admin (
+	AdminID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	PhoneNumber NVARCHAR(20),
+	Email NVARCHAR(50),
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
+)
+
+CREATE TABLE Manager (
+	ManagerID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50),
+	PhoneNumber NVARCHAR(20),
+	Address NVARCHAR(50),
+	Email NVARCHAR(50),
+	AccountID NVARCHAR(20),
+	FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 )
 
 CREATE TABLE Orderr (
-	OrderrID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	OrderID NVARCHAR(20) NOT NULL PRIMARY KEY,
 	StartDate DATE,
 	EndDate DATE,
-	Quantity INT,
-	Price INT,
+	TotalPrice INT,
 	Address NVARCHAR(50),
-	StatusProcess NVARCHAR(20),
-	StaffID NVARCHAR(20),
+	StatusProgress NVARCHAR(20),
 	CustomerID NVARCHAR(20),
-	FOREIGN KEY(StaffID) REFERENCES Staff(StaffID),
 	FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID)
-)
-
-CREATE TABLE Inventory (
-	InventoryID NVARCHAR(20) NOT NULL PRIMARY KEY,
-	ImportDate DATE,
-	Quantity INT,
-	Unit INT,
-	Description NVARCHAR(MAX)
 )
 
 CREATE TABLE Cage (
@@ -55,15 +77,25 @@ CREATE TABLE Cage (
 	Price INT,
 	Origin NVARCHAR(20),
 	Description NVARCHAR(MAX),
-	InventoryID NVARCHAR(20),
-	FOREIGN KEY(InventoryID) REFERENCES Inventory(InventoryID)
 )
 
-CREATE TABLE CageOrderr (
-	OrderrID NVARCHAR(20) NOT NULL,
+CREATE TABLE Inventory (
+	InventoryID NVARCHAR(20) NOT NULL,
 	CageID NVARCHAR(20) NOT NULL,
-	PRIMARY KEY(OrderrID, CageID),
-	FOREIGN KEY(OrderrID) REFERENCES Orderr(OrderrID),
+	ImportDate DATE,
+	Quantity INT,
+	Unit NVARCHAR(20),
+	Description NVARCHAR(MAX),
+	PRIMARY KEY(InventoryID, CageID),
+	FOREIGN KEY(CageID) REFERENCES Cage(CageID)
+)
+
+CREATE TABLE DetailOrder (
+	OrderID NVARCHAR(20) NOT NULL,
+	CageID NVARCHAR(20) NOT NULL,
+	Quantity INT,
+	PRIMARY KEY(OrderID, CageID),
+	FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
 	FOREIGN KEY(CageID) REFERENCES Cage(CageID)
 )
 
@@ -73,31 +105,14 @@ CREATE TABLE Material (
 	Origin NVARCHAR(20),
 	Price INT,
 	Quantity INT,
-	Unit INT
+	Unit NVARCHAR(20)
 )
 
 CREATE TABLE CageMaterial (
 	CageID NVARCHAR(20) NOT NULL,
-	MaterialID NVARCHAR(20) NOT NULL
+	MaterialID NVARCHAR(20) NOT NULL,
+	Quantity INT,
 	PRIMARY KEY(CageID, MaterialID),
 	FOREIGN KEY(CageID) REFERENCES Cage(CageID),
 	FOREIGN KEY(MaterialID) REFERENCES Material(MaterialID)
-)
-
-CREATE TABLE Admin (
-	AdminID NVARCHAR(20) NOT NULL PRIMARY KEY,
-	Name NVARCHAR(50),
-	Email NVARCHAR(50),
-	Username NVARCHAR(50),
-	Password NVARCHAR(50)
-)
-
-CREATE TABLE Manager (
-	ManagerID NVARCHAR(20) NOT NULL PRIMARY KEY,
-	Name NVARCHAR(50),
-	PhoneNumber NVARCHAR(20),
-	Address NVARCHAR(50),
-	Email NVARCHAR(50),
-	Username NVARCHAR(50),
-	Password NVARCHAR(50)
 )
