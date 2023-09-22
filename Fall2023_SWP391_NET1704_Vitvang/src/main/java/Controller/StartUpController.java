@@ -25,7 +25,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "StartUpController", urlPatterns = {"/StartUpController"})
 public class StartUpController extends HttpServlet {
 
-        private static final String AdminPage = "Adminpage.html";
+        private static final String AdminPage = "searchOrder.html";
         private static final String StaffPage = "Adminpage.html";
         private static final String ManagerPage = "Adminpage.html";
 

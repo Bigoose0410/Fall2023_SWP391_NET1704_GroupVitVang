@@ -19,6 +19,11 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
+
+        <!--GET search value from request param-->
+        <c:set var="Username" value="${param.txtUsername}"/>
+        <c:set var="Password" value="${param.txtPassword}"/>
+
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -31,8 +36,10 @@
                                     <div class="card-body">
                                         <form action="MainController">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputUsername" name="txtUsername" type="text" placeholder="text"/>
+                                                <input class="form-control" id="inputUsername" name="txtUsername" value="${param.txtUsername}"
+                                                       type="text" placeholder="text"/>
                                                 <label for="inputUsername">Username</label>
+                                                <!--error of username-->
                                                 <c:if test="${not empty error.getIsEmptyUsername()}">
                                                     <font style="color: red;">
                                                     <!--print out error-->
@@ -41,12 +48,20 @@
                                                 </c:if>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" name="txtPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" id="inputPassword" name="txtPassword" value="${param.txtPassword}"
+                                                       type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
+                                                <!--error of password-->
                                                 <c:if test="${not empty error.getIsEmptyPassword()}">
                                                     <font style="color: red;">
                                                     <!--print out error-->
                                                     ${error.getIsEmptyPassword()}
+                                                    </font><br/>                                                   
+                                                </c:if>
+                                                <c:if test="${not empty error.getIsWrongAccount()}">
+                                                    <font style="color: red;">
+                                                    <!--print out error-->
+                                                    ${error.getIsWrongAccount()}
                                                     </font><br/>                                                   
                                                 </c:if>
                                             </div>
@@ -54,9 +69,13 @@
                                                                                             <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                                                             <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                                                                         </div>-->
+
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <!--<a class="small" href="password.html">Forgot Password?</a>-->
                                                 <!--<a class="btn btn-primary" href="index.html">Login</a>-->
+
+                                                <input type="hidden" name="lastUsername" value="${Username}" />
+                                                <input type="hidden" name="lastpassword" value="${Password}" />
                                                 <input class="btn btn-primary" type="submit" value="Login" name="btAction" />
                                             </div>
                                         </form>

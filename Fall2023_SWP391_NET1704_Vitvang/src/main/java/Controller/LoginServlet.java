@@ -10,6 +10,7 @@ import Model.AccountDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "Adminpage.html";
+        private static final String AdminPage = "searchOrder.html";
         private static final String StaffPage = "header.jsp";
         private static final String ManagerPage = "header.jsp";
         private static final String LoginPage = "login.jsp";
@@ -62,7 +63,7 @@ public class LoginServlet extends HttpServlet {
                                 error.setIsEmptyPassword("Please enter password");
                         }
                         if (foundErr) {
-                                request.setAttribute("LOGIN_ERRORS", error); 
+                                request.setAttribute("LOGIN_ERRORS", error);
                                 url = LoginPage;
                         } else {
                                 // kiem tra xem ng ta nhan dung parameter chua roi moi can cac filt sau do
@@ -71,22 +72,30 @@ public class LoginServlet extends HttpServlet {
                                 AccountDAO dao = new AccountDAO();
                                 //1.2 Call method
                                 AccountDTO result = dao.checkLogin(username, password);
-                                switch (result.getRoleID()) {
-                                        case 1:
-                                                url = AdminPage;
-                                                break;
-                                        case 2:
-                                                url = ManagerPage;
-                                                break;
-                                        default:
-                                                url = StaffPage;
-                                                break;
+                                if (result != null) {
+
+                                        switch (result.getRoleID()) {
+                                                case 1:
+                                                        url = AdminPage;
+                                                        break;
+                                                case 2:
+                                                        url = ManagerPage;
+                                                        break;
+                                                default:
+                                                        url = StaffPage;
+                                                        break;
+                                        }
+                                        HttpSession session = request.getSession();
+                                        session.setAttribute("USER", result);
+                                        Cookie cookie = new Cookie(username, password);
+                                        cookie.setMaxAge(60 * 3);
+                                        response.addCookie(cookie);
+                                } else {
+                                        error.setIsWrongAccount("Wrong username or password");
+                                        request.setAttribute("LOGIN_ERRORS", error);
+                                        url = LoginPage;
                                 }
-                                HttpSession session = request.getSession();
-                                session.setAttribute("USER", result);
-//                                Cookie cookie = new Cookie(username, password);
-//                                cookie.setMaxAge(60 * 3);
-//                                response.addCookie(cookie);
+                                
                         } // no error input 
                 } catch (SQLException ex) {
                         log("LOGINSERVLET _ SQL" + ex.getMessage());
