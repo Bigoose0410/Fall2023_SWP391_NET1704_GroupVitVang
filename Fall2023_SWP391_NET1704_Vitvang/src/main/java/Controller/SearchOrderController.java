@@ -4,50 +4,49 @@
  */
 package Controller;
 
-import jakarta.servlet.RequestDispatcher;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
+import Model.OrderDTO;
+import Order.OrderDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
+@WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
+public class SearchOrderController extends HttpServlet {
 
-public class MainController extends HttpServlet {
-
-        private final String LoginController = "LoginServlet";
-        private final String StartUpController = "StartUpController";
-        private final String LogOutController = "LogOutServlet";
-        private final String SearchOrderController = "SearchOrderController";
+        private final String SEARCH_RESULT_PAGE = "resultOrderSearch.jsp";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-
-                String button = request.getParameter("btAction");
-                String url = "errorPageLogin.html";
+                String searchValue = request.getParameter("txtSearchValue");
+                String url = "searchOrder.html";
                 try {
-                        if (button == null) {
-                                url = StartUpController;
-                        } else if (button.equals("Login")) {
-                                url = LoginController;
-                        } else if (button.equals("LogOut")) {
-                                url = LogOutController;
-                        } else if (button.equals("Search")) {
-                                url = SearchOrderController;
-                        }
-                } finally {
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
-                }
+                        // kiem tra search value truyen ve co phai rong khong
+                        if (!searchValue.isEmpty()) {
+                                //1. call DAO
+                                OrderDAO dao = new OrderDAO();
+                                //1.2. call method
+                                dao.searchOrder(searchValue);
+                                // process result
+                                List<OrderDTO> result = dao.getListOrders();
 
+                                request.setAttribute("SEARCH_RESULT", result);
+                                url = SEARCH_RESULT_PAGE;
+                        }
+                } catch (SQLException e) {
+                        log("LOGINSERVLET _ SQL" + e.getMessage());
+                } finally {
+                        request.getRequestDispatcher(url).forward(request, response);
+                }
         }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,9 +90,4 @@ public class MainController extends HttpServlet {
                 return "Short description";
         }// </editor-fold>
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
 }
