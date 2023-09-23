@@ -84,7 +84,7 @@ public class OrderDAO implements Serializable {
                         con = DBHelper.makeConnection();
                         // tra ra null or k.
                         if (con != null) {
-                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProcess, CustomerID "
+                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
                                         + "From Orderr "
                                         + "Where OrderID Like ? ";
                                 stm = con.prepareStatement(sql);
@@ -98,7 +98,7 @@ public class OrderDAO implements Serializable {
                                         int TotalPrice = rs.getInt("TotalPrice");
 //                                        String Delivery = rs.getString("Delivery");
                                         String Address = rs.getString("Address");
-                                        String StatusProgress = rs.getString("StatusProcess");
+                                        String StatusProgress = rs.getString("StatusProgress");
 //                                        String StaffID = rs.getString("StaffID");
                                         String CustomerID = rs.getString("CustomerID");
 
