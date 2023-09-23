@@ -20,7 +20,7 @@ public class DBHelper implements Serializable{
         public static Connection makeConnection() {
                 Connection conn = null;
                 try {
-                        String dbURL = "jdbc:sqlserver://HandInTheAIR;databaseName=ProductionManagement;encrypt=false;";
+                        String dbURL = "jdbc:sqlserver://ADMIN\\TEW_SQLEXPRESS;databaseName=ProductionManagement;encrypt=false;";
                         String user = "sa";
                         String pass = "12345";
                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

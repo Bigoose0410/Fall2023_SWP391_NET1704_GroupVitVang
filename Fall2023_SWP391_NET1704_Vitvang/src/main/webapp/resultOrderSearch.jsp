@@ -32,14 +32,14 @@
                          <thead>
                               <tr>
                                    <th>No.</th>
-                                   <th>OrderrID</th>
+                                   <th>OrderID</th>
                                    <th>Start Date</th>
                                    <th>End Date</th>
-                                   <th>Price</th>
-                                   <th>Delivery</th>
+                                   <th>TotalPrice</th>
+                                   <!--<th>Delivery</th>-->
                                    <th>Address</th>
                                    <th>Status Progress</th>
-                                   <th>StaffID</th>
+                                   <!--<th>StaffID</th>-->
                                    <th>CustomerID</th>
                                    <!--<th>Delete</th>-->
                                    <!--<th>Update</th>-->
@@ -47,15 +47,15 @@
                          </thead>
                          <tbody>
                               <c:forEach var="dto" items="${result}" varStatus="counter">
-                              <form action="MainControlerr" method="POST">
+                              <form action="MainController" method="POST">
                                    <tr>
                                         <td>
                                              ${counter.count}
                                         </td>
                                         <td>
-                                             ${dto.getOrderrID()}
+                                             ${dto.getOrderID()}
                                              <input type="hidden" name="txtOrderID" 
-                                                    value="${dto.getOrderrID()}"/>
+                                                    value="${dto.getOrderID()}"/>
                                         </td>
                                         <td>
                                              <!--${dto.getStartDate()}-->
@@ -68,21 +68,25 @@
                                                     value="${dto.getEndDate()}"/>
                                         </td>
                                         <td>
-                                             ${dto.getPrice()}
+                                             ${dto.getTotalPrice()}
                                         </td>
+                                        <%--
                                         <td>
                                              <input type="text" name="txtDelivery" 
                                                     value="${dto.getDelivery()}"/>
                                         </td>
+                                        --%>
                                         <td>
                                              ${dto.getAddress()}
                                         </td>
                                         <td>
                                              ${dto.getStatusProgress()}
                                         </td>
+                                        <%--
                                         <td>
                                              ${dto.getStaffID()}
                                         </td>
+                                        --%>
                                         <td>
                                              ${dto.getCustomerID()}
                                         </td>
