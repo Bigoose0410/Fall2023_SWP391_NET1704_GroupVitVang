@@ -21,7 +21,6 @@ import java.io.IOException;
  */
 
 public class MainController extends HttpServlet {
-
         private final String LoginController = "LoginServlet";
         private final String StartUpController = "StartUpController";
         private final String LogOutController = "LogOutServlet";
