@@ -22,7 +22,7 @@ import javax.naming.NamingException;
  */
 public class OrderDAO implements Serializable {
 
-        public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, int Quantity, int Price, String Delivery, String Address, String StatusProgress, String StaffID)
+        public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, int Quantity, int Price, String Delivery, String Address, String StatusProcess, String StaffID)
                 throws SQLException, NamingException {
                 Connection con = null;
                 PreparedStatement stm = null;
@@ -35,12 +35,12 @@ public class OrderDAO implements Serializable {
                         if (con != null) {
                                 //2. create SQL statement string
                                 String sql = "UPDATE Orderr "
-                                        + "SET StartDate = ?, EndDate = ?, Quantity = ? , Price = ?, Delivery = ?, Address = ?, StatusProgress = ? "
+                                        + "SET StartDate = ?, EndDate = ?, Quantity = ? , Price = ?, Delivery = ?, Address = ?, StatusProcess = ?, StaffID = ? "
                                         + "WHERE OrderID = ?";
                                 //3. Create statement object
                                 stm = con.prepareStatement(sql);
-                                stm.setDate(1, StartDate);
-                                stm.setDate(2, EndDate);
+                                stm.setDate(1, (java.sql.Date) StartDate);
+                                stm.setDate(2, (java.sql.Date) EndDate);
                                 stm.setInt(3, Quantity);
                                 stm.setInt(4, Price);
                                 stm.setString(5, Delivery);

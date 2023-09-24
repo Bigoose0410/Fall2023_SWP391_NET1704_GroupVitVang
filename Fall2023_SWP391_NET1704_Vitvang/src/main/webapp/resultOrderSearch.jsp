@@ -42,12 +42,12 @@
                                    <th>StaffID</th>
                                    <th>CustomerID</th>
                                    <!--<th>Delete</th>-->
-                                   <!--<th>Update</th>-->
+                                   <th>Update</th>
                               </tr>
                          </thead>
                          <tbody>
                               <c:forEach var="dto" items="${result}" varStatus="counter">
-                              <form action="MainControlerr" method="POST">
+                              <form action="MainController" method="GET">
                                    <tr>
                                         <td>
                                              ${counter.count}
@@ -75,16 +75,29 @@
                                                     value="${dto.getDelivery()}"/>
                                         </td>
                                         <td>
-                                             ${dto.getAddress()}
+                                            <input type="text" name="txtAđress" 
+                                                    value="${dto.getAddress()}"/>
+                                             
                                         </td>
                                         <td>
-                                             ${dto.getStatusProgress()}
+                                             <input type="text" name="txtStatusProcess" 
+                                                    value="${dto.getStatusProgress()}"/>
+                                             
                                         </td>
                                         <td>
-                                             ${dto.getStaffID()}
+                                             <input type="text" name="txtStaffID" 
+                                                    value="${dto.getStaffID()}"/>
+                                             
                                         </td>
                                         <td>
-                                             ${dto.getCustomerID()}
+                                             <input type="text" name="txtCustomer" 
+                                                    value="${dto.getCustomerID()}"/>
+                                             
+                                        </td>
+                                        <td>
+                                             <!--form submits-->
+                                             <input type="hidden" name="lastSearchValue" value="${searchValue}" />
+                                             <input type="submit" name="btAction" value="Update">
                                         </td>
                                    </tr>
                               </form>
