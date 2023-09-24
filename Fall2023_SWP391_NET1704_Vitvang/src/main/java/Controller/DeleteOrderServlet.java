@@ -5,11 +5,13 @@
 package Controller;
 
 import Order.OrderDAO;
-import jakarta.servlet.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 
@@ -17,10 +19,8 @@ import javax.naming.NamingException;
  *
  * @author Admin
  */
-@WebServlet(name = "UpdateServlet", urlPatterns = {"/UpdateServlet"})
-public class UpdateOrderServlet extends HttpServlet {
-
-        private final String ERROR_PAGE = "errorPageLogin.html";
+@WebServlet(name = "DeleteOrderServlet", urlPatterns = {"/DeleteOrderServlet"})
+public class DeleteOrderServlet extends HttpServlet {
 
         /**
          * Processes requests for both HTTP <code>GET</code>
@@ -32,47 +32,25 @@ public class UpdateOrderServlet extends HttpServlet {
          * error occurs
          * @throws IOException if an I/O error occurs
          */
-        // update form fields
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String OrderID = request.getParameter("txtOrderID");
-                String StartDate = request.getParameter("txtStartDate");
-                String EndDate = request.getParameter("txtEndDate");
-//                String Quantity = request.getParameter("txtQuantity");
-//                String Price = request.getParameter("txtPrice");
-                String Address = request.getParameter("txtAddress");
-                String StatusProcess = request.getParameter("txtStatusProgress");
-                String CustomerID = request.getParameter("txtCustomerID");
-                // this param use for reload search page after update sucess
+                String OrderID = request.getParameter("pk");
                 String searchValue = request.getParameter("lastSearchValue");
                 String url = "errorPageLogin.html";
                 try {
-                        // get user session
-                        HttpSession session = request.getSession();
-                        boolean foundErr = false;
-
-                        if (foundErr) {// found error
-                                // set errors obj to attribute of request scope
-//                                request.setAttribute("UPDATE_ERRORS", errors);
-                        } else {// not found any error
-                                //1. cal model
-                                //1.1 new DAO
-                                OrderDAO dao = new OrderDAO();
-                                //1.2 call DAO's methods
-                                Date productStartDate = Date.valueOf(StartDate);
-                                Date productEndDate = Date.valueOf(EndDate);
-//                                int productQuantity = Integer.parseInt(Quantity);
-//                                int productPrice = Integer.parseInt(Price);
-                                 boolean result = dao.updateOrder(OrderID, productStartDate, productEndDate, Address, StatusProcess, CustomerID);
-                                //2.process
-                                if (result) {
-                                        //2.1 call the search function again using URL Rewriting
-
-                                        url = "SearchOrderController"
-                                                + "?btAction=Search"
-                                                + "&txtSearchValue=" + searchValue;
-                                }// end of process
+                        //1. call model
+                        //1.1 new DAO
+                        OrderDAO dao = new OrderDAO();
+                        //1.2 cal DAO's methods
+                        boolean result = dao.deleteOrder(OrderID);
+                        //2.process
+                        if (result) {
+                                //2.1 call the Search function again using URL  Rewriting
+                                url = "MainController"
+                                        + "?btAction=Search"
+                                        + "&txtSearchValue=" + searchValue;
+                                //noti to user that delete sucess
                         }
                 } catch (SQLException ex) {
                         log("UpdateAccountServlet _ SQL " + ex.getMessage());
@@ -85,7 +63,7 @@ public class UpdateOrderServlet extends HttpServlet {
                 }
         }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
         /**
          * Handles the HTTP <code>GET</code> method.
          *
