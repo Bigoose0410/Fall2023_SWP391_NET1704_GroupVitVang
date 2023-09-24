@@ -5,6 +5,10 @@
 package Controller;
 
 import jakarta.servlet.RequestDispatcher;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,8 +19,8 @@ import java.io.IOException;
  *
  * @author Admin
  */
-public class MainController extends HttpServlet {
 
+public class MainController extends HttpServlet {
         private final String LoginController = "LoginServlet";
         private final String StartUpController = "StartUpController";
         private final String LogOutController = "LogOutServlet";
@@ -45,6 +49,7 @@ public class MainController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
                 }
+
         }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -75,7 +75,7 @@ public class OrderDAO implements Serializable {
                 return listOrders;
         }
 
-        public void searchOrder(String txtSearchValue) throws SQLException {
+         public void searchOrder(String txtSearchValue) throws SQLException {
                 Connection con = null;
                 PreparedStatement stm = null;
                 ResultSet rs = null;
@@ -83,26 +83,26 @@ public class OrderDAO implements Serializable {
                         con = DBHelper.makeConnection();
                         // tra ra null or k.
                         if (con != null) {
-                                String sql = "Select OrderrID, StartDate, EndDate, Quantity, Price, Delivery, Address, StatusProcess, StaffID, CustomerID "
+                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
                                         + "From Orderr "
-                                        + "Where OrderrID Like ? ";
+                                        + "Where OrderID Like ? ";
                                 stm = con.prepareStatement(sql);
                                 stm.setString(1, "%" + txtSearchValue + "%");
                                 rs = stm.executeQuery();
                                 while (rs.next()) {
-                                        String OrderrID = rs.getString("OrderrID");
+                                        String OrderID = rs.getString("OrderID");
                                         Date StartDate = rs.getDate("StartDate");
                                         Date EndDate = rs.getDate("EndDate");
-                                        int Quantity = rs.getInt("Quantity");
-                                        int Price = rs.getInt("Price");
-                                        String Delivery = rs.getString("Delivery");
+//                                        int Quantity = rs.getInt("Quantity");
+                                        int TotalPrice = rs.getInt("TotalPrice");
+//                                        String Delivery = rs.getString("Delivery");
                                         String Address = rs.getString("Address");
-                                        String StatusProgress = rs.getString("StatusProcess");
-                                        String StaffID = rs.getString("StaffID");
+                                        String StatusProgress = rs.getString("StatusProgress");
+//                                        String StaffID = rs.getString("StaffID");
                                         String CustomerID = rs.getString("CustomerID");
 
 //                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
-                                        OrderDTO order = new OrderDTO(OrderrID, StartDate, EndDate, Quantity, Price, Delivery, Address, StatusProgress, StaffID, CustomerID);
+                                        OrderDTO order = new OrderDTO(OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID);
                                         if (this.listOrders == null) {
                                                 this.listOrders = new ArrayList<OrderDTO>();
                                         }

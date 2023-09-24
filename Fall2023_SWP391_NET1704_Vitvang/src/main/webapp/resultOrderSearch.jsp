@@ -1,9 +1,3 @@
-<%-- 
-    Document   : resultOrderSearch
-    Created on : Sep 22, 2023, 2:14:45 PM
-    Author     : Admin
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,30 +26,30 @@
                          <thead>
                               <tr>
                                    <th>No.</th>
-                                   <th>OrderrID</th>
+                                   <th>OrderID</th>
                                    <th>Start Date</th>
                                    <th>End Date</th>
-                                   <th>Price</th>
-                                   <th>Delivery</th>
+                                   <th>TotalPrice</th>
+                                   <!--<th>Delivery</th>-->
                                    <th>Address</th>
                                    <th>Status Progress</th>
-                                   <th>StaffID</th>
+                                   <!--<th>StaffID</th>-->
                                    <th>CustomerID</th>
                                    <!--<th>Delete</th>-->
-                                   <th>Update</th>
+                                   <!--<th>Update</th>-->
                               </tr>
                          </thead>
                          <tbody>
                               <c:forEach var="dto" items="${result}" varStatus="counter">
-                              <form action="MainController" method="GET">
+                              <form action="MainController" method="POST">
                                    <tr>
                                         <td>
                                              ${counter.count}
                                         </td>
                                         <td>
-                                             ${dto.getOrderrID()}
+                                             ${dto.getOrderID()}
                                              <input type="hidden" name="txtOrderID" 
-                                                    value="${dto.getOrderrID()}"/>
+                                                    value="${dto.getOrderID()}"/>
                                         </td>
                                         <td>
                                              <!--${dto.getStartDate()}-->
@@ -68,36 +62,27 @@
                                                     value="${dto.getEndDate()}"/>
                                         </td>
                                         <td>
-                                             ${dto.getPrice()}
+                                             ${dto.getTotalPrice()}
                                         </td>
+                                        <%--
                                         <td>
                                              <input type="text" name="txtDelivery" 
                                                     value="${dto.getDelivery()}"/>
                                         </td>
+                                        --%>
                                         <td>
-                                            <input type="text" name="txtAđress" 
-                                                    value="${dto.getAddress()}"/>
-                                             
+                                             ${dto.getAddress()}
                                         </td>
                                         <td>
-                                             <input type="text" name="txtStatusProcess" 
-                                                    value="${dto.getStatusProgress()}"/>
-                                             
+                                             ${dto.getStatusProgress()}
                                         </td>
+                                        <%--
                                         <td>
-                                             <input type="text" name="txtStaffID" 
-                                                    value="${dto.getStaffID()}"/>
-                                             
+                                             ${dto.getStaffID()}
                                         </td>
+                                        --%>
                                         <td>
-                                             <input type="text" name="txtCustomer" 
-                                                    value="${dto.getCustomerID()}"/>
-                                             
-                                        </td>
-                                        <td>
-                                             <!--form submits-->
-                                             <input type="hidden" name="lastSearchValue" value="${searchValue}" />
-                                             <input type="submit" name="btAction" value="Update">
+                                             ${dto.getCustomerID()}
                                         </td>
                                    </tr>
                               </form>

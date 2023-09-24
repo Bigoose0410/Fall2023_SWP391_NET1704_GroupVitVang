@@ -7,46 +7,45 @@ package Model;
 import java.io.Serializable;
 import java.sql.Date;
 
-
 /**
  *
  * @author Admin
  */
 public class OrderDTO implements Serializable {
 
-        private String OrderrID;
+        private String OrderID;
         private Date StartDate;
         private Date EndDate;
-        private int Quantity;
-        private int Price;
-        private String Delivery;
+//        private int Quantity;
+        private int TotalPrice;
+//        private String Delivery;
         private String Address;
         private String StatusProgress;
-        private String StaffID;
+//        private String StaffID;
         private String CustomerID;
 
         public OrderDTO() {
         }
 
-        public OrderDTO(String OrderrID, Date StartDate, Date EndDate, int Quantity, int Price, String Delivery, String Address, String StatusProgress, String StaffID, String CustomerID) {
-                this.OrderrID = OrderrID;
+        public OrderDTO(String OrderID, Date StartDate, Date EndDate, int TotalPrice, String Address, String StatusProgress, String CustomerID) {
+                this.OrderID = OrderID;
                 this.StartDate = StartDate;
                 this.EndDate = EndDate;
-                this.Quantity = Quantity;
-                this.Price = Price;
-                this.Delivery = Delivery;
+//                this.Quantity = Quantity;
+                this.TotalPrice = TotalPrice;
+//                this.Delivery = Delivery;
                 this.Address = Address;
                 this.StatusProgress = StatusProgress;
-                this.StaffID = StaffID;
+//                this.StaffID = StaffID;
                 this.CustomerID = CustomerID;
         }
 
-        public String getOrderrID() {
-                return OrderrID;
+        public String getOrderID() {
+                return OrderID;
         }
 
-        public void setOrderrID(String OrderrID) {
-                this.OrderrID = OrderrID;
+        public void setOrderID(String OrderID) {
+                this.OrderID = OrderID;
         }
 
         public Date getStartDate() {
@@ -65,29 +64,29 @@ public class OrderDTO implements Serializable {
                 this.EndDate = EndDate;
         }
 
-        public int getQuantity() {
-                return Quantity;
+//        public int getQuantity() {
+//                return Quantity;
+//        }
+//
+//        public void setQuantity(int Quantity) {
+//                this.Quantity = Quantity;
+//        }
+
+        public int getTotalPrice() {
+                return TotalPrice;
         }
 
-        public void setQuantity(int Quantity) {
-                this.Quantity = Quantity;
+        public void setTotalPrice(int TotalPrice) {
+                this.TotalPrice = TotalPrice;
         }
 
-        public int getPrice() {
-                return Price;
-        }
-
-        public void setPrice(int Price) {
-                this.Price = Price;
-        }
-
-        public String getDelivery() {
-                return Delivery;
-        }
-
-        public void setDelivery(String Delivery) {
-                this.Delivery = Delivery;
-        }
+//        public String getDelivery() {
+//                return Delivery;
+//        }
+//
+//        public void setDelivery(String Delivery) {
+//                this.Delivery = Delivery;
+//        }
 
         public String getAddress() {
                 return Address;
@@ -105,13 +104,13 @@ public class OrderDTO implements Serializable {
                 this.StatusProgress = StatusProgress;
         }
 
-        public String getStaffID() {
-                return StaffID;
-        }
-
-        public void setStaffID(String StaffID) {
-                this.StaffID = StaffID;
-        }
+//        public String getStaffID() {
+//                return StaffID;
+//        }
+//
+//        public void setStaffID(String StaffID) {
+//                this.StaffID = StaffID;
+//        }
 
         public String getCustomerID() {
                 return CustomerID;
