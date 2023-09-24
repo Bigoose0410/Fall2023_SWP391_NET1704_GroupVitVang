@@ -75,7 +75,8 @@ public class OrderDAO implements Serializable {
                 return listOrders;
         }
 
-         public void searchOrder(String txtSearchValue) throws SQLException {
+ 
+        public void searchOrder(String txtSearchValue) throws SQLException {
                 Connection con = null;
                 PreparedStatement stm = null;
                 ResultSet rs = null;

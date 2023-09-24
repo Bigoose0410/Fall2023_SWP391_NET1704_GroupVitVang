@@ -1,3 +1,9 @@
+     <%-- 
+    Document   : resultOrderSearch
+    Created on : Sep 22, 2023, 2:14:45 PM
+    Author     : Admin
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
