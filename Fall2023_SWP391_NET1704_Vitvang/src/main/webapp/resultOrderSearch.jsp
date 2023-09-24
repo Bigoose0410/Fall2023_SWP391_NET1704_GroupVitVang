@@ -14,7 +14,7 @@
      </head>
      <body>
           <font color="red">
-          Welcome, ${sessionScope.USER.getFullName()}
+          Welcome, ${sessionScope.USER.getAccountID()}
           </font> <br>
 
           <form action="MainController">
