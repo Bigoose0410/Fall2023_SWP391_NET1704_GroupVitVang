@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Cuprum&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  background-size: 100% 100%;
+}
+.center{
+  position: relative;
+  padding: 50px 50px;
+  backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 20px 20px 120px #000;
+  border-radius: 10px;
+  color: #000000;
+}
+h1{
+  font-size: 2em;
+  border-left: 5px solid dodgerblue;
+  padding: 10px;
+  color: #da26f1;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.inputbox{
+  position: relative;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #110e0e;
+  color: #0e0505;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.inputbox:last-child{
+  margin-bottom: 0;
+}
+.inputbox span{
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+    font-family: Cuprum;
+}
+.inputbox input:focus ~ span,
+.inputbox input:valid ~ span{
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+.button{
+  display: flex;
+  justify-content: center;
+}
+.btn{
+  width: 60px;
+  height: 20px;
+  border-radius: 20px;
+  border:#c21111;
+ 
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn:hover{
+  background-color: rgb(207, 207, 207);
+}
+.submit-button {
+  border: 1px solid transparent;
+  background-color: transparent;
+  padding: 10px 20px;
+ font-size: 20px;
+}
+
+.submit-button:hover {
+  border-color: pink;
+  background-color: pink;
+  border-radius: 10px;
+}

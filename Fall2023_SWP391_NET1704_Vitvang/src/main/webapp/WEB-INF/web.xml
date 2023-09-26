@@ -16,6 +16,7 @@
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -24,6 +25,7 @@
         <servlet-name>AddOrderController</servlet-name>
         <url-pattern>/AddOrderController</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

@@ -4,8 +4,8 @@
  */
 package Controller;
 
-import Model.OrderDTO;
 import Order.OrderDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,39 +13,53 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
-public class SearchOrderController extends HttpServlet {
+@WebServlet(name = "DeleteOrderServlet", urlPatterns = {"/DeleteOrderServlet"})
+public class DeleteOrderServlet extends HttpServlet {
 
-        private final String SEARCH_RESULT_PAGE = "resultOrderSearch.jsp";
-
+        /**
+         * Processes requests for both HTTP <code>GET</code>
+         * and <code>POST</code> methods.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific
+         * error occurs
+         * @throws IOException if an I/O error occurs
+         */
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String searchValue = request.getParameter("txtSearchValue");
-                String url = "login.jsp";
+                String OrderID = request.getParameter("pk");
+                String searchValue = request.getParameter("lastSearchValue");
+                String url = "errorPageLogin.html";
                 try {
-                        // kiem tra search value truyen ve co phai rong khong
-                        if (!searchValue.isEmpty()) {
-                                //1. call DAO
-                                OrderDAO dao = new OrderDAO();
-                                //1.2. call method
-                                dao.searchOrder(searchValue);
-                                // process result
-                                List<OrderDTO> result = dao.getListOrders();
-
-                                request.setAttribute("SEARCH_RESULT", result);
-                                url = SEARCH_RESULT_PAGE;
+                        //1. call model
+                        //1.1 new DAO
+                        OrderDAO dao = new OrderDAO();
+                        //1.2 cal DAO's methods
+                        boolean result = dao.deleteOrder(OrderID);
+                        //2.process
+                        if (result) {
+                                //2.1 call the Search function again using URL  Rewriting
+                                url = "MainController"
+                                        + "?btAction=Search"
+                                        + "&txtSearchValue=" + searchValue;
+                                //noti to user that delete sucess
                         }
-                } catch (SQLException e) {
-                        log("LOGINSERVLET _ SQL" + e.getMessage());
+                } catch (SQLException ex) {
+                        log("UpdateAccountServlet _ SQL " + ex.getMessage());
+                } catch (NamingException ex) {
+                        log("UpdateAccountServlet _ Naming " + ex.getMessage());
                 } finally {
-                        request.getRequestDispatcher(url).forward(request, response);
+//            response.sendRedirect(url);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
                 }
         }
 
