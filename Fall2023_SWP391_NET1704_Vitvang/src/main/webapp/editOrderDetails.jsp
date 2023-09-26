@@ -1,69 +1,48 @@
-<%-- 
-    Document   : addOrder
-    Created on : Sep 21, 2023, 3:27:32 PM
-    Author     : Admin
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
-<html>
+<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Order</title>
-  <link rel="stylesheet" href="css\addOrder.css" />
-</head>
+     <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>historyOrder</title>
+          <link rel="stylesheet" href="css\editOrderDetails.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+          <script src="notiSubmitOrder.js" defer></script>
+     </head>
 
-<body>
-  <header>
-    <nav class="navbar">
-      <div class="content-navebar">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEcpRsJfs-3m4K2TdEZM3NQzjQB_fcNoJdQ&usqp=CAU" />
-        <h1 class="logo">VitVang</h1>
-        <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <div class="container">
-    <aside>
-      <ul class="nav-links">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Orders</a></li>
-        <li><a href="#">Customers</a></li>
-        <li><a href="#">Production process</a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Material</a></li>
-        <li><a href="#">Inventory</a></li>
-      </ul>
-    </aside>
-    <!-- <h2>Them thong tin san pham</h2> -->
+     <body>
+          <header>
+               <nav class="navbar">
+                    <div class="content-navebar">
+                         <img
+                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEcpRsJfs-3m4K2TdEZM3NQzjQB_fcNoJdQ&usqp=CAU" />
+                         <h1 class="logo">VitVang</h1>
+                         <ul class="nav-links">
+                              <li><a href="#">Home</a></li>
+                              <li><a href="#">About</a></li>
+                              <li><a href="#">Services</a></li>
+                              <li><a href="#">Contact</a></li>
+                         </ul>
+                    </div>
+               </nav>
+          </header>
+          <div class="container">
+               <aside>
+                    <ul class="nav-links">
+                         <li><a href="#">Dashboard</a></li>
+                         <li><a href="#">Orders</a></li>
+                         <li><a href="#">Customers</a></li>
+                         <li><a href="#">Production process</a></li>
+                         <li><a href="#">Reports</a></li>
+                         <li><a href="#">Material</a></li>
+                         <li><a href="#">Inventory</a></li>
+                    </ul>
+               </aside>
 
-    <main>
-      <!--        <div class="main-Info">
-          <div class="search-container">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="SearchOrder..."
-            />
-            <button class="search-button">Search</button>
-          </div>
-          <div class="text-right">
-            <button class="add-button">Add</button>
-          </div>
-        </div>-->
-      <h2>Them thong tin san pham</h2>
+               <main>
+                  <h2>Điều chỉnh sản phẩm</h2>
+                  
       <div class="main-content">
         <ul>
           <li>OrderID</li>
@@ -148,9 +127,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           </li>
         </ul>
       </div>
-      <div class="text-right">
-        <button class="submit-button" >Submit</button>
-      </div>
+   <ul class="notifications"></ul>
+    <div class="buttons">
+      <button class="btn" id="success">Success</button>
+      <script src="notiSubmitOrder.js" defer></script>
+      
+    
+     
     </main>
   </div>
   <div class="footer">
@@ -160,4 +143,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
   </div>
 </body>
 
-</html>
+              
