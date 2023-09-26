@@ -88,7 +88,7 @@
                     <div class="search-box">
                          <i class="uil uil-search"></i>
                          <form action="MainController">
-                              <input type="text" name="txtSearchValue" placeholder="Search here...">
+                              <input type="text" name="txtSearchValue" required="" placeholder="Search here...">
                               <button class="add-btn" value="Search" name="btAction">Search</button>
                          </form>
                     </div>
@@ -201,80 +201,152 @@
                          </div>
                          <c:set var="searchValue" value="${param.txtSearchValue}"></c:set>
 
-                         <%--<c:if test="${not empty searchValue}">--%>
-                         <c:set var="result" value="${requestScope.SEARCH_RESULT}"></c:set>
-                         <c:if test="${not empty result}">
-                              <div class="activity-data">
-                                   <div class="data names">
-                                        <span class="data-title">No</span>
-                                   </div>
-                                   <div class="data names">
-                                        <span class="data-title">OrderID</span>
-                                   </div>
-                                   <div class="data email">
-                                        <span class="data-title">CustomerID</span>
-                                   </div>
-                                   <div class="data joined">
-                                        <span class="data-title">StartDate</span>
-                                   </div>
-                                   <div class="data joined">
-                                        <span class="data-title">EndDate</span>
-                                   </div>
-                                   <div class="data type">
-                                        <span class="data-title">CageID</span>
-                                   </div>
-                                   <div class="data status">
-                                        <span class="data-title">Status</span>
-                                   </div>
-                              </div>
-                              <c:forEach var="dto" items="${result}" varStatus="counter">
-
-                                   <form class="form-order" action="MainController" method="POST">
-                                        <div class="activity-data">
-                                             <div class="data names">
-                                                  <span class="data-list">${counter.count}</span>
-                                             </div>
-
-                                             <div class="data names">
-                                                  <span class="data-list">${dto.getOrderID()}
-                                                       <input type="hidden" name="txtOrderID" 
-                                                              value="${dto.getOrderID()}"/></span>
-                                             </div>
-
-                                             <div class="data email">
-                                                  <span class="data-list">${dto.getCustomerID()}</span>
-                                             </div>
-
-                                             <div class="data joined">
-                                                  <span class="data-list">${dto.getStartDate()}</span>
-                                             </div>
-
-                                             <div class="data joined">
-                                                  <span class="data-list">${dto.getEndDate()}</span>
-                                             </div>
-
-                                             <div class="data type">
-                                                  <span class="data-list">${dto.getTotalPrice()}</span>
-                                             </div>
-
-                                             <div class="data status">
-                                                  <span class="data-list">${dto.getStatusProgress()}</span>
-                                             </div>
+                         <c:if test="${empty searchValue}">
+                              <c:set var="result" value="${requestScope.SEARCH_RESULT}"></c:set>
+                              <c:if test="${not empty result}">
+                                   <div class="activity-data">
+                                        <div class="data names">
+                                             <span class="data-title">No</span>
                                         </div>
-                                   </form>
+                                        <div class="data names">
+                                             <span class="data-title">OrderID</span>
+                                        </div>
+                                        <div class="data email">
+                                             <span class="data-title">CustomerID</span>
+                                        </div>
+                                        <div class="data joined">
+                                             <span class="data-title">StartDate</span>
+                                        </div>
+                                        <div class="data joined">
+                                             <span class="data-title">EndDate</span>
+                                        </div>
+                                        <div class="data type">
+                                             <span class="data-title">CageID</span>
+                                        </div>
+                                        <div class="data status">
+                                             <span class="data-title">Status</span>
+                                        </div>
+                                   </div>
+                                   <c:forEach var="dto" items="${result}" varStatus="counter">
 
-                              </c:forEach>
+                                        <form class="form-order" action="MainController" method="POST">
+                                             <div class="activity-data">
+                                                  <div class="data names">
+                                                       <span class="data-list">${counter.count}</span>
+                                                  </div>
+
+                                                  <div class="data names">
+                                                       <span class="data-list">${dto.getOrderID()}
+                                                            <input type="hidden" name="txtOrderID" 
+                                                                   value="${dto.getOrderID()}"/></span>
+                                                  </div>
+
+                                                  <div class="data email">
+                                                       <span class="data-list">${dto.getCustomerID()}</span>
+                                                  </div>
+
+                                                  <div class="data joined">
+                                                       <span class="data-list">${dto.getStartDate()}</span>
+                                                  </div>
+
+                                                  <div class="data joined">
+                                                       <span class="data-list">${dto.getEndDate()}</span>
+                                                  </div>
+
+                                                  <div class="data type">
+                                                       <span class="data-list">${dto.getTotalPrice()}</span>
+                                                  </div>
+
+                                                  <div class="data status">
+                                                       <span class="data-list">${dto.getStatusProgress()}</span>
+                                                  </div>
+                                             </div>
+                                        </form>
+
+                                   </c:forEach>
+                              </c:if>
                          </c:if>
 
-                         <c:if test="${ empty result}">
-                              <font color="green">
-                              <h2>
-                                   No match record!!!
-                              </h2>
-                              </font>
+                         <c:if test="${not empty searchValue}">
+                              <c:set var="result" value="${requestScope.SEARCH_RESULT}"></c:set>
+                              <c:if test="${not empty result}">
+                                   <div class="activity-data">
+                                        <div class="data names">
+                                             <span class="data-title">No</span>
+                                        </div>
+                                        <div class="data names">
+                                             <span class="data-title">OrderID</span>
+                                        </div>
+                                        <div class="data email">
+                                             <span class="data-title">CustomerID</span>
+                                        </div>
+                                        <div class="data joined">
+                                             <span class="data-title">StartDate</span>
+                                        </div>
+                                        <div class="data joined">
+                                             <span class="data-title">EndDate</span>
+                                        </div>
+                                        <div class="data type">
+                                             <span class="data-title">CageID</span>
+                                        </div>
+                                        <div class="data status">
+                                             <span class="data-title">Status</span>
+                                        </div>
+                                        <div class="data status">
+                                             <span class="data-title">Edit</span>
+                                        </div>
+                                   </div>
+                                   <c:forEach var="dto" items="${result}" varStatus="counter">
+
+                                        <form class="form-order" action="MainController" method="POST">
+                                             <div class="activity-data">
+                                                  <div class="data names">
+                                                       <span class="data-list">${counter.count}</span>
+                                                  </div>
+
+                                                  <div class="data names">
+                                                       <span class="data-list">${dto.getOrderID()}
+                                                            <input type="hidden" name="txtOrderID" 
+                                                                   value="${dto.getOrderID()}"/></span>
+                                                  </div>
+
+                                                  <div class="data email">
+                                                       <span class="data-list">${dto.getCustomerID()}</span>
+                                                  </div>
+
+                                                  <div class="data joined">
+                                                       <span class="data-list">${dto.getStartDate()}</span>
+                                                  </div>
+
+                                                  <div class="data joined">
+                                                       <span class="data-list">${dto.getEndDate()}</span>
+                                                  </div>
+
+                                                  <div class="data type">
+                                                       <span class="data-list">${dto.getTotalPrice()}</span>
+                                                  </div>
+
+                                                  <div class="data status">
+                                                       <span class="data-list">${dto.getStatusProgress()}</span>
+                                                  </div>
+                                                  <div class="data status">
+                                                       <span class="data-list"><a href="#">Edit</a></span>
+                                                  </div>
+                                             </div>
+                                        </form>
+
+                                   </c:forEach>
+                              </c:if>
+
+                              <c:if test="${ empty result}">
+                                   <font color="green">
+                                   <h2>
+                                        No match record!!!
+                                   </h2>
+                                   </font>
+                              </c:if>
                          </c:if>
                     </div>
-                    <%--</c:if>--%>
           </section>
           <script src="admin.js"></script>
      </body>
