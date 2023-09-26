@@ -12,24 +12,22 @@ public class AccountDTO {
 
         private String AccountID;
         private String Password;
-        private String FullName;
-        private String Email;
-        private String CategaryBy;
+//        private String FullName;
+//        private String Email;
+//        private String CategaryBy;
         private int RoleID;
-        private String Status;
+//        private String Status;
 
         public AccountDTO() {
         }
 
-        public AccountDTO(String AccountID, String Password, String FullName, String Email, String CategaryBy, int RoleID, String Status) {
+        public AccountDTO(String AccountID, String Password, int RoleID) {
                 this.AccountID = AccountID;
                 this.Password = Password;
-                this.FullName = FullName;
-                this.Email = Email;
-                this.CategaryBy = CategaryBy;
                 this.RoleID = RoleID;
-                this.Status = Status;
         }
+
+
 
         public String getAccountID() {
                 return AccountID;
@@ -47,29 +45,29 @@ public class AccountDTO {
                 this.Password = Password;
         }
 
-        public String getFullName() {
-                return FullName;
-        }
-
-        public void setFullName(String FullName) {
-                this.FullName = FullName;
-        }
-
-        public String getEmail() {
-                return Email;
-        }
-
-        public void setEmail(String Email) {
-                this.Email = Email;
-        }
-
-        public String getCategaryBy() {
-                return CategaryBy;
-        }
-
-        public void setCategaryBy(String CategaryBy) {
-                this.CategaryBy = CategaryBy;
-        }
+//        public String getFullName() {
+//                return FullName;
+//        }
+//
+//        public void setFullName(String FullName) {
+//                this.FullName = FullName;
+//        }
+//
+//        public String getEmail() {
+//                return Email;
+//        }
+//
+//        public void setEmail(String Email) {
+//                this.Email = Email;
+//        }
+//
+//        public String getCategaryBy() {
+//                return CategaryBy;
+//        }
+//
+//        public void setCategaryBy(String CategaryBy) {
+//                this.CategaryBy = CategaryBy;
+//        }
 
         public int getRoleID() {
                 return RoleID;
@@ -79,11 +77,11 @@ public class AccountDTO {
                 this.RoleID = RoleID;
         }
 
-        public String getStatus() {
-                return Status;
-        }
-
-        public void setStatus(String Status) {
-                this.Status = Status;
-        }
+//        public String getStatus() {
+//                return Status;
+//        }
+//
+//        public void setStatus(String Status) {
+//                this.Status = Status;
+//        }
 }
