@@ -19,12 +19,13 @@ import java.io.IOException;
  *
  * @author Admin
  */
-
 public class MainController extends HttpServlet {
+
         private final String LoginController = "LoginServlet";
         private final String StartUpController = "StartUpController";
         private final String LogOutController = "LogOutServlet";
         private final String SearchOrderController = "SearchOrderController";
+        private final String AddOrderController = "AddOrderController";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
@@ -41,6 +42,8 @@ public class MainController extends HttpServlet {
                                 url = LogOutController;
                         } else if (button.equals("Search")) {
                                 url = SearchOrderController;
+                        } else if (button.equals("Add")) {
+                                url = AddOrderController;
                         }
                 } finally {
                         RequestDispatcher rd = request.getRequestDispatcher(url);
