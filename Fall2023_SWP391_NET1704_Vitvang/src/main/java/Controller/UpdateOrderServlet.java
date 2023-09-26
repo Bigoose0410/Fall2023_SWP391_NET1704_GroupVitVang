@@ -4,7 +4,10 @@
  */
 package Controller;
 
+import Model.AccountDTO;
 import Order.OrderDAO;
+import Order.OrderUpdateErrorr;
+import static Util.tool.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -20,110 +23,132 @@ import javax.naming.NamingException;
 @WebServlet(name = "UpdateServlet", urlPatterns = {"/UpdateServlet"})
 public class UpdateOrderServlet extends HttpServlet {
 
-        private final String ERROR_PAGE = "errorPageLogin.html";
+      private final String ERROR_UPDATE_PAGE = "EditOrder.jsp";
 
-        /**
-         * Processes requests for both HTTP <code>GET</code>
-         * and <code>POST</code> methods.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        // update form fields
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-                response.setContentType("text/html;charset=UTF-8");
-                String OrderID = request.getParameter("txtOrderID");
-                String StartDate = request.getParameter("txtStartDate");
-                String EndDate = request.getParameter("txtEndDate");
-//                String Quantity = request.getParameter("txtQuantity");
-//                String Price = request.getParameter("txtPrice");
-                String Address = request.getParameter("txtAddress");
-                String StatusProcess = request.getParameter("txtStatusProgress");
-                String CustomerID = request.getParameter("txtCustomerID");
-                // this param use for reload search page after update sucess
-                String searchValue = request.getParameter("lastSearchValue");
-                String url = "errorPageLogin.html";
-                try {
-                        // get user session
-                        HttpSession session = request.getSession();
-                        boolean foundErr = false;
+      /**
+       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
+      // update form fields
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            String CUSTOMER_PATTERN = "CS\\d{3}";
 
-                        if (foundErr) {// found error
-                                // set errors obj to attribute of request scope
-//                                request.setAttribute("UPDATE_ERRORS", errors);
-                        } else {// not found any error
-                                //1. cal model
-                                //1.1 new DAO
-                                OrderDAO dao = new OrderDAO();
-                                //1.2 call DAO's methods
-                                Date productStartDate = Date.valueOf(StartDate);
-                                Date productEndDate = Date.valueOf(EndDate);
-//                                int productQuantity = Integer.parseInt(Quantity);
-//                                int productPrice = Integer.parseInt(Price);
-                                 boolean result = dao.updateOrder(OrderID, productStartDate, productEndDate, Address, StatusProcess, CustomerID);
-                                //2.process
-                                if (result) {
-                                        //2.1 call the search function again using URL Rewriting
+            String OrderID = request.getParameter("txtOrderID");
+            String StartDate = request.getParameter("txtStartDate");
+            String EndDate = request.getParameter("txtEndDate");
+            String Address = request.getParameter("txtAddress");
+            String StatusProcess = request.getParameter("txtStatusProgress");
+            String CustomerID = request.getParameter("txtCustomerID").toUpperCase();
+            // this param use for reload search page after update sucess
+            String searchValue = request.getParameter("lastSearchValue");
+            Date productStartDate = Date.valueOf(StartDate);
+            Date productEndDate = Date.valueOf(EndDate);
+            String url = ERROR_UPDATE_PAGE;
+            boolean foundErr = false;
+            OrderUpdateErrorr error = new OrderUpdateErrorr();
+            try {
+                  //0. check role 
+                  HttpSession session = request.getSession();
+                  int roleID = ((AccountDTO) session.getAttribute("USER")).getRoleID();
 
-                                        url = "SearchOrderController"
-                                                + "?btAction=Search"
-                                                + "&txtSearchValue=" + searchValue;
-                                }// end of process
-                        }
-                } catch (SQLException ex) {
-                        log("UpdateAccountServlet _ SQL " + ex.getMessage());
-                } catch (NamingException ex) {
-                        log("UpdateAccountServlet _ Naming " + ex.getMessage());
-                } finally {
+                  // get user session
+                  if (compareDate(productStartDate, productEndDate)) {
+                        foundErr = true;
+                        error.setStartDateAfterEndDateErr("Start date can't before End date");
+                  }
+                  if (Address.isEmpty()) {
+                        foundErr = true;
+                        error.setAddressNullErr("Address can't be empty");
+                  }
+                  if (StatusProcess.isEmpty()) {
+                        foundErr = true;
+                        error.setStatusProgessNullErr("Process can't be empty");
+                  }
+                  if (!checkFormat(CustomerID, CUSTOMER_PATTERN, true)) {
+                        foundErr = true;
+                        error.setCustomerFormatErr("Cus format is CSxxx");
+                  }
+                  if (!checkRole(roleID, 1)) {
+                        foundErr = true;
+                        error.setAccountCanNotUpdateErr("This account can't update order");
+                  }
+                  if (foundErr) {// found error
+                        // set errors obj to attribute of request scope
+                        request.setAttribute("UPDATE_ORDER_ERROR", error);
+                  } else {// not found any error
+                        //1. cal model
+                        //1.1 new DAO
+                        OrderDAO dao = new OrderDAO();
+                        //1.2 call DAO's methods
+                        boolean result = dao.updateOrder(OrderID, productStartDate, productEndDate, Address, StatusProcess, CustomerID);
+                        //2.process
+                        if (result) {
+                              //2.1 call the search function again using URL Rewriting
+                              url = "SearchOrderController"
+                                      + "?btAction=Search"
+                                      + "&txtSearchValue=" + searchValue;
+                        }// end of process
+                  }
+
+            } catch (SQLException ex) {
+                  String msg = ex.getMessage();
+                  log("UpdateAccountServlet _ SQL " + msg);
+                  if (msg.contains("conflicted with the FOREIGN KEY")) {
+                        error.setCustomerNotExistInDatabasErr("Customer not exist in database");
+                        request.setAttribute("UPDATE_ORDER_ERROR", error);
+                  }
+            } catch (NamingException ex) {
+                  log("UpdateAccountServlet _ Naming " + ex.getMessage());
+            } finally {
 //            response.sendRedirect(url);
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
-                }
-        }
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+            }
+      }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-                processRequest(request, response);
-        }
+      /**
+       * Handles the HTTP <code>GET</code> method.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
+      @Override
+      protected void doGet(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            processRequest(request, response);
+      }
 
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-                processRequest(request, response);
-        }
+      /**
+       * Handles the HTTP <code>POST</code> method.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
+      @Override
+      protected void doPost(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            processRequest(request, response);
+      }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo() {
-                return "Short description";
-        }// </editor-fold>
+      /**
+       * Returns a short description of the servlet.
+       *
+       * @return a String containing servlet description
+       */
+      @Override
+      public String getServletInfo() {
+            return "Short description";
+      }// </editor-fold>
 
 }
