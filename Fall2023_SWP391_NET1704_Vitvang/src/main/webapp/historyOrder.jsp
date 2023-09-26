@@ -89,7 +89,7 @@
           <button class="search-button">Search</button>
         </div>
         <div class="text-right">
-          <button class="add-button">Add Order</button>
+          <button class="add-button" name="btAction" value="Add">Add Order</button>
         </div>
     </main>
   </div>
