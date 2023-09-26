@@ -23,7 +23,7 @@ public class MainController extends HttpServlet {
         private final String LogOutController = "LogOutServlet";
         private final String SearchOrderController = "SearchOrderController";
         private final String UpdateOrderController = "UpdateOrderController";
-
+        private final String OrderHistoryController = "OrderHistoryController";
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
@@ -39,8 +39,10 @@ public class MainController extends HttpServlet {
                                 url = LogOutController;
                         } else if (button.equals("Search")) {
                                 url = SearchOrderController;
-                        } if (button.equals("Update")) {
+                        } else if (button.equals("Update")) {
                                 url = UpdateOrderController;
+                        } else if (button.equals("Order")) {
+                                url = OrderHistoryController;
                         }
                 } finally {
                         RequestDispatcher rd = request.getRequestDispatcher(url);
