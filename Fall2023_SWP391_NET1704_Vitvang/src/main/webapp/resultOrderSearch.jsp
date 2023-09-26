@@ -4,7 +4,7 @@ Created on : Sep 22, 2023, 2:14:45 PM
 Author     : Admin
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,12 @@ Author     : Admin
           <title>Search</title>
      </head>
      <body>
-          <font color="red">
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="${sessionScope.USER.getAccountID()}"/>
+               <c:param value="Log Out" name="btAction"/>
+          </c:url>
+          <a href="${logout_query}">Log Out</a><br>
+          <font color="green">
           Welcome, ${sessionScope.USER.getAccountID()}
           </font> <br>
 
@@ -22,9 +27,7 @@ Author     : Admin
                                    value="${param.txtSearchValue}" /> <br>
                <input type="submit" name="btAction" value="Search" />
           </form> <br>
-
           <c:set var="searchValue" value="${param.txtSearchValue}"></c:set>
-
           <c:if test="${not empty searchValue}">
                <c:set var="result" value="${requestScope.SEARCH_RESULT}"></c:set>
                <c:if test="${not empty result}">
@@ -41,15 +44,15 @@ Author     : Admin
                                    <th>Status Progress</th>
                                    <!--<th>StaffID</th>-->
                                    <th>CustomerID</th>
-                                   <th>Update</th>
-                                   <th>Delete</th>
+                                   <th>Edit</th>
                               </tr>
                          </thead>
                          <tbody>
                               <c:forEach var="dto" items="${result}" varStatus="counter">
-                              <form action="MainController" method="POST">
-                                   <tr>
-                                        <td>
+                                   <c:set var="ender" value="${requestScope.UPDATE_ORDER_ERROR}"></c:set>
+                                   <form action="MainController" method="POST">
+                                        <tr>
+                                             <td>
                                              ${counter.count}
                                         </td>
                                         <td>
@@ -58,24 +61,17 @@ Author     : Admin
                                                     value="${dto.getOrderID()}"/>
                                         </td>
                                         <td>
-                                             <!--${dto.getStartDate()}-->
                                              <input type="date" name="txtStartDate" 
                                                     value="${dto.getStartDate()}"/>
+
                                         </td>
                                         <td>
-                                             <!--${dto.getEndDate()}-->
                                              <input type="date" name="txtEndDate" 
                                                     value="${dto.getEndDate()}"/>
                                         </td>
                                         <td>
                                              ${dto.getTotalPrice()}
                                         </td>
-                                        <%--
-                                        <td>
-                                             <input type="text" name="txtDelivery" 
-                                                    value="${dto.getDelivery()}"/>
-                                        </td>
-                                        --%>
                                         <td>
                                              <input type="text" name="txtAddress" 
                                                     value="${dto.getAddress()}"/>
@@ -83,46 +79,38 @@ Author     : Admin
                                         <td>
                                              <input type="text" name="txtStatusProgress" 
                                                     value="${dto.getStatusProgress()}"/>
-
                                         </td>
-                                        <%--
-                                        <td>
-                                             ${dto.getStaffID()}
-                                        </td>
-                                        --%>
                                         <td>
                                              <input type="text" name="txtCustomerID" 
                                                     value="${dto.getCustomerID()}"/>
                                         </td>
                                         <td>
-                                             <!--form submit-->
-                                             <input type="hidden" name="lastSearchValue" 
-                                                    value="${searchValue}"/>
-                                             <input type="submit" name="btAction" value="Update">
+                                             <c:url var="editlink" value="EditOrder.jsp">
+                                                  <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
+                                                  <c:param name="txtStartDate" value="${dto.getStartDate()}"/>
+                                                  <c:param name="txtEndDate" value="${dto.getEndDate()}"/>
+                                                  <c:param name="txtAddress" value="${dto.getAddress()}"/>
+                                                  <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
+                                                  <c:param name="txtCustomerID" value="${dto.getCustomerID()}"/>
+                                                  <c:param name="lastSearchValue" value="${searchValue}" />
+                                             </c:url> 
+                                             <a href="${editlink}">Edit</a>
+
+                                             <!--<input type="button"onclick="dieu_huong()" name="btEdit" value="Edit" />-->
                                         </td>
-                                        <td>
-                                    <c:url var="delelteLink" value="MainController">
-                                        <c:param name="btAction" value="Delete" />
-                                        <c:param name="pk" value="${getOrderID()}" />
-                                        <c:param name="lastSearchValue" value="${searchValue}" />
-                                    </c:url>
-                                    <a href="${delelteLink}">Delete</a>
-                                </td>
-                                   </tr>
-                              </form>
-                         </c:forEach>
-                    </tbody>
-               </table>
-          </c:if>
 
-          <c:if test="${ empty result}">
-               <font color="green">
-               <h2>
-                    No match record!!!
-               </h2>
-               </font>
-          </c:if>
-     </c:if>
+                                   </c:forEach>
+                                   </tbody>
+                                   </table>
+                              </c:if>
+               <c:if test="${ empty result}">
+                              <font color="green">
+                              <h2>
+                                   No match record!!!
+                              </h2>
+                              </font>
+                         </c:if>
+                    </c:if>
 
-</body>
-</html>
+                    </body>
+                    </html>

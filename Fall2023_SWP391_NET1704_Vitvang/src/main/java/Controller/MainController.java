@@ -24,6 +24,7 @@ public class MainController extends HttpServlet {
         private final String SearchOrderController = "SearchOrderController";
         private final String UpdateOrderController = "UpdateServlet";
         private final String DeleteOrderController = "DeleteOrderServlet";
+        private final String EditOrderPage = "EditOrder.jsp";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
@@ -36,7 +37,7 @@ public class MainController extends HttpServlet {
                                 url = StartUpController;
                         } else if (button.equals("Login")) {
                                 url = LoginController;
-                        } else if (button.equals("LogOut")) {
+                        } else if (button.equals("Log Out")) {
                                 url = LogOutController;
                         } else if (button.equals("Search")) {
                                 url = SearchOrderController;
@@ -44,6 +45,8 @@ public class MainController extends HttpServlet {
                                 url = UpdateOrderController;
                         } if (button.equals("Delete")) {
                                 url = DeleteOrderController;
+                        } if (button.equals("Edit")) {
+                                url = EditOrderPage;
                         }
                 } finally {
                         RequestDispatcher rd = request.getRequestDispatcher(url);

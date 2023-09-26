@@ -22,7 +22,7 @@ import java.util.List;
 @WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
 public class SearchOrderController extends HttpServlet {
 
-        private final String SEARCH_RESULT_PAGE = "resultOrderSearch.jsp";
+        private final String SEARCH_RESULT_PAGE = "showSearch.jsp";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
