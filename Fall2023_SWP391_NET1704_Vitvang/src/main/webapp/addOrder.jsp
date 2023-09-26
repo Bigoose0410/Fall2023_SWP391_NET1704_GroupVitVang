@@ -4,12 +4,11 @@
     Author     : Admin
 --%>
 
+<%@page import="Resigtration.RegistrationInsertError"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="t" %>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
+
 <html>
 
 <head>
@@ -50,26 +49,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <!-- <h2>Them thong tin san pham</h2> -->
 
     <main>
-      <!--        <div class="main-Info">
-          <div class="search-container">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="SearchOrder..."
-            />
-            <button class="search-button">Search</button>
-          </div>
-          <div class="text-right">
-            <button class="add-button">Add</button>
-          </div>
-        </div>-->
+      
       <h2>Them thong tin san pham</h2>
       <div class="main-content">
-        <ul>
+           <form action="MainController">
+                <ul>
           <li>OrderID</li>
           <li>
-            <input type="text" class="form-control" placeholder="OrderID" />
+               <input type="text" class="form-control" placeholder="OrderID" name="txtOrderID" value="<%=request.getParameter("txtOrderID")%>" />
           </li>
+          <t:set var="errors" value="${requestScope.INSERTERROR}"></t:set>
+            <t:if test="${not empty errors.orderIdErr}">
+                <font color ="red">
+                ${errors.orderIdErr}
+                </font>
+            </t:if>
+            <br>
         </ul>
         <ul>
           <li>CageID </li>
@@ -118,39 +113,57 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <ul>
           <li>StartDate</li>
           <li>
-            <input type="date" class="form-control" placeholder="StartDate" />
+            <input type="date" class="form-control" placeholder="StartDate" name="txtStartDate" />
           </li>
+           <t:if test="${not empty errors.startDateErr}">
+                <font color ="red">
+                ${errors.startDateErr}
+                </font>
+            </t:if>
+            <br>
         </ul>
 
         <ul>
           <li>Price</li>
           <li>
-            <input type="text" class="form-control" placeholder="Price" />
+            <input type="text" class="form-control" placeholder="Price" name="txtPrice" />
           </li>
         </ul>
 
         <ul>
           <li>StatusProcess</li>
           <li>
-            <input type="text" class="form-control" placeholder="StatusProcess" />
+            <input type="text" class="form-control" placeholder="StatusProcess" name="txtProcess" />
           </li>
+          
         </ul>
         <ul>
           <li>EndDate</li>
           <li>
-            <input type="date" class="form-control" placeholder="StaffID" />
+            <input type="date" class="form-control" name="txtEndDate" />
+              <t:if test="${not empty errors.endDateErr}">
+                <font color ="red">
+                ${errors.endDateErr}
+                </font>
+            </t:if>
+            <br>
           </li>
         </ul>
         <ul>
           <li>CustomerID</li>
           <li>
-            <input type="text" class="form-control" placeholder="CustomerID" />
+            <input type="text" class="form-control" placeholder="CustomerID" name="txtCustomerID" />
           </li>
         </ul>
       </div>
       <div class="text-right">
-        <button class="submit-button" >Submit</button>
+
+          <button class="submit-button" name="btAction" value="Add">Submit</button>
+        
       </div>
+           </form>>
+        
+     
     </main>
   </div>
   <div class="footer">
