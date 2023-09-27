@@ -121,7 +121,59 @@ public class OrderDAO implements Serializable {
                   }
             }
 
+        }
+        
+        public void OrderHistory() throws SQLException {
+                Connection con = null;
+                PreparedStatement stm = null;
+                ResultSet rs = null;
+                try {
+                        con = DBHelper.makeConnection();
+                        // tra ra null or k.
+                        if (con != null) {
+                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
+                                        + "From Orderr ";
+//                                        + "Where OrderID Like ? ";
+                                stm = con.prepareStatement(sql);
+//                                stm.setString(1, "%" + txtSearchValue + "%");
+                                rs = stm.executeQuery();
+                                while (rs.next()) {
+                                        String OrderID = rs.getString("OrderID");
+                                        Date StartDate = rs.getDate("StartDate");
+                                        Date EndDate = rs.getDate("EndDate");
+//                                        int Quantity = rs.getInt("Quantity");
+                                        int TotalPrice = rs.getInt("TotalPrice");
+//                                        String Delivery = rs.getString("Delivery");
+                                        String Address = rs.getString("Address");
+                                        String StatusProgress = rs.getString("StatusProgress");
+//                                        String StaffID = rs.getString("StaffID");
+                                        String CustomerID = rs.getString("CustomerID");
+
+//                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
+                                        OrderDTO order = new OrderDTO(OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID);
+                                        if (this.listOrders == null) {
+                                                this.listOrders = new ArrayList<OrderDTO>();
+                                        }
+                                        this.listOrders.add(order);
+
+                                }
+                        }
+                } finally {
+                        if (rs != null) {
+                                rs.close();
+                        }
+                        if (stm != null) {
+                                stm.close();
+                        }
+                        if (con != null) {
+                                con.close();
+                        }
+                }
+
+        }
+
       }
+
 
         public boolean deleteOrder(String OrderID)
               throws SQLException, NamingException {
