@@ -138,8 +138,8 @@ public class OrderDAO implements Serializable {
                         String sql = "DELETE from DetailOrder "
                                 + "WHERE OrderID = ? "
                                 + "DELETE from Orderr "
-                                + "WHERE OrderID = ? " ;
-//3. Create statement object
+                                + "WHERE OrderID = ? ";
+                        //3. Create statement object
                         stm = con.prepareStatement(sql);
                         stm.setString(1, OrderID);
                         stm.setString(2, OrderID);
@@ -163,5 +163,71 @@ public class OrderDAO implements Serializable {
                   }
             }
             return result;
+      }
+
+      public boolean insertOrder(String OrderID, Date StartDate, Date EndDate, 
+              String CustomerId, String Address) 
+              throws SQLException , NamingException{
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "insert into Orderr (OrderID, StartDate, EndDate, TotalPrice, CustomerID, Address, StatusProgress ) "
+                                + "values (?,?,?,0,?,?,?)";
+                              
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, OrderID);
+                        stm.setDate(2, StartDate);
+                        stm.setDate(3, EndDate);
+                        stm.setString(4, CustomerId);
+                        stm.setString(5, Address);
+                        stm.setString(6, "Start");
+
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+      public boolean insertOrderDetail(String OrderID, String Quantity, String CageID) 
+              throws SQLException , NamingException{
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql =  " insert into DetailOrder (OrderID, CageID, Quantity) values (?,?,?)";
+                        // insert to orderDetail
+                        stm.setString(1, OrderID);
+                        stm.setString(2, CageID);
+                        stm.setString(3, Quantity);
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+                        // hoan chinh roi thi excutequery
+
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
       }
 }
