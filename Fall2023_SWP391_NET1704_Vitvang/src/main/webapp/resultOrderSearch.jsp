@@ -1,7 +1,14 @@
+<<<<<<< HEAD
  <%-- 
     Document   : resultOrderSearch
     Created on : Sep 22, 2023, 2:14:45 PM
     Author     : Admin
+=======
+<%-- 
+Document   : resultOrderSearch
+Created on : Sep 22, 2023, 2:14:45 PM
+Author     : Admin
+>>>>>>> 4862ebbabc136424f5c7da12016f4b2205b6b4a8
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,7 +21,7 @@
      </head>
      <body>
           <font color="red">
-          Welcome, ${sessionScope.USER.getFullName()}
+          Welcome, ${sessionScope.USER.getAccountID()}
           </font> <br>
 
           <form action="MainController">
@@ -41,8 +48,8 @@
                                    <th>Status Progress</th>
                                    <!--<th>StaffID</th>-->
                                    <th>CustomerID</th>
-                                   <!--<th>Delete</th>-->
-                                   <!--<th>Update</th>-->
+                                   <th>Update</th>
+                                   <th>Delete</th>
                               </tr>
                          </thead>
                          <tbody>
@@ -77,10 +84,13 @@
                                         </td>
                                         --%>
                                         <td>
-                                             ${dto.getAddress()}
+                                             <input type="text" name="txtAddress" 
+                                                    value="${dto.getAddress()}"/>
                                         </td>
                                         <td>
-                                             ${dto.getStatusProgress()}
+                                             <input type="text" name="txtStatusProgress" 
+                                                    value="${dto.getStatusProgress()}"/>
+
                                         </td>
                                         <%--
                                         <td>
@@ -88,8 +98,23 @@
                                         </td>
                                         --%>
                                         <td>
-                                             ${dto.getCustomerID()}
+                                             <input type="text" name="txtCustomerID" 
+                                                    value="${dto.getCustomerID()}"/>
                                         </td>
+                                        <td>
+                                             <!--form submit-->
+                                             <input type="hidden" name="lastSearchValue" 
+                                                    value="${searchValue}"/>
+                                             <input type="submit" name="btAction" value="Update">
+                                        </td>
+                                        <td>
+                                    <c:url var="delelteLink" value="MainController">
+                                        <c:param name="btAction" value="Delete" />
+                                        <c:param name="pk" value="${getOrderID()}" />
+                                        <c:param name="lastSearchValue" value="${searchValue}" />
+                                    </c:url>
+                                    <a href="${delelteLink}">Delete</a>
+                                </td>
                                    </tr>
                               </form>
                          </c:forEach>

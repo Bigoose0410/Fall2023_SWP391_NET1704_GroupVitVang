@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -22,7 +22,7 @@ import javax.naming.NamingException;
  */
 public class OrderDAO implements Serializable {
 
-        public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, int Quantity, int Price, String Delivery, String Address, String StatusProgress, String StaffID)
+        public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress, String CusomerID)
                 throws SQLException, NamingException {
                 Connection con = null;
                 PreparedStatement stm = null;
@@ -35,17 +35,16 @@ public class OrderDAO implements Serializable {
                         if (con != null) {
                                 //2. create SQL statement string
                                 String sql = "UPDATE Orderr "
-                                        + "SET StartDate = ?, EndDate = ?, Quantity = ? , Price = ?, Delivery = ?, Address = ?, StatusProgress = ? "
-                                        + "WHERE OrderID = ?";
+                                        + "SET StartDate = ?, EndDate = ?, Address = ?, StatusProgress = ?, CustomerID = ? "
+                                        + "WHERE OrderID = ? ";
                                 //3. Create statement object
                                 stm = con.prepareStatement(sql);
-                                stm.setDate(1, StartDate);
-                                stm.setDate(2, EndDate);
-                                stm.setInt(3, Quantity);
-                                stm.setInt(4, Price);
-                                stm.setString(5, Delivery);
-                                stm.setString(6, Address);
-                                stm.setString(7, OrderID);
+                                stm.setDate(1, (java.sql.Date) StartDate);
+                                stm.setDate(2, (java.sql.Date) EndDate);
+                                stm.setString(3, Address);
+                                stm.setString(4, StatusProgress);
+                                stm.setString(5, CusomerID);
+                                stm.setString(6, OrderID);
                                 //4. Excute query
                                 int effectRows = stm.executeUpdate();
                                 //5. Process
@@ -83,7 +82,7 @@ public class OrderDAO implements Serializable {
                         con = DBHelper.makeConnection();
                         // tra ra null or k.
                         if (con != null) {
-                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProcess, CustomerID "
+                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
                                         + "From Orderr "
                                         + "Where OrderID Like ? ";
                                 stm = con.prepareStatement(sql);
@@ -97,7 +96,7 @@ public class OrderDAO implements Serializable {
                                         int TotalPrice = rs.getInt("TotalPrice");
 //                                        String Delivery = rs.getString("Delivery");
                                         String Address = rs.getString("Address");
-                                        String StatusProgress = rs.getString("StatusProcess");
+                                        String StatusProgress = rs.getString("StatusProgress");
 //                                        String StaffID = rs.getString("StaffID");
                                         String CustomerID = rs.getString("CustomerID");
 
@@ -123,6 +122,7 @@ public class OrderDAO implements Serializable {
                 }
 
         }
+
 
         public boolean insertOrder(String orderID, Date startDate, Date endDate, String customerId, String quantity, String CageId) throws SQLException{
                 Connection con = null;
@@ -162,9 +162,50 @@ public class OrderDAO implements Serializable {
         
     } 
 
+    
+ 
+
+        public boolean deleteOrder(String OrderID)
+                throws SQLException, NamingException {
+                Connection con = null;
+                PreparedStatement stm = null;
+                ResultSet rs = null;
+                boolean result = false;
+
+                try {
+                        //1. Make connection
+                        con = (Connection) DBHelper.makeConnection();
+                        if (con != null) {
+                                //2. create SQL statement string
+                                String sql = "UPDATE Orderr "
+                                        + "WHERE OrderID = ?";
+                                //3. Create statement object
+                                stm = con.prepareStatement(sql);
+                                stm.setString(1, OrderID);
+                                //4. Excute query
+                                int effectRows = stm.executeUpdate();
+                                //5. Process
+                                if (effectRows > 0) {
+                                        result = true;
+                                }
+                        } // end of connection has opend
+
+                } finally {
+                        if (rs != null) {
+                                rs.close();
+                        }
+                        if (stm != null) {
+                                stm.close();
+                        }
+                        if (con != null) {
+                                DBHelper.closeConnection(con);
+                        }
+                }
+                return result;
+        }
+
         public boolean insertOrder(String orderId, java.util.Date sDate, java.util.Date eDate, String customerId, String startDate, String orderId0) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
-        }
- 
+}
 

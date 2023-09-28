@@ -12,7 +12,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>historyOrder</title>
-  <link rel="stylesheet" href="css\historyOder.css" />
+  <link rel="stylesheet" href="css\historyOrder.css" />
 </head>
 
 <body>
@@ -55,6 +55,7 @@
           <th>StatusProgress</th>
           <th>Quantity</th>
           <th>Price</th>
+          <th>Edit</th>
           <!-- <th>Update</th> -->
         </tr>
         <tr>
@@ -67,6 +68,7 @@
           <td>12</td>
           <td>12</td>
           <!-- <td><a href="#">Edit</a></td> -->
+          <td><a href="editOrderDetails.jsp">Edit</a></td>
         </tr>
         <tr>
           <td>6</td>
@@ -78,6 +80,7 @@
           <td>12</td>
           <td>12</td>
           <!-- <td><a href="#">Edit</a></td> -->
+          <td> <a href="editOrderDetails.jsp">Edit</a></td>
         </tr>
 
       </table>

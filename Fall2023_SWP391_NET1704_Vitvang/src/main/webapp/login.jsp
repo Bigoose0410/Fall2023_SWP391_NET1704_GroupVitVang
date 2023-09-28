@@ -1,10 +1,3 @@
-x
-<%-- 
-    Document   : login
-    Created on : Sep 19, 2023, 4:46:01 PM
-    Author     : Admin
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,6 +33,7 @@ x
                                                 <input class="form-control" id="inputUsername" name="txtUsername" value="${param.txtUsername}"
                                                        type="text" placeholder="text"/>
                                                 <label for="inputUsername">Username</label>
+                                                
                                                 <!--error of username-->
                                                 <c:if test="${not empty error.getIsEmptyUsername()}">
                                                     <font style="color: red;">
@@ -77,7 +71,7 @@ x
 
                                                 <input type="hidden" name="lastUsername" value="${Username}" />
                                                 <input type="hidden" name="lastpassword" value="${Password}" />
-                                                <input class="btn btn-primary" type="submit" value="Login" name="btAction" />
+                                                <input class="btn btn-primary" type="submit" value="login" name="btAction" />
                                             </div>
                                         </form>
                                     </div>

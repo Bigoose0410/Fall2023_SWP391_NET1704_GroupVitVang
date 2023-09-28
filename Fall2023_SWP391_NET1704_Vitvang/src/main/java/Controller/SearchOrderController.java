@@ -28,7 +28,7 @@ public class SearchOrderController extends HttpServlet {
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
                 String searchValue = request.getParameter("txtSearchValue");
-                String url = "searchOrder.html";
+                String url = "login.jsp";
                 try {
                         // kiem tra search value truyen ve co phai rong khong
                         if (!searchValue.isEmpty()) {

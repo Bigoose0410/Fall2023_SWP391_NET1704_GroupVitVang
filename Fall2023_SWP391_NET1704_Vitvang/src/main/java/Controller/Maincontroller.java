@@ -5,11 +5,8 @@
 package Controller;
 
 import jakarta.servlet.RequestDispatcher;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +16,8 @@ import java.io.IOException;
  *
  * @author Admin
  */
+
+@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
         private final String LoginController = "LoginServlet";
@@ -26,6 +25,8 @@ public class MainController extends HttpServlet {
         private final String LogOutController = "LogOutServlet";
         private final String SearchOrderController = "SearchOrderController";
         private final String AddOrderController = "AddOrderController";
+        private final String UpdateOrderController = "UpdateOrderController";
+
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
@@ -42,8 +43,13 @@ public class MainController extends HttpServlet {
                                 url = LogOutController;
                         } else if (button.equals("Search")) {
                                 url = SearchOrderController;
+
                         } else if (button.equals("Add")) {
                                 url = AddOrderController;
+
+                        } if (button.equals("Update")) {
+                                url = UpdateOrderController;
+
                         }
                 } finally {
                         RequestDispatcher rd = request.getRequestDispatcher(url);
