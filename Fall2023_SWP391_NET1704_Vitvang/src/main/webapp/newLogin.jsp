@@ -41,7 +41,9 @@
                               <font style="color: red;">
                               <!--print out error-->
                               ${error.getIsWrongAccount()}
-                              </font><br/>                                                   
+                              </font><br/>
+                              <br/>
+                              <br/>
                          </c:if>
                     </div>
                     <div class="button" >

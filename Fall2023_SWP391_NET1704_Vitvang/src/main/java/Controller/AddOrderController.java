@@ -13,7 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Date;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +30,7 @@ public class AddOrderController extends HttpServlet {
         private final String HistoryOrderPAGE = "historyOrder.jsp";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException, ParseException {
+                throws ServletException, IOException, ParseException, SQLException {
                 response.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = response.getWriter()) {
                         String url = "orderHome.html";
@@ -45,7 +45,7 @@ public class AddOrderController extends HttpServlet {
                         OrderInsertError errors = new OrderInsertError();
                         Pattern pattern = Pattern.compile("^[O]\\d{2}$");
                         Pattern pattern1 = Pattern.compile("^[C]\\d{2}$");
-                        Date now = new Date();
+                        Date now = new Date(2023, 9, 29);
                         boolean berrors = false;
                         OrderDAO dao = new OrderDAO();
                         if (pattern.matcher(orderId).find()) {
@@ -96,6 +96,8 @@ public class AddOrderController extends HttpServlet {
                         processRequest(request, response);
                 } catch (ParseException ex) {
                         Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                        Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
 
@@ -114,6 +116,8 @@ public class AddOrderController extends HttpServlet {
                 try {
                         processRequest(request, response);
                 } catch (ParseException ex) {
+                        Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                         Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }

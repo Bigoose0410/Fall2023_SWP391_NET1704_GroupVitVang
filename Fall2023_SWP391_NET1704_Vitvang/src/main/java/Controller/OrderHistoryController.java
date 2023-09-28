@@ -6,12 +6,13 @@ package Controller;
 
 import Model.OrderDTO;
 import Order.OrderDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,28 +20,29 @@ import java.util.List;
  *
  * @author Admin
  */
-@WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
-public class SearchOrderController extends HttpServlet {
+@WebServlet(name = "OrderHistoryController", urlPatterns = {"/OrderHistoryController"})
+public class OrderHistoryController extends HttpServlet {
 
-        private final String OrderSearch = "order.jsp";
-
+        private final String OrderHistory = "order.jsp";
+        
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
                 String searchValue = request.getParameter("txtSearchValue");
-                String url = "login.jsp";
+                String url = "errorPageLogin.html";
                 try {
                         // kiem tra search value truyen ve co phai rong khong
-                        if (!searchValue.isEmpty()) {
+                        if (searchValue == null) {
                                 //1. call DAO
                                 OrderDAO dao = new OrderDAO();
                                 //1.2. call method
-                                dao.searchOrder(searchValue);
+//                                dao.searchOrder(searchValue);
+                                dao.OrderHistory();
                                 // process result
                                 List<OrderDTO> result = dao.getListOrders();
 
                                 request.setAttribute("SEARCH_RESULT", result);
-                                url = OrderSearch;
+                                url = OrderHistory;
                         }
                 } catch (SQLException e) {
                         log("LOGINSERVLET _ SQL" + e.getMessage());
