@@ -42,7 +42,7 @@ public class StartUpController extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String url = "login.jsp";
+                String url = "newLogin.jsp";
                 try {
                         //1. get all cookie 
                         Cookie[] cookies = request.getCookies();

@@ -29,26 +29,18 @@ import javax.naming.NamingException;
 public class LoginServlet extends HttpServlet {
 
         private static final String AdminPage = "resultOrderSearch.jsp";
-        private static final String StaffPage = "header.jsp";
-        private static final String ManagerPage = "header.jsp";
-        private static final String LoginPage = "login.jsp";
+        private static final String StaffPage = "homePage.html";
+        private static final String ManagerPage = "homePage.html";
+        private static final String LoginPage = "newLogin.jsp";
+        private static final String ErrorPage = "errorPageLogin.html";
 
-        /**
-         * Processes requests for both HTTP <code>GET</code>
-         * and <code>POST</code> methods.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
+        
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException, ClassNotFoundException {
                 response.setContentType("text/html;charset=UTF-8");
                 String username = request.getParameter("txtUsername");
                 String password = request.getParameter("txtPassword");
-                String url = "errorPageLogin.html";
+                String url = ErrorPage;
                 try {
                         AccountLoginError error = new AccountLoginError();
                         boolean foundErr = false;

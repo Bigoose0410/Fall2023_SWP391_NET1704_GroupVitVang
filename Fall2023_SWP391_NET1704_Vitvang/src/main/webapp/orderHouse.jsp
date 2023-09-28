@@ -33,7 +33,7 @@
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Home Page</span>
                 </a></li>
-                <li><a href="order.jsp">
+                <li><a href="orderHouse.jsp">
                     <i class="uil uil-bill"></i>>
                     <span class="link-name">Order</span>
                 </a></li>
