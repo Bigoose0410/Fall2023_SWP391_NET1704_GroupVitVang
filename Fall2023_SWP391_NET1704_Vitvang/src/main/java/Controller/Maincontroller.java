@@ -17,7 +17,7 @@ import java.io.IOException;
  * @author Admin
  */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+public class Maincontroller extends HttpServlet {
         private final String LoginController = "LoginServlet";
         private final String StartUpController = "StartUpController";
         private final String LogOutController = "LogOutServlet";
