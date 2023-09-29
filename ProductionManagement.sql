@@ -33,6 +33,7 @@ CREATE TABLE Orderr (
 	TotalPrice INT,
 	Address NVARCHAR(50),
 	StatusProgress NVARCHAR(20)
+	
 )
 
 CREATE TABLE UserOrder (
@@ -54,7 +55,9 @@ CREATE TABLE Cage (
 CREATE TABLE Process (
 	Step INT NOT NULL PRIMARY KEY,
 	StepName NVARCHAR(50),
-	Description NVARCHAR(MAX)
+	Description NVARCHAR(MAX),
+	Actual production quantity INT,
+	Number of Worker Int 
 )
 
 CREATE TABLE CageProcess (
