@@ -17,7 +17,7 @@
                <form action="MainController">
                     <c:set var="error" value="${requestScope.LOGIN_ERRORS}"/>
                     <div class="inputbox">
-                         <input type="text" required="required"  placeholder="text" id="inputUsername" name="txtUsername" value="${param.txtUsername}">
+                         <input type="text" required="required"   id="inputUsername" name="txtUsername" value="${param.txtUsername}">
                          <span for="inputUsername">Account</span>
                          <!--error of username-->
                          <c:if test="${not empty error.getIsEmptyUsername()}">
@@ -28,7 +28,7 @@
                          </c:if>
                     </div>
                     <div class="inputbox">
-                         <input type="password" placeholder="Password" required="required" id="inputPassword" name="txtPassword" value="${param.txtPassword}">
+                         <input type="password"  required="required" id="inputPassword" name="txtPassword" value="${param.txtPassword}">
                          <span for="inputPassword" >Password</span>
                          <!--error of password-->
                          <c:if test="${not empty error.getIsEmptyPassword()}">
