@@ -22,7 +22,9 @@
                     </div>
                     <div class="button" >
 
-                        <a href="homePage.html" class="submit-button" type="button">submit</a>
+
+                           <button  value="submit" class="submit-button" ><span><i class="uil uil-estate"></i></span>Submit</button>
+
                     </div>
                </form>
           </div>
