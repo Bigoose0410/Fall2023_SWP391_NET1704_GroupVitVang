@@ -21,6 +21,7 @@
     --title-icon-color: #fff;
      --cream-color: #f5f5dc;
       --hover-color: #333;
+      --blue-fall:# 00BFFF;
 --dark-text: #fff;
     /* ====== Transition ====== */
     --tran-05: all 0.5s ease;
@@ -57,7 +58,7 @@ body.dark{
     transition: all 0.3s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-th  mb:hover {
     background: #0b3cc1;
 }
 
@@ -66,19 +67,19 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
     background: #3A3B3C;
 }
 
-    nav{
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 250px;
-        padding: 10px 14px;
-        background-color: var(--panel-color);
-        border-right: 1px solid var(--border-color);
-        transition: var(--tran-05);
-        background-color: var(--cream-color);
-        border-color: #e6e6cc;
-    }
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    border-right: 1px solid var(--border-color);
+    transition: var(--tran-05);
+    background-color: #1da1f2;
+    
+}
     nav.close{
         width: 73px;
     }
@@ -102,6 +103,8 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
         font-weight: 600;
         color: var(--text-color);
         margin-right: 13px;
+        background-color: transparent;
+        border: none;
         transition: var(--tran-05);
     }
     nav.close .logo_name{
@@ -144,12 +147,12 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--black-light-color);
+        color: #222;
     }
     .menu-items li a .link-name{
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 400;
-        color: var(--black-light-color);
+        color: #222;
         transition: var(--tran-05);
     }
     nav.close li a .link-name{
@@ -242,36 +245,8 @@ nav.close ~ .dashboard .top{
     color: var(--text-color);
     cursor: pointer;
 }
-.dashboard .top .search-box{
-    position: relative;
-    height: 45px;
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 30px;
-    border-radius: 10px;
-}
-.top .search-box input{
-    position: absolute;
-    border: 1px solid var(--border-color);
-    background-color: var(--panel-color);
-    padding: 0 25px 0 50px;
-    border-radius: 5px;
-    height: 100%;
-    width: 100%;
-    color: var(--text-color);
-    font-size: 15px;
-    font-weight: 400;
-    outline: none;
-}
-.top .search-box i{
-    position: absolute;
-    left: 15px;
-    font-size: 22px;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--black-light-color);
-}
+
+
 .top img{
     width: 40px;
     border-radius: 50%;
@@ -484,4 +459,18 @@ color: var(--dark-text);
 }
 body.dark nav {
 background-color: #222;
+}
+.menu-items {
+  display: flex;
+  flex-direction: column;
+}
+.nav-links {
+  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-links li {
+  padding: 10px 0; 
 }
