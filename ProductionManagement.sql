@@ -23,16 +23,13 @@ CREATE TABLE Users (
 	Username NVARCHAR(50) NOT NULL,
 	Password NVARCHAR(20) NOT NULL,
 	RoleID INT NOT NULL,
-	FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
+	FOREIGN KEY (RoleID) REFERENCES Role(RoleID),
+	UNIQUE(Username)
 )
 
 CREATE TABLE Orderr (
 	OrderID NVARCHAR(20) NOT NULL PRIMARY KEY,
-	StartDate DATE,
-	EndDate DATE,
 	TotalPrice INT,
-	Address NVARCHAR(50),
-	StatusProgress NVARCHAR(20)
 )
 
 CREATE TABLE UserOrder (
@@ -45,24 +42,23 @@ CREATE TABLE UserOrder (
 
 CREATE TABLE Cage (
 	CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
-	Name NVARCHAR(50),
-	Price INT,
-	Origin NVARCHAR(20),
-	Description NVARCHAR(MAX),
+	CageName NVARCHAR(50),
+	Price INT
 )
 
 CREATE TABLE Process (
-	Step INT NOT NULL PRIMARY KEY,
-	StepName NVARCHAR(50),
-	Description NVARCHAR(MAX)
+	ProcessID NVARCHAR(20) NOT NULL PRIMARY KEY,
+	ProcessName NVARCHAR(20) NOT NULL,
+	Description NVARCHAR(MAX),
+	Rate float
 )
 
 CREATE TABLE CageProcess (
 	CageID NVARCHAR(20) NOT NULL,
-	Step INT NOT NULL,
-	PRIMARY KEY (CageID, Step),
+	ProcessID NVARCHAR(20) NOT NULL,
+	PRIMARY KEY (CageID, ProcessID),
 	FOREIGN KEY(CageID) REFERENCES Cage(CageID),
-	FOREIGN KEY(Step) REFERENCES Process(Step)
+	FOREIGN KEY(ProcessID) REFERENCES Process(ProcessID)
 )
 
 CREATE TABLE Inventory (
@@ -76,10 +72,13 @@ CREATE TABLE Inventory (
 	FOREIGN KEY(CageID) REFERENCES Cage(CageID)
 )
 
-CREATE TABLE DetailOrder (
+CREATE TABLE CageOrder (
 	OrderID NVARCHAR(20) NOT NULL,
 	CageID NVARCHAR(20) NOT NULL,
+	ImportDate DATE,
+	CompletionDate DATE,
 	Quantity INT,
+	StatusProcess NVARCHAR(20),
 	PRIMARY KEY(OrderID, CageID),
 	FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
 	FOREIGN KEY(CageID) REFERENCES Cage(CageID)
