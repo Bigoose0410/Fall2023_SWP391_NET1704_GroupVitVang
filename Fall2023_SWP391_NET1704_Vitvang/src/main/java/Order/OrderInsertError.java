@@ -13,10 +13,20 @@ import java.io.Serializable;
 public class OrderInsertError implements Serializable{
       private String orderIdFormatErr;
       private String customerIdFormatErr;
-      private String startDateErr;
+      private String AddressLengthErr;
       private String endDateErr;
       private String cageIdFormatErr;
       private String CustomerNotExistInDatabasErr;
+      private String DuplicateOrderIDErr;
+
+      public String getDuplicateOrderIDErr() {
+            return DuplicateOrderIDErr;
+      }
+
+      public void setDuplicateOrderIDErr(String DuplicateOrderIDErr) {
+            this.DuplicateOrderIDErr = DuplicateOrderIDErr;
+      }
+      
       
         public OrderInsertError() {
         }
@@ -38,13 +48,14 @@ public class OrderInsertError implements Serializable{
             this.customerIdFormatErr = customerIdFormatErr;
       }
 
-      public String getStartDateErr() {
-            return startDateErr;
+      public String getAddressLengthErr() {
+            return AddressLengthErr;
       }
 
-      public void setStartDateErr(String startDateErr) {
-            this.startDateErr = startDateErr;
+      public void setAddressLengthErr(String AddressLengthErr) {
+            this.AddressLengthErr = AddressLengthErr;
       }
+
 
       public String getEndDateErr() {
             return endDateErr;

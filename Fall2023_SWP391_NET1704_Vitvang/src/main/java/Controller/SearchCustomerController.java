@@ -4,8 +4,8 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import cage.CageDAO;
+import Model.UserDTO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,14 +16,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
+import users.UserDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
-public class ListCageController extends HttpServlet {
-      private final String ADD_ORDER_PAGE = "orderAdd.jsp";
+@WebServlet(name = "SearchCustomerController", urlPatterns = {"/SearchCustomerController"})
+public class SearchCustomerController extends HttpServlet {
+
+      private final String SEARCH_CUSTOMER_PAGE = "searchCustomer.jsp";
+      
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -35,24 +38,31 @@ public class ListCageController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
+            String searchName = request.getParameter("txtSearchvalue");
+            String RoleID = request.getParameter("txtRoleSearch");
+            int role = Integer.parseInt(RoleID);
             String url = "errorPageLogin.html";
             try {
-                        HttpSession session = request.getSession();
-                                //1. call DAO
-                                CageDAO dao = new CageDAO();
-                                //1.2. call method
-                                dao.AllProduction();
-                                // process result
-                                List<CageDTO> result = dao.getListCage();
-                                session.setAttribute("CAGE_LIST", result);
-                                url = ADD_ORDER_PAGE;
-                } catch (SQLException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                } catch (NamingException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                }finally {
-                        request.getRequestDispatcher(url).forward(request, response);
-                }
+                  // 1. new dao
+                  UserDAO dao = new UserDAO();
+                  // 2. call method
+                  dao.searchUserByNameAndRole(searchName, role);
+                  //3. process result
+                  List<UserDTO> result = dao.getListUser();
+                  
+                  request.setAttribute("SEARCH_CUS_RESULT", result);
+                  url = SEARCH_CUSTOMER_PAGE;
+                  HttpSession session = request.getSession();
+                  session.removeAttribute("SHOW_CUS_CREATE_FORM");
+                  
+            } catch (SQLException ex) {
+                  log("SearchUserController _ SQL" + ex.getMessage());
+            } catch (NamingException ex) {
+                  log("SearchUserController _ NAMING" + ex.getMessage());
+            } finally {
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+            }
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

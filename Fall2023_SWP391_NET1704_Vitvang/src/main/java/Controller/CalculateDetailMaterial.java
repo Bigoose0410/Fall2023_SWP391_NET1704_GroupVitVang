@@ -5,13 +5,14 @@
 package Controller;
 
 import Model.CageDTO;
+import Model.CageMaterialDTO;
 import cage.CageDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,9 +22,11 @@ import javax.naming.NamingException;
  *
  * @author Admin
  */
-@WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
-public class ListCageController extends HttpServlet {
-      private final String ADD_ORDER_PAGE = "orderAdd.jsp";
+@WebServlet(name = "Calculate Material", urlPatterns = {"/CalculateDetailMaterial"})
+public class CalculateDetailMaterial extends HttpServlet {
+
+      private final String CAGE_MATERIAL_PAGE = "CageMaterialDetail.jsp";
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -35,24 +38,39 @@ public class ListCageController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
+            String[] CageIDList = request.getParameterValues("txtCageID");
+            String[] QuantityList = request.getParameterValues("txtQuantity");
+            int i = 0;
             String url = "errorPageLogin.html";
             try {
-                        HttpSession session = request.getSession();
-                                //1. call DAO
-                                CageDAO dao = new CageDAO();
-                                //1.2. call method
-                                dao.AllProduction();
-                                // process result
-                                List<CageDTO> result = dao.getListCage();
-                                session.setAttribute("CAGE_LIST", result);
-                                url = ADD_ORDER_PAGE;
-                } catch (SQLException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                } catch (NamingException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                }finally {
-                        request.getRequestDispatcher(url).forward(request, response);
-                }
+                  // new DAO
+                  CageDAO dao = new CageDAO();
+                  // Call method
+                  for (String CageID : CageIDList) {
+                              int quantity = 1;
+                        if (QuantityList.length != 0) {
+                              quantity = Integer.parseInt(QuantityList[0]);
+                        }
+                        dao.ViewCageMaterial(CageID, quantity);
+                        dao.searchProduction(CageID);
+                        i++;
+                  }
+                  List<CageMaterialDTO> result1 = dao.getListCageMaterial();
+                  List<CageDTO> result2 = dao.getListCage();
+
+                  request.setAttribute("CAGE_MATERIAL", result1);
+                  request.setAttribute("CAGE_ORDER", result2);
+                  url = CAGE_MATERIAL_PAGE;
+
+            } catch (SQLException ex) {
+                  String msg = ex.getMessage();
+                  log("CalculateDetailMaterial SQL" + msg);
+            } catch (NamingException ex) {
+                  log("CalculateDetailMaterial _ NAMING " + ex.getMessage());
+            } finally {
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+            }
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

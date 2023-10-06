@@ -7,7 +7,6 @@ package Controller;
 import Order.OrderDAO;
 import Order.OrderInsertError;
 import static Util.tool.*;
-import cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -29,23 +27,23 @@ import javax.naming.NamingException;
  */
 public class AddOrderController extends HttpServlet {
 
-      private final String HistoryOrderPAGE = "historyOrder.jsp";
+      private final String ORDER_PAGE = "order.jsp";
+      private final String ORDER_ADD_PAGE = "orderAdd.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String ORDERID_PATTERN = "OD\\d{3}";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, ParseException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "orderHome.html";
+            String url = ORDER_PAGE;
             // test
             String orderId = request.getParameter("txtOrderID");
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            String StartDate = request.getParameter("txtStartDate");
             String EndDate = request.getParameter("txtEndDate");
-            Date productStartDate = Date.valueOf(StartDate);
             Date productEndDate = Date.valueOf(EndDate);
             String customerId = request.getParameter("txtCustomerID");
-
+            String Address = request.getParameter("txtAddress");
+            String[] CageID = request.getParameterValues("txtCageID");
+            String Quantity = request.getParameter("txtQuantity");
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
 
@@ -54,8 +52,7 @@ public class AddOrderController extends HttpServlet {
             try {
                   HttpSession session = request.getSession();
                   OrderDAO Orderdao = new OrderDAO();
-                  CageDAO CageDAO = new CageDAO();
-                  if (checkFormat(orderId, ORDERID_PATTERN, true)) {
+                  if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
                         error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
                         foundErr = true;
                   }
@@ -63,16 +60,29 @@ public class AddOrderController extends HttpServlet {
                         error.setEndDateErr("End date can not before today");
                         foundErr = true;
                   }
-                  if (checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
+                  if (!checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
                         error.setCustomerIdFormatErr("Pls type again CustomerID with two digit");
+                        foundErr = true;
+                  }
+                  if (Address.trim().length() < 5) {
+                        error.setAddressLengthErr("Pls type again Address too short");
                         foundErr = true;
                   }
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
+                        url = ORDER_ADD_PAGE;
                   } else {
-                        boolean result = Orderdao.insertOrder(orderId, now, productEndDate, customerId, EndDate);
+                        boolean result = Orderdao.insertOrder(orderId, now, productEndDate, Address);
+                        Orderdao.addUserOrder(orderId, customerId);
+                        if (!Quantity.isEmpty() && !Quantity.equals("0")) {
+                              int quantity = Integer.parseInt(Quantity);
+                              for (String item : CageID) {
+                                    Orderdao.addOrderDetail(orderId, item, quantity);
+                              }
+                        }
                         if (result) {
-                              url = HistoryOrderPAGE;
+                              url = "MainController"
+                                      + "?btAction=Order";
                         }
                   }
 
@@ -81,12 +91,15 @@ public class AddOrderController extends HttpServlet {
                   log("UpdateAccountServlet _ SQL " + msg);
                   if (msg.contains("conflicted with the FOREIGN KEY")) {
                         error.setCustomerNotExistInDatabasErr("Customer not exist in database");
-                        request.setAttribute("UPDATE_ORDER_ERROR", error);
+                        request.setAttribute("ADD_ORDER_ERROR", error);
+                  }
+                  if (msg.contains("duplicate")) {
+                        error.setDuplicateOrderIDErr("OrderID has exist in database");
+                        request.setAttribute("ADD_ORDER_ERROR", error);
                   }
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
             } finally {
-//            response.sendRedirect(url);
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
             }

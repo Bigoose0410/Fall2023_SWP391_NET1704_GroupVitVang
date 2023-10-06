@@ -4,8 +4,7 @@
  */
 package Controller;
 
-import Account.AccountDAO;
-import Model.AccountDTO;
+import Model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
+import users.UserDAO;
 
 /**
  *
@@ -25,9 +25,9 @@ import javax.naming.NamingException;
 @WebServlet(name = "StartUpController", urlPatterns = {"/StartUpController"})
 public class StartUpController extends HttpServlet {
 
-        private static final String AdminPage = "resultOrderSearch.jsp";
-        private static final String StaffPage = "Adminpage.html";
-        private static final String ManagerPage = "Adminpage.html";
+        private static final String AdminPage = "order.jsp";
+        private static final String StaffPage = "order.jsp";
+        private static final String ManagerPage = "order.jsp";
 
         /**
          * Processes requests for both HTTP <code>GET</code>
@@ -42,7 +42,7 @@ public class StartUpController extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String url = "login.jsp";
+                String url = "newLogin.jsp";
                 try {
                         //1. get all cookie 
                         Cookie[] cookies = request.getCookies();
@@ -54,9 +54,11 @@ public class StartUpController extends HttpServlet {
                                 String username = newestCookie.getName();
                                 String password = newestCookie.getValue();
                                 //5. call DAO use check login
-                                AccountDAO dao = new AccountDAO();
-                                AccountDTO result = dao.checkLogin(username, password);
+                                UserDAO dao = new UserDAO();
+                                UserDTO result = dao.checkLogin(username, password);
                                 if (result != null) {
+                                        HttpSession session = request.getSession();
+                                        session.setAttribute("USER", result);
                                         switch (result.getRoleID()) {
                                                 case 1:
                                                         url = AdminPage;
@@ -69,8 +71,6 @@ public class StartUpController extends HttpServlet {
                                                         break;
                                         }
 
-                                        HttpSession session = request.getSession();
-                                        session.setAttribute("USER", result);
                                 }//end user is authenticated
                         }//end user is authenticated
                 } catch (SQLException ex) {

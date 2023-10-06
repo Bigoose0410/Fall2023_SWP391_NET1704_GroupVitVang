@@ -21,7 +21,7 @@ import java.io.IOException;
 public class LogOutServlet extends HttpServlet {
 
         private static final String loginPage = "login.jsp";
-        
+
         /**
          * Processes requests for both HTTP <code>GET</code>
          * and <code>POST</code> methods.

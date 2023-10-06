@@ -4,8 +4,7 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import cage.CageDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,17 +12,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
-public class ListCageController extends HttpServlet {
-      private final String ADD_ORDER_PAGE = "orderAdd.jsp";
+@WebServlet(name = "ShowCusCreateFormController", urlPatterns = {"/ShowCusCreateFormController"})
+public class ShowCusCreateFormController extends HttpServlet {
+
+      private final String SEARCH_CUSTOMER_PAGE = "searchCustomer.jsp";
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -37,22 +35,14 @@ public class ListCageController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = "errorPageLogin.html";
             try {
-                        HttpSession session = request.getSession();
-                                //1. call DAO
-                                CageDAO dao = new CageDAO();
-                                //1.2. call method
-                                dao.AllProduction();
-                                // process result
-                                List<CageDTO> result = dao.getListCage();
-                                session.setAttribute("CAGE_LIST", result);
-                                url = ADD_ORDER_PAGE;
-                } catch (SQLException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                } catch (NamingException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                }finally {
-                        request.getRequestDispatcher(url).forward(request, response);
-                }
+                  HttpSession session = request.getSession();
+                  String showForm = "Show Form";
+                  session.setAttribute("SHOW_CUS_CREATE_FORM", showForm);
+                  url = SEARCH_CUSTOMER_PAGE;
+            } finally {
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+            }
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

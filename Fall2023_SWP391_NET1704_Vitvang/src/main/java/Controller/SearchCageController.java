@@ -4,27 +4,26 @@
  */
 package Controller;
 
-import Model.AccountDTO;
-import Order.OrderDAO;
-import static Util.tool.checkRole;
+import Model.CageDTO;
+import cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "DeleteOrderServlet", urlPatterns = {"/DeleteOrderServlet"})
-public class DeleteOrderServlet extends HttpServlet {
-
+@WebServlet(name = "SearchCageController", urlPatterns = {"/SearchCageController"})
+public class SearchCageController extends HttpServlet {
+      private static String CHOOSE_PRODUCT_PAGE = "chooseProduct.jsp";
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -36,35 +35,26 @@ public class DeleteOrderServlet extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String OrderID = request.getParameter("pk");
-            String searchValue = request.getParameter("lastSearchValue");
+            
             String url = "errorPageLogin.html";
+            String searchCageValue = request.getParameter("txtCageSearchValue");
             try {
-                  HttpSession session = request.getSession();
-                  int roleID = ((AccountDTO) session.getAttribute("USER")).getRoleID();
-                  //0. check role 
-                  if (checkRole(roleID, 1)) {
-
-                        //1. call model
-                        //1.1 new DAO
-                        OrderDAO dao = new OrderDAO();
-                        //1.2 cal DAO's methods
-                        boolean result = dao.deleteOrder(OrderID);
-                        //2.process
-                        if (result) {
-                              //2.1 call the Search function again using URL  Rewriting
-                              url = "SearchOrderController"
-                                      + "?btAction=Search"
-                                      + "&txtSearchValue=" + searchValue;
-                              //noti to user that delete sucess
-                        }
-                  } 
-            } catch (SQLException ex) {
-                  log("UpdateAccountServlet _ SQL " + ex.getMessage());
+                  // 1.new dao
+                  CageDAO dao = new CageDAO();
+                  // 2. call method
+                  if(searchCageValue == null ){
+                        searchCageValue = "";
+                  }
+                  dao.searchProduction(searchCageValue);
+                  //3. process result
+                  List<CageDTO> result = dao.getListCage();
+                  request.setAttribute("SEARCH_CAGE_RESULT", result);
+                  url = CHOOSE_PRODUCT_PAGE;
+           }catch (SQLException ex) {
+                  log("SearchUserController _ SQL" + ex.getMessage());
             } catch (NamingException ex) {
-                  log("UpdateAccountServlet _ Naming " + ex.getMessage());
+                  log("SearchUserController _ NAMING" + ex.getMessage());
             } finally {
-//            response.sendRedirect(url);
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
             }

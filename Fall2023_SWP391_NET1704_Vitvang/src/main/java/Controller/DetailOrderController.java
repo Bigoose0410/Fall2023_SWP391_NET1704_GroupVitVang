@@ -5,25 +5,33 @@
 package Controller;
 
 import Model.CageDTO;
+import Model.CageMaterialDTO;
+import Model.DetailOrderDTO;
+import Model.OrderDTO;
+import Model.UserDTO;
+import Order.OrderDAO;
 import cage.CageDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
+import users.UserDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
-public class ListCageController extends HttpServlet {
-      private final String ADD_ORDER_PAGE = "orderAdd.jsp";
+@WebServlet(name = "Detail Order", urlPatterns = {"/DetailOrderController"})
+public class DetailOrderController extends HttpServlet {
+
+      private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -35,24 +43,43 @@ public class ListCageController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
+            String OrderID = request.getParameter("txtOrderID");
             String url = "errorPageLogin.html";
             try {
-                        HttpSession session = request.getSession();
-                                //1. call DAO
-                                CageDAO dao = new CageDAO();
-                                //1.2. call method
-                                dao.AllProduction();
-                                // process result
-                                List<CageDTO> result = dao.getListCage();
-                                session.setAttribute("CAGE_LIST", result);
-                                url = ADD_ORDER_PAGE;
-                } catch (SQLException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                } catch (NamingException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                }finally {
-                        request.getRequestDispatcher(url).forward(request, response);
-                }
+                  // new DAO
+                  OrderDAO orderdao = new OrderDAO();
+                  UserDAO userdao = new UserDAO();
+                  CageDAO dao = new CageDAO();
+                  // call method orderDao
+                  orderdao.searchOrder(OrderID);
+                  orderdao.queryOrderDetail(OrderID);
+                  
+                  // process result
+                  UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
+                  OrderDTO order = orderdao.getListOrders().get(0);
+                  List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
+                  for (DetailOrderDTO detailOrderDTO : orderDetailList) {
+                        dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
+                        dao.searchProduction(detailOrderDTO.getCageID());
+                  }
+                  List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
+                  List<CageDTO> cageList = dao.getListCage();
+
+                  request.setAttribute("CUS_ORDER", customer);
+                  request.setAttribute("CAGE_MATERIAL", cageMaterialList);
+                  request.setAttribute("CAGE_ORDER", cageList);
+                  request.setAttribute("ORDER", order);
+                  url = ORDER_DETAIL_PAGE;
+
+            } catch (SQLException ex) {
+                  String msg = ex.getMessage();
+                  log("CalculateDetailMaterial SQL" + msg);
+            } catch (NamingException ex) {
+                  log("CalculateDetailMaterial _ NAMING " + ex.getMessage());
+            } finally {
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+            }
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
