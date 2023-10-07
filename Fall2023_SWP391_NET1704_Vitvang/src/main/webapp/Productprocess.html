@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="Productprocess.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <title>Production Process</title>
+</head>
+
+<body>
+    <nav>
+
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="img/OIP.jpg" alt="">
+            </div>
+
+            <span class="logo_name">Manager</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Home Page</span>
+                    </a></li>
+                <li><a href="order.html">
+                        <i class="uil uil-bill"></i>
+                        <span class="link-name">Order</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-grin"></i>
+                        <span class="link-name">Customers</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-chart-line"></i>
+                        <span class="link-name">Production process</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-clipboard-alt"></i>
+                        <span class="link-name">Reports</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-screw"></i>
+                        <span class="link-name">Material</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-archive-alt"></i>
+                        <span class="link-name">Inventory</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="index.html">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Dark Mode</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div id="process-form">
+            <!--Process-->
+            <h1>Process</h1>
+
+            <form>
+                <table class="tablesorter-custom">
+                    <thead>
+                        <tr class="search1">
+                            <td></td>
+                            <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
+                            <td> <input type="search" data-column="2" placeholder="OrderID"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>No.</th>
+                            <th>OrderID</th>
+                            <th>CustomerID</th>
+                            <th>TotalPrice</th>
+                            <th>StartDate</th>
+                            <th>produce</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>P001</td>
+                            <td>1001</td>
+                            <td>100</td>
+                            <td>2023-10-05</td>
+                            <td><button class="fa fa-cog"></button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>P002</td>
+                            <td>1002</td>
+                            <td>100</td>
+                            <td>2023-10-06</td>
+                            <td><button class="fa fa-cog"></button></td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>P003</td>
+                            <td>1003</td>
+                            <td>100</td>
+                            <td>2023-10-07</td>
+                            <td><button class="fa fa-cog"></button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </form>
+        </div>
+    </section>
+
+    <section class="dashboard1">
+        <div id="processing-form">
+            <!--Processing-->
+            <h1>Processing</h1>
+
+            <form>
+                <table class="tablesorter-custom1">
+                    <thead>
+                        <tr class="search2">
+                            <td></td>
+                            <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
+                            <td> <input type="search" data-column="2" placeholder="OrderID"></td>
+                            <td> <input type="search" data-column="3" placeholder="CageID"></td>
+                            <td> <input type="search" data-column="4" placeholder="ProcessID"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>No.</th>
+                            <th>CustomerID</th>
+                            <th>OrderID</th>
+                            <th>CageID</th>
+                            <th>ProcessID</th>
+                            <th>NameStep</th>
+                            <th>Date time Start</th>
+                            <th>Date time End</th>
+                            <th>Quantity completed</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1001</td>
+                            <td>P001</td>
+                            <td>PT001</td>
+                            <td>MT001</td>
+                            <td>Step 1</td>
+                            <td>2023-10-05</td>
+                            <td>2023-10-06</td>
+                            <td>70</td>
+                            <td><button class="fa fa-pencil-square"></button></td>
+                            <td><button class="fa fa-trash"></button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>P002</td>
+                            <td>PT001</td>
+                            <td>MT002</td>
+                            <td>Step 2</td>
+                            <td>2023-10-06</td>
+                            <td>2023-10-07</td>
+                            <td>70</td>
+                            <td><button class="fa fa-pencil-square"></button></td>
+                            <td><button class="fa fa-trash"></button></td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>1003</td>
+                            <td>P003</td>
+                            <td>PT001</td>
+                            <td>MT003</td>
+                            <td>Step 3</td>
+                            <td>2023-10-07</td>
+                            <td>2023-10-08</td>
+                            <td>80</td>
+                            <td><button class="fa fa-pencil-square"></button></td>
+                            <td><button class="fa fa-trash"></button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </form>
+        </div>
+    </section>
+
+    <script src="Productprocess.js"></script>
+</body>
+
+</html>
