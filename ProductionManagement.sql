@@ -117,13 +117,17 @@
 		CageID NVARCHAR(20) NOT NULL,
 		MaterialID NVARCHAR(20) NOT NULL,
 		Quantity INT,
+		Name NVARCHAR(20),
+		Origin NVARCHAR(20),
+		Price int,
+		Unit NVARCHAR(20),
 		PRIMARY KEY(MaterialID),
 		FOREIGN KEY(CageID) REFERENCES Cage(CageID),
 		FOREIGN KEY(MaterialID) REFERENCES Material(MaterialID)
 	)
 
 	Create table HistoryProduction (
-		HistoryPID	NVARCHAR(20) NOT NULL PRIMARY KEY,
+		HistoryPID NVARCHAR(20) NOT NULL PRIMARY KEY,
 		OrderID NVARCHAR(20) NOT NULL,
 		DetailPID NVARCHAR(20) NOT NULL,
 		DateTimeStart datetime,
