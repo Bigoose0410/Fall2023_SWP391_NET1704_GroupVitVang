@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.AccountDTO;
+import Model.UserDTO;
 import Order.OrderDAO;
 import Order.OrderUpdateErrorr;
 import static Util.tool.*;
@@ -20,8 +20,8 @@ import javax.naming.NamingException;
  *
  * @author Admin
  */
-@WebServlet(name = "UpdateServlet", urlPatterns = {"/UpdateServlet"})
-public class UpdateOrderServlet extends HttpServlet {
+@WebServlet(name = "UpdateOrderController", urlPatterns = {"/UpdateOrderController"})
+public class UpdateOrderController extends HttpServlet {
 
       private final String ERROR_UPDATE_PAGE = "EditOrder.jsp";
 
@@ -44,7 +44,7 @@ public class UpdateOrderServlet extends HttpServlet {
             String EndDate = request.getParameter("txtEndDate");
             String Address = request.getParameter("txtAddress");
             String StatusProcess = request.getParameter("txtStatusProgress");
-            String CustomerID = request.getParameter("txtCustomerID").toUpperCase();
+//            String CustomerID = request.getParameter("txtCustomerID").toUpperCase();
             // this param use for reload search page after update sucess
             String searchValue = request.getParameter("lastSearchValue");
             Date productStartDate = Date.valueOf(StartDate);
@@ -55,25 +55,25 @@ public class UpdateOrderServlet extends HttpServlet {
             try {
                   //0. check role 
                   HttpSession session = request.getSession();
-                  int roleID = ((AccountDTO) session.getAttribute("USER")).getRoleID();
+                  int roleID = ((UserDTO) session.getAttribute("USER")).getRoleID();
 
                   // get user session
                   if (compareDate(productStartDate, productEndDate)) {
                         foundErr = true;
                         error.setStartDateAfterEndDateErr("Start date can't before End date");
                   }
-                  if (Address.isEmpty()) {
+                  if (Address.trim().length() < 5) {
                         foundErr = true;
-                        error.setAddressNullErr("Address can't be empty");
+                        error.setAddressNullErr("Address too short");
                   }
                   if (StatusProcess.isEmpty()) {
                         foundErr = true;
                         error.setStatusProgessNullErr("Process can't be empty");
                   }
-                  if (!checkFormat(CustomerID, CUSTOMER_PATTERN, true)) {
-                        foundErr = true;
-                        error.setCustomerFormatErr("Cus format is CSxxx");
-                  }
+//                  if (!checkFormat(CustomerID, CUSTOMER_PATTERN, true)) {
+//                        foundErr = true;
+//                        error.setCustomerFormatErr("Cus format is CSxxx");
+//                  }
                   if (!checkRole(roleID, 1)) {
                         foundErr = true;
                         error.setAccountCanNotUpdateErr("This account can't update order");
@@ -86,7 +86,7 @@ public class UpdateOrderServlet extends HttpServlet {
                         //1.1 new DAO
                         OrderDAO dao = new OrderDAO();
                         //1.2 call DAO's methods
-                        boolean result = dao.updateOrder(OrderID, productStartDate, productEndDate, Address, StatusProcess, CustomerID);
+                        boolean result = dao.updateOrder(OrderID, productStartDate, productEndDate, Address, StatusProcess);
                         //2.process
                         if (result) {
                               //2.1 call the search function again using URL Rewriting
@@ -95,7 +95,6 @@ public class UpdateOrderServlet extends HttpServlet {
                                       + "&txtSearchValue=" + searchValue;
                         }// end of process
                   }
-
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
                   log("UpdateAccountServlet _ SQL " + msg);

@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,8 +41,20 @@ public class OrderHistoryController extends HttpServlet {
                                 dao.OrderHistory();
                                 // process result
                                 List<OrderDTO> result = dao.getListOrders();
-
+                                int countInProcessing = 0;
+                                int countNewOrder = 0;
+                                for (OrderDTO order : result) {
+                                      if (order.getStatusProgress().equals("Processing")) {
+                                            countInProcessing++;
+                                      }
+                                      if (order.getStatusProgress().toLowerCase().equals("new order")) {
+                                            countNewOrder++;
+                                      }
+                              }
                                 request.setAttribute("SEARCH_RESULT", result);
+                                request.setAttribute("TOTAL_ORDER", result.size());
+                                request.setAttribute("PROCESS_ORDER", countInProcessing);
+                                request.setAttribute("NEW_ORDER", countNewOrder);
                                 url = OrderHistory;
                         }
                 } catch (SQLException e) {

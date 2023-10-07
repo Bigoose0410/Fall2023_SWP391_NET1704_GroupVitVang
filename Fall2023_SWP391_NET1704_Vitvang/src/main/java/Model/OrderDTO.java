@@ -16,25 +16,22 @@ public class OrderDTO implements Serializable {
         private String OrderID;
         private Date StartDate;
         private Date EndDate;
-//        private int Quantity;
         private int TotalPrice;
-//        private String Delivery;
         private String Address;
         private String StatusProgress;
-//        private String StaffID;
-        private String CustomerID;
+
+
 
         public OrderDTO() {
         }
 
-        public OrderDTO(String OrderID, Date StartDate, Date EndDate, int TotalPrice, String Address, String StatusProgress, String CustomerID) {
+        public OrderDTO(String OrderID, Date StartDate, Date EndDate, int TotalPrice, String Address, String StatusProgress) {
                 this.OrderID = OrderID;
                 this.StartDate = StartDate;
                 this.EndDate = EndDate;
                 this.TotalPrice = TotalPrice;
                 this.Address = Address;
                 this.StatusProgress = StatusProgress;
-                this.CustomerID = CustomerID;
         }
 
         public String getOrderID() {
@@ -85,11 +82,5 @@ public class OrderDTO implements Serializable {
                 this.StatusProgress = StatusProgress;
         }
 
-        public String getCustomerID() {
-                return CustomerID;
-        }
 
-        public void setCustomerID(String CustomerID) {
-                this.CustomerID = CustomerID;
-        }
 }
