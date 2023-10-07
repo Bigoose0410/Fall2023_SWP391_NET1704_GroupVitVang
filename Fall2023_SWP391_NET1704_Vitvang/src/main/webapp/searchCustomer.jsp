@@ -85,18 +85,19 @@
           </nav>
 
           <section class="dashboard">
-               <form class="form-all">
+               <div id="form-all">
                     <div class="search-all">
                          <form action="MainController" method="POST">
-                              <input class="form-control" type="text" value="${param.txtSearchvalue}" name="txtSearchvalue" placeholder="Search Customer here...">
+                              <input class="form-control" type="text" value="${param.txtSearchvalue}" 
+                                     name="txtSearchvalue" placeholder="Search Customer here..." >
                               <input type="hidden" value="4" name="txtRoleSearch">
                               <button class="search-button" value="Search Customer" name="btAction">Find Customer</button>
-                         </form> 
+                         </form>
+                         
                          <form action="MainController" method="POST">
                               <input type="submit" class="show" name="btAction" value="Create New Customer" />
                          </form>
                     </div>
-                    <div>
 
                          <c:if test="${not empty searchValue}">
 
@@ -250,7 +251,7 @@
                                    </button>
                               </form>
                          </c:if>
-               </form>
+               </div>
           </section>
      </div>
 </body>

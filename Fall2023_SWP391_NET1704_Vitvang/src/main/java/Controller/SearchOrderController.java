@@ -22,7 +22,7 @@ import java.util.List;
 @WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
 public class SearchOrderController extends HttpServlet {
 
-        private final String SEARCH_RESULT_PAGE = "showSearch.jsp";
+        private final String OrderSearch = "order.jsp";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
@@ -40,7 +40,7 @@ public class SearchOrderController extends HttpServlet {
                                 List<OrderDTO> result = dao.getListOrders();
 
                                 request.setAttribute("SEARCH_RESULT", result);
-                                url = SEARCH_RESULT_PAGE;
+                                url = OrderSearch;
                         }
                 } catch (SQLException e) {
                         log("LOGINSERVLET _ SQL" + e.getMessage());

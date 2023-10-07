@@ -20,7 +20,7 @@ import java.io.IOException;
 @WebServlet(name = "LogOutServlet", urlPatterns = {"/LogOutServlet"})
 public class LogOutServlet extends HttpServlet {
 
-        private static final String loginPage = "login.jsp";
+        private static final String loginPage = "newLogin.jsp";
 
         /**
          * Processes requests for both HTTP <code>GET</code>

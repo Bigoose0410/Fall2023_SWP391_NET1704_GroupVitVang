@@ -1,3 +1,14 @@
+
+<%-- 
+    Document   : orderAdd
+    Created on : Sep 29, 2023, 10:11:22 AM
+    Author     : Admin
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
+<!DOCTYPE html>
 <html lang="en">
      <head>
           <meta charset="UTF-8">
@@ -10,19 +21,31 @@
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
           <title>Admin Dashboard Panel</title>
      </head>
      <body>
-          <nav>
 
-               <div class="logo-name">
-                    <div class="logo-image">
-                         <img src="img/OIP.jpg" alt="">
-                    </div>
 
-                    <span class="logo_name">Manager</span>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
+               <c:param value="Log Out" name="btAction"/>
+          </c:url>
+          <!-- get error input -->
+          <c:set var="errors" value="${requestScope.ADD_ORDER_ERROR}"/>
+          <!-- get list product -->
+          <c:set var="CageList" value="${sessionScope.CAGE_LIST}"></c:set>
+               <nav>
+                    <div class="logo-name">
+                         <div class="logo-image">
+                              <img src="img/OIP.jpg" alt="">
+                         </div>
+
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                </div>
 
                <div class="menu-items">
@@ -58,7 +81,7 @@
                     </ul>
 
                     <ul class="logout-mode">
-                         <li><a href="index.html">
+                         <li><a href="${logout_query}">
                                    <i class="uil uil-signout"></i>
                                    <span class="link-name" >Logout</span>
                               </a></li>
@@ -75,85 +98,118 @@
                          </li>
                     </ul>
                </div>
-
           </nav>
-
           <section class="dashboard">
                <div class="top">
-
-
-                    <div class="top"> <div class="search-box">
-                              <i class="uil uil-search"></i>
-                              <input type="text" placeholder="Search here...">
-                              <!--                 <button class="add-btn" > <a href="orderAdd.jsp">ADD</a></button>-->
-                         </div>
-
-                    </div>
                     <div class="add-order-form"> 
                          <main>
-                              <h1>ADD ORDER</h1>
-                             
-                                                            </br>
+                              <h1>NEW ORDER</h1>
+                              </br>
+                              <form action="MainController" method="get">
+                                   <div class="form-group">
+                                        <label for="orderId">OrderID</label>
+                                        <input type="text" class="form-control" placeholder="OrderID" 
+                                               name="txtOrderID" value="${param.txtOrderID}" />
+                                        <c:if test="${not empty errors.getOrderIdFormatErr()}">
+                                             <font color ="red">
+                                             ${errors.getOrderIdFormatErr()}
+                                             </font>
+                                        </c:if>
+                                        <c:if test="${not empty errors.getDuplicateOrderIDErr()}">
+                                             <font color ="red">
+                                             ${errors.getDuplicateOrderIDErr()}
+                                             </font>
+                                        </c:if>
+                                   </div>
+                                   <div class="form-group">  
+                                        <label for="customerId">CustomerID</label>
+                                        <input type="text" class="form-control" placeholder="CustomerID"
+                                               name="txtCustomerID" value="${param.txtCustomerID}"/>
+                                        <c:if test="${not empty errors.getCustomerNotExistInDatabasErr()}">
+                                             <font color ="red">
+                                             ${errors.getCustomerNotExistInDatabasErr()}
+                                             </font>
+                                        </c:if>
+                                        <c:if test="${not empty errors.getCustomerIdFormatErr()}">
+                                             <font color ="red">
+                                             ${errors.getCustomerIdFormatErr()}
+                                             </font>
+                                        </c:if>
+                                        <c:url value="searchCustomer.jsp" var="searchCustomer">
+                                             <c:param name="txtOrderID" value="${param.txtOrderID}"/>
+                                        </c:url>
 
-                              <!--        <div class="main-Info">
-                                  <div class="search-container">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="SearchOrder..."
-                                    />
-                                    <button class="search-button">Search</button>
-                                  </div>
-                                  <div class="text-right">
-                                    <button class="add-button">Add</button>
-                                  </div>
-                                </div>-->
-                              <div class="form-group">
-                                   <label for="orderId">OrderID</label>
-                                   <input type="text" id="orderId">
-                              </div>
+                                        <a href="${searchCustomer}">Find or New customer</a>     
+                                   </div>
 
-                              <div class="form-group">  
-                                   <label for="customerId">CustomerID</label>
-                                   <input type="text" id="customerId">
-                              </div>
+                                   <div class="form-group">
+                                        <label for="startDate">StartDate</label> 
+                                        <fmt:formatDate var="date" value="${now}" pattern="MM-dd-yyyy" />
+                                        ${date}
+                                   </div>
 
-                              <div class="form-group">
-                                   <label for="startDate">StartDate</label> 
-                                   <input type="date" id="startDate">
-                              </div>
+                                   <div class="form-group">
+                                        <label for="endDate">EndDate</label>
+                                        <input type="date" required="required" class="form-control" placeholder="EndDate" name="txtEndDate"  value="${param.txtEndDate}" />
+                                        <c:if test="${not empty errors.getEndDateErr()}">
+                                             <font color ="red">
+                                             ${errors.getEndDateErr()}
+                                             </font>
+                                        </c:if>
+                                   </div>
 
-                              <div class="form-group">
-                                   <label for="endDate">EndDate</label>
-                                   <input type="date" id="endDate">
-                              </div>
+                                   <div class="form-group">
+                                        <label for="Address">Address</label>
+                                        <input type="text" class="form-control" placeholder="Address" name="txtAddress"  value="${param.txtAddress}" />
+                                        <c:if test="${not empty errors.getAddressLengthErr()}">
+                                             <font color ="red">
+                                             ${errors.getAddressLengthErr()}
+                                             </font>
+                                        </c:if>
+                                   </div>
+                                   <div class="form-group"> <label>Cage</label> 
+                                        <div class="cages"> 
+                                             <table border="1">
+                                                  <thead>
+                                                       <tr>
+                                                            <th>Name</th>
+                                                            <th>Quanity</th>
+                                                       </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                       <tr>
+                                                            <td>
+                                                                 <select name="txtCageID">
+                                                                      <c:forEach items="${CageList}" var="cage">
+                                                                           <option value="${cage.getCageID()}">${cage.getName()}</option>
+                                                                      </c:forEach>
+                                                                 </select>
+                                                            </td>
+                                                            <td>
+                                                                 <input type="number" name="txtQuantity" value="${param.txtQuantity}"
+                                                                        placeholder="Quantity Order" min="5" max="100" step="5"/>
+                                                                 <c:if test="${not empty errors.getNullQuanityErr()}">
+                                                                      <font color ="red">
+                                                                      ${errors.getNullQuanityErr()}
+                                                                      </font>
+                                                                 </c:if>
+                                                            </td>
+                                                       </tr>
+                                                  </tbody>
+                                                  <input type="hidden" name="inAddOrder" value="true" />
+                                                  <input type="submit" name="btAction" value="View Detail" />
+                                             </table>
+                                        </div> 
+                                   </div>
+                                   <div class="form-group">
+                                        <button name="btAction" value="Create Order" type="submit">Create Order</button> 
+                                   </div>
+                              </form>
+                         </main> 
+                    </div>
+               </div>
+          </section>
 
-                              <div class="form-group"> <label>Cage</label> 
-                                   <div class="cages"> <div> <input type="checkbox" id="cage1"> 
-                                             <label for="cage1">#</label>
 
-
-                                             <input type="number" id="qty1" >
-                                        </div>
-
-                                        <div>    
-                                             <input type="checkbox" id="cage2">
-                                             <label for="cage2">#</label>
-
-                                             <input type="number" id="qty2">
-                                        </div>
-
-                                        <div>
-                                             <input type="checkbox" id="cage3">
-                                             <label for="cage3">#</label>
-
-                                             <input type="number" id="qty3">
-                                        </div>
-                                   </div> </div>
-
-
-
-                              <div class="form-group">
-                                   <button type="submit">Submit</button> 
-                              </div>
-                         </main> </div>
+     </body>
+</html>

@@ -28,27 +28,18 @@ import users.UserLoginError;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "order.jsp";
-        private static final String StaffPage = "order.jsp";
-        private static final String ManagerPage ="order.jsp";
+        private static final String AdminPage = "MainController?btAction=Order";
+        private static final String StaffPage = "MainController?btAction=Order";
+        private static final String ManagerPage ="MainController?btAction=Order";
         private static final String LoginPage = "newLogin.jsp";
 
-        /**
-         * Processes requests for both HTTP <code>GET</code>
-         * and <code>POST</code> methods.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
+        
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException, ClassNotFoundException {
                 response.setContentType("text/html;charset=UTF-8");
                 String username = request.getParameter("txtUsername");
                 String password = request.getParameter("txtPassword");
-                String url = "errorPageLogin.html";
+                String url = LoginPage;
                 try {
                         UserLoginError error = new UserLoginError();
                         boolean foundErr = false;
