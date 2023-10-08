@@ -29,12 +29,11 @@
 	)
 
 	CREATE TABLE Orderr (
-		OrderID NVARCHAR(20) NOT NULL,
+		OrderID NVARCHAR(20) NOT NULL PRIMARY KEY,
 		CustomerID NVARCHAR(20) NOT NULL,
 		TotalPrice INT,
 		StartDate Datetime,
 		StatusProcess NVARCHAR(20),
-		Primary key (OrderID),
 		FOREIGN KEY (CustomerID) REFERENCES Users(UserID)
 
 	)
@@ -48,27 +47,42 @@
 		Position nvarchar(30),
 
 	)
-
-	CREATE TABLE Process (
-		ProcessID NVARCHAR(20) NOT NULL,
-		ProcessName NVARCHAR(20) NOT NULL,
-		PRIMARY KEY (ProcessID)
+		CREATE TABLE Cage (
+		CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
+		CageName NVARCHAR(50),
+		Price INT
+	)
+		CREATE TABLE OrderDetail (
+		OrderID NVARCHAR(20) NOT NULL,
+		CageID NVARCHAR(20) NOT NULL,
+		Quantity INT,
+		PRIMARY KEY (OrderID, CageID),
+		FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
+		FOREIGN KEY(CageID) REFERENCES Cage(CageID)
 	)
 
-	Create table DetailProcess (
-		DetailPID NVARCHAR(20) NOT NULL PRIMARY KEY,
-		ProcessID NVARCHAR(20) NOT NULL,
-		WorkerID NVARCHAR(20) NOT NULL,
-		OrderID NVARCHAR(20) NOT NULL,
+		Create table DesignForProcess (
+		Phrase NVARCHAR(20) NOT NULL,
+		CageID NVARCHAR(20) NOT NULL,
+		TimeProcess INT,
 		Description NVARCHAR(MAX),
-		DateTimeStart datetime,
-		DateTimeEnd Datetime,
-		Quantity int,
-		Status NVARCHAR(20) NOT NULL,
-		FOREIGN KEY (ProcessID) REFERENCES Process(ProcessID),
+		NumberOfEmployee INT,
+		CompletionCage INT,
+		PRIMARY KEY (Phrase),
+		FOREIGN KEY (CageID) REFERENCES Cage(CageID)
+	)
+
+	CREATE TABLE Process (
+		ProcessID NVARCHAR(20) NOT NULL PRIMARY KEY,
+		ProcessName NVARCHAR(20) NOT NULL,
+		Status NVARCHAR(20),
+		StartDate Date,
+		EndDate Date,
+		OrderID NVARCHAR(20),
+		Phrase NVARCHAR(20),
+		CageID NVARCHAR(20),
 		FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID),
-		FOREIGN KEY (WorkerID) REFERENCES Worker(WorkerID)
-		
+		FOREIGN KEY (Phrase) REFERENCES DesignForProcess(Phrase),
 	)
 
 	CREATE TABLE UserOrder (
@@ -77,12 +91,6 @@
 		PRIMARY KEY (UserID, OrderID),
 		FOREIGN KEY (UserID) REFERENCES Users(UserID),
 		FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID)
-	)
-
-	CREATE TABLE Cage (
-		CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
-		CageName NVARCHAR(50),
-		Price INT
 	)
 
 
@@ -94,15 +102,6 @@
 		Unit NVARCHAR(20),
 		Description NVARCHAR(MAX),
 		PRIMARY KEY(InventoryID, CageID),
-		FOREIGN KEY(CageID) REFERENCES Cage(CageID)
-	)
-
-	CREATE TABLE DetailOrder (
-		OrderID NVARCHAR(20) NOT NULL,
-		CageID NVARCHAR(20) NOT NULL,
-		Quantity INT,
-		StatusProcess NVARCHAR(20),
-		FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
 		FOREIGN KEY(CageID) REFERENCES Cage(CageID)
 	)
 
@@ -129,9 +128,9 @@
 	Create table HistoryProduction (
 		HistoryPID NVARCHAR(20) NOT NULL PRIMARY KEY,
 		OrderID NVARCHAR(20) NOT NULL,
-		DetailPID NVARCHAR(20) NOT NULL,
+		Phrase NVARCHAR(20),
 		DateTimeStart datetime,
 		DateTimeEnd Datetime,
 		FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
-		FOREIGN KEY(DetailPID) REFERENCES DetailProcess(DetailPID)
+		FOREIGN KEY(Phrase) REFERENCES DesignForProcess(Phrase)
 	)
