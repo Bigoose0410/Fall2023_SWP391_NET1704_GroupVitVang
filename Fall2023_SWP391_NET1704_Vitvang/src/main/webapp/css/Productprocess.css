@@ -233,15 +233,37 @@ body.dark .switch:before {
     left: 20px;
 }
 
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+    color: var(--hover-color);
+}
+
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+    color: var(--dark-text);
+}
+
+body.dark nav {
+    background-color: #222;
+}
+
 /* CSS Dashboard */
 
 /* Dashboard Container */
+.dashboard, .dashboard1 {
+    position: relative;
+    left: 250px;
+    background-color: var(--panel-color);
+    min-height: 50vh;
+    width: calc(100% - 250px);
+    padding: 10px 14px;
+    transition: var(--tran-05);
+}
+
+/* Dashboard Container */
 .dashboard {
-    width: 80%;
-    margin: 0px 280px; /* Add space on both sides */
+    width: 83%;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
@@ -255,18 +277,15 @@ body.dark .switch:before {
 
 /* Dashboard1 Container */
 .dashboard1 {
-    width: 80%;
-    margin: 20px 280px; /* Add space on both sides */
+    width: 83%;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 /* Dashboard1 Title */
 .dashboard1 h1 {
     font-size: 1.5em;
-    margin-bottom: 20px; /* Add space below the title */
+    margin-bottom: 10px; /* Add space below the title */
 }
 
 /* Styling for the Table */
