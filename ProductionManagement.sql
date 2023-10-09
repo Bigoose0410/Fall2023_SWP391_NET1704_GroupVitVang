@@ -30,11 +30,12 @@
 
 	CREATE TABLE Orderr (
 		OrderID NVARCHAR(20) NOT NULL PRIMARY KEY,
-		CustomerID NVARCHAR(20) NOT NULL,
+		StartDate DATE,
+		EndDate DATE,
 		TotalPrice INT,
-		StartDate Datetime,
+		Address NVARCHAR(50),
 		StatusProcess NVARCHAR(20),
-		FOREIGN KEY (CustomerID) REFERENCES Users(UserID)
+
 
 	)
 	
@@ -50,7 +51,9 @@
 		CREATE TABLE Cage (
 		CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
 		CageName NVARCHAR(50),
-		Price INT
+		Price INT,
+		Origin NVARCHAR(20),
+		Description NVARCHAR(MAX)
 	)
 		CREATE TABLE OrderDetail (
 		OrderID NVARCHAR(20) NOT NULL,
