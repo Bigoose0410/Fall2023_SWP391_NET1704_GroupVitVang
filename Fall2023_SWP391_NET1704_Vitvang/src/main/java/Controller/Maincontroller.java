@@ -16,12 +16,15 @@ import java.io.IOException;
  *
  * @author Admin
  */
+
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
+
         private final String LoginController = "LoginServlet";
         private final String StartUpController = "StartUpController";
         private final String LogOutController = "LogOutServlet";
         private final String SearchOrderController = "SearchOrderController";
+        private final String AddOrderController = "AddOrderController";
         private final String UpdateOrderController = "UpdateOrderController";
         private final String OrderHistoryController = "OrderHistoryController";
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,10 +42,13 @@ public class MainController extends HttpServlet {
                                 url = LogOutController;
                         } else if (button.equals("Search")) {
                                 url = SearchOrderController;
-                        } else if (button.equals("Update")) {
+                        } else if (button.equals("Add")) {
+                                url = AddOrderController;
+                        }  else if (button.equals("Update")) {
                                 url = UpdateOrderController;
-                        } else if (button.equals("Order")) {
-                                url = OrderHistoryController;
+                        }
+                        else if (button.equals("Order")) {
+                                url = UpdateOrderController;
                         }
                 } finally {
                         RequestDispatcher rd = request.getRequestDispatcher(url);
