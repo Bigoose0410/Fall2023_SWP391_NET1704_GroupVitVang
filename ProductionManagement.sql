@@ -129,13 +129,3 @@
 		FOREIGN KEY(CageID) REFERENCES Cage(CageID),
 		FOREIGN KEY(MaterialID) REFERENCES Material(MaterialID)
 	)
-
-	Create table HistoryProduction (
-		HistoryPID NVARCHAR(20) NOT NULL PRIMARY KEY,
-		OrderID NVARCHAR(20) NOT NULL,
-		Phrase NVARCHAR(20),
-		DateTimeStart datetime,
-		DateTimeEnd Datetime,
-		FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
-		FOREIGN KEY(Phrase) REFERENCES DesignForProcess(Phrase)
-	)
