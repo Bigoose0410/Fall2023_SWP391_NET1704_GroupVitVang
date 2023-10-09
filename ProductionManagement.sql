@@ -1,4 +1,4 @@
-﻿	USE [master]
+	USE [master]
 	GO
 
 	CREATE DATABASE [ProductionManagement]
@@ -35,7 +35,7 @@
 		TotalPrice INT,
 		Address NVARCHAR(50),
 		StatusProcess NVARCHAR(20),
-
+		FOREIGN KEY (CustomerID) REFERENCES Users(UserID)
 
 	)
 	
@@ -48,6 +48,7 @@
 		Position nvarchar(30),
 
 	)
+
 		CREATE TABLE Cage (
 		CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
 		CageName NVARCHAR(50),
@@ -65,13 +66,12 @@
 	)
 
 		Create table DesignForProcess (
-		Phrase NVARCHAR(20) NOT NULL,
+		Phrase NVARCHAR(20) NOT NULL PRIMARY KEY,
 		CageID NVARCHAR(20) NOT NULL,
 		TimeProcess INT,
 		Description NVARCHAR(MAX),
 		NumberOfEmployee INT,
 		CompletionCage INT,
-		PRIMARY KEY (Phrase),
 		FOREIGN KEY (CageID) REFERENCES Cage(CageID)
 	)
 
@@ -87,7 +87,7 @@
 		NumberOfEmployee INT,
 		FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID),
 		FOREIGN KEY (Phrase) REFERENCES DesignForProcess(Phrase),
-	)
+)
 
 	CREATE TABLE UserOrder (
 		UserID NVARCHAR(20) NOT NULL,
@@ -95,6 +95,29 @@
 		PRIMARY KEY (UserID, OrderID),
 		FOREIGN KEY (UserID) REFERENCES Users(UserID),
 		FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID)
+	)
+	CREATE TABLE Inventory (
+		InventoryID NVARCHAR(20) NOT NULL,
+		CageID NVARCHAR(20) NOT NULL,
+		ImportDate DATE,
+		Quantity INT,
+		Unit NVARCHAR(20),
+		Description NVARCHAR(MAX),
+		PRIMARY KEY(InventoryID, CageID),
+		FOREIGN KEY(CageID) REFERENCES Cage(CageID)
+	)
+
+	CREATE TABLE Material (
+		MaterialID NVARCHAR(20) NOT NULL PRIMARY KEY,
+		Name NVARCHAR(50),
+		Inventory INT,
+		Unit NVARCHAR(20)
+	)
+
+	CREATE TABLE Cage (
+		CageID NVARCHAR(20) NOT NULL PRIMARY KEY,
+		CageName NVARCHAR(50),
+		Price INT
 	)
 
 
@@ -106,6 +129,15 @@
 		Unit NVARCHAR(20),
 		Description NVARCHAR(MAX),
 		PRIMARY KEY(InventoryID, CageID),
+		FOREIGN KEY(CageID) REFERENCES Cage(CageID)
+	)
+
+	CREATE TABLE DetailOrder (
+		OrderID NVARCHAR(20) NOT NULL,
+		CageID NVARCHAR(20) NOT NULL,
+		Quantity INT,
+		StatusProcess NVARCHAR(20),
+		FOREIGN KEY(OrderID) REFERENCES Orderr(OrderID),
 		FOREIGN KEY(CageID) REFERENCES Cage(CageID)
 	)
 

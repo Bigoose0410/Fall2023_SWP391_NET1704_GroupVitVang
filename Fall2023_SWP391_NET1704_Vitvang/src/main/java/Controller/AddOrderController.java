@@ -4,22 +4,22 @@
  */
 package Controller;
 
-import Model.OrderInsertError;
 import Order.OrderDAO;
+import Order.OrderInsertError;
+import static Util.tool.*;
 import jakarta.servlet.RequestDispatcher;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
+import javax.naming.NamingException;
 
 /**
  *
@@ -27,109 +27,129 @@ import java.util.regex.Pattern;
  */
 public class AddOrderController extends HttpServlet {
 
-        private final String HistoryOrderPAGE = "historyOrder.jsp";
+      private final String ORDER_PAGE = "order.jsp";
+      private final String ORDER_ADD_PAGE = "orderAdd.jsp";
+      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
+      private final String ORDERID_PATTERN = "OD\\d{3}";
 
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException, ParseException, SQLException {
-                response.setContentType("text/html;charset=UTF-8");
-                try (PrintWriter out = response.getWriter()) {
-                        String url = "orderHome.html";
-                        // test
-                        String orderId = request.getParameter("txtOrderID");
-                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                        String startDate = request.getParameter("txtStartDate");
-                        Date sDate = (Date) formatter.parse(startDate);
-                        String endDate = request.getParameter("txtEndDate");
-                        Date eDate = (Date) formatter.parse(endDate);
-                        String customerId = request.getParameter("txtCustomerID");
-                        OrderInsertError errors = new OrderInsertError();
-                        Pattern pattern = Pattern.compile("^[O]\\d{2}$");
-                        Pattern pattern1 = Pattern.compile("^[C]\\d{2}$");
-                        Date now = new Date(2023, 9, 29);
-                        boolean berrors = false;
-                        OrderDAO dao = new OrderDAO();
-                        if (pattern.matcher(orderId).find()) {
-                                errors.setOrderIdErr("Pls type again OrderID with two digit");
-                                berrors = true;
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException, ParseException {
+            response.setContentType("text/html;charset=UTF-8");
+            String url = ORDER_PAGE;
+            // test
+            String orderId = request.getParameter("txtOrderID");
+            String EndDate = request.getParameter("txtEndDate");
+            Date productEndDate = Date.valueOf(EndDate);
+            String customerId = request.getParameter("txtCustomerID");
+            String Address = request.getParameter("txtAddress");
+            String[] CageID = request.getParameterValues("txtCageID");
+            String Quantity = request.getParameter("txtQuantity");
+            long millis = System.currentTimeMillis();
+            java.sql.Date now = new java.sql.Date(millis);
+
+            boolean foundErr = false;
+            OrderInsertError error = new OrderInsertError();
+            try {
+                  HttpSession session = request.getSession();
+                  OrderDAO Orderdao = new OrderDAO();
+                  if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
+                        error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
+                        foundErr = true;
+                  }
+                  if (productEndDate.before(now)) {
+                        error.setEndDateErr("End date can not before today");
+                        foundErr = true;
+                  }
+                  if (!checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
+                        error.setCustomerIdFormatErr("Pls type again CustomerID with two digit");
+                        foundErr = true;
+                  }
+                  if (Address.trim().length() < 5) {
+                        error.setAddressLengthErr("Pls type again Address too short");
+                        foundErr = true;
+                  }
+                  if (foundErr) {
+                        request.setAttribute("ADD_ORDER_ERROR", error);
+                        url = ORDER_ADD_PAGE;
+                  } else {
+                        boolean result = Orderdao.insertOrder(orderId, now, productEndDate, Address);
+                        Orderdao.addUserOrder(orderId, customerId);
+                        if (!Quantity.isEmpty() && !Quantity.equals("0")) {
+                              int quantity = Integer.parseInt(Quantity);
+                              for (String item : CageID) {
+                                    Orderdao.addOrderDetail(orderId, item, quantity);
+                              }
                         }
-                        if (sDate.before(now)) {
-                                errors.setStartDateErr("pls type again valid Date");
-                                berrors = true;
+                        if (result) {
+                              url = "MainController"
+                                      + "?btAction=Order";
                         }
-                        if (eDate.after(now)) {
-                                errors.setStartDateErr("pls type again valid Date");
-                                berrors = true;
-                        }
-                        if (pattern.matcher(customerId).find()) {
-                                errors.setOrderIdErr("Pls type again CustomerID with two digit");
-                                berrors = true;
-                        }
+                  }
 
-                        if (berrors) {
-                                request.setAttribute("INSERTERROR", errors);
-                        } else {
-                                boolean result = dao.insertOrder(orderId, sDate, eDate, customerId, startDate, orderId);
-                                if (result) {
-                                        url = HistoryOrderPAGE;
-                                }
-                        }
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
+            } catch (SQLException ex) {
+                  String msg = ex.getMessage();
+                  log("UpdateAccountServlet _ SQL " + msg);
+                  if (msg.contains("conflicted with the FOREIGN KEY")) {
+                        error.setCustomerNotExistInDatabasErr("Customer not exist in database");
+                        request.setAttribute("ADD_ORDER_ERROR", error);
+                  }
+                  if (msg.contains("duplicate")) {
+                        error.setDuplicateOrderIDErr("OrderID has exist in database");
+                        request.setAttribute("ADD_ORDER_ERROR", error);
+                  }
+            } catch (NamingException ex) {
+                  log("UpdateAccountServlet _ Naming " + ex.getMessage());
+            } finally {
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+            }
+      }
 
-                }
-        }
+      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+      /**
+       * Handles the HTTP <code>GET</code> method.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
+      @Override
+      protected void doGet(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            try {
+                  processRequest(request, response);
+            } catch (ParseException ex) {
+                  Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
 
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-                try {
-                        processRequest(request, response);
-                } catch (ParseException ex) {
-                        Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                        Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
+      /**
+       * Handles the HTTP <code>POST</code> method.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
+      @Override
+      protected void doPost(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            try {
+                  processRequest(request, response);
+            } catch (ParseException ex) {
+                  Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
 
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific
-         * error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-                try {
-                        processRequest(request, response);
-                } catch (ParseException ex) {
-                        Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                        Logger.getLogger(AddOrderController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo() {
-                return "Short description";
-        }// </editor-fold>
+      /**
+       * Returns a short description of the servlet.
+       *
+       * @return a String containing servlet description
+       */
+      @Override
+      public String getServletInfo() {
+            return "Short description";
+      }// </editor-fold>
 
 }
