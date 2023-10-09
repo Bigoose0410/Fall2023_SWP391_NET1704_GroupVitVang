@@ -1,4 +1,5 @@
-﻿	USE [master]
+
+	USE [master]
 	GO
 
 	CREATE DATABASE [ProductionManagement]
@@ -35,7 +36,7 @@
 		TotalPrice INT,
 		Address NVARCHAR(50),
 		StatusProcess NVARCHAR(20),
-
+		FOREIGN KEY (CustomerID) REFERENCES Users(UserID)
 
 	)
 	

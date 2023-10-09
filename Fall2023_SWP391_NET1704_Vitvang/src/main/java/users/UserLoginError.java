@@ -2,21 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Account;
+package users;
 
 /**
  *
  * @author Admin
  */
-public class AccountLoginError {
+public class UserLoginError {
         private String isEmptyUsername;
         private String isEmptyPassword;
         private String isWrongAccount;
 
-        public AccountLoginError() {
+        public UserLoginError() {
         }
 
-        public AccountLoginError(String isEmptyUsername, String isEmptyPassword, String isWrongAccount) {
+        public UserLoginError(String isEmptyUsername, String isEmptyPassword, String isWrongAccount) {
                 this.isEmptyUsername = isEmptyUsername;
                 this.isEmptyPassword = isEmptyPassword;
                 this.isWrongAccount = isWrongAccount;

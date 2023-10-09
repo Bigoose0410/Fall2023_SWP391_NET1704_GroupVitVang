@@ -4,9 +4,7 @@
  */
 package Controller;
 
-import Account.AccountDAO;
-import Account.AccountLoginError;
-import Model.AccountDTO;
+import Model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,6 +18,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import users.UserDAO;
+import users.UserLoginError;
 
 /**
  *
@@ -28,11 +28,10 @@ import javax.naming.NamingException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "resultOrderSearch.jsp";
-        private static final String StaffPage = "homePage.html";
-        private static final String ManagerPage = "homePage.html";
+        private static final String AdminPage = "MainController?btAction=Order";
+        private static final String StaffPage = "MainController?btAction=Order";
+        private static final String ManagerPage ="MainController?btAction=Order";
         private static final String LoginPage = "newLogin.jsp";
-        private static final String ErrorPage = "errorPageLogin.html";
 
         
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -40,9 +39,9 @@ public class LoginServlet extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 String username = request.getParameter("txtUsername");
                 String password = request.getParameter("txtPassword");
-                String url = ErrorPage;
+                String url = LoginPage;
                 try {
-                        AccountLoginError error = new AccountLoginError();
+                        UserLoginError error = new UserLoginError();
                         boolean foundErr = false;
                         if (username.isEmpty()) { // if userame empty
                                 // found error 
@@ -61,9 +60,9 @@ public class LoginServlet extends HttpServlet {
                                 // kiem tra xem ng ta nhan dung parameter chua roi moi can cac filt sau do
                                 //1.Call model - DAO
                                 //1.1 new object
-                                AccountDAO dao = new AccountDAO();
+                                UserDAO dao = new UserDAO();
                                 //1.2 Call method
-                                AccountDTO result = dao.checkLogin(username, password);
+                                UserDTO result = dao.checkLogin(username, password);
                                 if (result != null) {
 
                                         switch (result.getRoleID()) {

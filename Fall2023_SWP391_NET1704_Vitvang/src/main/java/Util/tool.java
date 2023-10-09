@@ -10,8 +10,9 @@ import java.sql.Date;
  *
  * @author Admin
  */
-public class tool {
-     public static final String DATE_FORMAT = "MM/dd/yyyy";
+public final class tool {
+
+      public static final String DATE_FORMAT = "MM/dd/yyyy";
       private static final String IGNORE_CASE_PATTERN = "(?i)";
 
       private tool() {
