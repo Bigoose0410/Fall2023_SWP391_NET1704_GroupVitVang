@@ -31,6 +31,7 @@
 
 	CREATE TABLE Orderr (
 		OrderID NVARCHAR(20) NOT NULL PRIMARY KEY,
+		CustomerID NVARCHAR(20),
 		StartDate DATE,
 		EndDate DATE,
 		TotalPrice INT,
