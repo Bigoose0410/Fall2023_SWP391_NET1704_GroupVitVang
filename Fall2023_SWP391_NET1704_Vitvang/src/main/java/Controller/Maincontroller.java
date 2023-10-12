@@ -16,7 +16,6 @@ import java.io.IOException;
  *
  * @author Admin
  */
-
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
@@ -35,7 +34,8 @@ public class MainController extends HttpServlet {
       private final String SearchCageController = "SearchCageController";
       private final String CalculateDetailMaterial = "CalculateDetailMaterial";
       private final String DetailOrderController = "DetailOrderController";
-      
+      private final String ProcessController = "ProcessController";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -63,17 +63,18 @@ public class MainController extends HttpServlet {
                         url = AddOrderController;
                   } else if (button.equals("Search Customer")) {
                         url = SearchCustomerController;
-                  }else if (button.equals("New Customer")) {
+                  } else if (button.equals("New Customer")) {
                         url = CreateUserController;
                   } else if (button.equals("Create New Customer")) {
                         url = ShowCusCreateFormController;
-                  }else if (button.equals("View Detail")) {
+                  } else if (button.equals("View Detail")) {
                         url = CalculateDetailMaterial;
-                  }else if (button.equals("Detail")) {
+                  } else if (button.equals("Detail")) {
                         url = DetailOrderController;
+                  } else if (button.equals("Production process")) {
+                        url = ProcessController;
                   }
-                 
-                   
+
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
