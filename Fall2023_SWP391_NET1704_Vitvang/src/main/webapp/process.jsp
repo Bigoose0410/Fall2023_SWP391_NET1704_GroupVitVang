@@ -15,7 +15,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css\ProductProcess.css">
+          <link rel="stylesheet" href="css\ProductPocess.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -94,7 +94,7 @@
           <section class="dashboard">
                <div id="process-form">
                     <!--Process-->
-                    <h1>Process</h1>
+                    <h1>New Order</h1>
 
                     <form>
                          <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
@@ -112,8 +112,8 @@
                                         </tr>
                                         <tr>
                                              <th>No.</th>
+                                             <th>CustomerID</th>
                                              <th>OrderID</th>
-                                             <th>CageID</th>
                                              <th>CageID</th>
                                              <th>StartDate</th>
                                              <th>Status</th>
@@ -121,17 +121,26 @@
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatusProgress().equals('new order')}">
+                                        <c:if test="${dto.getStatus().equals('Not Yet')}">
                                              <tbody>
                                              <form action="MainController">         
                                                   <tr>
                                                        <td>${counter.count}</td>
-                                                       <td name="txtOrderId">${dto.getOrderID()}</td>
-                                                       <td name="txtCustomerId">${dto.getCageID()}</td>
-                                                       <td name="CageId">${dto.getCageID()}</td>
-                                                       <td name="Date">${dto.getStartDate()}</td>
-                                                       <td name="Date">${dto.getStatusProgress()}</td>
-                                                       <td><button class="fa fa-cog"  type="submit" value="Process" name="btAction"></button></td>
+                                                       <td>${dto.getUserID()}</td>
+                                                       <td>
+                                                            ${dto.getOrderID()}
+                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getCageID()}
+                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                       </td>
+                                                       <td>${dto.getStartDate()}</td>
+                                                       <td>
+                                                            ${dto.getStatus()}
+                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getStatus()}" />
+                                                       </td>
+                                                       <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
                                                        <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
                                                   </tr>
 
@@ -209,7 +218,7 @@
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatusProgress().equals('Processing')}">
+                                        <c:if test="${dto.getStatus().equals('Processing')}">
                                              <tbody>
                                              <form action="MainController">  
                                                   <tr>
@@ -222,7 +231,7 @@
                                                        <td>${dto.getStartDate()}</td>
                                                        <td>${dto.getEndDate()}</td>
                                                        <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getStatusProgress()}</td>
+                                                       <td>${dto.getStatus()}</td>
                                                        <td><button class="fa fa-pencil-square"></button></td>
                                                        <td><button class="fa fa-trash"></button></td>
                                                   </tr>

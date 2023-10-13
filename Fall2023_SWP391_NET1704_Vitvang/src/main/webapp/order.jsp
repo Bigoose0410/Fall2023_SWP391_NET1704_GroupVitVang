@@ -25,7 +25,7 @@
           <title>Admin Dashboard Panel</title>
      </head>
      <body>
-          <c:url var="logout_query" value="MainController">
+     <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
           </c:url>
