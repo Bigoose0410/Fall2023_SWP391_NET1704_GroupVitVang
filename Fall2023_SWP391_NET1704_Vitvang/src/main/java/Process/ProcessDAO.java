@@ -38,7 +38,7 @@ public class ProcessDAO implements Serializable {
 //                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
 //                                        + "From Orderr "
 //                                        + "Where OrderID Like ? ";
-                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, Process.CageID, Process.ProcessID, Process.ProcessName, Process.StartDate, Process.EndDate, Process.NumberOfEmployee, Orderr.StatusProgress "
+                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, Process.CageID, Process.ProcessID, Process.ProcessName, Process.Status, Process.StartDate, Process.EndDate, Process.NumberOfEmployee, Orderr.StatusProgress "
                                 + "FROM UserOrder JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
                                 + "JOIN Process "
@@ -54,6 +54,7 @@ public class ProcessDAO implements Serializable {
                               String ProcessName = rs.getString("ProcessName");
                               Date StartDate = rs.getDate("StartDate");
                               Date EndDate = rs.getDate("EndDate");
+                              String Status = rs.getString("Status");
                               int NumberOfEmployee = rs.getInt("NumberOfEmployee");
                               String StatusProgress = rs.getString("StatusProgress");
 //                              int TotalPrice = rs.getInt("TotalPrice");
@@ -61,7 +62,7 @@ public class ProcessDAO implements Serializable {
 //                              int Price = rs.getInt("Price");
 //                              String StatusProcess = rs.getString("StatusProcess");
 //                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
-                              ProcessDTO process = new ProcessDTO(UserID, OrderID, CageID, ProcessID, ProcessName, StartDate, EndDate, NumberOfEmployee, StatusProgress);
+                              ProcessDTO process = new ProcessDTO(UserID, OrderID, CageID, ProcessID, ProcessName, Status, StartDate, EndDate, NumberOfEmployee, StatusProgress);
                               if (this.listOrdersProcess == null) {
                                     this.listOrdersProcess = new ArrayList<ProcessDTO>();
                               }
@@ -81,5 +82,39 @@ public class ProcessDAO implements Serializable {
                   }
             }
 
+      }
+
+      public boolean updateStatusNewOrder(String OrderID, String CageID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "UPDATE Process SET Status = 'Processing' "
+                                + " FROM Process INNER JOIN Orderr ON (Process.OrderID = Orderr.OrderID) "
+                                + " Where Orderr.OrderID = ? AND Process.CageID = ? ";
+                        stm = con.prepareStatement(sql);
+//                        stm.setString(1, password);
+//                        stm.setString(2, lastname);
+//                        stm.setBoolean(3, role);
+                        stm.setString(1, OrderID);
+                        stm.setString(2, CageID);
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+                        // hoan chinh roi thi excutequery
+
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
       }
 }

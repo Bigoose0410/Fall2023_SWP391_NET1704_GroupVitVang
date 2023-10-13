@@ -17,6 +17,7 @@ public class ProcessDTO {
       private String CageID;
       private String ProcessID;
       private String ProcessName;
+      private String Status;
       private Date StartDate;
       private Date EndDate;
       private int NumberOfEmployee;
@@ -25,12 +26,13 @@ public class ProcessDTO {
       public ProcessDTO() {
       }
 
-      public ProcessDTO(String UserID, String OrderID, String CageID, String ProcessID, String ProcessName, Date StartDate, Date EndDate, int NumberOfEmployee, String StatusProgress) {
+      public ProcessDTO(String UserID, String OrderID, String CageID, String ProcessID, String ProcessName, String Status, Date StartDate, Date EndDate, int NumberOfEmployee, String StatusProgress) {
             this.UserID = UserID;
             this.OrderID = OrderID;
             this.CageID = CageID;
             this.ProcessID = ProcessID;
             this.ProcessName = ProcessName;
+            this.Status = Status;
             this.StartDate = StartDate;
             this.EndDate = EndDate;
             this.NumberOfEmployee = NumberOfEmployee;
@@ -75,6 +77,14 @@ public class ProcessDTO {
 
       public void setProcessName(String ProcessName) {
             this.ProcessName = ProcessName;
+      }
+
+      public String getStatus() {
+            return Status;
+      }
+
+      public void setStatus(String Status) {
+            this.Status = Status;
       }
 
       public Date getStartDate() {
