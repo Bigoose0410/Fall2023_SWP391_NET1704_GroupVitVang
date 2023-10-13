@@ -20,7 +20,7 @@ import java.io.IOException;
 @WebServlet(name = "LogOutServlet", urlPatterns = {"/LogOutServlet"})
 public class LogOutServlet extends HttpServlet {
 
-        private static final String loginPage = "loginPage.html";
+        private static final String loginPage = "newLogin.jsp";
 
         /**
          * Processes requests for both HTTP <code>GET</code>
@@ -38,7 +38,6 @@ public class LogOutServlet extends HttpServlet {
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
                 String cookiekey = request.getParameter("cookiekey");
-
                 try {
                         Cookie[] cookies = request.getCookies();
                         for (Cookie cooky : cookies) {

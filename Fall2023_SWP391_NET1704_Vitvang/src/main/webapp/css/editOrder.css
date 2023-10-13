@@ -1,5 +1,16 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Sep 29, 2023, 8:31:48 PM
+    Author     : Admin
+*/
+
 /* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+/* Global CSS */
 *{
     margin: 0;
     padding: 0;
@@ -7,6 +18,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Root Variables (Colors and Transitions) */
 :root{
     /* ===== Colors ===== */
     --primary-color: #0E4BF1;
@@ -21,7 +33,6 @@
     --title-icon-color: #fff;
      --cream-color: #f5f5dc;
       --hover-color: #333;
-      --blue-fall:# 00BFFF;
 --dark-text: #fff;
     /* ====== Transition ====== */
     --tran-05: all 0.5s ease;
@@ -29,10 +40,13 @@
     --tran-03: all 0.2s ease;
 }
 
+/* Light Mode */
 body{
     min-height: 100vh;
     background-color: white;
 }
+
+/* Dark Mode */
 body.dark{
     --primary-color: #3A3B3C;
     --panel-color: #242526;
@@ -58,7 +72,7 @@ body.dark{
     transition: all 0.3s ease;
 }
 
-::-webkit-scrollbar-th  mb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #0b3cc1;
 }
 
@@ -67,19 +81,19 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
     background: #3A3B3C;
 }
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background-color: var(--panel-color);
-    border-right: 1px solid var(--border-color);
-    transition: var(--tran-05);
-    background-color: #1da1f2;
-    
-}
+    nav{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        padding: 10px 14px;
+        background-color: var(--panel-color);
+        border-right: 1px solid var(--border-color);
+        transition: var(--tran-05);
+        background-color: var(--cream-color);
+        border-color: #e6e6cc;
+    }
     nav.close{
         width: 73px;
     }
@@ -103,8 +117,6 @@ nav {
         font-weight: 600;
         color: var(--text-color);
         margin-right: 13px;
-        background-color: transparent;
-        border: none;
         transition: var(--tran-05);
     }
     nav.close .logo_name{
@@ -147,12 +159,12 @@ nav {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #222;
+        color: var(--black-light-color);
     }
     .menu-items li a .link-name{
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
-        color: #222;
+        color: var(--black-light-color);
         transition: var(--tran-05);
     }
     nav.close li a .link-name{
@@ -245,8 +257,36 @@ nav.close ~ .dashboard .top{
     color: var(--text-color);
     cursor: pointer;
 }
-
-
+.dashboard .top .search-box{
+    position: relative;
+    height: 45px;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 30px;
+    border-radius: 10px;
+}
+.top .search-box input{
+    position: absolute;
+    border: 1px solid var(--border-color);
+    background-color: var(--panel-color);
+    padding: 0 25px 0 50px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+}
+.top .search-box i{
+    position: absolute;
+    left: 15px;
+    font-size: 22px;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--black-light-color);
+}
 .top img{
     width: 40px;
     border-radius: 50%;
@@ -460,26 +500,114 @@ color: var(--dark-text);
 body.dark nav {
 background-color: #222;
 }
-.menu-items {
-  display: flex;
-  flex-direction: column;
-}
-.nav-links {
-  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+main {
+    background-image: url(https://i.imgur.com/s72kG4M.png);
+    background-position: top;
+    background-size: cover;
+    padding: 20px;
+    color: black;
+    text-align: center;
 }
-.nav-links li {
-  padding: 10px 0; 
 
+h1 {
+    margin-bottom: 10px;
+    margin-right: 300px;
 }
-button:active {
-  background-color: #fff;
-  color: #000;
-}button:focus {
-  background-color: #fff;
-  color: #000; 
 
+#content {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    padding: 20px;
+    font-size: 16px;
+    display: inline-block;
+    text-align: left;
+    margin-right: 300px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ababab; /* Add this line to set a border */
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000;
+}
+
+select {
+    width: calc(100% - 300px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ababab; /* Add this line to set a border */
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#required {
+    color: red;
+    margin-bottom: 20px;
+}
+
+fieldset {
+    border: none;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+.update-button, .delete-button {
+    width: auto;
+}
+
+.update-button {
+    background-color: #28a745;
+}
+
+.update-button:hover {
+    background-color: #218838;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+#image {
+    justify-content: space-around;
+    margin-top: -60%;
+    margin-left: 75%;
+}
+
+#image img {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;  
 }
