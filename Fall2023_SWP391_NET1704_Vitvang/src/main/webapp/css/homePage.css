@@ -473,6 +473,7 @@ background-color: #222;
 }
 .nav-links li {
   padding: 10px 0; 
+
 }
 button:active {
   background-color: #fff;
@@ -480,4 +481,5 @@ button:active {
 }button:focus {
   background-color: #fff;
   color: #000; 
+
 }
