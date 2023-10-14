@@ -121,7 +121,7 @@
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatus().equals('Not Yet')}">
+                                        <c:if test="${getStatusProgress().equals('new order')}">
                                              <tbody>
                                              <form action="MainController">         
                                                   <tr>
@@ -137,8 +137,8 @@
                                                        </td>
                                                        <td>${dto.getStartDate()}</td>
                                                        <td>
-                                                            ${dto.getStatus()}
-                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getStatus()}" />
+                                                            ${getStatusProgress()}
+                                                            <input type="hidden" name="updateStatusNewOrder" value="${getStatusProgress()}" />
                                                        </td>
                                                        <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
                                                        <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
@@ -218,7 +218,7 @@
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatus().equals('Processing')}">
+                                        <c:if test="${getStatusProgress().equals('Processing')}">
                                              <tbody>
                                              <form action="MainController">  
                                                   <tr>
@@ -231,7 +231,7 @@
                                                        <td>${dto.getStartDate()}</td>
                                                        <td>${dto.getEndDate()}</td>
                                                        <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getStatus()}</td>
+                                                       <td>${getStatusProgress()}</td>
                                                        <td><button class="fa fa-pencil-square"></button></td>
                                                        <td><button class="fa fa-trash"></button></td>
                                                   </tr>
