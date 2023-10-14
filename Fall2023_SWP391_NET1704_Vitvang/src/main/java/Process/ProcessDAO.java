@@ -91,8 +91,8 @@ public class ProcessDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "UPDATE Process SET Status = 'Processing' "
-                                + " FROM Process INNER JOIN Orderr ON (Process.OrderID = Orderr.OrderID) "
+                        String sql = "UPDATE Orderr SET StatusProgress = 'Processing' "
+                                + " FROM Orderr INNER JOIN Process ON (Orderr.OrderID = Process.OrderID) "
                                 + " Where Orderr.OrderID = ? AND Process.CageID = ? ";
                         stm = con.prepareStatement(sql);
 //                        stm.setString(1, password);
