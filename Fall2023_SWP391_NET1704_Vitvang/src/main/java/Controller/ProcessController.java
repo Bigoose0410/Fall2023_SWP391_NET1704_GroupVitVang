@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.ProcessDTO;
+import Model.ProcessNewOrderDTO;
 import Process.ProcessDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,7 +34,10 @@ public class ProcessController extends HttpServlet {
             String url = Process;
             try {
                   ProcessDAO dao = new ProcessDAO();
-                  dao.ViewProcessOrder();
+                  dao.ViewNewOrder();
+                  dao.ViewProcessingOrder();
+                  List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
+                  request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
                   List<ProcessDTO> process = dao.getListOrdersProcess();
                   request.setAttribute("PROCESS_RESULT", process);
                   url = Process;
