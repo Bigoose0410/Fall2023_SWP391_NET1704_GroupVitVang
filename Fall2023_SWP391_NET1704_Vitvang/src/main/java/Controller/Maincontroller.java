@@ -47,6 +47,9 @@ public class MainController extends HttpServlet {
       //delete
       private final String DeleteOrderController = "DeleteOrderController";
       private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
+      private final String ProcessController = "ProcessController";
+      private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
+
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -103,9 +106,13 @@ public class MainController extends HttpServlet {
                         url = DeleteMaterialofCageController;
                   }else if (button.equals("AddMaterialToCage")) {
                         url = AddMaterialToCageController;
+                  }                
+                  } else if (button.equals("Production process")) {
+                        url = ProcessController;
+                  } else if (button.equals("AddToProcess")) {
+                        url = UpdateSatusNewOrderController;
                   }
-                   
-                  
+
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

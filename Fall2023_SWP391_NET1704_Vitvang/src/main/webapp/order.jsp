@@ -12,7 +12,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css\admin.css">
+          <link rel="stylesheet" href="cssadmin.css">
 
           <!----===== Iconscout CSS =====--> 
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -108,8 +108,39 @@
                     <div class="search-box">
                          <i class="uil uil-search"></i>
                          <form action="MainController">
-                              <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" required="" placeholder="Search here...">
-                              <button class="add-btn" value="Search" name="btAction">Search</button>
+
+                              <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" required="" placeholder="Search here..." style=".dashboard .top .search-box{
+    position: relative;
+    height: 45px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 30px;
+}
+.top .search-box input{
+    position: absolute;
+    border: 1px solid var(--border-color);
+    background-color: var(--panel-color);
+    padding: 0 25px 0 50px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+}
+.top .search-box i{
+    position: absolute;
+    left: 15px;
+    font-size: 22px;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--black-light-color);
+}
+                                     "
+
+                                     <button class="add-btn" value="Search" name="btAction"></button>
                          </form>
                     </div>
                </div>
@@ -302,13 +333,27 @@
                                    </font>
                               </c:if>
                          </c:if>
-                         <form action="MainController">
-                              <input type="submit" name="btAction" value="New Order" />
-                         </form>
+                         <form action="MainController" class="ordera">
+
+                              <button type="submit" name="btAction" class="button-icon" style="
+                                      background-color: #e6e5e500;
+                                      color: blue;
+                                      font-size: 16px;
+                                      padding: 8px;
+                                      border: none;
+                                      cursor: pointer;
+                                      outline: none;
+                                      font-size:30px;
+                                      margin-top:-60px;
+                                      float:right;
+                                      ">
+                                   <i class="uil uil-plus"></i>
+
+                              </button>                  </form>
                     </div>
 
           </section>
-          <script src="js\darkMode.js"></script>
-          
+          <script src="js\darkMode.js"></script>      
+          <script src="jsadmin.js"></script>
      </body>
 </html>   

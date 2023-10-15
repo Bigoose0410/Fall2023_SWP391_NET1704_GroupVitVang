@@ -29,13 +29,15 @@ import users.UserLoginError;
 public class LoginServlet extends HttpServlet {
 
         private static final String AdminPage = "MainController?btAction=Order";
+
         private static final String StaffPage = "MainController?btAction=Order";
         private static final String ManagerPage ="MainController?btAction=Order ";
+        private static final String ManagerPage ="MainController?btAction=Order";
         private static final String LoginPage = "newLogin.jsp";
 
         
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException, ClassNotFoundException {
+                throws ServletException, IOException, ClassNotFoundException, Exception {
                 response.setContentType("text/html;charset=UTF-8");
                 String username = request.getParameter("txtUsername");
                 String password = request.getParameter("txtPassword");
@@ -62,6 +64,7 @@ public class LoginServlet extends HttpServlet {
                                 //1.1 new object
                                 UserDAO dao = new UserDAO();
                                 //1.2 Call method
+                                password = dao.EncodePass(password);
                                 UserDTO result = dao.checkLogin(username, password);
                                 if (result != null) {
 
@@ -116,7 +119,9 @@ public class LoginServlet extends HttpServlet {
                         processRequest(request, response);
                 } catch (ClassNotFoundException ex) {
                         Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+              }
         }
 
         /**
@@ -135,7 +140,9 @@ public class LoginServlet extends HttpServlet {
                         processRequest(request, response);
                 } catch (ClassNotFoundException ex) {
                         Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+              }
         }
 
         /**
