@@ -40,6 +40,7 @@ public class MainController extends HttpServlet {
       private final String AddDesignProcess = "AddDesignProcess";
       private final String CreateUserController = "CreateUserController";
       private final String AddMaterialToCageController = "AddMaterialToCageController";
+      private final String AddAutoProcessController = "ProductionProcessController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
       private final String UpdateDesignProcessController = "UpdateDesignProcessController";
@@ -49,7 +50,6 @@ public class MainController extends HttpServlet {
       private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
-
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -104,13 +104,12 @@ public class MainController extends HttpServlet {
                         url = EditMaterialController;
                   } else if (button.equals("DeleteMaterialofCage")) {
                         url = DeleteMaterialofCageController;
-                  }else if (button.equals("AddMaterialToCage")) {
+                  } else if (button.equals("AddMaterialToCage")) {
                         url = AddMaterialToCageController;
-                  }                
                   } else if (button.equals("Production process")) {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {
-                        url = UpdateSatusNewOrderController;
+                        url = AddAutoProcessController;
                   }
 
             } finally {
