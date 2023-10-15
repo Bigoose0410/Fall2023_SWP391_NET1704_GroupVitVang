@@ -22,6 +22,7 @@ public class ProcessDTO {
       private Date EndDate;
       private int NumberOfEmployee;
       private String StatusProgress;
+      private int Quantity;
 
       public ProcessDTO() {
       }
@@ -117,6 +118,14 @@ public class ProcessDTO {
 
       public void setStatusProgress(String StatusProgress) {
             this.StatusProgress = StatusProgress;
+      }
+
+      public int getQuantity() {
+            return Quantity;
+      }
+
+      public void setQuantity(int Quantity) {
+            this.Quantity = Quantity;
       }
 
 }
