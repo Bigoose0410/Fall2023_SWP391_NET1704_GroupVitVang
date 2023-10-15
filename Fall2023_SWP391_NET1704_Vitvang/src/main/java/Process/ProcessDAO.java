@@ -5,6 +5,7 @@
 package Process;
 
 import Model.ProcessDTO;
+import Model.ProcessNewOrderDTO;
 import Util.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -21,13 +22,72 @@ import java.util.List;
  */
 public class ProcessDAO implements Serializable {
 
+      List<ProcessNewOrderDTO> listProcessNewOrder;
+
+      public List<ProcessNewOrderDTO> getListProcessNewOrder() {
+            return listProcessNewOrder;
+      }
+
+      public void ViewNewOrder() throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+//                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
+//                                        + "From Orderr "
+//                                        + "Where OrderID Like ? ";
+                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Orderr.StartDate, OrderDetail.Quantity, Orderr.StatusProgress "
+                                + "FROM UserOrder JOIN Orderr "
+                                + "ON UserOrder.OrderID = Orderr.OrderID "
+                                + "JOIN OrderDetail "
+                                + "ON Orderr.OrderID = OrderDetail.OrderID ";
+                        stm = con.prepareStatement(sql);
+//                                stm.setString(1, "%" + txtSearchValue + "%");
+                        rs = stm.executeQuery();
+                        while (rs.next()) {
+                              String UserID = rs.getString("UserID");
+                              String OrderID = rs.getString("OrderID");
+                              String CageID = rs.getString("CageID");
+                              Date StartDate = rs.getDate("StartDate");
+                              int Quantity = rs.getInt("Quantity");
+                              String StatusProgress = rs.getString("StatusProgress");
+//                              int TotalPrice = rs.getInt("TotalPrice");
+//                              int Quantity = rs.getInt("Quantity");
+//                              int Price = rs.getInt("Price");
+//                              String StatusProcess = rs.getString("StatusProcess");
+//                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
+                              ProcessNewOrderDTO processNewOrder = new ProcessNewOrderDTO(UserID, OrderID, CageID, StartDate, Quantity, StatusProgress);
+                              if (this.listProcessNewOrder == null) {
+                                    this.listProcessNewOrder = new ArrayList<ProcessNewOrderDTO>();
+                              }
+                              this.listProcessNewOrder.add(processNewOrder);
+
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+
+      }
+
       List<ProcessDTO> listOrdersProcess;
 
       public List<ProcessDTO> getListOrdersProcess() {
             return listOrdersProcess;
       }
 
-      public void ViewProcessOrder() throws SQLException {
+      public void ViewProcessingOrder() throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             ResultSet rs = null;
