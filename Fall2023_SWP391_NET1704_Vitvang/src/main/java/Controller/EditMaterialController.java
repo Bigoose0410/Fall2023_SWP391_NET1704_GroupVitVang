@@ -4,12 +4,7 @@
  */
 package Controller;
 
-import Model.CageDTO;
 import Model.CageMaterialDTO;
-import Model.DetailOrderDTO;
-import Model.OrderDTO;
-import Model.UserDTO;
-import Order.OrderDAO;
 import cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,17 +16,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
-import users.UserDAO;
+import material.MaterialDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "Detail Order", urlPatterns = {"/DetailOrderController"})
-public class DetailOrderController extends HttpServlet {
-
-      private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
-
+@WebServlet(name = "EditMaterialController", urlPatterns = {"/EditMaterialController"})
+public class EditMaterialController extends HttpServlet {
+      private static String CAGE_MATERIAL_PAGE = "EditMaterial.jsp";
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -43,39 +36,34 @@ public class DetailOrderController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String OrderID = request.getParameter("txtOrderID");
-            String url = "errorPageLogin.html";
-            try {
-                  // new DAO
-                  OrderDAO orderdao = new OrderDAO();
-                  UserDAO userdao = new UserDAO();
-                  CageDAO dao = new CageDAO();
-                  // call method orderDao
-                  orderdao.searchOrder(OrderID);
-                  orderdao.queryOrderDetail(OrderID);
+           String cageID = request.getParameter("txtCageID");
+           String Materialselect = request.getParameter("slMateriaID");
+            String url = "homePage.html";
+           try {
+                  //1. new DAO
+                  CageDAO cagedao = new CageDAO();
+                  MaterialDAO materialdao = new MaterialDAO();
+                  //2. Call method
+                  cagedao.ViewCageMaterial2(cageID);
+                  materialdao.MaterialNotBuild(cageID);
+                  // get result set
+                  List<CageMaterialDTO> listmaterial = cagedao.getListCageMaterial();
+                  List<CageMaterialDTO> listmaterialnotbuild = materialdao.getListMaterialnotBuild();
+                  CageMaterialDTO materAdd = materialdao.queryMaterialbyID(Materialselect);
+                  int materialPirce = cagedao.TotalPriceMaterial();
+                  //3. process result     
+                  request.setAttribute("CAGE_MATERIAL", listmaterial);
+                  request.setAttribute("MATERIAL_PRICE", materialPirce);
+                  request.setAttribute("MATERIAL_NOT_USE", listmaterialnotbuild);
+                  request.setAttribute("MATERIAL_WILL_ADD", materAdd);
                   
-                  // process result
-                  UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
-                  OrderDTO order = orderdao.getListOrders().get(0);
-                  List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
-                  for (DetailOrderDTO detailOrderDTO : orderDetailList) {
-                        dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
-                        dao.searchProductionbyID(detailOrderDTO.getCageID());
-                  }
-                  List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
-                  List<CageDTO> cageList = dao.getListCage();
-
-                  request.setAttribute("CUS_ORDER", customer);
-                  request.setAttribute("CAGE_MATERIAL", cageMaterialList);
-                  request.setAttribute("CAGE_ORDER", cageList);
-                  request.setAttribute("ORDER", order);
-                  url = ORDER_DETAIL_PAGE;
+                  url = CAGE_MATERIAL_PAGE;
 
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
-                  log("CalculateDetailMaterial SQL" + msg);
+                  log("EditMaterialController SQL" + msg);
             } catch (NamingException ex) {
-                  log("CalculateDetailMaterial _ NAMING " + ex.getMessage());
+                  log("EditMaterialController _ NAMING " + ex.getMessage());
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

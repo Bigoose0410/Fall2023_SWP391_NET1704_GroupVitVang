@@ -19,7 +19,18 @@ public class CageMaterialDTO implements Serializable{
       private int Price;
       private int Quantity;
       private String Unit;
+      private int TotalpriceOfMaterial;
 
+      public CageMaterialDTO(String MaterialID, String Name, String Origin, int Price, String Unit) {
+            this.MaterialID = MaterialID;
+            this.Name = Name;
+            this.Origin = Origin;
+            this.Price = Price;
+            this.Unit = Unit;
+      }
+
+     
+      
       public CageMaterialDTO(String CageID, int QuantityNeed, String MaterialID, String Name, String Origin, int Price, int Quantity, String Unit) {
             this.CageID = CageID;
             this.QuantityNeed = QuantityNeed;
@@ -100,6 +111,13 @@ public class CageMaterialDTO implements Serializable{
             this.Unit = Unit;
       }
 
-  
-      
+      public int getTotalPriceOfMaterial() {
+            return this.getPrice()*this.QuantityNeed;
+      }
+
+      public void setTotalPriceOfMaterial(int priceOfMaterial) {
+            this.TotalpriceOfMaterial = priceOfMaterial;
+      }
+
+
 }

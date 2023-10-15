@@ -4,13 +4,6 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import Model.CageMaterialDTO;
-import Model.DetailOrderDTO;
-import Model.OrderDTO;
-import Model.UserDTO;
-import Order.OrderDAO;
-import cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,18 +12,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import javax.naming.NamingException;
-import users.UserDAO;
+import material.MaterialDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "Detail Order", urlPatterns = {"/DetailOrderController"})
-public class DetailOrderController extends HttpServlet {
+@WebServlet(name = "UpdateMaterialofCageController", urlPatterns = {"/UpdateMaterialofCageController"})
+public class UpdateMaterialofCageController extends HttpServlet {
 
-      private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
+      private final String EDIT_MATERIAL_PAGE = "EditMaterial.jsp";
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,39 +35,23 @@ public class DetailOrderController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String OrderID = request.getParameter("txtOrderID");
-            String url = "errorPageLogin.html";
+            String materialID = request.getParameter("txtMaterialID").trim();
+            String CageID = request.getParameter("txtCageID").trim();
+            String quantity = request.getParameter("txtQuantity").trim();
+            String url = EDIT_MATERIAL_PAGE;
             try {
-                  // new DAO
-                  OrderDAO orderdao = new OrderDAO();
-                  UserDAO userdao = new UserDAO();
-                  CageDAO dao = new CageDAO();
-                  // call method orderDao
-                  orderdao.searchOrder(OrderID);
-                  orderdao.queryOrderDetail(OrderID);
+                  int qunaitybuild;
+                  qunaitybuild = (quantity != null) ? Integer.parseInt(quantity) : 1;
                   
-                  // process result
-                  UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
-                  OrderDTO order = orderdao.getListOrders().get(0);
-                  List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
-                  for (DetailOrderDTO detailOrderDTO : orderDetailList) {
-                        dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
-                        dao.searchProductionbyID(detailOrderDTO.getCageID());
-                  }
-                  List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
-                  List<CageDTO> cageList = dao.getListCage();
-
-                  request.setAttribute("CUS_ORDER", customer);
-                  request.setAttribute("CAGE_MATERIAL", cageMaterialList);
-                  request.setAttribute("CAGE_ORDER", cageList);
-                  request.setAttribute("ORDER", order);
-                  url = ORDER_DETAIL_PAGE;
-
+                  MaterialDAO dao = new MaterialDAO();
+                  dao.updateMaterialOfCage(CageID, materialID, qunaitybuild);
+                  url = "MainController"
+                          + "?btAction=EditMaterial"
+                          + "&txtCageID=" + CageID;
             } catch (SQLException ex) {
-                  String msg = ex.getMessage();
-                  log("CalculateDetailMaterial SQL" + msg);
+                  log("AddDesignProcess _ SQL " + ex.getMessage());
             } catch (NamingException ex) {
-                  log("CalculateDetailMaterial _ NAMING " + ex.getMessage());
+                  log("AddDesignProcess _ Naming " + ex.getMessage());
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

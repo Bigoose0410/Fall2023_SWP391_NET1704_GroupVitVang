@@ -4,13 +4,8 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import Model.CageMaterialDTO;
-import Model.DetailOrderDTO;
-import Model.OrderDTO;
-import Model.UserDTO;
-import Order.OrderDAO;
-import cage.CageDAO;
+import Model.DesignForProcessDTO;
+import designforprocess.DesignForProcessDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,16 +16,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
-import users.UserDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "Detail Order", urlPatterns = {"/DetailOrderController"})
-public class DetailOrderController extends HttpServlet {
-
-      private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
+@WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
+public class EditDesignController extends HttpServlet {
+      private final String DESIGN_PROCESS_PAGE = "EditDeisgn.jsp";
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,33 +36,19 @@ public class DetailOrderController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String OrderID = request.getParameter("txtOrderID");
-            String url = "errorPageLogin.html";
-            try {
-                  // new DAO
-                  OrderDAO orderdao = new OrderDAO();
-                  UserDAO userdao = new UserDAO();
-                  CageDAO dao = new CageDAO();
-                  // call method orderDao
-                  orderdao.searchOrder(OrderID);
-                  orderdao.queryOrderDetail(OrderID);
-                  
-                  // process result
-                  UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
-                  OrderDTO order = orderdao.getListOrders().get(0);
-                  List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
-                  for (DetailOrderDTO detailOrderDTO : orderDetailList) {
-                        dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
-                        dao.searchProductionbyID(detailOrderDTO.getCageID());
-                  }
-                  List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
-                  List<CageDTO> cageList = dao.getListCage();
+            String cageID = request.getParameter("txtCageID");
+            String url = "";
+           try {
+                  //1. new DAO
+                  DesignForProcessDAO designdao = new DesignForProcessDAO();
+                  //2. Call method
+                  // get design
+                  designdao.ViewDesignForProcess(cageID);
+                  //3. process result     
+                  List<DesignForProcessDTO> result1 = designdao.getDesignProcessList();
 
-                  request.setAttribute("CUS_ORDER", customer);
-                  request.setAttribute("CAGE_MATERIAL", cageMaterialList);
-                  request.setAttribute("CAGE_ORDER", cageList);
-                  request.setAttribute("ORDER", order);
-                  url = ORDER_DETAIL_PAGE;
+                  request.setAttribute("DESIGN_PROCESS", result1);
+                  url = DESIGN_PROCESS_PAGE;
 
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
