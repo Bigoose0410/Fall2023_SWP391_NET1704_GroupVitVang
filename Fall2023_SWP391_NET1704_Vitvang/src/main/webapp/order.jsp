@@ -29,6 +29,9 @@
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
           </c:url>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
+          </c:url>
           <c:set var="totalOrder" value="${requestScope.TOTAL_ORDER}"></c:set>
           <c:set var="NumInProcess" value="${requestScope.PROCESS_ORDER}"></c:set>
           <c:set var="NumNewOrder" value="${requestScope.NEW_ORDER}"></c:set>
@@ -50,12 +53,16 @@
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
                          <li><a href="MainController?btAction=Order">
-                                   <i class="uil uil-bill"></i>>
+                                   <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
                          <li><a href="#">
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Customers</span>
+                              </a></li>
+                         <li><a href="${productionList}">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Production</span>
                               </a></li>
                          <li><a href="#">
                                    <i class="uil uil-chart-line"></i>
@@ -168,7 +175,8 @@
                                         </div>
                                    </div>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-
+                                        <%--<c:if test="${dto.getStatusProgress().equals('new order')}">--%>
+                                             
                                         <form class="form-order" action="MainController" method="POST">
                                              <div class="activity-data">
                                                   <div class="data names">
@@ -202,6 +210,7 @@
                                                   </div>
                                              </div>
                                         </form>
+                                        <%--</c:if>--%>
 
                                    </c:forEach>
                               </c:if>
@@ -299,7 +308,7 @@
                     </div>
 
           </section>
-          <script src="admin.js"></script>
-
+          <script src="js\darkMode.js"></script>
+          
      </body>
 </html>   

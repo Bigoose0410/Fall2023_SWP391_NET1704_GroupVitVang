@@ -14,7 +14,8 @@ public class CageDTO {
       private int Price;
       private String Origin;
       private String Description;
-
+      private int quantityOrder;
+      
       public CageDTO() {
       }
 
@@ -26,6 +27,24 @@ public class CageDTO {
             this.Description = Description;
       }
 
+      public CageDTO(String CageID, String Name, int Price, String Origin, String Description, int quantityOrder) {
+            this.CageID = CageID;
+            this.Name = Name;
+            this.Price = Price;
+            this.Origin = Origin;
+            this.Description = Description;
+            this.quantityOrder = quantityOrder;
+      }
+
+      public int getQuantityOrder() {
+            return quantityOrder;
+      }
+
+      public void setQuantityOrder(int quantityOrder) {
+            this.quantityOrder = quantityOrder;
+      }
+      
+      
       public String getCageID() {
             return CageID;
       }
@@ -65,6 +84,7 @@ public class CageDTO {
       public void setDescription(String Description) {
             this.Description = Description;
       }
+      
       
       
               

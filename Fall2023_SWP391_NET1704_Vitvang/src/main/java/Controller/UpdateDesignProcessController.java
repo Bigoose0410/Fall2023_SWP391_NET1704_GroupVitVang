@@ -4,8 +4,7 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import cage.CageDAO;
+import designforprocess.DesignForProcessDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,16 +13,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "SearchCageController", urlPatterns = {"/SearchCageController"})
-public class SearchCageController extends HttpServlet {
-      private static String PRODUCT_PAGE = "Product.jsp";
+@WebServlet(name = "UpdateDesignProcessController", urlPatterns = {"/UpdateDesignProcessController"})
+public class UpdateDesignProcessController extends HttpServlet {
+
+      private final String EDITDESIGN_PAGE = "EditDeisgn.jsp";
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -35,42 +35,45 @@ public class SearchCageController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            
-            String url = "errorPageLogin.html";
-            String searchCageValue = request.getParameter("txtSearchValue");
+             response.setContentType("text/html;charset=UTF-8");
+            String Phrase = request.getParameter("txtPhrase");
+            String CageID = request.getParameter("txtCageID");
+            String TimeProcess = request.getParameter("txtTimeProcess");
+            String Description = request.getParameter("txtDescription");
+            String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
+            String url = EDITDESIGN_PAGE;
             try {
-                  // 1.new dao
-                  CageDAO dao = new CageDAO();
-                  // 2. call method
-                  if(searchCageValue == null ){
-                        searchCageValue = "";
-                  }
-                  dao.searchProductionbyName(searchCageValue);
-                  //3. process result
-                  List<CageDTO> result = dao.getListCage();
-                  request.setAttribute("SEARCH_CAGE_RESULT", result);
-                  url = PRODUCT_PAGE;
-           }catch (SQLException ex) {
-                  log("SearchUserController _ SQL" + ex.getMessage());
+                  int timeprocess;
+                  timeprocess = (TimeProcess != null) ? Integer.parseInt(TimeProcess) : 1;
+                  int numemployee;
+                  numemployee = (NumberOfEmployee != null) ? Integer.parseInt(NumberOfEmployee) : 1;
+                  
+                  DesignForProcessDAO designdao = new DesignForProcessDAO();
+                  designdao.updateDesign(Phrase, CageID, timeprocess, Description, numemployee);
+                  url = "MainController"
+                          + "?btAction=EditDesign"
+                          + "&txtCageID="+CageID;
+            } catch (SQLException ex) {
+                  log("AddDesignProcess _ SQL " + ex.getMessage());
             } catch (NamingException ex) {
-                  log("SearchUserController _ NAMING" + ex.getMessage());
+                  log("AddDesignProcess _ Naming " + ex.getMessage());
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
             }
-      }
+}
 
-      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-      /**
-       * Handles the HTTP <code>GET</code> method.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
-      @Override
-      protected void doGet(HttpServletRequest request, HttpServletResponse response)
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             processRequest(request, response);
       }
@@ -84,7 +87,7 @@ public class SearchCageController extends HttpServlet {
        * @throws IOException if an I/O error occurs
        */
       @Override
-      protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             processRequest(request, response);
       }
@@ -95,7 +98,7 @@ public class SearchCageController extends HttpServlet {
        * @return a String containing servlet description
        */
       @Override
-      public String getServletInfo() {
+public String getServletInfo() {
             return "Short description";
       }// </editor-fold>
 

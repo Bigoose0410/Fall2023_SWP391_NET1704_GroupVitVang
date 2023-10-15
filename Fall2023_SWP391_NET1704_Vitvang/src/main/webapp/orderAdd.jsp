@@ -29,20 +29,22 @@
           <title>Admin Dashboard Panel</title>
      </head>
      <body>
-
-
           <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
+          </c:url>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
           </c:url>
           <!-- get error input -->
           <c:set var="errors" value="${requestScope.ADD_ORDER_ERROR}"/>
           <!-- get list product -->
           <c:set var="CageList" value="${sessionScope.CAGE_LIST}"></c:set>
                <nav>
+
                     <div class="logo-name">
                          <div class="logo-image">
-                              <img src="img/OIP.jpg" alt="">
+                              <img src="images/logo.png" alt="">
                          </div>
 
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
@@ -52,15 +54,19 @@
                     <ul class="nav-links">
                          <li><a href="#">
                                    <i class="uil uil-estate"></i>
-                                   <span class="link-name">Home Page</span>
+                                   <span class="link-name">Dahsboard</span>
                               </a></li>
-                         <li><a href="order.jsp">
-                                   <i class="uil uil-bill"></i>>
+                         <li><a href="MainController?btAction=Order">
+                                   <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
                          <li><a href="#">
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Customers</span>
+                              </a></li>
+                         <li><a href="${productionList}">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Production</span>
                               </a></li>
                          <li><a href="#">
                                    <i class="uil uil-chart-line"></i>
@@ -149,16 +155,6 @@
                                    </div>
 
                                    <div class="form-group">
-                                        <label for="endDate">EndDate</label>
-                                        <input type="date" required="required" class="form-control" placeholder="EndDate" name="txtEndDate"  value="${param.txtEndDate}" />
-                                        <c:if test="${not empty errors.getEndDateErr()}">
-                                             <font color ="red">
-                                             ${errors.getEndDateErr()}
-                                             </font>
-                                        </c:if>
-                                   </div>
-
-                                   <div class="form-group">
                                         <label for="Address">Address</label>
                                         <input type="text" class="form-control" placeholder="Address" name="txtAddress"  value="${param.txtAddress}" />
                                         <c:if test="${not empty errors.getAddressLengthErr()}">
@@ -174,10 +170,12 @@
                                                        <tr>
                                                             <th>Name</th>
                                                             <th>Quanity</th>
+                                                            <th>        </th>
                                                        </tr>
                                                   </thead>
                                                   <tbody>
                                                        <tr>
+
                                                             <td>
                                                                  <select name="txtCageID">
                                                                       <c:forEach items="${CageList}" var="cage">
@@ -194,12 +192,49 @@
                                                                       </font>
                                                                  </c:if>
                                                             </td>
+                                                            <td>
+                                                                 <input type="hidden"  placeholder="Address" name="txtAddress"  value="${param.txtAddress}" />
+                                                                 <button name="btAction" value="addToCart" type="submit">Add</button> 
+                                                            </td>
                                                        </tr>
                                                   </tbody>
                                                   <input type="hidden" name="inAddOrder" value="true" />
                                                   <input type="submit" name="btAction" value="View Detail" />
                                              </table>
                                         </div> 
+                                        <c:set var="cart" value="${sessionScope.CART}"/>
+                                        <c:if test="${not empty cart}">
+                                             <h2>Your cart includes</h2>
+                                             <!-- 3. Cus  takes items - ngăn chứa đồ-->
+                                             <c:set var="items" value="${cart.items}" />
+                                             <c:if test="${items != null}">
+                                                  <!-- 4. Cus picks each item up - lấy đồ-->
+                                                  <table border="1">
+                                                       <thead>
+                                                            <tr>
+                                                                 <th>No.</th>
+                                                                 <th>Name</th>
+                                                                 <th>Quantity</th>
+                                                            </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                            <c:forEach items="${items.keySet()}" var="key" varStatus="counter">
+                                                                 <tr>                
+                                                                      <td>
+                                                                           ${counter.count}
+                                                                           .</td>
+                                                                      <td>
+                                                                           ${key}
+                                                                      </td>
+                                                                      <td>
+                                                                           ${items.get(key)}
+                                                                      </td>
+                                                                 </tr>
+                                                            </c:forEach>
+                                                       </tbody>
+                                                  </table>
+                                             </c:if>
+                                        </c:if>
                                    </div>
                                    <div class="form-group">
                                         <button name="btAction" value="Create Order" type="submit">Create Order</button> 
@@ -209,7 +244,5 @@
                     </div>
                </div>
           </section>
-
-
      </body>
 </html>
