@@ -29,75 +29,75 @@
      </head>
 
      <body>
-          <nav>
+          <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
+               <nav>
 
-               <div class="logo-name">
-                    <div class="logo-image">
-                         <img src="img/OIP.jpg" alt="">
+                    <div class="logo-name">
+                         <div class="logo-image">
+                              <img src="img/OIP.jpg" alt="">
+                         </div>
+
+                         <span class="logo_name">Manager</span>
                     </div>
 
-                    <span class="logo_name">Manager</span>
-               </div>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <li><a href="homePage.html">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Home Page</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=Order">
+                                        <i class="MainController?btAction=Order"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <li><a href="#">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Customers</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=Production process">
+                                        <i class="uil uil-chart-line"></i>
+                                        <span class="link-name">Production process</span>
+                                   </a></li>
+                              <li><a href="#">
+                                        <i class="uil uil-clipboard-alt"></i>
+                                        <span class="link-name">Reports</span>
+                                   </a></li>
+                              <li><a href="#">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
+                              <li><a href="#">
+                                        <i class="uil uil-archive-alt"></i>
+                                        <span class="link-name">Inventory</span>
+                                   </a></li>
+                         </ul>
 
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Home Page</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Order">
-                                   <i class="MainController?btAction=Order"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Production process">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
+                         <ul class="logout-mode">
+                              <li><a href="index.html">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name">Logout</span>
+                                   </a></li>
 
-                    <ul class="logout-mode">
-                         <li><a href="index.html">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
-                              </a></li>
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
 
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
+               </nav>
 
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
-          </nav>
+               <section class="dashboard">
+                    <div id="process-form">
+                         <!--Process-->
+                         <h1>New Order</h1>
 
-          <section class="dashboard">
-               <div id="process-form">
-                    <!--Process-->
-                    <h1>New Order</h1>
-
-                    <form>
-                         <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
+                         <form>
                          <%--<c:if test="${empty searchValue}">--%>
                          <c:if test="${not empty result}">
                               <table class="tablesorter-custom">
@@ -120,12 +120,12 @@
                                              <th>Add Process</th>
                                         </tr>
                                    </thead>
-                                   <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatus().equals('Not Yet')}">
+                                   <c:forEach var="dto" items="${result}" varStatus="counter1">
+                                        <c:if test="${dto.getStatusProgress().equals('new order')}">
                                              <tbody>
                                              <form action="MainController">         
                                                   <tr>
-                                                       <td>${counter.count}</td>
+                                                       <td>${counter1.count}</td>
                                                        <td>${dto.getUserID()}</td>
                                                        <td>
                                                             ${dto.getOrderID()}
@@ -137,8 +137,8 @@
                                                        </td>
                                                        <td>${dto.getStartDate()}</td>
                                                        <td>
-                                                            ${dto.getStatus()}
-                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getStatus()}" />
+                                                            ${dto.getStatusProgress()}
+                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getStatusProgress()}" />
                                                        </td>
                                                        <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
                                                        <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
@@ -185,7 +185,6 @@
                     <h1>Processing</h1>
 
                     <form>
-                         <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
                          <%--<c:if test="${empty searchValue}">--%>
                          <c:if test="${not empty result}">
                               <table class="tablesorter-custom1">
@@ -218,7 +217,7 @@
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatus().equals('Processing')}">
+                                        <c:if test="${dto.getStatusProgress().equals('Processing')}">
                                              <tbody>
                                              <form action="MainController">  
                                                   <tr>
@@ -231,7 +230,7 @@
                                                        <td>${dto.getStartDate()}</td>
                                                        <td>${dto.getEndDate()}</td>
                                                        <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getStatus()}</td>
+                                                       <td>${dto.getStatusProgress()}</td>
                                                        <td><button class="fa fa-pencil-square"></button></td>
                                                        <td><button class="fa fa-trash"></button></td>
                                                   </tr>
