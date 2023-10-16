@@ -179,7 +179,7 @@ public class ProcessDAO implements Serializable {
             }
             return false;
       }
-      public boolean AutoAddProcess(String OrderID, String CageID, Date StartDate, int Quantity)
+ public boolean AutoAddProcess(String OrderID, String CageID, Date StartDate, int Quantity)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm1 = null;
@@ -195,7 +195,7 @@ public class ProcessDAO implements Serializable {
             Date[] startDate = {StartDate, step1, step2, step3};
             Date[] endDate = {step1, step2, step3, step4};
             String[] processName = {"Định hình khung", "Tạo hình", "Trang trí", "Kiểm tra chất lượng"};
-            String[] status = {"Processing", "Not Yet", "Not Yet"};
+            String[] status = {"Processing", "Not Yet", "Not Yet","Not Yet"};
             String[][] phrases = {
                   {"nep chan", "chan de", "day long", "khay de"},
                   {"thanh tru va dinh", "dam mai", "co dinh khung"},
@@ -204,35 +204,40 @@ public class ProcessDAO implements Serializable {
             };
             try {
                   //1. Make connection
-                  con = (Connection) DBHelper.makeConnection();
+                      con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
                         for (int i = 0; i < processIds.length; i++) {
                               String sql1 = "Insert into Process"
-                                      + " (ProcessID, ProcessName, OrderID, Phrase, CageID, Status, StartDate, EndDate)  VALUES (? , ?, ?, ?, ?, ?, ?, ?)";
+                                      + " (ProcessID, ProcessName, OrderID, Status, Phrase, CageID, StartDate, EndDate) "
+                                      + "VALUES (? , ?, ?, ?, ?, ?, ?, ?)";
                               stm1 = con.prepareStatement(sql1);
                               for (String phrase : phrases[i]) {
                                     stm1.setString(1, processIds[i]);
                                     stm1.setString(2, processName[i]);
                                     stm1.setString(3, OrderID);
-                                    stm1.setString(4, phrase);
-                                    stm1.setString(5, CageID);
-                                    stm1.setString(6, status[i]);
+                                    stm1.setString(4, status[i]);
+                                    stm1.setString(5, phrase);
+                                    stm1.setString(6, CageID);
                                     stm1.setDate(7, startDate[i]);
                                     stm1.setDate(8, endDate[i]);
                                     row1 = stm1.executeUpdate();
                               }
                         }
-//                        String sql2 = "UPDATE Orderr " +
-//                                    " SET StatusProgress = 'Processing' " +
-//                                    " FROM Orderr " +
-//                                    " Where Orderr.OrderID = ? ";
+                        // rồi đó, test lại đi. t nghĩ đc rồi 
+//                        String sql2 = "UPDATE Process SET Status = 'Processing' "
+//                                + " FROM Process INNER JOIN Orderr ON (Process.OrderID = Orderr.OrderID) "
+//                                + " Where Orderr.OrderID = ? AND Process.CageID = ? ";
 //                        stm2 = con.prepareStatement(sql2);
+////                        stm.setString(1, password);
+////                        stm.setString(2, lastname);
+////                        stm.setBoolean(3, role);
 //                        stm2.setString(1, OrderID);
+//                        stm2.setString(2, CageID);
 //                        row2 = stm2.executeUpdate();
-//
-//                        if (row1 > 0 && row2 > 0) {
-//                              return true;
-//                        }
+
+                        if (row1 > 0) {
+                              return true;
+                        }
                   }
 
             } finally {
@@ -254,3 +259,4 @@ public class ProcessDAO implements Serializable {
             return false;
       }
 }
+
