@@ -4,13 +4,10 @@
  */
 package Controller;
 
-import Model.CageDTO;
 import Model.CageMaterialDTO;
-import Model.DetailOrderDTO;
-import Model.OrderDTO;
-import Model.UserDTO;
-import Order.OrderDAO;
+import Model.DesignForProcessDTO;
 import cage.CageDAO;
+import designforprocess.DesignForProcessDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,16 +18,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
-import users.UserDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "Detail Order", urlPatterns = {"/DetailOrderController"})
-public class DetailOrderController extends HttpServlet {
+@WebServlet(name = "DetailProduct", urlPatterns = {"/DetailProductController"})
+public class DetailProductController extends HttpServlet {
 
-      private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
+      private final String CAGE_DETAIL_PAGE = "ProductDetail.jsp";
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,33 +39,29 @@ public class DetailOrderController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String OrderID = request.getParameter("txtOrderID");
+            String cageID = request.getParameter("txtCageID");
             String url = "errorPageLogin.html";
             try {
-                  // new DAO
-                  OrderDAO orderdao = new OrderDAO();
-                  UserDAO userdao = new UserDAO();
-                  CageDAO dao = new CageDAO();
-                  // call method orderDao
-                  orderdao.searchOrder(OrderID);
-                  orderdao.queryOrderDetail(OrderID);
+                  //1. new DAO
+                  CageDAO cagedao = new CageDAO();
+                  DesignForProcessDAO designdao = new DesignForProcessDAO();
                   
-                  // process result
-                  UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
-                  OrderDTO order = orderdao.getListOrders().get(0);
-                  List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
-                  for (DetailOrderDTO detailOrderDTO : orderDetailList) {
-                        dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
-                        dao.searchProductionbyID(detailOrderDTO.getCageID());
-                  }
-                  List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
-                  List<CageDTO> cageList = dao.getListCage();
-
-                  request.setAttribute("CUS_ORDER", customer);
-                  request.setAttribute("CAGE_MATERIAL", cageMaterialList);
-                  request.setAttribute("CAGE_ORDER", cageList);
-                  request.setAttribute("ORDER", order);
-                  url = ORDER_DETAIL_PAGE;
+                  //2. Call method
+                  // get material list
+                  cagedao.ViewCageMaterial2(cageID);
+                  // get design
+                  designdao.ViewDesignForProcess(cageID);
+                  
+                  //3. process result     
+                  List<CageMaterialDTO> result1 = cagedao.getListCageMaterial();
+                  int materialPirce = cagedao.TotalPriceMaterial();
+                  List<DesignForProcessDTO> result3 = designdao.getDesignProcessList();
+                  int processPrice = designdao.TotalPriceProcess();
+                  request.setAttribute("CAGE_MATERIAL", result1);
+                  request.setAttribute("DESIGN_PROCESS", result3);
+                  request.setAttribute("MATERIAL_PRICE", materialPirce);
+                  request.setAttribute("PROCESS_PRICE", processPrice);
+                  url = CAGE_DETAIL_PAGE;
 
             } catch (SQLException ex) {
                   String msg = ex.getMessage();

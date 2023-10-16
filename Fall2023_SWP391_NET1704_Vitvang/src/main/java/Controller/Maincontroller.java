@@ -16,26 +16,41 @@ import java.io.IOException;
  *
  * @author Admin
  */
-
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
       private final String LoginController = "LoginServlet";
       private final String StartUpController = "StartUpController";
       private final String LogOutController = "LogOutServlet";
+      //search-show
       private final String SearchOrderController = "SearchOrderController";
-      private final String UpdateOrderController = "UpdateOrderController";
-      private final String DeleteOrderController = "DeleteOrderController";
-      private final String OrderHistoryController = "OrderHistoryController";
-      private final String AddOrderController = "AddOrderController";
-      private final String ListCageController = "ListCageController";
-      private final String SearchCustomerController = "SearchCustomerController";
-      private final String CreateUserController = "CreateUserController";
-      private final String ShowCusCreateFormController = "ShowCusCreateFormController";
       private final String SearchCageController = "SearchCageController";
+      private final String SearchCustomerController = "SearchCustomerController";
+      private final String OrderHistoryController = "OrderHistoryController";
+      private final String ListCageController = "ListCageController";
+      private final String ShowCusCreateFormController = "ShowCusCreateFormController";
       private final String CalculateDetailMaterial = "CalculateDetailMaterial";
       private final String DetailOrderController = "DetailOrderController";
-      
+      private final String DetailProductController = "DetailProductController";
+      private final String EditDesignController = "EditDesignController";
+      private final String EditMaterialController = "EditMaterialController";
+      //create-add
+      private final String AddOrderController = "AddOrderController";
+      private final String AddItemToCartController = "AddItemToCartController";
+      private final String AddDesignProcess = "AddDesignProcess";
+      private final String CreateUserController = "CreateUserController";
+      private final String AddMaterialToCageController = "AddMaterialToCageController";
+      private final String AddAutoProcessController = "ProductionProcessController";
+      //update
+      private final String UpdateOrderController = "UpdateOrderController";
+      private final String UpdateDesignProcessController = "UpdateDesignProcessController";
+      private final String UpdateMaterialofCageController = "UpdateMaterialofCageController";
+      //delete
+      private final String DeleteOrderController = "DeleteOrderController";
+      private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
+      private final String ProcessController = "ProcessController";
+      private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -61,19 +76,42 @@ public class MainController extends HttpServlet {
                         url = ListCageController;
                   } else if (button.equals("Create Order")) {
                         url = AddOrderController;
+                  } else if (button.equals("addToCart")) {
+                        url = AddItemToCartController;
                   } else if (button.equals("Search Customer")) {
                         url = SearchCustomerController;
-                  }else if (button.equals("New Customer")) {
+                  } else if (button.equals("New Customer")) {
                         url = CreateUserController;
                   } else if (button.equals("Create New Customer")) {
                         url = ShowCusCreateFormController;
-                  }else if (button.equals("View Detail")) {
+                  } else if (button.equals("View Detail")) {
                         url = CalculateDetailMaterial;
-                  }else if (button.equals("Detail")) {
+                  } else if (button.equals("Detail")) {
                         url = DetailOrderController;
+                  } else if (button.equals("SearchCage")) {
+                        url = SearchCageController;
+                  } else if (button.equals("DetailProduct")) {
+                        url = DetailProductController;
+                  } else if (button.equals("EditDesign")) {
+                        url = EditDesignController;
+                  } else if (button.equals("AddDesignProcess")) {
+                        url = AddDesignProcess;
+                  } else if (button.equals("updateDesign")) {
+                        url = UpdateDesignProcessController;
+                  } else if (button.equals("UpdateMaterialofCage")) {
+                        url = UpdateMaterialofCageController;
+                  } else if (button.equals("EditMaterial")) {
+                        url = EditMaterialController;
+                  } else if (button.equals("DeleteMaterialofCage")) {
+                        url = DeleteMaterialofCageController;
+                  } else if (button.equals("AddMaterialToCage")) {
+                        url = AddMaterialToCageController;
+                  } else if (button.equals("Production process")) {
+                        url = ProcessController;
+                  } else if (button.equals("AddToProcess")) {
+                        url = AddAutoProcessController;
                   }
-                 
-                   
+
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

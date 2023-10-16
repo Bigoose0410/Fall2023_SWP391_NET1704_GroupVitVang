@@ -4,59 +4,44 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import cage.CageDAO;
-import jakarta.servlet.RequestDispatcher;
+import Process.ProcessDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import javax.naming.NamingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "SearchCageController", urlPatterns = {"/SearchCageController"})
-public class SearchCageController extends HttpServlet {
-      private static String PRODUCT_PAGE = "Product.jsp";
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+@WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
+public class UpdateSatusNewOrderController extends HttpServlet {
+
+//      private final String Process = "process.jsp";
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+              throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            
-            String url = "errorPageLogin.html";
-            String searchCageValue = request.getParameter("txtSearchValue");
+            String url = "newLogin.jsp";
+            String newStatus = request.getParameter("updateStatusNewOrder");
+            String orderID = request.getParameter("txtOrderID");
+            String cageID = request.getParameter("txtCageID");
             try {
-                  // 1.new dao
-                  CageDAO dao = new CageDAO();
-                  // 2. call method
-                  if(searchCageValue == null ){
-                        searchCageValue = "";
+                  ProcessDAO dao = new ProcessDAO();
+                  boolean result = dao.updateStatusNewOrder(orderID, cageID);
+                  if (result) {
+                        url = "MainController?btAction=Production process";
                   }
-                  dao.searchProductionbyName(searchCageValue);
-                  //3. process result
-                  List<CageDTO> result = dao.getListCage();
-                  request.setAttribute("SEARCH_CAGE_RESULT", result);
-                  url = PRODUCT_PAGE;
-           }catch (SQLException ex) {
-                  log("SearchUserController _ SQL" + ex.getMessage());
-            } catch (NamingException ex) {
-                  log("SearchUserController _ NAMING" + ex.getMessage());
+
+            } catch (SQLException e) {
+                  e.printStackTrace();
             } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+                  request.getRequestDispatcher(url).forward(request, response);
             }
       }
 
@@ -72,7 +57,11 @@ public class SearchCageController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (SQLException ex) {
+                  Logger.getLogger(UpdateSatusNewOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -86,7 +75,11 @@ public class SearchCageController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (SQLException ex) {
+                  Logger.getLogger(UpdateSatusNewOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**

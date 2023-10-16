@@ -4,59 +4,39 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import cage.CageDAO;
-import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import javax.naming.NamingException;
 
 /**
  *
- * @author Admin
+ * @author Lê Minh Nhật
  */
-@WebServlet(name = "SearchCageController", urlPatterns = {"/SearchCageController"})
-public class SearchCageController extends HttpServlet {
-      private static String PRODUCT_PAGE = "Product.jsp";
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+public class ProductionProcessController extends HttpServlet {
+
+     
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            
-            String url = "errorPageLogin.html";
-            String searchCageValue = request.getParameter("txtSearchValue");
-            try {
-                  // 1.new dao
-                  CageDAO dao = new CageDAO();
-                  // 2. call method
-                  if(searchCageValue == null ){
-                        searchCageValue = "";
-                  }
-                  dao.searchProductionbyName(searchCageValue);
-                  //3. process result
-                  List<CageDTO> result = dao.getListCage();
-                  request.setAttribute("SEARCH_CAGE_RESULT", result);
-                  url = PRODUCT_PAGE;
-           }catch (SQLException ex) {
-                  log("SearchUserController _ SQL" + ex.getMessage());
-            } catch (NamingException ex) {
-                  log("SearchUserController _ NAMING" + ex.getMessage());
-            } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+            try (PrintWriter out = response.getWriter()) {
+                  /* TODO output your page here. You may use following sample code. */
+                  out.println("<!DOCTYPE html>");
+                  out.println("<html>");
+                  out.println("<head>");
+                  out.println("<title>Servlet ProductionProcessController</title>");                  
+                  out.println("</head>");
+                  out.println("<body>");
+                  out.println("<h1>Servlet ProductionProcessController at " + request.getContextPath() + "</h1>");
+                  out.println("</body>");
+                  out.println("</html>");
             }
       }
 

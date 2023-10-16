@@ -52,10 +52,11 @@ public class CalculateDetailMaterial extends HttpServlet {
                               quantity = Integer.parseInt(QuantityList[0]);
                         }
                         dao.ViewCageMaterial(CageID, quantity);
-                        dao.searchProduction(CageID);
+                        dao.searchProductionbyID(CageID);
                         i++;
                   }
                   List<CageMaterialDTO> result1 = dao.getListCageMaterial();
+                  int TotalMaterialPirce = dao.TotalPriceMaterial();
                   List<CageDTO> result2 = dao.getListCage();
 
                   request.setAttribute("CAGE_MATERIAL", result1);
