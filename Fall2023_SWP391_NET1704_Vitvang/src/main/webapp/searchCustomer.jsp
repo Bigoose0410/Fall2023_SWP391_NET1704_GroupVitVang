@@ -12,7 +12,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-          <link rel="stylesheet" href="css\searchCustomer.css">
+          <link rel="stylesheet" href="css/searchCustomer.css">
           <title>BPMS</title>
      </head>
      <body>
