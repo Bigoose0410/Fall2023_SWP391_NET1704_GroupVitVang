@@ -76,6 +76,10 @@ public class MainController extends HttpServlet {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {
                         url = UpdateSatusNewOrderController;
+                  } else if (button.equals("Customers")) {
+                        url = SearchCustomerController;
+                  } else if (button.equals("ViewProcessDetail")) {
+                        url = ProcessController;
                   }
 
             } finally {
