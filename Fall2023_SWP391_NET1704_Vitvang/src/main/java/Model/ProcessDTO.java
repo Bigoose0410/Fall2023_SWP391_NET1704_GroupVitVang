@@ -22,11 +22,13 @@ public class ProcessDTO {
       private Date EndDate;
       private int NumberOfEmployee;
       private String StatusProgress;
+      private int Quantity;
+      private String OrderDetailStatus;
 
       public ProcessDTO() {
       }
 
-      public ProcessDTO(String UserID, String OrderID, String CageID, String ProcessID, String ProcessName, String Status, Date StartDate, Date EndDate, int NumberOfEmployee, String StatusProgress) {
+      public ProcessDTO(String UserID, String OrderID, String CageID, String ProcessID, String ProcessName, String Status, Date StartDate, Date EndDate, int NumberOfEmployee, String StatusProgress, int Quantity, String OrderDetailStatus) {
             this.UserID = UserID;
             this.OrderID = OrderID;
             this.CageID = CageID;
@@ -37,6 +39,8 @@ public class ProcessDTO {
             this.EndDate = EndDate;
             this.NumberOfEmployee = NumberOfEmployee;
             this.StatusProgress = StatusProgress;
+            this.Quantity = Quantity;
+            this.OrderDetailStatus = OrderDetailStatus;
       }
 
       public String getUserID() {
@@ -117,6 +121,22 @@ public class ProcessDTO {
 
       public void setStatusProgress(String StatusProgress) {
             this.StatusProgress = StatusProgress;
+      }
+
+      public int getQuantity() {
+            return Quantity;
+      }
+
+      public void setQuantity(int Quantity) {
+            this.Quantity = Quantity;
+      }
+
+      public String getOrderDetailStatus() {
+            return OrderDetailStatus;
+      }
+
+      public void setOrderDetailStatus(String OrderDetailStatus) {
+            this.OrderDetailStatus = OrderDetailStatus;
       }
 
 }

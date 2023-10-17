@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.ProcessDTO;
+import Model.ProcessNewOrderDTO;
 import Process.ProcessDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,17 +27,28 @@ import java.util.logging.Logger;
 public class ProcessController extends HttpServlet {
 
       private final String Process = "process.jsp";
+      private final String ProcessDetail = "ProcessDetail.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
             String url = Process;
+            String OrderID = request.getParameter("txtOrderID");
+            String CageID = request.getParameter("txtCageID");
+            String button = request.getParameter("btAction");
             try {
                   ProcessDAO dao = new ProcessDAO();
-                  dao.ViewProcessOrder();
-                  List<ProcessDTO> process = dao.getListOrdersProcess();
-                  request.setAttribute("PROCESS_RESULT", process);
-                  url = Process;
+                  if (!button.equals("ViewProcessDetail")) {
+                        dao.ViewNewOrder();
+                        List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
+                        request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
+                        url = Process;
+                  } else {
+                        dao.ViewProcessingOrder(OrderID, CageID);
+                        List<ProcessDTO> process = dao.getListOrdersProcess();
+                        request.setAttribute("PROCESS_RESULT", process);
+                        url = ProcessDetail;
+                  }
             } catch (SQLException e) {
                   log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {

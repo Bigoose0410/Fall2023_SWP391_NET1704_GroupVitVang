@@ -4,59 +4,45 @@
  */
 package Controller;
 
-import Model.CageDTO;
-import cage.CageDAO;
-import jakarta.servlet.RequestDispatcher;
+import Model.UserDTO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
+import users.UserDAO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "SearchCageController", urlPatterns = {"/SearchCageController"})
-public class SearchCageController extends HttpServlet {
-      private static String PRODUCT_PAGE = "Product.jsp";
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+@WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
+public class CustomerController extends HttpServlet {
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+              throws ServletException, IOException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
-            
-            String url = "errorPageLogin.html";
-            String searchCageValue = request.getParameter("txtSearchValue");
+            String url = "newLogin.jsp";
             try {
-                  // 1.new dao
-                  CageDAO dao = new CageDAO();
-                  // 2. call method
-                  if(searchCageValue == null ){
-                        searchCageValue = "";
-                  }
-                  dao.searchProductionbyName(searchCageValue);
-                  //3. process result
-                  List<CageDTO> result = dao.getListCage();
-                  request.setAttribute("SEARCH_CAGE_RESULT", result);
-                  url = PRODUCT_PAGE;
-           }catch (SQLException ex) {
-                  log("SearchUserController _ SQL" + ex.getMessage());
-            } catch (NamingException ex) {
-                  log("SearchUserController _ NAMING" + ex.getMessage());
+                  String username = request.getParameter("txtUsername");
+                  int role = Integer.parseInt(request.getParameter("txtRoleID"));
+                  UserDAO dao = new UserDAO();
+                  dao.searchUserByNameAndRole(username, 4);
+                  List<UserDTO> user = dao.getListUser();
+                  request.setAttribute("USER_RESULT", user);
+                  url = "customer.jsp";
+            } catch (SQLException e) {
+                  log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+                  request.getRequestDispatcher(url).forward(request, response);
             }
       }
 
@@ -72,7 +58,11 @@ public class SearchCageController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (NamingException ex) {
+                  Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -86,7 +76,11 @@ public class SearchCageController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (NamingException ex) {
+                  Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
