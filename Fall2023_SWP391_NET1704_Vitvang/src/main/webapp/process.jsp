@@ -46,7 +46,7 @@
                                    <span class="link-name">Home Page</span>
                               </a></li>
                          <li><a href="MainController?btAction=Order">
-                                   <i class="MainController?btAction=Order"></i>
+                                   <i class="uil uil-estate"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
                          <li><a href="#">
@@ -108,7 +108,7 @@
                                              <td> <input type="search" data-column="2" placeholder="OrderID"></td>
                                              <td></td>
                                              <td></td>
-                                             <td></td>s
+                                             <td></td>
                                         </tr>
                                         <tr>
                                              <th>No.</th>
@@ -122,7 +122,7 @@
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter1">
-                                        <c:if test="${dto.getStatusProgress().equals('new order')}">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
                                              <tbody>
                                              <form action="MainController">         
                                                   <tr>
@@ -145,8 +145,8 @@
                                                             <input type="hidden" name="txtQuantity" value="${dto.getQuantity()}" />
                                                        </td>
                                                        <td>
-                                                            ${dto.getStatusProgress()}
-                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getStatusProgress()}" />
+                                                            ${dto.getOrderDetailStatus()}
+                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />
                                                        </td>
                                                        <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
                                                        <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
@@ -219,14 +219,16 @@
                                              <th>Process Name</th>
                                              <th>Date time Start</th>
                                              <th>Date time End</th>
+                                             <th>Quantity</th>
                                              <th>Number Of Employee</th>
+                                             <th>OrderDetailStatus</th>
                                              <th>Status</th>
                                              <th>Update</th>
                                              <th>Delete</th>
                                         </tr>
                                    </thead>
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
-                                        <c:if test="${dto.getStatusProgress().equals('Processing')}">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
                                              <tbody>
                                              <form action="MainController">  
                                                   <tr>
@@ -238,8 +240,10 @@
                                                        <td>${dto.getProcessName()}</td>
                                                        <td>${dto.getStartDate()}</td>
                                                        <td>${dto.getEndDate()}</td>
+                                                       <td>${dto.getQuantity()}</td>
                                                        <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getStatusProgress()}</td>
+                                                       <td>${dto.getOrderDetailStatus()}</td>
+                                                       <td>${dto.getStatus()}</td>
                                                        <td><button class="fa fa-pencil-square"></button></td>
                                                        <td><button class="fa fa-trash"></button></td>
                                                   </tr>
