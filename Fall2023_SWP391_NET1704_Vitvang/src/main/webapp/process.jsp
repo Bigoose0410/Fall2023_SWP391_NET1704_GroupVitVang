@@ -121,12 +121,16 @@
                                              <th>Add Process</th>
                                         </tr>
                                    </thead>
-                                   <c:forEach var="dto" items="${result}" varStatus="counter1">
+                                   <c:set var="count" value="0" />
+                                   <c:forEach var="dto" items="${result}">
                                         <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
                                              <tbody>
                                              <form action="MainController">         
                                                   <tr>
-                                                       <td>${counter1.count}</td>
+                                                       <td> 
+                                                            <c:set var="count" value="${count + 1}" />
+                                                            ${count}
+                                                       </td>
                                                        <td>${dto.getUserID()}</td>
                                                        <td>
                                                             ${dto.getOrderID()}
@@ -193,19 +197,15 @@
                     <h1>Processing</h1>
 
                     <form>
-                         <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
+                         <c:set var="result" value="${requestScope.PROCESSNEWORDER_RESULT}"></c:set>
                          <%--<c:if test="${empty searchValue}">--%>
                          <c:if test="${not empty result}">
-                              <table class="tablesorter-custom1">
+                              <table class="tablesorter-custom">
                                    <thead>
-                                        <tr class="search2">
+                                        <tr class="search1">
                                              <td></td>
                                              <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
                                              <td> <input type="search" data-column="2" placeholder="OrderID"></td>
-                                             <td> <input type="search" data-column="3" placeholder="CageID"></td>
-                                             <td> <input type="search" data-column="4" placeholder="ProcessID"></td>
-                                             <td></td>
-                                             <td></td>
                                              <td></td>
                                              <td></td>
                                              <td></td>
@@ -215,64 +215,71 @@
                                              <th>CustomerID</th>
                                              <th>OrderID</th>
                                              <th>CageID</th>
-                                             <th>ProcessID</th>
-                                             <th>Process Name</th>
-                                             <th>Date time Start</th>
-                                             <th>Date time End</th>
+                                             <th>StartDate</th>
                                              <th>Quantity</th>
-                                             <th>Number Of Employee</th>
-                                             <th>OrderDetailStatus</th>
                                              <th>Status</th>
-                                             <th>Update</th>
-                                             <th>Delete</th>
+                                             <th>View Detail</th>
                                         </tr>
                                    </thead>
-                                   <c:forEach var="dto" items="${result}" varStatus="counter">
+                                   <c:set var="count1" value="0" />
+                                   <c:forEach var="dto" items="${result}">
                                         <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
                                              <tbody>
-                                             <form action="MainController">  
+                                             <form action="MainController">         
                                                   <tr>
-                                                       <td>${counter.count}</td>
+                                                       <td>
+                                                            <c:set var="count1" value="${count1 + 1}" />
+                                                            ${count1}
+                                                       </td>
                                                        <td>${dto.getUserID()}</td>
-                                                       <td>${dto.getOrderID()}</td>
-                                                       <td>${dto.getCageID()}</td>
-                                                       <td>${dto.getProcessID()}</td>
-                                                       <td>${dto.getProcessName()}</td>
-                                                       <td>${dto.getStartDate()}</td>
-                                                       <td>${dto.getEndDate()}</td>
-                                                       <td>${dto.getQuantity()}</td>
-                                                       <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getOrderDetailStatus()}</td>
-                                                       <td>${dto.getStatus()}</td>
-                                                       <td><button class="fa fa-pencil-square"></button></td>
-                                                       <td><button class="fa fa-trash"></button></td>
+                                                       <td>
+                                                            ${dto.getOrderID()}
+                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getCageID()}
+                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getStartDate()}
+                                                            <input type="hidden" name="txtStartDate" value="${dto.getStartDate()}" />
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getQuantity()}
+                                                            <input type="hidden" name="txtQuantity" value="${dto.getQuantity()}" />
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getOrderDetailStatus()}
+                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />
+                                                       </td>
+                                                       <td><button class="fa fa-cog"  type="submit" value="ViewProcessDetail" name="btAction"></button></td>
+                                                       <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
                                                   </tr>
+
                                                   <!--                                   <tr>
                                                                                           <td>2</td>
-                                                                                          <td>1002</td>
-                                                                                          <td>P002</td>
-                                                                                          <td>PT001</td>
-                                                                                          <td>MT002</td>
-                                                                                          <td>Step 2</td>
+                                                                                          <td>OR001</td>
+                                                                                          <td>CS001</td>
+                                                                                          <td>CG002</td>
                                                                                           <td>2023-10-06</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td>70</td>
-                                                                                          <td><button class="fa fa-pencil-square"></button></td>
-                                                                                          <td><button class="fa fa-trash"></button></td>
+                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
                                                                                      </tr>
                                                   
                                                                                      <tr>
                                                                                           <td>3</td>
-                                                                                          <td>1003</td>
-                                                                                          <td>P003</td>
-                                                                                          <td>PT001</td>
-                                                                                          <td>MT003</td>
-                                                                                          <td>Step 3</td>
+                                                                                          <td>OR003</td>
+                                                                                          <td>CS002</td>
+                                                                                          <td>Cg001</td>
                                                                                           <td>2023-10-07</td>
-                                                                                          <td>2023-10-08</td>
-                                                                                          <td>80</td>
-                                                                                          <td><button class="fa fa-pencil-square"></button></td>
-                                                                                          <td><button class="fa fa-trash"></button></td>
+                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
+                                                                                     </tr>
+                                                                                     <tr>
+                                                                                          <td>4</td>
+                                                                                          <td>OR003</td>
+                                                                                          <td>CS002</td>
+                                                                                          <td>CG002</td>
+                                                                                          <td>2023-10-07</td>
+                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
                                                                                      </tr>-->
                                              </form>
                                              </tbody>
