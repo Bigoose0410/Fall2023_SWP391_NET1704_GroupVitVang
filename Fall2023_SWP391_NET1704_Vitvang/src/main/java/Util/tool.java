@@ -5,6 +5,8 @@
 package Util;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -12,7 +14,6 @@ import java.sql.Date;
  */
 public final class tool {
 
-      public static final String DATE_FORMAT = "MM/dd/yyyy";
       private static final String IGNORE_CASE_PATTERN = "(?i)";
 
       private tool() {
@@ -38,5 +39,41 @@ public final class tool {
             } else {
                   return false;
             }
+      }
+
+      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess ,int employee, int maxConpletionperDay ) {
+            
+            double maxConpletion = (maxConpletionperDay * 1d /employee);
+//            int employee = 3;
+//            int timeprocess = 2;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar c1 = Calendar.getInstance();
+            // Tính thời gian cần thiết cho quy trình
+            // (số lượng lồng cần sx / số lượng có thể sx trong 1 ngày)
+            double time = Math.ceil((quantity / (maxConpletion / timeprocess)) / 8);
+            System.out.println(time);
+            c1.setTime(startDate);
+            c1.roll(Calendar.DATE, (int) time);
+            double mountcount = Math.floor(time / 30);
+            if (time > 30) {
+                  for (int i = 0; i < (int) mountcount; i++) {
+                        c1.roll(Calendar.MONTH, 1);
+                        if (c1.getTime().getMonth() < startDate.getMonth()) {
+                              c1.roll(Calendar.YEAR, 1);
+                        }
+                  }
+            } else {
+                  if (c1.getTime().getDate() < startDate.getDate()) {
+                  c1.roll(Calendar.MONTH, 1);
+                  }
+                  if (c1.getTime().getMonth() < startDate.getMonth()) {
+                        c1.roll(Calendar.YEAR, 1);
+                  }
+            }
+            // Ngày bắt đầu của quy trình này là ngày kết thúc của quy trình trước
+            // Ngày kết thúc của quy trình
+            String processEndDate = formatter.format(c1.getTime());
+            Date EndDate = Date.valueOf(processEndDate);
+            return EndDate;
       }
 }

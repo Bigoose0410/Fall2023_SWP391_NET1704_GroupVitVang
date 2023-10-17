@@ -108,7 +108,7 @@
                                              <td> <input type="search" data-column="2" placeholder="OrderID"></td>
                                              <td></td>
                                              <td></td>
-                                             <td></td>s
+                                             <td></td>
                                         </tr>
                                         <tr>
                                              <th>No.</th>
@@ -149,34 +149,7 @@
                                                             <input type="hidden" name="updateStatusNewOrder" value="${dto.getStatusProgress()}" />
                                                        </td>
                                                        <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
-                                                       <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
                                                   </tr>
-
-                                                  <!--                                   <tr>
-                                                                                          <td>2</td>
-                                                                                          <td>OR001</td>
-                                                                                          <td>CS001</td>
-                                                                                          <td>CG002</td>
-                                                                                          <td>2023-10-06</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>
-                                                  
-                                                                                     <tr>
-                                                                                          <td>3</td>
-                                                                                          <td>OR003</td>
-                                                                                          <td>CS002</td>
-                                                                                          <td>Cg001</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>
-                                                                                     <tr>
-                                                                                          <td>4</td>
-                                                                                          <td>OR003</td>
-                                                                                          <td>CS002</td>
-                                                                                          <td>CG002</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>-->
                                              </form>
                                              </tbody>
                                         </c:if>
@@ -243,33 +216,6 @@
                                                        <td><button class="fa fa-pencil-square"></button></td>
                                                        <td><button class="fa fa-trash"></button></td>
                                                   </tr>
-                                                  <!--                                   <tr>
-                                                                                          <td>2</td>
-                                                                                          <td>1002</td>
-                                                                                          <td>P002</td>
-                                                                                          <td>PT001</td>
-                                                                                          <td>MT002</td>
-                                                                                          <td>Step 2</td>
-                                                                                          <td>2023-10-06</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td>70</td>
-                                                                                          <td><button class="fa fa-pencil-square"></button></td>
-                                                                                          <td><button class="fa fa-trash"></button></td>
-                                                                                     </tr>
-                                                  
-                                                                                     <tr>
-                                                                                          <td>3</td>
-                                                                                          <td>1003</td>
-                                                                                          <td>P003</td>
-                                                                                          <td>PT001</td>
-                                                                                          <td>MT003</td>
-                                                                                          <td>Step 3</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td>2023-10-08</td>
-                                                                                          <td>80</td>
-                                                                                          <td><button class="fa fa-pencil-square"></button></td>
-                                                                                          <td><button class="fa fa-trash"></button></td>
-                                                                                     </tr>-->
                                              </form>
                                              </tbody>
                                         </c:if>

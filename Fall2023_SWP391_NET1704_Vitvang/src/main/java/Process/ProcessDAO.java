@@ -4,6 +4,7 @@
  */
 package Process;
 
+import Model.DesignForProcessDTO;
 import Model.ProcessDTO;
 import Model.ProcessNewOrderDTO;
 import Util.DBHelper;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.NamingException;
 
 /**
  *
@@ -36,9 +38,6 @@ public class ProcessDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-//                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
-//                                        + "From Orderr "
-//                                        + "Where OrderID Like ? ";
                         String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Orderr.StartDate, OrderDetail.Quantity, Orderr.StatusProgress "
                                 + "FROM UserOrder JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
@@ -54,17 +53,11 @@ public class ProcessDAO implements Serializable {
                               Date StartDate = rs.getDate("StartDate");
                               int Quantity = rs.getInt("Quantity");
                               String StatusProgress = rs.getString("StatusProgress");
-//                              int TotalPrice = rs.getInt("TotalPrice");
-//                              int Quantity = rs.getInt("Quantity");
-//                              int Price = rs.getInt("Price");
-//                              String StatusProcess = rs.getString("StatusProcess");
-//                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
                               ProcessNewOrderDTO processNewOrder = new ProcessNewOrderDTO(UserID, OrderID, CageID, StartDate, Quantity, StatusProgress);
                               if (this.listProcessNewOrder == null) {
                                     this.listProcessNewOrder = new ArrayList<ProcessNewOrderDTO>();
                               }
                               this.listProcessNewOrder.add(processNewOrder);
-
                         }
                   }
             } finally {
@@ -95,9 +88,7 @@ public class ProcessDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-//                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
-//                                        + "From Orderr "
-//                                        + "Where OrderID Like ? ";
+//                        
                         String sql = "SELECT UserOrder.UserID, Orderr.OrderID, Process.CageID, Process.ProcessID, Process.ProcessName, Process.Status, Process.StartDate, Process.EndDate, Process.NumberOfEmployee, Orderr.StatusProgress "
                                 + "FROM UserOrder JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
@@ -117,11 +108,7 @@ public class ProcessDAO implements Serializable {
                               String Status = rs.getString("Status");
                               int NumberOfEmployee = rs.getInt("NumberOfEmployee");
                               String StatusProgress = rs.getString("StatusProgress");
-//                              int TotalPrice = rs.getInt("TotalPrice");
-//                              int Quantity = rs.getInt("Quantity");
-//                              int Price = rs.getInt("Price");
-//                              String StatusProcess = rs.getString("StatusProcess");
-//                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
+
                               ProcessDTO process = new ProcessDTO(UserID, OrderID, CageID, ProcessID, ProcessName, Status, StartDate, EndDate, NumberOfEmployee, StatusProgress);
                               if (this.listOrdersProcess == null) {
                                     this.listOrdersProcess = new ArrayList<ProcessDTO>();
@@ -165,7 +152,6 @@ public class ProcessDAO implements Serializable {
                               return true;
                         }
                         // hoan chinh roi thi excutequery
-
                   }
             } finally {
                   if (stm != null) {
@@ -176,5 +162,51 @@ public class ProcessDAO implements Serializable {
                   }
             }
             return false;
+      }
+
+      public boolean AutoAddProcess(int ProcessID, String OrderID, String status, Date StartDate, Date Endate,  DesignForProcessDTO design)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            String processID = "PR" + String.format("%03d", ProcessID);
+            try {
+                  //1. Make connection
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+
+                        String sql = "Insert into Process "
+                                + " (ProcessID, ProcessName, OrderID, Phrase, CageID, Status, StartDate, EndDate, NumberOfEmployee) "
+                                + "VALUES ("
+                                + "?, ?, ?, ?, ?, ? ,?, ?, 1"
+                                + ")";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, processID);
+                        stm.setString(2, design.getDescription());
+                        stm.setString(3, OrderID);
+                        stm.setString(4, design.getPhrase());
+                        stm.setString(5, design.getCageID());
+                        stm.setString(6, status);
+                        stm.setDate(7, StartDate);
+                        stm.setDate(8, Endate);
+                        int rowEffect = stm.executeUpdate();
+                        if (rowEffect > 0) {
+                              return true;
+                        }
+                  }
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        DBHelper.closeConnection(con);
+                  }
+            }
+            return result;
       }
 }

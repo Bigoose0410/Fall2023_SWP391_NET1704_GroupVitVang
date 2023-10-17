@@ -50,7 +50,6 @@ public class MainController extends HttpServlet {
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
 
-
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -104,9 +103,8 @@ public class MainController extends HttpServlet {
                         url = EditMaterialController;
                   } else if (button.equals("DeleteMaterialofCage")) {
                         url = DeleteMaterialofCageController;
-                  }else if (button.equals("AddMaterialToCage")) {
+                  } else if (button.equals("AddMaterialToCage")) {
                         url = AddMaterialToCageController;
-                  }                
                   } else if (button.equals("Production process")) {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {

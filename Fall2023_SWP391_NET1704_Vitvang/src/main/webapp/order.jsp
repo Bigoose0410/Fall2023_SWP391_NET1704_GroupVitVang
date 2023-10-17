@@ -64,7 +64,7 @@
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="MainController?btAction=Production process">
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>

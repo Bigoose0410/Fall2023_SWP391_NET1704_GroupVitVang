@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 
         private static final String StaffPage = "MainController?btAction=Order";
         private static final String ManagerPage ="MainController?btAction=Order ";
-        private static final String ManagerPage ="MainController?btAction=Order";
         private static final String LoginPage = "newLogin.jsp";
 
         
