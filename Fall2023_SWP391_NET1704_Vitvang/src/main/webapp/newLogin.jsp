@@ -8,54 +8,7 @@
           <meta http-equiv="X-UA-Compatible" content="ie=edge" />
           <title>WEB BEKS</title>
           <link href="css\newLogin.css" rel="stylesheet" />
-     </head>
-     <!--     <body style="background-image: url('img/a.png')">
-     <c:set var="Username" value="${param.txtUsername}"/>
-     <c:set var="Password" value="${param.txtPassword}"/>
-     <div class="center">
-          <h1>Login</h1>
-          <form action="MainController">
-     <c:set var="error" value="${requestScope.LOGIN_ERRORS}"/>
-     <div class="inputbox">
-          <input type="text" required="required"   id="inputUsername" name="txtUsername" value="${param.txtUsername}">
-          <span for="inputUsername">Account</span>
-          error of username
-     <c:if test="${not empty error.getIsEmptyUsername()}">
-          <font style="color: red;">
-          print out error
-          ${error.getIsEmptyUsername()}
-          </font><br/>
-     </c:if>
-</div>
-<div class="inputbox">
-     <input type="password"  required="required" id="inputPassword" name="txtPassword" value="${param.txtPassword}">
-     <span for="inputPassword" >Password</span>
-     error of password
-     <c:if test="${not empty error.getIsEmptyPassword()}">
-          <font style="color: red;">
-          print out error
-          ${error.getIsEmptyPassword()}
-          </font><br/>                                                   
-     </c:if>
-     <c:if test="${not empty error.getIsWrongAccount()}">
-          <font style="color: red;">
-          print out error
-          ${error.getIsWrongAccount()}
-          </font><br/>
-          <br/>
-          <br/>
-     </c:if>
-</div>
-<div class="button" >
-       <button  value="submit" class="submit-button" ><span><i class="uil uil-estate"></i></span>Submit</button>
-  <input type="hidden" name="lastUsername" value="${Username}" />
-     <input type="hidden" name="lastpassword" value="${Password}" />
-     <input class="btn btn-primary" type="submit" value="Login" name="btAction" />
-
-</div>
-</form>
-</div>
-</body>-->
+     </head>  
      <body>
           <c:set var="Username" value="${param.txtUsername}"/>
           <c:set var="Password" value="${param.txtPassword}"/>
@@ -100,8 +53,5 @@
                               <button  value="Login" type="submit" class="submit-button" name="btAction" ><span><i class="uil uil-estate"></i></span>Login</button>
                          </div>
                     </form>
-
-               </div>
-          </div>
      </body>
 </html>

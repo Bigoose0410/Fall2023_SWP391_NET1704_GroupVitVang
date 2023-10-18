@@ -66,19 +66,19 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
     background: #3A3B3C;
 }
 
-    nav{
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 250px;
-        padding: 10px 14px;
-        background-color: var(--panel-color);
-        border-right: 1px solid var(--border-color);
-        transition: var(--tran-05);
-        background-color: var(--cream-color);
-        border-color: #e6e6cc;
-    }
+ nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    border-right: 1px solid var(--border-color);
+    transition: var(--tran-05);
+    background-color: var(--box1-color);
+    border-color: #e6e6cc;
+}
     nav.close{
         width: 73px;
     }
@@ -124,6 +124,7 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
         height: 50px;
         text-decoration: none;
         position: relative;
+        color:#222;
     }
     .nav-links li a:hover:before{
         content: "";
@@ -137,19 +138,20 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
     body.dark li a:hover:before{
         background-color: var(--text-color);
     }
-    .menu-items li a i{
-        font-size: 24px;
-        min-width: 45px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--black-light-color);
-    }
+   .menu-items li a i {
+    font-size: 24px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black-light-color);
+    color: black;
+}
     .menu-items li a .link-name{
         font-size: 18px;
         font-weight: 400;
-        color: var(--black-light-color);
+        color: black;
         transition: var(--tran-05);
     }
     nav.close li a .link-name{
@@ -577,4 +579,15 @@ margin-bottom: 10px;
 }
 .cage1{
      margin-left: 8900px;
+}
+.nav-links {
+  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-links li {
+  padding: 10px 0; 
+
 }

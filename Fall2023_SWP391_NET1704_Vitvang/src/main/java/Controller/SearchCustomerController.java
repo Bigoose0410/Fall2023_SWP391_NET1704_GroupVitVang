@@ -26,7 +26,7 @@ import users.UserDAO;
 public class SearchCustomerController extends HttpServlet {
 
       private final String SEARCH_CUSTOMER_PAGE = "searchCustomer.jsp";
-      
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -49,12 +49,12 @@ public class SearchCustomerController extends HttpServlet {
                   dao.searchUserByNameAndRole(searchName, role);
                   //3. process result
                   List<UserDTO> result = dao.getListUser();
-                  
+
                   request.setAttribute("SEARCH_CUS_RESULT", result);
                   url = SEARCH_CUSTOMER_PAGE;
                   HttpSession session = request.getSession();
                   session.removeAttribute("SHOW_CUS_CREATE_FORM");
-                  
+
             } catch (SQLException ex) {
                   log("SearchUserController _ SQL" + ex.getMessage());
             } catch (NamingException ex) {

@@ -40,6 +40,7 @@ public class MainController extends HttpServlet {
       private final String AddDesignProcess = "AddDesignProcess";
       private final String CreateUserController = "CreateUserController";
       private final String AddMaterialToCageController = "AddMaterialToCageController";
+      private final String AddAutoProcessController = "ProductionProcessController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
       private final String UpdateDesignProcessController = "UpdateDesignProcessController";
@@ -49,11 +50,12 @@ public class MainController extends HttpServlet {
       private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
+      private final String CustomerController = "CustomerController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-
+            
             String button = request.getParameter("btAction");
             String url = "errorPageLogin.html";
             try {
@@ -109,6 +111,11 @@ public class MainController extends HttpServlet {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {
                         url = UpdateSatusNewOrderController;
+                  } else if (button.equals("Customers")) {
+                        url = CustomerController;
+                  } else if (button.equals("ViewProcessDetail")) {
+                        url = ProcessController;
+                        
                   }
 
             } finally {

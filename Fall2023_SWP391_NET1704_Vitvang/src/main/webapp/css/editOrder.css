@@ -81,19 +81,19 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
     background: #3A3B3C;
 }
 
-    nav{
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 250px;
-        padding: 10px 14px;
-        background-color: var(--panel-color);
-        border-right: 1px solid var(--border-color);
-        transition: var(--tran-05);
-        background-color: var(--cream-color);
-        border-color: #e6e6cc;
-    }
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    border-right: 1px solid var(--border-color);
+    transition: var(--tran-05);
+    background-color: var(--box1-color);
+    border-color: #e6e6cc;
+}
     nav.close{
         width: 73px;
     }
@@ -159,12 +159,12 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--black-light-color);
+        color: black;
     }
     .menu-items li a .link-name{
         font-size: 18px;
         font-weight: 400;
-        color: var(--black-light-color);
+        color: black;
         transition: var(--tran-05);
     }
     nav.close li a .link-name{
@@ -610,4 +610,15 @@ legend {
     border-radius: 10px;
     margin: 10px;
     display: flex;  
+}
+.nav-links {
+  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-links li {
+  padding: 10px 0; 
+
 }
