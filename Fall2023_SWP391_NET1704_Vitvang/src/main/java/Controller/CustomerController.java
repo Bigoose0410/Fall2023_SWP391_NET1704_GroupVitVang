@@ -5,6 +5,8 @@
 package Controller;
 
 import Model.UserDTO;
+import Model.UserInformationDTO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,23 +31,35 @@ import users.UserDAO;
 @WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
 public class CustomerController extends HttpServlet {
 
+      private final String CustomerPage = "customer.jsp";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "newLogin.jsp";
+            String UserName = request.getParameter("txtUsername");
             try {
-                  String username = request.getParameter("txtUsername");
-                  int role = Integer.parseInt(request.getParameter("txtRoleID"));
+                  // 1. new dao
                   UserDAO dao = new UserDAO();
-                  dao.searchUserByNameAndRole(username, 4);
-                  List<UserDTO> user = dao.getListUser();
-                  request.setAttribute("USER_RESULT", user);
-                  url = "customer.jsp";
-            } catch (SQLException e) {
-                  log("LOGINSERVLET _ SQL" + e.getMessage());
+                  // 2. call method
+                  dao.showCustomerInformation();
+                  //3. process result
+                  List<UserInformationDTO> result = dao.getUserInformation();
+
+                  request.setAttribute("SEARCH_CUS_RESULT", result);
+                  url = CustomerPage;
+                  HttpSession session = request.getSession();
+                  session.removeAttribute("SHOW_CUS_CREATE_FORM");
+
+            } catch (SQLException ex) {
+                  log("SearchUserController _ SQL" + ex.getMessage());
+            } catch (NamingException ex) {
+                  log("SearchUserController _ NAMING" + ex.getMessage());
             } finally {
-                  request.getRequestDispatcher(url).forward(request, response);
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
             }
+
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -49,7 +49,7 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="MainController?btAction=Customers">
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Customers</span>
                               </a></li>
@@ -187,6 +187,13 @@
                                    </c:forEach>
                               </table>
                          </c:if>
+                         <c:if test="${empty result}">
+                              <font color="green">
+                              <h2>
+                                   Your Order is not in processing!!!
+                              </h2>
+                              </font>
+                         </c:if>
                     </form>
                </div>
           </section>
@@ -286,6 +293,13 @@
                                         </c:if>
                                    </c:forEach>
                               </table>
+                         </c:if>
+                         <c:if test="${empty result}">
+                              <font color="green">
+                              <h2>
+                                   Your Order is not in processing!!!
+                              </h2>
+                              </font>
                          </c:if>
                     </form>
                </div>

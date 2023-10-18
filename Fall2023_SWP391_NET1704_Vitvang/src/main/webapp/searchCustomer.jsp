@@ -93,164 +93,164 @@
                               <input type="hidden" value="4" name="txtRoleSearch">
                               <button class="search-button" value="Search Customer" name="btAction">Find Customer</button>
                          </form>
-                         
+
                          <form action="MainController" method="POST">
                               <input type="submit" class="show" name="btAction" value="Create New Customer" />
                          </form>
                     </div>
 
-                         <c:if test="${not empty searchValue}">
+                    <c:if test="${not empty searchValue}">
 
-                              <c:if test="${not empty CustomerList}">
-                                   <div class="table-container">
-                                        <table border="1">
-                                             <thead>
+                         <c:if test="${not empty CustomerList}">
+                              <div class="table-container">
+                                   <table border="1">
+                                        <thead>
+                                             <tr>
+                                                  <th>No.</th>
+                                                  <th>CustomerID</th>
+                                                  <th>Name</th>
+                                                  <th>Sex</th>
+                                                  <th>Address</th>
+                                                  <th>Date of Birth</th>
+                                                  <th>Email</th>
+                                                  <th>Get Order</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <c:forEach items="${CustomerList}" var="dto" varStatus="counter">
                                                   <tr>
-                                                       <th>No.</th>
-                                                       <th>CustomerID</th>
-                                                       <th>Name</th>
-                                                       <th>Sex</th>
-                                                       <th>Address</th>
-                                                       <th>Date of Birth</th>
-                                                       <th>Email</th>
-                                                       <th>Get Order</th>
+                                                       <td>
+                                                            ${counter.count}
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getUserID()}
+                                                            <input type="hidden" name="txtCustomerName" value="${dto.getUserID()}" />
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getName()}
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getSex()}
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getAdress()}
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getBirthDate()}
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getEmail()}
+                                                       </td>
+                                                       <td>
+                                                            <c:url value="orderAdd.jsp" var="AdddLink">
+                                                                 <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
+                                                            </c:url>
+                                                            <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
+                                                       </td>
                                                   </tr>
-                                             </thead>
-                                             <tbody>
-                                                  <c:forEach items="${CustomerList}" var="dto" varStatus="counter">
-                                                       <tr>
-                                                            <td>
-                                                                 ${counter.count}
-                                                            </td>
-                                                            <td>
-                                                                 ${dto.getUserID()}
-                                                                 <input type="hidden" name="txtCustomerName" value="${dto.getUserID()}" />
-                                                            </td>
-                                                            <td>
-                                                                 ${dto.getName()}
-                                                            </td>
-                                                            <td>
-                                                                 ${dto.getSex()}
-                                                            </td>
-                                                            <td>
-                                                                 ${dto.getAdress()}
-                                                            </td>
-                                                            <td>
-                                                                 ${dto.getBirthDate()}
-                                                            </td>
-                                                            <td>
-                                                                 ${dto.getEmail()}
-                                                            </td>
-                                                            <td>
-                                                                 <c:url value="orderAdd.jsp" var="AdddLink">
-                                                                      <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
-                                                                 </c:url>
-                                                                 <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
-                                                            </td>
-                                                       </tr>
-                                                  </c:forEach>
-                                             </tbody>
-                                        </table>
-                                   </div>
-                              </c:if>
-                              <c:if test="${empty CustomerList}">
-                                   <h2>
-                                        No Match Record!!!
-                                   </h2>
-                              </c:if>
+                                             </c:forEach>
+                                        </tbody>
+                                   </table>
+                              </div>
                          </c:if>
-                         <c:set var="ShowForm" value="${sessionScope.SHOW_CUS_CREATE_FORM}" />
-                         <c:if test="${not empty ShowForm}">
-                              <c:set var="errors" value="${requestScope.CREATE_CUS_ERROR}" />
-
-                              <form action="MainController" method="POST">
-                                   CustomerID 
-                                   <c:if test="${not empty errors.getCustomerIDFormatErr()}">
-                                        <font color = "red">
-                                        ${errors.getCustomerIDFormatErr()}
-                                        </font><br>
-                                   </c:if>
-                                   <c:if test="${not empty errors.getCustomerIDexistErr()}">
-                                        <font color = "red">
-                                        ${errors.getCustomerIDexistErr()}
-                                        </font>
-                                   </c:if>    
-                                   <input type="text" class="form-control" value="${param.txtUserID}" 
-                                          placeholder="Customer ID" name="txtUserID" >
-                                   
-                                   <br>
-                                   Customer Name
-                                   <c:if test="${not empty errors.getNameLengthErr()}">
-                                        <font color = "red">
-                                        ${errors.getNameLengthErr()}
-                                        </font><br>
-                                   </c:if>   
-                                   <input type="text" class="form-control" value="${param.txtName}"
-                                          placeholder="Customer Name" name="txtName"> <br>
-                                   <!--check customer name-->
-                                   Phone Number     
-                                   <input type="tel" class="form-control" required="required"  value="${param.txtPhoneNumber}"
-                                          placeholder="Phone Number" name="txtPhoneNumber"> <br>
-                                   <fieldset>
-                                        <select name="txtGender" class="form-control" >
-                                             <option value="M" selected>Male</option>
-                                             <option value="F">Female</option>
-                                        </select>
-                                   </fieldset> <br>
-                                   <!--check gender -->
-                                   Address
-                                   <c:if test="${not empty errors.getAddressLenghtErr()}">
-                                        <font color = "red">
-                                        ${errors.getAddressLenghtErr()}
-                                        </font><br>
-                                   </c:if>  
-                                   <input type="text" class="form-control" placeholder="Adress" value="${param.txtAdress}"
-                                          name="txtAdress"> <br>
-
-                                   Birth Date
-                                   <input type="date" required="required" class="form-control" value="${param.txtBirthDate}"
-                                          placeholder="BirthDate" name="txtBirthDate">
-                                   <br>
-
-                                   Email
-                                   <input type="email" required="required" class="form-control" value="${param.txtEmail}"
-                                          placeholder="Email" name="txtEmail">
-                                   <br>
-
-                                   Account Username
-                                   <c:if test="${not empty errors.getUsernameLengthErr()}">
-                                        <font color = "red">
-                                        ${errors.getUsernameLengthErr()}
-                                        </font><br>
-                                   </c:if>  
-                                   <input type="text" class="form-control" value="${param.txtUsername}"
-                                          placeholder="Account Username" name="txtUsername">
-                                   <br>
-
-                                   Account Password
-                                   <c:if test="${not empty errors.getPasswordLengthErr()}">
-                                        <font color = "red">
-                                        ${errors.getPasswordLengthErr()}
-                                        </font><br>
-                                   </c:if> 
-                                   <input type="text" class="form-control" value="${param.txtPassword}"
-                                          placeholder="Account Password" name="txtPassword">
-                                   <!--check password -->
-                                   <br>
-
-                                   Confirm Password
-                                   <c:if test="${not empty errors.getConfirmNotMatch()}">
-                                        <font color = "red">
-                                        ${errors.getConfirmNotMatch()}
-                                        </font><br>
-                                   </c:if> 
-                                   <input type="text" class="form-control" placeholder="Confirm Password" name="txtConfirm">
-                                   <br>
-                                   <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
-                                        Create New customer
-                                   </button>
-                              </form>
+                         <c:if test="${empty CustomerList}">
+                              <h2>
+                                   No Match Record!!!
+                              </h2>
                          </c:if>
+                    </c:if>
+                    <c:set var="ShowForm" value="${sessionScope.SHOW_CUS_CREATE_FORM}" />
+                    <c:if test="${not empty ShowForm}">
+                         <c:set var="errors" value="${requestScope.CREATE_CUS_ERROR}" />
+
+                         <form action="MainController" method="POST">
+                              CustomerID 
+                              <c:if test="${not empty errors.getCustomerIDFormatErr()}">
+                                   <font color = "red">
+                                   ${errors.getCustomerIDFormatErr()}
+                                   </font><br>
+                              </c:if>
+                              <c:if test="${not empty errors.getCustomerIDexistErr()}">
+                                   <font color = "red">
+                                   ${errors.getCustomerIDexistErr()}
+                                   </font>
+                              </c:if>    
+                              <input type="text" class="form-control" value="${param.txtUserID}" 
+                                     placeholder="Customer ID" name="txtUserID" >
+
+                              <br>
+                              Customer Name
+                              <c:if test="${not empty errors.getNameLengthErr()}">
+                                   <font color = "red">
+                                   ${errors.getNameLengthErr()}
+                                   </font><br>
+                              </c:if>   
+                              <input type="text" class="form-control" value="${param.txtName}"
+                                     placeholder="Customer Name" name="txtName"> <br>
+                              <!--check customer name-->
+                              Phone Number     
+                              <input type="tel" class="form-control" required="required"  value="${param.txtPhoneNumber}"
+                                     placeholder="Phone Number" name="txtPhoneNumber"> <br>
+                              <fieldset>
+                                   <select name="txtGender" class="form-control" >
+                                        <option value="M" selected>Male</option>
+                                        <option value="F">Female</option>
+                                   </select>
+                              </fieldset> <br>
+                              <!--check gender -->
+                              Address
+                              <c:if test="${not empty errors.getAddressLenghtErr()}">
+                                   <font color = "red">
+                                   ${errors.getAddressLenghtErr()}
+                                   </font><br>
+                              </c:if>  
+                              <input type="text" class="form-control" placeholder="Adress" value="${param.txtAdress}"
+                                     name="txtAdress"> <br>
+
+                              Birth Date
+                              <input type="date" required="required" class="form-control" value="${param.txtBirthDate}"
+                                     placeholder="BirthDate" name="txtBirthDate">
+                              <br>
+
+                              Email
+                              <input type="email" required="required" class="form-control" value="${param.txtEmail}"
+                                     placeholder="Email" name="txtEmail">
+                              <br>
+
+                              Account Username
+                              <c:if test="${not empty errors.getUsernameLengthErr()}">
+                                   <font color = "red">
+                                   ${errors.getUsernameLengthErr()}
+                                   </font><br>
+                              </c:if>  
+                              <input type="text" class="form-control" value="${param.txtUsername}"
+                                     placeholder="Account Username" name="txtUsername">
+                              <br>
+
+                              Account Password
+                              <c:if test="${not empty errors.getPasswordLengthErr()}">
+                                   <font color = "red">
+                                   ${errors.getPasswordLengthErr()}
+                                   </font><br>
+                              </c:if> 
+                              <input type="text" class="form-control" value="${param.txtPassword}"
+                                     placeholder="Account Password" name="txtPassword">
+                              <!--check password -->
+                              <br>
+
+                              Confirm Password
+                              <c:if test="${not empty errors.getConfirmNotMatch()}">
+                                   <font color = "red">
+                                   ${errors.getConfirmNotMatch()}
+                                   </font><br>
+                              </c:if> 
+                              <input type="text" class="form-control" placeholder="Confirm Password" name="txtConfirm">
+                              <br>
+                              <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
+                                   Create New customer
+                              </button>
+                         </form>
+                    </c:if>
                </div>
           </section>
      </div>
