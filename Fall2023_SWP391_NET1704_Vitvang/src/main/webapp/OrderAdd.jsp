@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : orderAdd
     Created on : Sep 29, 2023, 10:11:22 AM
@@ -16,7 +15,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/AddOrder.css">
+          <link rel="stylesheet" href="css\addOrder_1.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -26,7 +25,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-          <title>Add new Order</title>
+          <title>Admin Dashboard Panel</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
