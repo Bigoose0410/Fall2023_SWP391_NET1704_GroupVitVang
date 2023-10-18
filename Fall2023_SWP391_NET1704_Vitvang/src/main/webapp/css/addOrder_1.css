@@ -487,107 +487,276 @@ color: var(--dark-text);
 body.dark nav {
 background-color: #222;
 }
-.add-order-form {
-width: 600px;
-margin: 20px auto;
-padding: 20px;
-border: 1px solid #ddd;
-border-radius: 5px;
+
+
+/*DASHBOARD*/
+.dashboard h1 {
+    text-align: center;
+    justify-content: center;
+    margin: 10px 0px;
+    color: black;
 }
 
-.form-group {
-margin-bottom: 15px;
+.form {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 25px;
 }
 
 label {
-display: block;
-margin-bottom: 5px;
+    display: block;
+    margin: 10px 0px;
+    font-weight: bold;
 }
 
-input, select, button {
-width: 100%;
-padding: 8px;
-border: 1px solid #ddd;
-border-radius: 3px;
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
-button[type="submit"] {
-background: blue;
-color: #fff;
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.product {
-display: flex;
-align-items: center;
+.custom-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
 }
 
-.product select, .product input {
-margin-right: 10px;
+.custom-btn:hover {
+    background-color: #0056b3;
 }
 
-.product button {
-padding: 6px 10px;
-}
-.top {
-position: fixed;
-top: 0;
-width: 100%;
-}
-
-.add-order-form {
-margin-top: 60px; 
-padding: 20px;}
-
-.cages div {
-display: flex;
-margin-bottom: 10px;
+/* Style for the anchor tag */
+a.fa-search {
+    color: #4fa4ff;
+    /* Set the color of the link */
+    text-decoration: none;
+    /* Remove underline */
+    font-size: 20px;
+    /* Adjust the font size */
+    margin: 10px 10px 10px 0px;
+    /* Add some space on the right side of the icon */
 }
 
-.cages input,
-.cages label {
-margin-right: 10px;
-}
-cages div {
-display: flex;
-align-items: center;
-margin-bottom: 10px;
+/* Style for the icon itself */
+a.fa-search:before {
+    font-family: "FontAwesome";
+    /* Set the FontAwesome font family */
+    content: "\f002";
+    /* Specify the Unicode for the search icon */
 }
 
-.cages input[type="checkbox"] {
-width: 20px;
-height: 20px;
+/* On hover effect for the link */
+a.fa-search:hover {
+    color: #007bff;
+    /* Change color on hover */
+    text-decoration: underline;
 }
 
-.cages label {
-margin-left: 10px;
-}
-.cages input[type="number"] {
-width: 100px;
-height: 30px;
-padding: 10px;
-margin-left: 40px;
-}
-.cages {
-display: flex;
-flex-direction: column;
+/* Style for the cage table */
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-.item {
-display: flex;
-flex-direction: column;
-margin-bottom: 10px;
+/* Style for the table rows */
+table tr {
+    border-bottom: 1px solid #ccc;
+    /* Add a bottom border to each row */
 }
-.cage1{
-     margin-left: 8900px;
-}
-.nav-links {
-  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* Style for the table cells */
+table td {
+    padding: 8px;
+    text-align: center;
 }
-.nav-links li {
-  padding: 10px 0; 
 
+/* Style for input fields */
+.input-field {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+/* Style for inputs */
+.input-field input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for labels */
+.input-field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: #777;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+/* Style for labels when input is focused or has value */
+.input-field input:focus+label,
+.input-field input:not(:placeholder-shown)+label {
+    top: -12px;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Input field */
+.input-field {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    background-color: transparent;
+}
+
+/* Input label */
+.input-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    color: rgba(204, 204, 204, 0);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Input highlight */
+.input-highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+/* Input field:focus styles */
+.input-field:focus+.input-label {
+    top: -20px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+.input-field:focus+.input-label+.input-highlight {
+    width: 100%;
+}
+
+.input-field {
+    width: 50px;
+    /* Set the desired width */
+    padding: 5px;
+}
+
+/* Add this rule to override the width for larger screens if needed */
+@media (min-width: 768px) {
+    .input-field {
+        width: 100%;
+        /* Adjust the width for larger screens */
+    }
+}
+
+/*button create*/
+.custom-btn{
+    margin-left: 400px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    width: 50%;
+    padding: 10px;
+}
+
+.input-container {
+    display: inline-block;
+    margin-bottom: 15px;
+    /* Adjust as needed */
+    margin-top: 15px;
+}
+
+.input-container label,
+.input-container input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.input-container input {
+    margin-left: 10px;
+    /* Add some space between label and input */
+    padding: 10px;
+    width: 350px;
+}
+
+.input-container2 {
+    display: inline-block;
+    margin-bottom: 15px;
+    /* Adjust as needed */
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+.input-container2 label,
+.input-container2 input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.input-container2 input {
+    margin-left: 10px;
+    /* Add some space between label and input */
+    padding: 10px;
+    width: 350px;
+}
+
+/* Style for the plus button */
+.plus_button button {
+    background-color: #4caf50; /* Set the background color */
+    color: white; /* Set the text color */
+    border: none; /* Remove border */
+    padding: 5px 20px; /* Add some padding */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 5px;
+}
+
+/* On hover effect for the plus button */
+.plus_button button:hover {
+    background-color: #45a049; /* Darken the background color on hover */
 }
