@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.UserDTO;
-import my.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -25,14 +25,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "DeleteOrderController", urlPatterns = {"/DeleteOrderController"})
 public class DeleteOrderController extends HttpServlet {
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+ 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");

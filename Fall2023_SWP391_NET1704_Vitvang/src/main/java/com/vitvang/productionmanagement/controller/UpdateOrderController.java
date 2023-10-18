@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.UserDTO;
-import my.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderUpdateError;
 import static com.vitvang.productionmanagement.util.tool.*;
 import jakarta.servlet.*;

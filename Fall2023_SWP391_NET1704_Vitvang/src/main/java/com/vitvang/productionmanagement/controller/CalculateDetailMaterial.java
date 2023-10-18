@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.CageDTO;
-import my.vitvang.productionmanagement.model.CageMaterialDTO;
+import com.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -41,7 +41,7 @@ public class CalculateDetailMaterial extends HttpServlet {
             String[] CageIDList = request.getParameterValues("txtCageID");
             String[] QuantityList = request.getParameterValues("txtQuantity");
             int i = 0;
-            String url = "errorPageLogin.html";
+            String url = "ErrorPageLogin.html";
             try {
                   // new DAO
                   CageDAO dao = new CageDAO();

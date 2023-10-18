@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
@@ -28,7 +28,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
 public class UpdateSatusNewOrderController extends HttpServlet {
 
-      private final String PROCESS_OF_CAGE_PAGE = "process.jsp";
+      private final String PROCESS_OF_CAGE_PAGE = "Process.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {

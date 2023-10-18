@@ -20,7 +20,7 @@ import java.io.IOException;
 @WebServlet(name = "ShowCusCreateFormController", urlPatterns = {"/ShowCusCreateFormController"})
 public class ShowCusCreateFormController extends HttpServlet {
 
-      private final String SEARCH_CUSTOMER_PAGE = "searchCustomer.jsp";
+      private final String SEARCH_CUSTOMER_PAGE = "SearchCustomer.jsp";
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.CageMaterialDTO;
+import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -38,7 +38,7 @@ public class EditMaterialController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
            String cageID = request.getParameter("txtCageID");
            String Materialselect = request.getParameter("slMateriaID");
-            String url = "homePage.html";
+            String url = "HomePage.html";
            try {
                   //1. new DAO
                   CageDAO cagedao = new CageDAO();

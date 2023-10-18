@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.dao.material;
 
-import my.vitvang.productionmanagement.model.CageMaterialDTO;
+import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

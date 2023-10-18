@@ -275,6 +275,12 @@ nav.close ~ .dashboard .top{
     width: 40px;
     border-radius: 50%;
 }
+.li{
+     padding: 0;
+}
+.logo_name{
+     display: block;
+}
 .dashboard .dash-content{
     padding-top: 50px;
 }
@@ -473,4 +479,38 @@ nav.close ~ .dashboard .top{
   border-radius: 5px;
   font-size: 15px;
   cursor: pointer;
+}
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+color: var(--hover-color);
+}
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+color: var(--dark-text);
+}
+body.dark nav {
+background-color: #222;
+}
+.menu-items {
+  display: flex;
+  flex-direction: column;
+}
+.nav-links {
+  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-links li {
+  padding: 10px 0; 
+
+}
+button:active {
+  background-color: #fff;
+  color: #000;
+}button:focus {
+  background-color: #fff;
+  color: #000; 
+
 }

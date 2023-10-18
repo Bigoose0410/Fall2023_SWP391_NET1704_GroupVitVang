@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.OrderDTO;
-import my.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.model.OrderDTO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +22,7 @@ import java.util.List;
 @WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
 public class SearchOrderController extends HttpServlet {
 
-        private final String OrderSearch = "order.jsp";
+        private final String OrderSearch = "Order.jsp";
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {

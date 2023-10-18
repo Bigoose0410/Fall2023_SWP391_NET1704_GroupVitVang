@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,9 +25,9 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 @WebServlet(name = "StartUpController", urlPatterns = {"/StartUpController"})
 public class StartUpController extends HttpServlet {
 
-        private static final String AdminPage = "order.jsp";
-        private static final String StaffPage = "order.jsp";
-        private static final String ManagerPage = "order.jsp";
+        private static final String AdminPage = "Order.jsp";
+        private static final String StaffPage = "Order.jsp";
+        private static final String ManagerPage = "Order.jsp";
 
         /**
          * Processes requests for both HTTP <code>GET</code>
@@ -42,7 +42,7 @@ public class StartUpController extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                String url = "newLogin.jsp";
+                String url = "NewLogin.jsp";
                 try {
                         //1. get all cookie 
                         Cookie[] cookies = request.getCookies();

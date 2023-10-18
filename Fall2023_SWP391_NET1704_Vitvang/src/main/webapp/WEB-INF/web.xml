@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>Controller.LoginController</servlet-class>
+        <servlet-class>com.vitvang.productionmanagement.controller.controller.LoginController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddOrderController</servlet-name>

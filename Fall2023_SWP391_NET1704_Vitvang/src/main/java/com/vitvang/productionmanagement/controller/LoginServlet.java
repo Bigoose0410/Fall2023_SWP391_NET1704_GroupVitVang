@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         private static final String AdminPage = "MainController?btAction=Order";
         private static final String StaffPage = "MainController?btAction=Order";
         private static final String ManagerPage ="MainController?btAction=Order ";
-        private static final String LoginPage = "newLogin.jsp";
+        private static final String LoginPage = "NewLogin.jsp";
 
         
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)

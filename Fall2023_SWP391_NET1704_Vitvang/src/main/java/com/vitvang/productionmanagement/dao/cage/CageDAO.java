@@ -4,9 +4,9 @@
  */
 package com.vitvang.productionmanagement.dao.cage;
 
-import my.vitvang.productionmanagement.model.CageDTO;
-import my.vitvang.productionmanagement.model.CageMaterialDTO;
-import my.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.CageMaterialDTO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import java.sql.Connection;

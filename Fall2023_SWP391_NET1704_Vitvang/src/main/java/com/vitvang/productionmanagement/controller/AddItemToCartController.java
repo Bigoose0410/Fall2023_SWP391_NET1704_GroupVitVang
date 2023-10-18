@@ -22,7 +22,7 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "AddItemToCartController", urlPatterns = {"/AddItemToCartController"})
 public class AddItemToCartController extends HttpServlet {
-      private final String ORDER_ADD_PAGE = "orderAdd.jsp";
+      private final String ORDER_ADD_PAGE = "OrderAdd.jsp";
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
