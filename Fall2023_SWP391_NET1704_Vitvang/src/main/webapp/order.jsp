@@ -4,7 +4,7 @@
     Author     : Admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 <html>
      <head>
@@ -193,15 +193,11 @@
                                                                                           </div>-->
 
                                                   <th    class="data-title" style="text-align: start ;color:blue;font-size:23px">StartDate </th>
-
-
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">EndDate</th>
-
-
                                                   <th   class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
-
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">City</th>
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status </th>
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px"></th>
 
 
                                              </tr>
@@ -209,44 +205,58 @@
                                         <tbody>
 
                                              <c:forEach var="dto" items="${result}" varStatus="counter">
-                                                  <tr>
+
                                              <form class="form-order" action="MainController" method="POST">
                                                   <div class="activity-data">
+                                                       <tr>
+                                                            <td class="data-list" style="text-align: start;font-size:18px">${counter.count}</td>
 
-                                                       <td class="data-list" style="text-align: start;font-size:18px">${counter.count}</td>
-
-
-
-                                                       <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
-                                                            <input type="hidden" name="txtOrderID" 
-                                                                   value="${dto.getOrderID()}"/></td>
+                                                            <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
+                                                                 <input type="hidden" name="txtOrderID" 
+                                                                        value="${dto.getOrderID()}"/></td>
 
 
-
-                                                       <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
+                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
 
 
 
-                                                       <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
+                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
 
 
 
-                                                       <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
+                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
 
 
 
-                                                       <td class="data-list" style="text-align: start ;font-size:18px">${dto.getAddress()}</td>
+                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getAddress()}</td>
 
 
 
-                                                       <td class="data-list" style="text-align: start">${dto.getStatusProgress()}</td>
+                                                            <td class="data-list" style="text-align: start">${dto.getStatusProgress()}</td>
+
+                                                            <div class="data status">
+                                                                      <c:url value="EditOrder.jsp" var="editLink">
+                                                                           <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
+                                                                           <c:param name="txtStartDate" value="${dto.getStartDate()}" />
+                                                                           <c:param name="txtEndDate" value="${dto.getEndDate()}" />
+                                                                           <c:param name="txtAddress" value="${dto.getAddress()}" />
+                                                                           <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
+                                                                           <c:param name="lastSearchValue" value="${searchValue}"/>
+                                                                      </c:url>
+                                                                 </div>
+                                                                 <!--<input type="submit" value="Detail" name="btAction" />-->
+                                                                 <td class="data-list" style="text-align: start">
+                                                                       <input type="submit" value="Detail" name="btAction" />
+                                                                       <span class="data-list"><a href="${editLink}">Edit</a></span>
+                                                                 </td>
 
                                                   </div>
-                                             </form>
-                                             </tr>
-                                        </c:forEach>
+                                                  </tr>
+                                                  </from>                                     
 
-                                        </tbody>
+                                             </c:forEach>
+
+                                             </tbody>
                                    </table>
 
                               </c:if>
@@ -281,114 +291,93 @@
                                              <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status</th>
 
 
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Edit</th>
-                                             </tr>
-                                             </thead>
-                                             <tbody>
+                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px"></th>
 
-                                                  <c:forEach var="dto" items="${result}" varStatus="counter">
-                                                       <%--<c:if test="${dto.getStatusProgress().equals('new order')}">--%>
-                                                       <tr>
-                                                  <form class="form-order" action="MainController" method="POST">
-                                                       <div class="activity-data">
-
-                                                            <td class="data-list" style="text-align: start;font-size:18px">${counter.count}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
-                                                                 <input type="hidden" name="txtOrderID" 
-                                                                        value="${dto.getOrderID()}"/></td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getAddress()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start">${dto.getStatusProgress()}</td>
-
-                                                       </div>
-                                                  </form>
+                                             </<div>
                                                   </tr>
-                                             </c:forEach>
-                                             </tbody>
-                                   </table>
-                              </c:if>
-                         </c:if>
-                         <%--</c:if>--%>
+                                                  </thead>
+                                                  <tbody>
 
-                         
-                      <!--  <div class="data names">
-                              <span class="data-list">${dto.getOrderID()}
-                                   <input type="hidden" name="txtOrderID" 
-                                          value="${dto.getOrderID()}"/></span>
-                         </div>
-
-                         <div class="data joined">
-                              <span class="data-list">${dto.getStartDate()}</span>
-                         </div>
-
-                         <div class="data joined">
-                              <span class="data-list">${dto.getEndDate()}</span>
-                         </div>
-
-                         <div class="data type">
-                              <span class="data-list">${dto.getTotalPrice()}</span>
-                         </div>
-
-                         <div class="data email">
-                              <span class="data-list">${dto.getAddress()}</span>
-                         </div>
-
-                         <div class="data status">
-                              <span class="data-list">${dto.getStatusProgress()}</span>
-                         </div>
-                         <div class="data status">
-                              <c:url value="EditOrder.jsp" var="editLink">
-                                   <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
-                                   <c:param name="txtStartDate" value="${dto.getStartDate()}" />
-                                   <c:param name="txtEndDate" value="${dto.getEndDate()}" />
-                                   <c:param name="txtAddress" value="${dto.getAddress()}" />
-                                   <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
-                                   <c:param name="lastSearchValue" value="${searchValue}"/>
-                              </c:url>
-                              <span class="data-list"><a href="${editLink}">Edit</a></span>
-                         </div>
-                         <input type="submit" value="Detail" name="btAction" />
-                    </div>
-                    </form>
-                    </table>
-               <%--</c:forEach>--%>
--->          </c:if>
+                                                       <c:forEach var="dto" items="${result}" varStatus="counter">
+                                                            <%--<c:if test="${dto.getStatusProgress().equals('new order')}">--%>
+                                                       <div class="activity-data">
+                                                            <form class="form-order" action="MainController" method="get">
+                                                                 <tr>
 
 
-          <c:if test="${ empty result}">
-               <font color="green">
-               <h2>
-                    No match record!!!
-               </h2>
-               </font>
-          </c:if>
-     </c:if>
+                                                                      <td class="data-list" style="text-align: start;font-size:18px">${counter.count}</td>
 
 
-</section>
 
-<script src="js/admin.js"></script>
-<script src="js\darkMode.js"></script>      
+                                                                      <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
+                                                                           <input type="hidden" name="txtOrderID" 
+                                                                                  value="${dto.getOrderID()}"/></td>
 
-</body>
-</html>   
+
+
+                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
+
+
+
+                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
+
+
+
+                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
+
+
+
+                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getAddress()}</td>
+
+
+
+                                                                      <td class="data-list" style="text-align: start">${dto.getStatusProgress()}</td>
+
+
+                                                                 <div class="data status">
+                                                                      <c:url value="EditOrder.jsp" var="editLink">
+                                                                           <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
+                                                                           <c:param name="txtStartDate" value="${dto.getStartDate()}" />
+                                                                           <c:param name="txtEndDate" value="${dto.getEndDate()}" />
+                                                                           <c:param name="txtAddress" value="${dto.getAddress()}" />
+                                                                           <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
+                                                                           <c:param name="lastSearchValue" value="${searchValue}"/>
+                                                                      </c:url>
+                                                                 </div>
+                                                                 <!--<input type="submit" value="Detail" name="btAction" />-->
+                                                                 <td class="data-list" style="text-align: start">
+                                                                       <input type="submit" value="Detail" name="btAction" />
+                                                                       <span class="data-list"><a href="${editLink}">Edit</a></span>
+                                                                 </td>
+
+
+                                                                 </tr>
+                                                            </form>
+                                                       </div>
+
+                                                  </c:forEach>
+                                                  </tbody>
+                                                  </table>
+                                             </c:if>
+                                        </c:if>
+                                        <%--</c:if>--%>
+
+
+                                      
+
+                                        <c:if test="${ empty result}">
+                                             <font color="red">
+                                             <h2>
+                                                  No match record!!!
+                                             </h2>
+                                             </font>
+                                        </c:if>
+
+
+                                        </section>
+
+                                        <script src="js/admin.js"></script>
+                                        <script src="js\darkMode.js"></script>      
+
+                                        </body>
+                                        </html>   

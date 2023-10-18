@@ -17,6 +17,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import users.UserCreateError;
 import users.UserDAO;
@@ -32,16 +34,8 @@ public class CreateUserController extends HttpServlet {
       private final String SEARCH_CUS_PAGE = "searchCustomer.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+              throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
 
             // get parameter from form
@@ -89,6 +83,7 @@ public class CreateUserController extends HttpServlet {
                         // 1. new DAO
                         UserDAO dao = new UserDAO();
                         // 2. call method
+                        Password = dao.EncodePass(Password);
                         UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, 4);
                         boolean result = dao.createAccount(user);
                         if (result) {
@@ -129,7 +124,11 @@ public class CreateUserController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (Exception ex) {
+                  Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -143,7 +142,11 @@ public class CreateUserController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (Exception ex) {
+                  Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
