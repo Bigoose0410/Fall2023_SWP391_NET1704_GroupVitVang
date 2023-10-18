@@ -36,6 +36,7 @@ public class MainController extends HttpServlet {
       private final String DetailOrderController = "DetailOrderController";
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
+      private final String CustomerController = "CustomerController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -77,7 +78,7 @@ public class MainController extends HttpServlet {
                   } else if (button.equals("AddToProcess")) {
                         url = UpdateSatusNewOrderController;
                   } else if (button.equals("Customers")) {
-                        url = SearchCustomerController;
+                        url = CustomerController;
                   } else if (button.equals("ViewProcessDetail")) {
                         url = ProcessController;
                   }
