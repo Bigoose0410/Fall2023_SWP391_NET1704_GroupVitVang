@@ -1,6 +1,6 @@
 package com.vitvang.productionmanagement.dao.cart;
 
-import my.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import java.sql.SQLException;
 import java.util.HashMap;

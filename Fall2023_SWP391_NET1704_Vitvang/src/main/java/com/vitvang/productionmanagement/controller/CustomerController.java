@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.UserDTO;
-import my.vitvang.productionmanagement.model.UserInformationDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.UserInformationDTO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +31,7 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 @WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
 public class CustomerController extends HttpServlet {
 
-      private final String CustomerPage = "customer.jsp";
+      private final String CustomerPage = "Customer.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, NamingException {

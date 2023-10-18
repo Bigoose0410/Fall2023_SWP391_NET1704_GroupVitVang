@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.dao.designforprocess;
 
-import my.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

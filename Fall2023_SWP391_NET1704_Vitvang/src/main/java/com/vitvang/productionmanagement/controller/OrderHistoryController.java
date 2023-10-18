@@ -4,10 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.OrderDTO;
-import my.vitvang.productionmanagement.dao.order.OrderDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.vitvang.productionmanagement.model.OrderDTO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,13 +22,13 @@ import java.util.List;
 @WebServlet(name = "OrderHistoryController", urlPatterns = {"/OrderHistoryController"})
 public class OrderHistoryController extends HttpServlet {
 
-        private final String OrderHistory = "order.jsp";
+        private final String OrderHistory = "Order.jsp";
         
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
                 String searchValue = request.getParameter("txtSearchValue");
-                String url = "errorPageLogin.html";
+                String url = "ErrorPageLogin.html";
                 try {
                         // kiem tra search value truyen ve co phai rong khong
                         if (searchValue == null) {

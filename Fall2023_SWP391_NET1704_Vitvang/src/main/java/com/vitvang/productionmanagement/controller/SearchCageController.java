@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -36,7 +36,7 @@ public class SearchCageController extends HttpServlet {
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             
-            String url = "errorPageLogin.html";
+            String url = "ErrorPageLogin.html";
             String searchCageValue = request.getParameter("txtSearchValue");
             try {
                   // 1.new dao

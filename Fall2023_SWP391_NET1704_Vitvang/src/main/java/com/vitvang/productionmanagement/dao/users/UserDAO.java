@@ -4,9 +4,9 @@
  */
 package com.vitvang.productionmanagement.dao.users;
 
-import my.vitvang.productionmanagement.model.UserDTO;
-import my.vitvang.productionmanagement.model.UserInformationDTO;
-import my.vitvang.productionmanagement.model.UserOrderDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.UserInformationDTO;
+import com.vitvang.productionmanagement.model.UserOrderDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;

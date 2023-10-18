@@ -5,7 +5,7 @@
 package com.vitvang.productionmanagement.controller;
 
 
-import my.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -30,8 +30,8 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 @WebServlet(name = "CreateUserController", urlPatterns = {"/CreateUserController"})
 public class CreateUserController extends HttpServlet {
 
-      private final String ADD_ORDER_PAGE = "orderAdd.jsp";
-      private final String SEARCH_CUS_PAGE = "searchCustomer.jsp";
+      private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
+      private final String SEARCH_CUS_PAGE = "SearchCustomer.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -89,7 +89,7 @@ public class CreateUserController extends HttpServlet {
                         if (result) {
                         HttpSession session = request.getSession();
                         session.removeAttribute("SHOW_CUS_CREATE_FORM");
-                              url = "orderAdd.jsp"
+                              url = "OrderAdd.jsp"
                                       + "?txtCustomerID=" + CusID;
                         }
                   }

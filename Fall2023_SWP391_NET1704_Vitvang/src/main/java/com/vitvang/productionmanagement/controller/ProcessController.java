@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.ProcessDTO;
-import my.vitvang.productionmanagement.model.ProcessNewOrderDTO;
+import com.vitvang.productionmanagement.model.ProcessDTO;
+import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 @WebServlet(name = "ProcessController", urlPatterns = {"/ProcessController"})
 public class ProcessController extends HttpServlet {
 
-      private final String Process = "process.jsp";
+      private final String Process = "Process.jsp";
       private final String ProcessDetail = "ProcessDetail.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 @WebServlet(name = "SearchCustomerController", urlPatterns = {"/SearchCustomerController"})
 public class SearchCustomerController extends HttpServlet {
 
-      private final String SEARCH_CUSTOMER_PAGE = "searchCustomer.jsp";
+      private final String SEARCH_CUSTOMER_PAGE = "SearchCustomer.jsp";
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,7 +41,7 @@ public class SearchCustomerController extends HttpServlet {
             String searchName = request.getParameter("txtSearchvalue");
             String RoleID = request.getParameter("txtRoleSearch");
             int role = Integer.parseInt(RoleID);
-            String url = "errorPageLogin.html";
+            String url = "ErrorPageLogin.html";
             try {
                   // 1. new dao
                   UserDAO dao = new UserDAO();

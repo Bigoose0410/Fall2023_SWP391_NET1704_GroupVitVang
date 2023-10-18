@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.CageMaterialDTO;
-import my.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.CageMaterialDTO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import jakarta.servlet.RequestDispatcher;

@@ -95,12 +95,6 @@ input{
  color:rgb(241, 238, 232);
  background-color: #7679cd;
 }
-
-/* .submit-button:hover {
-  border-color: pink;
-  background-color: rgb(237, 228, 230);
-  border-radius: 10px;
-} */
 p {
     margin-top: 0;
     margin-bottom: 1rem;

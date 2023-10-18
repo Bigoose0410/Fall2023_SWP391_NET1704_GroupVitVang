@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderInsertError;
 import static com.vitvang.productionmanagement.util.tool.*;
 import jakarta.servlet.RequestDispatcher;
@@ -27,8 +27,8 @@ import javax.naming.NamingException;
  */
 public class AddOrderController extends HttpServlet {
 
-      private final String ORDER_PAGE = "order.jsp";
-      private final String ORDER_ADD_PAGE = "orderAdd.jsp";
+      private final String ORDER_PAGE = "Order.jsp";
+      private final String ORDER_ADD_PAGE = "OrderAdd.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String ORDERID_PATTERN = "OD\\d{3}";
 

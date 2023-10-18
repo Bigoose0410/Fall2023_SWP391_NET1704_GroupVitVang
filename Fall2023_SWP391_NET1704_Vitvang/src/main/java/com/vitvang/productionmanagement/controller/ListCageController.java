@@ -4,7 +4,7 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import my.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
 public class ListCageController extends HttpServlet {
-      private final String ADD_ORDER_PAGE = "orderAdd.jsp";
+      private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -35,7 +35,7 @@ public class ListCageController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "errorPageLogin.html";
+            String url = "ErrorPageLogin.html";
             try {
                         HttpSession session = request.getSession();
                                 //1. call DAO

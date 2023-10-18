@@ -4,7 +4,7 @@ package com.vitvang.productionmanagement.controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import my.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
