@@ -153,34 +153,7 @@
                                                             <input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />
                                                        </td>
                                                        <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
-                                                       <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
                                                   </tr>
-
-                                                  <!--                                   <tr>
-                                                                                          <td>2</td>
-                                                                                          <td>OR001</td>
-                                                                                          <td>CS001</td>
-                                                                                          <td>CG002</td>
-                                                                                          <td>2023-10-06</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>
-                                                  
-                                                                                     <tr>
-                                                                                          <td>3</td>
-                                                                                          <td>OR003</td>
-                                                                                          <td>CS002</td>
-                                                                                          <td>Cg001</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>
-                                                                                     <tr>
-                                                                                          <td>4</td>
-                                                                                          <td>OR003</td>
-                                                                                          <td>CS002</td>
-                                                                                          <td>CG002</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>-->
                                              </form>
                                              </tbody>
                                         </c:if>
@@ -262,32 +235,6 @@
                                                        <td><button class="fa fa-cog"  type="submit" value="ViewProcessDetail" name="btAction"></button></td>
                                                        <!--<td><input type="submit" value="Process" name="btAction" /></td>-->
                                                   </tr>
-
-                                                  <!--                                   <tr>
-                                                                                          <td>2</td>
-                                                                                          <td>OR001</td>
-                                                                                          <td>CS001</td>
-                                                                                          <td>CG002</td>
-                                                                                          <td>2023-10-06</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>
-                                                  
-                                                                                     <tr>
-                                                                                          <td>3</td>
-                                                                                          <td>OR003</td>
-                                                                                          <td>CS002</td>
-                                                                                          <td>Cg001</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>
-                                                                                     <tr>
-                                                                                          <td>4</td>
-                                                                                          <td>OR003</td>
-                                                                                          <td>CS002</td>
-                                                                                          <td>CG002</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td><button class="fa fa-cog" value="Process" name="btAction"></button></td>
-                                                                                     </tr>-->
                                              </form>
                                              </tbody>
                                         </c:if>

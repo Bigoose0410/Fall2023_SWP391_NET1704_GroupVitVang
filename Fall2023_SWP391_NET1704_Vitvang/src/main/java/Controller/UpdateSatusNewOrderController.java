@@ -4,42 +4,79 @@
  */
 package Controller;
 
+import Model.DesignForProcessDTO;
 import Process.ProcessDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import static Util.tool.calculateProcessDate;
+import designforprocess.DesignForProcessDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
- * @author Admin
+ * @author thetam
  */
 @WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
 public class UpdateSatusNewOrderController extends HttpServlet {
 
-//      private final String Process = "process.jsp";
+      private final String PROCESS_OF_CAGE_PAGE = "process.jsp";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "newLogin.jsp";
-            String newStatus = request.getParameter("updateStatusNewOrder");
+            // get param from view
             String orderID = request.getParameter("txtOrderID");
             String cageID = request.getParameter("txtCageID");
+            String StartDate = request.getParameter("txtStartDate");
+            Date startdate = Date.valueOf(StartDate);
+            Date endDate;
+            String Quantity = request.getParameter("txtQuantity");
+            int quantityorder = Integer.parseInt(Quantity);
+            String newStatus = "";
+          
+            String url = "newLogin.jsp";
+            boolean result1 = false;
+            boolean result2 = false;
+            int i = 1;
             try {
-                  ProcessDAO dao = new ProcessDAO();
-                  boolean result = dao.updateStatusNewOrder(orderID, cageID);
-                  if (result) {
+                  // new dao
+                  ProcessDAO processdao = new ProcessDAO();
+                  DesignForProcessDAO designdao = new DesignForProcessDAO();
+                  //2. call method
+                  designdao.ViewDesignForProcess(cageID);
+                  //3. process result
+                  List<DesignForProcessDTO> designList = designdao.getDesignProcessList();
+                  for (DesignForProcessDTO designDTO : designList) {
+                        if(i == 1 ){
+                              newStatus = "Processing";
+                        } else {
+                              newStatus = "not yet";
+                        }
+                        endDate = calculateProcessDate
+        (startdate, quantityorder, designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(), designDTO.getNumCompletionCage());
+                       result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, designDTO);
+                        i++;
+                        startdate = endDate;
+                  }
+                  result2 = processdao.updateStatusNewOrder(orderID, cageID);
+                  
+                  if (result1 && result2) {
                         url = "MainController?btAction=Production process";
                   }
 
-            } catch (SQLException e) {
-                  e.printStackTrace();
+            } catch (SQLException ex) {
+                  log("UpdateSatusNewOrderController _ SQL" + ex.getMessage());
+            } catch (NamingException ex) {
+                  log("UpdateSatusNewOrderController _ NAMING" + ex.getMessage());
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }

@@ -4,6 +4,7 @@
  */
 package Process;
 
+import Model.DesignForProcessDTO;
 import Model.ProcessDTO;
 import Model.ProcessNewOrderDTO;
 import Util.DBHelper;
@@ -38,9 +39,7 @@ public class ProcessDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-//                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
-//                                        + "From Orderr "
-//                                        + "Where OrderID Like ? ";
+
                         String sql = "SELECT Distinct UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Orderr.StartDate, OrderDetail.Quantity, OrderDetail.OrderDetailStatus "
                                 + "FROM UserOrder JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
@@ -55,6 +54,7 @@ public class ProcessDAO implements Serializable {
                               String CageID = rs.getString("CageID");
                               Date StartDate = rs.getDate("StartDate");
                               int Quantity = rs.getInt("Quantity");
+
                               String OrderDetailStatus = rs.getString("OrderDetailStatus");
 //                              int TotalPrice = rs.getInt("TotalPrice");
 //                              int Quantity = rs.getInt("Quantity");
@@ -66,7 +66,6 @@ public class ProcessDAO implements Serializable {
                                     this.listProcessNewOrder = new ArrayList<ProcessNewOrderDTO>();
                               }
                               this.listProcessNewOrder.add(processNewOrder);
-
                         }
                   }
             } finally {
@@ -97,6 +96,7 @@ public class ProcessDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
+
 //                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
 //                                        + "From Orderr "
 //                                        + "Where OrderID Like ? ";
@@ -125,12 +125,14 @@ public class ProcessDAO implements Serializable {
                               String OrderDetailStatus = rs.getString("OrderDetailStatus");
                               String Status = rs.getString("Status");
                               String StatusProgress = rs.getString("StatusProgress");
+
 //                              int TotalPrice = rs.getInt("TotalPrice");
 //                              int Quantity = rs.getInt("Quantity");
 //                              int Price = rs.getInt("Price");
 //                              String StatusProcess = rs.getString("StatusProcess");
 //                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
                               ProcessDTO process = new ProcessDTO(UserID, OrderID, CageID, ProcessID, ProcessName, Status, StartDate, EndDate, NumberOfEmployee, StatusProgress, Quantity, OrderDetailStatus);
+
                               if (this.listOrdersProcess == null) {
                                     this.listOrdersProcess = new ArrayList<ProcessDTO>();
                               }
@@ -180,7 +182,6 @@ public class ProcessDAO implements Serializable {
                               return true;
                         }
                         // hoan chinh roi thi excutequery
-
                   }
             } finally {
                   if (stm != null && stm1 != null) {
@@ -193,63 +194,35 @@ public class ProcessDAO implements Serializable {
             }
             return false;
       }
- public boolean AutoAddProcess(String OrderID, String CageID, Date StartDate, int Quantity)
+
+      public boolean AutoAddProcess(int ProcessID, String OrderID, String status, Date StartDate, Date Endate,  DesignForProcessDTO design)
               throws SQLException, NamingException {
             Connection con = null;
-            PreparedStatement stm1 = null;
-            PreparedStatement stm2 = null;
+            PreparedStatement stm = null;
             ResultSet rs = null;
-            int row1 = 0;
-            int row2 = 0;
-            Date step1 =tool.calculateProcess1Date(StartDate,Quantity);
-            Date step2 =tool.calculateProcess2Date(step1,Quantity);
-            Date step3 =tool.calculateProcess3Date(step2,Quantity);
-            Date step4 =tool.calculateProcess4Date(step3,Quantity);
-            String[] processIds = {"P001", "P002", "P003", "P004"};
-            Date[] startDate = {StartDate, step1, step2, step3};
-            Date[] endDate = {step1, step2, step3, step4};
-            String[] processName = {"Định hình khung", "Tạo hình", "Trang trí", "Kiểm tra chất lượng"};
-            String[] status = {"Processing", "Not Yet", "Not Yet","Not Yet"};
-            String[][] phrases = {
-                  {"nep chan", "chan de", "day long", "khay de"},
-                  {"thanh tru va dinh", "dam mai", "co dinh khung"},
-                  {"cua long gan moc", "gan nan vao de dinh", "trang tri dinh long", "son pu"},
-                  {"kiem tra chuc nang", "kiem tra do ben", "kiem tra kich thuoc"}
-            };
+            boolean result = false;
+            String processID = "PR" + String.format("%03d", ProcessID);
             try {
                   //1. Make connection
-                      con = (Connection) DBHelper.makeConnection();
+                  con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
-                        for (int i = 0; i < processIds.length; i++) {
-                              String sql1 = "Insert into Process"
-                                      + " (ProcessID, ProcessName, OrderID, Status, Phrase, CageID, StartDate, EndDate) "
-                                      + "VALUES (? , ?, ?, ?, ?, ?, ?, ?)";
-                              stm1 = con.prepareStatement(sql1);
-                              for (String phrase : phrases[i]) {
-                                    stm1.setString(1, processIds[i]);
-                                    stm1.setString(2, processName[i]);
-                                    stm1.setString(3, OrderID);
-                                    stm1.setString(4, status[i]);
-                                    stm1.setString(5, phrase);
-                                    stm1.setString(6, CageID);
-                                    stm1.setDate(7, startDate[i]);
-                                    stm1.setDate(8, endDate[i]);
-                                    row1 = stm1.executeUpdate();
-                              }
-                        }
-                        // rồi đó, test lại đi. t nghĩ đc rồi 
-//                        String sql2 = "UPDATE Process SET Status = 'Processing' "
-//                                + " FROM Process INNER JOIN Orderr ON (Process.OrderID = Orderr.OrderID) "
-//                                + " Where Orderr.OrderID = ? AND Process.CageID = ? ";
-//                        stm2 = con.prepareStatement(sql2);
-////                        stm.setString(1, password);
-////                        stm.setString(2, lastname);
-////                        stm.setBoolean(3, role);
-//                        stm2.setString(1, OrderID);
-//                        stm2.setString(2, CageID);
-//                        row2 = stm2.executeUpdate();
 
-                        if (row1 > 0) {
+                        String sql = "Insert into Process "
+                                + " (ProcessID, ProcessName, OrderID, Phrase, CageID, Status, StartDate, EndDate, NumberOfEmployee) "
+                                + "VALUES ("
+                                + "?, ?, ?, ?, ?, ? ,?, ?, 1"
+                                + ")";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, processID);
+                        stm.setString(2, design.getDescription());
+                        stm.setString(3, OrderID);
+                        stm.setString(4, design.getPhrase());
+                        stm.setString(5, design.getCageID());
+                        stm.setString(6, status);
+                        stm.setDate(7, StartDate);
+                        stm.setDate(8, Endate);
+                        int rowEffect = stm.executeUpdate();
+                        if (rowEffect > 0) {
                               return true;
                         }
                   }
@@ -258,19 +231,14 @@ public class ProcessDAO implements Serializable {
                   if (rs != null) {
                         rs.close();
                   }
-                  if (stm1 != null) {
-                        stm1.close();
+                  if (stm != null) {
+                        stm.close();
                   }
-//                  if (stm2 != null) {
-//                        stm2.close();
-//                  }
-
                   if (con != null) {
-                        con.close();
                         DBHelper.closeConnection(con);
                   }
             }
-            return false;
+            return result;
       }
 }
 
