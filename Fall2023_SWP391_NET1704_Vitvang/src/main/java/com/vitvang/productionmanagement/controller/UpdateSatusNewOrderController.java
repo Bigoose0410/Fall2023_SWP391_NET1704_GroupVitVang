@@ -42,8 +42,7 @@ public class UpdateSatusNewOrderController extends HttpServlet {
             String Quantity = request.getParameter("txtQuantity");
             int quantityorder = Integer.parseInt(Quantity);
             String newStatus = "";
-          
-            String url = "newLogin.jsp";
+            String url = "NewLogin.jsp";
             boolean result1 = false;
             boolean result2 = false;
             int i = 1;

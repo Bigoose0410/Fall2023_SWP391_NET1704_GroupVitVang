@@ -31,7 +31,7 @@ public class ProcessDAO implements Serializable {
             return listProcessNewOrder;
       }
 
-      public void ViewNewOrder() throws SQLException {
+       public void ViewNewOrder() throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             ResultSet rs = null;
@@ -45,8 +45,9 @@ public class ProcessDAO implements Serializable {
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
                                 + "JOIN OrderDetail "
                                 + "ON Orderr.OrderID = OrderDetail.OrderID ";
+                        
                         stm = con.prepareStatement(sql);
-//                                stm.setString(1, "%" + txtSearchValue + "%");
+//                                stm.setString(1, "%" + txtSearchValue + "%");// 
                         rs = stm.executeQuery();
                         while (rs.next()) {
                               String UserID = rs.getString("UserID");
