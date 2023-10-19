@@ -38,7 +38,7 @@ public class OrderDAO implements Serializable {
                   // tra ra null or k.
                   if (con != null) {
                         String sql = "select * "
-                                + "from DetailOrder "
+                                + "from OrderDetail "
                                 + "where OrderID like ?";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, "%" + SearchValue + "%");

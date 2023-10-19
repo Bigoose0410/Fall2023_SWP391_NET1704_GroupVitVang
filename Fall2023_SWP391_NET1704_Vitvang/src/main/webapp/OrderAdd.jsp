@@ -15,7 +15,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css\addOrder_1.css">
+          <link rel="stylesheet" href="css/AddOrder.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -25,7 +25,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-          <title>Admin Dashboard Panel</title>
+          <title>Add Order</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -41,68 +41,66 @@
           <c:set var="CageList" value="${sessionScope.CAGE_LIST}"></c:set>
                <nav>
 
-                    <div class="logo-name">
+                    <div class="logo-name"style="
+                         display: block;">
                          <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
+                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+                    </div>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+<!--                              <li ><a href="#">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>-->
+                              <li ><a href="MainController?btAction=Order">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Customers">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Customers</span>
+                                   </a></li>
+                              <li ><a href="${productionList}">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Production</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Production process">
+                                        <i class="uil uil-chart-line"></i>
+                                        <span class="link-name">Production process</span>
+                                   </a></li>
+                              <li > <a href="#">
+                                        <i class="uil uil-clipboard-alt"></i>
+                                        <span class="link-name">Reports</span>
+                                   </a></li>
+                              <li ><a href="#">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
+                              <li > <a href="#">
+                                        <i class="uil uil-archive-alt"></i>
+                                        <span class="link-name">Inventory</span>
+                                   </a></li>
+                         </ul>
 
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
+                         <ul class="logout-mode">
+                              <li><a href="${logout_query}">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
 
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Order">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
-                              </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Production</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
 
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name" >Logout</span>
-                              </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
           </nav>
           <section class="dashboard">
                <h1>PURCHASE</h1>
@@ -139,7 +137,7 @@
                                    ${errors.getCustomerIdFormatErr()}
                                    </font>
                               </c:if>
-                              <c:url value="searchCustomer.jsp" var="searchCustomer">
+                              <c:url value="SearchCustomer.jsp" var="searchCustomer">
                                    <c:param name="txtOrderID" value="${param.txtOrderID}" />
                               </c:url>
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>

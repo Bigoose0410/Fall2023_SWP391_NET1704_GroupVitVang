@@ -36,7 +36,7 @@ public class CustomerController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "newLogin.jsp";
+            String url = "NewLogin.jsp";
             String UserName = request.getParameter("txtUsername");
             try {
                   // 1. new dao
