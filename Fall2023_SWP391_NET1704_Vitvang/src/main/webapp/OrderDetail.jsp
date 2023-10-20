@@ -11,7 +11,7 @@
      <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css\OrderDetail.css">
+          <link rel="stylesheet" href="css/OrderDetail.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -19,13 +19,16 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-          <title>BCPM</title>
+          <title>Order Detail</title>
      </head>
      <body>
           <!-- log out link -->
           <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
+          </c:url>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
           </c:url>
           <c:set var="OrderInfo" value="${requestScope.ORDER}"></c:set>
           <c:set var="ListMatarial" value="${requestScope.CAGE_MATERIAL}"></c:set>
@@ -34,41 +37,43 @@
 
                <nav>
 
-                    <div class="logo-name">
+                    <div class="logo-name"style="
+                         display: block;">
                          <div class="logo-image">
-                              <img src="img/OIP.jpg" alt="">
-                         </div>
-
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
-
                     <div class="menu-items">
                          <ul class="nav-links">
-                              <li><a href="#">
+<!--                              <li ><a href="#">
                                         <i class="uil uil-estate"></i>
-                                        <span class="link-name">Home Page</span>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>-->
+                              <li ><a href="MainController?btAction=Order">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Order</span>
                                    </a></li>
-                              <li><a href="MainController?btAction=Order">
-                                   <i class="uil uil-bill"></i>>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                              <li><a href="#">
-                                        <i class="uil uil-grin"></i>
+                              <li ><a href="MainController?btAction=Customers">
+                                        <i class="uil uil-bill"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
-                              <li><a href="#">
+                              <li ><a href="${productionList}">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Production</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Production process">
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
-                              <li><a href="#">
+                              <li > <a href="#">
                                         <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Reports</span>
                                    </a></li>
-                              <li><a href="#">
+                              <li ><a href="#">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
-                              <li><a href="#">
+                              <li > <a href="#">
                                         <i class="uil uil-archive-alt"></i>
                                         <span class="link-name">Inventory</span>
                                    </a></li>
@@ -76,9 +81,9 @@
 
                          <ul class="logout-mode">
                               <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name" >Logout</span>
-                              </a></li>
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
 
                               <li class="mode">
                                    <a href="#">
@@ -92,7 +97,7 @@
                               </li>
                          </ul>
                     </div>
-               </nav>
+          </nav>
 
                <div class="search-box">
                     <i class="uil uil-search"></i>
@@ -302,6 +307,6 @@
                     </c:forEach>
                </c:if> 
           </section>
-          <script src="js\Material.js"></script>
+          <script src="js/Material.js"></script>
      </body>
 </html>

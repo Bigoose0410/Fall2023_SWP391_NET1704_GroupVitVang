@@ -14,48 +14,48 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css\editOrder.css"/>
+          <link rel="stylesheet" href="css/EditOrder.css"/>
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <title>BCPM</title>
+          <title>Edit Order</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
           </c:url>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
+          </c:url>
           <nav>
 
                <div class="logo-name">
                     <div class="logo-image">
-                         <img src="images/logo.png" alt="">
+                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
-                    <span class="logo_name">${sessionScope.USER.getName()}</span>
+                   
                </div>
 
                <div class="menu-items">
                     <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
                          <li><a href="MainController?btAction=Order">
                                    <i class="uil uil-bill"></i>>
                                    <span class="link-name">Order</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="MainController?btAction=Customers">
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Customers</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="${productionList}">
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="MainController?btAction=Production process">
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
@@ -98,7 +98,7 @@
                     <c:set var="error" value="${requestScope.UPDATE_ORDER_ERROR}"></c:set>
                          <h1>Order Template</h1>
                          <div id="content">
-                              <form name="order" id="order" action="MainController" method="GET">
+                              <form name="order" id="order" action="MainController" method="post">
 
                                    <div>
                                         <label for="orderid">OrderID</label>
@@ -170,6 +170,6 @@
                     </div>
                </main>
           </section>
-          <script src="js\editOrder.js"></script>
+          <script src="js/editOrder.js"></script>
      </body>
 </html>
