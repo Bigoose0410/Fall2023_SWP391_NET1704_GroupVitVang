@@ -29,6 +29,11 @@ public class OrderDAO implements Serializable {
             return listDetailOrder;
       }
 
+      public String ORDERIDCOUNT() {
+            String orderID = "OD" + String.format("%03d", (this.listOrders.size() + 1));
+            return orderID;
+      }
+
       public void queryOrderDetail(String SearchValue) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -47,7 +52,7 @@ public class OrderDAO implements Serializable {
                               String OrderID = rs.getString("OrderID");
                               String CageID = rs.getString("CageID");
                               int Quantity = rs.getInt("Quantity");
-                              
+
                               DetailOrderDTO detailorder = new DetailOrderDTO(OrderID, CageID, Quantity);
                               if (this.listDetailOrder == null) {
                                     this.listDetailOrder = new ArrayList<DetailOrderDTO>();
@@ -206,7 +211,7 @@ public class OrderDAO implements Serializable {
 
       }
 
-      public boolean insertOrder(String orderID, Date startDate, Date endDate, String Addres)
+      public boolean insertOrder(String orderID, Date startDate, int totalprice, Date endDate, String Addres)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -214,15 +219,15 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into Orderr (OrderID, StartDate, EndDate, TotalPrice , Address, StatusProgress ) "
-                                + "values (?,?,?,0,?, 'New Order')";
+                        String sql = "insert into Orderr (OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress ) "
+                                + "values (?,?,?,?,?, 'new order')";
 
                         stm = con.prepareStatement(sql);
                         stm.setString(1, orderID);
                         stm.setDate(2, startDate);
                         stm.setDate(3, endDate);
-                        stm.setString(4, Addres);
-
+                        stm.setInt(4, totalprice);
+                        stm.setString(5, Addres);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
@@ -249,7 +254,7 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into DetailOrder(OrderID, CageID, Quantity ) "
+                        String sql = "insert into OrderDetail(OrderID, CageID, Quantity ) "
                                 + "values (?,?,?)";
 
                         stm = con.prepareStatement(sql);

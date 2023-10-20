@@ -39,6 +39,8 @@
           <c:set var="errors" value="${requestScope.ADD_ORDER_ERROR}"/>
           <!-- get list product -->
           <c:set var="CageList" value="${sessionScope.CAGE_LIST}"></c:set>
+          <c:set var="CusList" value="${sessionScope.CUSTOMER_LIST}"></c:set>
+          <c:set var="orderID" value="${requestScope.ORDERID}"></c:set>
                <nav>
 
                     <div class="logo-name"style="
@@ -49,10 +51,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -102,7 +104,7 @@
                          </ul>
                     </div>
           </nav>
-          <section class="dashboard">
+            <section class="dashboard">
                <h1>PURCHASE</h1>
                <div class="form">
 
@@ -125,8 +127,23 @@
                               <label for="customerinput">CustomerID</label>
                               <!--                               <input type="text" id="customerinput" name="customerid" required="required" 
                                                             placeholder="CustomerID" />-->
-                              <input type="text" id="customerinput" placeholder="CustomerID" name="txtCustomerID"
-                                     value="${param.txtCustomerID}" />
+                              <!--                              <input type="text" id="customerinput" placeholder="CustomerID" name="txtCustomerID"
+                                                                   value="${param.txtCustomerID}" />-->
+                              <select id="customerinput" class="input-field" name="txtCustomerID">
+                                   <c:forEach items="${CusList}" var="cus">
+                                        <c:if test="${param.txtCustomerID eq cus.getUserID()}">
+                                             <option selected="selected" value="${cus.getUserID()}">
+                                                  ${cus.getUserID()} 
+                                             </option>
+                                        </c:if>
+                                        <c:if test="${param.txtCustomerID ne cus.getUserID()}">
+                                             <option value="${cus.getUserID()}">
+                                                  ${cus.getUserID()} 
+                                             </option>
+                                        </c:if>
+                                   </c:forEach>
+                              </select>
+
                               <c:if test="${not empty errors.getCustomerNotExistInDatabasErr()}">
                                    <font color="red">
                                    ${errors.getCustomerNotExistInDatabasErr()}
@@ -137,7 +154,7 @@
                                    ${errors.getCustomerIdFormatErr()}
                                    </font>
                               </c:if>
-                              <c:url value="SearchCustomer.jsp" var="searchCustomer">
+                              <c:url value="searchCustomer.jsp" var="searchCustomer">
                                    <c:param name="txtOrderID" value="${param.txtOrderID}" />
                               </c:url>
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
@@ -150,10 +167,10 @@
                                           required="required" />
                               </div>
 
-                              <!-- <div class="input-container2">
-                                  <label for="enddateinput">EndDate</label>
-                                  <input type="date" id="enddateinput" name="enddate" required="required" />
-                              </div> -->
+                              <div class="input-container2">
+                                   <label for="enddateinput">EndDate</label>
+                                   <input type="date" id="enddateinput" value="${param.txtEndDate}" name="txtEndDate" required="required" />
+                              </div> 
 
                               <label for="addressinput">Address</label>
                               <!--                               <input type="text" id="addressinput" name="address" required="required" 
@@ -181,7 +198,9 @@
                                              <div class="input-container1">
                                                   <select class="input-field" name="txtCageID">
                                                        <c:forEach items="${CageList}" var="cage">
-                                                            <option value="${cage.getCageID()}">${cage.getName()}</option>
+                                                            <option value="${cage.getCageID()}">
+                                                                 ${cage.getName()} 
+                                                            </option>
                                                        </c:forEach>
                                                   </select>
                                                   <!-- Add more options as needed -->
@@ -193,7 +212,7 @@
                                         <td>
                                              <div class="input-container1">
                                                   <input placeholder="Quantity" class="input-field" type="number" min="1"
-                                                         name="txtQuantity" value="${param.txtQuantity}">
+                                                         name="txtQuantity" value="">
                                                   <c:if test="${not empty errors.getNullQuanityErr()}">
                                                        <font color="red">
                                                        ${errors.getNullQuanityErr()}
@@ -204,8 +223,6 @@
                                         </td>
                                         <td>
                                              <div class="plus_button">
-                                                  <input type="hidden" placeholder="Address" name="txtAddress"
-                                                         value="${param.txtAddress}" />
                                                   <button name="btAction" value="addToCart" type="submit"><i
                                                             class="fa fa-shopping-cart"></i></button>
                                              </div>
@@ -213,40 +230,63 @@
                                    </tr>
                                    <!-- Add more rows as needed -->
                               </table>
+
                               <c:set var="cart" value="${sessionScope.CART}" />
+                              <c:set var="cartlist" value="${requestScope.CARTLIST}" />
                               <c:if test="${not empty cart}">
-                                   <c:set var="items" value="${cart.items}" />
-                                   <c:if test="${items != null}">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        <table>
-                                             <tr>
-                                                  <td><strong>No.</strong></td>
-                                                  <td><strong>Name</strong></td>
-                                                  <td><strong>Quantity</strong></td>
-                                             </tr>
-                                             <tr>
-                                                  <c:forEach items="${items.keySet()}" var="key" varStatus="counter">
+                                   <c:set var="items" value="${cart.getProductItems()}" />
+                                   <%--<c:if test="${items != null}">--%>
+                                   <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                   <table>
+                                        <tr>
+                                             <td><strong>No.</strong></td>
+                                             <td><strong>Name</strong></td>
+                                             <td><strong>Quantity</strong></td>
+                                             <td><strong>Remove</strong></td>
+                                        </tr>
+                                        <tr>
+                                             <c:set var="totalprice" value=""></c:set>
+                                             <c:forEach items="${cartlist}" var="key" varStatus="counter">
+                                             <form action="MainController" method="GET">
                                                   <tr>
                                                        <td>
                                                             ${counter.count}
                                                             .</td>
                                                        <td>
-                                                            ${key}
+                                                            ${key.getName()}
+                                                            <input type="hidden" name="txtOrderCageID" value="${key.getCageID()}" />
                                                        </td>
                                                        <td>
-                                                            ${items.get(key)}
+                                                            ${key.getQuantityOrder()}
+                                                            <c:set var="totalprice" value="${totalprice +key.getQuantityOrder()* key.getPrice() }"></c:set>
+                                                            <input type="hidden" name="${key.getCageID()}" value="${key.getQuantityOrder()}" />
+                                                       </td>
+                                                       <td>
+                                                            <input type="hidden" name="txtOrderID"  value="${param.txtOrderID}" />
+                                                            <input type="hidden" name="txtCustomerID" value="${param.txtCustomerID}" />
+                                                            <input type="hidden" name="txtAddress" value="${param.txtAddress}"/>
+                                                            <input type="hidden" name="txtEndDate" value="${param.txtEndDate}"/>
+                                                            <div class="plus_button minus_button">
+                                                                 <button type="submit" name="btAction" value="RemoveItemFromCart">
+                                                                      <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                                                 </button>
+                                                            </div>
                                                        </td>
                                                   </tr>
-                                             </c:forEach>
-                                             </tr>
-                                        </table>
-                                   </c:if>
+                                             </form>
+                                        </c:forEach>
+                                        </tr>         
+                                   </table>
+                                   <p>Total Price: ${totalprice}</p>
+                                   <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
                               </c:if>
+                              <%--</c:if>--%>
                          </fieldset>
                          <button name="btAction" value="Create Order" type="submit" class="custom-btn btn-1">
                               Create Order
                          </button>
                     </form>
+
                </div>
           </section>
      </body>

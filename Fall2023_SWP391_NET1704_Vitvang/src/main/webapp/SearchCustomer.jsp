@@ -150,7 +150,7 @@
                                                             ${dto.getEmail()}
                                                        </td>
                                                        <td>
-                                                            <c:url value="orderAdd.jsp" var="AdddLink">
+                                                            <c:url value="OrderAdd.jsp" var="AdddLink">
                                                                  <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
                                                             </c:url>
                                                             <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
