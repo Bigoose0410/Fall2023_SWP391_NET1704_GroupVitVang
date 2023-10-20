@@ -11,13 +11,13 @@
           <meta charset="UTF-8">
           <meta name="viewport" content=" initial-scale=1.0">
           <!--======== CSS ======== -->
-          <link rel="stylesheet" href="css\admin.css">  
+          <link rel="stylesheet" href="css/admin.css">  
 
           <!----===== Iconscout CSS =====--> 
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css\homePage.css">
-
+     <a href="order.jsp"></a>
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
           <link href="../java/bootstrap-5.3.2-dist/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
@@ -372,7 +372,7 @@
                     </form>
                     </table>
                <%--</c:forEach>--%>
--->          </c:if>
+-->       
 
 
           <c:if test="${ empty result}">
@@ -382,7 +382,7 @@
                </h2>
                </font>
           </c:if>
-     </c:if>
+   
 
 
 </section>
