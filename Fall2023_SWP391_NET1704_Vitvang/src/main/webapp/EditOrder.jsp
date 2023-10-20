@@ -170,6 +170,6 @@
                     </div>
                </main>
           </section>
-          <script src="js/editOrder.js"></script>
+          <script src="js/EditOrder.js"></script>
      </body>
 </html>
