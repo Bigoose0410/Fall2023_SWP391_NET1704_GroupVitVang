@@ -18,6 +18,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
+
       private final String LoginController = "LoginServlet";
       private final String StartUpController = "StartUpController";
       private final String LogOutController = "LogOutServlet";
@@ -50,11 +51,12 @@ public class MainController extends HttpServlet {
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
       private final String CustomerController = "CustomerController";
+      private final String UpdateStatusProcessController = "UpdateStatusProcessController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            
+
             String button = request.getParameter("btAction");
             String url = "errorPageLogin.html";
             try {
@@ -114,7 +116,8 @@ public class MainController extends HttpServlet {
                         url = CustomerController;
                   } else if (button.equals("ViewProcessDetail")) {
                         url = ProcessController;
-                        
+                  } else if (button.equals("UpdateStatusProcess")) {
+                        url = UpdateStatusProcessController;
                   }
 
             } finally {

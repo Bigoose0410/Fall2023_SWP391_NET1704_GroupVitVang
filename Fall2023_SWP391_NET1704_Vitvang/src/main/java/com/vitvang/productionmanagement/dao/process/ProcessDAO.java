@@ -31,7 +31,7 @@ public class ProcessDAO implements Serializable {
             return listProcessNewOrder;
       }
 
-       public void ViewNewOrder() throws SQLException {
+      public void ViewNewOrder() throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             ResultSet rs = null;
@@ -45,7 +45,7 @@ public class ProcessDAO implements Serializable {
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
                                 + "JOIN OrderDetail "
                                 + "ON Orderr.OrderID = OrderDetail.OrderID ";
-                        
+
                         stm = con.prepareStatement(sql);
 //                                stm.setString(1, "%" + txtSearchValue + "%");// 
                         rs = stm.executeQuery();
@@ -89,7 +89,7 @@ public class ProcessDAO implements Serializable {
             return listOrdersProcess;
       }
 
-      public void ViewProcessingOrder(String OrderID, String CageID) throws SQLException {
+      public void ViewProcessingOrder(String OrderID, String CageID, String CageID1) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             ResultSet rs = null;
@@ -108,10 +108,11 @@ public class ProcessDAO implements Serializable {
                                 + "ON Orderr.OrderID = OrderDetail.OrderID "
                                 + "JOIN Process "
                                 + "ON Orderr.OrderID = Process.OrderID "
-                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? ";
+                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, OrderID);
                         stm.setString(2, CageID);
+                        stm.setString(3, CageID1);
                         rs = stm.executeQuery();
                         while (rs.next()) {
                               String UserID = rs.getString("UserID");
@@ -196,7 +197,41 @@ public class ProcessDAO implements Serializable {
             return false;
       }
 
-      public boolean AutoAddProcess(int ProcessID, String OrderID, String status, Date StartDate, Date Endate,  DesignForProcessDTO design)
+      public boolean updateStatusProcess(String Status, String ProcessID, String OrderID, String CageID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "UPDATE Process SET Status = ? "
+                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+                        stm = con.prepareStatement(sql);
+//                        stm.setString(1, password);
+//                        stm.setString(2, lastname);
+//                        stm.setBoolean(3, role);
+                        stm.setString(1, Status);
+                        stm.setString(2, ProcessID);
+                        stm.setString(3, OrderID);
+                        stm.setString(4, CageID);
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+                        // hoan chinh roi thi excutequery
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+
+      public boolean AutoAddProcess(int ProcessID, String OrderID, String status, Date StartDate, Date Endate, DesignForProcessDTO design)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -242,4 +277,3 @@ public class ProcessDAO implements Serializable {
             return result;
       }
 }
-

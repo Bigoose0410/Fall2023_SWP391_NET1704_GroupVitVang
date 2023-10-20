@@ -55,19 +55,18 @@ public class UpdateSatusNewOrderController extends HttpServlet {
                   //3. process result
                   List<DesignForProcessDTO> designList = designdao.getDesignProcessList();
                   for (DesignForProcessDTO designDTO : designList) {
-                        if(i == 1 ){
+                        if (i == 1) {
                               newStatus = "Processing";
                         } else {
                               newStatus = "not yet";
                         }
-                        endDate = calculateProcessDate
-        (startdate, quantityorder, designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(), designDTO.getNumCompletionCage());
-                       result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, designDTO);
+                        endDate = calculateProcessDate(startdate, quantityorder, designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(), designDTO.getNumCompletionCage());
+                        result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, designDTO);
                         i++;
                         startdate = endDate;
                   }
                   result2 = processdao.updateStatusNewOrder(orderID, cageID);
-                  
+
                   if (result1 && result2) {
                         url = "MainController?btAction=Production process";
                   }
