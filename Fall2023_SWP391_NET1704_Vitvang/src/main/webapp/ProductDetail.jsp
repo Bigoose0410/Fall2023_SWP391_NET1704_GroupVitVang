@@ -247,7 +247,7 @@
                     </div>
                </div>
           </section>
-          <script src="js/darkMode.js"></script>
+          <script src="js/DarkMode.js"></script>
           <script src="js/Material.js"></script>
      </body>
 </html>
