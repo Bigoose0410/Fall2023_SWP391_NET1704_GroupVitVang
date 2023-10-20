@@ -43,5 +43,9 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.spaces-per-tab>6</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.spaces-per-tab>
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.text-limit-width>100</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.text-limit-width>
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.tab-size>4</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.tab-size>
+        <org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapProperties>WRAP_ALWAYS</org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapProperties>
+        <org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapArrayInit>WRAP_ALWAYS</org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapArrayInit>
+        <org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapArrayInitItems>WRAP_ALWAYS</org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapArrayInitItems>
+        <org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapObjects>WRAP_ALWAYS</org-netbeans-modules-editor-indent.text.x-json.CodeStyle.project.wrapObjects>
     </properties>
 </project-shared-configuration>
