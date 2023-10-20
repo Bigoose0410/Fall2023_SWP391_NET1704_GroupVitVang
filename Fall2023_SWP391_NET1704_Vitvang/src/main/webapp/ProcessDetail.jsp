@@ -29,20 +29,20 @@
      </head>
 
      <body>
-           <nav>
+          <nav>
 
-                    <div class="logo-name"style="
-                         display: block;">
-                         <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+               <div class="logo-name"style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -138,30 +138,61 @@
                                              <form action="MainController">  
                                                   <tr>
                                                        <td>${counter.count}</td>
+
                                                        <td>${dto.getUserID()}</td>
-                                                       <td>${dto.getOrderID()}</td>
-                                                       <td>${dto.getCageID()}</td>
-                                                       <td>${dto.getProcessID()}</td>
+
+                                                       <td>
+                                                            ${dto.getOrderID()}
+                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                       </td>
+
+                                                       <td>
+                                                            ${dto.getCageID()}
+                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                       </td>
+
+                                                       <td>
+                                                            ${dto.getProcessID()}
+                                                            <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                       </td>
+
                                                        <td>${dto.getProcessName()}</td>
+
                                                        <td>${dto.getStartDate()}</td>
+
                                                        <td>${dto.getEndDate()}</td>
+
                                                        <td>${dto.getQuantity()}</td>
-                                                       <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getOrderDetailStatus()}</td>
-                                                       <td>${dto.getStatus()}</td>
-                                                       <td><button class="fa fa-pencil-square"></button></td>
+
+                                                       <td>
+                                                            ${dto.getNumberOfEmployee()}
+                                                            <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                       </td>
+                                                       <td>${dto.getOrderDetailStatus()}</td>                                                  
+                                                       <td>
+                                                            <select name="txtStatus">    
+                                                                 <option selected>${dto.getStatus()}</option>
+                                                                 <option value="not yet">not yet</option>
+                                                                 <option value="Processing">Processing</option>
+                                                                 <option value="Done">Done</option>
+                                                            </select>
+                                                       </td>
+                                                       <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
                                                   </tr>
-                                                  
+
                                              </form>
                                              </tbody>
                                         </c:if>
                                    </c:forEach>
                               </table>
                          </c:if>
+                         <c:if test="${empty result}">
+                              <p>Yours order is not in processing!!!</p>
+                         </c:if>
                     </form>
                </div>
           </section>
 
-                         <script src="js/ProductProcess.js"></script>
+          <script src="js/ProductProcess.js"></script>
      </body>
 </html>
