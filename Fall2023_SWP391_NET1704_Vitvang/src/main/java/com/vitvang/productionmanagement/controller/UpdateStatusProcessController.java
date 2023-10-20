@@ -4,8 +4,6 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.model.ProcessDTO;
-import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,34 +20,26 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-@WebServlet(name = "ProcessController", urlPatterns = {"/ProcessController"})
-public class ProcessController extends HttpServlet {
-
-      private final String Process = "Process.jsp";
-      private final String ProcessDetail = "ProcessDetail.jsp";
+@WebServlet(name = "UpdateStatusProcessController", urlPatterns = {"/UpdateStatusProcessController"})
+public class UpdateStatusProcessController extends HttpServlet {
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = Process;
+            String ProcessID = request.getParameter("txtProcessID");
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
-            String button = request.getParameter("btAction");
+            String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
+            String Status = request.getParameter("txtStatus");
+            String url = "NewLogin.jsp";
             try {
-                  ProcessDAO dao = new ProcessDAO();
-                  if (!button.equals("ViewProcessDetail")) {
-                        dao.ViewNewOrder();
-                        List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
-                        request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
-                        url = Process;
-                  } else {
-                        dao.ViewProcessingOrder(OrderID, CageID, CageID);
-                        List<ProcessDTO> process = dao.getListOrdersProcess();
-                        request.setAttribute("PROCESS_RESULT", process);
-                        url = ProcessDetail;
+                  ProcessDAO processdao = new ProcessDAO();
+                  boolean result = processdao.updateStatusProcess(Status, ProcessID, OrderID, CageID);
+                  if (result) {
+                        url = "MainController?btAction=ViewProcessDetail";
                   }
             } catch (SQLException e) {
-                  log("LOGINSERVLET _ SQL" + e.getMessage());
+                  e.printStackTrace();
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
@@ -71,7 +60,7 @@ public class ProcessController extends HttpServlet {
             try {
                   processRequest(request, response);
             } catch (SQLException ex) {
-                  Logger.getLogger(ProcessController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(UpdateStatusProcessController.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
 
@@ -89,7 +78,7 @@ public class ProcessController extends HttpServlet {
             try {
                   processRequest(request, response);
             } catch (SQLException ex) {
-                  Logger.getLogger(ProcessController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(UpdateStatusProcessController.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
 
