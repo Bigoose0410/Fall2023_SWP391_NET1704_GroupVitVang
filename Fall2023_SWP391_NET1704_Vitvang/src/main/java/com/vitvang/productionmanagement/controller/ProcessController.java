@@ -44,7 +44,7 @@ public class ProcessController extends HttpServlet {
                         request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
                         url = Process;
                   } else {
-                        dao.ViewProcessingOrder(OrderID, CageID);
+                        dao.ViewProcessingOrder(OrderID, CageID, CageID);
                         List<ProcessDTO> process = dao.getListOrdersProcess();
                         request.setAttribute("PROCESS_RESULT", process);
                         url = ProcessDetail;
@@ -55,7 +55,6 @@ public class ProcessController extends HttpServlet {
                   request.getRequestDispatcher(url).forward(request, response);
             }
       }
-      
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
       /**
