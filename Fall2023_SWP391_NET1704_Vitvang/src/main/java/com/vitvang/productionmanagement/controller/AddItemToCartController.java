@@ -5,6 +5,7 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.cart.CartObj;
+import com.vitvang.productionmanagement.model.CageDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 
 /**
@@ -22,15 +25,8 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "AddItemToCartController", urlPatterns = {"/AddItemToCartController"})
 public class AddItemToCartController extends HttpServlet {
-      private final String ORDER_ADD_PAGE = "OrderAdd.jsp";
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      private final String ORDER_ADD_PAGE = "MainController?btAction=New Order";
+      
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -47,14 +43,13 @@ public class AddItemToCartController extends HttpServlet {
             if (cart == null) {
                 cart = new CartObj();
             }
-            if (RequestQuantity > 1) {
-                    cart.addManyItemToCart(sku, Integer.parseInt(quantity));
-                } else {
-                    cart.addItemToCart(sku);
-                }
-                session.setAttribute("CART", cart);
                 // 3. Cus drops items to his cart
                 cart.addCageToCart(sku, RequestQuantity);
+                List<CageDTO> cageCart = new ArrayList<CageDTO>();
+                for (CageDTO cage : cart.getProductItems().values()) {
+                    cageCart.add(cage);
+              }
+                request.setAttribute("CARTLIST", cageCart);
                 session.setAttribute("CART", cart);
             // 4. Cus continuously goes to shopping
             url = "MainController"
@@ -72,7 +67,6 @@ public class AddItemToCartController extends HttpServlet {
             rd.forward(request, response);
         }
       }
-
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
       /**
        * Handles the HTTP <code>GET</code> method.
@@ -87,7 +81,6 @@ public class AddItemToCartController extends HttpServlet {
               throws ServletException, IOException {
             processRequest(request, response);
       }
-
       /**
        * Handles the HTTP <code>POST</code> method.
        *
@@ -101,7 +94,6 @@ public class AddItemToCartController extends HttpServlet {
               throws ServletException, IOException {
             processRequest(request, response);
       }
-
       /**
        * Returns a short description of the servlet.
        *
@@ -111,5 +103,4 @@ public class AddItemToCartController extends HttpServlet {
       public String getServletInfo() {
             return "Short description";
       }// </editor-fold>
-
 }

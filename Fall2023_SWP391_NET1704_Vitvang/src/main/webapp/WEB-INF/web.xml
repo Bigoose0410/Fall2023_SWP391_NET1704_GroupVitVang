@@ -12,6 +12,10 @@
         <servlet-name>AddOrderController</servlet-name>
         <servlet-class>com.vitvang.productionmanagement.controller.AddOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveItemFromCartController</servlet-name>
+        <servlet-class>com.vitvang.productionmanagement.controller.RemoveItemFromCartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>AddOrderController</servlet-name>
         <url-pattern>/AddOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveItemFromCartController</servlet-name>
+        <url-pattern>/RemoveItemFromCartController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -18,6 +18,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
+
       private final String LoginController = "LoginServlet";
       private final String StartUpController = "StartUpController";
       private final String LogOutController = "LogOutServlet";
@@ -46,6 +47,7 @@ public class MainController extends HttpServlet {
       private final String UpdateMaterialofCageController = "UpdateMaterialofCageController";
       //delete
       private final String DeleteOrderController = "DeleteOrderController";
+      private final String RemoveItemFromCartController = "RemoveItemFromCartController";
       private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
@@ -54,7 +56,7 @@ public class MainController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            
+
             String button = request.getParameter("btAction");
             String url = "errorPageLogin.html";
             try {
@@ -78,7 +80,9 @@ public class MainController extends HttpServlet {
                         url = AddOrderController;
                   } else if (button.equals("addToCart")) {
                         url = AddItemToCartController;
-                  } else if (button.equals("Search Customer")) {
+                  } else if (button.equals("RemoveItemFromCart")) {
+                        url = RemoveItemFromCartController;
+                  }else if (button.equals("Search Customer")) {
                         url = SearchCustomerController;
                   } else if (button.equals("New Customer")) {
                         url = CreateUserController;
@@ -117,55 +121,59 @@ public class MainController extends HttpServlet {
                         
                   }
 
-            } finally {
+                  }finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
             }
 
-      }
+            }
 
-      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-      /**
-       * Handles the HTTP <code>GET</code> method.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
-      @Override
-      protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+            /**
+             * Handles the HTTP <code>GET</code> method.
+             *
+             * @param request servlet request
+             * @param response servlet response
+             * @throws ServletException if a servlet-specific error occurs
+             * @throws IOException if an I/O error occurs
+             */
+            @Override
+            protected void doGet
+            (HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
-      }
+                  processRequest(request, response);
+            }
 
-      /**
-       * Handles the HTTP <code>POST</code> method.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
-      @Override
-      protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            /**
+             * Handles the HTTP <code>POST</code> method.
+             *
+             * @param request servlet request
+             * @param response servlet response
+             * @throws ServletException if a servlet-specific error occurs
+             * @throws IOException if an I/O error occurs
+             */
+            @Override
+            protected void doPost
+            (HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
-      }
+                  processRequest(request, response);
+            }
 
-      /**
-       * Returns a short description of the servlet.
-       *
-       * @return a String containing servlet description
-       */
-      @Override
-      public String getServletInfo() {
+            /**
+             * Returns a short description of the servlet.
+             *
+             * @return a String containing servlet description
+             */
+            @Override
+            public String getServletInfo
+            
+                  () {
             return "Short description";
-      }// </editor-fold>
+            }// </editor-fold>
 
-      /**
-       * Returns a short description of the servlet.
-       *
-       * @return a String containing servlet description
-       */
-}
+            /**
+             * Returns a short description of the servlet.
+             *
+             * @return a String containing servlet description
+             */
+      }

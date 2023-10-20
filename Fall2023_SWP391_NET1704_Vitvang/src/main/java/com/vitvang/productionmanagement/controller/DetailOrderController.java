@@ -44,7 +44,7 @@ public class DetailOrderController extends HttpServlet {
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String OrderID = request.getParameter("txtOrderID");
-            String url = "errorPageLogin.html";
+            String url = "ErrorPageLogin.html";
             try {
                   // new DAO
                   OrderDAO orderdao = new OrderDAO();

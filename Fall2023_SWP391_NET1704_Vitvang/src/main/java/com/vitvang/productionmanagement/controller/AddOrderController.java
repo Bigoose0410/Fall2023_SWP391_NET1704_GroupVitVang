@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
-
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderInsertError;
-import static com.vitvang.productionmanagement.util.tool.*;
+import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -41,12 +40,12 @@ public class AddOrderController extends HttpServlet {
             String EndDate = request.getParameter("txtEndDate");
             Date productEndDate = Date.valueOf(EndDate);
             String customerId = request.getParameter("txtCustomerID");
+            String totalprice = request.getParameter("txtTotalPrice");
+            int total = Integer.parseInt(totalprice);
             String Address = request.getParameter("txtAddress");
-            String[] CageID = request.getParameterValues("txtCageID");
-            String Quantity = request.getParameter("txtQuantity");
+            String[] CageID = request.getParameterValues("txtOrderCageID");
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
-
             boolean foundErr = false;
             OrderInsertError error = new OrderInsertError();
             try {
@@ -72,20 +71,20 @@ public class AddOrderController extends HttpServlet {
                         request.setAttribute("ADD_ORDER_ERROR", error);
                         url = ORDER_ADD_PAGE;
                   } else {
-                        boolean result = Orderdao.insertOrder(orderId, now, productEndDate, Address);
+                        boolean result = Orderdao.insertOrder(orderId, now, total, productEndDate, Address);
                         Orderdao.addUserOrder(orderId, customerId);
-                        if (!Quantity.isEmpty() && !Quantity.equals("0")) {
-                              int quantity = Integer.parseInt(Quantity);
-                              for (String item : CageID) {
-                                    Orderdao.addOrderDetail(orderId, item, quantity);
-                              }
+                              int quantity = 1;
+                        for (String item : CageID) {
+                              String quantityrequest = request.getParameter(item);
+                              quantity = Integer.parseInt(quantityrequest);
+                              Orderdao.addOrderDetail(orderId, item, quantity);
                         }
                         if (result) {
                               url = "MainController"
-                                      + "?btAction=Order";
+                                      + "?btAction=Detail"
+                                      + "&txtOrderID="+ orderId;
                         }
                   }
-
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
                   log("UpdateAccountServlet _ SQL " + msg);

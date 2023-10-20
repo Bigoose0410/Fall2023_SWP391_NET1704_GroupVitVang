@@ -45,11 +45,9 @@ public final class tool {
             }
       }
 
-      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess ,int employee, int maxConpletionperDay ) {
-            
-            double maxConpletion = (maxConpletionperDay * 1d /employee);
-//            int employee = 3;
-//            int timeprocess = 2;
+      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess ,int employeeinDesign, int maxConpletionperDay, int empInprocess ) {
+
+            double maxConpletion = 1d*empInprocess*(maxConpletionperDay * 1d /employeeinDesign);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c1 = Calendar.getInstance();
             // Tính thời gian cần thiết cho quy trình
@@ -81,61 +79,5 @@ public final class tool {
             return EndDate;
       }
 
-      public static Date calculateProcess1Date(
-              Date startDate, int quantity) {
-
-            // Tính thời gian cần thiết cho quy trình
-            long time = (quantity * 28800L * 24 * 60 * 60) / PRODUCTS_STEP1__PER_8HOURS;
-
-            // Ngày bắt đầu của quy trình này là ngày kết thúc của quy trình trước
-            Date processStartDate = startDate;
-
-            // Ngày kết thúc của quy trình
-            Date processEndDate = new Date(processStartDate.getTime() + time);
-
-            return processEndDate;
-      }
-      public static Date calculateProcess2Date(
-              Date startDate, int quantity) {
-
-            // Tính thời gian cần thiết cho quy trình
-            long time = (quantity * 28800L * 24 * 60 * 60) / PRODUCTS_STEP2__PER_8HOURS;
-
-            // Ngày bắt đầu của quy trình này là ngày kết thúc của quy trình trước
-            Date processStartDate = startDate;
-
-            // Ngày kết thúc của quy trình
-            Date processEndDate = new Date(processStartDate.getTime() + time);
-
-            return processEndDate;
-      }
-      public static Date calculateProcess3Date(
-              Date startDate, int quantity) {
-
-            // Tính thời gian cần thiết cho quy trình
-            long time = (quantity * 28800L * 24 * 60 * 60) / PRODUCTS_STEP3__PER_8HOURS;
-
-            // Ngày bắt đầu của quy trình này là ngày kết thúc của quy trình trước
-            Date processStartDate = startDate;
-
-            // Ngày kết thúc của quy trình
-            Date processEndDate = new Date(processStartDate.getTime() + time);
-
-            return processEndDate;
-      }
-      public static Date calculateProcess4Date(
-              Date startDate, int quantity) {
-
-            // Tính thời gian cần thiết cho quy trình
-            long time = (quantity * 28800L * 24 * 60 * 60) / PRODUCTS_STEP4__PER_8HOURS;
-
-            // Ngày bắt đầu của quy trình này là ngày kết thúc của quy trình trước
-            Date processStartDate = startDate;
-
-            // Ngày kết thúc của quy trình
-            Date processEndDate = new Date(processStartDate.getTime() + time);
-
-            return processEndDate;
-      }
       
 }
