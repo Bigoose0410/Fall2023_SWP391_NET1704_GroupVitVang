@@ -38,11 +38,11 @@ public class ProcessDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Orderr.StartDate, OrderDetail.Quantity, Orderr.StatusProgress "
+                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, DetailOrder.CageID, Orderr.StartDate, DetailOrder.Quantity, Orderr.StatusProgress "
                                 + "FROM UserOrder JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
-                                + "JOIN OrderDetail "
-                                + "ON Orderr.OrderID = OrderDetail.OrderID ";
+                                + "JOIN DetailOrder "
+                                + "ON Orderr.OrderID = DetailOrder.OrderID ";
                         stm = con.prepareStatement(sql);
 //                                stm.setString(1, "%" + txtSearchValue + "%");
                         rs = stm.executeQuery();

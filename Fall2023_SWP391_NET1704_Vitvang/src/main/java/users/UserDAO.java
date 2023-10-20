@@ -15,10 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.NamingException;
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.*;
+import javax.naming.NamingException;
 
 public class UserDAO implements Serializable {
 
@@ -161,6 +160,55 @@ public class UserDAO implements Serializable {
                   }
             }
       }
+      
+      public void getAllCustomer()
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            UserDTO result = null;
+            try {
+                  //1. Make connection
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+                        String sql = "Select * " // phai co cach sau username
+                                + "From Users "
+                                + "Where RoleID = 4 ";
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        //4. Excute query
+                        rs = stm.executeQuery();
+                        //5. Process
+                        while (rs.next()) {
+                              String UserID = rs.getString("UserID");
+                              String Name = rs.getString("Name");
+                              String PhoneNumber = rs.getString("PhoneNumber");
+                              String Sex = rs.getString("Sex");
+                              String Adress = rs.getString("Adress");
+                              Date BirthDate = rs.getDate("BirthDate");
+                              String Email = rs.getString("Email");
+                              int RoleID = rs.getInt("RoleID");
+                              UserDTO user = new UserDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, null, null, RoleID);
+                              if (this.listUser == null) {
+                                    this.listUser = new ArrayList<UserDTO>();
+                              }
+                              this.listUser.add(user);
+                        }//end username and password are checked
+                  } // end of connection has opend
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+            }
+      }
 
       public UserDTO queryCusFromUserOrder(String OrderID)
               throws SQLException, NamingException {
@@ -222,7 +270,7 @@ public class UserDAO implements Serializable {
             return result;
       }
 
-      public boolean createAccount(UserDTO user)
+     public boolean createAccount(UserDTO user)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;

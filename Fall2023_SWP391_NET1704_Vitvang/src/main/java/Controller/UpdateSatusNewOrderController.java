@@ -62,7 +62,7 @@ public class UpdateSatusNewOrderController extends HttpServlet {
                               newStatus = "not yet";
                         }
                         endDate = calculateProcessDate
-        (startdate, quantityorder, designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(), designDTO.getNumCompletionCage());
+        (startdate, quantityorder, designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(), designDTO.getNumCompletionCage(),1);
                        result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, designDTO);
                         i++;
                         startdate = endDate;

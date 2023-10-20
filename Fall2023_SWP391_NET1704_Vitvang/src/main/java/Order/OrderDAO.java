@@ -119,6 +119,11 @@ public class OrderDAO implements Serializable {
       public List<OrderDTO> getListOrders() {
             return listOrders;
       }
+      
+      public String ORDERIDCOUNT(){
+            String orderID = "OD" + String.format("%03d", (this.listOrders.size() + 1));
+            return orderID;
+      }
 
       public void searchOrder(String SearchValue) throws SQLException {
             Connection con = null;
@@ -189,7 +194,6 @@ public class OrderDAO implements Serializable {
                                     this.listOrders = new ArrayList<OrderDTO>();
                               }
                               this.listOrders.add(order);
-
                         }
                   }
             } finally {
@@ -206,7 +210,7 @@ public class OrderDAO implements Serializable {
 
       }
 
-      public boolean insertOrder(String orderID, Date startDate, Date endDate, String Addres)
+      public boolean insertOrder(String orderID, Date startDate,int totalprice , Date endDate, String Addres)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -214,14 +218,15 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into Orderr (OrderID, StartDate, EndDate, TotalPrice , Address, StatusProgress ) "
-                                + "values (?,?,?,0,?, 'New Order')";
+                        String sql = "insert into Orderr (OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress ) "
+                                + "values (?,?,?,?,?, 'new order')";
 
                         stm = con.prepareStatement(sql);
                         stm.setString(1, orderID);
                         stm.setDate(2, startDate);
                         stm.setDate(3, endDate);
-                        stm.setString(4, Addres);
+                        stm.setInt(4, totalprice);
+                        stm.setString(5, Addres);
 
                         int row = stm.executeUpdate();
                         if (row > 0) {

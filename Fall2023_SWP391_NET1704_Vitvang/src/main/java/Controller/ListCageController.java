@@ -5,6 +5,8 @@
 package Controller;
 
 import Model.CageDTO;
+import Model.UserDTO;
+import Order.OrderDAO;
 import cage.CageDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
+import users.UserDAO;
 
 /**
  *
@@ -23,7 +26,9 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
 public class ListCageController extends HttpServlet {
+
       private final String ADD_ORDER_PAGE = "orderAdd.jsp";
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -37,22 +42,28 @@ public class ListCageController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = "errorPageLogin.html";
             try {
-                        HttpSession session = request.getSession();
-                                //1. call DAO
-                                CageDAO dao = new CageDAO();
-                                //1.2. call method
-                                dao.AllProduction();
-                                // process result
-                                List<CageDTO> result = dao.getListCage();
-                                session.setAttribute("CAGE_LIST", result);
-                                url = ADD_ORDER_PAGE;
-                } catch (SQLException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                } catch (NamingException e) {
-                        log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-                }finally {
-                        request.getRequestDispatcher(url).forward(request, response);
-                }
+                  HttpSession session = request.getSession();
+                  //1. call DAO
+                  CageDAO dao = new CageDAO();
+                  UserDAO userdao = new UserDAO();
+                  OrderDAO orderdao = new OrderDAO();
+                  //1.2. call method
+                  dao.AllProduction();
+                  userdao.getAllCustomer();
+                  orderdao.getListOrders();
+                  // process result
+                  List<CageDTO> result1 = dao.getListCage();
+                  List<UserDTO> result2 = userdao.getListUser();
+                  session.setAttribute("CAGE_LIST", result1);
+                  session.setAttribute("CUSTOMER_LIST", result2);
+                  url = ADD_ORDER_PAGE;
+            } catch (SQLException e) {
+                  log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
+            } catch (NamingException e) {
+                  log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
+            } finally {
+                  request.getRequestDispatcher(url).forward(request, response);
+            }
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

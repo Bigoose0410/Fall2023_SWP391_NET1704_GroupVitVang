@@ -14,18 +14,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "AddItemToCartController", urlPatterns = {"/AddItemToCartController"})
-public class AddItemToCartController extends HttpServlet {
-      private final String ORDER_ADD_PAGE = "MainController?btAction=New Order";
+@WebServlet(name = "RemoveItemFromCartController", urlPatterns = {"/RemoveItemFromCartController"})
+public class RemoveItemFromCartController extends HttpServlet {
+
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
        *
@@ -37,49 +35,40 @@ public class AddItemToCartController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-        String sku = request.getParameter("txtCageID");
-        String quantity = request.getParameter("txtQuantity");
-        int RequestQuantity = (!quantity.isEmpty()) ? Integer.parseInt(quantity) : 1;
-        String url = ORDER_ADD_PAGE;
-        try {
-            // 1. Cus goes to chartt's place
-            // 2. Cus takes his cart
-              HttpSession session = request.getSession(); // phai luon co san session
-            
-              CartObj cart = (CartObj) session.getAttribute("CART");
-            if (cart == null) {
-                cart = new CartObj();
+            String sku = request.getParameter("txtOrderCageID");
+            String url = "newLogin.jsp";
+            try {
+                  if (sku == null) {
+                        return;
+                  }
+                  // 1. cus go to cart place
+                  HttpSession session = request.getSession();
+                  // 2. cus take his cart
+                  CartObj cart = (CartObj) session.getAttribute("CART");
+                  if (cart == null) {
+                        return;
+                  }
+                  // 3. cus drop item out
+
+                  cart.removeItemFromPay(sku);
+                  if (cart.getProductItems() == null) {
+                        cart = null;
+                  }
+                  List<CageDTO> cageCart = new ArrayList<CageDTO>();
+                  for (CageDTO cage : cart.getProductItems().values()) {
+                        cageCart.add(cage);
+                  }
+                  request.setAttribute("CARTLIST", cageCart);
+                  session.setAttribute("CART", cart);
+                  // cus coutinous shopping
+                  url = "MainController"
+                          + "?btAction=New Order";
+
+            } finally {
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+                  rd.forward(request, response);
+
             }
-//            if (RequestQuantity > 1) {
-//                    cart.addManyItemToCart(sku, Integer.parseInt(quantity));
-//                } else {
-//                    cart.addItemToCart(sku);
-//                }
-//            cart.addCageToCart(sku, RequestQuantity);
-//                session.setAttribute("CART", cart);
-                // 3. Cus drops items to his cart
-                cart.addCageToCart(sku, RequestQuantity);
-                List<CageDTO> cageCart = new ArrayList<CageDTO>();
-                for (CageDTO cage : cart.getProductItems().values()) {
-                    cageCart.add(cage);
-              }
-                request.setAttribute("CARTLIST", cageCart);
-                session.setAttribute("CART", cart);
-            // 4. Cus continuously goes to shopping
-            url = "MainController"
-                    + "?btAction=New Order";
-                    
-        }catch(SQLException ex){
-        String msg= ex.getMessage();
-        log("CalculateDetailMaterial SQL" + msg);
-        }catch(NamingException ex ){
-        String msg = ex.getMessage();
-        log("CalculateDetailMaterial SQL" + msg);
-        }finally {
-//            response.sendRedirect(url); // dùng RequestDispatcher cũng được
-              RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

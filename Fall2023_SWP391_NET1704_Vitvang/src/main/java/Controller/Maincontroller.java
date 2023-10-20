@@ -45,6 +45,7 @@ public class MainController extends HttpServlet {
       private final String UpdateDesignProcessController = "UpdateDesignProcessController";
       private final String UpdateMaterialofCageController = "UpdateMaterialofCageController";
       //delete
+      private final String RemoveItemFromCartController = "RemoveItemFromCartController";
       private final String DeleteOrderController = "DeleteOrderController";
       private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
       private final String ProcessController = "ProcessController";
@@ -77,7 +78,9 @@ public class MainController extends HttpServlet {
                         url = AddOrderController;
                   } else if (button.equals("addToCart")) {
                         url = AddItemToCartController;
-                  } else if (button.equals("Search Customer")) {
+                  } else if (button.equals("RemoveItemFromCart")) {
+                        url = RemoveItemFromCartController;
+                  }else if (button.equals("Search Customer")) {
                         url = SearchCustomerController;
                   } else if (button.equals("New Customer")) {
                         url = CreateUserController;

@@ -41,9 +41,9 @@ public final class tool {
             }
       }
 
-      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess ,int employee, int maxConpletionperDay ) {
+      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess ,int employeeinDesign, int maxConpletionperDay, int empInprocess ) {
             
-            double maxConpletion = (maxConpletionperDay * 1d /employee);
+            double maxConpletion = 1d*empInprocess*(maxConpletionperDay * 1d /employeeinDesign);
 //            int employee = 3;
 //            int timeprocess = 2;
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
