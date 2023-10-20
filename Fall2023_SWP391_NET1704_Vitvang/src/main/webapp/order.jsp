@@ -21,7 +21,7 @@
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
           <link href="../java/bootstrap-5.3.2-dist/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-          
+
           <title>Order</title>
      </head>   
      <body>
@@ -98,6 +98,7 @@
                               </li>
                          </ul>
                     </div>
+
           </nav>
 
           <section class="dashboard">
@@ -193,7 +194,7 @@
                                                   <th   class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">City</th>
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status </th>
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px"></th>
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Details</th>
 
 
                                              </tr>
@@ -205,7 +206,7 @@
                                              <form class="form-order" action="MainController" method="get">
                                                   <div class="activity-data">
                                                        <tr>
-                                                            <td class="data-list" style="text-align: start;font-size:18px">${counter.count}</td>
+                                                            <td class="data-list" style="text-align: start;font-size:18px; ">${counter.count}</td>
 
                                                             <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
                                                                  <input type="hidden" name="txtOrderID" 
@@ -241,18 +242,21 @@
                                                             </c:url>
                                                        </div>
                                                        <!--<input type="submit" value="Detail" name="btAction" />-->
-                                                       <td class="data-list" style="text-align: start">
-                                                            <input type="submit" value="Detail" name="btAction" />
-                                                            <span class="data-list"><a href="${editLink}">Edit</a></span>
+                                                       <td class="data-list" style="text-align: start ">
+
+                                                            <button value="Detail" name="btAction" style="font-size:20px; outline: none;background-color: transparent; border:none;margin-left: 30px" d q/>
+                                                            <i class="uil uil-file-info-alt"></i>
+                                                            <p class="data-list"><a href="${editLink}"></p>
                                                        </td>
 
-                                                  </div>
+                                                 
                                                   </tr>
-                                                  </from>                                     
+                                                   </div>
+                                             </form>                                 
 
-                                             </c:forEach>
+                                        </c:forEach>
 
-                                             </tbody>
+                                        </tbody>
                                    </table>
 
                               </c:if>
@@ -341,11 +345,12 @@
                                                                       </c:url>
                                                                  </div>
                                                                  <!--<input type="submit" value="Detail" name="btAction" />-->
-                                                                 <td class="data-list" style="text-align: start">
-                                                                      <input type="submit" value="Detail" name="btAction" />
-                                                                      <span class="data-list"><a href="${editLink}">Edit</a></span>
-                                                                 </td>
+                                                                <td class="data-list" style="text-align: start ">
 
+                                                            <button value="Detail" name="btAction" style="font-size:20px; outline: none;background-color: transparent; border:none;margin-left: 30px" d q/>
+                                                            <i class="uil uil-file-info-alt"></i>
+                                                            <p class="data-list"><a href="${editLink}"></p>
+                                                       </td>
 
                                                                  </tr>
                                                             </form>
@@ -364,7 +369,7 @@
                                              </font>
                                         </c:if>
                                         </section>
-                                        <!--<script src="js/darkMode.js"></script>-->      
+                                        <script src="js/darkMode.js"></script>      
                                         <script src="js/OrderAdd.js"></script>      
 
                                         </body>
