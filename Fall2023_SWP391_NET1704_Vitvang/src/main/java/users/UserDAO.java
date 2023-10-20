@@ -5,6 +5,7 @@
 package users;
 
 import Model.UserDTO;
+import Model.UserInformationDTO;
 import Model.UserOrderDTO;
 import Util.DBHelper;
 import java.io.Serializable;
@@ -196,6 +197,74 @@ public class UserDAO implements Serializable {
                               this.listUser.add(user);
                         }//end username and password are checked
                   } // end of connection has opend
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+            }
+      }
+
+      List<UserInformationDTO> listUserInformation;
+
+      public List<UserInformationDTO> getUserInformation() {
+            return listUserInformation;
+      }
+
+      public void showCustomerInformation()
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            UserInformationDTO result = null;
+            try {
+                  //1. Make connection
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+                        String sql = "SELECT * " // phai co cach sau username
+                                + "FROM Users JOIN UserOrder "
+                                + "ON Users.UserID = UserOrder.UserID "
+                                + "JOIN OrderDetail "
+                                + "ON UserOrder.OrderID = OrderDetail.OrderID ";
+//                                + "Where UserName like ? ";
+//                                + "And RoleID = ? ";
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+//                        stm.setInt(2, roleID);
+                        //4. Excute query
+                        rs = stm.executeQuery();
+                        //5. Process
+                        while (rs.next()) {
+                              String UserID = rs.getString("UserID");
+                              String Name = rs.getString("Name");
+                              String PhoneNumber = rs.getString("PhoneNumber");
+                              String Sex = rs.getString("Sex");
+                              String Adress = rs.getString("Adress");
+                              Date BirthDate = rs.getDate("BirthDate");
+                              String Email = rs.getString("Email");
+                              String UserName = rs.getString("Username");
+                              String Password = rs.getString("Password");
+                              int RoleID = rs.getInt("RoleID");
+                              String OrderID = rs.getString("OrderID");
+                              String CageID = rs.getString("CageID");
+                              int Quantity = rs.getInt("Quantity");
+                              String OrderDetailStatus = rs.getString("OrderDetailStatus");
+
+                              UserInformationDTO user = new UserInformationDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, UserName, Password, RoleID, OrderID, CageID, Quantity, OrderDetailStatus);
+                              if (this.listUserInformation == null) {
+                                    this.listUserInformation = new ArrayList<UserInformationDTO>();
+                              }
+                              this.listUserInformation.add(user);
+                        }//end username and password are checked
+                  } // end of connection has opend
+
             } finally {
                   if (rs != null) {
                         rs.close();
