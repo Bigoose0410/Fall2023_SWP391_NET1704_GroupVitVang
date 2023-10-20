@@ -88,17 +88,21 @@
                     </div>
           </nav>
 
-          <section class="dashboard">
+           <section class="dashboard">
                <div id="form-all">
+                    <div style="display: flex; justify-content: space-between; align-items: center">
                     <div class="search-all">
                          <form action="MainController" method="POST">
                               <input class="form-control" type="text" value="${param.txtSearchvalue}" 
-                                     name="txtSearchvalue" placeholder="Search Customer here..." >
+                                     name="txtSearchvalue" style=" width:400px"placeholder="Search Customer here..." >
                               <input type="hidden" value="4" name="txtRoleSearch">
-                              <button class="search-button" value="Search Customer" name="btAction">Find Customer</button>
+                             <button class="search-button" value="Search Customer" name="btAction"><i class="uil uil-search"></i></button>
                          </form>
 
-                         <form action="MainController" method="POST">
+
+
+                    </div>
+                                       <form action="MainController" method="POST" style="margin-right:10px">
                               <input type="submit" class="show" name="btAction" value="Create New Customer" />
                          </form>
                     </div>
@@ -167,7 +171,8 @@
                     <c:if test="${not empty ShowForm}">
                          <c:set var="errors" value="${requestScope.CREATE_CUS_ERROR}" />
 
-                         <form action="MainController" method="POST">
+                         <form action="MainController" method="POST" style="display:flex; flex-wrap: wrap;justify-content: space-between">
+                              <div style="width:48%">
                               CustomerID 
                               <c:if test="${not empty errors.getCustomerIDFormatErr()}">
                                    <font color = "red">
@@ -181,46 +186,65 @@
                               </c:if>    
                               <input type="text" class="form-control" value="${param.txtUserID}" 
                                      placeholder="Customer ID" name="txtUserID" >
-
+                              </div>
                               <br>
+                              <div style="width:48%">
                               Customer Name
                               <c:if test="${not empty errors.getNameLengthErr()}">
                                    <font color = "red">
                                    ${errors.getNameLengthErr()}
                                    </font><br>
                               </c:if>   
+
                               <input type="text" class="form-control" value="${param.txtName}"
-                                     placeholder="Customer Name" name="txtName"> <br>
+                                     placeholder="Customer Name" name="txtName"> <br> </div>
                               <!--check customer name-->
+                              <div style="width:48%">
+                               Birth Date
+                              <input type="date" required="required" class="form-control" value="${param.txtBirthDate}"
+                                     placeholder="BirthDate" name="txtBirthDate"> </div>
+                              <br>
+                              <div style="width:48%;">
+                              Gender:
+                              <br>
+                              <div style="display:flex; align-items: center; height: 80%">
+                              <div style="padding: 5px; width: 30%">
+    <input type="radio" id="Male" name="Gender" value="M" checked />
+    <label for="Male">Male</label>
+  </div>
+                               <div style="padding: 5px; width: 30%">
+    <input type="radio" id="Female" name="Gender" value="F"  />
+    <label for="Female">Female</label>
+                               </div></div>
+
+                                    </div>
+                              <div style="width:48%">
                               Phone Number     
                               <input type="tel" class="form-control" required="required"  value="${param.txtPhoneNumber}"
-                                     placeholder="Phone Number" name="txtPhoneNumber"> <br>
-                              <fieldset>
-                                   <select name="txtGender" class="form-control" >
-                                        <option value="M" selected>Male</option>
-                                        <option value="F">Female</option>
-                                   </select>
-                              </fieldset> <br>
+                                     placeholder="Phone Number" name="txtPhoneNumber"> </div>
+
+                               <br>
+                                                                  <div style="width:48%">
+                              Email
+                              <input type="email" required="required" class="form-control" value="${param.txtEmail}"
+                                     placeholder="Email" name="txtEmail">
+                              <br>
+                                     </div>
+                               <div style="width:100%">
+
                               <!--check gender -->
                               Address
                               <c:if test="${not empty errors.getAddressLenghtErr()}">
                                    <font color = "red">
                                    ${errors.getAddressLenghtErr()}
-                                   </font><br>
+                                   </font> 
                               </c:if>  
                               <input type="text" class="form-control" placeholder="Adress" value="${param.txtAdress}"
-                                     name="txtAdress"> <br>
+                                     name="txtAdress">
 
-                              Birth Date
-                              <input type="date" required="required" class="form-control" value="${param.txtBirthDate}"
-                                     placeholder="BirthDate" name="txtBirthDate">
-                              <br>
-
-                              Email
-                              <input type="email" required="required" class="form-control" value="${param.txtEmail}"
-                                     placeholder="Email" name="txtEmail">
-                              <br>
-
+                               </div>
+                                     <br>
+                                     <div style="width: 100%">
                               Account Username
                               <c:if test="${not empty errors.getUsernameLengthErr()}">
                                    <font color = "red">
@@ -249,14 +273,19 @@
                                    </font><br>
                               </c:if> 
                               <input type="text" class="form-control" placeholder="Confirm Password" name="txtConfirm">
+                              </div>
                               <br>
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
                                    Create New customer
                               </button>
                          </form>
+
                     </c:if>
                </div>
           </section>
+     </div>
+</body>
+</html>
      </div>
 </body>
 </html>
