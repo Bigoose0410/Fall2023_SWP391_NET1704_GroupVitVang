@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : orderAdd
     Created on : Sep 29, 2023, 10:11:22 AM
@@ -25,7 +26,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-          <title>Add Order</title>
+          <title>Admin Dashboard Panel</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -43,68 +44,70 @@
           <c:set var="orderID" value="${requestScope.ORDERID}"></c:set>
                <nav>
 
-                    <div class="logo-name"style="
-                         display: block;">
+                    <div class="logo-name">
                          <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
-                    </div>
-                    <div class="menu-items">
-                         <ul class="nav-links">
-                              <!--                              <li ><a href="#">
-                                                                      <i class="uil uil-estate"></i>
-                                                                      <span class="link-name">Dahsboard</span>
-                                                                 </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Order</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Customers</span>
-                                   </a></li>
-                              <li ><a href="${productionList}">
-                                        <i class="uil uil-grin"></i>
-                                        <span class="link-name">Production</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Production process">
-                                        <i class="uil uil-chart-line"></i>
-                                        <span class="link-name">Production process</span>
-                                   </a></li>
-                              <li > <a href="#">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Reports</span>
-                                   </a></li>
-                              <li ><a href="#">
-                                        <i class="uil uil-screw"></i>
-                                        <span class="link-name">Material</span>
-                                   </a></li>
-                              <li > <a href="#">
-                                        <i class="uil uil-archive-alt"></i>
-                                        <span class="link-name">Inventory</span>
-                                   </a></li>
-                         </ul>
+                              <img src="images/logo.png" alt="">
+                         </div>
 
-                         <ul class="logout-mode">
-                              <li><a href="${logout_query}">
-                                        <i class="uil uil-signout"></i>
-                                        <span class="link-name" >Logout</span>
-                                   </a></li>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+               </div>
 
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
+               <div class="menu-items">
+                    <ul class="nav-links">
+                         <li><a href="#">
+                                   <i class="uil uil-estate"></i>
+                                   <span class="link-name">Dahsboard</span>
+                              </a></li>
+                         <li><a href="MainController?btAction=Order">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Customers</span>
+                              </a></li>
+                         <li><a href="${productionList}">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Reports</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-archive-alt"></i>
+                                   <span class="link-name">Inventory</span>
+                              </a></li>
+                    </ul>
 
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
-                         </ul>
-                    </div>
+                    <ul class="logout-mode">
+                         <li><a href="${logout_query}">
+                                   <i class="uil uil-signout"></i>
+                                   <span class="link-name" >Logout</span>
+                              </a></li>
+
+                         <li class="mode">
+                              <a href="#">
+                                   <i class="uil uil-moon"></i>
+                                   <span class="link-name">Dark Mode</span>
+                              </a>
+
+                              <div class="mode-toggle">
+                                   <span class="switch"></span>
+                              </div>
+                         </li>
+                    </ul>
+               </div>
           </nav>
-            <section class="dashboard">
+          <section class="dashboard">
                <h1>PURCHASE</h1>
                <div class="form">
 
@@ -133,12 +136,12 @@
                                    <c:forEach items="${CusList}" var="cus">
                                         <c:if test="${param.txtCustomerID eq cus.getUserID()}">
                                              <option selected="selected" value="${cus.getUserID()}">
-                                                  ${cus.getUserID()} 
+                                                  ${cus.getName()} 
                                              </option>
                                         </c:if>
                                         <c:if test="${param.txtCustomerID ne cus.getUserID()}">
                                              <option value="${cus.getUserID()}">
-                                                  ${cus.getUserID()} 
+                                                  ${cus.getName()} 
                                              </option>
                                         </c:if>
                                    </c:forEach>
@@ -154,7 +157,7 @@
                                    ${errors.getCustomerIdFormatErr()}
                                    </font>
                               </c:if>
-                              <c:url value="searchCustomer.jsp" var="searchCustomer">
+                              <c:url value="SearchCustomer.jsp" var="searchCustomer">
                                    <c:param name="txtOrderID" value="${param.txtOrderID}" />
                               </c:url>
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
