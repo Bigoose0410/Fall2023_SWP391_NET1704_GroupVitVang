@@ -150,7 +150,8 @@
                               <i class="uil uil-clock-three"> </i>
                               <span class="text">Recent Order</span> 
 
-                              <a href="OrderAdd.jsp">     <button type="submit" id="btn" onclick="document.loccation = 'OrderAdd.jsp'" name="btAction" class="button-icon" style="
+                              <form action="MainController" method="POST">
+                                   <button type="submit" id="btn" value="New Order" name="btAction" class="button-icon" style="
                                                                   background-color: #e6e5e500;
                                                                   color: blue;
                                                                   font-size: 16px;
@@ -163,8 +164,9 @@
                                                                   margin-left: 1000px;
                                                                   ">
                                         <i class="uil uil-plus"></i>
-                                   </button>   
-                              </a>
+                                   </button> 
+                                   </form>
+                              
                          </div>
                          <div> 
                          </div>

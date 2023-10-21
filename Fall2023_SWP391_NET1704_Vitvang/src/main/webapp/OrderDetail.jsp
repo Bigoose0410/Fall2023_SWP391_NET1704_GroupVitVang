@@ -12,6 +12,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/OrderDetail.css">
+          <link rel="stylesheet" href="css/HomePage.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">

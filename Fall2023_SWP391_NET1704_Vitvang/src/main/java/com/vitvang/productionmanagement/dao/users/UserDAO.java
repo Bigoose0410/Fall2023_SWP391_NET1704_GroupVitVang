@@ -350,7 +350,7 @@ public class UserDAO implements Serializable {
                   if (con != null) {
                         //2. create SQL statement string
 
-                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID)  "
+                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID) "
                                 + "VALUES ("
                                 + "?, ?, ? , ?, ?, ?, ?, ?, ?, ?"
                                 + ")";
