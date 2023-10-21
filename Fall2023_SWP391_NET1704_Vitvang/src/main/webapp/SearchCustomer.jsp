@@ -191,16 +191,15 @@
                               <br>
                               <div style="width:48%">
                                    Customer Name
-                                   
-
-                                   <input type="text" class="form-control" value="${param.txtName}"
-                                          placeholder="Customer Name" name="txtName"> <br> </div>
-                                          <c:if test="${not empty errors.getNameLengthErr()}">
+                                    <c:if test="${not empty errors.getNameLengthErr()}">
                                         <font color = "red">
                                         ${errors.getNameLengthErr()}
                                         </font><br>
-                                   </c:if>  
-                              check customer name
+                                   </c:if> 
+
+                                   <input type="text" class="form-control" value="${param.txtName}"
+                                          placeholder="Customer Name" name="txtName"> <br> </div>
+                                          
                               <div style="width:48%">
                                    Birth Date
                                    <input type="date" required="required" class="form-control" value="${param.txtBirthDate}"
@@ -210,12 +209,10 @@
                                    Gender:
                                    <br>
                                    <div style="display:flex; align-items: center; height: 80%">
-                                        <fieldset>
                                         <select name="txtGender" class="form-control" >
                                              <option value="M" selected>Male</option>
                                              <option value="F">Female</option>
                                         </select>
-                                        </fieldset>
                                    </div>
 
                               </div>
@@ -233,7 +230,6 @@
                               </div>
                               <div style="width:100%">
 
-                                   check gender 
                                    Address
                                    <c:if test="${not empty errors.getAddressLenghtErr()}">
                                         <font color = "red">
@@ -264,17 +260,16 @@
                                    </c:if> 
                                    <input type="password" class="form-control" value="${param.txtPassword}"
                                           placeholder="Account Password" name="txtPassword">
-                                   check password 
                                    <br>
 
                                    Confirm Password
-                                  
-                                   <input type="password" class="form-control" placeholder="Confirm Password" name="txtConfirm">
-                                    <c:if test="${not empty errors.getConfirmNotMatch()}">
+                                   <c:if test="${not empty errors.getConfirmNotMatch()}">
                                         <font color = "red">
                                         ${errors.getConfirmNotMatch()}
                                         </font><br>
                                    </c:if> 
+                                   <input type="password" class="form-control" placeholder="Confirm Password" name="txtConfirm">
+                                   
                               </div>
                               <br>
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">

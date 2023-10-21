@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
+
+import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderInsertError;
+import com.vitvang.productionmanagement.model.CageDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,7 +30,8 @@ import javax.naming.NamingException;
 public class AddOrderController extends HttpServlet {
 
       private final String ORDER_PAGE = "Order.jsp";
-      private final String ORDER_ADD_PAGE = "OrderAdd.jsp";
+      private final String ORDER_ADD_PAGE = "MainController"
+              + "?btAction=New Order";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String ORDERID_PATTERN = "OD\\d{3}";
 
@@ -50,6 +54,7 @@ public class AddOrderController extends HttpServlet {
             OrderInsertError error = new OrderInsertError();
             try {
                   HttpSession session = request.getSession();
+                  CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO Orderdao = new OrderDAO();
                   if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
                         error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
@@ -73,16 +78,20 @@ public class AddOrderController extends HttpServlet {
                   } else {
                         boolean result = Orderdao.insertOrder(orderId, now, total, productEndDate, Address);
                         Orderdao.addUserOrder(orderId, customerId);
-                              int quantity = 1;
-                        for (String item : CageID) {
-                              String quantityrequest = request.getParameter(item);
-                              quantity = Integer.parseInt(quantityrequest);
-                              Orderdao.addOrderDetail(orderId, item, quantity);
+                        int quantity = 1;
+                        for (CageDTO value : cart.getProductItems().values()) {
+                              Orderdao.addOrderDetail(orderId, value.getCageID(), value.getQuantityOrder());
+
                         }
+//                        for (String item : CageID) {
+//                              String quantityrequest = request.getParameter(item);
+//                              quantity = Integer.parseInt(quantityrequest);
+//                              Orderdao.addOrderDetail(orderId, item, quantity);
+//                        }
                         if (result) {
                               url = "MainController"
                                       + "?btAction=Detail"
-                                      + "&txtOrderID="+ orderId;
+                                      + "&txtOrderID=" + orderId;
                         }
                   }
             } catch (SQLException ex) {

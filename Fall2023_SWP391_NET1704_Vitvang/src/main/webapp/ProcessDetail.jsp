@@ -105,9 +105,9 @@
                                    <thead>
                                         <tr class="search2">
                                              <td></td>
-                                             <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
-                                             <td> <input type="search" data-column="2" placeholder="OrderID"></td>
-                                             <td> <input type="search" data-column="3" placeholder="CageID"></td>
+                                             <td> <input type="search" data-column="1" placeholder="CustomerID">CS003</td>
+                                             <td> <input type="search" data-column="2" placeholder="OrderID">OD001</td>
+                                             <td> <input type="search" data-column="3" placeholder="CageID">CG001</td>
                                              <td> <input type="search" data-column="4" placeholder="ProcessID"></td>
                                              <td></td>
                                              <td></td>
@@ -135,12 +135,14 @@
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
                                         <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
                                              <tbody>
-                                             <form action="MainController">  
+                                             <form action="MainController"> 
+
                                                   <tr>
                                                        <td>${counter.count}</td>
 
-                                                       <td>${dto.getUserID()}</td>
-
+                                                       <td>
+                                                            <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                       </td>
                                                        <td>
                                                             ${dto.getOrderID()}
                                                             <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
@@ -171,9 +173,9 @@
                                                        <td>${dto.getOrderDetailStatus()}</td>                                                  
                                                        <td>
                                                             <select name="txtStatus">    
-                                                                 <option selected>${dto.getStatus()}</option>
-                                                                 <option value="not yet">not yet</option>
+                                                                 <option>${dto.getStatus()}</option>
                                                                  <option value="Processing">Processing</option>
+                                                                 <option value="not yet">not yet</option>
                                                                  <option value="Done">Done</option>
                                                             </select>
                                                        </td>

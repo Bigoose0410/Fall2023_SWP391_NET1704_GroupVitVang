@@ -4,7 +4,6 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-
 import com.vitvang.productionmanagement.model.UserDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
@@ -56,32 +55,33 @@ public class CreateUserController extends HttpServlet {
             boolean foundErr = false;
             UserCreateError error = new UserCreateError();
             try {
-                  if (Name.trim().length() < 6) {
-                        error.setNameLengthErr("Name too short,please enter full name");
-                        foundErr = true;
-                  }
-                  if (Username.trim().length() < 3) {
-                        error.setNameLengthErr("UserName too short,please enter full name");
-                        foundErr = true;
-                  }
-                  if (!checkFormat(CusID, CUSTOMERID_PATTERN, true)) {
-                        error.setCustomerIDFormatErr("Pls type again CustomerID with correct format CSxxx");
-                        foundErr = true;
-                  }
-                  if (Password.trim().length() < 6
-                          || Password.trim().length() > 25) {
-                        foundErr = true;
-                        error.setPasswordLengthErr("Pass word is required typed length form 6-25 chars");
-                  } else if (!Confirm.trim().equals(Password.trim())) {
-                        error.setConfirmNotMatch("Confirm not match password");
-                         foundErr = true;
-                  }
-                  if (Adress.trim().length() < 5) {
-                        error.setAddressLenghtErr("Addres too short,please enter detail address");
-                        foundErr = true;
-                  }
+//                  if (Name.trim().length() < 6) {
+//                        error.setNameLengthErr("Name too short,please enter full name");
+//                        foundErr = true;
+//                  }
+//                  if (Username.trim().length() < 3) {
+//                        error.setNameLengthErr("UserName too short,please enter full name");
+//                        foundErr = true;
+//                  }
+//                  if (!checkFormat(CusID, CUSTOMERID_PATTERN, true)) {
+//                        error.setCustomerIDFormatErr("Pls type again CustomerID with correct format CSxxx");
+//                        foundErr = true;
+//                  }
+//                  if (Password.trim().length() < 6
+//                          || Password.trim().length() > 25) {
+//                        foundErr = true;
+//                        error.setPasswordLengthErr("Pass word is required typed length form 6-25 chars");
+//                  } else if (!Confirm.trim().equals(Password.trim())) {
+//                        error.setConfirmNotMatch("Confirm not match password");
+//                        foundErr = true;
+//                  }
+//                  if (Adress.trim().length() < 5) {
+//                        error.setAddressLenghtErr("Addres too short,please enter detail address");
+//                        foundErr = true;
+//                  }
                   if (foundErr) {
                         request.setAttribute("CREATE_CUS_ERROR", error);
+                        url = SEARCH_CUS_PAGE;
                   } else {
                         // 1. new DAO
                         UserDAO dao = new UserDAO();
@@ -90,10 +90,13 @@ public class CreateUserController extends HttpServlet {
                         UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, 4);
                         boolean result = dao.createAccount(user);
                         if (result) {
-                        HttpSession session = request.getSession();
-                        session.removeAttribute("SHOW_CUS_CREATE_FORM");
-                              url = "OrderAdd.jsp"
-                                      + "?txtCustomerID=" + CusID;
+                              HttpSession session = request.getSession();
+                              session.removeAttribute("SHOW_CUS_CREATE_FORM");
+//                              url = "OrderAdd.jsp"
+//                                      + "?txtCustomerID=" + CusID;
+                              url = "MainController"
+                                      + "?btAction=New Order"
+                                      + "&txtCustomerID=" + CusID;
                         }
                   }
             } catch (SQLException ex) {

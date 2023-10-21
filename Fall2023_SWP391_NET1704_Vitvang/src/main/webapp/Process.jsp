@@ -30,27 +30,27 @@
      </head>
 
      <body>
-         <c:url var="logout_query" value="MainController">
+          <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
           </c:url>
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
-           <nav>
+          <nav>
 
-                    <div class="logo-name"style="
-                         display: block;">
-                         <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+               <div class="logo-name"style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -141,7 +141,9 @@
                                                             <c:set var="count" value="${count + 1}" />
                                                             ${count}
                                                        </td>
-                                                       <td>${dto.getUserID()}</td>
+                                                       <td>
+                                                            <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                       </td>
                                                        <td>
                                                             ${dto.getOrderID()}
                                                             <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
@@ -162,7 +164,11 @@
                                                             ${dto.getOrderDetailStatus()}
                                                             <input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />
                                                        </td>
-                                                       <td><button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction"></button></td>
+                                                       <td>
+                                                            <button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction">
+                                                            </button>
+                                                       </td>
+
                                                   </tr>
                                              </form>
                                              </tbody>
@@ -221,7 +227,9 @@
                                                             <c:set var="count1" value="${count1 + 1}" />
                                                             ${count1}
                                                        </td>
-                                                       <td>${dto.getUserID()}</td>
+                                                       <td>
+                                                            <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                       </td>
                                                        <td>
                                                             ${dto.getOrderID()}
                                                             <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />

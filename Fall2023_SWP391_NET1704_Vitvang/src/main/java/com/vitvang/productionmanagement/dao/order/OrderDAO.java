@@ -254,8 +254,8 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into OrderDetail(OrderID, CageID, Quantity ) "
-                                + "values (?,?,?)";
+                        String sql = "insert into OrderDetail(OrderID, CageID, Quantity, OrderDetailStatus) "
+                                + "values (?,?,?, 'new order')";
 
                         stm = con.prepareStatement(sql);
                         stm.setString(1, orderId);
