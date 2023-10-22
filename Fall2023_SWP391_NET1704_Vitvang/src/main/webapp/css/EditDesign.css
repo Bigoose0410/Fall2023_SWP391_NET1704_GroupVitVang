@@ -93,6 +93,18 @@ nav {
      border-color: #e6e6cc;
 }
 
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
+
 nav.close {
      width: 73px;
 }
@@ -486,4 +498,3 @@ h1 {
      background: rgb(0, 3, 255);
      background: linear-gradient(0deg, rgba(0, 3, 255, 1) 0%, rgba(2, 126, 251, 1) 100%);
 }
-

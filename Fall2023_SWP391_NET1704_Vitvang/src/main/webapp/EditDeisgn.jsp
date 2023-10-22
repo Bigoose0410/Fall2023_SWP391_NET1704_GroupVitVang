@@ -31,7 +31,7 @@
           </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
-              <nav>
+               <nav>
 
                     <div class="logo-name"style="
                          display: block;">
@@ -41,10 +41,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -94,109 +94,231 @@
                          </ul>
                     </div>
           </nav>
-          <section class="dashboard2">
-               <div id="processing-form">
+          <section class="dashboard">
+               <h1>Desgin</h1>
+               <div class="table-container">
+                    <table>
+                         <thead>
+                              <tr>
+                                   <th>No.</th>
+                                   <th>Phrase</th>
+                                   <th>CageID</th>
+                                   <th>Time Process</th>
+                                   <th>Description</th>
+                                   <th>Employee Need</th>
+                                   <th>Modify</th>
+                              </tr>
+                         </thead>
 
-                    <h1>Design Process</h1>
-                    <form action="MainController">
-                         <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
-                         <button type="submit" value="EditDesign" name="btAction">Modify</button>
-                    </form>
-                    <div id="process-form">
-                         <table class="tablesorter-custom2">
-                              <thead>
-                                   <tr>
-                                        <th>No.</th>
-                                        <th>Phrase</th>
-                                        <th>CageID</th>
-                                        <th>Time Process</th>
-                                        <th>Description</th>
-                                        <th>Employee Need</th>
-                                        <th>Modify</th>
-                                   </tr>
-                              </thead>
-                              <tbody>
-                                   <c:set var="countPhare" value=""></c:set>
-                                   <c:forEach var="dto" items="${Design}" varStatus="counter">
-                                   <form action="MainController">
-                                        <tr>
-                                             <td>
-                                                  ${counter.count}
-                                                  <c:set var="countPhare" value="${counter.count}"></c:set>
-                                                  </td>
-                                                  <td>
-                                                  ${dto.getPhrase()}
-                                                  <input type="hidden" name="txtPhrase" value="${dto.getPhrase()}" />
-                                             </td>
-                                             <td>
-                                                  ${dto.getCageID()}
-                                                  <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                             </td>
-                                             <td>
-                                                  <input type="text" name="txtTimeProcess" value="${dto.getTimeProcess()}" />
-                                             </td>
-                                             <td>
-                                                  <input type="text" name="txtDescription" value="${dto.getDescription()}" />
-                                             </td>
-                                             <td>
-                                                  <input type="text" name="txtNumberOfEmployee" value="${dto.getNumberOfEmployee()}" />
-                                             </td>
-                                             <td>
-                                                  <button type="submit" value="updateDesign" name="btAction">
-                                                       Update
-                                                  </button>
-<!--                                                  <button type="submit" value="DeleteDesign" name="btAction">
-                                                       Delete
-                                                  </button>-->
-                                                  
-                                             </td>
-                                        </tr>
-                                   </form>
-                              </c:forEach>
-                              </tbody>
-                         </table>
+                         <tbody>
+                              <tr>
+                                   <td>
+                                        <c:set var="countPhare" value=""></c:set>
+                                        </td>
 
-                         <table>
-                              <thead>
-                                   <tr>
-                                        <th>Phrase</th>
-                                        <th>Time Process</th>
-                                        <th>Description</th>
-                                        <th>NumberOfEmployee</th>
-                                        <th>CompletionCage</th>
-                                        <th>Action</th>
+                                        <td>
+                                             <input type="hidden" name="txtPhrase" value="" />
+                                        </td>
+
+                                        <td>
+                                             <input type="hidden" name="txtCageID" value="" />
+                                        </td>
+
+                                        <td>
+                                             <div class="input-container1">
+                                                  <input placeholder="Time Process" class="input-field" type="number"
+                                                         name="txtNumberOfEmployee" value="">
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td>
+                                             <div class="input-container1">
+                                                  <input placeholder="Description" class="input-field" type="text"
+                                                         name="txtNumberOfEmployee" value="">
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td>
+                                             <div class="input-container1">
+                                                  <input placeholder="Employee Need" class="input-field" type="number"
+                                                         name="txtNumberOfEmployee" value="">
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td class="update_button">
+                                             <button type="submit" value="updateDesign" name="btAction">
+                                                  <i class="fa fa-pencil-square"></i>
+                                             </button>
+                                             <!--<button type="submit" value="DeleteDesign" name="btAction">
+                                                                    Delete
+                                                               </button>-->
+                                        </td>
                                    </tr>
-                              </thead>
-                              <tbody>
-                              <form action="MainController">
                                    <tr>
                                         <td>
-                                             <input type="text" name="txtPhrase" value="${param.txtPhrase}" placeholder="P001" />
+                                        <c:set var="countPhare" value=""></c:set>
                                         </td>
+
                                         <td>
-                                             <input type="number" name="txtTimeProcess" min="1" max="20" value="${param.txtTimeProcess}" placeholder="time" />
+                                             <input type="hidden" name="txtPhrase" value="" />
                                         </td>
+
                                         <td>
-                                             <input type="text" name="txtDescription" value="${param.txtDescription}" placeholder=""/>
+                                             <input type="hidden" name="txtCageID" value="" />
                                         </td>
+
                                         <td>
-                                             <input type="number" name="txtNumberOfEmployee" min="1" max="10" value="${param.txtNumberOfEmployee}" />
+                                             <div class="input-container1">
+                                                  <input placeholder="Time Process" class="input-field" type="number"
+                                                         name="txtNumberOfEmployee" value="">
+                                                  <span class="input-highlight"></span>
+                                             </div>
                                         </td>
+
                                         <td>
-                                             <input type="number" name="txtCompletionCage" min="1" max="10" value="${param.txtCompletionCage}" />
+                                             <div class="input-container1">
+                                                  <input placeholder="Description" class="input-field" type="text"
+                                                         name="txtNumberOfEmployee" value="">
+                                                  <span class="input-highlight"></span>
+                                             </div>
                                         </td>
+
                                         <td>
-                                             <input type="hidden" name="txtCageID" value="${CageID}" />
-                                             <button type="submit" value="AddDesignProcess" name="btAction">New Step</button>
+                                             <div class="input-container1">
+                                                  <input placeholder="Employee Need" class="input-field" type="number"
+                                                         name="txtNumberOfEmployee" value="">
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td class="update_button">
+                                             <button type="submit" value="updateDesign" name="btAction">
+                                                  <i class="fa fa-pencil-square"></i>
+                                             </button>
+                                             <!--<button type="submit" value="DeleteDesign" name="btAction">
+                                                                    Delete
+                                                               </button>-->
                                         </td>
                                    </tr>
-                              </form>
-                              </tbody>
-                         </table>
-                    </div>
+
+                                   <tr>
+                                        <td>
+                                        <c:set var="countPhare" value=""></c:set>
+                                   </td>
+
+                                   <td>
+                                        <input type="hidden" name="txtPhrase" value="" />
+                                   </td>
+
+                                   <td>
+                                        <input type="hidden" name="txtCageID" value="" />
+                                   </td>
+
+                                   <td>
+                                        <div class="input-container1">
+                                             <input placeholder="Time Process" class="input-field" type="number"
+                                                    name="txtNumberOfEmployee" value="">
+                                             <span class="input-highlight"></span>
+                                        </div>
+                                   </td>
+
+                                   <td>
+                                        <div class="input-container1">
+                                             <input placeholder="Description" class="input-field" type="text"
+                                                    name="txtNumberOfEmployee" value="">
+                                             <span class="input-highlight"></span>
+                                        </div>
+                                   </td>
+
+                                   <td>
+                                        <div class="input-container1">
+                                             <input placeholder="Employee Need" class="input-field" type="number"
+                                                    name="txtNumberOfEmployee" value="">
+                                             <span class="input-highlight"></span>
+                                        </div>
+                                   </td>
+
+                                   <td class="update_button">
+                                        <button type="submit" value="updateDesign" name="btAction">
+                                             <i class="fa fa-pencil-square"></i>
+                                        </button>
+                                        <!--<button type="submit" value="DeleteDesign" name="btAction">
+                                                               Delete
+                                                          </button>-->
+                                   </td>
+                              </tr>
+                         </tbody>
+                    </table>
                </div>
+
+               <button class="custom-btn btn-1">New Step</button>
+
+               <table class="tablesorter-custom1" style="display: none;">
+                    <thead>
+                    </thead>
+
+                    <tbody>
+                    <form action="MainController">
+                         <tr>
+
+                              <td>
+                                   <div class="input-container">
+                                        <input placeholder="Phrase" class="input-field" type="text">
+                                        <label for="input-field" class="input-label">Phrase</label>
+                                        <span class="input-highlight"></span>
+                                   </div>
+                              </td>
+
+                              <td>
+                                   <div class="input-container">
+                                        <input placeholder="Time Process" class="input-field" type="text">
+                                        <label for="input-field" class="input-label">Time Process</label>
+                                        <span class="input-highlight"></span>
+                                   </div>
+                              </td>
+
+                              <td>
+                                   <div class="input-container">
+                                        <input placeholder="Description" class="input-field" type="text">
+                                        <label for="input-field" class="input-label">Description</label>
+                                        <span class="input-highlight"></span>
+                                   </div>
+                              </td>
+
+                              <td>
+                                   <div class="input-container">
+                                        <input placeholder="NumberOfEmployee" class="input-field" type="text">
+                                        <label for="input-field" class="input-label">NumberOfEmployee</label>
+                                        <span class="input-highlight"></span>
+                                   </div>
+                              </td>
+
+                              <td>
+                                   <div class="input-container">
+                                        <input placeholder="CompletionCage" class="input-field" type="text">
+                                        <label for="input-field" class="input-label">CompletionCage</label>
+                                        <span class="input-highlight"></span>
+                                   </div>
+                              </td>
+
+                              <td>
+                                   <input type="hidden" name="txtCageID" value="" />
+                                   <div class="plus_button">
+                                        <button type="submit" value="AddDesignProcess" name="btAction"><i
+                                                  class="fa fa-plus"></i></button>
+                                   </div>
+                              </td>
+
+                         </tr>
+                    </form>
+                    </tbody>
+               </table>
           </section>
           <script src="js/Material.js"></script>
+          <script src="js/EditDesign.js"></script>
 
      </body>
 </html>
