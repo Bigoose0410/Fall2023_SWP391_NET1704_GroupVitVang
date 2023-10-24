@@ -1,6 +1,6 @@
 <%-- 
     Document   : searchCustomer
-    Created on : Oct 3, 2023, 10:52:53 AM
+    Created on : Oct 3, 1523, 10:52:53 AM
     Author     : Admin
 --%>
 
@@ -16,7 +16,7 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-          <link rel="stylesheet" href="css/SearchCustomer.css">
+          <link rel="stylesheet" href="css/Cus.css">
           <title>Customer</title>
      </head>
      <body>
@@ -30,18 +30,18 @@
 
           <nav>
 
-                    <div class="logo-name"style="
-                         display: block;">
-                         <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+               <div class="logo-name"style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -91,115 +91,150 @@
                          </ul>
                     </div>
           </nav>
+                                        
+          <div class="activity">
+              
+<!--                    <i class="uil uil-bars sidebar-toggle"></i>
+                    <div class="search-box">
+                         <i class="uil uil-search"></i>
+                         <form action="MainController">
 
-          <section class="dashboard1">
-               <div id="processing-form">
-                    <!--Processing-->
-                    <h1>Customer Information</h1>
+                              <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" required="" placeholder="Search here..." class="searchh" >
 
-                    <form>
-                         <%--<c:if test="${empty searchValue}">--%>
-                         <c:if test="${not empty CustomerList}">
-                              <table class="tablesorter-custom">
-                                   <thead>
-                                        <tr class="search1">
-                                             <td></td>
-                                             <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
-                                             <td> <input type="search" data-column="2" placeholder="Name"></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                        </tr>
-                                        <tr>
-                                             <th>No.</th>
-                                             <th>CustomerID</th>
-                                             <th>Name</th>
-                                             <th>PhoneNumber</th>
-                                             <th>Sex</th>
-                                             <th>Address</th>
-                                             <th>Date of Birth</th>
-                                             <th>Email</th>
-                                             <th>OrderID</th>
-                                             <th>CageID</th>
-                                             <th>Quantity</th>
-                                             <th>OrderDetailStatus</th>
-                                             <th>View Order Detail</th>
-                                        </tr>
-                                   </thead>
-                                   <c:set var="count1" value="0" />
-                                   <c:forEach items="${CustomerList}" var="dto" varStatus="counter">
-                                        <c:if test="${dto.getRoleID()==4}">
-                                             <form action="MainController">
+
+
+                              <button class="add-btn" value="Search" name="btAction"></button>
+                         </form>
+                    </div>
+           -->
+
+               
+               <div class="title">
+                    <span style="margin-left:700px;font-size:30px">Customer Information</span></p>
+                    <p style="margin-left:1400px; font-family: inherit"> <!-- SO Luong Khách Hàng -->customer </p>
+                    <div id="processing-form" class="customer-table">
+
+                         <section class="dashboard1" class="customer-table">
+
+                              <!--Processing-->
+
+
+                              <form>
+                                   <%--<c:if test="${empty searchValue}">--%>
+                                   <c:if test="${not empty CustomerList}">
+                                        <table style="width:100%">
+                                             <thead style="background:gainsboro">
+                                                  <!--                                        <tr class="search1">
+                                                                                               <td></td>
+                                                                                               <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
+                                                                                               <td> <input type="search" data-column="2" placeholder="Name"></td>
+                                                                                               <td></td>
+                                                                                               <td></td>
+                                                                                               <td></td>
+                                                                                          </tr>-->
                                                   <tr>
-                                                       <td>
-                                                            ${counter.count}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getUserID()}
-                                                            <input type="hidden" name="txtCustomerName" value="${dto.getUserID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getName()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getPhoneNumber()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getSex()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getAdress()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getBirthDate()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getEmail()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrderID()}
-                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getCageID()}
-                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getQuantity()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrderDetailStatus()}
-                                                            <input type="hidden" name="txtOrderDetailStatus" value="${dto.getOrderDetailStatus()}" />
-                                                       </td>
-                                                       <td>
-                                                            <button class="fa fa-cog"  type="submit" value="ViewProcessDetail" name="btAction"></button>
-                                                       </td>
-                                                       <%--
-                                                       <td>
-                                                            <c:url value="orderAdd.jsp" var="AdddLink">
-                                                                 <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
-                                                            </c:url>
-                                                            <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
-                                                       </td>
-                                                       --%>
-                                                  </tr>
-                                             </form>
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px;padding:24px">|No </th>
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Avatar</th>
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|CustomerID</th>
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Name</th>
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Sex</th>
+                                                          <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Address</th>
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|PhoneNumber</th>
+                                                       
+                                                    
+<!--                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Date of Birth</th>-->
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Email</th>
+                                                       <!--                                   <th class="data-title" style="text-align: center ;color:red;font-size:18px">|OrderID</th>-->
+                                                       <!--                                   <th class="data-title" style="text-align: center ;color:red;font-size:18px">|CageID</th>-->
+                                                       <!--                                   <th class="data-title" style="text-align: center ;color:red;font-size:18px">|Quantity</th>-->
+                                                       <!--                                                                                          <th>OrderDetailStatus</th>-->
+                                                       <th class="data-title" style="text-align: center ;color:red;font-size:18px">|View Order</th>
 
-                                        </c:if>
-                                   </c:forEach>
-                              </table>
-                         </c:if>
-                         <c:if test="${empty CustomerList}">
-                              <font color="green">
-                              <h2>
-                                   There is no Customers!!!
-                              </h2>
-                              </font>
-                         </c:if>
-                    </form>
+                                                  </tr>
+
+                                             </thead><!--    <hr> -->
+                                             <c:set var="count1" value="0" />
+                                             <c:forEach items="${CustomerList}" var="dto" varStatus="counter">
+                                                  <c:if test="${dto.getRoleID()==4}">
+                                                       <!--                                    <div class="activity-data">-->
+                                                       <form action="MainController">
+                                                            <tr>
+                                                                 <td class="data-list" style="font-size:18px;padding:15px;text-align: center;">
+                                                                      ${counter.count}
+                                                                 </td>
+                                                                 <td class="data-list" style="font-size:18px;padding:15px;text-align: center;">
+                                                                      <img src="img/download.png" alt="alt"/>
+                                                                 </td>
+                                                                 <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getUserID()}
+                                                                      <input type="hidden" name="txtCustomerName" value="${dto.getUserID()}" />
+                                                                 </td>
+                                                                 <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getName()}
+                                                                 </td>
+                                                                   <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getSex()}
+                                                                 </td>
+                                                                  <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getAdress()}
+                                                                 </td>
+                                                                 <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getPhoneNumber()}
+                                                                 </td>
+                                                               
+                                                                
+<!--                                                                 <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getBirthDate()}
+                                                                 </td>-->
+                                                                 <td class="data-list" style="font-size:18px;text-align: center">
+                                                                      ${dto.getEmail()}
+                                                                 </td>
+                                                                 <!--                                             <td class="data-list" style="font-size:18px;text-align: center">
+                                                                 ${dto.getOrderID()}
+                                                                 <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                            </td>-->
+                                                                 <!--                                             <td class="data-list" style="font-size:18px;text-align: center">
+                                                                 ${dto.getCageID()}
+                                                                 <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                            </td>-->
+                                                                 <!--                                             <td class="data-list" style="font-size:18px;text-align: center">
+                                                                 ${dto.getQuantity()}
+                                                            </td>-->
+                                                                 <!--                                                       <td>
+                                                                 ${dto.getOrderDetailStatus()}
+                                                                 <input type="hidden" name="txtOrderDetailStatus" value="${dto.getOrderDetailStatus()}" />
+                                                            </td>-->
+                                                                 <td class="data-list" style="font-size:18px">
+                                                                      <button   type="submit" value="ViewProcessDetail" name="btAction" style="font-size:18px; margin-left: 60px ; border: none; background: white;color:blue"><i class="uil uil-receipt-alt"></i></button>
+                                                                 </td>
+                                                                 <%--
+                                                                 <td>
+                                                                      <c:url value="orderAdd.jsp" var="AdddLink">
+                                                                           <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
+                                                                      </c:url>
+                                                                      <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
+                                                                 </td>
+                                                                 --%>
+                                                            </tr>
+                                                       </form>
+                                                       </div>
+                                                  </c:if>
+                                             </c:forEach>
+                                        </table>
+                                   </c:if>
+                                   <hr>
+                                   <c:if test="${empty CustomerList}">
+                                        <font color="green">
+                                        <h2>
+                                             There is no Customers!!!
+                                        </h2>
+                                        </font>
+                                   </c:if>
+                              </form>
+                    </div>
+                    </section>
                </div>
-          </section>
-     </div>
-     <script src="js/ProductProcess.js"></script>
-</body>
+          </div>
+          <script src="js/ProductProcess.js"></script>
+     </body>
 </html>
