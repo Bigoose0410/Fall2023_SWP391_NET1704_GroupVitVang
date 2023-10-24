@@ -146,6 +146,12 @@
 </table> -->
                     <h1 style="font-size: 30px">Detail</h1>
                     <br>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                     <div style="border-style: outset; padding:10px;width:700px;background-color: white" > 
                          <h1>Order Information </h1>
                          <p> Order : ${OrderInfo.getOrderID()} </p>
@@ -157,6 +163,11 @@
                          <p> Billing Address : ${OrderInfo.getAddress()}</p>
                     </div>
                </c:if>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                <!--    <c:if test="${not empty OrderInfo}"> 
                         <table class="tablesorter-custom1">
                     <!--Form OrderID
@@ -201,8 +212,15 @@
                <p> Product: </p>
                <hr>
                <c:if test="${not empty CageList}">
+<<<<<<< HEAD
                     <table class="tablesorter-custom1" style="width:70%; background-color:white;border-style: initial">
                          <!--Form CageID-->
+=======
+
+                    <table class="tablesorter-custom1" style="width:70%; background-color:white;border-style: initial">
+                         <!--Form CageID-->
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                          <thead>
                               <tr>
                                    <th class="data-title" style="text-align: start ;color:black;font-size:20px">CageID</th>
@@ -210,11 +228,24 @@
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
                                    <!--                                   <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Origin</th>-->
+<<<<<<< HEAD
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
                               </tr>
                          </thead>
                          <tbody>
                               <c:forEach items="${CageList}" var="cage" varStatus="status">
+=======
+
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
+                              </tr>
+
+                         </thead>
+
+                         <tbody>
+
+                              <c:forEach items="${CageList}" var="cage" varStatus="status">
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                    <tr>
                                         <td style="color:purple">
                                              ${cage.getCageID()}
@@ -231,9 +262,17 @@
                                         <!--                                        <td>
                                         ${cage.getOrigin()}
                                    </td>-->
+<<<<<<< HEAD
                                         <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
                                                        </tr>
                                                        <tr class="hidden" id="expand-${   status.index}">
+=======
+
+                                        <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
+                                                       </tr>
+                                                       <tr class="hidden" id="expand-${   status.index}">
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                             <td colspan="7">
                                                                  <table class="tablesorter-custom1" style="width:100%;  " >
                                                                       <br>
@@ -255,6 +294,10 @@
                                                                                                               </tr>-->
                                                                       <tr style="padding:100px">
                                                                            <th class="data-title" style="text-align: start ;color:green;font-size:16px">No</th>
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Material ID</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Name</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Origin</th>
@@ -273,6 +316,10 @@
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px;color: #999999">
                                                                                                ${counter.count}
                                                                                           </td>
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px;">
                                                                                                ${dto.getMaterialID()}
                                                                                           </td>
@@ -305,6 +352,10 @@
                                                                                                ${totalPrice}
                                                                                           </td>
                                                                                      </tr>
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                                                 </c:if>
                                                                            </c:forEach>
                                                                       </tbody>
@@ -312,9 +363,21 @@
                                                                  <hr>
                                                                
                                                             </td>
+<<<<<<< HEAD
                                                        </tr> 
                                                        </tr>
                                                   </c:forEach>
+=======
+
+
+                                                       </tr> 
+
+                                                       </tr>
+
+
+                                                  </c:forEach>
+
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                   </tbody>
                                                   </table>
                     <hr>
@@ -328,4 +391,8 @@
                                              </section>
                                              <script src="js/Material.js"></script>
                                              </body>
+<<<<<<< HEAD
                                              </html>
+=======
+                                             </html>
+>>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
