@@ -2,19 +2,19 @@
 <web-app version="5.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
     <servlet>
         <servlet-name>MainController</servlet-name>
-        <servlet-class>Controller.MainController</servlet-class>
+        <servlet-class>com.vitvang.productionmanagement.controller.MainController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>Controller.LoginController</servlet-class>
+        <servlet-class>com.vitvang.productionmanagement.controller.controller.LoginController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddOrderController</servlet-name>
-        <servlet-class>Controller.AddOrderController</servlet-class>
+        <servlet-class>com.vitvang.productionmanagement.controller.AddOrderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProductionProcessController</servlet-name>
-        <servlet-class>Controller.ProductionProcessController</servlet-class>
+        <servlet-name>RemoveItemFromCartController</servlet-name>
+        <servlet-class>com.vitvang.productionmanagement.controller.RemoveItemFromCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -29,8 +29,8 @@
         <url-pattern>/AddOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductionProcessController</servlet-name>
-        <url-pattern>/ProductionProcessController</url-pattern>
+        <servlet-name>RemoveItemFromCartController</servlet-name>
+        <url-pattern>/RemoveItemFromCartController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

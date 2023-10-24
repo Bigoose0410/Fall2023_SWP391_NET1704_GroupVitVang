@@ -15,7 +15,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css\ProductPocess.css">
+          <link rel="stylesheet" href="css/ProductPocess.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -31,66 +31,67 @@
      <body>
           <nav>
 
-               <div class="logo-name">
+               <div class="logo-name"style="
+                    display: block;">
                     <div class="logo-image">
-                         <img src="img/OIP.jpg" alt="">
+                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
+                              <li ><a href="MainController?btAction=Order">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Customers">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Customers</span>
+                                   </a></li>
+                              <li ><a href="${productionList}">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Production</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Production process">
+                                        <i class="uil uil-chart-line"></i>
+                                        <span class="link-name">Production process</span>
+                                   </a></li>
+                              <li > <a href="#">
+                                        <i class="uil uil-clipboard-alt"></i>
+                                        <span class="link-name">Reports</span>
+                                   </a></li>
+                              <li ><a href="#">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
+                              <li > <a href="#">
+                                        <i class="uil uil-archive-alt"></i>
+                                        <span class="link-name">Inventory</span>
+                                   </a></li>
+                         </ul>
 
-                    <span class="logo_name">Manager</span>
-               </div>
+                         <ul class="logout-mode">
+                              <li><a href="${logout_query}">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
 
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="homePage.html">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Home Page</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Order">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Production process">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
 
-                    <ul class="logout-mode">
-                         <li><a href="index.html">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
-                              </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
           </nav>
-
           <section class="dashboard1">
                <div id="processing-form">
                     <!--Processing-->
@@ -104,9 +105,9 @@
                                    <thead>
                                         <tr class="search2">
                                              <td></td>
-                                             <td> <input type="search" data-column="1" placeholder="CustomerID"></td>
-                                             <td> <input type="search" data-column="2" placeholder="OrderID"></td>
-                                             <td> <input type="search" data-column="3" placeholder="CageID"></td>
+                                             <td> <input type="search" data-column="1" placeholder="CustomerID">CS003</td>
+                                             <td> <input type="search" data-column="2" placeholder="OrderID">OD001</td>
+                                             <td> <input type="search" data-column="3" placeholder="CageID">CG001</td>
                                              <td> <input type="search" data-column="4" placeholder="ProcessID"></td>
                                              <td></td>
                                              <td></td>
@@ -134,60 +135,66 @@
                                    <c:forEach var="dto" items="${result}" varStatus="counter">
                                         <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
                                              <tbody>
-                                             <form action="MainController">  
+                                             <form action="MainController"> 
+
                                                   <tr>
                                                        <td>${counter.count}</td>
-                                                       <td>${dto.getUserID()}</td>
-                                                       <td>${dto.getOrderID()}</td>
-                                                       <td>${dto.getCageID()}</td>
-                                                       <td>${dto.getProcessID()}</td>
+
+                                                       <td>
+                                                            <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                       </td>
+                                                       <td>
+                                                            ${dto.getOrderID()}
+                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                       </td>
+
+                                                       <td>
+                                                            ${dto.getCageID()}
+                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                       </td>
+
+                                                       <td>
+                                                            ${dto.getProcessID()}
+                                                            <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                       </td>
+
                                                        <td>${dto.getProcessName()}</td>
+
                                                        <td>${dto.getStartDate()}</td>
+
                                                        <td>${dto.getEndDate()}</td>
+
                                                        <td>${dto.getQuantity()}</td>
-                                                       <td>${dto.getNumberOfEmployee()}</td>
-                                                       <td>${dto.getOrderDetailStatus()}</td>
-                                                       <td>${dto.getStatus()}</td>
-                                                       <td><button class="fa fa-pencil-square"></button></td>
-                                                       <!--<td><button class="fa fa-trash"></button></td>-->
+
+                                                       <td>
+                                                            ${dto.getNumberOfEmployee()}
+                                                            <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                       </td>
+                                                       <td>${dto.getOrderDetailStatus()}</td>                                                  
+                                                       <td>
+                                                            <select name="txtStatus">    
+                                                                 <option>${dto.getStatus()}</option>
+                                                                 <option value="Processing">Processing</option>
+                                                                 <option value="not yet">not yet</option>
+                                                                 <option value="Done">Done</option>
+                                                            </select>
+                                                       </td>
+                                                       <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
                                                   </tr>
-                                                  <!--                                   <tr>
-                                                                                          <td>2</td>
-                                                                                          <td>1002</td>
-                                                                                          <td>P002</td>
-                                                                                          <td>PT001</td>
-                                                                                          <td>MT002</td>
-                                                                                          <td>Step 2</td>
-                                                                                          <td>2023-10-06</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td>70</td>
-                                                                                          <td><button class="fa fa-pencil-square"></button></td>
-                                                                                          <td><button class="fa fa-trash"></button></td>
-                                                                                     </tr>
-                                                  
-                                                                                     <tr>
-                                                                                          <td>3</td>
-                                                                                          <td>1003</td>
-                                                                                          <td>P003</td>
-                                                                                          <td>PT001</td>
-                                                                                          <td>MT003</td>
-                                                                                          <td>Step 3</td>
-                                                                                          <td>2023-10-07</td>
-                                                                                          <td>2023-10-08</td>
-                                                                                          <td>80</td>
-                                                                                          <td><button class="fa fa-pencil-square"></button></td>
-                                                                                          <td><button class="fa fa-trash"></button></td>
-                                                                                     </tr>-->
+
                                              </form>
                                              </tbody>
                                         </c:if>
                                    </c:forEach>
                               </table>
                          </c:if>
+                         <c:if test="${empty result}">
+                              <p>Yours order is not in processing!!!</p>
+                         </c:if>
                     </form>
                </div>
           </section>
 
-          <script src="js\Productprocess.js"></script>
+          <script src="js/ProductProcess.js"></script>
      </body>
 </html>
