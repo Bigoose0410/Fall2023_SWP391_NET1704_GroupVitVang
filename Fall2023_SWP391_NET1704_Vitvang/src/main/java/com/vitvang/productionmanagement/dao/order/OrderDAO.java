@@ -211,7 +211,7 @@ public class OrderDAO implements Serializable {
 
       }
 
-      public boolean insertOrder(String orderID, Date startDate, int totalprice, Date endDate, String Addres)
+      public boolean insertOrder(String orderID, Date startDate, int totalprice, String Addres)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -219,15 +219,14 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into Orderr (OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress ) "
-                                + "values (?,?,?,?,?, 'new order')";
+                        String sql = "insert into Orderr (OrderID, StartDate, TotalPrice, Address, StatusProgress ) "
+                                + "values (?,?,?,?, 'new order')";
 
                         stm = con.prepareStatement(sql);
                         stm.setString(1, orderID);
                         stm.setDate(2, startDate);
-                        stm.setDate(3, endDate);
-                        stm.setInt(4, totalprice);
-                        stm.setString(5, Addres);
+                        stm.setInt(3, totalprice);
+                        stm.setString(4, Addres);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;

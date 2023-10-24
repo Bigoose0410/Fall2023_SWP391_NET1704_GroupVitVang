@@ -41,8 +41,6 @@ public class AddOrderController extends HttpServlet {
             String url = ORDER_PAGE;
             // test
             String orderId = request.getParameter("txtOrderID");
-            String EndDate = request.getParameter("txtEndDate");
-            Date productEndDate = Date.valueOf(EndDate);
             String customerId = request.getParameter("txtCustomerID");
             String totalprice = request.getParameter("txtTotalPrice");
             int total = Integer.parseInt(totalprice);
@@ -55,15 +53,12 @@ public class AddOrderController extends HttpServlet {
             try {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
-                  OrderDAO Orderdao = new OrderDAO();
+                  OrderDAO dao = new OrderDAO();
                   if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
                         error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
                         foundErr = true;
                   }
-                  if (productEndDate.before(now)) {
-                        error.setEndDateErr("End date can not before today");
-                        foundErr = true;
-                  }
+                  
                   if (!checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
                         error.setCustomerIdFormatErr("Pls type again CustomerID with two digit");
                         foundErr = true;
@@ -76,18 +71,14 @@ public class AddOrderController extends HttpServlet {
                         request.setAttribute("ADD_ORDER_ERROR", error);
                         url = ORDER_ADD_PAGE;
                   } else {
-                        boolean result = Orderdao.insertOrder(orderId, now, total, productEndDate, Address);
-                        Orderdao.addUserOrder(orderId, customerId);
+                        boolean result = dao.insertOrder(orderId, now, total, Address);
+                        dao.addUserOrder(orderId, customerId);
                         int quantity = 1;
                         for (CageDTO value : cart.getProductItems().values()) {
-                              Orderdao.addOrderDetail(orderId, value.getCageID(), value.getQuantityOrder());
+                              dao.addOrderDetail(orderId, value.getCageID(), value.getQuantityOrder());
 
                         }
-//                        for (String item : CageID) {
-//                              String quantityrequest = request.getParameter(item);
-//                              quantity = Integer.parseInt(quantityrequest);
-//                              Orderdao.addOrderDetail(orderId, item, quantity);
-//                        }
+
                         if (result) {
                               url = "MainController"
                                       + "?btAction=Detail"

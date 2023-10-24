@@ -55,30 +55,30 @@ public class CreateUserController extends HttpServlet {
             boolean foundErr = false;
             UserCreateError error = new UserCreateError();
             try {
-//                  if (Name.trim().length() < 6) {
-//                        error.setNameLengthErr("Name too short,please enter full name");
-//                        foundErr = true;
-//                  }
-//                  if (Username.trim().length() < 3) {
-//                        error.setNameLengthErr("UserName too short,please enter full name");
-//                        foundErr = true;
-//                  }
-//                  if (!checkFormat(CusID, CUSTOMERID_PATTERN, true)) {
-//                        error.setCustomerIDFormatErr("Pls type again CustomerID with correct format CSxxx");
-//                        foundErr = true;
-//                  }
-//                  if (Password.trim().length() < 6
-//                          || Password.trim().length() > 25) {
-//                        foundErr = true;
-//                        error.setPasswordLengthErr("Pass word is required typed length form 6-25 chars");
-//                  } else if (!Confirm.trim().equals(Password.trim())) {
-//                        error.setConfirmNotMatch("Confirm not match password");
-//                        foundErr = true;
-//                  }
-//                  if (Adress.trim().length() < 5) {
-//                        error.setAddressLenghtErr("Addres too short,please enter detail address");
-//                        foundErr = true;
-//                  }
+                  if (Name.trim().length() < 6) {
+                        error.setNameLengthErr("Name too short,please enter full name");
+                        foundErr = true;
+                  }
+                  if (Username.trim().length() < 3) {
+                        error.setNameLengthErr("UserName too short,please enter full name");
+                        foundErr = true;
+                  }
+                  if (!checkFormat(CusID, CUSTOMERID_PATTERN, true)) {
+                        error.setCustomerIDFormatErr("Pls type again CustomerID with correct format CSxxx");
+                        foundErr = true;
+                  }
+                  if (Password.trim().length() < 6
+                          || Password.trim().length() > 25) {
+                        foundErr = true;
+                        error.setPasswordLengthErr("Pass word is required typed length form 6-25 chars");
+                  } else if (!Confirm.trim().equals(Password.trim())) {
+                        error.setConfirmNotMatch("Confirm not match password");
+                        foundErr = true;
+                  }
+                  if (Adress.trim().length() < 5) {
+                        error.setAddressLenghtErr("Addres too short,please enter detail address");
+                        foundErr = true;
+                  }
                   if (foundErr) {
                         request.setAttribute("CREATE_CUS_ERROR", error);
                         url = SEARCH_CUS_PAGE;

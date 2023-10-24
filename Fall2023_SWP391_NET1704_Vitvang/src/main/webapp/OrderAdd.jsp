@@ -170,10 +170,7 @@
                                           required="required" />
                               </div>
 
-                              <div class="input-container2">
-                                   <label for="enddateinput">EndDate</label>
-                                   <input type="date" id="enddateinput" value="${param.txtEndDate}" name="txtEndDate" required="required" />
-                              </div> 
+                             
 
                               <label for="addressinput">Address</label>
                               <!--                               <input type="text" id="addressinput" name="address" required="required" 
