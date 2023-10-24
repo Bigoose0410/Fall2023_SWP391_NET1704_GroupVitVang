@@ -122,16 +122,9 @@
                                    ${errors.getOrderIdFormatErr()}
                                    </font>
                               </c:if>
-                              <c:if test="${not empty errors.getDuplicateOrderIDErr()}">
-                                   <font color="red">
-                                   ${errors.getDuplicateOrderIDErr()}
-                                   </font>
-                              </c:if>
+
                               <label for="customerinput">CustomerID</label>
-                              <!--                               <input type="text" id="customerinput" name="customerid" required="required" 
-                                                            placeholder="CustomerID" />-->
-                              <!--                              <input type="text" id="customerinput" placeholder="CustomerID" name="txtCustomerID"
-                                                                   value="${param.txtCustomerID}" />-->
+
                               <select id="customerinput" class="input-field" name="txtCustomerID">
                                    <c:forEach items="${CusList}" var="cus">
                                         <c:if test="${param.txtCustomerID eq cus.getUserID()}">
@@ -147,37 +140,20 @@
                                    </c:forEach>
                               </select>
 
-                              <c:if test="${not empty errors.getCustomerNotExistInDatabasErr()}">
-                                   <font color="red">
-                                   ${errors.getCustomerNotExistInDatabasErr()}
-                                   </font>
-                              </c:if>
-                              <c:if test="${not empty errors.getCustomerIdFormatErr()}">
-                                   <font color="red">
-                                   ${errors.getCustomerIdFormatErr()}
-                                   </font>
-                              </c:if>
                               <c:url value="SearchCustomer.jsp" var="searchCustomer">
                                    <c:param name="txtOrderID" value="${param.txtOrderID}" />
                               </c:url>
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
 
                               <div class="input-container">
-                                   <label for="startdateinput">StartDate</label>
+                                   <label for="startdateinput">Start Date</label>
                                    <fmt:formatDate var="date" value="${now}" pattern="MM-dd-yyyy" />
-                                   <!--${date}-->
+
                                    <input type="text" readonly="true" id="startdateinput" value="${date}"
                                           required="required" />
                               </div>
 
-                              <div class="input-container2">
-                                   <label for="enddateinput">EndDate</label>
-                                   <input type="date" id="enddateinput" value="${param.txtEndDate}" name="txtEndDate" required="required" />
-                              </div> 
-
                               <label for="addressinput">Address</label>
-                              <!--                               <input type="text" id="addressinput" name="address" required="required" 
-                                                            placeholder="Address" />-->
                               <input type="text" id="addressinput" placeholder="Address" name="txtAddress"
                                      value="${param.txtAddress}" />
                               <c:if test="${not empty errors.getAddressLengthErr()}">
@@ -216,11 +192,7 @@
                                              <div class="input-container1">
                                                   <input placeholder="Quantity" class="input-field" type="number" min="1"
                                                          name="txtQuantity" value="">
-                                                  <c:if test="${not empty errors.getNullQuanityErr()}">
-                                                       <font color="red">
-                                                       ${errors.getNullQuanityErr()}
-                                                       </font>
-                                                  </c:if>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -261,14 +233,13 @@
                                                        </td>
                                                        <td>
                                                             ${key.getQuantityOrder()}
-                                                            <c:set var="totalprice" value="${totalprice +key.getQuantityOrder()* key.getPrice() }"></c:set>
+                                                            <c:set var="totalprice" value="${totalprice + key.getQuantityOrder()* key.getPrice() }"></c:set>
                                                             <input type="hidden" name="${key.getCageID()}" value="${key.getQuantityOrder()}" />
                                                        </td>
                                                        <td>
                                                             <input type="hidden" name="txtOrderID"  value="${param.txtOrderID}" />
                                                             <input type="hidden" name="txtCustomerID" value="${param.txtCustomerID}" />
                                                             <input type="hidden" name="txtAddress" value="${param.txtAddress}"/>
-                                                            <input type="hidden" name="txtEndDate" value="${param.txtEndDate}"/>
                                                             <div class="plus_button minus_button">
                                                                  <button type="submit" name="btAction" value="RemoveItemFromCart">
                                                                       <i class="fa fa-minus-square" aria-hidden="true"></i>
@@ -280,16 +251,25 @@
                                         </c:forEach>
                                         </tr>         
                                    </table>
-                                   <p>Total Price: ${totalprice}</p>
+                                   <br>
+                                   <p>Total Price: 
+                                        <font color="red">
+                                   
+                                   ${totalprice}
+                                   </font>
+                                             </p>
                                    <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
                               </c:if>
-                              <%--</c:if>--%>
                          </fieldset>
                          <button name="btAction" value="Create Order" type="submit" class="custom-btn btn-1">
                               Create Order
                          </button>
+                         <c:if test="${not empty errors.getCustomerNotExistInDatabasErr()}">
+                              <font color="red">
+                              ${errors.setCustomerNotExistInDatabasErr()}
+                              </font>
+                         </c:if>
                     </form>
-
                </div>
           </section>
      </body>

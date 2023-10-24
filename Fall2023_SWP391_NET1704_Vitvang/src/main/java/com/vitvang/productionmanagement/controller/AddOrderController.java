@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -29,9 +28,7 @@ import javax.naming.NamingException;
  */
 public class AddOrderController extends HttpServlet {
 
-      private final String ORDER_PAGE = "Order.jsp";
-      private final String ORDER_ADD_PAGE = "MainController"
-              + "?btAction=New Order";
+      private final String ORDER_PAGE = "OrderAdd.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String ORDERID_PATTERN = "OD\\d{3}";
 
@@ -59,17 +56,14 @@ public class AddOrderController extends HttpServlet {
                         foundErr = true;
                   }
                   
-                  if (!checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
-                        error.setCustomerIdFormatErr("Pls type again CustomerID with two digit");
-                        foundErr = true;
-                  }
                   if (Address.trim().length() < 5) {
                         error.setAddressLengthErr("Pls type again Address too short");
                         foundErr = true;
                   }
+                  
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
-                        url = ORDER_ADD_PAGE;
+                        url = "MainController"+"?btAction=New Order";
                   } else {
                         boolean result = dao.insertOrder(orderId, now, total, Address);
                         dao.addUserOrder(orderId, customerId);
@@ -78,7 +72,6 @@ public class AddOrderController extends HttpServlet {
                               dao.addOrderDetail(orderId, value.getCageID(), value.getQuantityOrder());
 
                         }
-
                         if (result) {
                               url = "MainController"
                                       + "?btAction=Detail"
@@ -86,16 +79,10 @@ public class AddOrderController extends HttpServlet {
                         }
                   }
             } catch (SQLException ex) {
-                  String msg = ex.getMessage();
-                  log("UpdateAccountServlet _ SQL " + msg);
-                  if (msg.contains("conflicted with the FOREIGN KEY")) {
-                        error.setCustomerNotExistInDatabasErr("Customer not exist in database");
-                        request.setAttribute("ADD_ORDER_ERROR", error);
-                  }
-                  if (msg.contains("duplicate")) {
-                        error.setDuplicateOrderIDErr("OrderID has exist in database");
-                        request.setAttribute("ADD_ORDER_ERROR", error);
-                  }
+                 error.setCustomerNotExistInDatabasErr(orderId + " has existed in database");
+                 request.setAttribute("ADD_ORDER_ERROR", error);
+                 url = "MainController"+"?btAction=New Order";
+                  
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
             } finally {
