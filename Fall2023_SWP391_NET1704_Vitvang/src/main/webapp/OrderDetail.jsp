@@ -45,10 +45,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -99,214 +99,263 @@
                     </div>
           </nav>
 
-               <div class="search-box">
-                    <i class="uil uil-search"></i>
-                    <form action="MainController">
-                         <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" required="" placeholder="Search here...">
-                    <button class="add-btn" value="Search" name="btAction">Search</button>
-               </form>
-          </div>
+          <!--          <div class="search-box">
+                         <i class="uil uil-search"></i>
+                         <form action="MainController">
+                              <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" required="" placeholder="Search here...">
+                              <button class="add-btn" value="Search" name="btAction">Search</button>
+                         </form>
+                    </div>-->
 
-          <section class="dashboard">
-              <c:if test="${not empty customer}">
-                    <table class="tablesorter-custom1">
-                         <!--Form OrderID-->
-                         <h1>Customer Infomation</h1>
-                         <thead>
-                              <tr>
-                                   <th>CusID</th>
-                                   <th>Name</th>
-                                   <th>Phone Number</th>
-                                   <th>Gender</th>
-                                   <th>Address</th>
-                                   <th>Birth Date</th>
-                                   <th>Email</th>
-                              </tr>
-                         </thead>
-                         <tbody>
-                              <tr>
-                                   <td>
-                                        ${customer.getUserID()}
-                                   </td>
-                                   <td>
-                                        ${customer.getName()}
-                                   </td>
-                                   <td>
-                                        ${customer.getPhoneNumber()}
-                                   </td>
-                                   <td>
-                                        ${customer.getSex()}
-                                   </td>
-                                   <td>
-                                        ${customer.getAdress()}
-                                   </td>
-                                   <td>
-                                        ${customer.getBirthDate()}
-                                   </td>
-                                   <td>
-                                        ${customer.getEmail()}
-                                   </td>
-                              </tr>
-                         </tbody>
-                    </table>
+          <section class="dashboard" style="   "}
+
+">
+               <!-- <c:if test="${not empty customer}">
+                      <table class="tablesorter-custom1">
+                    <!--Form OrderID
+                    <h1>Customer Infomation</h1>
+                    <thead>
+                         <tr>
+                              <th>CusID</th>
+                              <th>Name</th>
+                              <th>Phone Number</th>
+                              <th>Gender</th>
+                              <th>Address</th>
+                              <th>Birth Date</th>
+                              <th>Email</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <td>
+                    ${customer.getUserID()}
+               </td>
+               <td>
+                    ${customer.getName()}
+               </td>
+               <td>
+                    ${customer.getPhoneNumber()}
+               </td>
+               <td>
+                    ${customer.getSex()}
+               </td>
+               <td>
+                    ${customer.getAdress()}
+               </td>
+               <td>
+                    ${customer.getBirthDate()}
+               </td>
+               <td>
+                    ${customer.getEmail()}
+               </td>
+          </tr>
+     </tbody>
+</table> -->
+                    <h1 style="font-size: 30px">Detail</h1>
+                    <br>
+
+
+
+                    <div style="border-style: outset; padding:10px;width:700px;background-color: white" > 
+                         <h1>Order Information </h1>
+                         <p> Order : ${OrderInfo.getOrderID()} </p>
+                         <br>
+                         <hr>
+                         <p> <span style="color:blue;font-family: sans-serif">CusID: </span>  ${customer.getUserID()}</p>
+                         <p> <span style="color:blue"> Name : </span>  ${customer.getName()} </p> <br>
+                         <p>   <span style="color:blue"> Phone : </span>  ${customer.getPhoneNumber()} |<span style="color:blue">    Email:</span> ${customer.getEmail()}  <p><br>
+                         <p> Billing Address : ${OrderInfo.getAddress()}</p>
+                    </div>
                </c:if>
-               
-               <c:if test="${not empty OrderInfo}">
-                    <table class="tablesorter-custom1">
-                         <!--Form OrderID-->
-                         <h1>Order Infomation</h1>
-                         <thead>
-                              <tr>
-                                   <th>OrderID</th>
-                                   <th>StartDate</th>
-                                   <th>EndDate</th>
-                                   <th>TotalPrice</th>
-                                   <th>Address</th>
-                                   <th>StatusProgress</th>
-                              </tr>
-                         </thead>
-                         <tbody>
-                              <tr>
-                                   <td>
-                                        ${OrderInfo.getOrderID()}
-                                   </td>
-                                   <td>
-                                        ${OrderInfo.getStartDate()}
-                                   </td>
-                                   <td>
-                                        ${OrderInfo.getEndDate()}
-                                   </td>
-                                   <td>
-                                        ${OrderInfo.getTotalPrice()}
-                                   </td>
-                                   <td>
-                                        ${OrderInfo.getAddress()}
-                                   </td>
-                                   <td>
-                                        ${OrderInfo.getStatusProgress()}
-                                   </td>
-                              </tr>
-                         </tbody>
-                    </table>
-               </c:if>
+
+
+               <!--    <c:if test="${not empty OrderInfo}"> 
+                        <table class="tablesorter-custom1">
+                    <!--Form OrderID
+                    <h1>Order Infomation</h1>
+                    <thead>
+                         <tr>
+                              <th>OrderID</th>
+                              <th>StartDate</th>
+                              <th>EndDate</th>
+                              <th>TotalPrice</th>
+                              <th>Address</th>
+                              <th>StatusProgress</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <td>
+                    ${OrderInfo.getOrderID()}
+               </td>
+               <td>
+                    ${OrderInfo.getStartDate()}
+               </td>
+               <td>
+                    ${OrderInfo.getEndDate()}
+               </td>
+               <td>
+                    ${OrderInfo.getTotalPrice()}
+               </td>
+               <td>
+                    ${OrderInfo.getAddress()}
+               </td>
+               <td>
+                    ${OrderInfo.getStatusProgress()}
+               </td>
+          </tr>
+     </tbody>
+</table>
+               </c:if>-->
                <br><!-- comment -->
+               <h2 style="">      <span style="margin-right: 500px"> Order <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span> Total : </span> </h2>
+               <br>
+               <p> Product: </p>
+               <hr>
                <c:if test="${not empty CageList}">
-                    <c:forEach items="${CageList}" var="cage">
-                         <table class="tablesorter-custom1">
-                              <!--Form CageID-->
-                              <h2>Cage - Material</h2>
-                              <thead>
+
+                    <table class="tablesorter-custom1" style="width:70%; background-color:white;border-style: initial">
+                         <!--Form CageID-->
+
+                         <thead>
+                              <tr>
+                                   <th class="data-title" style="text-align: start ;color:black;font-size:20px">CageID</th>
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Name</th>
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
+                                   <!--                                   <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Origin</th>-->
+
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
+                              </tr>
+
+                         </thead>
+
+                         <tbody>
+
+                              <c:forEach items="${CageList}" var="cage" varStatus="status">
+
                                    <tr>
-                                        <th>CageID</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Origin</th>
-                                        <th>Description</th>
-                                   </tr>
-                              </thead>
-                              <tbody>
-                                   <tr>
-                                        <td>
+                                        <td style="color:purple">
                                              ${cage.getCageID()}
                                         </td>
-                                        <td>
+                                        <td style="font-family: sans-serif">
                                              ${cage.getName()}
-                                        </td>
-                                        <td>
-                                             ${cage.getPrice()}
-                                        </td>
-                                        <td>
-                                             ${cage.getOrigin()}
                                         </td>
                                         <td>
                                              ${cage.getDescription()}
                                         </td>
-                                   </tr>
-                                   <tr>
-                              <table class="tablesorter-custom1">
-                                   <br>
-                                   <thead>
-                                        <!--Form Material-->
-                                        <tr class="search">
-                                             <td> <input type="search" data-column="0" placeholder="No."></td>
-                                             <td> <input type="search" data-column="1" placeholder="CageID"></td>
-                                             <td> <input type="search" data-column="2" placeholder="MaterialID"></td>
-                                             <td> <input type="search" data-column="3" placeholder="Name"></td>
-                                             <td> <input type="search" data-column="4" placeholder="Origin"></td>
-                                             <td> <input type="search" data-column="5" placeholder="Need/Cage"></td>
-                                             <td> <input type="search" data-column="6" placeholder="Price/Unit"></td>
-                                             <td> <input type="search" data-column="7" placeholder="Unit"></td>
-                                             <td> <input type="search" data-column="8" placeholder="Quantity Order"></td>
-                                             <td> <input type="search" data-column="9" placeholder="Total Quantity"></td>
-                                             <td> <input type="search" data-column="10" placeholder="Total Price"></td>
-                                        </tr>
-                                        <tr>
-                                             <th>No.</th>
-                                             <th>Cage ID</th>
-                                             <th>Material ID</th>
-                                             <th>Name</th>
-                                             <th>Origin</th>
-                                             <th>Need/Cage</th>
-                                             <th>Price/Unit</th>
-                                             <th>Unit</th>
-                                             <th>Quantity Order</th>
-                                             <th>Total Quantity</th>
-                                             <th>Total Price</th>
-                                        </tr>
-                                   </thead>
-                                   <tbody>
-                                        <c:forEach var="dto" items="${ListMatarial}" varStatus="counter">
-                                             <c:if test="${cage.getCageID() eq dto.getCageID() }">
-                                                  <tr>
-                                                       <td>
-                                                            ${counter.count}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getCageID()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getMaterialID()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getName()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrigin()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getQuantityNeed()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getPrice()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getUnit()}
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getQuantity()}
-                                                       </td>
-                                                       <td>
-                                                            <c:set var="totalQuantity" 
-                                                                   value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
-                                                            ${totalQuantity}
-                                                       </td>
-                                                       <td>
-                                                            <c:set var="totalPrice" 
-                                                                   value="${dto.getPrice() * totalQuantity }"></c:set>
-                                                            ${totalPrice}
-                                                       </td>
-                                                  </tr>
-                                             </c:if>
-                                        </c:forEach>
-                                   </tbody>
-                              </table>
-                              <h1>-----------------------------------------------------------------------------------------------------</h1>
-                              </tr>
-                              </tbody>
-                         </table>
-                    </c:forEach>
-               </c:if> 
-          </section>
-          <script src="js/Material.js"></script>
-     </body>
-</html>
+                                        <td>
+                                             ${cage.getPrice()}
+                                        </td>
+                                        <!--                                        <td>
+                                        ${cage.getOrigin()}
+                                   </td>-->
+
+                                        <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
+                                                       </tr>
+                                                       <tr class="hidden" id="expand-${   status.index}">
+
+                                                            <td colspan="7">
+                                                                 <table class="tablesorter-custom1" style="width:100%;  " >
+                                                                      <br>
+                                                                      <thead >
+                                                                      <hr>
+                                                                      <!--Form Materia
+                                                                      <!--                                        <tr class="search">
+                                                                                                                   <td> <input type="search" data-column="0" placeholder="No."></td>
+                                                                                                                   <td> <input type="search" data-column="1" placeholder="CageID"></td>
+                                                                                                                   <td> <input type="search" data-column="2" placeholder="MaterialID"></td>
+                                                                                                                   <td> <input type="search" data-column="3" placeholder="Name"></td>
+                                                                                                                   <td> <input type="search" data-column="4" placeholder="Origin"></td>
+                                                                                                                   <td> <input type="search" data-column="5" placeholder="Need/Cage"></td>
+                                                                                                                   <td> <input type="search" data-column="6" placeholder="Price/Unit"></td>
+                                                                                                                   <td> <input type="search" data-column="7" placeholder="Unit"></td>
+                                                                                                                   <td> <input type="search" data-column="8" placeholder="Quantity Order"></td>
+                                                                                                                   <td> <input type="search" data-column="9" placeholder="Total Quantity"></td>
+                                                                                                                   <td> <input type="search" data-column="10" placeholder="Total Price"></td>
+                                                                                                              </tr>-->
+                                                                      <tr style="padding:100px">
+                                                                           <th class="data-title" style="text-align: start ;color:green;font-size:16px">No</th>
+
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Material ID</th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Name</th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Origin</th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Need </th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Price </th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Unit</th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>
+                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Total Quantity</th>
+                                                                           <th  style="text-align: start ;color:black;font-size:16px">Total Price</th>
+                                                                      </tr>
+                                                                      </thead>
+                                                                      <tbody>
+                                                                           <c:forEach var="dto" items="${ListMatarial}" varStatus="counter">
+                                                                                <c:if test="${cage.getCageID() eq dto.getCageID() }">
+                                                                                     <tr>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;color: #999999">
+                                                                                               ${counter.count}
+                                                                                          </td>
+
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;">
+                                                                                               ${dto.getMaterialID()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               ${dto.getName()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               ${dto.getOrigin()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:18px">
+                                                                                               ${dto.getQuantityNeed()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               ${dto.getPrice()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               ${dto.getUnit()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               ${dto.getQuantity()}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               <c:set var="totalQuantity" 
+                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
+                                                                                               ${totalQuantity}
+                                                                                          </td>
+                                                                                          <td class="data-list" style="text-align: start ;font-size:18px"ss>
+                                                                                               <c:set var="totalPrice" 
+                                                                                                      value="${dto.getPrice() * totalQuantity }"></c:set>
+                                                                                               ${totalPrice}
+                                                                                          </td>
+                                                                                     </tr>
+
+                                                                                </c:if>
+                                                                           </c:forEach>
+                                                                      </tbody>
+                                                                 </table> 
+                                                                 <hr>
+                                                               
+                                                            </td>
+
+
+                                                       </tr> 
+
+                                                       </tr>
+
+
+                                                  </c:forEach>
+
+                                                  </tbody>
+                                                  </table>
+                    <hr>
+                                             </c:if> 
+                    <br>
+                    <div style=" width:60%; height: 100px ; background-color: white     ">
+                         <p>  <span style="margin-right:200px">Payment: </span> 
+                         <span style="margin-right:50px">Billing Address:  ${customer.getAdress()} </span>
+                         <span >Delivery Address: ${OrderInfo.getAddress()} </span></p>
+                    </div>
+                                             </section>
+                                             <script src="js/Material.js"></script>
+                                             </body>
+                                             </html>
