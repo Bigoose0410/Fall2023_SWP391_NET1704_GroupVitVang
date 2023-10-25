@@ -3,6 +3,7 @@
     Created on : Oct 5, 2023, 5:59:00 PM
     Author     : Admin
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +11,8 @@
      <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/OrderDetail.css">
+          <link rel="stylesheet" href="css/OrderrDetail.css">
+
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -32,7 +34,9 @@
           <c:set var="ListMatarial" value="${requestScope.CAGE_MATERIAL}"></c:set>
           <c:set var="CageList" value="${requestScope.CAGE_ORDER}"></c:set>
           <c:set var="customer" value="${requestScope.CUS_ORDER}"></c:set>
+
                <nav>
+
                     <div class="logo-name"style="
                          display: block;">
                          <div class="logo-image">
@@ -50,7 +54,7 @@
                                         <span class="link-name">Order</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
+<i class="uil uil-bill"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
@@ -74,16 +78,19 @@
                                         <span class="link-name">Inventory</span>
                                    </a></li>
                          </ul>
+
                          <ul class="logout-mode">
                               <li><a href="${logout_query}">
                                         <i class="uil uil-signout"></i>
                                         <span class="link-name" >Logout</span>
                                    </a></li>
+
                               <li class="mode">
                                    <a href="#">
                                         <i class="uil uil-moon"></i>
                                         <span class="link-name">Dark Mode</span>
                                    </a>
+
                                    <div class="mode-toggle">
                                         <span class="switch"></span>
                                    </div>
@@ -104,7 +111,7 @@
 
 ">
                <!-- <c:if test="${not empty customer}">
-                      <table class="tablesorter-custom1">
+<table class="tablesorter-custom1">
                     <!--Form OrderID
                     <h1>Customer Infomation</h1>
                     <thead>
@@ -146,12 +153,9 @@
 </table> -->
                     <h1 style="font-size: 30px">Detail</h1>
                     <br>
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                     <div style="border-style: outset; padding:10px;width:700px;background-color: white" > 
                          <h1>Order Information </h1>
                          <p> Order : ${OrderInfo.getOrderID()} </p>
@@ -163,11 +167,8 @@
                          <p> Billing Address : ${OrderInfo.getAddress()}</p>
                     </div>
                </c:if>
-<<<<<<< HEAD
-=======
 
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                <!--    <c:if test="${not empty OrderInfo}"> 
                         <table class="tablesorter-custom1">
                     <!--Form OrderID
@@ -188,7 +189,7 @@
                     ${OrderInfo.getOrderID()}
                </td>
                <td>
-                    ${OrderInfo.getStartDate()}
+${OrderInfo.getStartDate()}
                </td>
                <td>
                     ${OrderInfo.getEndDate()}
@@ -207,34 +208,22 @@
 </table>
                </c:if>-->
                <br><!-- comment -->
-               <h2 style="">      <span style="margin-right: 500px"> Order <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span> Total : </span> </h2>
+               <h2 style="">      <span style="margin-right: 500px"> Order <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span> Total :${OrderInfo.getTotalPrice()} </span> </h2>
                <br>
                <p> Product: </p>
                <hr>
                <c:if test="${not empty CageList}">
-<<<<<<< HEAD
-                    <table class="tablesorter-custom1" style="width:70%; background-color:white;border-style: initial">
-                         <!--Form CageID-->
-=======
 
                     <table class="tablesorter-custom1" style="width:70%; background-color:white;border-style: initial">
                          <!--Form CageID-->
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                          <thead>
                               <tr>
-                                   <th class="data-title" style="text-align: start ;color:black;font-size:20px">CageID</th>
-                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Name</th>
+<!--                                   <th class="data-title" style="text-align: start ;color:black;font-size:20px">CageID</th>-->
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px;padding:10px">Name</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
                                    <!--                                   <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Origin</th>-->
-<<<<<<< HEAD
-                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
-                              </tr>
-                         </thead>
-                         <tbody>
-                              <c:forEach items="${CageList}" var="cage" varStatus="status">
-=======
 
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
                               </tr>
@@ -245,11 +234,10 @@
 
                               <c:forEach items="${CageList}" var="cage" varStatus="status">
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                    <tr>
-                                        <td style="color:purple">
+<!--                                        <td style="color:purple">
                                              ${cage.getCageID()}
-                                        </td>
+                                        </td>-->
                                         <td style="font-family: sans-serif">
                                              ${cage.getName()}
                                         </td>
@@ -262,17 +250,10 @@
                                         <!--                                        <td>
                                         ${cage.getOrigin()}
                                    </td>-->
-<<<<<<< HEAD
-                                        <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
-                                                       </tr>
-                                                       <tr class="hidden" id="expand-${   status.index}">
-=======
-
-                                        <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
+<td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
                                                        </tr>
                                                        <tr class="hidden" id="expand-${   status.index}">
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                             <td colspan="7">
                                                                  <table class="tablesorter-custom1" style="width:100%;  " >
                                                                       <br>
@@ -290,15 +271,12 @@
                                                                                                                    <td> <input type="search" data-column="7" placeholder="Unit"></td>
                                                                                                                    <td> <input type="search" data-column="8" placeholder="Quantity Order"></td>
                                                                                                                    <td> <input type="search" data-column="9" placeholder="Total Quantity"></td>
-                                                                                                                   <td> <input type="search" data-column="10" placeholder="Total Price"></td>
+<td> <input type="search" data-column="10" placeholder="Total Price"></td>
                                                                                                               </tr>-->
                                                                       <tr style="padding:100px">
                                                                            <th class="data-title" style="text-align: start ;color:green;font-size:16px">No</th>
-<<<<<<< HEAD
-=======
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
-                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Material ID</th>
+<!--                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Material ID</th>-->
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Name</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Origin</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Need </th>
@@ -313,16 +291,12 @@
                                                                            <c:forEach var="dto" items="${ListMatarial}" varStatus="counter">
                                                                                 <c:if test="${cage.getCageID() eq dto.getCageID() }">
                                                                                      <tr>
-                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;color: #999999">
+                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;color: red;padding:10px">
                                                                                                ${counter.count}
                                                                                           </td>
-<<<<<<< HEAD
-=======
-
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
-                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;">
+<!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;">
                                                                                                ${dto.getMaterialID()}
-                                                                                          </td>
+                                                                                          </td>-->
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getName()}
                                                                                           </td>
@@ -342,8 +316,8 @@
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
-                                                                                               <c:set var="totalQuantity" 
-                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
+                                                                                               <c:set var="totalQuantity"
+value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
                                                                                                ${totalQuantity}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
@@ -352,10 +326,7 @@
                                                                                                ${totalPrice}
                                                                                           </td>
                                                                                      </tr>
-<<<<<<< HEAD
-=======
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                                                 </c:if>
                                                                            </c:forEach>
                                                                       </tbody>
@@ -363,11 +334,6 @@
                                                                  <hr>
                                                                
                                                             </td>
-<<<<<<< HEAD
-                                                       </tr> 
-                                                       </tr>
-                                                  </c:forEach>
-=======
 
 
                                                        </tr> 
@@ -377,22 +343,18 @@
 
                                                   </c:forEach>
 
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c
                                                   </tbody>
                                                   </table>
                     <hr>
                                              </c:if> 
                     <br>
                     <div style=" width:60%; height: 100px ; background-color: white     ">
-                         <p>  <span style="margin-right:200px">Payment: </span> 
+                         <p>  <span style="margin-right:50px">Start Day:<span style="color: #ff6600">${OrderInfo.getStartDate()}</span> </span> 
                          <span style="margin-right:50px">Billing Address:  ${customer.getAdress()} </span>
+                         
                          <span >Delivery Address: ${OrderInfo.getAddress()} </span></p>
                     </div>
-                                             </section>
-                                             <script src="js/Material.js"></script>
+          </section>
+                    <script src="js/OrderMaterial.js"></script>
                                              </body>
-<<<<<<< HEAD
                                              </html>
-=======
-                                             </html>
->>>>>>> bf37ea5754975b3f314216e198187c17536cf70c

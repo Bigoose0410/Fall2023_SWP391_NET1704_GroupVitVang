@@ -187,7 +187,6 @@
                               <br>
                               <div style="width:48%">
                                    Customer Name
-
                                    <input type="text" class="form-control" value="${param.txtName}"
                                           placeholder="Customer Name" name="txtName"> <br> 
                                    <c:if test="${not empty errors.getNameLengthErr()}">
