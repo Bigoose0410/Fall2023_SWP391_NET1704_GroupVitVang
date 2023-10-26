@@ -1,4 +1,4 @@
-USE [master]
+	USE [master]
 	GO
 
 	CREATE DATABASE ProductionManagement
@@ -80,6 +80,8 @@ USE [master]
 		OrderID NVARCHAR(20) NOT NULL,
 		Phrase NVARCHAR(20) NOT NULL,
 		CageID NVARCHAR(20) NOT NULL,
+		CompletedQuantity INT,
+		Note NVARCHAR(MAX),
 		Status NVARCHAR(20),
 		StartDate Date,
 		EndDate Date,
@@ -175,11 +177,11 @@ INSERT INTO DesignForProcess (Phrase,CageID,TimeProcess,Description,NumberOfEmpl
 
 
 
-INSERT INTO Process (ProcessID,ProcessName,OrderID,Phrase,CageID,Status,StartDate,EndDate,NumberOfEmployee) VALUES 
-('PR001','tao hinh','OD001','P001','CG001','not yet',CAST('2023/10/14'AS DATE),CAST('2023/10/17'AS DATE),3),
-('PR002','Lam Nan','OD001','P002','CG001','not yet',CAST('2023/10/18'AS DATE),CAST('2023/10/23'AS DATE),3),
-('PR003','tao hinh','OD001','P003','CG001','not yet',CAST('2023/10/24'AS DATE),CAST('2023/10/30'AS DATE),4),
-('PR004','Lap Rap','OD001','P004','CG001','not yet',CAST('2023/11/01'AS DATE),CAST('2023/11/03'AS DATE),3);
+INSERT INTO Process (ProcessID,ProcessName,OrderID,Phrase,CageID,CompletedQuantity,Note,Status,StartDate,EndDate,NumberOfEmployee) VALUES 
+('PR001','tao hinh','OD001','P001','CG001',0, NULL,'not yet',CAST('2023/10/14'AS DATE),CAST('2023/10/17'AS DATE),3),
+('PR002','Lam Nan','OD001','P002','CG001',0, NULL,'not yet',CAST('2023/10/18'AS DATE),CAST('2023/10/23'AS DATE),3),
+('PR003','tao hinh','OD001','P003','CG001',0, NULL,'not yet',CAST('2023/10/24'AS DATE),CAST('2023/10/30'AS DATE),4),
+('PR004','Lap Rap','OD001','P004','CG001',0, NULL,'not yet',CAST('2023/11/01'AS DATE),CAST('2023/11/03'AS DATE),3);
 
 INSERT INTO CageMaterial (CageID, MaterialID, Quantity) VALUES
 ('CG001', 'MT001', 20),

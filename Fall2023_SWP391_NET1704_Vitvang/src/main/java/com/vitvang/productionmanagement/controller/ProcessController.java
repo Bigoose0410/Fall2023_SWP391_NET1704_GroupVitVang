@@ -46,6 +46,12 @@ public class ProcessController extends HttpServlet {
                   } else {
                         dao.ViewProcessingOrder(OrderID, CageID, CageID);
                         List<ProcessDTO> process = dao.getListOrdersProcess();
+                        for (ProcessDTO proces : process) {
+                              if(proces.getStatus().equals("Processing")){
+                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
+                                    break;
+                              }
+                        }
                         request.setAttribute("PROCESS_RESULT", process);
                         url = ProcessDetail;
                   }
