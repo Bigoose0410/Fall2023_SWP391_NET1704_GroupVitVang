@@ -3,7 +3,7 @@
     Created on : Oct 7, 2023, 11:32:39 AM
     Author     : Admin
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -39,10 +39,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-                              <!--                              <li ><a href="#">
-                                                                      <i class="uil uil-estate"></i>
-                                                                      <span class="link-name">Dahsboard</span>
-                                                                 </a></li>-->
+                              <li ><a href="#">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -92,16 +92,16 @@
                          </ul>
                     </div>
           </nav>
-          <section class="dashboard1">
+          <section class="dashboard">
                <div id="processing-form">
                     <!--Processing-->
                     <h1>Processing</h1>
 
                     <form>
                          <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
-                         <%--<c:if test="${empty searchValue}">--%>
+                         <c:set var="processID" value="${requestScope.HIGHLIGHT}"></c:set>
                          <c:if test="${not empty result}">
-                              <table class="tablesorter-custom1">
+                              <table class="tablesorter-custom">
                                    <thead>
                                         <tr class="search2">
                                              <td></td>
@@ -132,13 +132,19 @@
                                              <!--<th>Delete</th>-->
                                         </tr>
                                    </thead>
-                                   <c:forEach var="dto" items="${result}" varStatus="counter">
+                                   <c:set var="count" value="0" />
+
+                                   <c:forEach var="dto" items="${result}" varStatus="status">
                                         <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
                                              <tbody>
+
                                              <form action="MainController"> 
 
                                                   <tr>
-                                                       <td>${counter.count}</td>
+                                                       <td>
+                                                            <c:set var="count" value="${count +1}" />
+                                                            ${count}
+                                                       </td>
 
                                                        <td>
                                                             <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
@@ -170,22 +176,632 @@
                                                             ${dto.getNumberOfEmployee()}
                                                             <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
                                                        </td>
-                                                       <td>${dto.getOrderDetailStatus()}</td>                                                  
-                                                       <td>
-                                                            <select name="txtStatus">    
-                                                                 <option>${dto.getStatus()}</option>
-                                                                 <option value="Processing">Processing</option>
-                                                                 <option value="not yet">not yet</option>
-                                                                 <option value="Done">Done</option>
-                                                            </select>
-                                                       </td>
+                                                       <td>${dto.getOrderDetailStatus()}</td>
+                                                       <c:if test="${dto.getProcessID().equals(processID)}">
+                                                            <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                 <td>
+                                                                      <select name="txtStatus">    
+                                                                           <option>${dto.getStatus()}</option>
+                                                                           <option value="Processing">Processing</option>
+                                                                           <option value="Done">Done</option>
+                                                                      </select>
+                                                                 </td>
+                                                            </c:if>
+                                                            <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                 <td>
+                                                                      <select name="txtStatus">    
+                                                                           <option>${dto.getStatus()}</option>
+                                                                           <option value="Done">Done</option>
+                                                                      </select>
+                                                                 </td>
+                                                            </c:if>
+                                                            <c:if test="${dto.getStatus().equals('Done')}">
+                                                                 <td>
+                                                                      <select name="txtStatus" disabled="">    
+                                                                           <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                      </select>
+                                                                 </td>
+                                                            </c:if>
+                                                       </c:if>
+                                                       <c:if test="${!dto.getProcessID().equals(processID)}">
+                                                            <td>
+                                                                 <select name="txtStatus" disabled="">    
+                                                                      <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                 </select>
+                                                            </td>
+                                                       </c:if>
+
                                                        <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
                                                   </tr>
 
                                              </form>
+
                                              </tbody>
                                         </c:if>
                                    </c:forEach>
+
+                                   <%--
+                         <c:forEach var="dto" items="${result}" varStatus="status">
+                              <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
+                                   <tbody>
+                                        <c:if test="${dto.getProcessID().equals('PR001') && !dto.getStatus().equals('Done')}">
+                                             <c:forEach var="dto" items="${result}" varStatus="status">
+                                             <form action="MainController"> 
+
+                                                            <tr>
+                                                                 <td>
+                                                                      <c:set var="count" value="${count +1}" />
+                                                                      ${count}
+                                                                 </td>
+
+                                                                 <td>
+                                                                      <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                                 </td>
+                                                                 <td>
+                                                                      ${dto.getOrderID()}
+                                                                      <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                                 </td>
+
+                                                                 <td>
+                                                                      ${dto.getCageID()}
+                                                                      <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                                 </td>
+
+                                                                 <td>
+                                                                      ${dto.getProcessID()}
+                                                                      <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                 </td>
+
+                                                                 <td>${dto.getProcessName()}</td>
+
+                                                                 <td>${dto.getStartDate()}</td>
+
+                                                                 <td>${dto.getEndDate()}</td>
+
+                                                                 <td>${dto.getQuantity()}</td>
+
+                                                                 <td>
+                                                                      ${dto.getNumberOfEmployee()}
+                                                                      <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                                 </td>
+                                                                 <td>${dto.getOrderDetailStatus()}</td>
+                                                                 <c:if test="${dto.getProcessID().equals('PR001')}">
+                                                                      <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                           <td>
+                                                                                <select name="txtStatus">    
+                                                                                     <option>${dto.getStatus()}</option>
+                                                                                     <option value="Processing">Processing</option>
+                                                                                     <option value="Done">Done</option>
+                                                                                </select>
+                                                                           </td>
+                                                                      </c:if>
+                                                                      <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                           <td>
+                                                                                <select name="txtStatus">    
+                                                                                     <option>${dto.getStatus()}</option>
+                                                                                     <option value="Done">Done</option>
+                                                                                </select>
+                                                                           </td>
+                                                                      </c:if>
+                                                                      <c:if test="${dto.getStatus().equals('Done')}">
+                                                                           <td>
+                                                                                <select name="txtStatus" disabled="">    
+                                                                                     <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                </select>
+                                                                           </td>
+                                                                      </c:if>
+                                                                 </c:if>
+                                                                 <c:if test="${!dto.getProcessID().equals('PR001')}">
+                                                                      <td>
+                                                                           <select name="txtStatus" disabled="">    
+                                                                                <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                           </select>
+                                                                      </td>
+                                                                 </c:if>
+
+                                                                 <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
+                                                            </tr>
+
+                                                       </form>
+                                                  </c:forEach>
+                                             </c:if>
+                                             </tbody>
+                                        </c:if>
+                                   </c:forEach>
+
+
+                                   <c:forEach var="dto" items="${result}" varStatus="status">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
+                                             <tbody>
+                                                  <c:if test="${dto.getProcessID().equals('PR001') && dto.getStatus().equals('Done')}">
+                                                       <c:forEach var="dto" items="${result}" varStatus="status">
+                                                            <c:if test="${dto.getProcessID().equals('PR002') && !dto.getStatus().equals('Done')}">
+                                                                 <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                 <form action="MainController"> 
+
+                                                                      <tr>
+                                                                           <td>
+                                                                                <c:set var="count" value="${count +1}" />
+                                                                                ${count}
+                                                                           </td>
+
+                                                                           <td>
+                                                                                <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                                           </td>
+                                                                           <td>
+                                                                                ${dto.getOrderID()}
+                                                                                <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                                           </td>
+
+                                                                           <td>
+                                                                                ${dto.getCageID()}
+                                                                                <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                                           </td>
+
+                                                                           <td>
+                                                                                ${dto.getProcessID()}
+                                                                                <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                           </td>
+
+                                                                           <td>${dto.getProcessName()}</td>
+
+                                                                           <td>${dto.getStartDate()}</td>
+
+                                                                           <td>${dto.getEndDate()}</td>
+
+                                                                           <td>${dto.getQuantity()}</td>
+
+                                                                           <td>
+                                                                                ${dto.getNumberOfEmployee()}
+                                                                                <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                                           </td>
+                                                                           <td>${dto.getOrderDetailStatus()}</td>
+                                                                           <c:if test="${dto.getProcessID().equals('PR002')}">
+                                                                                <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                                     <td>
+                                                                                          <select name="txtStatus">    
+                                                                                               <option>${dto.getStatus()}</option>
+                                                                                               <option value="Processing">Processing</option>
+                                                                                               <option value="Done">Done</option>
+                                                                                          </select>
+                                                                                     </td>
+                                                                                </c:if>
+                                                                                <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                                     <td>
+                                                                                          <select name="txtStatus">    
+                                                                                               <option>${dto.getStatus()}</option>
+                                                                                               <option value="Done">Done</option>
+                                                                                          </select>
+                                                                                     </td>
+                                                                                </c:if>
+                                                                                <c:if test="${dto.getStatus().equals('Done')}">
+                                                                                     <td>
+                                                                                          <select name="txtStatus" disabled="">    
+                                                                                               <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                          </select>
+                                                                                     </td>
+                                                                                </c:if>
+                                                                           </c:if>
+                                                                           <c:if test="${!dto.getProcessID().equals('PR002')}">
+                                                                                <td>
+                                                                                     <select name="txtStatus" disabled="">    
+                                                                                          <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                     </select>
+                                                                                </td>
+                                                                           </c:if>
+
+                                                                           <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
+                                                                      </tr>
+
+                                                                 </form>
+                                                            </c:forEach>
+                                                       </c:if>
+                                                  </c:forEach>
+                                             </c:if>
+                                             </tbody>
+                                        </c:if>
+                                   </c:forEach>
+
+
+                                   <c:forEach var="dto" items="${result}" varStatus="status">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
+                                             <tbody>
+                                                  <c:if test="${dto.getProcessID().equals('PR001') && dto.getStatus().equals('Done')}">
+                                                       <c:forEach var="dto" items="${result}" varStatus="status">
+                                                            <c:if test="${dto.getProcessID().equals('PR002') && dto.getStatus().equals('Done')}">
+                                                                 <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                      <c:if test="${dto.getProcessID().equals('PR003') && !dto.getStatus().equals('Done')}">
+                                                                           <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                           <form action="MainController"> 
+
+                                                                                <tr>
+                                                                                     <td>
+                                                                                          <c:set var="count" value="${count +1}" />
+                                                                                          ${count}
+                                                                                     </td>
+
+                                                                                     <td>
+                                                                                          <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                                                     </td>
+                                                                                     <td>
+                                                                                          ${dto.getOrderID()}
+                                                                                          <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                                                     </td>
+
+                                                                                     <td>
+                                                                                          ${dto.getCageID()}
+                                                                                          <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                                                     </td>
+
+                                                                                     <td>
+                                                                                          ${dto.getProcessID()}
+                                                                                          <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                                     </td>
+
+                                                                                     <td>${dto.getProcessName()}</td>
+
+                                                                                     <td>${dto.getStartDate()}</td>
+
+                                                                                     <td>${dto.getEndDate()}</td>
+
+                                                                                     <td>${dto.getQuantity()}</td>
+
+                                                                                     <td>
+                                                                                          ${dto.getNumberOfEmployee()}
+                                                                                          <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                                                     </td>
+                                                                                     <td>${dto.getOrderDetailStatus()}</td>
+                                                                                     <c:if test="${dto.getProcessID().equals('PR003')}">
+                                                                                          <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                                               <td>
+                                                                                                    <select name="txtStatus">    
+                                                                                                         <option>${dto.getStatus()}</option>
+                                                                                                         <option value="Processing">Processing</option>
+                                                                                                         <option value="Done">Done</option>
+                                                                                                    </select>
+                                                                                               </td>
+                                                                                          </c:if>
+                                                                                          <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                                               <td>
+                                                                                                    <select name="txtStatus">    
+                                                                                                         <option>${dto.getStatus()}</option>
+                                                                                                         <option value="Done">Done</option>
+                                                                                                    </select>
+                                                                                               </td>
+                                                                                          </c:if>
+                                                                                          <c:if test="${dto.getStatus().equals('Done')}">
+                                                                                               <td>
+                                                                                                    <select name="txtStatus" disabled="">    
+                                                                                                         <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                                    </select>
+                                                                                               </td>
+                                                                                          </c:if>
+                                                                                     </c:if>
+                                                                                     <c:if test="${!dto.getProcessID().equals('PR003')}">
+                                                                                          <td>
+                                                                                               <select name="txtStatus" disabled="">    
+                                                                                                    <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                               </select>
+                                                                                          </td>
+                                                                                     </c:if>
+
+                                                                                     <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
+                                                                                </tr>
+
+                                                                           </form>
+                                                                      </c:forEach>
+                                                                 </c:if>
+                                                            </c:forEach>
+                                                       </c:if>
+                                                  </c:forEach>
+                                             </c:if>
+                                             </tbody>
+                                        </c:if>
+                                   </c:forEach>
+
+
+                                   <c:forEach var="dto" items="${result}" varStatus="status">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
+                                             <tbody>
+                                                  <c:if test="${dto.getProcessID().equals('PR001') && dto.getStatus().equals('Done')}">
+                                                       <c:forEach var="dto" items="${result}" varStatus="status">
+                                                            <c:if test="${dto.getProcessID().equals('PR002') && dto.getStatus().equals('Done')}">
+                                                                 <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                      <c:if test="${dto.getProcessID().equals('PR003') && dto.getStatus().equals('Done')}">
+                                                                           <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                <c:if test="${dto.getProcessID().equals('PR004') && !dto.getStatus().equals('Done')}">
+                                                                                     <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                     <form action="MainController"> 
+
+                                                                                          <tr>
+                                                                                               <td>
+                                                                                                    <c:set var="count" value="${count +1}" />
+                                                                                                    ${count}
+                                                                                               </td>
+
+                                                                                               <td>
+                                                                                                    <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                                                               </td>
+                                                                                               <td>
+                                                                                                    ${dto.getOrderID()}
+                                                                                                    <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                                                               </td>
+
+                                                                                               <td>
+                                                                                                    ${dto.getCageID()}
+                                                                                                    <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                                                               </td>
+
+                                                                                               <td>
+                                                                                                    ${dto.getProcessID()}
+                                                                                                    <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                                               </td>
+
+                                                                                               <td>${dto.getProcessName()}</td>
+
+                                                                                               <td>${dto.getStartDate()}</td>
+
+                                                                                               <td>${dto.getEndDate()}</td>
+
+                                                                                               <td>${dto.getQuantity()}</td>
+
+                                                                                               <td>
+                                                                                                    ${dto.getNumberOfEmployee()}
+                                                                                                    <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                                                               </td>
+                                                                                               <td>${dto.getOrderDetailStatus()}</td>
+                                                                                               <c:if test="${dto.getProcessID().equals('PR004')}">
+                                                                                                    <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                                                         <td>
+                                                                                                              <select name="txtStatus">    
+                                                                                                                   <option>${dto.getStatus()}</option>
+                                                                                                                   <option value="Processing">Processing</option>
+                                                                                                                   <option value="Done">Done</option>
+                                                                                                              </select>
+                                                                                                         </td>
+                                                                                                    </c:if>
+                                                                                                    <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                                                         <td>
+                                                                                                              <select name="txtStatus">    
+                                                                                                                   <option>${dto.getStatus()}</option>
+                                                                                                                   <option value="Done">Done</option>
+                                                                                                              </select>
+                                                                                                         </td>
+                                                                                                    </c:if>
+                                                                                                    <c:if test="${dto.getStatus().equals('Done')}">
+                                                                                                         <td>
+                                                                                                              <select name="txtStatus" disabled="">    
+                                                                                                                   <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                                              </select>
+                                                                                                         </td>
+                                                                                                    </c:if>
+                                                                                               </c:if>
+                                                                                               <c:if test="${!dto.getProcessID().equals('PR004')}">
+                                                                                                    <td>
+                                                                                                         <select name="txtStatus" disabled="">    
+                                                                                                              <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                                         </select>
+                                                                                                    </td>
+                                                                                               </c:if>
+
+                                                                                               <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
+                                                                                          </tr>
+
+                                                                                     </form>
+                                                                                </c:forEach>
+                                                                           </c:if>
+                                                                      </c:forEach>
+                                                                 </c:if>
+                                                            </c:forEach>
+                                                       </c:if>
+                                                  </c:forEach>
+                                             </c:if>
+                                             </tbody>
+                                        </c:if>
+                                   </c:forEach>
+
+
+                                   <c:forEach var="dto" items="${result}" varStatus="status">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
+                                             <tbody>
+                                                  <c:if test="${dto.getProcessID().equals('PR001') && dto.getStatus().equals('Done')}">
+                                                       <c:forEach var="dto" items="${result}" varStatus="status">
+                                                            <c:if test="${dto.getProcessID().equals('PR002') && dto.getStatus().equals('Done')}">
+                                                                 <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                      <c:if test="${dto.getProcessID().equals('PR003') && dto.getStatus().equals('Done')}">
+                                                                           <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                <c:if test="${dto.getProcessID().equals('PR004') && dto.getStatus().equals('Done')}">
+                                                                                     <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                          <c:if test="${dto.getProcessID().equals('PR005') && !dto.getStatus().equals('Done')}">
+                                                                                               <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                               <form action="MainController"> 
+
+                                                                                                    <tr>
+                                                                                                         <td>
+                                                                                                              <c:set var="count" value="${count +1}" />
+                                                                                                              ${count}
+                                                                                                         </td>
+
+                                                                                                         <td>
+                                                                                                              <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                                                                         </td>
+                                                                                                         <td>
+                                                                                                              ${dto.getOrderID()}
+                                                                                                              <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                                                                         </td>
+
+                                                                                                         <td>
+                                                                                                              ${dto.getCageID()}
+                                                                                                              <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                                                                         </td>
+
+                                                                                                         <td>
+                                                                                                              ${dto.getProcessID()}
+                                                                                                              <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                                                         </td>
+
+                                                                                                         <td>${dto.getProcessName()}</td>
+
+                                                                                                         <td>${dto.getStartDate()}</td>
+
+                                                                                                         <td>${dto.getEndDate()}</td>
+
+                                                                                                         <td>${dto.getQuantity()}</td>
+
+                                                                                                         <td>
+                                                                                                              ${dto.getNumberOfEmployee()}
+                                                                                                              <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                                                                         </td>
+                                                                                                         <td>${dto.getOrderDetailStatus()}</td>
+                                                                                                         <c:if test="${dto.getProcessID().equals('PR005')}">
+                                                                                                              <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                                                                   <td>
+                                                                                                                        <select name="txtStatus">    
+                                                                                                                             <option>${dto.getStatus()}</option>
+                                                                                                                             <option value="Processing">Processing</option>
+                                                                                                                             <option value="Done">Done</option>
+                                                                                                                        </select>
+                                                                                                                   </td>
+                                                                                                              </c:if>
+                                                                                                              <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                                                                   <td>
+                                                                                                                        <select name="txtStatus">    
+                                                                                                                             <option>${dto.getStatus()}</option>
+                                                                                                                             <option value="Done">Done</option>
+                                                                                                                        </select>
+                                                                                                                   </td>
+                                                                                                              </c:if>
+                                                                                                              <c:if test="${dto.getStatus().equals('Done')}">
+                                                                                                                   <td>
+                                                                                                                        <select name="txtStatus" disabled="">    
+                                                                                                                             <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                                                        </select>
+                                                                                                                   </td>
+                                                                                                              </c:if>
+                                                                                                         </c:if>
+                                                                                                         <c:if test="${!dto.getProcessID().equals('PR005')}">
+                                                                                                              <td>
+                                                                                                                   <select name="txtStatus" disabled="">    
+                                                                                                                        <option value="${dto.getStatus()}">${dto.getStatus()}</option>
+                                                                                                                   </select>
+                                                                                                              </td>
+                                                                                                         </c:if>
+
+                                                                                                         <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
+                                                                                                    </tr>
+
+                                                                                               </form>
+                                                                                          </c:forEach>
+                                                                                     </c:if>
+                                                                                </c:forEach>
+                                                                           </c:if>
+                                                                      </c:forEach>
+                                                                 </c:if>
+                                                            </c:forEach>
+                                                       </c:if>
+                                                  </c:forEach>
+                                             </c:if>
+                                             </tbody>
+                                        </c:if>
+                                   </c:forEach>
+
+
+                                   <c:forEach var="dto" items="${result}" varStatus="status">
+                                        <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
+                                             <tbody>
+                                                  <c:if test="${dto.getProcessID().equals('PR001') && dto.getStatus().equals('Done')}">
+                                                       <c:forEach var="dto" items="${result}" varStatus="status">
+                                                            <c:if test="${dto.getProcessID().equals('PR002') && dto.getStatus().equals('Done')}">
+                                                                 <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                      <c:if test="${dto.getProcessID().equals('PR003') && dto.getStatus().equals('Done')}">
+                                                                           <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                <c:if test="${dto.getProcessID().equals('PR004') && dto.getStatus().equals('Done')}">
+                                                                                     <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                          <c:if test="${dto.getProcessID().equals('PR005') && dto.getStatus().equals('Done')}">
+                                                                                               <c:forEach var="dto" items="${result}" varStatus="status">
+                                                                                               <form action="MainController"> 
+
+                                                                                                    <tr>
+                                                                                                         <td>
+                                                                                                              <c:set var="count" value="${count +1}" />
+                                                                                                              ${count}
+                                                                                                         </td>
+
+                                                                                                         <td>
+                                                                                                              <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                                                                         </td>
+                                                                                                         <td>
+                                                                                                              ${dto.getOrderID()}
+                                                                                                              <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                                                                         </td>
+
+                                                                                                         <td>
+                                                                                                              ${dto.getCageID()}
+                                                                                                              <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                                                                         </td>
+
+                                                                                                         <td>
+                                                                                                              ${dto.getProcessID()}
+                                                                                                              <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                                                         </td>
+
+                                                                                                         <td>${dto.getProcessName()}</td>
+
+                                                                                                         <td>${dto.getStartDate()}</td>
+
+                                                                                                         <td>${dto.getEndDate()}</td>
+
+                                                                                                         <td>${dto.getQuantity()}</td>
+
+                                                                                                         <td>
+                                                                                                              ${dto.getNumberOfEmployee()}
+                                                                                                              <input type="hidden" name="txtNumberOfEmployee" placeholder="New Quantity" min="1" value="${dto.getNumberOfEmployee()}" />
+                                                                                                         </td>
+                                                                                                         <td>${dto.getOrderDetailStatus()}</td>
+
+                                                                                                         <c:if test="${dto.getStatus().equals('Done')}">
+                                                                                                              <td>
+                                                                                                                   <select name="txtStatus" disabled="">    
+                                                                                                                        <option value="Done">${dto.getStatus()}</option>
+                                                                                                                   </select>
+                                                                                                              </td>
+                                                                                                         </c:if>
+                                                                                                         <c:if test="${dto.getStatus().equals('not yet')}">
+                                                                                                              <td>
+                                                                                                                   <select name="txtStatus">    
+                                                                                                                        <option>${dto.getStatus()}</option>
+                                                                                                                        <option value="Processing">Processing</option>
+                                                                                                                        <option value="Done">Done</option>
+                                                                                                                   </select>
+                                                                                                              </td>
+                                                                                                         </c:if>
+                                                                                                         <c:if test="${dto.getStatus().equals('Processing')}">
+                                                                                                              <td>
+                                                                                                                   <select name="txtStatus">    
+                                                                                                                        <option>${dto.getStatus()}</option>
+                                                                                                                        <option value="Done">Done</option>
+                                                                                                                   </select>
+                                                                                                              </td>
+                                                                                                         </c:if>
+
+                                                                                                         <td><button class="fa fa-pencil-square" type="submit" value="UpdateStatusProcess" name="btAction"></button></td>
+                                                                                                    </tr>
+
+                                                                                               </form>
+                                                                                          </c:forEach>
+                                                                                     </c:if>
+                                                                                </c:forEach>
+                                                                           </c:if>
+                                                                      </c:forEach>
+                                                                 </c:if>
+                                                            </c:forEach>
+                                                       </c:if>
+                                                  </c:forEach>
+                                             </c:if>
+                                             </tbody>
+                                        </c:if>
+                                   </c:forEach>
+                                   --%>
                               </table>
                          </c:if>
                          <c:if test="${empty result}">
