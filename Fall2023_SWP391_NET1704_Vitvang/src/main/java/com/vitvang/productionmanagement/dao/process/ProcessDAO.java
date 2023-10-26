@@ -231,6 +231,207 @@ public class ProcessDAO implements Serializable {
             return false;
       }
 
+      public boolean updateStatusProcessToDone(String Status, String ProcessID, String nextProcessID, String OrderID, String CageID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            PreparedStatement stm1 = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "UPDATE Process SET Status = ? "
+                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, Status);
+                        stm.setString(2, ProcessID);
+                        stm.setString(3, OrderID);
+                        stm.setString(4, CageID);
+                        int row = stm.executeUpdate();
+
+                        String sql1 = "UPDATE Process SET Status = 'Processing' "
+                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+                        stm1 = con.prepareStatement(sql1);
+                        stm1.setString(1, nextProcessID);
+                        stm1.setString(2, OrderID);
+                        stm1.setString(3, CageID);
+                        int row1 = stm1.executeUpdate();
+                        if (row > 0 && row1 > 0) {
+                              return true;
+                        }
+                        // hoan chinh roi thi excutequery
+                  }
+            } finally {
+                  if (stm != null && stm1 != null) {
+                        stm.close();
+                        stm1.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+      
+      public boolean updateStatusLastProcess(String Status, String ProcessID, String OrderID, String CageID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            PreparedStatement stm1 = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "UPDATE Process SET Status = ? "
+                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, Status);
+                        stm.setString(2, ProcessID);
+                        stm.setString(3, OrderID);
+                        stm.setString(4, CageID);
+                        int row = stm.executeUpdate();
+
+                        String sql1 = "UPDATE OrderDetail SET OrderDetailStatus = 'Done' "
+                                + "  WHERE OrderID = ? AND CageID = ? ";
+                        stm1 = con.prepareStatement(sql1);
+                        stm1.setString(1, OrderID);
+                        stm1.setString(2, CageID);
+                        int row1 = stm1.executeUpdate();
+                        if (row > 0 && row1 > 0) {
+                              return true;
+                        }
+                        // hoan chinh roi thi excutequery
+                  }
+            } finally {
+                  if (stm != null && stm1 != null) {
+                        stm.close();
+                        stm1.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+//
+//      public boolean updateStatusProcess2(String Status, String ProcessID, String OrderID, String CageID) throws SQLException {
+//            Connection con = null;
+//            PreparedStatement stm = null;
+//            PreparedStatement stm1 = null;
+//            try {
+//                  con = DBHelper.makeConnection();
+//                  // tra ra null or k.
+//                  if (con != null) {
+//                        String sql = "UPDATE Process SET Status = ? "
+//                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+//                        stm = con.prepareStatement(sql);
+//                        stm.setString(1, Status);
+//                        stm.setString(2, ProcessID);
+//                        stm.setString(3, OrderID);
+//                        stm.setString(4, CageID);
+//                        int row = stm.executeUpdate();
+//
+//                        String sql1 = "UPDATE Process SET Status = 'Processing' "
+//                                + "  WHERE ProcessID = 'PR003' AND OrderID = ? AND CageID = ? ";
+//                        stm1 = con.prepareStatement(sql1);
+//                        stm1.setString(1, OrderID);
+//                        stm1.setString(2, CageID);
+//                        int row1 = stm1.executeUpdate();
+//                        if (row > 0 && row1 > 0) {
+//                              return true;
+//                        }
+//                        // hoan chinh roi thi excutequery
+//                  }
+//            } finally {
+//                  if (stm != null && stm1 != null) {
+//                        stm.close();
+//                        stm1.close();
+//                  }
+//                  if (con != null) {
+//                        con.close();
+//                  }
+//            }
+//            return false;
+//      }
+//
+//      public boolean updateStatusProcess3(String Status, String ProcessID, String OrderID, String CageID) throws SQLException {
+//            Connection con = null;
+//            PreparedStatement stm = null;
+//            PreparedStatement stm1 = null;
+//            try {
+//                  con = DBHelper.makeConnection();
+//                  // tra ra null or k.
+//                  if (con != null) {
+//                        String sql = "UPDATE Process SET Status = ? "
+//                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+//                        stm = con.prepareStatement(sql);
+//                        stm.setString(1, Status);
+//                        stm.setString(2, ProcessID);
+//                        stm.setString(3, OrderID);
+//                        stm.setString(4, CageID);
+//                        int row = stm.executeUpdate();
+//
+//                        String sql1 = "UPDATE Process SET Status = 'Processing' "
+//                                + "  WHERE ProcessID = 'PR004' AND OrderID = ? AND CageID = ? ";
+//                        stm1 = con.prepareStatement(sql1);
+//                        stm1.setString(1, OrderID);
+//                        stm1.setString(2, CageID);
+//                        int row1 = stm1.executeUpdate();
+//                        if (row > 0 && row1 > 0) {
+//                              return true;
+//                        }
+//                        // hoan chinh roi thi excutequery
+//                  }
+//            } finally {
+//                  if (stm != null && stm1 != null) {
+//                        stm.close();
+//                        stm1.close();
+//                  }
+//                  if (con != null) {
+//                        con.close();
+//                  }
+//            }
+//            return false;
+//      }
+//
+//      public boolean updateStatusProcess4(String Status, String ProcessID, String OrderID, String CageID) throws SQLException {
+//            Connection con = null;
+//            PreparedStatement stm = null;
+//            PreparedStatement stm1 = null;
+//            try {
+//                  con = DBHelper.makeConnection();
+//                  // tra ra null or k.
+//                  if (con != null) {
+//                        String sql = "UPDATE Process SET Status = ? "
+//                                + "  WHERE ProcessID = ? AND OrderID = ? AND CageID = ? ";
+//                        stm = con.prepareStatement(sql);
+//                        stm.setString(1, Status);
+//                        stm.setString(2, ProcessID);
+//                        stm.setString(3, OrderID);
+//                        stm.setString(4, CageID);
+//                        int row = stm.executeUpdate();
+//
+//                        String sql1 = "UPDATE Process SET Status = 'Processing' "
+//                                + "  WHERE ProcessID = 'PR005' AND OrderID = ? AND CageID = ? ";
+//                        stm1 = con.prepareStatement(sql1);
+//                        stm1.setString(1, OrderID);
+//                        stm1.setString(2, CageID);
+//                        int row1 = stm1.executeUpdate();
+//                        if (row > 0 && row1 > 0) {
+//                              return true;
+//                        }
+//                        // hoan chinh roi thi excutequery
+//                  }
+//            } finally {
+//                  if (stm != null && stm1 != null) {
+//                        stm.close();
+//                        stm1.close();
+//                  }
+//                  if (con != null) {
+//                        con.close();
+//                  }
+//            }
+//            return false;
+//      }
+//
       public boolean AutoAddProcess(int ProcessID, String OrderID, String status, Date StartDate, Date Endate, DesignForProcessDTO design)
               throws SQLException, NamingException {
             Connection con = null;
