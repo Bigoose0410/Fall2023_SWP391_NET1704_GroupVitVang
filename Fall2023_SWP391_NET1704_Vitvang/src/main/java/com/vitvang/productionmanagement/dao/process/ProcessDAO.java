@@ -40,19 +40,23 @@ public class ProcessDAO implements Serializable {
                   // tra ra null or k.
                   if (con != null) {
 
-                        String sql = "SELECT Distinct UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Orderr.StartDate, OrderDetail.Quantity, OrderDetail.OrderDetailStatus "
-                                + "FROM UserOrder JOIN Orderr "
+                        String sql = "SELECT Distinct Users.Name, Orderr.OrderID, Cage.CageName, Orderr.StartDate, OrderDetail.Quantity, OrderDetail.OrderDetailStatus "
+                                + "FROM UserOrder join Users "
+                                + "ON UserOrder.UserID = Users.UserID "
+                                + "JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
                                 + "JOIN OrderDetail "
-                                + "ON Orderr.OrderID = OrderDetail.OrderID ";
+                                + "ON Orderr.OrderID = OrderDetail.OrderID "
+                                + "JOIN Cage "
+                                + "ON OrderDetail.CageID = Cage.CageID ";
 
                         stm = con.prepareStatement(sql);
 //                                stm.setString(1, "%" + txtSearchValue + "%");// 
                         rs = stm.executeQuery();
                         while (rs.next()) {
-                              String UserID = rs.getString("UserID");
+                              String UserID = rs.getString("Name");
                               String OrderID = rs.getString("OrderID");
-                              String CageID = rs.getString("CageID");
+                              String CageID = rs.getString("CageName");
                               Date StartDate = rs.getDate("StartDate");
                               int Quantity = rs.getInt("Quantity");
 
@@ -63,6 +67,7 @@ public class ProcessDAO implements Serializable {
 //                              String StatusProcess = rs.getString("StatusProcess");
 //                    RegistrationDTO dto = new RegistrationDTO(username, password, lastname, isadmin);
                               ProcessNewOrderDTO processNewOrder = new ProcessNewOrderDTO(UserID, OrderID, CageID, StartDate, Quantity, OrderDetailStatus);
+                              
                               if (this.listProcessNewOrder == null) {
                                     this.listProcessNewOrder = new ArrayList<ProcessNewOrderDTO>();
                               }
@@ -101,11 +106,15 @@ public class ProcessDAO implements Serializable {
 //                                String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress, CustomerID "
 //                                        + "From Orderr "
 //                                        + "Where OrderID Like ? ";
-                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Process.ProcessID, ProcessName, Process.StartDate, Process.EndDate, OrderDetail.Quantity, Process.NumberOfEmployee,OrderDetail.OrderDetailStatus, Process.Status, Orderr.StatusProgress "
-                                + "FROM UserOrder JOIN Orderr "
+                        String sql = "SELECT Users.Name, Orderr.OrderID, Cage.CageName, Process.ProcessID, ProcessName, Process.StartDate, Process.EndDate, OrderDetail.Quantity, Process.NumberOfEmployee,OrderDetail.OrderDetailStatus, Process.Status, Orderr.StatusProgress "
+                                + "FROM UserOrder join Users "
+                                + "ON UserOrder.UserID = Users.UserID "
+                                + "JOIN Orderr "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
                                 + "JOIN OrderDetail "
                                 + "ON Orderr.OrderID = OrderDetail.OrderID "
+                                + "JOIN Cage "
+                                + "ON OrderDetail.CageID = Cage.CageID "
                                 + "JOIN Process "
                                 + "ON Orderr.OrderID = Process.OrderID "
                                 + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
@@ -115,7 +124,7 @@ public class ProcessDAO implements Serializable {
                         stm.setString(3, CageID1);
                         rs = stm.executeQuery();
                         while (rs.next()) {
-                              String UserID = rs.getString("UserID");
+                              String UserID = rs.getString("Name");
 //                              String OrderID = rs.getString("OrderID");
 //                              String CageID = rs.getString("CageID");
                               String ProcessID = rs.getString("ProcessID");

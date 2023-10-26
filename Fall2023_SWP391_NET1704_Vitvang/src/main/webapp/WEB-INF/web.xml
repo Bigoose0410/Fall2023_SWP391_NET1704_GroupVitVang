@@ -8,10 +8,6 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.vitvang.productionmanagement.controller.controller.LoginController</servlet-class>
     </servlet>
-    <!--    <servlet>
-        <servlet-name>AddOrderController</servlet-name>
-        <servlet-class>com.vitvang.productionmanagement.controller.AddOrderController</servlet-class>
-    </servlet>-->
     <servlet>
         <servlet-name>RemoveItemFromCartController</servlet-name>
         <servlet-class>com.vitvang.productionmanagement.controller.RemoveItemFromCartController</servlet-class>

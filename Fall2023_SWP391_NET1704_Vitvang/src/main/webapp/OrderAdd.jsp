@@ -123,7 +123,7 @@
                                    </font>
                               </c:if>
 
-                              <label for="customerinput">CustomerID</label>
+                              <label for="customerinput">Customer Name</label>
 
                               <select id="customerinput" class="input-field" name="txtCustomerID">
                                    <c:forEach items="${CusList}" var="cus">

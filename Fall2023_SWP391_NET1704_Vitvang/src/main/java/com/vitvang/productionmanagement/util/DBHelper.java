@@ -5,6 +5,7 @@
 package com.vitvang.productionmanagement.util;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,7 +20,7 @@ public class DBHelper {
         public static Connection makeConnection() {
                 Connection conn = null;
                 try {
-                        String dbURL = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=ProductionManagement;encrypt=true;trustServerCertificate=true;";
+                        String dbURL = "jdbc:sqlserver://LEEMINHHNHATT\\BIGOOSE;databaseName=ProductionManagement;encrypt=true;trustServerCertificate=true;";
                         String user = "sa";
                         String pass = "12345";
                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -39,5 +40,5 @@ public class DBHelper {
                         }
                 }
         }
-
+      
 }
