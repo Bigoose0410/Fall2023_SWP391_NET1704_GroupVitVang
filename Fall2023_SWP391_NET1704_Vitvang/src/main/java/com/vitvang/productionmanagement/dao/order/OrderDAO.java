@@ -73,6 +73,43 @@ public class OrderDAO implements Serializable {
             }
 
       }
+      
+      public DetailOrderDTO query1LineOrderDetail(String OrderID, String CageID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            // tra ra null or k.
+            if (con != null) {
+                String sql = "select OrderID, CageID , Quantity "
+                        + "from OrderDetail "
+                        + "where OrderID = ? AND CageID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1,  OrderID );
+                stm.setString (2, CageID );
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String orderID = rs.getString("OrderID");
+                    String cageID = rs.getString("CageID");
+                    int Quantity = rs.getInt("Quantity");
+                    DetailOrderDTO detailorder = new DetailOrderDTO(orderID, cageID, Quantity);
+                    return detailorder;
+                }
+            }
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 
       public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
               throws SQLException, NamingException {
@@ -124,7 +161,7 @@ public class OrderDAO implements Serializable {
       public List<OrderDTO> getListOrders() {
             return listOrders;
       }
-
+      
       public void searchOrder(String SearchValue) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -194,7 +231,6 @@ public class OrderDAO implements Serializable {
                                     this.listOrders = new ArrayList<OrderDTO>();
                               }
                               this.listOrders.add(order);
-
                         }
                   }
             } finally {
@@ -227,6 +263,8 @@ public class OrderDAO implements Serializable {
                         stm.setDate(1, startDate);
                         stm.setInt(2, totalprice);
                         stm.setString(3, Addres);
+                       
+
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;

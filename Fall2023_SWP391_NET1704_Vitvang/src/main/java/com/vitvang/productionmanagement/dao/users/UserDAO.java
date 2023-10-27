@@ -16,9 +16,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.NamingException;
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+import javax.naming.NamingException;
 
 public class UserDAO implements Serializable {
 
@@ -338,7 +338,7 @@ public class UserDAO implements Serializable {
             return result;
       }
 
-      public boolean createAccount(UserDTO user)
+     public boolean createAccount(UserDTO user)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;

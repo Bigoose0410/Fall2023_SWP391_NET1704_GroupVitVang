@@ -26,7 +26,14 @@ import javax.naming.NamingException;
 @WebServlet(name = "AddItemToCartController", urlPatterns = {"/AddItemToCartController"})
 public class AddItemToCartController extends HttpServlet {
       private final String ORDER_ADD_PAGE = "MainController?btAction=New Order";
-      
+      /**
+       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -43,6 +50,7 @@ public class AddItemToCartController extends HttpServlet {
             if (cart == null) {
                 cart = new CartObj();
             }
+
                 // 3. Cus drops items to his cart
                 cart.addCageToCart(sku, RequestQuantity);
                 List<CageDTO> cageCart = new ArrayList<CageDTO>();
