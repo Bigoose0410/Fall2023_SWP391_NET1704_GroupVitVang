@@ -211,7 +211,7 @@ public class OrderDAO implements Serializable {
 
       }
 
-      public boolean insertOrder(String orderID, Date startDate, int totalprice, String Addres)
+      public boolean insertOrder(Date startDate, int totalprice, String Addres)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -219,14 +219,14 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into Orderr (OrderID, StartDate, TotalPrice, Address, StatusProgress ) "
-                                + "values (?,?,?,?, 'new order')";
-
+                        String sql = "DECLARE @orderID NVARCHAR(10) "
+                                + "SET @orderID = dbo.GetNextOrderID() "
+                                + "insert into Orderr (OrderID, StartDate, TotalPrice, Address, StatusProgress ) "
+                                + "values (@orderID, ?, ?, ?, 'new order')";
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, orderID);
-                        stm.setDate(2, startDate);
-                        stm.setInt(3, totalprice);
-                        stm.setString(4, Addres);
+                        stm.setDate(1, startDate);
+                        stm.setInt(2, totalprice);
+                        stm.setString(3, Addres);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
@@ -245,7 +245,7 @@ public class OrderDAO implements Serializable {
 
       }
 
-      public boolean addOrderDetail(String orderId, String CageID, int quantity)
+      public boolean addOrderDetail(String CageID, int quantity)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -253,13 +253,23 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into OrderDetail(OrderID, CageID, Quantity, OrderDetailStatus) "
-                                + "values (?,?,?, 'new order')";
+                        String sql = "DECLARE @str1 NVARCHAR(10) "
+                                + "DECLARE @str2 NVARCHAR(10) = 'OD001' "
+                                + "DECLARE @num1 INT "
+                                + "SET @str1 = dbo.GetNextOrderID() "
+                                + "SET @num1 = CONVERT(INT, RIGHT(@str1, 3)) "
+                                + "DECLARE @num2 INT "
+                                + "SET @num2 = CONVERT(INT, RIGHT(@str2, 3)) "
+                                + "DECLARE @result INT "
+                                + "SET @result = @num1 - @num2 "
+                                + "DECLARE @orderID NVARCHAR(10) "
+                                + "SET @orderID = 'OD' + RIGHT('00' + CAST(@result AS NVARCHAR(3)), 3) "
+                                + "insert into OrderDetail(OrderID, CageID, Quantity, OrderDetailStatus) "
+                                + "values (@orderID, ?, ?, 'new order')";
 
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, orderId);
-                        stm.setString(2, CageID);
-                        stm.setInt(3, quantity);
+                        stm.setString(1, CageID);
+                        stm.setInt(2, quantity);
 
                         int row = stm.executeUpdate();
                         if (row > 0) {
@@ -279,7 +289,7 @@ public class OrderDAO implements Serializable {
 
       }
 
-      public boolean addUserOrder(String orderId, String CustomerID)
+      public boolean addUserOrder(String CustomerID)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -287,13 +297,22 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "insert into UserOrder(UserID, OrderID ) "
-                                + "values (?,?)";
+                        String sql = "DECLARE @str1 NVARCHAR(10) "
+                                + "DECLARE @str2 NVARCHAR(10) = 'OD001' "
+                                + "DECLARE @num1 INT "
+                                + "SET @str1 = dbo.GetNextOrderID() "
+                                + "SET @num1 = CONVERT(INT, RIGHT(@str1, 3)) "
+                                + "DECLARE @num2 INT "
+                                + "SET @num2 = CONVERT(INT, RIGHT(@str2, 3)) "
+                                + "DECLARE @result INT "
+                                + "SET @result = @num1 - @num2 "
+                                + "DECLARE @orderID NVARCHAR(10) "
+                                + "SET @orderID = 'OD' + RIGHT('00' + CAST(@result AS NVARCHAR(3)), 3) "
+                                + "insert into UserOrder(UserID, OrderID)  "
+                                + "values (?,@orderID)";
 
                         stm = con.prepareStatement(sql);
                         stm.setString(1, CustomerID);
-                        stm.setString(2, orderId);
-
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;

@@ -113,16 +113,8 @@
 
                     <form action="MainController" method="GET" novalidate="novalidate">
                          <fieldset id="info">
-                              <legend>Order Info</legend>
-                              <label for="orderinput">Order</label>
-                              <input type="text" id="orderinput" placeholder="Order" name="txtOrderID"
-                                     value="${param.txtOrderID}" />
-                              <c:if test="${not empty errors.getOrderIdFormatErr()}">
-                                   <font color="red">
-                                   ${errors.getOrderIdFormatErr()}
-                                   </font>
-                              </c:if>
-
+                              <legend>Order Information</legend>
+                              
                               <label for="customerinput">Customer Name</label>
 
                               <select id="customerinput" class="input-field" name="txtCustomerID">

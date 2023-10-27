@@ -37,7 +37,6 @@ public class AddOrderController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = ORDER_PAGE;
             // test
-            String orderId = request.getParameter("txtOrderID");
             String customerId = request.getParameter("txtCustomerID");
             String totalprice = request.getParameter("txtTotalPrice");
             int total = Integer.parseInt(totalprice);
@@ -51,10 +50,6 @@ public class AddOrderController extends HttpServlet {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO dao = new OrderDAO();
-                  if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
-                        error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
-                        foundErr = true;
-                  }
                   
                   if (Address.trim().length() < 5) {
                         error.setAddressLengthErr("Pls type again Address too short");
@@ -65,24 +60,21 @@ public class AddOrderController extends HttpServlet {
                         request.setAttribute("ADD_ORDER_ERROR", error);
                         url = "MainController"+"?btAction=New Order";
                   } else {
-                        boolean result = dao.insertOrder(orderId, now, total, Address);
-                        dao.addUserOrder(orderId, customerId);
+                        boolean result = dao.insertOrder( now, total, Address);
+                        dao.addUserOrder( customerId);
                         int quantity = 1;
                         for (CageDTO value : cart.getProductItems().values()) {
-                              dao.addOrderDetail(orderId, value.getCageID(), value.getQuantityOrder());
+                              dao.addOrderDetail( value.getCageID(), value.getQuantityOrder());
 
                         }
                         if (result) {
                               url = "MainController"
-                                      + "?btAction=Detail"
-                                      + "&txtOrderID=" + orderId;
+                                      + "?btAction=Order";
+                                      
                         }
                   }
             } catch (SQLException ex) {
-                 error.setCustomerNotExistInDatabasErr(orderId + " has existed in database");
-                 request.setAttribute("ADD_ORDER_ERROR", error);
-                 url = "MainController"+"?btAction=New Order";
-                  
+                  ex.printStackTrace();
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
             } finally {

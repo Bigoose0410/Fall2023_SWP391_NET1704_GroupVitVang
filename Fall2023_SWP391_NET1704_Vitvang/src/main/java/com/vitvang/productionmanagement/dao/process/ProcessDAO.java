@@ -8,7 +8,6 @@ import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
-import com.vitvang.productionmanagement.util.tool;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
