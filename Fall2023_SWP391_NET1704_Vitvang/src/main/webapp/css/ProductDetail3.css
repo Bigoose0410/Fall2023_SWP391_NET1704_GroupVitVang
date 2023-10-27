@@ -1,0 +1,476 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Oct 27, 2023, 9:39:32 PM
+    Author     : Nguyen Ba Tung
+*/
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
+}
+
+/* Root Variables (Colors and Transitions) */
+:root {
+     /* ===== Colors ===== */
+     --primary-color: #0E4BF1;
+     --panel-color: #FFF;
+     --text-color: #000;
+     --black-light-color: #707070;
+     --border-color: #e6e5e5;
+     --toggle-color: #DDD;
+     --box1-color: #4DA3FF;
+     --box2-color: #FFE6AC;
+     --box3-color: #E7D1FC;
+     --title-icon-color: #fff;
+     --cream-color: #f5f5dc;
+     --hover-color: #333;
+     --dark-text: #fff;
+     /* ====== Transition ====== */
+     --tran-05: all 0.5s ease;
+     --tran-03: all 0.3s ease;
+     --tran-03: all 0.2s ease;
+}
+
+/* Light Mode */
+body {
+     min-height: 100vh;
+     background-color: white;
+}
+
+/* Dark Mode */
+body.dark {
+     --primary-color: #3A3B3C;
+     --panel-color: #242526;
+     --text-color: #CCC;
+     --black-light-color: #CCC;
+     --border-color: #4D4C4C;
+     --toggle-color: #FFF;
+     --box1-color: #3A3B3C;
+     --box2-color: #3A3B3C;
+     --box3-color: #3A3B3C;
+     --title-icon-color: #CCC;
+}
+
+/* === Custom Scroll Bar CSS === */
+::-webkit-scrollbar {
+     width: 8px;
+}
+
+::-webkit-scrollbar-track {
+     background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+     background: var(--primary-color);
+     border-radius: 12px;
+     transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+     background: #0b3cc1;
+}
+
+body.dark::-webkit-scrollbar-thumb:hover,
+body.dark .activity-data::-webkit-scrollbar-thumb:hover {
+     background: #3A3B3C;
+}
+
+nav {
+     position: fixed;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 250px;
+     padding: 10px 14px;
+     background-color: var(--panel-color);
+     border-right: 1px solid var(--border-color);
+     transition: var(--tran-05);
+     background-color: var(--box1-color);
+     border-color: #e6e6cc;
+}
+
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
+
+
+nav.close {
+     width: 73px;
+}
+
+nav .logo-name {
+     display: flex;
+     align-items: center;
+}
+
+nav .logo-image {
+     display: flex;
+     justify-content: center;
+     min-width: 45px;
+}
+
+nav .logo-image img {
+     width: 40px;
+     object-fit: cover;
+     border-radius: 50%;
+}
+
+nav .logo-name .logo_name {
+     font-size: 25px;
+     font-weight: 600;
+     color: var(--text-color);
+     margin-right: 13px;
+     transition: var(--tran-05);
+}
+
+nav.close .logo_name {
+     opacity: 0;
+     pointer-events: none;
+}
+
+nav .menu-items {
+     margin-top: 40px;
+     height: calc(100% - 90px);
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.menu-items li {
+     list-style: none;
+}
+
+.menu-items li a {
+     display: flex;
+     align-items: center;
+     height: 50px;
+     text-decoration: none;
+     position: relative;
+}
+
+.nav-links li a:hover:before {
+     content: "";
+     position: absolute;
+     left: -7px;
+     height: 5px;
+     width: 5px;
+     border-radius: 50%;
+     background-color: var(--primary-color);
+}
+
+body.dark li a:hover:before {
+     background-color: var(--text-color);
+}
+
+.menu-items li a i {
+     font-size: 24px;
+     min-width: 45px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: black;
+}
+
+.menu-items li a .link-name {
+     font-size: 18px;
+     font-weight: 400;
+     color: black;
+     transition: var(--tran-05);
+}
+
+nav.close li a .link-name {
+     opacity: 0;
+     pointer-events: none;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+     color: var(--primary-color);
+}
+
+body.dark .nav-links li a:hover i,
+body.dark .nav-links li a:hover .link-name {
+     color: var(--text-color);
+}
+
+.menu-items .logout-mode {
+     padding-top: 10px;
+     border-top: 1px solid var(--border-color);
+}
+
+.menu-items .mode {
+     display: flex;
+     align-items: center;
+     white-space: nowrap;
+}
+
+.menu-items .mode-toggle {
+     position: absolute;
+     right: 14px;
+     height: 50px;
+     min-width: 45px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
+}
+
+.mode-toggle .switch {
+     position: relative;
+     display: inline-block;
+     height: 22px;
+     width: 40px;
+     border-radius: 25px;
+     background-color: var(--toggle-color);
+}
+
+.switch:before {
+     content: "";
+     position: absolute;
+     left: 5px;
+     top: 50%;
+     transform: translateY(-50%);
+     height: 15px;
+     width: 15px;
+     background-color: var(--panel-color);
+     border-radius: 50%;
+     transition: var(--tran-03);
+}
+
+body.dark .switch:before {
+     left: 20px;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+     color: var(--hover-color);
+}
+
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+     color: var(--dark-text);
+}
+
+body.dark nav {
+     background-color: #222;
+}
+
+.dashboard {
+     position: relative;
+     left: 250px;
+     background-color: var(--panel-color);
+     min-height: 100vh;
+     width: calc(100% - 250px);
+     padding: 10px 5px;
+     transition: var(--tran-05);
+}
+
+/*Dashboard*/
+h1 {
+     text-align: center;
+     font-size: xx-large;
+}
+
+.header-row h1,
+.header-row form {
+     display: inline-block;
+     vertical-align: middle; /* Optional: Aligns elements vertically */
+     margin-right: 10px; /* Adjust as needed for spacing between elements */
+}
+
+.header-row {
+     text-align: center;
+}
+
+.section {
+     border: 1px solid #ccc;
+     padding: 20px;
+     margin: 10px;
+     border-radius: 10px;
+     background-color: #f9f9f9;
+}
+
+.info {
+     display: flex;
+     align-items: center;
+}
+
+.info img {
+     max-width: 500px;
+     border-radius: 5px;
+     margin: 0px 30px;
+}
+
+.info-details {
+     flex-grow: 1;
+}
+
+.info-item {
+     margin-left: 40px;
+     margin-bottom: 10px;
+     font-size: 40px;
+     font-family: "utm";
+     color: gray ;
+}
+
+.info-details span {
+     color: #333;
+     font-family: "roboto";
+}
+
+.toggle-button {
+     background-color: #28a745;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     padding: 5px 10px;
+     cursor: pointer;
+     font-size: 16px;
+     margin-top: 5px;
+}
+
+.toggle-button:hover {
+     background-color: #28a745;
+     color: #fff;
+}
+
+.toggle-button1 {
+     background-color: #28a745;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     padding: 5px 10px;
+     cursor: pointer;
+     font-size: 16px;
+     margin-top: 5px;
+}
+
+.toggle-button1:hover {
+     background-color: #28a745;
+     color: #fff;
+}
+
+/*Material table*/
+.table-container {
+     overflow-x: auto;
+     border-radius: 10px;
+     border: 1px solid black;
+}
+
+.table-container table {
+     width: 100%;
+     border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+     padding: 10px;
+     text-align: center;
+}
+
+.table-container th {
+     color: white;
+     background-color: #2193b0;
+}
+
+.table-container tbody tr:nth-child(even) {
+     background-color: #e6fcfa;
+}
+
+.table-container tbody tr:hover {
+     background-color: #ddd;
+}
+
+/*Design Process table*/
+.table-container1 {
+     overflow-x: auto;
+     border-radius: 10px;
+     border: 1px solid black;
+}
+
+.table-container1 table {
+     width: 100%;
+     border-collapse: collapse;
+}
+
+.table-container1 th,
+.table-container1 td {
+     padding: 10px;
+     text-align: center;
+}
+
+.table-container1 th {
+     color: white;
+     background-color: #2193b0;
+}
+
+.table-container1 tbody tr:nth-child(even) {
+     background-color: #e6fcfa;
+}
+
+.table-container1 tbody tr:hover {
+     background-color: #ddd;
+}
+
+/*Show table*/
+
+.table-container {
+     margin: 10px 0px;
+}
+
+.table-container1 {
+     margin: 10px 0px;
+}
+
+/*button modify*/
+form {
+     display: inline-block; /* Ensures form and button are on the same line */
+     margin-bottom: 10px; /* Adjust as needed for spacing */
+}
+
+/*button modify*/
+button {
+     background: none;
+     border: none;
+     cursor: pointer;
+     font-size: 24px;
+     color: #757575;
+     /* Adjust the color as needed */
+     margin-top: 10px;
+}
+
+button:focus {
+     outline: none;
+}
+
+button:hover {
+     color: blue;
+     /* Change color on hover if desired */
+}
+
+button {
+     border: none;
+}
+
+
+.show-table {
+     display: block !important;
+}
+
+.material_table,
+.process_table {
+     margin-top: 20px;
+}
