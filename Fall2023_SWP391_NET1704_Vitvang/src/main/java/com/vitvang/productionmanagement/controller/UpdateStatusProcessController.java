@@ -5,13 +5,12 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,12 +28,30 @@ public class UpdateStatusProcessController extends HttpServlet {
             String ProcessID = request.getParameter("txtProcessID");
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
-            String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
-            String Status = request.getParameter("txtStatus");
+            String LastStep = request.getParameter("LastStep");
+            String addComplete = request.getParameter("txtCompletedAdd");
+            String quanneedproduct = request.getParameter("txtTotalQuantity");
+            String txtquantityCompleted = request.getParameter("txtquantityCompleted");
+            int addcompleted = Integer.parseInt(addComplete);
+            int totalquanNeed = Integer.parseInt(quanneedproduct);
+            int quantityCompleted = Integer.parseInt(txtquantityCompleted);
             String url = "NewLogin.jsp";
+            boolean result = false;
+            boolean full = false;
+            boolean laststep = false;
             try {
+                  if (!LastStep.trim().isEmpty()) {
+                        laststep = true;
+                  }
                   ProcessDAO processdao = new ProcessDAO();
-                  boolean result = processdao.updateStatusProcess(Status, ProcessID, OrderID, CageID);
+                  if (addcompleted >= totalquanNeed - quantityCompleted) {
+                        full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
+                        if (full) {
+                            result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
+                        }
+                  } else {
+                        result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
+                  }
                   if (result) {
                         url = "MainController?btAction=ViewProcessDetail";
                   }

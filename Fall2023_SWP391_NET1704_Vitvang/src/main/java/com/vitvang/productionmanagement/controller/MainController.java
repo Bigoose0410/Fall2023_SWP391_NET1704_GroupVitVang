@@ -48,7 +48,6 @@ public class MainController extends HttpServlet {
       //delete
       private final String RemoveItemFromCartController = "RemoveItemFromCartController";
       private final String DeleteOrderController = "DeleteOrderController";
-      private final String RemoveItemFromCartController = "RemoveItemFromCartController";
       private final String DeleteMaterialofCageController = "DeleteMaterialofCageController";
       private final String ProcessController = "ProcessController";
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";

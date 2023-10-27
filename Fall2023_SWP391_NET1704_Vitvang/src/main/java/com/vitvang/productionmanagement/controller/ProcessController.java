@@ -4,16 +4,15 @@
  */
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
-import com.vitvang.productionmanagement.dao.process.ProcessDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -46,6 +45,12 @@ public class ProcessController extends HttpServlet {
                   } else {
                         dao.ViewProcessingOrder(OrderID, CageID, CageID);
                         List<ProcessDTO> process = dao.getListOrdersProcess();
+                        for (ProcessDTO proces : process) {
+                              if(proces.getStatus().equals("Processing")){
+                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
+                                    break;
+                              }
+                        }
                         request.setAttribute("PROCESS_RESULT", process);
                         url = ProcessDetail;
                   }
