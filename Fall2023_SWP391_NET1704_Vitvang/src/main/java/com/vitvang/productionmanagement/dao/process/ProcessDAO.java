@@ -40,22 +40,28 @@ public class ProcessDAO implements Serializable {
                   // tra ra null or k.
                   if (con != null) {
 
-                        String sql = "SELECT Distinct UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Orderr.StartDate, OrderDetail.Quantity, OrderDetail.OrderDetailStatus "
-                                + "FROM UserOrder JOIN Orderr "
-                                + "ON UserOrder.OrderID = Orderr.OrderID "
+                        String sql = "SELECT Distinct Users.Name as 'Customer', Orderr.OrderID, OrderDetail.CageID, Cage.Name as 'Cage Name', Orderr.StartDate, OrderDetail.Quantity, OrderDetail.OrderDetailStatus "
+                                + "FROM UserOrder join Users "
+                                + "ON UserOrder.UserID = Users.UserID "
+                                + "JOIN Orderr "
+                                + " ON UserOrder.OrderID = Orderr.OrderID "
                                 + "JOIN OrderDetail "
-                                + "ON Orderr.OrderID = OrderDetail.OrderID ";
+                                + "ON Orderr.OrderID = OrderDetail.OrderID "
+                                + "JOIN Cage "
+                                + "ON OrderDetail.CageID = Cage.CageID "
+                                ;
                         stm = con.prepareStatement(sql);
                         rs = stm.executeQuery();
                         while (rs.next()) {
-                              String UserID = rs.getString("UserID");
+                              String UserName = rs.getString("Customer");
                               String OrderID = rs.getString("OrderID");
                               String CageID = rs.getString("CageID");
+                              String CageName = rs.getString("Cage Name");
                               Date StartDate = rs.getDate("StartDate");
                               int Quantity = rs.getInt("Quantity");
                               String OrderDetailStatus = rs.getString("OrderDetailStatus");
 
-                              ProcessNewOrderDTO processNewOrder = new ProcessNewOrderDTO(UserID, OrderID, CageID, StartDate, Quantity, OrderDetailStatus);
+                              ProcessNewOrderDTO processNewOrder = new ProcessNewOrderDTO(UserName, OrderID, CageName, CageID, StartDate, Quantity, OrderDetailStatus);
                               if (this.listProcessNewOrder == null) {
                                     this.listProcessNewOrder = new ArrayList<ProcessNewOrderDTO>();
                               }

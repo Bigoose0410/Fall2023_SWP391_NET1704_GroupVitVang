@@ -149,7 +149,7 @@
                                                                  <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
                                                             </td>
                                                             <td>
-                                                                 ${dto.getCageID()}
+                                                                 ${dto.getCageName()}
                                                                  <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
                                                             </td>
                                                             <td>
@@ -261,7 +261,7 @@
                                                                  <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
                                                             </td>
                                                             <td>
-                                                                 ${dto.getCageID()}
+                                                                ${dto.getCageName()}
                                                                  <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
                                                             </td>
                                                             <td>
