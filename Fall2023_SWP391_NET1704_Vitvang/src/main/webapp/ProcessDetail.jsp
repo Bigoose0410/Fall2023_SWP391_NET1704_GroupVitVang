@@ -108,16 +108,16 @@
                               <div class="infomation_form">
                                    <div class="form_row">
                                         <i class="fa fa-user"></i>
-                                        <label for="field1">Customer: </label>
-                                        <a href="MainController?btAction=Customers"><i>${result[1].getUserName()}</i></a>   
+                                        <label for="field1">Customer:</label>
+                                        <i>${result[1].getUserName()}</i>
 
                                         <i class="fa fa-shopping-cart"></i>
-                                        <label for="field2">OrderID: </label>
+                                        <label for="field2">OrderID:</label>
                                         <i>${result[1].getOrderID()}</i>
 
                                         <i class="fa fa-cube"></i>
-                                        <label for="field3">Cage Name: </label>
-                                        <i>${result[1].getCageName()}</i>
+                                        <label for="field3">Cage:</label>
+                                        <a href="MainController?btAction=Customers"><i>${result[1].getCageName()}</i></a>   
                                    </div>
                               </div>
 

@@ -64,7 +64,7 @@ public class AutoAddProcessController extends HttpServlet {
                         } else {
                               newStatus = "not yet";
                         }
-                        endDate = calculateProcessDate(startdate, quantityorder, 
+                        endDate = calculateProcessDate(startdate, quantityorder,
                                 designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(),
                                 designDTO.getNumCompletionCage(), 1);
                         result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity() ,designDTO);

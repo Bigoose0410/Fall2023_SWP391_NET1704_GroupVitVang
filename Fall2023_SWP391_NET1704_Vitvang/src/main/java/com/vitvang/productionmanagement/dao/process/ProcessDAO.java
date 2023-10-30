@@ -301,6 +301,7 @@ public class ProcessDAO implements Serializable {
             PreparedStatement stm1 = null;
             int row = 0;
             int row1 = 0;
+
             try {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
@@ -331,6 +332,7 @@ public class ProcessDAO implements Serializable {
                               stm1.setString(2, CageID);
                               row1 = stm1.executeUpdate();
                         }
+                        
                         if (row > 0 && row1 > 0) {
                               return true;
                         }
@@ -347,7 +349,6 @@ public class ProcessDAO implements Serializable {
             }
             return false;
       }
-
       public boolean AutoAddProcess(int ProcessID, String OrderID, String status, Date StartDate, Date Endate, int quanityProduct, DesignForProcessDTO design)
               throws SQLException, NamingException {
             Connection con = null;
