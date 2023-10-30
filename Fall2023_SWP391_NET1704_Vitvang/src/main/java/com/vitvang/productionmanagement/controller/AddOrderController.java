@@ -29,11 +29,12 @@ import javax.naming.NamingException;
 public class AddOrderController extends HttpServlet {
 
       private final String ORDER_PAGE = "OrderAdd.jsp";
-      private final String ADDRESS_FORM_PATTERN = "^([0-9]{1,4}[A-Z]?/[0-9]{1,3}\\s[a-zA-Z"
+      private final String ADDRESS_FORM_PATTERN = "([0-9]{1,4}[A-Z]?/[0-9]{1,3}\\s[a-zA-Z"
               + "ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơ"
               + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈ"
-              + "ỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30})$";
-      private final String ADDRESS_NUMBERANDCHAR_PATTERN = "^(?=.[A-Za-z])(?=.\\d)[A-Za-z\\d]+$";
+              + "ỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30})";
+      private final String ADDRESS_NUMBERANDCHAR_PATTERN = "(?=.[A-Za-z])(?=.\\d)[A-Za-z\\d]+";
+      private final String QUANTITY_PATTERN = "(?!-)\\d+";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, ParseException {
@@ -42,8 +43,13 @@ public class AddOrderController extends HttpServlet {
             // test
             String customerId = request.getParameter("txtCustomerID");
             String totalprice = request.getParameter("txtTotalPrice");
+             if (totalprice == null ) {
+                        totalprice = "0";
+                  }
             int total = Integer.parseInt(totalprice);
             String Address = request.getParameter("txtAddress");
+            String quantity = request.getParameter("txtQuantity");
+            int quantityCheck = Integer.parseInt(quantity);
             String[] CageID = request.getParameterValues("txtOrderCageID");
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
@@ -53,14 +59,27 @@ public class AddOrderController extends HttpServlet {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO dao = new OrderDAO();
-
-                  if (Address.trim().length() < 6 || Address.trim().length() > 20) {
-                        error.setAddressLengthErr("Pls type again Address from 6 -> 20 chars");
+                 
+                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
+                        error.setAddressNumberErr("Pls type again Address, with have at least "
+                                + "one char and one number");
                         foundErr = true;
                   }
-                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
-                        error.setAddressLengthErr("Pls type again Address, with have at least "
-                                + "one char and one number");
+                  if (Address.trim().length() < 6) {
+                        error.setAddressLengthErr("Pls type again, Address too short, maybe something wrong!!");
+                        foundErr = false;
+                  }
+
+                  if (!checkFormat(Address, ADDRESS_FORM_PATTERN, true)) {
+                        error.setAddressFormErr("Pls type again Address, e.g: 123 Hiệp Hòa, Biên Hòa Đồng Nai ");
+                        foundErr = true;
+                  }
+                  if (!checkFormat(quantity, QUANTITY_PATTERN, true)) {
+                        error.setNullQuantityErr("PLs type again Quantity!!!");
+                        foundErr = true;
+                  }
+                  if (quantityCheck < 100 || quantityCheck > 100000) {
+                        error.setQuantityValidErr("Pls type again quantity > 100 and < 100000");
                         foundErr = true;
                   }
 
@@ -70,7 +89,7 @@ public class AddOrderController extends HttpServlet {
                   } else {
                         boolean result = dao.insertOrder(now, total, Address);
                         dao.addUserOrder(customerId);
-                        int quantity = 1;
+                        int quantityTmp = 1;
                         for (CageDTO value : cart.getProductItems().values()) {
                               dao.addOrderDetail(value.getCageID(), value.getQuantityOrder());
 
@@ -82,9 +101,17 @@ public class AddOrderController extends HttpServlet {
                         }
                   }
             } catch (SQLException ex) {
-                  ex.printStackTrace();
+                  String msg = ex.getMessage();
+                  log("UpdateAccountServlet _ SQL " + msg);
+                  error.setNullQuantityErr("Not accept Null quantity!!!");
+                  request.setAttribute("ADD_ORDER_ERROR", error);
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
+            } catch (NumberFormatException  ex) {
+                  String msg = ex.getMessage();
+                  log("UpdateAccountServlet _ SQL " + msg);
+                  error.setNullQuantityErr("Not accept Null quantity!!!");
+                  request.setAttribute("ADD_ORDER_ERROR", error);
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
