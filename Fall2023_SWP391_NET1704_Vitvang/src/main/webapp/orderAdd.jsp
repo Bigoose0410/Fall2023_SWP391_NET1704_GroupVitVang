@@ -114,20 +114,8 @@
                     <form action="MainController" method="GET" novalidate="novalidate">
                          <fieldset id="info">
                               <legend>Order Info</legend>
-                              <label for="orderinput">Order</label>
-                              <input type="text" id="orderinput" placeholder="Order" name="txtOrderID"
-                                     value="${param.txtOrderID}" />
-                              <c:if test="${not empty errors.getOrderIdFormatErr()}">
-                                   <font color="red">
-                                   ${errors.getOrderIdFormatErr()}
-                                   </font>
-                              </c:if>
-                              <c:if test="${not empty errors.getDuplicateOrderIDErr()}">
-                                   <font color="red">
-                                   ${errors.getDuplicateOrderIDErr()}
-                                   </font>
-                              </c:if>
-                              <label for="customerinput">CustomerID</label>
+                             
+                              <label for="customerinput">Customer Name</label>
                               <!--                               <input type="text" id="customerinput" name="customerid" required="required" 
                                                             placeholder="CustomerID" />-->
                               <!--                              <input type="text" id="customerinput" placeholder="CustomerID" name="txtCustomerID"
@@ -163,17 +151,12 @@
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
 
                               <div class="input-container">
-                                   <label for="startdateinput">StartDate</label>
+                                   <label for="startdateinput">Start Date</label>
                                    <fmt:formatDate var="date" value="${now}" pattern="MM-dd-yyyy" />
                                    <!--${date}-->
                                    <input type="text" readonly="true" id="startdateinput" value="${date}"
                                           required="required" />
                               </div>
-
-                              <div class="input-container2">
-                                   <label for="enddateinput">EndDate</label>
-                                   <input type="date" id="enddateinput" value="${param.txtEndDate}" name="txtEndDate" required="required" />
-                              </div> 
 
                               <label for="addressinput">Address</label>
                               <!--                               <input type="text" id="addressinput" name="address" required="required" 

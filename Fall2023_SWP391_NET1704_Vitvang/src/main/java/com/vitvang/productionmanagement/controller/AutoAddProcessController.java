@@ -4,10 +4,12 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.model.DesignForProcessDTO;
-import com.vitvang.productionmanagement.dao.process.ProcessDAO;
-import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.dao.process.ProcessDAO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.DetailOrderDTO;
+import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,7 +28,7 @@ import javax.naming.NamingException;
  * @author thetam
  */
 @WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
-public class UpdateSatusNewOrderController extends HttpServlet {
+public class AutoAddProcessController extends HttpServlet {
 
       private final String PROCESS_OF_CAGE_PAGE = "Process.jsp";
 
@@ -48,22 +50,24 @@ public class UpdateSatusNewOrderController extends HttpServlet {
             int i = 1;
             try {
                   // new dao
+                  OrderDAO orderdao = new OrderDAO();
                   ProcessDAO processdao = new ProcessDAO();
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   //2. call method
                   designdao.ViewDesignForProcess(cageID);
                   //3. process result
                   List<DesignForProcessDTO> designList = designdao.getDesignProcessList();
+                  DetailOrderDTO getquantity =  orderdao.query1LineOrderDetail(orderID,cageID);
                   for (DesignForProcessDTO designDTO : designList) {
                         if (i == 1) {
                               newStatus = "Processing";
                         } else {
                               newStatus = "not yet";
                         }
-                        endDate = calculateProcessDate(startdate, quantityorder, 
+                        endDate = calculateProcessDate(startdate, quantityorder,
                                 designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(),
                                 designDTO.getNumCompletionCage(), 1);
-                        result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, designDTO);
+                        result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity() ,designDTO);
                         i++;
                         startdate = endDate;
                   }
@@ -97,7 +101,7 @@ public class UpdateSatusNewOrderController extends HttpServlet {
             try {
                   processRequest(request, response);
             } catch (SQLException ex) {
-                  Logger.getLogger(UpdateSatusNewOrderController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(AutoAddProcessController.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
 
@@ -115,7 +119,7 @@ public class UpdateSatusNewOrderController extends HttpServlet {
             try {
                   processRequest(request, response);
             } catch (SQLException ex) {
-                  Logger.getLogger(UpdateSatusNewOrderController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(AutoAddProcessController.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
 

@@ -34,10 +34,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-                                                            <li ><a href="#">
-                                                                      <i class="uil uil-estate"></i>
-                                                                      <span class="link-name">Dahsboard</span>
-                                                                 </a></li>
+                              <li ><a href="#">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -174,7 +174,7 @@
                          <form action="MainController" method="get" style="display:flex; flex-wrap: wrap;justify-content: space-between">
                               <div style="width:48%">
                                    CustomerID 
-                                   
+
                                    <input type="text" class="form-control" value="${param.txtUserID}" 
                                           placeholder="Customer ID" name="txtUserID" >
                                    <c:if test="${not empty errors.getCustomerIDFormatErr()}">
@@ -182,28 +182,30 @@
                                         ${errors.getCustomerIDFormatErr()}
                                         </font>
                                    </c:if>
-                                   <c:if test="${not empty errors.getCustomerIDexistErr()}">
-                                        <font color = "red">
-                                        ${errors.getCustomerIDexistErr()}
-                                        </font>
-                                   </c:if>    
+                                     
                               </div>
                               <br>
                               <div style="width:48%">
                                    Customer Name
-                                    <c:if test="${not empty errors.getNameLengthErr()}">
+                                   <input type="text" class="form-control" value="${param.txtName}"
+                                          placeholder="Customer Name" name="txtName"> <br> 
+                                   <c:if test="${not empty errors.getNameLengthErr()}">
                                         <font color = "red">
                                         ${errors.getNameLengthErr()}
                                         </font><br>
                                    </c:if> 
+                              </div>
 
-                                   <input type="text" class="form-control" value="${param.txtName}"
-                                          placeholder="Customer Name" name="txtName"> <br> </div>
-                                          
                               <div style="width:48%">
                                    Birth Date
                                    <input type="date" required="required" class="form-control" value="${param.txtBirthDate}"
-                                          placeholder="BirthDate" name="txtBirthDate"> </div>
+                                          placeholder="BirthDate" name="txtBirthDate">
+                                   <c:if test="${not empty errors.getBirthDateVaildErr()}">
+                                        <font color = "red">
+                                        ${errors.getBirthDateVaildErr()}
+                                        </font><br>
+                                   </c:if> 
+                              </div>
                               <br>
                               <div style="width:48%;">
                                    Gender:
@@ -219,39 +221,50 @@
                               <div style="width:48%">
                                    Phone Number     
                                    <input type="tel" class="form-control" required="required"  value="${param.txtPhoneNumber}"
-                                          placeholder="Phone Number" name="txtPhoneNumber"> </div>
+                                          placeholder="Phone Number" name="txtPhoneNumber">
+                                   <c:if test="${not empty errors.getPhoneNumberTypeErr()}">
+                                        <font color = "red">
+                                        ${errors.getPhoneNumberTypeErr()}
+                                        </font><br>
+                                   </c:if>    
+                              </div>
 
                               <br>
                               <div style="width:48%">
                                    Email
                                    <input type="email" required="required" class="form-control" value="${param.txtEmail}"
                                           placeholder="Email" name="txtEmail">
-                                   <br>
+                                   <c:if test="${not empty errors.getGmailTypeErr()}">
+                                        <font color = "red">
+                                        ${errors.getGmailTypeErr()}
+                                        </font><br>
+                                   </c:if>  
                               </div>
                               <div style="width:100%">
 
                                    Address
+
+                                   <input type="text" class="form-control" placeholder="Adress" value="${param.txtAdress}"
+                                          name="txtAdress">
                                    <c:if test="${not empty errors.getAddressLenghtErr()}">
                                         <font color = "red">
                                         ${errors.getAddressLenghtErr()}
                                         </font> 
-                                   </c:if>  
-                                   <input type="text" class="form-control" placeholder="Adress" value="${param.txtAdress}"
-                                          name="txtAdress">
+                                   </c:if>
 
                               </div>
                               <br>
                               <div style="width: 100%">
                                    Account Username
-                                   <c:if test="${not empty errors.getUsernameLengthErr()}">
+                                  
+                                   <input type="text" class="form-control" value="${param.txtUsername}"
+                                          placeholder="Account Username" name="txtUsername">
+                                   <br>
+                                    <c:if test="${not empty errors.getUsernameLengthErr()}">
                                         <font color = "red">
                                         ${errors.getUsernameLengthErr()}
                                         </font><br>
                                    </c:if>  
-                                   <input type="text" class="form-control" value="${param.txtUsername}"
-                                          placeholder="Account Username" name="txtUsername">
-                                   <br>
-
                                    Account Password
                                    <c:if test="${not empty errors.getPasswordLengthErr()}">
                                         <font color = "red">
@@ -269,12 +282,17 @@
                                         </font><br>
                                    </c:if> 
                                    <input type="password" class="form-control" placeholder="Confirm Password" name="txtConfirm">
-                                   
+
                               </div>
                               <br>
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
                                    Create New customer
                               </button>
+                              <c:if test="${not empty errors.getCustomerIDexistErr()}">
+                                        <font color = "red">
+                                        ${errors.getCustomerIDexistErr()}
+                                        </font>
+                                   </c:if>  
                          </form>
 
                     </c:if>

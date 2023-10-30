@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -29,20 +28,18 @@ import javax.naming.NamingException;
  */
 public class AddOrderController extends HttpServlet {
 
-      private final String ORDER_PAGE = "Order.jsp";
-      private final String ORDER_ADD_PAGE = "MainController"
-              + "?btAction=New Order";
-      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
-      private final String ORDERID_PATTERN = "OD\\d{3}";
+      private final String ORDER_PAGE = "OrderAdd.jsp";
+      private final String ADDRESS_FORM_PATTERN = "^([0-9]{1,4}[A-Z]?/[0-9]{1,3}\\s[a-zA-Z"
+              + "ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơ"
+              + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈ"
+              + "ỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30})$";
+      private final String ADDRESS_NUMBERANDCHAR_PATTERN = "^(?=.[A-Za-z])(?=.\\d)[A-Za-z\\d]+$";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, ParseException {
             response.setContentType("text/html;charset=UTF-8");
             String url = ORDER_PAGE;
             // test
-            String orderId = request.getParameter("txtOrderID");
-            String EndDate = request.getParameter("txtEndDate");
-            Date productEndDate = Date.valueOf(EndDate);
             String customerId = request.getParameter("txtCustomerID");
             String totalprice = request.getParameter("txtTotalPrice");
             int total = Integer.parseInt(totalprice);
@@ -55,56 +52,37 @@ public class AddOrderController extends HttpServlet {
             try {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
-                  OrderDAO Orderdao = new OrderDAO();
-                  if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
-                        error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
+                  OrderDAO dao = new OrderDAO();
+
+                  if (Address.trim().length() < 6 || Address.trim().length() > 20) {
+                        error.setAddressLengthErr("Pls type again Address from 6 -> 20 chars");
                         foundErr = true;
                   }
-                  if (productEndDate.before(now)) {
-                        error.setEndDateErr("End date can not before today");
+                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
+                        error.setAddressLengthErr("Pls type again Address, with have at least "
+                                + "one char and one number");
                         foundErr = true;
                   }
-                  if (!checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
-                        error.setCustomerIdFormatErr("Pls type again CustomerID with two digit");
-                        foundErr = true;
-                  }
-                  if (Address.trim().length() < 5) {
-                        error.setAddressLengthErr("Pls type again Address too short");
-                        foundErr = true;
-                  }
+
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
-                        url = ORDER_ADD_PAGE;
+                        url = "MainController" + "?btAction=New Order";
                   } else {
-                        boolean result = Orderdao.insertOrder(orderId, now, total, productEndDate, Address);
-                        Orderdao.addUserOrder(orderId, customerId);
+                        boolean result = dao.insertOrder(now, total, Address);
+                        dao.addUserOrder(customerId);
                         int quantity = 1;
                         for (CageDTO value : cart.getProductItems().values()) {
-                              Orderdao.addOrderDetail(orderId, value.getCageID(), value.getQuantityOrder());
+                              dao.addOrderDetail(value.getCageID(), value.getQuantityOrder());
 
                         }
-//                        for (String item : CageID) {
-//                              String quantityrequest = request.getParameter(item);
-//                              quantity = Integer.parseInt(quantityrequest);
-//                              Orderdao.addOrderDetail(orderId, item, quantity);
-//                        }
                         if (result) {
                               url = "MainController"
-                                      + "?btAction=Detail"
-                                      + "&txtOrderID=" + orderId;
+                                      + "?btAction=Order";
+
                         }
                   }
             } catch (SQLException ex) {
-                  String msg = ex.getMessage();
-                  log("UpdateAccountServlet _ SQL " + msg);
-                  if (msg.contains("conflicted with the FOREIGN KEY")) {
-                        error.setCustomerNotExistInDatabasErr("Customer not exist in database");
-                        request.setAttribute("ADD_ORDER_ERROR", error);
-                  }
-                  if (msg.contains("duplicate")) {
-                        error.setDuplicateOrderIDErr("OrderID has exist in database");
-                        request.setAttribute("ADD_ORDER_ERROR", error);
-                  }
+                  ex.printStackTrace();
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
             } finally {

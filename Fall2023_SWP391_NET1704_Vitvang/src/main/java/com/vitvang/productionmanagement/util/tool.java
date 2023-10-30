@@ -45,9 +45,17 @@ public final class tool {
             }
       }
 
-      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess ,int employeeinDesign, int maxConpletionperDay, int empInprocess ) {
+      public static String getNextProcessID(String processID) {
+            String prefix = processID.substring(0, 2); // Lấy phần tiền tố "PR"
+            int number = Integer.parseInt(processID.substring(2)); // Lấy phần số xxx
+            int nextNumber = number + 1; // Tăng giá trị số xxx lên 1
+            String nextNumberString = String.format("%03d", nextNumber); // Định dạng lại số xxx thành chuỗi có 3 chữ số
+            return prefix + nextNumberString; // Tạo chuỗi processID mới bằng cách kết hợp phần tiền tố và phần số
+      }
 
-            double maxConpletion = 1d*empInprocess*(maxConpletionperDay * 1d /employeeinDesign);
+      public static Date calculateProcessDate(Date startDate, int quantity, int timeprocess, int employeeinDesign, int maxConpletionperDay, int empInprocess) {
+
+            double maxConpletion = 1d * empInprocess * (maxConpletionperDay * 1d / employeeinDesign);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c1 = Calendar.getInstance();
             // Tính thời gian cần thiết cho quy trình
@@ -66,7 +74,7 @@ public final class tool {
                   }
             } else {
                   if (c1.getTime().getDate() < startDate.getDate()) {
-                  c1.roll(Calendar.MONTH, 1);
+                        c1.roll(Calendar.MONTH, 1);
                   }
                   if (c1.getTime().getMonth() < startDate.getMonth()) {
                         c1.roll(Calendar.YEAR, 1);
@@ -79,5 +87,13 @@ public final class tool {
             return EndDate;
       }
 
-      
+ public static long getVaildYob(Date birthDate) {
+            long millis = System.currentTimeMillis();
+            java.sql.Date currentDate = new java.sql.Date(millis);
+
+            long ageInMillis = currentDate.getTime() - birthDate.getTime();
+            long ageInYears = ageInMillis / (1000 * 60 * 60 * 24 * 365);
+            
+            return ageInYears;
+      }
 }

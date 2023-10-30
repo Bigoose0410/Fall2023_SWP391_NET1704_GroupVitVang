@@ -5,14 +5,17 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
+import com.vitvang.productionmanagement.model.ProcessDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,15 +29,36 @@ public class UpdateStatusProcessController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
+            String Status = request.getParameter("txtStatus");
             String ProcessID = request.getParameter("txtProcessID");
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
-            String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
-            String Status = request.getParameter("txtStatus");
+            String LastStep = request.getParameter("LastStep");
+            String addComplete = request.getParameter("txtCompletedAdd");
+            String quanneedproduct = request.getParameter("txtTotalQuantity");
+            String txtquantityCompleted = request.getParameter("txtquantityCompleted");
+            int addcompleted = Integer.parseInt(addComplete);
+            int totalquanNeed = Integer.parseInt(quanneedproduct);
+            int quantityCompleted = Integer.parseInt(txtquantityCompleted);
+
             String url = "NewLogin.jsp";
+            boolean result = false;
+            boolean full = false;
+            boolean laststep = false;
             try {
+                  if (!LastStep.trim().isEmpty()) {
+                        laststep = true;
+                  }
                   ProcessDAO processdao = new ProcessDAO();
-                  boolean result = processdao.updateStatusProcess(Status, ProcessID, OrderID, CageID);
+                  if (addcompleted >= totalquanNeed - quantityCompleted) {
+                        full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
+                        if (full) {
+                            result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
+                        }
+                  } else {
+                        result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
+                  }
+
                   if (result) {
                         url = "MainController?btAction=ViewProcessDetail";
                   }
@@ -43,6 +67,14 @@ public class UpdateStatusProcessController extends HttpServlet {
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
+      }
+
+      private static String getNextProcessID(String processID) {
+            String prefix = processID.substring(0, 2); // Lấy phần tiền tố "PR"
+            int number = Integer.parseInt(processID.substring(2)); // Lấy phần số xxx
+            int nextNumber = number + 1; // Tăng giá trị số xxx lên 1
+            String nextNumberString = String.format("%03d", nextNumber); // Định dạng lại số xxx thành chuỗi có 3 chữ số
+            return prefix + nextNumberString; // Tạo chuỗi processID mới bằng cách kết hợp phần tiền tố và phần số
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
