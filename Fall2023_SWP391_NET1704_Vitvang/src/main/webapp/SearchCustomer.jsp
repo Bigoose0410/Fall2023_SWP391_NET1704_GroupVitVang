@@ -115,8 +115,8 @@
                                         <thead>
                                              <tr>
                                                   <th>No.</th>
-                                                  <th>CustomerID</th>
-                                                  <th>Name</th>
+                                                  <th>Customer </th>
+                                                  <th>Customer Name</th>
                                                   <th>Sex</th>
                                                   <th>Address</th>
                                                   <th>Date of Birth</th>
