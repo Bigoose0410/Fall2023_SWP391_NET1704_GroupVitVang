@@ -29,8 +29,11 @@ import javax.naming.NamingException;
 public class AddOrderController extends HttpServlet {
 
       private final String ORDER_PAGE = "OrderAdd.jsp";
-      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
-      private final String ORDERID_PATTERN = "OD\\d{3}";
+      private final String ADDRESS_FORM_PATTERN = "^([0-9]{1,4}[A-Z]?/[0-9]{1,3}\\s[a-zA-Z"
+              + "ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơ"
+              + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈ"
+              + "ỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30})$";
+      private final String ADDRESS_NUMBERANDCHAR_PATTERN = "^(?=.[A-Za-z])(?=.\\d)[A-Za-z\\d]+$";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, ParseException {
@@ -50,27 +53,32 @@ public class AddOrderController extends HttpServlet {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO dao = new OrderDAO();
-                  
-                  if (Address.trim().length() < 5) {
-                        error.setAddressLengthErr("Pls type again Address too short");
+
+                  if (Address.trim().length() < 6 || Address.trim().length() > 20) {
+                        error.setAddressLengthErr("Pls type again Address from 6 -> 20 chars");
                         foundErr = true;
                   }
-                  
+                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
+                        error.setAddressLengthErr("Pls type again Address, with have at least "
+                                + "one char and one number");
+                        foundErr = true;
+                  }
+
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
-                        url = "MainController"+"?btAction=New Order";
+                        url = "MainController" + "?btAction=New Order";
                   } else {
-                        boolean result = dao.insertOrder( now, total, Address);
-                        dao.addUserOrder( customerId);
+                        boolean result = dao.insertOrder(now, total, Address);
+                        dao.addUserOrder(customerId);
                         int quantity = 1;
                         for (CageDTO value : cart.getProductItems().values()) {
-                              dao.addOrderDetail( value.getCageID(), value.getQuantityOrder());
+                              dao.addOrderDetail(value.getCageID(), value.getQuantityOrder());
 
                         }
                         if (result) {
                               url = "MainController"
                                       + "?btAction=Order";
-                                      
+
                         }
                   }
             } catch (SQLException ex) {

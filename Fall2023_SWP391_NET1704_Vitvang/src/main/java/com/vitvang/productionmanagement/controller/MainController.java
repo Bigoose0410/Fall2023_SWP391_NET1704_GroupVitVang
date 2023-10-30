@@ -53,6 +53,7 @@ public class MainController extends HttpServlet {
       private final String UpdateSatusNewOrderController = "UpdateSatusNewOrderController";
       private final String CustomerController = "CustomerController";
       private final String UpdateStatusProcessController = "UpdateStatusProcessController";
+      private final String UpdateEmpProcessController = "UpdateEmpProcessController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -121,6 +122,9 @@ public class MainController extends HttpServlet {
                         url = ProcessController;
                   } else if (button.equals("UpdateStatusProcess")) {
                         url = UpdateStatusProcessController;
+                  
+                  } else if (button.equals("UpdateEmployee")) {
+                        url = UpdateEmpProcessController;
                   }
 
                   }finally {

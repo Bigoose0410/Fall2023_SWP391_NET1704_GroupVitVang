@@ -20,7 +20,7 @@ public class DBHelper {
         public static Connection makeConnection() {
                 Connection conn = null;
                 try {
-                         String dbURL = "jdbc:sqlserver://LEEMINHHNHATT\\BIGOOSE;databaseName=ProductionManagement1;encrypt=true;trustServerCertificate=true;";
+                         String dbURL = "jdbc:sqlserver://ADMIN\\SQLEXPRESS;databaseName=ProductionManagementV_2;encrypt=true;trustServerCertificate=true;";
                         String user = "sa";
                         String pass = "12345";
                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
