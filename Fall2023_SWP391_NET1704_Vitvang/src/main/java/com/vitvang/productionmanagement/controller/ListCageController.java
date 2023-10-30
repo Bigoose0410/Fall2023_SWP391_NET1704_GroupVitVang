@@ -27,18 +27,11 @@ public class ListCageController extends HttpServlet {
 
       private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "ErrorPageLogin.html";
+            String url = "";
             try {
                   HttpSession session = request.getSession();
                   //1. call DAO

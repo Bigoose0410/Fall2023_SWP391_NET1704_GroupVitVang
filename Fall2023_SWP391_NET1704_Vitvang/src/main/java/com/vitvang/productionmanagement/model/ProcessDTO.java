@@ -13,20 +13,62 @@ import java.sql.Date;
 public class ProcessDTO {
 
       private String UserID;
+      private String UserName;
       private String OrderID;
       private String CageID;
+      private String CageName;
+      private String Phrase;
       private String ProcessID;
       private String ProcessName;
-      private String Status;
+      private int CompletedQuantity;
+      private int Quantity;
       private Date StartDate;
       private Date EndDate;
+      private String Status;
       private int NumberOfEmployee;
-      private String StatusProgress;
-      private int Quantity;
       private String OrderDetailStatus;
+      private String StatusProgress;
 
       public ProcessDTO() {
       }
+
+//      public ProcessDTO(String UserID, String UserName, String OrderID, String CageID, String Phrase, String ProcessID, String ProcessName, int CompletedQuantity, int Quantity, Date StartDate, Date EndDate, String Status, int NumberOfEmployee, String OrderDetailStatus, String StatusProgress) {
+//            this.UserID = UserID;
+//            this.UserName = UserName;
+//            this.OrderID = OrderID;
+//            this.CageID = CageID;
+//            this.Phrase = Phrase;
+//            this.ProcessID = ProcessID;
+//            this.ProcessName = ProcessName;
+//            this.CompletedQuantity = CompletedQuantity;
+//            this.Quantity = Quantity;
+//            this.StartDate = StartDate;
+//            this.EndDate = EndDate;
+//            this.Status = Status;
+//            this.NumberOfEmployee = NumberOfEmployee;
+//            this.OrderDetailStatus = OrderDetailStatus;
+//            this.StatusProgress = StatusProgress;
+//      }
+
+      public ProcessDTO(String UserID, String UserName, String OrderID, String CageID, String CageName, String Phrase, String ProcessID, String ProcessName, int CompletedQuantity, int Quantity, Date StartDate, Date EndDate, String Status, int NumberOfEmployee, String OrderDetailStatus, String StatusProgress) {
+            this.UserID = UserID;
+            this.UserName = UserName;
+            this.OrderID = OrderID;
+            this.CageID = CageID;
+            this.CageName = CageName;
+            this.Phrase = Phrase;
+            this.ProcessID = ProcessID;
+            this.ProcessName = ProcessName;
+            this.CompletedQuantity = CompletedQuantity;
+            this.Quantity = Quantity;
+            this.StartDate = StartDate;
+            this.EndDate = EndDate;
+            this.Status = Status;
+            this.NumberOfEmployee = NumberOfEmployee;
+            this.OrderDetailStatus = OrderDetailStatus;
+            this.StatusProgress = StatusProgress;
+      }
+     
 
       public ProcessDTO(String UserID, String OrderID, String CageID, String ProcessID, String ProcessName, String Status, Date StartDate, Date EndDate, int NumberOfEmployee, String StatusProgress, int Quantity, String OrderDetailStatus) {
             this.UserID = UserID;
@@ -43,6 +85,39 @@ public class ProcessDTO {
             this.OrderDetailStatus = OrderDetailStatus;
       }
 
+      public String getCageName() {
+            return CageName;
+      }
+
+      public void setCageName(String CageName) {
+            this.CageName = CageName;
+      }
+
+      
+      public int getCompletedQuantity() {
+            return CompletedQuantity;
+      }
+
+      public void setCompletedQuantity(int CompletedQuantity) {
+            this.CompletedQuantity = CompletedQuantity;
+      }
+
+      public String getUserName() {
+            return UserName;
+      }
+
+      public void setUserName(String UserName) {
+            this.UserName = UserName;
+      }
+
+      public String getPhrase() {
+            return Phrase;
+      }
+
+      public void setPhrase(String Phrase) {
+            this.Phrase = Phrase;
+      }
+      
       public String getUserID() {
             return UserID;
       }

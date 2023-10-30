@@ -7,13 +7,12 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,46 +33,30 @@ public class UpdateStatusProcessController extends HttpServlet {
             String ProcessID = request.getParameter("txtProcessID");
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
-//            String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
+            String LastStep = request.getParameter("LastStep");
+            String addComplete = request.getParameter("txtCompletedAdd");
+            String quanneedproduct = request.getParameter("txtTotalQuantity");
+            String txtquantityCompleted = request.getParameter("txtquantityCompleted");
+            int addcompleted = Integer.parseInt(addComplete);
+            int totalquanNeed = Integer.parseInt(quanneedproduct);
+            int quantityCompleted = Integer.parseInt(txtquantityCompleted);
+
             String url = "NewLogin.jsp";
+            boolean result = false;
+            boolean full = false;
+            boolean laststep = false;
             try {
-                  boolean result = false;
-                  int count = 0;
-                  ProcessDAO dao = new ProcessDAO();
-//                  if (ProcessID.equals("PR001") && Status.equals("Done")) {
-//                        result = dao.updateStatusProcess1(Status, ProcessID, OrderID, CageID);
-//                  } else if (ProcessID.equals("PR002") && Status.equals("Done")) {
-//                        result = dao.updateStatusProcess2(Status, ProcessID, OrderID, CageID);
-//                  } else if (ProcessID.equals("PR003") && Status.equals("Done")) {
-//                        result = dao.updateStatusProcess3(Status, ProcessID, OrderID, CageID);
-//                  } else if (ProcessID.equals("PR004") && Status.equals("Done")) {
-//                        result = dao.updateStatusProcess4(Status, ProcessID, OrderID, CageID);
-//                  } else if (ProcessID.equals("PR005") && Status.equals("Done")) {
-//                        result = dao.updateStatusProcess5(Status, ProcessID, OrderID, CageID);
-//                  } else {
-//                        result = dao.updateStatusProcess(Status, ProcessID, OrderID, CageID);
-//                  }
-                  dao.ViewProcessingOrder(OrderID, CageID, CageID);
-                  List<ProcessDTO> list = dao.getListOrdersProcess();
-                  for (ProcessDTO process : list) {
-                        count++;
-
-                        if (process.getProcessID().equals(ProcessID) && !Status.equals("Done")) {
-                              result = dao.updateStatusProcess(Status, ProcessID, OrderID, CageID);
-                              break;
+                  if (!LastStep.trim().isEmpty()) {
+                        laststep = true;
+                  }
+                  ProcessDAO processdao = new ProcessDAO();
+                  if (addcompleted >= totalquanNeed - quantityCompleted) {
+                        full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
+                        if (full) {
+                            result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
                         }
-
-                        if (process.getProcessID().equals(ProcessID) && Status.equals("Done") && count != list.size()) {
-//                              request.setAttribute("UPDATE_STATUS", ProcessID);
-                              String nextProcessID = getNextProcessID(ProcessID);
-                              result = dao.updateStatusProcessToDone(Status, ProcessID, nextProcessID, OrderID, CageID);
-                              break;
-                        }
-
-                        if (process.getProcessID().equals(ProcessID) && Status.equals("Done") && count == list.size()) {
-                              result = dao.updateStatusLastProcess(Status, ProcessID, OrderID, CageID);
-                              break;
-                        }
+                  } else {
+                        result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
                   }
 
                   if (result) {

@@ -19,14 +19,7 @@ public class OrderInsertError implements Serializable{
       private String CustomerNotExistInDatabasErr;
       private String DuplicateOrderIDErr;
 
-      public String getDuplicateOrderIDErr() {
-            return DuplicateOrderIDErr;
-      }
-
-      public void setDuplicateOrderIDErr(String DuplicateOrderIDErr) {
-            this.DuplicateOrderIDErr = DuplicateOrderIDErr;
-      }
-      
+          
       
         public OrderInsertError() {
         }
@@ -81,6 +74,13 @@ public class OrderInsertError implements Serializable{
             this.CustomerNotExistInDatabasErr = CustomerNotExistInDatabasErr;
       }
       
-      
+       public String getDuplicateOrderIDErr() {
+            return DuplicateOrderIDErr;
+      }
+
+      public void setDuplicateOrderIDErr(String DuplicateOrderIDErr) {
+            this.DuplicateOrderIDErr = DuplicateOrderIDErr;
+      }
+
       
 }

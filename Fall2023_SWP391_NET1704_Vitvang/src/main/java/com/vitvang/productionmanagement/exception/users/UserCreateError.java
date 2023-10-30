@@ -19,11 +19,17 @@ public class UserCreateError {
       private String confirmNotMatch;
       private String usernameIsExist;
       private String addressLenghtErr;
+      private String birthDateVaildErr;
+      private String phoneNumberTypeErr;
+      private String gmailTypeErr;
 
       public UserCreateError() {
       }
 
-      public UserCreateError(String usernameLengthErr, String usernameExistErr,String fullNameLengthErr, String confirmNotMatch, String usernameIsExist, String customerIDFormatErr, String customerIDexistErr, String addressLenghtErr) {
+      public UserCreateError(String usernameLengthErr, String usernameExistErr,String fullNameLengthErr,
+              String confirmNotMatch, String usernameIsExist, String customerIDFormatErr,
+              String customerIDexistErr, String addressLenghtErr, String birthDateVaildErr,String phoneNumberTypeErr
+      , String gmailTypeErr) {
             this.usernameLengthErr = usernameLengthErr;
             this.usernameExistErr = usernameExistErr;
             this.passwordLengthErr = passwordLengthErr;
@@ -32,6 +38,33 @@ public class UserCreateError {
             this.customerIDFormatErr = customerIDFormatErr;
             this.customerIDexistErr = customerIDexistErr;
             this.addressLenghtErr = addressLenghtErr;
+            this.birthDateVaildErr = birthDateVaildErr;
+            this.phoneNumberTypeErr = phoneNumberTypeErr;
+            this.gmailTypeErr = gmailTypeErr;
+      }
+
+      public String getGmailTypeErr() {
+            return gmailTypeErr;
+      }
+
+      public void setGmailTypeErr(String gmailTypeErr) {
+            this.gmailTypeErr = gmailTypeErr;
+      }
+
+      public String getPhoneNumberTypeErr() {
+            return phoneNumberTypeErr;
+      }
+
+      public void setPhoneNumberTypeErr(String phoneNumberTypeErr) {
+            this.phoneNumberTypeErr = phoneNumberTypeErr;
+      }
+
+      public String getBirthDateVaildErr() {
+            return birthDateVaildErr;
+      }
+
+      public void setBirthDateVaildErr(String birthDateVaildErr) {
+            this.birthDateVaildErr = birthDateVaildErr;
       }
 
       public String getUsernameLengthErr() {
