@@ -14,6 +14,7 @@ public class ProcessNewOrderDTO {
 
       private String UserID;
       private String OrderID;
+      private String CageName;
       private String CageID;
       private Date StartDate;
       private int Quantity;
@@ -22,9 +23,10 @@ public class ProcessNewOrderDTO {
       public ProcessNewOrderDTO() {
       }
 
-      public ProcessNewOrderDTO(String UserID, String OrderID, String CageID, Date StartDate, int Quantity, String OrderDetailStatus) {
+      public ProcessNewOrderDTO(String UserID, String OrderID, String CageName, String CageID, Date StartDate, int Quantity, String OrderDetailStatus) {
             this.UserID = UserID;
             this.OrderID = OrderID;
+            this.CageName = CageName;
             this.CageID = CageID;
             this.StartDate = StartDate;
             this.Quantity = Quantity;
@@ -45,6 +47,14 @@ public class ProcessNewOrderDTO {
 
       public void setOrderID(String OrderID) {
             this.OrderID = OrderID;
+      }
+
+      public String getCageName() {
+            return CageName;
+      }
+
+      public void setCageName(String CageName) {
+            this.CageName = CageName;
       }
 
       public String getCageID() {
@@ -79,4 +89,5 @@ public class ProcessNewOrderDTO {
             this.OrderDetailStatus = OrderDetailStatus;
       }
 
+     
 }

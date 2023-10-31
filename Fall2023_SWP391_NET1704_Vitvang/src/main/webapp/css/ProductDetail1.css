@@ -1,5 +1,7 @@
-/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
 
 * {
      margin: 0;
@@ -8,6 +10,7 @@
      font-family: 'Poppins', sans-serif;
 }
 
+/* Root Variables (Colors and Transitions) */
 :root {
      /* ===== Colors ===== */
      --primary-color: #0E4BF1;
@@ -29,11 +32,13 @@
      --tran-03: all 0.2s ease;
 }
 
+/* Light Mode */
 body {
      min-height: 100vh;
      background-color: white;
 }
 
+/* Dark Mode */
 body.dark {
      --primary-color: #3A3B3C;
      --panel-color: #242526;
@@ -259,62 +264,107 @@ body.dark nav {
      background-color: #222;
 }
 
-.dashboard {
+.dashboard, .dashboard1, .dashboard2 {
      position: relative;
      left: 250px;
      background-color: var(--panel-color);
      min-height: 100vh;
      width: calc(100% - 250px);
-     padding: 0px 0px;
+     padding: 10px 5px;
      transition: var(--tran-05);
 }
 
+/* Dashboard Container */
 /*Dashboard*/
-/*Header*/
-header {
-     background-color: #2193b0;
-     padding: 10px;
+h1 {
      text-align: center;
+     font-size: xx-large;
+}
+
+.header-row h1,
+.header-row form {
+     display: inline-block;
+     vertical-align: middle; /* Optional: Aligns elements vertically */
+     margin-right: 10px; /* Adjust as needed for spacing between elements */
+}
+
+.header-row {
+     text-align: center;
+}
+
+.section {
+     border: 1px solid #ccc;
+     padding: 20px;
+     margin: 10px;
+     border-radius: 10px;
+     background-color: #f9f9f9;
+}
+
+.info {
      display: flex;
-     /* Use flexbox to align items horizontally */
-     justify-content: center;
-     /* Center align items horizontally */
      align-items: center;
-     /* Center align items vertically */
 }
 
-header h1 {
-     margin: 0px;
-     /* Remove default margin to prevent extra space */
+.info img {
+     max-width: 500px;
+     border-radius: 5px;
+     margin: 0px 30px;
 }
 
-i.fas.fa-cogs {
-     font-size: 1.5em;
-     color: black;
-     margin-left: 1050px;
-     order: 5;
-     /* Set the order to 2 to move the gear icon to the end */
+.info-details {
+     flex-grow: 1;
 }
 
-p {
-     font-size: 25px;
-     color: #FF5733;
-     /* You can change the color to your preference */
-     font-weight: bold;
-     /* Make the text bold */
-     margin-top: 20px;
+.info-item {
+     margin-left: 40px;
+     margin-bottom: 10px;
+     font-size: 40px;
+     font-family: "utm";
+     color: gray ;
 }
 
-/*Table Process*/
-.process_table {
-     margin-top: 20px;
+.info-details span {
+     color: #333;
+     font-family: "roboto";
 }
 
+.toggle-button {
+     background-color: #28a745;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     padding: 5px 10px;
+     cursor: pointer;
+     font-size: 16px;
+     margin-top: 5px;
+}
+
+.toggle-button:hover {
+     background-color: #28a745;
+     color: #fff;
+}
+
+.toggle-button1 {
+     background-color: #28a745;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     padding: 5px 10px;
+     cursor: pointer;
+     font-size: 16px;
+     margin-top: 5px;
+}
+
+.toggle-button1:hover {
+     background-color: #28a745;
+     color: #fff;
+}
+
+/*Material table*/
 .table-container {
      overflow-x: auto;
      border-radius: 10px;
      border: 1px solid black;
-     margin: 10px 10px;
 }
 
 .table-container table {
@@ -322,13 +372,9 @@ p {
      border-collapse: collapse;
 }
 
-.table-container th {
-     padding: 10px;
-     text-align: center;
-}
-
+.table-container th,
 .table-container td {
-     padding: 0px 10px;
+     padding: 10px;
      text-align: center;
 }
 
@@ -345,137 +391,83 @@ p {
      background-color: #ddd;
 }
 
-/*button process*/
-.process_button button {
+/*Design Process table*/
+.table-container1 {
+     overflow-x: auto;
+     border-radius: 10px;
+     border: 1px solid black;
+}
+
+.table-container1 table {
+     width: 100%;
+     border-collapse: collapse;
+}
+
+.table-container1 th,
+.table-container1 td {
+     padding: 10px;
+     text-align: center;
+}
+
+.table-container1 th {
+     color: white;
+     background-color: #2193b0;
+}
+
+.table-container1 tbody tr:nth-child(even) {
+     background-color: #e6fcfa;
+}
+
+.table-container1 tbody tr:hover {
+     background-color: #ddd;
+}
+
+/*Show table*/
+
+.table-container {
+     margin: 10px 0px;
+}
+
+.table-container1 {
+     margin: 10px 0px;
+}
+
+/*button modify*/
+form {
+     display: inline-block; /* Ensures form and button are on the same line */
+     margin-bottom: 10px; /* Adjust as needed for spacing */
+}
+
+/*button modify*/
+button {
      background: none;
      border: none;
      cursor: pointer;
-}
-
-.process_button button .fa {
-     font-size: 22px;
+     font-size: 24px;
      color: #757575;
      /* Adjust the color as needed */
-     transition: color 0.3s;
-     /* Add transition for hover effect */
+     margin-top: 10px;
 }
 
-.process_button button .fa:focus {
+button:focus {
      outline: none;
 }
 
-.process_button button:hover .fa {
-     color: orange;
+button:hover {
+     color: blue;
      /* Change color on hover if desired */
 }
 
-.process_table h1 {
-     margin-left: 10px;
-}
-
-/*form infomation*/
-.infomation_form {
-     width: 60%;
-     box-sizing: border-box;
-}
-
-.form_row {
-     display: flex;
-     margin-bottom: 30px;
-     margin-top: 30px;
-     margin-left: 20px;
-}
-
-.form-row label {
-     flex: 1;
-     margin-right: 10px;
-}
-
-.form-row i {
-     flex: 2;
-     margin-right: 10px;
-}
-
-/* Input container */
-.input-container {
-     position: relative;
-     margin: 20px;
-}
-
-
-/* Style for input fields */
-.input-field {
-     position: relative;
-}
-
-/* Style for inputs */
-.input-field input {
-     width: 100%;
-     padding: 8px;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-}
-
-/* Style for labels */
-.input-field label {
-     position: absolute;
-     top: 0;
-     left: 0;
-     font-size: 14px;
-     color: #777;
-     pointer-events: none;
-     transition: 0.2s ease all;
-}
-
-/* Style for labels when input is focused or has value */
-.input-field input:focus+label,
-.input-field input:not(:placeholder-shown)+label {
-     top: -12px;
-     font-size: 12px;
-     color: #333;
-}
-
-/* Input field */
-.input-field {
-     display: block;
-     width: 100%;
-     padding: 10px;
-     font-size: 16px;
+button {
      border: none;
-     border-bottom: 2px solid #ccc;
-     outline: none;
-     background-color: transparent;
 }
 
-/* Input field:focus styles */
-.input-field:focus+.input-label {
-     top: -20px;
-     font-size: 12px;
-     color: #007bff;
+
+.show-table {
+     display: block !important;
 }
 
-.input-field:focus+.input-label+.input-highlight {
-     width: 100%;
-}
-
-.input-field {
-     width: 50px;
-     /* Set the desired width */
-     padding: 5px;
-}
-
-/* Add this rule to override the width for larger screens if needed */
-@media (min-width: 768px) {
-     .input-field {
-          width: 100%;
-          /* Adjust the width for larger screens */
-     }
-}
-
-.input-container select {
-     width: 150px;
-}
-
-i {
-     margin-right: 20px; /* Add some space between the icon and the text */
+.material_table,
+.process_table {
+     margin-top: 20px;
 }

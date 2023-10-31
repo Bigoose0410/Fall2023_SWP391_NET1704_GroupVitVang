@@ -2,15 +2,19 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
-/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-*{
+/* 
+    Created on : Oct 30, 2023, 2:12:52 PM
+    Author     : Nguyen Ba Tung
+*/
+* {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
      font-family: 'Poppins', sans-serif;
 }
-:root{
+
+/* Root Variables (Colors and Transitions) */
+:root {
      /* ===== Colors ===== */
      --primary-color: #0E4BF1;
      --panel-color: #FFF;
@@ -22,18 +26,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
      --box2-color: #FFE6AC;
      --box3-color: #E7D1FC;
      --title-icon-color: #fff;
-
+     --cream-color: #f5f5dc;
+     --hover-color: #333;
+     --dark-text: #fff;
      /* ====== Transition ====== */
      --tran-05: all 0.5s ease;
      --tran-03: all 0.3s ease;
      --tran-03: all 0.2s ease;
 }
 
-body{
+/* Light Mode */
+body {
      min-height: 100vh;
-     background-color: var(--primary-color);
+     background-color: white;
 }
-body.dark{
+
+/* Dark Mode */
+body.dark {
      --primary-color: #3A3B3C;
      --panel-color: #242526;
      --text-color: #CCC;
@@ -45,13 +54,16 @@ body.dark{
      --box3-color: #3A3B3C;
      --title-icon-color: #CCC;
 }
+
 /* === Custom Scroll Bar CSS === */
 ::-webkit-scrollbar {
      width: 8px;
 }
+
 ::-webkit-scrollbar-track {
      background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
      background: var(--primary-color);
      border-radius: 12px;
@@ -63,11 +75,11 @@ body.dark{
 }
 
 body.dark::-webkit-scrollbar-thumb:hover,
-body.dark .activity-data::-webkit-scrollbar-thumb:hover{
+body.dark .activity-data::-webkit-scrollbar-thumb:hover {
      background: #3A3B3C;
 }
 
-nav{
+nav {
      position: fixed;
      top: 0;
      left: 0;
@@ -77,6 +89,8 @@ nav{
      background-color: var(--panel-color);
      border-right: 1px solid var(--border-color);
      transition: var(--tran-05);
+     background-color: var(--box1-color);
+     border-color: #e6e6cc;
 }
 
 .nav-links {
@@ -91,53 +105,74 @@ nav{
      padding: 10px 0;
 }
 
-nav.close{
+
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
+
+nav.close {
      width: 73px;
 }
-nav .logo-name{
+
+nav .logo-name {
      display: flex;
      align-items: center;
 }
-nav .logo-image{
+
+nav .logo-image {
      display: flex;
      justify-content: center;
      min-width: 45px;
 }
-nav .logo-image img{
+
+nav .logo-image img {
      width: 40px;
      object-fit: cover;
      border-radius: 50%;
 }
 
-nav .logo-name .logo_name{
-     font-size: 22px;
+nav .logo-name .logo_name {
+     font-size: 25px;
      font-weight: 600;
      color: var(--text-color);
-     margin-left: 14px;
+     margin-right: 13px;
      transition: var(--tran-05);
 }
-nav.close .logo_name{
+
+nav.close .logo_name {
      opacity: 0;
      pointer-events: none;
 }
-nav .menu-items{
+
+nav .menu-items {
      margin-top: 40px;
      height: calc(100% - 90px);
      display: flex;
      flex-direction: column;
      justify-content: space-between;
 }
-.menu-items li{
+
+.menu-items li {
      list-style: none;
 }
-.menu-items li a{
+
+.menu-items li a {
      display: flex;
      align-items: center;
      height: 50px;
      text-decoration: none;
      position: relative;
 }
-.nav-links li a:hover:before{
+
+.nav-links li a:hover:before {
      content: "";
      position: absolute;
      left: -7px;
@@ -146,46 +181,55 @@ nav .menu-items{
      border-radius: 50%;
      background-color: var(--primary-color);
 }
-body.dark li a:hover:before{
+
+body.dark li a:hover:before {
      background-color: var(--text-color);
 }
-.menu-items li a i{
+
+.menu-items li a i {
      font-size: 24px;
      min-width: 45px;
      height: 100%;
      display: flex;
      align-items: center;
      justify-content: center;
-     color: var(--black-light-color);
+     color: black;
 }
-.menu-items li a .link-name{
+
+.menu-items li a .link-name {
      font-size: 18px;
      font-weight: 400;
-     color: var(--black-light-color);
+     color: black;
      transition: var(--tran-05);
 }
-nav.close li a .link-name{
+
+nav.close li a .link-name {
      opacity: 0;
      pointer-events: none;
 }
+
 .nav-links li a:hover i,
-.nav-links li a:hover .link-name{
+.nav-links li a:hover .link-name {
      color: var(--primary-color);
 }
+
 body.dark .nav-links li a:hover i,
-body.dark .nav-links li a:hover .link-name{
+body.dark .nav-links li a:hover .link-name {
      color: var(--text-color);
 }
-.menu-items .logout-mode{
+
+.menu-items .logout-mode {
      padding-top: 10px;
      border-top: 1px solid var(--border-color);
 }
-.menu-items .mode{
+
+.menu-items .mode {
      display: flex;
      align-items: center;
      white-space: nowrap;
 }
-.menu-items .mode-toggle{
+
+.menu-items .mode-toggle {
      position: absolute;
      right: 14px;
      height: 50px;
@@ -195,7 +239,8 @@ body.dark .nav-links li a:hover .link-name{
      justify-content: center;
      cursor: pointer;
 }
-.mode-toggle .switch{
+
+.mode-toggle .switch {
      position: relative;
      display: inline-block;
      height: 22px;
@@ -203,7 +248,8 @@ body.dark .nav-links li a:hover .link-name{
      border-radius: 25px;
      background-color: var(--toggle-color);
 }
-.switch:before{
+
+.switch:before {
      content: "";
      position: absolute;
      left: 5px;
@@ -215,216 +261,173 @@ body.dark .nav-links li a:hover .link-name{
      border-radius: 50%;
      transition: var(--tran-03);
 }
-body.dark .switch:before{
+
+body.dark .switch:before {
      left: 20px;
 }
 
-.dashboard{
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+     color: var(--hover-color);
+}
+
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+     color: var(--dark-text);
+}
+
+body.dark nav {
+     background-color: #222;
+}
+
+.dashboard {
      position: relative;
      left: 250px;
      background-color: var(--panel-color);
      min-height: 100vh;
      width: calc(100% - 250px);
-     padding: 10px 14px;
+     padding: 10px 5px;
      transition: var(--tran-05);
 }
 
 /*Dashboard*/
-/* Header Styles */
-.header {
+/*form*/
+.form {
+     width: 95%;
+     margin: 0 auto;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     background-color: #f9f9f9;
+     margin-top: 50px;
+}
+
+.info_form {
      display: flex;
      align-items: center;
      justify-content: space-between;
-     background-color: #2193b0; /* Change the background color as needed */
-     color: #fff; /* Change the text color as needed */
-     padding: 15px 20px;
-     position: sticky;
-     top: 0;
-     position: -webkit-sticky;
-     z-index: 1;
+     border-bottom: 1px solid #ccc;
+     padding-bottom: 10px; /* Add padding to maintain spacing */
 }
 
-/* Logo Styles */
-.header h1 {
-     font-size: 24px;
+.info_form h2 {
+     font-size: 1.5em;
      margin: 0;
 }
 
-/* Search Styles */
-.search {
-     display: flex;
-     align-items: center;
+.info_form p {
+     margin: 10px 0px;
+     font-size: 1em;
+     color: #777;
 }
 
-.search input {
-     width: 500px;
-     padding: 10px;
-     margin-right: 10px;
-     border: none;
-     border-radius: 5px;
-     outline: none;
-}
-
-.search button {
-     padding: 10px 10px;
-     border: none;
-     border-radius: 5px;
-     background-color: blue; /* Change the button color as needed */
+#deleteButton {
+     background-color: #ff0000;
      color: #fff;
-     cursor: pointer;
-}
-
-.search button:hover {
-     background-color: rgb(14, 14, 180); /* Change the button color as needed */
-}
-
-/* Navigation Styles */
-header ul {
-     list-style-type: none;
-     margin: 0;
-     padding: 0;
-}
-
-header li {
-     display: inline;
-     margin-left: 20px; /* Adjust the spacing between items */
-}
-
-header a {
-     text-decoration: none;
-     color: #fff;
-     font-weight: bold;
+     border: none;
+     padding: 10px 20px;
      font-size: 16px;
+     cursor: pointer;
+     border-radius: 5px;
 }
 
-/* Container */
-.container {
-     max-width: 1200px;
+/* Add some hover effect to the button */
+#deleteButton:hover {
+     background-color: #cc0000;
+}
+/*form1*/
+.info_form1 {
+     max-width: 1050px;
      margin: 0 auto;
-}
-
-.menu-icon {
-     color: #333;
-     text-decoration: none;
-}
-
-.logo {
-     max-width: 100%;
-     height: auto;
-}
-
-/* Swiper Slider */
-.mySwiper {
-     position: relative;
-}
-
-.swiper-wrapper {
-     display: flex;
-     transition: transform 0.3s ease;
-}
-
-.swiper-slide {
-     flex: 0 0 33.33%;
-     box-sizing: border-box;
      padding: 20px;
+     border-radius: 5px;
+     background-color: #f9f9f9;
 }
 
-/* Main Content */
-.main {
-     display: flex;
-     border-radius: 10px;
-     overflow: hidden;
-     background-color: #fff;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.left-side {
-     flex: 1;
-     padding: 30px;
-}
-
-.main-wrapper {
-     margin-bottom: 20px;
-}
-
-.main-header {
-     font-size: 18px;
-     color: #333;
-}
-
-.main-title {
-     font-size: 32px;
-     font-weight: bold;
-     color: #333;
-}
-
-.main-subtitle {
-     font-size: 24px;
-     font-weight: bold;
-     color: #333;
-}
-
-.main-content__title,
-.main-content__subtitle {
-     margin-bottom: 10px;
-     font-size: 16px;
-     color: #555;
-}
-
-/* Right Side Image */
-.center {
-     flex: 0 0 66.66%;
-     position: relative;
-     overflow: hidden;
-}
-
-.right-side__img {
-     position: absolute;
-     top: 0;
-     left: 50px;
-     width: 100%;
-     height: 100%;
+.form-row {
      display: flex;
      align-items: center;
-     justify-content: center;
+     margin-bottom: 10px;
 }
 
-.bottle-bg {
-     max-width: 100%;
-     max-height: 100%;
-     object-fit: cover;
+.form-row label {
+     flex: 1;
+     font-size: 1.4em;
+     margin: 10px 10px;
 }
 
-/* Button Icon */
-.toggle-button,
-.toggle-button1 {
-     background: none;
-     border: none;
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row input[type="email"],
+.form-row input[type="tel"] {
+     flex: 2;
+     width: 100%;
+     padding: 8px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     box-sizing: border-box;
+}
+
+#phone {
+     margin-right: 605px;
+}
+
+#email,
+#password,
+#username,
+#address {
+     margin-right: 100px;
+}
+
+.form-row i {
+     font-size: 1.3em;
+     margin-right: 82%;
+}
+
+
+/* Optional: Style the labels for male and female */
+.form-row label[for="male"],
+.form-row label[for="female"] {
+     font-weight: bold;
+}
+
+/*button update,delete*/
+.form-row1 {
+     text-align: center;
+}
+
+.form-row1 button {
+     padding: 10px 20px;
+     margin: 0 10px;
+     font-size: 1em;
      cursor: pointer;
 }
 
-.toggle-button i {
-     font-size: 24px;
-     color: #333;
+#updateButton {
+     background-color: #0E4BF1;
+     color: white;
+     border: none;
+     border-radius: 5px;
 }
 
-/* Button Hover Effect */
-.toggle-button:hover,
-.toggle-button1:hover {
-     color: #007bff;
+#updateButton:hover {
+     background-color: #153dac;
 }
 
-.more-menu {
-     background-color: #007bff; /* Set the background color */
-     color: #fff; /* Set the text color */
-     padding: 10px 20px; /* Set padding (top/bottom, left/right) */
-     border: none; /* Remove border */
-     border-radius: 5px; /* Add rounded corners */
-     font-size: 16px; /* Set font size */
-     cursor: pointer; /* Change cursor on hover */
-     margin-top: 20px;
+.form-row2 {
+     display: flex;
+     align-items: center;
+     margin-bottom: 10px;
 }
 
-.more-menu:hover {
-     background-color: #0056b3; /* Change background color on hover */
+.form-row2 label {
+     flex: 1;
+     font-size: 1.4em;
+     margin: 10px 10px;
 }
+
+.form-row2 i {
+     font-size: 1em;
+     margin-right: 32%;
+}
+

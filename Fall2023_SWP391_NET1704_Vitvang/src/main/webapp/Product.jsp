@@ -13,12 +13,13 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="../css/admin.css">
+          <!--<link rel="stylesheet" href="/css/Admin.css">-->
 
           <!----===== Iconscout CSS =====--> 
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/HomePage.css">
+          <!--<link rel="stylesheet" href="css/HomePage.css">-->
+          <link rel="stylesheet" href="css/Product.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -33,20 +34,20 @@
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
-         <nav>
+          <nav>
 
-                    <div class="logo-name"style="
-                         display: block;">
-                         <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+               <div class="logo-name"style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -98,119 +99,107 @@
           </nav>
 
           <section class="dashboard">
-               <div class="top">
-                    <i class="uil uil-bars sidebar-toggle"></i>
-                    <div class="search-box">
-                         <i class="uil uil-search"></i>
-                         <form action="MainController">
-                              <input type="text" value="${param.txtSearchValue}" name="txtSearchValue"  placeholder="Search Cage here...">
-                              <button class="add-btn" value="SearchCage" name="btAction">Search</button>
-                         </form>
+               <div class="header">
+                    <h1>Danh Mục Sản Phẩm</h1>
+                    <div class="search">
+                         <input type="text" placeholder="Search...">
+                         <button type="button">Search</button>
                     </div>
                </div>
 
-               <div class="dash-content">
-                    <div class="overview">
-                         <div class="title">
-                              <i class="uil uil-tachometer-fast-alt"></i>
-                              <span class="text">Dashboard</span>
-                         </div>
-                    </div>
+               <div class="container">
 
-                    <div class="activity">
-                         <div class="title">
-                              <i class="uil uil-clock-three"></i>
-                              <span class="text">Recent Order</span>
-                         </div>
-
-                         <c:set var="searchValue" value="${param.txtSearchValue}"></c:set>
-
-                         <c:set var="result" value="${requestScope.SEARCH_CAGE_RESULT}"></c:set>
-                         <c:if test="${not empty result}">
-                              <div class="activity-data">
-                                   <div class="data names">
-                                        <span class="data-title">No</span>
+                    <div class="mySwiper">
+                         <div class="swiper-slide" id="savanna">
+                              <div class="main">
+                                   <div class="left-side">
+                                        <div class="main-wrapper">
+                                             <h3 class="main-header">Closca Bottle</h3>
+                                             <h1 class="main-title">Savanna</h1>
+                                             <h2 class="main-subtitle">€ 39.90</h2>
+                                        </div>
+                                        <div class="main-content">
+                                             <div class="main-content__title">The Earth’s area affected by desertification is approx
+                                                  11 times India’s size.
+                                             </div>
+                                             <div class="main-content__subtitle">The Savannas act as a carbon sink, absorbing CO2
+                                                  from the atmosphere and helping to maintain the balance of global temperatures.
+                                             </div>
+                                             <a href="ProductDetail1.html"> <button class="more-menu"><strong>+ Detail</strong></button></a>
+                                        </div>
                                    </div>
-                                   <div class="data names">
-                                        <span class="data-title">Cage ID</span>
-                                   </div>
-                                   <div class="data joined">
-                                        <span class="data-title">Name</span>
-                                   </div>
-                                   <div class="data joined">
-                                        <span class="data-title">Price</span>
-                                   </div>
-                                   <div class="data type">
-                                        <span class="data-title">Origin</span>
-                                   </div>
-                                   <div class="data status">
-                                        <span class="data-title">Description</span>
-                                   </div>
-                                   <div class="data status">
-                                        <span class="data-title">View</span>
+                                   <div class="center">
+                                        <div class="right-side__img">
+                                             <img class="bottle-bg"
+                                                  src="https://i.pinimg.com/736x/d3/69/81/d36981aa38aec939c776717d0660a0d6.jpg" />
+                                        </div>
                                    </div>
                               </div>
-                              <c:forEach var="dto" items="${result}" varStatus="counter">
+                         </div>
 
-                                   <form class="form-order" action="MainController" method="POST">
-                                        <div class="activity-data">
-                                             <div class="data names">
-                                                  <span class="data-list">${counter.count}</span>
-                                             </div>
-
-                                             <div class="data names">
-                                                  <span class="data-list">${dto.getCageID()}
-                                                       <input type="hidden" name="txtCageID" 
-                                                              value="${dto.getCageID()}"/></span>
-                                             </div>
-
-                                             <div class="data joined">
-                                                  <span class="data-list">${dto.getName()}</span>
-                                                  <input type="hidden" name="txtCageName" 
-                                                              value="${dto.getName()}"/>
-                                             </div>
-
-                                             <div class="data joined">
-                                                  <span class="data-list">${dto.getPrice()}</span>
-                                                  <input type="hidden" name="txtPrice" 
-                                                              value="${dto.getPrice()}"/>
-                                             </div>
-
-                                             <div class="data type">
-                                                  <span class="data-list">${dto.getOrigin()}</span>
-                                                  <input type="hidden" name="txtOrigin" 
-                                                              value="${dto.getOrigin()}"/>
-                                             </div>
-
-                                             <div class="data email">
-                                                  <span class="data-list">${dto.getDescription()}</span>
-                                                  <input type="hidden" name="txtDescription" 
-                                                              value="${dto.getDescription()}"/>
-                                             </div>
-                                             <div class="data status">
-                                                  <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "DetailProduct">
-                                                       Detail
-                                                  </button>
-                                             </div>
-
+                         <div class="swiper-slide" id="savanna">
+                              <div class="main">
+                                   <div class="left-side">
+                                        <div class="main-wrapper">
+                                             <h3 class="main-header">Closca Bottle</h3>
+                                             <h1 class="main-title">Savanna</h1>
+                                             <h2 class="main-subtitle">€ 39.90</h2>
                                         </div>
-                                   </form>
+                                        <div class="main-content">
+                                             <div class="main-content__title">The Earth’s area affected by desertification is approx
+                                                  11 times India’s size.
+                                             </div>
+                                             <div class="main-content__subtitle">The Savannas act as a carbon sink, absorbing CO2
+                                                  from the atmosphere and helping to maintain the balance of global temperatures.
+                                             </div>
+                                             <div>
+                                                  <a href="ProductDetail2.html"> <button class="more-menu"><strong>+ Detail</strong></button></a>
+                                             </div>
+                                        </div>
 
-                              </c:forEach>
-                         </c:if>
+                                   </div>
+                                   <div class="center">
+                                        <div class="right-side__img">
+                                             <img class="bottle-bg"
+                                                  src="https://i.pinimg.com/236x/dc/ab/eb/dcabeb04860e941fc2609278e95109c3.jpg" />
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
 
-                         <c:if test="${ empty result}">
-                              <font color="green">
-                              <h2>
-                                   No match record!!!
-                              </h2>
-                              </font>
-                         </c:if>
+                         <div class="swiper-slide" id="savanna">
+                              <div class="main">
+                                   <div class="left-side">
+                                        <div class="main-wrapper">
+                                             <h3 class="main-header">Closca Bottle</h3>
+                                             <h1 class="main-title">Savanna</h1>
+                                             <h2 class="main-subtitle">€ 39.90</h2>
+                                        </div>
+                                        <div class="main-content">
+                                             <div class="main-content__title">The Earth’s area affected by desertification is approx
+                                                  11 times India’s size.
+                                             </div>
+                                             <div class="main-content__subtitle">The Savannas act as a carbon sink, absorbing CO2
+                                                  from the atmosphere and helping to maintain the balance of global temperatures.
+                                             </div>
+                                             <a href="ProductDetail3.html"> <button class="more-menu"><strong>+ Detail</strong></button></a>
+                                        </div>
+                                   </div>
+                                   <div class="center">
+                                        <div class="right-side__img">
+                                             <img class="bottle-bg"
+                                                  src="https://i.pinimg.com/564x/21/d3/dd/21d3ddfd618b42fe42ea96c69ff34892.jpg" />
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
 
                     </div>
-
+               </div>
           </section>
-          <script src="../js/admin.js"></script>
 
-     </body>
+     </section>
+     <script src="../js/admin.js"></script>
+
+</body>
 </html>   

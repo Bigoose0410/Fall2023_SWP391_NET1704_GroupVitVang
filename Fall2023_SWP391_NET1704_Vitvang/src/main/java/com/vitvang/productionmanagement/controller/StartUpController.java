@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
-
 import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -25,9 +24,9 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 @WebServlet(name = "StartUpController", urlPatterns = {"/StartUpController"})
 public class StartUpController extends HttpServlet {
 
-        private static final String AdminPage = "Order.jsp";
-        private static final String StaffPage = "Order.jsp";
-        private static final String ManagerPage = "Order.jsp";
+        private static final String AdminPage = "HomePage.html";
+        private static final String StaffPage = "HomePage.html";
+        private static final String ManagerPage = "HomePage.html";
 
         /**
          * Processes requests for both HTTP <code>GET</code>

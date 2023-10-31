@@ -1,0 +1,607 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Oct 31, 2023, 1:28:09 PM
+    Author     : Nguyen Ba Tung
+*/
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 10, 2023, 2:07:18 PM
+    Author     : Admin
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Root Variables (Colors and Transitions) */
+:root {
+    /* ===== Colors ===== */
+    --primary-color: #0E4BF1;
+    --panel-color: #FFF;
+    --text-color: #000;
+    --black-light-color: #707070;
+    --border-color: #e6e5e5;
+    --toggle-color: #DDD;
+    --box1-color: #4DA3FF;
+    --box2-color: #FFE6AC;
+    --box3-color: #E7D1FC;
+    --title-icon-color: #fff;
+    --cream-color: #f5f5dc;
+    --hover-color: #333;
+    --dark-text: #fff;
+    /* ====== Transition ====== */
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-03: all 0.2s ease;
+}
+
+/* Light Mode */
+body {
+    min-height: 100vh;
+    background-color: white;
+}
+
+/* Dark Mode */
+body.dark {
+    --primary-color: #3A3B3C;
+    --panel-color: #242526;
+    --text-color: #CCC;
+    --black-light-color: #CCC;
+    --border-color: #4D4C4C;
+    --toggle-color: #FFF;
+    --box1-color: #3A3B3C;
+    --box2-color: #3A3B3C;
+    --box3-color: #3A3B3C;
+    --title-icon-color: #CCC;
+}
+
+/* === Custom Scroll Bar CSS === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0b3cc1;
+}
+
+body.dark::-webkit-scrollbar-thumb:hover,
+body.dark .activity-data::-webkit-scrollbar-thumb:hover {
+    background: #3A3B3C;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    border-right: 1px solid var(--border-color);
+    transition: var(--tran-05);
+    background-color: var(--box1-color);
+    border-color: #e6e6cc;
+}
+
+.nav-links {
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-links li {
+    padding: 10px 0;
+}
+
+
+nav.close {
+    width: 73px;
+}
+
+nav .logo-name {
+    display: flex;
+    align-items: center;
+}
+
+nav .logo-image {
+    display: flex;
+    justify-content: center;
+    min-width: 45px;
+}
+
+nav .logo-image img {
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+nav .logo-name .logo_name {
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-right: 13px;
+    transition: var(--tran-05);
+}
+
+nav.close .logo_name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+nav .menu-items {
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-items li {
+    list-style: none;
+}
+
+.menu-items li a {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    position: relative;
+}
+
+.nav-links li a:hover:before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+body.dark li a:hover:before {
+    background-color: var(--text-color);
+}
+
+.menu-items li a i {
+    font-size: 24px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.menu-items li a .link-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+    transition: var(--tran-05);
+}
+
+nav.close li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-links {
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-links li {
+    padding: 10px 0;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+    color: var(--primary-color);
+}
+
+body.dark .nav-links li a:hover i,
+body.dark .nav-links li a:hover .link-name {
+    color: var(--text-color);
+}
+
+.menu-items .logout-mode {
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.menu-items .mode {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-items .mode-toggle {
+    position: absolute;
+    right: 14px;
+    height: 50px;
+    min-width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mode-toggle .switch {
+    position: relative;
+    display: inline-block;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+}
+
+.switch:before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 15px;
+    width: 15px;
+    background-color: var(--panel-color);
+    border-radius: 50%;
+    transition: var(--tran-03);
+}
+
+body.dark .switch:before {
+    left: 20px;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+    color: var(--hover-color);
+}
+
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+    color: var(--dark-text);
+}
+
+body.dark nav {
+    background-color: #222;
+}
+
+.dashboard {
+    position: relative;
+    left: 250px;
+    background-color: var(--panel-color);
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    padding: 10px 14px;
+    transition: var(--tran-05);
+}
+
+/*Dashboard*/
+h1 {
+    text-align: center;
+    margin: 10px 0px;
+    font-size: xx-large;
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+    padding: 10px;
+    text-align: center;
+}
+
+.table-container th {
+    color: white;
+    background-color: #007bff;
+}
+
+.table-container tbody tr:nth-child(even) {
+    background-color: #e6fcfa;
+}
+
+/*button Update*/
+.update_button button .fa {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #757575;
+    /* Adjust the color as needed */
+}
+
+.update_button button .fa:focus {
+    outline: none;
+}
+
+.update_button button .fa:hover {
+    color: blue;
+    /* Change color on hover if desired */
+}
+
+.update_button button {
+    border: none;
+}
+
+/*button Delete*/
+.delete_button button .fa {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: #757575;
+    /* Adjust the color as needed */
+}
+
+.delete_button button .fa:focus {
+    outline: none;
+}
+
+.delete_button button .fa:hover {
+    color: red;
+    /* Change color on hover if desired */
+}
+
+.delete_button button {
+    border: none;
+}
+
+/*Form select*/
+form {
+    margin: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    /* Set your desired font */
+}
+
+strong {
+    font-weight: bold;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Optional: Style the submit button if needed */
+input[type="submit"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #0E4BF1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Optional: Style the selected option */
+select option[selected] {
+    font-weight: bold;
+    color: #0E4BF1;
+}
+
+/* Style for input fields */
+.input-field {
+    position: relative;
+}
+
+/* Style for inputs */
+.input-field input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for labels */
+.input-field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: #777;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+/* Style for labels when input is focused or has value */
+.input-field input:focus+label,
+.input-field input:not(:placeholder-shown)+label {
+    top: -12px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* Input field */
+.input-field {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    background-color: transparent;
+}
+
+/* Input field:focus styles */
+.input-field:focus+.input-label {
+    top: -20px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+.input-field:focus+.input-label+.input-highlight {
+    width: 100%;
+}
+
+.input-field {
+    width: 50px;
+    /* Set the desired width */
+    padding: 5px;
+}
+
+
+
+/*Table add more Material*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Style labels */
+label {
+    font-weight: bold;
+    display: inline-block;
+    /* Make label behave like an inline element */
+    width: 120px;
+    /* Adjust the width as needed */
+    margin-bottom: 5px;
+    /* Add some space below the label */
+}
+
+/* Style input fields */
+input[type="text"] {
+    width: calc(50% - 100px);
+    /* Calculate width to leave space for the label */
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Style the submit button (optional) */
+.submit_button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 260px;
+    border-radius: 10px;
+}
+
+.submit_button:hover {
+    background-color: #348637;
+}
+
+@media screen and (min-width: 1060px) {
+    .material_form input[type="text"] {
+        padding: 8px;
+        width: 50px;
+        border-radius: 4px;
+        box-sizing: border-box;
+
+    }
+}
+
+/* Style input fields */
+.material_form1 {
+    margin: 0 auto;
+    width: 50%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #007bff;
+}
+
+.material_form1 h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+
+}
+
+.material_form td {
+    padding: 8px;
+}
+
+.material_form input[type="text"] {
+    padding: 8px;
+    width: calc(100% - 16px);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.material_form input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.edit_button {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.separator {
+    display: inline-block;
+    width: 15px;
+    /* Adjust the width as needed */
+    font-size: 25px;
+    color: #777;
+}
+
+/*Done,Next Button*/
+.button_2 {
+    text-align: end;
+    /* Center align the buttons */
+}
+
+.next_button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.next_button:hover {
+    background-color: #1367c1;
+}
+
+.input-container input[type="number"] {
+    position: relative;
+    width: 150px;
+    margin: 0 auto
+}
+
+
+

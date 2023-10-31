@@ -1,6 +1,11 @@
-/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Oct 20, 2023, 8:51:49 AM
+    Author     : Nguyen Ba Tung
+*/
 * {
      margin: 0;
      padding: 0;
@@ -8,6 +13,7 @@
      font-family: 'Poppins', sans-serif;
 }
 
+/* Root Variables (Colors and Transitions) */
 :root {
      /* ===== Colors ===== */
      --primary-color: #0E4BF1;
@@ -29,11 +35,13 @@
      --tran-03: all 0.2s ease;
 }
 
+/* Light Mode */
 body {
      min-height: 100vh;
      background-color: white;
 }
 
+/* Dark Mode */
 body.dark {
      --primary-color: #3A3B3C;
      --panel-color: #242526;
@@ -265,56 +273,21 @@ body.dark nav {
      background-color: var(--panel-color);
      min-height: 100vh;
      width: calc(100% - 250px);
-     padding: 0px 0px;
+     padding: 10px 5px;
      transition: var(--tran-05);
 }
 
 /*Dashboard*/
-/*Header*/
-header {
-     background-color: #2193b0;
-     padding: 10px;
+h1 {
      text-align: center;
-     display: flex;
-     /* Use flexbox to align items horizontally */
-     justify-content: center;
-     /* Center align items horizontally */
-     align-items: center;
-     /* Center align items vertically */
-}
-
-header h1 {
-     margin: 0px;
-     /* Remove default margin to prevent extra space */
-}
-
-i.fas.fa-cogs {
-     font-size: 1.5em;
-     color: black;
-     margin-left: 1050px;
-     order: 5;
-     /* Set the order to 2 to move the gear icon to the end */
-}
-
-p {
-     font-size: 25px;
-     color: #FF5733;
-     /* You can change the color to your preference */
-     font-weight: bold;
-     /* Make the text bold */
-     margin-top: 20px;
-}
-
-/*Table Process*/
-.process_table {
-     margin-top: 20px;
+     margin: 10px 0px;
+     font-size: xx-large;
 }
 
 .table-container {
      overflow-x: auto;
      border-radius: 10px;
      border: 1px solid black;
-     margin: 10px 10px;
 }
 
 .table-container table {
@@ -322,13 +295,9 @@ p {
      border-collapse: collapse;
 }
 
-.table-container th {
-     padding: 10px;
-     text-align: center;
-}
-
+.table-container th,
 .table-container td {
-     padding: 0px 10px;
+     padding: 10px;
      text-align: center;
 }
 
@@ -345,67 +314,160 @@ p {
      background-color: #ddd;
 }
 
-/*button process*/
-.process_button button {
+/* Style for the table */
+.tablesorter-custom1 {
+     width: 100%;
+     border-collapse: collapse;
+     margin-bottom: 20px;
+}
+
+/* Style for table cells */
+.tablesorter-custom1 td {
+     padding: 2px;
+}
+
+
+/* Style for the plus button */
+.plus_button button {
+     background-color: rgb(24, 175, 24);
+     color: #fff;
+     border: none;
+     padding: 5px 20px;
+     cursor: pointer;
+     border-radius: 4px;
+     font-size: 16px;
+     margin-top: 5px;
+     margin-right: 20px;
+}
+
+
+
+.input-container1 input[type="number"]  {
+     width: 80%;
+     margin: 0 auto;
+     /* Center align the input field */
+}
+
+/* Input label */
+.input-label {
+     position: absolute;
+     top: 0;
+     left: 0;
+     font-size: 16px;
+     color: rgba(204, 204, 204, 0);
+     pointer-events: none;
+     transition: all 0.3s ease;
+}
+
+/* Input highlight */
+.input-highlight {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     height: 2px;
+     width: 0;
+     background-color: #007bff;
+     transition: all 0.3s ease;
+}
+
+/*button modify*/
+.update_button button .fa {
      background: none;
      border: none;
      cursor: pointer;
-}
-
-.process_button button .fa {
-     font-size: 22px;
+     font-size: 24px;
      color: #757575;
      /* Adjust the color as needed */
-     transition: color 0.3s;
-     /* Add transition for hover effect */
 }
 
-.process_button button .fa:focus {
+.update_button button .fa:focus {
      outline: none;
 }
 
-.process_button button:hover .fa {
-     color: orange;
+.update_button button .fa:hover {
+     color: blue;
      /* Change color on hover if desired */
 }
 
-.process_table h1 {
-     margin-left: 10px;
+.update_button button {
+     border: none;
 }
 
-/*form infomation*/
-.infomation_form {
-     width: 60%;
-     box-sizing: border-box;
-}
-
-.form_row {
-     display: flex;
-     margin-bottom: 30px;
-     margin-top: 30px;
-     margin-left: 20px;
-}
-
-.form-row label {
-     flex: 1;
-     margin-right: 10px;
-}
-
-.form-row i {
-     flex: 2;
-     margin-right: 10px;
-}
-
-/* Input container */
-.input-container {
+/*new step button*/
+.custom-btn {
+     width: 120px;
+     height: 40px;
+     color: #fff;
+     border-radius: 5px;
+     padding: 10px 25px;
+     font-family: 'Lato', sans-serif;
+     font-weight: 500;
+     background: transparent;
+     cursor: pointer;
+     transition: all 0.3s ease;
      position: relative;
-     margin: 20px;
+     display: inline-block;
+     outline: none;
+     margin: 10px 0px;
 }
 
+/* 1 */
+.btn-1 {
+     background: #007bff;
+     border: none;
+}
+
+.btn-1:hover {
+     background: #0755a9;
+}
+
+/*form*/
+h2 {
+     margin: 10px 0px;
+}
+
+.step {
+     display: flex;
+     flex-wrap: wrap;
+     border: 1px solid #333;
+     border-top: 5px solid #007bff;
+     margin: 20px;
+     padding: 10px;
+     border-radius: 15px;
+}
+
+.step-header {
+     flex: 1 1 100%;
+     margin-bottom: 10px;
+     margin-left: 15px;
+}
+
+.form-step {
+     flex: 0 0 calc(25% - 10px);
+     box-sizing: border-box;
+     padding: 10px;
+     border-radius: 4px;
+     margin-bottom: 10px;
+}
+
+.form-step label {
+     display: block;
+     font-weight: bold;
+     margin-bottom: 5px;
+}
 
 /* Style for input fields */
 .input-field {
      position: relative;
+     display: block;
+     width: 100%;
+     padding: 10px;
+     font-size: 16px;
+     border: none;
+     border-bottom: 2px solid #ccc;
+     outline: none;
+     background-color: transparent;
+     width: 70%;
 }
 
 /* Style for inputs */
@@ -435,17 +497,6 @@ p {
      color: #333;
 }
 
-/* Input field */
-.input-field {
-     display: block;
-     width: 100%;
-     padding: 10px;
-     font-size: 16px;
-     border: none;
-     border-bottom: 2px solid #ccc;
-     outline: none;
-     background-color: transparent;
-}
 
 /* Input field:focus styles */
 .input-field:focus+.input-label {
@@ -458,24 +509,46 @@ p {
      width: 100%;
 }
 
-.input-field {
-     width: 50px;
-     /* Set the desired width */
-     padding: 5px;
+/*button*/
+.create-button {
+     background-color: #4caf50;
+     color: #ffffff;
+     border: none;
+     padding: 10px 20px;
+     font-size: 16px;
+     cursor: pointer;
+     border-radius: 4px;
+     margin-left: 20px;
+     margin-bottom: 15px;
 }
 
-/* Add this rule to override the width for larger screens if needed */
-@media (min-width: 768px) {
-     .input-field {
-          width: 100%;
-          /* Adjust the width for larger screens */
-     }
+.create-button:hover {
+     background-color: #318936;
 }
 
-.input-container select {
-     width: 150px;
+.input-container2 {
+     width: 73%;
+     margin-left: 80px;
+     /* Center align the input field */
+     text-align: center;
+     /* Center-align the text inside the input field */
 }
 
-i {
-     margin-right: 20px; /* Add some space between the icon and the text */
+.button_2 {
+     text-align: end; /* Center align the buttons */
+}
+
+.done_button {
+     padding: 10px 20px;
+     font-size: 16px;
+     margin: 5px;
+     cursor: pointer;
+     border: none;
+     border-radius: 5px;
+     background-color: #4caf50;
+     color: #fff;
+}
+
+.done_button:hover {
+     background-color: #318936;
 }

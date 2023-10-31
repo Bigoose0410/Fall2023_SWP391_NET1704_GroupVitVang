@@ -1,19 +1,11 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Oct 6, 2023, 2:22:11 PM
-    Author     : Admin
-*/
-/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
+/* Root Variables (Colors and Transitions) */
 :root {
     /* ===== Colors ===== */
     --primary-color: #0E4BF1;
@@ -34,10 +26,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     --tran-03: all 0.3s ease;
     --tran-03: all 0.2s ease;
 }
+
+/* Light Mode */
 body {
     min-height: 100vh;
     background-color: white;
 }
+
+/* Dark Mode */
 body.dark {
     --primary-color: #3A3B3C;
     --panel-color: #242526;
@@ -50,25 +46,31 @@ body.dark {
     --box3-color: #3A3B3C;
     --title-icon-color: #CCC;
 }
+
 /* === Custom Scroll Bar CSS === */
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 12px;
     transition: all 0.3s ease;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: #0b3cc1;
 }
+
 body.dark::-webkit-scrollbar-thumb:hover,
 body.dark .activity-data::-webkit-scrollbar-thumb:hover {
     background: #3A3B3C;
 }
+
 nav {
     position: fixed;
     top: 0;
@@ -82,23 +84,28 @@ nav {
     background-color: var(--box1-color);
     border-color: #e6e6cc;
 }
+
 nav.close {
     width: 73px;
 }
+
 nav .logo-name {
     display: flex;
     align-items: center;
 }
+
 nav .logo-image {
     display: flex;
     justify-content: center;
     min-width: 45px;
 }
+
 nav .logo-image img {
     width: 40px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 nav .logo-name .logo_name {
     font-size: 25px;
     font-weight: 600;
@@ -106,10 +113,12 @@ nav .logo-name .logo_name {
     margin-right: 13px;
     transition: var(--tran-05);
 }
+
 nav.close .logo_name {
     opacity: 0;
     pointer-events: none;
 }
+
 nav .menu-items {
     margin-top: 40px;
     height: calc(100% - 90px);
@@ -117,9 +126,11 @@ nav .menu-items {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .menu-items li {
     list-style: none;
 }
+
 .menu-items li a {
     display: flex;
     align-items: center;
@@ -127,6 +138,7 @@ nav .menu-items {
     text-decoration: none;
     position: relative;
 }
+
 .nav-links li a:hover:before {
     content: "";
     position: absolute;
@@ -136,9 +148,11 @@ nav .menu-items {
     border-radius: 50%;
     background-color: var(--primary-color);
 }
+
 body.dark li a:hover:before {
     background-color: var(--text-color);
 }
+
 .menu-items li a i {
     font-size: 24px;
     min-width: 45px;
@@ -148,33 +162,40 @@ body.dark li a:hover:before {
     justify-content: center;
     color: black;
 }
+
 .menu-items li a .link-name {
     font-size: 18px;
     font-weight: 400;
     color: black;
     transition: var(--tran-05);
 }
+
 nav.close li a .link-name {
     opacity: 0;
     pointer-events: none;
 }
+
 .nav-links li a:hover i,
 .nav-links li a:hover .link-name {
     color: var(--primary-color);
 }
+
 body.dark .nav-links li a:hover i,
 body.dark .nav-links li a:hover .link-name {
     color: var(--text-color);
 }
+
 .menu-items .logout-mode {
     padding-top: 10px;
     border-top: 1px solid var(--border-color);
 }
+
 .menu-items .mode {
     display: flex;
     align-items: center;
     white-space: nowrap;
 }
+
 .menu-items .mode-toggle {
     position: absolute;
     right: 14px;
@@ -185,6 +206,7 @@ body.dark .nav-links li a:hover .link-name {
     justify-content: center;
     cursor: pointer;
 }
+
 .mode-toggle .switch {
     position: relative;
     display: inline-block;
@@ -193,6 +215,7 @@ body.dark .nav-links li a:hover .link-name {
     border-radius: 25px;
     background-color: var(--toggle-color);
 }
+
 .switch:before {
     content: "";
     position: absolute;
@@ -205,139 +228,212 @@ body.dark .nav-links li a:hover .link-name {
     border-radius: 50%;
     transition: var(--tran-03);
 }
+
 body.dark .switch:before {
     left: 20px;
 }
 
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+    color: var(--hover-color);
+}
+
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+    color: var(--dark-text);
+}
+
+body.dark nav {
+    background-color: #222;
+}
 
 .dashboard {
-    width: 60%;
-    margin: 60px 390px;
-    /* Add space on both sides */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.form-all {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.form-all form {
-    margin-right: 20px;
-    margin: 10px;
-}
-input.form-control {
-    width: 100%;
-    padding: 10px;
-    margin: 20px 0px;
-}
-.search-all {
-    width: 100%;
-    display: flex;
-/*    justify-content: space-between;*/
-    align-items: center;
+    position: relative;
+    left: 250px;
+    background-color: var(--panel-color);
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    padding: 10px 5px;
+    transition: var(--tran-05);
 }
 
-input.search-control {
-    width: 40%;
-    padding: 5px;
-    margin: 10px 0px;
-}
+/*Dashboard*/
 .table-container {
     overflow-x: auto;
-    /* Add a horizontal scrollbar if needed */
+    border-radius: 10px;
+    border: 1px solid black;
 }
+
 .table-container table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
+
 .table-container th,
 .table-container td {
-    border: 1px solid #ccc;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
 }
+
 .table-container th {
-    background-color: #f0f0f0;
+    color: white;
+    background-color: #2193b0;
 }
+
 .table-container tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #e6fcfa;
 }
+
 .table-container tbody tr:hover {
     background-color: #ddd;
 }
 
-.search-button {
-       /* background-color: rgb(34, 176, 34); */
-    /* color: white; */
+.table-container1 {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+.table-container1 table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container1 th,
+.table-container1 td {
+    padding: 10px;
+    text-align: center;
+}
+
+.table-container1 th {
+    color: white;
+    background-color: #2193b0;
+}
+
+.table-container1 tbody tr:nth-child(even) {
+    background-color: #e6fcfa;
+}
+
+.table-container1 tbody tr:hover {
+    background-color: #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+/*button detail*/
+.detail_button button {
+    background: none;
+    border: none;
     cursor: pointer;
-    border-radius: 5px;
-/*    margin-right: 200px;*/
-    height: 45px;
-    width: 50px;
+}
+
+.detail_button button .fa {
+    font-size: 22px;
+    color: #757575; /* Adjust the color as needed */
+    transition: color 0.3s; /* Add transition for hover effect */
+}
+
+.detail_button button .fa:focus {
     outline: none;
 }
 
-
-.search-button:hover {
-/*    background-color: green;*/
-    color: white;
-    cursor: pointer;
-    height: 50px;
+.detail_button button:hover .fa {
+    color: orange; /* Change color on hover if desired */
 }
 
-.btn {
-    background-color: #0E4BF1;
-    color: white;
+/*button update*/
+.update_button button .fa {
+    background: none;
+    border: none;
     cursor: pointer;
-    border-radius: 25px;
-    padding: 7px;
+    font-size: 24px;
+    color: #757575;
+    /* Adjust the color as needed */
+}
+
+.update_button button .fa:focus {
+    outline: none;
+}
+
+.update_button button .fa:hover {
+    color: blue;
+    /* Change color on hover if desired */
+}
+
+.update_button button {
+    border: none;
+}
+
+/* Input container */
+.input-container {
     position: relative;
-    text-align: center;
-    margin-left: 330px;
+    margin: 20px;
 }
-.btn:hover {
-    background-color: #0a33a3;
-    color: white;
-    cursor: pointer;
+
+/* Style for input fields */
+.input-field {
+    position: relative;
 }
-.show {
-    background-color: #0E4BF1;
-    color: white;
-    cursor: pointer;
-    border-radius: 25px;
-    padding: 7px;
+
+/* Style for inputs */
+.input-field input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-.show:hover {
-    background-color: #0a33a3;
-    color: white;
-    cursor: pointer;
+
+/* Style for labels */
+.input-field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: #777;
+    pointer-events: none;
+    transition: 0.2s ease all;
 }
-tbody td {
-    text-align: center;
+
+/* Style for labels when input is focused or has value */
+.input-field input:focus+label,
+.input-field input:not(:placeholder-shown)+label {
+    top: -12px;
+    font-size: 12px;
+    color: #333;
 }
-.table-container {
+
+/* Input field */
+.input-field {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    background-color: transparent;
+}
+
+/* Input field:focus styles */
+.input-field:focus+.input-label {
+    top: -20px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+.input-field:focus+.input-label+.input-highlight {
     width: 100%;
 }
-tbody a {
-    text-decoration: none;
+
+h1 {
+    margin: 20px 0px;
+    font-size: 28px;
 }
-tbody a:hover {
-    color: #0a33a3;
-}
-h2 {
-    color: red;
-}
-.nav-links {
-  flex: 1 1 auto; /* chiếm khoảng trống còn lại */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.nav-links li {
-  padding: 10px 0; 
+
+p {
+    margin: 20px 0px;
+    font-size: 28px;
+    color: red; 
 }

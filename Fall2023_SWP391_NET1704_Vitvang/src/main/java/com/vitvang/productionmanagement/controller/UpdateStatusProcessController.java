@@ -6,14 +6,15 @@ package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
-import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,43 +23,58 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-@WebServlet(name = "ProcessController", urlPatterns = {"/ProcessController"})
-public class ProcessController extends HttpServlet {
-
-      private final String Process = "Process.jsp";
-      private final String ProcessDetail = "ProcessDetail.jsp";
+@WebServlet(name = "UpdateStatusProcessController", urlPatterns = {"/UpdateStatusProcessController"})
+public class UpdateStatusProcessController extends HttpServlet {
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = Process;
+            String Status = request.getParameter("txtStatus");
+            String ProcessID = request.getParameter("txtProcessID");
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
-            String button = request.getParameter("btAction");
+            String LastStep = request.getParameter("LastStep");
+            String addComplete = request.getParameter("txtCompletedAdd");
+            String quanneedproduct = request.getParameter("txtTotalQuantity");
+            String txtquantityCompleted = request.getParameter("txtquantityCompleted");
+            int addcompleted = Integer.parseInt(addComplete);
+            int totalquanNeed = Integer.parseInt(quanneedproduct);
+            int quantityCompleted = Integer.parseInt(txtquantityCompleted);
+
+            String url = "NewLogin.jsp";
+            boolean result = false;
+            boolean full = false;
+            boolean laststep = false;
             try {
-                  ProcessDAO dao = new ProcessDAO();
-                  if (!button.equals("ViewProcessDetail")) {
-                        dao.ViewNewOrder();
-                        List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
-                        request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
-                        url = Process;
-                  } else {
-                        dao.ViewProcessingOrder(OrderID, CageID, CageID);
-                        List<ProcessDTO> process = dao.getListOrdersProcess();
-                        for (ProcessDTO proces : process) {
-                              if(proces.getStatus().equals("Processing")){
-                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
-                                    break;
-                              }
+                  if (!LastStep.trim().isEmpty()) {
+                        laststep = true;
+                  }
+                  ProcessDAO processdao = new ProcessDAO();
+                  if (addcompleted >= totalquanNeed - quantityCompleted) {
+                        full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
+                        if (full) {
+                            result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
                         }
-                        request.setAttribute("PROCESS_RESULT", process);
-                        url = ProcessDetail;
+                  } else {
+                        result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
+                  }
+
+                  if (result) {
+                        url = "MainController?btAction=ViewProcessDetail";
                   }
             } catch (SQLException e) {
-                  log("LOGINSERVLET _ SQL" + e.getMessage());
+                  e.printStackTrace();
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
+      }
+
+      private static String getNextProcessID(String processID) {
+            String prefix = processID.substring(0, 2); // Lấy phần tiền tố "PR"
+            int number = Integer.parseInt(processID.substring(2)); // Lấy phần số xxx
+            int nextNumber = number + 1; // Tăng giá trị số xxx lên 1
+            String nextNumberString = String.format("%03d", nextNumber); // Định dạng lại số xxx thành chuỗi có 3 chữ số
+            return prefix + nextNumberString; // Tạo chuỗi processID mới bằng cách kết hợp phần tiền tố và phần số
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,7 +92,7 @@ public class ProcessController extends HttpServlet {
             try {
                   processRequest(request, response);
             } catch (SQLException ex) {
-                  Logger.getLogger(ProcessController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(UpdateStatusProcessController.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
 
@@ -94,7 +110,7 @@ public class ProcessController extends HttpServlet {
             try {
                   processRequest(request, response);
             } catch (SQLException ex) {
-                  Logger.getLogger(ProcessController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(UpdateStatusProcessController.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
 

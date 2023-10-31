@@ -4,9 +4,11 @@
  */
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderInsertError;
-import static com.vitvang.productionmanagement.util.tool.*;
+import com.vitvang.productionmanagement.model.CageDTO;
+import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -27,78 +28,90 @@ import javax.naming.NamingException;
  */
 public class AddOrderController extends HttpServlet {
 
-      private final String ORDER_PAGE = "Order.jsp";
-      private final String ORDER_ADD_PAGE = "OrderAdd.jsp";
-      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
-      private final String ORDERID_PATTERN = "OD\\d{3}";
+      private final String ORDER_PAGE = "OrderAdd.jsp";
+      private final String ADDRESS_FORM_PATTERN = "([0-9]{1,4}[A-Z]?/[0-9]{1,3}\\s[a-zA-Z"
+              + "ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơ"
+              + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈ"
+              + "ỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30},[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,30})";
+      private final String ADDRESS_NUMBERANDCHAR_PATTERN = "(?=.[A-Za-z])(?=.\\d)[A-Za-z\\d]+";
+      private final String QUANTITY_PATTERN = "(?!-)\\d+";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, ParseException {
             response.setContentType("text/html;charset=UTF-8");
             String url = ORDER_PAGE;
             // test
-            String orderId = request.getParameter("txtOrderID");
-            String EndDate = request.getParameter("txtEndDate");
-            Date productEndDate = Date.valueOf(EndDate);
             String customerId = request.getParameter("txtCustomerID");
+            String totalprice = request.getParameter("txtTotalPrice");
+             if (totalprice == null ) {
+                        totalprice = "0";
+                  }
+            int total = Integer.parseInt(totalprice);
             String Address = request.getParameter("txtAddress");
-            String[] CageID = request.getParameterValues("txtCageID");
-            String Quantity = request.getParameter("txtQuantity");
+            String quantity = request.getParameter("txtQuantity");
+            int quantityCheck = Integer.parseInt(quantity);
+            String[] CageID = request.getParameterValues("txtOrderCageID");
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
-
             boolean foundErr = false;
             OrderInsertError error = new OrderInsertError();
             try {
                   HttpSession session = request.getSession();
-                  OrderDAO Orderdao = new OrderDAO();
-                  if (!checkFormat(orderId, ORDERID_PATTERN, true)) {
-                        error.setOrderIdFormatErr("Pls type again OrderID with form ODxxx");
+                  CartObj cart = (CartObj) session.getAttribute("CART");
+                  OrderDAO dao = new OrderDAO();
+                 
+                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
+                        error.setAddressNumberErr("Pls type again Address, with have at least "
+                                + "one char and one number");
                         foundErr = true;
                   }
-                  if (productEndDate.before(now)) {
-                        error.setEndDateErr("End date can not before today");
+                  if (Address.trim().length() < 6) {
+                        error.setAddressLengthErr("Pls type again, Address too short, maybe something wrong!!");
+                        foundErr = false;
+                  }
+
+                  if (!checkFormat(Address, ADDRESS_FORM_PATTERN, true)) {
+                        error.setAddressFormErr("Pls type again Address, e.g: 123 Hiệp Hòa, Biên Hòa Đồng Nai ");
                         foundErr = true;
                   }
-                  if (!checkFormat(customerId, CUSTOMERID_PATTERN, true)) {
-                        error.setCustomerIdFormatErr("Pls type again CustomerID with two digit");
+                  if (!checkFormat(quantity, QUANTITY_PATTERN, true)) {
+                        error.setNullQuantityErr("PLs type again Quantity!!!");
                         foundErr = true;
                   }
-                  if (Address.trim().length() < 5) {
-                        error.setAddressLengthErr("Pls type again Address too short");
+                  if (quantityCheck < 100 || quantityCheck > 100000) {
+                        error.setQuantityValidErr("Pls type again quantity > 100 and < 100000");
                         foundErr = true;
                   }
+
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
-                        url = ORDER_ADD_PAGE;
+                        url = "MainController" + "?btAction=New Order";
                   } else {
-                        boolean result = Orderdao.insertOrder(orderId, now, productEndDate, Address);
-                        Orderdao.addUserOrder(orderId, customerId);
-                        if (!Quantity.isEmpty() && !Quantity.equals("0")) {
-                              int quantity = Integer.parseInt(Quantity);
-                              for (String item : CageID) {
-                                    Orderdao.addOrderDetail(orderId, item, quantity);
-                              }
+                        boolean result = dao.insertOrder(now, total, Address);
+                        dao.addUserOrder(customerId);
+                        int quantityTmp = 1;
+                        for (CageDTO value : cart.getProductItems().values()) {
+                              dao.addOrderDetail(value.getCageID(), value.getQuantityOrder());
+
                         }
                         if (result) {
                               url = "MainController"
                                       + "?btAction=Order";
+
                         }
                   }
-
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
                   log("UpdateAccountServlet _ SQL " + msg);
-                  if (msg.contains("conflicted with the FOREIGN KEY")) {
-                        error.setCustomerNotExistInDatabasErr("Customer not exist in database");
-                        request.setAttribute("ADD_ORDER_ERROR", error);
-                  }
-                  if (msg.contains("duplicate")) {
-                        error.setDuplicateOrderIDErr("OrderID has exist in database");
-                        request.setAttribute("ADD_ORDER_ERROR", error);
-                  }
+                  error.setNullQuantityErr("Not accept Null quantity!!!");
+                  request.setAttribute("ADD_ORDER_ERROR", error);
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
+            } catch (NumberFormatException  ex) {
+                  String msg = ex.getMessage();
+                  log("UpdateAccountServlet _ SQL " + msg);
+                  error.setNullQuantityErr("Not accept Null quantity!!!");
+                  request.setAttribute("ADD_ORDER_ERROR", error);
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

@@ -13,7 +13,7 @@ import javax.naming.NamingException;
  */
 /**
  *
- * @author Admin
+ * @author thetam
  */
 public class CartObj {
 
@@ -66,7 +66,11 @@ public class CartObj {
             CageDAO dao = new CageDAO();
             dao.AllProduction();
             CageDTO dto = dao.getCageDTObyID(sku);
-            dto.setQuantityOrder(dto.getQuantityOrder() + quantity);
+            if (this.productItems.get(sku) != null) {
+                  dto.setQuantityOrder(this.productItems.get(sku).getQuantityOrder() + quantity);
+            } else{
+                   dto.setQuantityOrder(quantity);
+            }
             // 3. Update items
             this.productItems.put(sku, dto);
       }

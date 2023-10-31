@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : orderAdd
     Created on : Sep 29, 2023, 10:11:22 AM
@@ -25,7 +26,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-          <title>Add Order</title>
+          <title>Admin Dashboard Panel</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -39,68 +40,72 @@
           <c:set var="errors" value="${requestScope.ADD_ORDER_ERROR}"/>
           <!-- get list product -->
           <c:set var="CageList" value="${sessionScope.CAGE_LIST}"></c:set>
+          <c:set var="CusList" value="${sessionScope.CUSTOMER_LIST}"></c:set>
+          <c:set var="orderID" value="${requestScope.ORDERID}"></c:set>
                <nav>
 
-                    <div class="logo-name"style="
-                         display: block;">
+                    <div class="logo-name">
                          <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
-                    </div>
-                    <div class="menu-items">
-                         <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Order</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Customers</span>
-                                   </a></li>
-                              <li ><a href="${productionList}">
-                                        <i class="uil uil-grin"></i>
-                                        <span class="link-name">Production</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Production process">
-                                        <i class="uil uil-chart-line"></i>
-                                        <span class="link-name">Production process</span>
-                                   </a></li>
-                              <li > <a href="#">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Reports</span>
-                                   </a></li>
-                              <li ><a href="#">
-                                        <i class="uil uil-screw"></i>
-                                        <span class="link-name">Material</span>
-                                   </a></li>
-                              <li > <a href="#">
-                                        <i class="uil uil-archive-alt"></i>
-                                        <span class="link-name">Inventory</span>
-                                   </a></li>
-                         </ul>
+                              <img src="images/logo.png" alt="">
+                         </div>
 
-                         <ul class="logout-mode">
-                              <li><a href="${logout_query}">
-                                        <i class="uil uil-signout"></i>
-                                        <span class="link-name" >Logout</span>
-                                   </a></li>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+               </div>
 
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
+               <div class="menu-items">
+                    <ul class="nav-links">
+                         <li><a href="#">
+                                   <i class="uil uil-estate"></i>
+                                   <span class="link-name">Dahsboard</span>
+                              </a></li>
+                         <li><a href="MainController?btAction=Order">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Customers</span>
+                              </a></li>
+                         <li><a href="${productionList}">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Reports</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
+                         <li><a href="#">
+                                   <i class="uil uil-archive-alt"></i>
+                                   <span class="link-name">Inventory</span>
+                              </a></li>
+                    </ul>
 
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
-                         </ul>
-                    </div>
+                    <ul class="logout-mode">
+                         <li><a href="${logout_query}">
+                                   <i class="uil uil-signout"></i>
+                                   <span class="link-name" >Logout</span>
+                              </a></li>
+
+                         <li class="mode">
+                              <a href="#">
+                                   <i class="uil uil-moon"></i>
+                                   <span class="link-name">Dark Mode</span>
+                              </a>
+
+                              <div class="mode-toggle">
+                                   <span class="switch"></span>
+                              </div>
+                         </li>
+                    </ul>
+               </div>
           </nav>
           <section class="dashboard">
                <h1>PURCHASE</h1>
@@ -109,51 +114,39 @@
                     <form action="MainController" method="GET" novalidate="novalidate">
                          <fieldset id="info">
                               <legend>Order Info</legend>
-                              <label for="orderinput">Order</label>
-                              <input type="text" id="orderinput" placeholder="Order" name="txtOrderID"
-                                     value="${param.txtOrderID}" />
-                              <c:if test="${not empty errors.getOrderIdFormatErr()}">
-                                   <font color="red">
-                                   ${errors.getOrderIdFormatErr()}
-                                   </font>
-                              </c:if>
-                              <c:if test="${not empty errors.getDuplicateOrderIDErr()}">
-                                   <font color="red">
-                                   ${errors.getDuplicateOrderIDErr()}
-                                   </font>
-                              </c:if>
-                              <label for="customerinput">CustomerID</label>
+
+                              <label for="customerinput">Customer Name</label>
                               <!--                               <input type="text" id="customerinput" name="customerid" required="required" 
                                                             placeholder="CustomerID" />-->
-                              <input type="text" id="customerinput" placeholder="CustomerID" name="txtCustomerID"
-                                     value="${param.txtCustomerID}" />
-                              <c:if test="${not empty errors.getCustomerNotExistInDatabasErr()}">
-                                   <font color="red">
-                                   ${errors.getCustomerNotExistInDatabasErr()}
-                                   </font>
-                              </c:if>
-                              <c:if test="${not empty errors.getCustomerIdFormatErr()}">
-                                   <font color="red">
-                                   ${errors.getCustomerIdFormatErr()}
-                                   </font>
-                              </c:if>
+                              <!--                              <input type="text" id="customerinput" placeholder="CustomerID" name="txtCustomerID"
+                                                                   value="${param.txtCustomerID}" />-->
+                              <select id="customerinput" class="input-field" name="txtCustomerID">
+                                   <c:forEach items="${CusList}" var="cus">
+                                        <c:if test="${param.txtCustomerID eq cus.getUserID()}">
+                                             <option selected="selected" value="${cus.getUserID()}">
+                                                  ${cus.getName()} 
+                                             </option>
+                                        </c:if>
+                                        <c:if test="${param.txtCustomerID ne cus.getUserID()}">
+                                             <option value="${cus.getUserID()}">
+                                                  ${cus.getName()} 
+                                             </option>
+                                        </c:if>
+                                   </c:forEach>
+                              </select>
+
                               <c:url value="SearchCustomer.jsp" var="searchCustomer">
                                    <c:param name="txtOrderID" value="${param.txtOrderID}" />
                               </c:url>
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
 
                               <div class="input-container">
-                                   <label for="startdateinput">StartDate</label>
+                                   <label for="startdateinput">Start Date</label>
                                    <fmt:formatDate var="date" value="${now}" pattern="MM-dd-yyyy" />
                                    <!--${date}-->
                                    <input type="text" readonly="true" id="startdateinput" value="${date}"
                                           required="required" />
                               </div>
-
-                              <!-- <div class="input-container2">
-                                  <label for="enddateinput">EndDate</label>
-                                  <input type="date" id="enddateinput" name="enddate" required="required" />
-                              </div> -->
 
                               <label for="addressinput">Address</label>
                               <!--                               <input type="text" id="addressinput" name="address" required="required" 
@@ -163,6 +156,16 @@
                               <c:if test="${not empty errors.getAddressLengthErr()}">
                                    <font color="red">
                                    ${errors.getAddressLengthErr()}
+                                   </font>
+                              </c:if> <br>
+                              <c:if test="${not empty errors.getAddressNumberErr()}">
+                                   <font color="red">
+                                   ${errors.getAddressNumberErr()}
+                                   </font>
+                              </c:if><br>
+                              <c:if test="${not empty errors.getAddressFormErr()}">
+                                   <font color="red">
+                                   ${errors.getAddressFormErr()}
                                    </font>
                               </c:if>
                          </fieldset>
@@ -181,7 +184,9 @@
                                              <div class="input-container1">
                                                   <select class="input-field" name="txtCageID">
                                                        <c:forEach items="${CageList}" var="cage">
-                                                            <option value="${cage.getCageID()}">${cage.getName()}</option>
+                                                            <option value="${cage.getCageID()}">
+                                                                 ${cage.getName()} 
+                                                            </option>
                                                        </c:forEach>
                                                   </select>
                                                   <!-- Add more options as needed -->
@@ -192,11 +197,18 @@
 
                                         <td>
                                              <div class="input-container1">
+                                                  <br>
                                                   <input placeholder="Quantity" class="input-field" type="number" min="1"
-                                                         name="txtQuantity" value="${param.txtQuantity}">
-                                                  <c:if test="${not empty errors.getNullQuanityErr()}">
+                                                         name="txtQuantity" value="" oninput="this.value = Math.abs(this.value)"
+>                                                 
+                                                  <c:if test="${not empty errors.getQuantityValidErr()}">
                                                        <font color="red">
-                                                       ${errors.getNullQuanityErr()}
+                                                       ${errors.getQuantityValidErr()}
+                                                       </font>
+                                                  </c:if>
+                                                       <c:if test="${not empty errors.getNullQuantityErr()}">
+                                                       <font color="red">
+                                                       ${errors.getNullQuantityErr()}
                                                        </font>
                                                   </c:if>
                                                   <span class="input-highlight"></span>
@@ -204,8 +216,6 @@
                                         </td>
                                         <td>
                                              <div class="plus_button">
-                                                  <input type="hidden" placeholder="Address" name="txtAddress"
-                                                         value="${param.txtAddress}" />
                                                   <button name="btAction" value="addToCart" type="submit"><i
                                                             class="fa fa-shopping-cart"></i></button>
                                              </div>
@@ -213,40 +223,63 @@
                                    </tr>
                                    <!-- Add more rows as needed -->
                               </table>
+
                               <c:set var="cart" value="${sessionScope.CART}" />
+                              <c:set var="cartlist" value="${requestScope.CARTLIST}" />
                               <c:if test="${not empty cart}">
-                                   <c:set var="items" value="${cart.items}" />
-                                   <c:if test="${items != null}">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        <table>
-                                             <tr>
-                                                  <td><strong>No.</strong></td>
-                                                  <td><strong>Name</strong></td>
-                                                  <td><strong>Quantity</strong></td>
-                                             </tr>
-                                             <tr>
-                                                  <c:forEach items="${items.keySet()}" var="key" varStatus="counter">
+                                   <c:set var="items" value="${cart.getProductItems()}" />
+                                   <%--<c:if test="${items != null}">--%>
+                                   <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                   <table>
+                                        <tr>
+                                             <td><strong>No.</strong></td>
+                                             <td><strong>Name</strong></td>
+                                             <td><strong>Quantity</strong></td>
+                                             <td><strong>Remove</strong></td>
+                                        </tr>
+                                        <tr>
+                                             <c:set var="totalprice" value=""></c:set>
+                                             <c:forEach items="${cartlist}" var="key" varStatus="counter">
+                                             <form action="MainController" method="GET">
                                                   <tr>
                                                        <td>
                                                             ${counter.count}
                                                             .</td>
                                                        <td>
-                                                            ${key}
+                                                            ${key.getName()}
+                                                            <input type="hidden" name="txtOrderCageID" value="${key.getCageID()}" />
                                                        </td>
                                                        <td>
-                                                            ${items.get(key)}
+                                                            ${key.getQuantityOrder()}
+                                                            <c:set var="totalprice" value="${totalprice +key.getQuantityOrder()* key.getPrice() }"></c:set>
+                                                            <input type="hidden" name="${key.getCageID()}" value="${key.getQuantityOrder()}" />
+                                                       </td>
+                                                       <td>
+                                                            <input type="hidden" name="txtOrderID"  value="${param.txtOrderID}" />
+                                                            <input type="hidden" name="txtCustomerID" value="${param.txtCustomerID}" />
+                                                            <input type="hidden" name="txtAddress" value="${param.txtAddress}"/>
+                                                            <input type="hidden" name="txtEndDate" value="${param.txtEndDate}"/>
+                                                            <div class="plus_button minus_button">
+                                                                 <button type="submit" name="btAction" value="RemoveItemFromCart">
+                                                                      <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                                                 </button>
+                                                            </div>
                                                        </td>
                                                   </tr>
-                                             </c:forEach>
-                                             </tr>
-                                        </table>
-                                   </c:if>
+                                             </form>
+                                        </c:forEach>
+                                        </tr>         
+                                   </table>
+                                   <p>Total Price: ${totalprice}</p>
+                                   <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
                               </c:if>
+                              <%--</c:if>--%>
                          </fieldset>
                          <button name="btAction" value="Create Order" type="submit" class="custom-btn btn-1">
                               Create Order
                          </button>
                     </form>
+
                </div>
           </section>
      </body>

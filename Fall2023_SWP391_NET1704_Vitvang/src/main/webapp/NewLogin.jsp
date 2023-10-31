@@ -39,19 +39,20 @@
                                    ${error.getIsEmptyPassword()}
                                    </font><br/>                                                   
                               </c:if>
-                              <c:if test="${not empty error.getIsWrongAccount()}">
-                                   <font style="color: red;">
-                                   print out error
-                                   ${error.getIsWrongAccount()}
-                                   </font><br/>
-                              </c:if>
                               <span>Password</span>
                          </div>
+                         <c:if test="${not empty error.getIsWrongAccount()}">
+                              <font style="color: red;">
+                              <!--print out error-->
+                              ${error.getIsWrongAccount()}
+                              </font><br/>
+                         </c:if>
                          <div class="button" >
                               <input type="hidden" name="lastUsername" value="${Username}" />
                               <input type="hidden" name="lastpassword" value="${Password}" />
                               <button  value="Login" type="submit" class="submit-button" name="btAction" ><span><i class="uil uil-estate"></i></span>Login</button>
                          </div>
+
                     </form>
-     </body>
-</html>
+                    </body>
+                    </html>
