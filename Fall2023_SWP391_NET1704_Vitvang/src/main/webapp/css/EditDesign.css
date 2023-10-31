@@ -326,37 +326,6 @@ h1 {
      padding: 2px;
 }
 
-/* Style for input fields */
-.input-field {
-     position: relative;
-}
-
-/* Style for inputs */
-.input-field input {
-     width: 100%;
-     padding: 8px;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-}
-
-/* Style for labels */
-.input-field label {
-     position: absolute;
-     top: 0;
-     left: 0;
-     font-size: 14px;
-     color: #777;
-     pointer-events: none;
-     transition: 0.2s ease all;
-}
-
-/* Style for labels when input is focused or has value */
-.input-field input:focus+label,
-.input-field input:not(:placeholder-shown)+label {
-     top: -12px;
-     font-size: 12px;
-     color: #333;
-}
 
 /* Style for the plus button */
 .plus_button button {
@@ -371,30 +340,12 @@ h1 {
      margin-right: 20px;
 }
 
-/* Input container */
-.input-container {
-     position: relative;
-     margin: 20px;
-}
 
-/* Input field */
-.input-field {
-     display: block;
-     width: 100%;
-     padding: 10px;
-     font-size: 16px;
-     border: none;
-     border-bottom: 2px solid #ccc;
-     outline: none;
-     background-color: transparent;
-}
 
-.input-container1 input[type="number"] {
-     width: 50%;
+.input-container1 input[type="number"]  {
+     width: 80%;
      margin: 0 auto;
      /* Center align the input field */
-     text-align: center;
-     /* Center-align the text inside the input field */
 }
 
 /* Input label */
@@ -417,31 +368,6 @@ h1 {
      width: 0;
      background-color: #007bff;
      transition: all 0.3s ease;
-}
-
-/* Input field:focus styles */
-.input-field:focus+.input-label {
-     top: -20px;
-     font-size: 12px;
-     color: #007bff;
-}
-
-.input-field:focus+.input-label+.input-highlight {
-     width: 100%;
-}
-
-.input-field {
-     width: 50px;
-     /* Set the desired width */
-     padding: 5px;
-}
-
-/* Add this rule to override the width for larger screens if needed */
-@media (min-width: 768px) {
-     .input-field {
-          width: 100%;
-          /* Adjust the width for larger screens */
-     }
 }
 
 /*button modify*/
@@ -481,20 +407,148 @@ h1 {
      transition: all 0.3s ease;
      position: relative;
      display: inline-block;
-     box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-          7px 7px 20px 0px rgba(0, 0, 0, .1),
-          4px 4px 5px 0px rgba(0, 0, 0, .1);
      outline: none;
      margin: 10px 0px;
 }
 
 /* 1 */
 .btn-1 {
-     background: rgb(100, 175, 232);
+     background: #007bff;
      border: none;
 }
 
 .btn-1:hover {
-     background: rgb(0, 3, 255);
-     background: linear-gradient(0deg, rgba(0, 3, 255, 1) 0%, rgba(2, 126, 251, 1) 100%);
+     background: #0755a9;
+}
+
+/*form*/
+h2 {
+     margin: 10px 0px;
+}
+
+.step {
+     display: flex;
+     flex-wrap: wrap;
+     border: 1px solid #333;
+     border-top: 5px solid #007bff;
+     margin: 20px;
+     padding: 10px;
+     border-radius: 15px;
+}
+
+.step-header {
+     flex: 1 1 100%;
+     margin-bottom: 10px;
+     margin-left: 15px;
+}
+
+.form-step {
+     flex: 0 0 calc(25% - 10px);
+     box-sizing: border-box;
+     padding: 10px;
+     border-radius: 4px;
+     margin-bottom: 10px;
+}
+
+.form-step label {
+     display: block;
+     font-weight: bold;
+     margin-bottom: 5px;
+}
+
+/* Style for input fields */
+.input-field {
+     position: relative;
+     display: block;
+     width: 100%;
+     padding: 10px;
+     font-size: 16px;
+     border: none;
+     border-bottom: 2px solid #ccc;
+     outline: none;
+     background-color: transparent;
+     width: 70%;
+}
+
+/* Style for inputs */
+.input-field input {
+     width: 100%;
+     padding: 8px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+}
+
+/* Style for labels */
+.input-field label {
+     position: absolute;
+     top: 0;
+     left: 0;
+     font-size: 14px;
+     color: #777;
+     pointer-events: none;
+     transition: 0.2s ease all;
+}
+
+/* Style for labels when input is focused or has value */
+.input-field input:focus+label,
+.input-field input:not(:placeholder-shown)+label {
+     top: -12px;
+     font-size: 12px;
+     color: #333;
+}
+
+
+/* Input field:focus styles */
+.input-field:focus+.input-label {
+     top: -20px;
+     font-size: 12px;
+     color: #007bff;
+}
+
+.input-field:focus+.input-label+.input-highlight {
+     width: 100%;
+}
+
+/*button*/
+.create-button {
+     background-color: #4caf50;
+     color: #ffffff;
+     border: none;
+     padding: 10px 20px;
+     font-size: 16px;
+     cursor: pointer;
+     border-radius: 4px;
+     margin-left: 20px;
+     margin-bottom: 15px;
+}
+
+.create-button:hover {
+     background-color: #318936;
+}
+
+.input-container2 {
+     width: 73%;
+     margin-left: 80px;
+     /* Center align the input field */
+     text-align: center;
+     /* Center-align the text inside the input field */
+}
+
+.button_2 {
+     text-align: end; /* Center align the buttons */
+}
+
+.done_button {
+     padding: 10px 20px;
+     font-size: 16px;
+     margin: 5px;
+     cursor: pointer;
+     border: none;
+     border-radius: 5px;
+     background-color: #4caf50;
+     color: #fff;
+}
+
+.done_button:hover {
+     background-color: #318936;
 }
