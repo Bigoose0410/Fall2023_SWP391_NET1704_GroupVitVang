@@ -3,10 +3,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
 /* 
-    Created on : Oct 31, 2023, 2:24:17 PM
-    Author     : Admin
+    Created on : Oct 30, 2023, 2:11:39 PM
+    Author     : Nguyen Ba Tung
 */
-
 * {
      margin: 0;
      padding: 0;
@@ -292,129 +291,144 @@ body.dark nav {
 }
 
 /*Dashboard*/
-/*form*/
-.form {
-     width: 90%;
-     margin: 0 auto;
-     padding: 20px;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-     background-color: #f9f9f9;
-     margin-top: 50px;
-}
-
-.info_form {
-     border-bottom: 1px solid #ccc;
-}
-
-.info_form h2 {
-     font-size: 1.5em;
-     margin-bottom: 10px;
-}
-
-.info_form p {
-     font-size: 0.8em;
-     color: #777;
-     margin-bottom: 20px;
-}
-
-/*form1*/
-.info_form1 {
-     max-width: 1000px;
-     margin: 0 auto;
-     padding: 20px;
-     border-radius: 5px;
-     background-color: #f9f9f9;
-}
-
-.form-row {
+/* Search Styles */
+.search {
      display: flex;
      align-items: center;
-     margin-bottom: 10px;
 }
 
-.form-row label {
-     flex: 1;
-     font-size: 1em;
-     margin: 10px 10px;
-}
-
-.form-row input[type="text"],
-.form-row input[type="password"],
-.form-row input[type="radio"],
-.form-row input[type="tel"],
-.form-row input[type="email"] {
-     flex: 2;
-     width: 100%;
-     padding: 8px;
-     border: 1px solid #ccc;
+.search input {
+     width: 300px;
+     padding: 10px;
+     margin-right: 10px;
+     border: 1px solid #757575;
      border-radius: 5px;
-     box-sizing: border-box;
+     outline: none;
 }
 
-.form-row input[type="date"] {
-     flex: 1;
-     width: 100%;
-     padding: 8px;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-     box-sizing: border-box;
+.search input:hover {
+     border: 1px solid #333;
 }
 
-.form-row input[type="radio"] {
-     width: auto;
-     margin-right: 5px;
-}
-
-.form-row i {
-     font-size: 1.3em;
-     margin-right: 82%;
-}
-
-.form-row input[type="radio"] + label {
-     margin-right: 20px;
-}
-
-.form-row input[type="radio"]:last-child {
-     margin-right: 700px;
-}
-
-/* Optional: Style the labels for male and female */
-.form-row label[for="male"], .form-row label[for="female"] {
-     font-weight: bold;
-     margin-left: 60px;
-}
-
-button {
-     background-color: #4CAF50;
-     color: white;
-     padding: 10px 20px;
-     font-size: 1em;
+.search button {
+     padding: 10px 10px;
      border: none;
      border-radius: 5px;
+     background-color: blue;
+     /* Change the button color as needed */
+     color: #fff;
      cursor: pointer;
-     margin-top: 10px;
-     margin-left: 400px;
 }
 
+.search button:hover {
+     background-color: rgb(14, 14, 180);
+     /* Change the button color as needed */
+}
+
+h1 {
+     text-align: center;
+     margin: 10px;
+}
+
+/*account table*/
+.account_table,
+.processing_table {
+     margin-top: 20px;
+}
+
+.table-container {
+     overflow-x: auto;
+     border-radius: 10px;
+     border: 1px solid black;
+}
+
+.table-container table {
+     width: 100%;
+     border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+     padding: 10px;
+     text-align: center;
+}
+
+.table-container th {
+     color: white;
+     background-color: #2193b0;
+}
+
+.table-container tbody tr:nth-child(even) {
+     background-color: #e6fcfa;
+}
+
+.table-container tbody tr:hover {
+     background-color: #ddd;
+}
+
+/* Button Styling */
+button {
+     cursor: pointer;
+     color: black;
+}
+
+/* Button Hover Effect */
 button:hover {
-     background-color: #358b38;
+     cursor: pointer;
 }
 
-#email,
-#password,
-#username,
-#address,
-#userID,
-#name,
-#phone,
-#roleID,
-#birthday {
-     margin-right: 100px;
+.button a {
+     background-color: #007bff;
+     color: white;
+     padding: 5px 10px;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     text-decoration: none;
+     margin-right: 10px;
+     padding: 10px;
 }
 
-#birthday {
-     margin-right: 695px;
+.button a:hover {
+     background-color: #206fc5;
 }
 
+.header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     /* Optional: Align elements vertically */
+     padding: 10px 0px;
+}
 
+/*Group box*/
+.group-box {
+     display: inline-block;
+     width: 30%;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     padding: 10px;
+     margin: 10px;
+     background-color: #f9f9f9;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.group-box p {
+     margin: 5px 5px;
+}
+
+.group-content {
+     margin-top: 10px;
+}
+
+.box {
+     margin-left: 50px;
+}
+
+span a {
+     text-decoration: none; /* Remove the default underline */
+}
+
+span a:hover {
+     text-decoration: underline; /* Add underline on hover */
+}
