@@ -11,7 +11,7 @@
      <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/ProductDetail.css">
+          <link rel="stylesheet" href="css/EditMaterial.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -29,6 +29,11 @@
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
+          <c:url var="DesignPage" value="MainController">
+               <c:param value="EditDesign" name="btAction"/>
+               <c:param value="${param.txtCageID}" name="txtCageID"/>
+               <c:param value="${param.txtCageName}" name="txtCageName"/>
+          </c:url>
           <c:set var="ListMaterial" value="${requestScope.CAGE_MATERIAL}"></c:set>
           <c:set var="materialPrice" value="${requestScope.MATERIAL_PRICE}"></c:set>
           <c:set var="materialnotuse" value="${requestScope.MATERIAL_NOT_USE}"></c:set>
@@ -44,10 +49,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -97,84 +102,82 @@
                          </ul>
                     </div>
           </nav>
-          <section class="dashboard2">
-               <table class="tablesorter-custom">
-                    <br>
-                    <h1>Material</h1>
-                    <!--               <form action="MainController">
-                                        <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
-                                        <button type="submit" value="EditMaterial" name="btAction">Modify</button>
-                                   </form>-->
-                    <thead>
-                         <tr class="search">
-                              <td> <input type="search" data-column="0" placeholder="No."></td>
-                              <!--<td> <input type="search" data-column="1" placeholder="CageID"></td>-->
-                              <!--<td> <input type="search" data-column="2" placeholder="MaterialID"></td>-->
-                              <td> <input type="search" data-column="3" placeholder="Name"></td>
-                              <td> <input type="search" data-column="4" placeholder="Origin"></td>
-                              <!--<td> <input type="search" data-column="5" placeholder="Need/Cage"></td>-->
-                              <td> <input type="search" data-column="6" placeholder="Price/Unit"></td>
-                              <td> <input type="search" data-column="7" placeholder="Unit"></td>
-                         </tr>
-                         <tr>
-                              <th>No.</th>
-                              <!--<th>Cage ID</th>-->
-                              <th>Material ID</th>
-                              <th>Name </th>
-                              <th>Quantity </th>
-                              <th>Origin</th>
-                              <th>Price/Unit</th>
-                              <th>Unit</th>
-                              <th>      </th>
-                         </tr>
-                         </tbody>
-                    </thead>
-                    <tbody>
-                         <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
-                         <form action="MainController" ">
+
+          <section class="dashboard">
+               <h1>Material</h1>
+               <div class="table-container">
+                    <h3>${param.txtCageName}</h3>
+                    <table>
+                         <thead>
                               <tr>
-                                   <td>
-                                        ${counter.count}
-                                   </td>
-                                   <!--                                   <td>
-                                   ${dto.getCageID()}
-                              </td>-->
-                                   <td>
-                                        ${dto.getMaterialID()}
-                                        <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
-                                   </td>
-                                   <td>
-                                        ${dto.getName()} 
-                                   </td>
-                                   <td>
-                                        <input type="text" name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100" />
-                                   </td>
-                                   <td>
-                                        ${dto.getOrigin()}
-                                   </td>
-                                   <td>
-                                        ${dto.getPrice()}
-                                   </td>
-                                   <td>
-                                        ${dto.getUnit()}
-                                   </td>
-                                   <td>
-                                        <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                        <button type="submit" value="UpdateMaterialofCage" name="btAction">
-                                             Update
-                                        </button>
-                                        <button type="submit" value="DeleteMaterialofCage" name="btAction">
-                                             Delete
-                                        </button>
-                                   </td>
+                                   <th>No.</th>
+                                   <th>MaterialID</th>
+                                   <th>Name / Unit</th>
+                                   <th>Quantity</th>
+                                   <th>Origin</th>
+                                   <th>Price/Unit</th>
+                                   <th>Edit</th>
                               </tr>
-                         </form>
-                    </c:forEach>
-                    </tbody>
-                    total material = ${materialPrice}
-               </table>
+                         </thead>
+
+                         <tbody>
+                              <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
+                              <div action="MainController">
+                                   <tr>
+                                        <td>
+                                             ${counter.count}
+                                        </td>
+
+                                        <td>
+                                             ${dto.getMaterialID()}
+                                             <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
+                                        </td>
+
+                                        <td>
+                                             ${dto.getName()} / ${dto.getUnit()}
+                                        </td>
+
+                                        <td>
+                                             <div class="input-container">
+                                                  <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+                                                         name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100">
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td>
+                                             ${dto.getOrigin()}
+                                        </td>
+
+                                        <td>
+                                             ${dto.getPrice()}
+                                        </td>
+
+
+
+                                        <td class="edit_button">
+                                             <div class="update_button">
+                                                  <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                  <button type="submit" value="UpdateMaterialofCage" name="btAction">
+                                                       <i class="fa fa-pencil-square"></i>
+                                                  </button>
+                                             </div>
+                                             <div class="separator">/</div>
+                                             <div class="delete_button">
+                                                  <button type="submit" value="DeleteMaterialofCage" name="btAction">
+                                                       <i class="fa fa-trash"></i>
+                                                  </button>
+                                             </div>
+                                        </td>
+                                   </tr>
+                              </div>
+                         </c:forEach>
+                         </tbody>
+                    </table>
+               </div>
+
                <form action="MainController">
-                    add more marterial in build
+                    <strong>Add More Marterial: </strong>
                     <select onchange="this.form.submit()" name="slMateriaID">
                          <option selected>Open this select menu</option>
                          <c:forEach var="dto" items="${materialnotuse}">
@@ -184,44 +187,80 @@
                          <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
                     </select>
                </form>
+
                <c:if test="${not empty materialwilladd}">
-                    <form action="MainController">
-                         <table border="1">
-                              <thead>
-                                   <tr>
-                                        <th>MaterialID</th>
-                                        <th>Name</th>
-                                        <th>Origin</th>
-                                        <th>Price</th>
-                                        <th>Unit</th>
-                                        <th>Quantity Add</th>
-                                        <th>   </th>
-                                   </tr>
-                              </thead>
-                              <tbody>
+                    <div class="material_form1">
+                         <form action="MainController">
+                              <table class="material_form">
+                                   <h2><span>Add</span> Material</h2>
                                    <tr>
                                         <td>
-                                             ${materialwilladd.getMaterialID()}
-                                             <input type="hidden" name="txtMaterialID" value="${materialwilladd.getMaterialID()}" />
+                                             <label for="MaterialID_name">MaterialID :</label>
+                                             <div class="input-container1">
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getMaterialID()}" readonly>
+                                                  <span class="input-highlight"></span>
+                                             </div>
                                         </td>
-                                        <td>${materialwilladd.getName()}</td>
-                                        <td>${materialwilladd.getOrigin()}</td>
-                                        <td>${materialwilladd.getPrice()}</td>
-                                        <td>${materialwilladd.getUnit()}</td>
+
                                         <td>
-                                             <input type="number" name="txtQuantity" value="" min="1" max="100"/>
+                                             <label for="Name">Name :</label>
+                                             <div class="input-container1">
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getName()}" readonly>
+                                                  <span class="input-highlight"></span>
+                                             </div>
                                         </td>
+
                                         <td>
-                                             <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
-                                             <button type="submit" name="btAction" value="AddMaterialToCage">
-                                                  +
-                                             </button>
+                                             <label for="Origin_name">Origin :</label>
+                                             <div class="input-container1">
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getOrigin()}" readonly>
+                                                  <span class="input-highlight"></span>
+                                             </div>
                                         </td>
                                    </tr>
-                              </tbody>
-                         </table>
-                    </form>
+
+                                   <tr>
+                                        <td>
+                                             <label for="Price_name">Price :</label>
+                                             <div class="input-container1">
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getPrice()}" readonly>
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td>
+                                             <label for="Unit_name">Unit :</label>
+                                             <div class="input-container1">
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getUnit()}" readonly>
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+
+                                        <td>
+                                             <label for="Quantity_name">Quantity :</label>
+                                             <div class="input-container1">
+                                                  <input class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+                                                         name="txtNumberOfEmployee" value="0" min="0" max="100">
+
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+                                   </tr>
+                              </table>
+                              <button class="submit_button" type="submit">Submit</button>
+                         </form>
+                    </div>
                </c:if>
+               <div class="button_2">
+                    
+                    <a href="${DesignPage}"><button class="next_button"><i class="fas fa-arrow-right"></i></button></a>
+
+               </div>
           </section>
      </body>
 </html>

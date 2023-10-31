@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
+
 import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.model.CageDTO;
 import jakarta.servlet.RequestDispatcher;
@@ -52,16 +53,17 @@ public class RemoveItemFromCartController extends HttpServlet {
                   cart.removeItemFromPay(sku);
                   if (cart.getProductItems() == null) {
                         cart = null;
+                  } else {
+                        List<CageDTO> cageCart = new ArrayList<CageDTO>();
+                        for (CageDTO cage : cart.getProductItems().values()) {
+                              cageCart.add(cage);
+                        }
+                        request.setAttribute("CARTLIST", cageCart);
+                        // cus coutinous shopping
                   }
-                  List<CageDTO> cageCart = new ArrayList<CageDTO>();
-                  for (CageDTO cage : cart.getProductItems().values()) {
-                        cageCart.add(cage);
-                  }
-                  request.setAttribute("CARTLIST", cageCart);
-                  session.setAttribute("CART", cart);
-                  // cus coutinous shopping
-                  url = "MainController"
-                          + "?btAction=New Order";
+                        session.setAttribute("CART", cart);
+                        url = "MainController"
+                                + "?btAction=New Order";
 
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);

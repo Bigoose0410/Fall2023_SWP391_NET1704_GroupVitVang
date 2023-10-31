@@ -35,6 +35,7 @@
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
           <c:set var="materialPrice" value="${requestScope.MATERIAL_PRICE}"></c:set>
           <c:set var="processPrice" value="${requestScope.PROCESS_PRICE}"></c:set>
+          <c:set var="cage" value="${requestScope.CAGE_DTO}"></c:set>
                <nav>
 
                     <div class="logo-name"style="
@@ -105,13 +106,23 @@
                     <div class="info">
                          <img src="https://i.pinimg.com/736x/d3/69/81/d36981aa38aec939c776717d0660a0d6.jpg" alt="Cage Image">
                          <div class="info-details">
-                              <div class="info-item">CageID: <span>CG001</span></div>
-                              <div class="info-item">Name: <span>long tang vuong</span></div>
-                              <div class="info-item">Price: <span>2000</span></div>
-                              <div class="info-item">Origin: <span>VN</span></div>
-                              <div class="info-item">Description: <span>Long vuong chao mao</span></div>
+                              <div class="info-item">CageID: <span> ${cage.getCageID()}</span></div>
+                              <div class="info-item">Name: <span>${cage.getName()}</span></div>
+                              <div class="info-item">Price: <span>${cage.getPrice()}</span></div>
+                              <div class="info-item">Origin: <span>${cage.getOrigin()}</span></div>
+                              <div class="info-item">Description: <span>${cage.getDescription()}</span></div>
                               <div class="info-item">
-                                   Material: <span> Tre, Cửa, Móc,...</span></br>
+                                   Material: <span> 
+                                        <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
+                                             <!--bo dau phay o cuoi-->
+                                             <c:if test="${ListMaterial.size() != (counter.count )}">
+                                             ${dto.getName()},                                                
+                                             </c:if>
+                                             <c:if test="${ListMaterial.size() == (counter.count)}">
+                                             ${dto.getName()}                                                
+                                             </c:if>
+                                        </c:forEach>
+                                   </span></br>
                                    <button class="toggle-button">
                                         <i class="fa fa-plus"></i>
                                    </button>
@@ -131,6 +142,7 @@
                          <h1>Material</h1>
                          <form action="MainController">
                               <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
+                              <input type="hidden" name="txtCageName" value="${param.txtCageName}" />
                               <button type="submit" value="EditMaterial" name="btAction"><i
                                         class="fa fa-pencil-square"></i></button>
                          </form>
@@ -147,31 +159,8 @@
                                         <th>Unit</th>
                                    </tr>
                               </thead>
-
                               <tbody>
                                    <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
-                                        <tr>
-                                             <td>
-                                                  ${counter.count}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getName()} - ${dto.getQuantityNeed()}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getOrigin()}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getPrice()}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getUnit()}
-                                             </td>
-                                        </tr>
-
                                         <tr>
                                              <td>
                                                   ${counter.count}
@@ -204,6 +193,7 @@
                          <h1>Design Process</h1>
                          <form action="MainController">
                               <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
+                              <input type="hidden" name="txtCageName" value="${param.txtCageName}" />
                               <button type="submit" value="EditDesign" name="btAction"><i
                                         class="fa fa-pencil-square"></i></button>
                          </form>
@@ -217,34 +207,12 @@
                                         <th>Phrase</th>
                                         <th>Time Process</th>
                                         <th>Description</th>
-                                        <th>NumberOfEmployee</th>
+                                        <th>Employee need</th>
                                    </tr>
                               </thead>
 
                               <tbody>
                                    <c:forEach var="dto" items="${Design}" varStatus="counter">
-                                        <tr>
-                                             <td>
-                                                  ${counter.count}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getPhrase()}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getTimeProcess()}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getDescription()}
-                                             </td>
-
-                                             <td>
-                                                  ${dto.getNumberOfEmployee()}
-                                             </td>
-                                        </tr>
-
                                         <tr>
                                              <td>
                                                   ${counter.count}

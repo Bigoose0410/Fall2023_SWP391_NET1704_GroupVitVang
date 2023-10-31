@@ -43,7 +43,9 @@ public class DesignForProcessDAO {
                         stm = con.prepareStatement(sql);
                         stm.setString(1, "%" + CageID + "%");
                         rs = stm.executeQuery();
-
+                        if (this.listProcessDesign == null) {
+                                    this.listProcessDesign = new ArrayList<DesignForProcessDTO>();
+                              }
                         while (rs.next()) {
                               String Pharse = rs.getString("Phrase");
                               String Cage = rs.getString("CageID");
@@ -53,9 +55,7 @@ public class DesignForProcessDAO {
                               int NumCompletionCage = rs.getInt("NumCompletionCage");
                               DesignForProcessDTO dto
                                       = new DesignForProcessDTO(Pharse, Cage, TimeProcess, Description, NumberOfEmployee, NumCompletionCage);
-                              if (this.listProcessDesign == null) {
-                                    this.listProcessDesign = new ArrayList<DesignForProcessDTO>();
-                              }
+                              
                               this.listProcessDesign.add(dto);
                         }
                   }

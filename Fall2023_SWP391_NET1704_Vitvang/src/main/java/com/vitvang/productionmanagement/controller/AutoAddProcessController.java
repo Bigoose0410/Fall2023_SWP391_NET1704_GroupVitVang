@@ -7,6 +7,7 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
+import com.vitvang.productionmanagement.exception.processs.AutoAddProcessErr;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
@@ -38,43 +39,61 @@ public class AutoAddProcessController extends HttpServlet {
             // get param from view
             String orderID = request.getParameter("txtOrderID");
             String cageID = request.getParameter("txtCageID");
-            String StartDate = request.getParameter("txtStartDate");
-            Date startdate = Date.valueOf(StartDate);
+            long millis = System.currentTimeMillis();
+            java.sql.Date startdate = new java.sql.Date(millis);
             Date endDate;
             String Quantity = request.getParameter("txtQuantity");
             int quantityorder = Integer.parseInt(Quantity);
             String newStatus = "";
             String url = "NewLogin.jsp";
+            AutoAddProcessErr error = new AutoAddProcessErr();
+            boolean foundErr = false;
             boolean result1 = false;
             boolean result2 = false;
             int i = 1;
             try {
-                  // new dao
-                  OrderDAO orderdao = new OrderDAO();
-                  ProcessDAO processdao = new ProcessDAO();
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
-                  //2. call method
                   designdao.ViewDesignForProcess(cageID);
-                  //3. process result
-                  List<DesignForProcessDTO> designList = designdao.getDesignProcessList();
-                  DetailOrderDTO getquantity =  orderdao.query1LineOrderDetail(orderID,cageID);
-                  for (DesignForProcessDTO designDTO : designList) {
-                        if (i == 1) {
-                              newStatus = "Processing";
-                        } else {
-                              newStatus = "not yet";
-                        }
-                        endDate = calculateProcessDate(startdate, quantityorder,
-                                designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(),
-                                designDTO.getNumCompletionCage(), 1);
-                        result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity() ,designDTO);
-                        i++;
-                        startdate = endDate;
+                  List<DesignForProcessDTO> designList = null;
+                  designList = designdao.getDesignProcessList();
+                  if (designList.isEmpty()) {
+                        error.setDesignListLength("Check your step process again !!!");
+                        foundErr = true;
                   }
-                  result2 = processdao.updateStatusNewOrder(orderID, cageID);
-
-                  if (result1 && result2) {
+                  if (!designList.isEmpty()) {
+                        if(designList.size() < 3){
+                        error.setDesignListLength("Your step not reađy !!!");
+                        foundErr = true;
+                        }
+                  }
+                  if (foundErr) {
+                        request.setAttribute("AUTO_ADD_ERR", error);
                         url = "MainController?btAction=Production process";
+                  } else {
+                        // new dao
+                        OrderDAO orderdao = new OrderDAO();
+                        ProcessDAO processdao = new ProcessDAO();
+                        //2. call method
+                        //3. process result
+                        DetailOrderDTO getquantity = orderdao.query1LineOrderDetail(orderID, cageID);
+                        for (DesignForProcessDTO designDTO : designList) {
+                              if (i == 1) {
+                                    newStatus = "Processing";
+                              } else {
+                                    newStatus = "not yet";
+                              }
+                              endDate = calculateProcessDate(startdate, quantityorder,
+                                      designDTO.getTimeProcess(), designDTO.getNumberOfEmployee(),
+                                      designDTO.getNumCompletionCage(), 1);
+                              result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity(), designDTO);
+                              i++;
+                              startdate = endDate;
+                        }
+                        result2 = processdao.updateStatusNewOrder(orderID, cageID);
+
+                        if (result1 && result2) {
+                              url = "MainController?btAction=Production process";
+                        }
                   }
 
             } catch (SQLException ex) {

@@ -4,8 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
 public class EditDesignController extends HttpServlet {
-      private final String DESIGN_PROCESS_PAGE = "EditDeisgn.jsp";
+      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -52,9 +52,9 @@ public class EditDesignController extends HttpServlet {
 
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
-                  log("CalculateDetailMaterial SQL" + msg);
+                  log("EditDesignController SQL" + msg);
             } catch (NamingException ex) {
-                  log("CalculateDetailMaterial _ NAMING " + ex.getMessage());
+                  log("EditDesignController _ NAMING " + ex.getMessage());
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

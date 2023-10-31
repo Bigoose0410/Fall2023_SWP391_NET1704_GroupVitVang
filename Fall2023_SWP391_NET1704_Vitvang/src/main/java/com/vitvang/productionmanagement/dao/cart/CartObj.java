@@ -1,7 +1,7 @@
 package com.vitvang.productionmanagement.dao.cart;
 
-import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
+import com.vitvang.productionmanagement.model.CageDTO;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,38 +17,11 @@ import javax.naming.NamingException;
  */
 public class CartObj {
 
+      // bỏ đồ tuần tự nên ko cho set public
       private Map<String, CageDTO> productItems;
 
       public Map<String, CageDTO> getProductItems() {
             return productItems;
-      }
-
-      private Map<String, Integer> items;
-
-      // bỏ đồ tuần tự nên ko cho set public
-      public Map<String, Integer> getItems() {
-            return items;
-      }
-
-      //
-      public void addItemToCart(String sku) {
-            if (sku == null) {
-                  return;
-            }
-            if (sku.trim().isEmpty()) {
-                  return;
-            }
-            // 1. Check existed cart / items
-            if (this.items == null) {
-                  this.items = new HashMap<>();
-            }
-            // 2. Check existed item
-            int quantity = 1;
-            if (this.items.containsKey(sku)) {
-                  quantity = this.items.get(sku) + 1;
-            }
-            // 3. Update items
-            this.items.put(sku, quantity);
       }
 
       public void addCageToCart(String sku, int quantity) throws SQLException, NamingException {
@@ -75,43 +48,7 @@ public class CartObj {
             this.productItems.put(sku, dto);
       }
 
-      public void addManyItemToCart(String sku, Integer quantity) {
-            if (sku == null) {
-                  return;
-            }
-            if (sku.trim().isEmpty() || quantity == 0) {
-                  return;
-            }
-            //1. check existed cart / items
-            if (this.items == null) {
-                  this.items = new HashMap<>();
-            }
-            //2. check exíted item
-            if (this.items.containsKey(sku)) {
-                  quantity = this.items.get(sku) + quantity;
-            }
-            //3. update items
-            this.items.put(sku, quantity);
-      }
 
-      public void removeItemFromCart(String sku) {
-            // method nay remove tat ca
-            //remove 1 mon ra khoi gio thi add item bang so am
-
-            //1. Check existed items |ngan chua do
-            if (this.items == null) {
-                  return;
-            }
-            //2. check exist item |mon do
-            if (this.items.containsKey(sku)) {
-                  //3. Romove item from items
-                  this.items.remove(sku);
-                  if (this.items.isEmpty()) {    // neu doi tuong khong chua gi thi gan null de sau nay de check lai
-                        this.items = null;
-                  }
-
-            }
-      }
 
       public void removeItemFromPay(String sku) {
             // method nay remove tat ca
@@ -131,26 +68,4 @@ public class CartObj {
             }
       }
 
-      public void RemoveManyItemToCart(String sku, Integer quantity) {
-            // method nay remove tat ca
-            //remove 1 mon ra khoi gio thi add item bang so am
-            int itemquantity = this.items.get(sku);  // lay quantity hien tai cua item
-            //1. Check existed items |ngan chua do
-            if (this.items == null) {
-                  return;
-            }
-            //2. check exist item | mon do
-            if (this.items.containsKey(sku)) {
-                  // neu mon do co ton tai va so luong muon xoa > so luong san co thi remove mon hang
-                  //3. Romove item from items
-                  if (itemquantity == quantity) {
-                        this.items.remove(sku);
-                  } else {
-                        this.items.put(sku, itemquantity - quantity);
-                  }
-            }
-            if (this.items.isEmpty()) {    // neu doi tuong khong chua gi thi gan null de sau nay de check lai de hon
-                  this.items = null;
-            }
-      }
 }
