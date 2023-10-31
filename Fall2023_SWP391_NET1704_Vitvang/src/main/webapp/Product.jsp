@@ -103,7 +103,8 @@
                     <h1>Danh Mục Sản Phẩm</h1>
                     <div class="search">
                          <input type="text" placeholder="Search...">
-                         <button type="button">Search</button>
+                         <button type="button" style="background-color: blue; color:black;margin-left: 30px">Search</button>
+                          <button id="addBtn" style="background-color: greenyellow; color:black;margin-left: 30px">Add</button>
                     </div>
                </div>
 
@@ -197,9 +198,62 @@
                     </div>
                </div>
           </section>
+<div id="overlay" class="hidden" style=" position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  
+  display: none;"></div>
+                           <div id="popupForm" class="hidden">
 
-     </section>
-     <script src="../js/admin.js"></script>
+  <div class="wrapper">
+    <header>Add New Cage</header>
+    <form action="#">
+      <div class="dbl-field">
+        <div class="field" style="margin-bottom: 25px">
+             <input type="text" name="name" placeholder="CageID" readonly="">
+        <i class="fa-solid fa-feather"></i>
+        </div>
+        <div class="field">
+          <input type="text" name="email" placeholder="Cage name">
+      <i class="fa-solid fa-crow"></i>
+        </div>
+      </div>
+      <div class="dbl-field">
+        <div class="field" style="margin-bottom: 25px">
+          <input type="text" name="origin" placeholder="Origin">
+        <i class="fa-solid fa-globe"></i>    
+        </div>
+       <div class="message">
+        <textarea placeholder="Description" name="message"></textarea>
+<i class="fa-solid fa-pen"></i>
+      </div>
+            
+      </div>
+      
+      <div class="button-area" style=" 
+    margin: 25px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+">
+           <div> <button type="submit">Next</button> </div>
+           <div><button id="closeBtn" type="submit">Close</button> </div>
+        <span></span>
+      </div>
+    </form>
+  </div>
+
+
+</div>
+
+     
+                                        <script src="js/ProductDetail.js"></script>
 
 </body>
 </html>   

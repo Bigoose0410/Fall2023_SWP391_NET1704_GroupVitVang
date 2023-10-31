@@ -16,3 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
      });
 });
 
+// Mở form popup
+document.getElementById('addBtn').addEventListener('click', function() {
+  document.getElementById('popupForm').classList.remove('hidden');
+  document.getElementById('overlay').classList.remove('hidden');
+});
+
+// Đóng form popup
+document.getElementById('closeBtn').addEventListener('click', function() {
+  document.getElementById('popupForm').classList.add('hidden');  
+});
+const closeBtn = document.getElementById('closeBtn');
+
+closeBtn.addEventListener('click', () => {
+  document.getElementById('popupForm').classList.add('hidden');
+   document.getElementById('overlay').classList.add('hidden'); 
+});
+
+
