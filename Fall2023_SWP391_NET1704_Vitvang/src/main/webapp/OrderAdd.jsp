@@ -114,7 +114,7 @@
                     <form action="MainController" method="GET" novalidate="novalidate">
                          <fieldset id="info">
                               <legend>Order Info</legend>
-                             
+
                               <label for="customerinput">Customer Name</label>
                               <!--                               <input type="text" id="customerinput" name="customerid" required="required" 
                                                             placeholder="CustomerID" />-->
@@ -135,16 +135,6 @@
                                    </c:forEach>
                               </select>
 
-                              <c:if test="${not empty errors.getCustomerNotExistInDatabasErr()}">
-                                   <font color="red">
-                                   ${errors.getCustomerNotExistInDatabasErr()}
-                                   </font>
-                              </c:if>
-                              <c:if test="${not empty errors.getCustomerIdFormatErr()}">
-                                   <font color="red">
-                                   ${errors.getCustomerIdFormatErr()}
-                                   </font>
-                              </c:if>
                               <c:url value="SearchCustomer.jsp" var="searchCustomer">
                                    <c:param name="txtOrderID" value="${param.txtOrderID}" />
                               </c:url>
@@ -166,6 +156,16 @@
                               <c:if test="${not empty errors.getAddressLengthErr()}">
                                    <font color="red">
                                    ${errors.getAddressLengthErr()}
+                                   </font>
+                              </c:if> <br>
+                              <c:if test="${not empty errors.getAddressNumberErr()}">
+                                   <font color="red">
+                                   ${errors.getAddressNumberErr()}
+                                   </font>
+                              </c:if><br>
+                              <c:if test="${not empty errors.getAddressFormErr()}">
+                                   <font color="red">
+                                   ${errors.getAddressFormErr()}
                                    </font>
                               </c:if>
                          </fieldset>
@@ -197,11 +197,18 @@
 
                                         <td>
                                              <div class="input-container1">
+                                                  <br>
                                                   <input placeholder="Quantity" class="input-field" type="number" min="1"
-                                                         name="txtQuantity" value="">
-                                                  <c:if test="${not empty errors.getNullQuanityErr()}">
+                                                         name="txtQuantity" value="" oninput="this.value = Math.abs(this.value)"
+>                                                 
+                                                  <c:if test="${not empty errors.getQuantityValidErr()}">
                                                        <font color="red">
-                                                       ${errors.getNullQuanityErr()}
+                                                       ${errors.getQuantityValidErr()}
+                                                       </font>
+                                                  </c:if>
+                                                       <c:if test="${not empty errors.getNullQuantityErr()}">
+                                                       <font color="red">
+                                                       ${errors.getNullQuantityErr()}
                                                        </font>
                                                   </c:if>
                                                   <span class="input-highlight"></span>

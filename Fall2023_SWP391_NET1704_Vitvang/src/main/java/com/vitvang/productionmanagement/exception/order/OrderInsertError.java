@@ -12,18 +12,16 @@ import java.io.Serializable;
  */
 public class OrderInsertError implements Serializable{
       private String orderIdFormatErr;
-      private String customerIdFormatErr;
       private String AddressLengthErr;
-      private String endDateErr;
-      private String cageIdFormatErr;
-      private String CustomerNotExistInDatabasErr;
-      private String DuplicateOrderIDErr;
-
+      private String NullQuantityErr;
+      private String QuantityValidErr;
+      private String AddressNumberErr;
+      private String AddressFormErr;
+      
           
       
         public OrderInsertError() {
         }
-
 
       public String getOrderIdFormatErr() {
             return orderIdFormatErr;
@@ -31,14 +29,6 @@ public class OrderInsertError implements Serializable{
 
       public void setOrderIdFormatErr(String orderIdFormatErr) {
             this.orderIdFormatErr = orderIdFormatErr;
-      }
-
-      public String getCustomerIdFormatErr() {
-            return customerIdFormatErr;
-      }
-
-      public void setCustomerIdFormatErr(String customerIdFormatErr) {
-            this.customerIdFormatErr = customerIdFormatErr;
       }
 
       public String getAddressLengthErr() {
@@ -49,38 +39,39 @@ public class OrderInsertError implements Serializable{
             this.AddressLengthErr = AddressLengthErr;
       }
 
-
-      public String getEndDateErr() {
-            return endDateErr;
+      public String getNullQuantityErr() {
+            return NullQuantityErr;
       }
 
-      public void setEndDateErr(String endDateErr) {
-            this.endDateErr = endDateErr;
+      public void setNullQuantityErr(String NullQuantityErr) {
+            this.NullQuantityErr = NullQuantityErr;
       }
 
-      public String getCageIdFormatErr() {
-            return cageIdFormatErr;
+      public String getQuantityValidErr() {
+            return QuantityValidErr;
       }
 
-      public void setCageIdFormatErr(String cageIdFormatErr) {
-            this.cageIdFormatErr = cageIdFormatErr;
+      public void setQuantityValidErr(String QuantityValidErr) {
+            this.QuantityValidErr = QuantityValidErr;
       }
 
-      public String getCustomerNotExistInDatabasErr() {
-            return CustomerNotExistInDatabasErr;
+      public String getAddressNumberErr() {
+            return AddressNumberErr;
       }
 
-      public void setCustomerNotExistInDatabasErr(String CustomerNotExistInDatabasErr) {
-            this.CustomerNotExistInDatabasErr = CustomerNotExistInDatabasErr;
-      }
-      
-       public String getDuplicateOrderIDErr() {
-            return DuplicateOrderIDErr;
+      public void setAddressNumberErr(String AddressNumberErr) {
+            this.AddressNumberErr = AddressNumberErr;
       }
 
-      public void setDuplicateOrderIDErr(String DuplicateOrderIDErr) {
-            this.DuplicateOrderIDErr = DuplicateOrderIDErr;
+      public String getAddressFormErr() {
+            return AddressFormErr;
       }
 
+      public void setAddressFormErr(String AddressFormErr) {
+            this.AddressFormErr = AddressFormErr;
+      }
+        
+
+     
       
 }
