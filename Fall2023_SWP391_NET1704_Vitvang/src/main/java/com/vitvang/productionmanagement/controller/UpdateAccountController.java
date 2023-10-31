@@ -48,6 +48,9 @@ public class UpdateAccountController extends HttpServlet {
                   if (update) {
                         url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
                         request.setAttribute("MESSAGE", "Update successfully");
+                  } else {
+                        url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
+                        request.setAttribute("MESSAGE", "Update failed");
                   }
             } catch (SQLException e) {
                   e.printStackTrace();

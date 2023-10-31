@@ -57,7 +57,7 @@ public class MainController extends HttpServlet {
       private final String ManageAccountController = "ManageAccountController";
       private final String UpdateAccountController = "UpdateAccountController";
       private final String ViewAccountDetailController = "ViewAccountDetailController";
-      private final String CreateAccountController = "CreateAccountController.jsp";
+      private final String CreateAccountController = "CreateAccountController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {

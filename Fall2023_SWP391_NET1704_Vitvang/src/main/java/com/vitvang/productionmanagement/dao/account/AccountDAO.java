@@ -160,4 +160,52 @@ public class AccountDAO implements Serializable {
             return false;
       }
 
+      public boolean createNewAccount(AccountDTO account) throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  //1. Make connection
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+
+                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID) "
+                                + "VALUES (?, ?, ? , ?, ?, ?, ?, ?, ?, ?)";
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, account.getUserID());
+                        stm.setString(2, account.getName());
+                        stm.setString(3, account.getPhoneNumber());
+                        stm.setString(4, account.getSex());
+                        stm.setString(5, account.getAdress());
+                        stm.setDate(6, account.getBirthDate());
+                        stm.setString(7, account.getEmail());
+                        stm.setString(8, account.getUsername());
+                        stm.setString(9, account.getPassword());
+                        stm.setInt(10, account.getRoleID());
+
+                        //4. Excute query
+                        int row = stm.executeUpdate();
+                        //5. Process
+                        if (row > 0) {
+                              return true;
+                        }
+                        //end username and password are checked
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+
 }
