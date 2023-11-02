@@ -24,11 +24,12 @@ public class AccountDTO implements Serializable {
       private String Password;
       private int RoleID;
       private String RoleName;
+      private boolean UserStatus;
 
       public AccountDTO() {
       }
 
-      public AccountDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, String RoleName) {
+      public AccountDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, String RoleName, boolean UserStatus) {
             this.UserID = UserID;
             this.Name = Name;
             this.PhoneNumber = PhoneNumber;
@@ -40,6 +41,7 @@ public class AccountDTO implements Serializable {
             this.Password = Password;
             this.RoleID = RoleID;
             this.RoleName = RoleName;
+            this.UserStatus = UserStatus;
       }
 
       public String getUserID() {
@@ -133,6 +135,14 @@ public class AccountDTO implements Serializable {
 
       public void setRoleName(String RoleName) {
             this.RoleName = RoleName;
+      }
+
+      public boolean isUserStatus() {
+            return UserStatus;
+      }
+
+      public void setUserStatus(boolean UserStatus) {
+            this.UserStatus = UserStatus;
       }
 
 }

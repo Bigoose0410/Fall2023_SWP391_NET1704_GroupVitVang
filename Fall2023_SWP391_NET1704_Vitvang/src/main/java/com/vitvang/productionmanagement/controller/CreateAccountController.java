@@ -56,9 +56,12 @@ public class CreateAccountController extends HttpServlet {
                   String Username = request.getParameter("txtUsername");
                   String Password = request.getParameter("txtPassword");
                   String ConfirmPassword = request.getParameter("txtConfirmPassword");
+//                  String txtUserStatus = request.getParameter("txtUserStatus");
 
                   Date BirthDate = Date.valueOf(txtBirthDate);
                   int RoleID = Integer.parseInt(txtRoleID);
+//                  Boolean UserStatus = Boolean.parseBoolean("txtUserStatus");
+                  
                   String url = AdminCreateAccount;
                   boolean foundErr = false;
                   UserCreateError error = new UserCreateError();
@@ -108,7 +111,7 @@ public class CreateAccountController extends HttpServlet {
                               AccountDAO accountdao = new AccountDAO();
                               // 2. call method
                               Password = userdao.EncodePass(Password);
-                              AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, Username);
+                              AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, Username, true);
                               boolean result = accountdao.createNewAccount(account);
                               if (result) {
 //                                    HttpSession session = request.getSession();

@@ -5,7 +5,6 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
-import com.vitvang.productionmanagement.model.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,37 +13,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ManageAccountController", urlPatterns = {"/ManageAccountController"})
-public class ManageAccountController extends HttpServlet {
-
-      private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
+@WebServlet(name = "DeleteAccountController", urlPatterns = {"/DeleteAccountController"})
+public class DeleteAccountController extends HttpServlet {
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException, SQLException, NamingException {
+              throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "NewLogin.jsp";
             try {
+                  /* TODO output your page here. You may use following sample code. */
+                  String Username = request.getParameter("txtUsername");
                   AccountDAO dao = new AccountDAO();
-                  dao.showListAccount();
-                  List<AccountDTO> list = dao.getListAccount();
-//                  for (AccountDTO accountDTO : list) {
-//                        if (accountDTO.isUserStatus()) {
-//                              request.setAttribute("USER_STATUS", "True");
-//                        }
-//                  }
-                  request.setAttribute("ACCOUNT_RESULT", list);
-                  url = AdminCustomerAccount;
+                  boolean result = dao.deleteAccount(Username);
+                  if (result) {
+                        url = "MainController?btAction=Manage Account";
+                  }
             } catch (SQLException e) {
-                  log("LOGINSERVLET _ SQL" + e.getMessage());
+                  e.printStackTrace();
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
@@ -62,13 +52,7 @@ public class ManageAccountController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            try {
-                  processRequest(request, response);
-            } catch (SQLException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NamingException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            processRequest(request, response);
       }
 
       /**
@@ -82,13 +66,7 @@ public class ManageAccountController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            try {
-                  processRequest(request, response);
-            } catch (SQLException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NamingException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            processRequest(request, response);
       }
 
       /**

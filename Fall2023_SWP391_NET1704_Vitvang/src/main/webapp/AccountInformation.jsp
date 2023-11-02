@@ -49,13 +49,13 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
-                         <!--                         <li><a href="MainController?btAction=Order">
-                                                            <i class="uil uil-bill"></i>
-                                                            <span class="link-name">Order</span>
-                                                       </a></li>-->
-                         <li><a href="#">
+                         <li><a href="AdminHomePage.jsp">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Home</span>
+                              </a></li>
+                         <li><a href="MainController?btAction=Manage Account">
                                    <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
+                                   <span class="link-name">Manage Account</span>
                               </a></li>
                          <!--                         <li><a href="">
                                                             <i class="uil uil-grin"></i>
@@ -85,16 +85,16 @@
                                    <span class="link-name">Logout</span>
                               </a></li>
 
-                              <!--                         <li class="mode">
-                                                            <a href="#">
-                                                                 <i class="uil uil-moon"></i>
-                                                                 <span class="link-name">Dark Mode</span>
-                                                            </a>
-                              
-                                                            <div class="mode-toggle">
-                                                                 <span class="switch"></span>
-                                                            </div>
-                                                       </li>-->
+                         <!--                         <li class="mode">
+                                                       <a href="#">
+                                                            <i class="uil uil-moon"></i>
+                                                            <span class="link-name">Dark Mode</span>
+                                                       </a>
+                         
+                                                       <div class="mode-toggle">
+                                                            <span class="switch"></span>
+                                                       </div>
+                                                  </li>-->
                     </ul>
                </div>
           </nav>
@@ -105,8 +105,6 @@
                               <h2>Information</h2>
                               <p>Manage profile information for account security</p>
                          </div>
-
-                         <button type="button" id="deleteButton">Delete</button>
 
                     </div>
                     <c:forEach var="dto" items="${result}">
@@ -152,6 +150,7 @@
                                    </div>
                                    <div class="form-row1">
                                         <button type="submit" id="updateButton" value="UpdateAccount" name="btAction">Update</button>
+                                        <button type="submit" id="deleteButton" value="DeleteAccount" name="btAction">Delete</button>
                                    </div>
                               </form>
                          </div>
