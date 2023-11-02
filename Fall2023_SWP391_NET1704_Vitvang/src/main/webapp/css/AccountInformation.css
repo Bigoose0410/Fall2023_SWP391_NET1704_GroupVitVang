@@ -2,10 +2,6 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
-/* 
-    Created on : Oct 27, 2023, 9:39:26 PM
-    Author     : Nguyen Ba Tung
-*/
 * {
      margin: 0;
      padding: 0;
@@ -105,6 +101,18 @@ nav {
      padding: 10px 0;
 }
 
+
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
 
 nav.close {
      width: 73px;
@@ -279,199 +287,142 @@ body.dark nav {
 }
 
 /*Dashboard*/
-h1 {
-     text-align: center;
-     font-size: xx-large;
-}
-
-.header-row h1,
-.header-row form {
-     display: inline-block;
-     vertical-align: middle; /* Optional: Aligns elements vertically */
-     margin-right: 10px; /* Adjust as needed for spacing between elements */
-}
-
-.header-row {
-     text-align: center;
-}
-
-.section {
-     border: 1px solid #ccc;
+/*form*/
+.form {
+     width: 95%;
+     margin: 0 auto;
      padding: 20px;
-     margin: 10px;
-     border-radius: 10px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     background-color: #f9f9f9;
+     margin-top: 50px;
+}
+
+.info_form {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     border-bottom: 1px solid #ccc;
+     padding-bottom: 10px; /* Add padding to maintain spacing */
+}
+
+.info_form h2 {
+     font-size: 1.5em;
+     margin: 0;
+}
+
+.info_form p {
+     margin: 10px 0px;
+     font-size: 1em;
+     color: #777;
+}
+
+#deleteButton {
+     background-color: #ff0000;
+     color: #fff;
+     border: none;
+     padding: 10px 20px;
+     font-size: 16px;
+     cursor: pointer;
+     border-radius: 5px;
+}
+
+/* Add some hover effect to the button */
+#deleteButton:hover {
+     background-color: #cc0000;
+}
+/*form1*/
+.info_form1 {
+     max-width: 1050px;
+     margin: 0 auto;
+     padding: 20px;
+     border-radius: 5px;
      background-color: #f9f9f9;
 }
 
-.info {
+.form-row {
      display: flex;
      align-items: center;
-}
-
-.info img {
-     width: 33%;
-     max-width: 500px;
-     border-radius: 5px;
-     margin: 0px 60px;
-}
-
-.info-details {
-     flex-grow: 1;
-}
-
-.info-item {
-     margin-left: 40px;
      margin-bottom: 10px;
-     font-size: 40px;
-     font-family: "utm";
-     color: gray ;
 }
 
-.info-details span {
-     color: #333;
-     font-family: "roboto";
+.form-row label {
+     flex: 1;
+     font-size: 1.4em;
+     margin: 10px 10px;
 }
 
-.toggle-button {
-     background-color: #28a745;
-     color: #fff;
-     border: none;
-     border-radius: 5px;
-     padding: 5px 10px;
-     cursor: pointer;
-     font-size: 16px;
-     margin-top: 5px;
-}
-
-.toggle-button:hover {
-     background-color: #28a745;
-     color: #fff;
-}
-
-.toggle-button1 {
-     background-color: #28a745;
-     color: #fff;
-     border: none;
-     border-radius: 5px;
-     padding: 5px 10px;
-     cursor: pointer;
-     font-size: 16px;
-     margin-top: 5px;
-}
-
-.toggle-button1:hover {
-     background-color: #28a745;
-     color: #fff;
-}
-
-/*Material table*/
-.table-container {
-     overflow-x: auto;
-     border-radius: 10px;
-     border: 1px solid black;
-}
-
-.table-container table {
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row input[type="email"],
+.form-row input[type="tel"] {
+     flex: 2;
      width: 100%;
-     border-collapse: collapse;
+     padding: 8px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     box-sizing: border-box;
 }
 
-.table-container th,
-.table-container td {
-     padding: 10px;
+#phone {
+     margin-right: 605px;
+}
+
+#email,
+#password,
+#username,
+#address {
+     margin-right: 100px;
+}
+
+.form-row i {
+     font-size: 1.3em;
+     margin-right: 82%;
+}
+
+
+/* Optional: Style the labels for male and female */
+.form-row label[for="male"],
+.form-row label[for="female"] {
+     font-weight: bold;
+}
+
+/*button update,delete*/
+.form-row1 {
      text-align: center;
 }
 
-.table-container th {
-     color: white;
-     background-color: #2193b0;
-}
-
-.table-container tbody tr:nth-child(even) {
-     background-color: #e6fcfa;
-}
-
-.table-container tbody tr:hover {
-     background-color: #ddd;
-}
-
-/*Design Process table*/
-.table-container1 {
-     overflow-x: auto;
-     border-radius: 10px;
-     border: 1px solid black;
-}
-
-.table-container1 table {
-     width: 100%;
-     border-collapse: collapse;
-}
-
-.table-container1 th,
-.table-container1 td {
-     padding: 10px;
-     text-align: center;
-}
-
-.table-container1 th {
-     color: white;
-     background-color: #2193b0;
-}
-
-.table-container1 tbody tr:nth-child(even) {
-     background-color: #e6fcfa;
-}
-
-.table-container1 tbody tr:hover {
-     background-color: #ddd;
-}
-
-/*Show table*/
-
-.table-container {
-     margin: 10px 0px;
-}
-
-.table-container1 {
-     margin: 10px 0px;
-}
-
-/*button modify*/
-form {
-     display: inline-block; /* Ensures form and button are on the same line */
-     margin-bottom: 10px; /* Adjust as needed for spacing */
-}
-
-/*button modify*/
-button {
-     background: none;
-     border: none;
+.form-row1 button {
+     padding: 10px 20px;
+     margin: 0 10px;
+     font-size: 1em;
      cursor: pointer;
-     font-size: 24px;
-     color: #757575;
-     /* Adjust the color as needed */
-     margin-top: 10px;
 }
 
-button:focus {
-     outline: none;
-}
-
-button:hover {
-     color: blue;
-     /* Change color on hover if desired */
-}
-
-button {
+#updateButton {
+     background-color: #0E4BF1;
+     color: white;
      border: none;
+     border-radius: 5px;
 }
 
-
-.show-table {
-     display: block !important;
+#updateButton:hover {
+     background-color: #153dac;
 }
 
-.material_table,
-.process_table {
-     margin-top: 20px;
+.form-row2 {
+     display: flex;
+     align-items: center;
+     margin-bottom: 10px;
+}
+
+.form-row2 label {
+     flex: 1;
+     font-size: 1.4em;
+     margin: 10px 10px;
+}
+
+.form-row2 i {
+     font-size: 1em;
+     margin-right: 32%;
 }

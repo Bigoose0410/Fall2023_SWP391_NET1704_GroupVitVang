@@ -3,9 +3,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
 /* 
-    Created on : Oct 30, 2023, 2:14:00 PM
-    Author     : Nguyen Ba Tung
+    Created on : Oct 31, 2023, 2:24:17 PM
+    Author     : Admin
 */
+
 * {
      margin: 0;
      padding: 0;
@@ -415,3 +416,5 @@ button:hover {
 #birthday {
      margin-right: 695px;
 }
+
+

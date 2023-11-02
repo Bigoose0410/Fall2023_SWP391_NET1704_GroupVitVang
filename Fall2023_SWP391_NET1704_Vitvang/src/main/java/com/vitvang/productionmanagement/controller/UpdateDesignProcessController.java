@@ -5,6 +5,7 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.exception.processs.DesignProcessErr;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -41,8 +42,17 @@ public class UpdateDesignProcessController extends HttpServlet {
             String TimeProcess = request.getParameter("txtTimeProcess");
             String Description = request.getParameter("txtDescription");
             String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
+            DesignProcessErr error = new DesignProcessErr();
+            boolean foundErr = false;
             String url = EDITDESIGN_PAGE;
             try {
+                  if(Description.length()< 5 || Description.length() > 251){
+                        error.setDescriptionLengthErr("Your description from 6-251 chars please");
+                        foundErr = true;
+                  }
+                  if(foundErr){
+                        request.setAttribute("UPDATE_DESIGN_ERR", error);
+                  } else {
                   int timeprocess;
                   timeprocess = (TimeProcess != null) ? Integer.parseInt(TimeProcess) : 1;
                   int numemployee;
@@ -50,6 +60,7 @@ public class UpdateDesignProcessController extends HttpServlet {
                   
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   designdao.updateDesign(Phrase, CageID, timeprocess, Description, numemployee);
+                  }
                   url = "MainController"
                           + "?btAction=EditDesign"
                           + "&txtCageID="+CageID;

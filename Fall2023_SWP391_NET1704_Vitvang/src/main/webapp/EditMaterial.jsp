@@ -29,6 +29,11 @@
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
+          <c:url var="DesignPage" value="MainController">
+               <c:param value="EditDesign" name="btAction"/>
+               <c:param value="${param.txtCageID}" name="txtCageID"/>
+               <c:param value="${param.txtCageName}" name="txtCageName"/>
+          </c:url>
           <c:set var="ListMaterial" value="${requestScope.CAGE_MATERIAL}"></c:set>
           <c:set var="materialPrice" value="${requestScope.MATERIAL_PRICE}"></c:set>
           <c:set var="materialnotuse" value="${requestScope.MATERIAL_NOT_USE}"></c:set>
@@ -101,56 +106,69 @@
           <section class="dashboard">
                <h1>Material</h1>
                <div class="table-container">
+                    <h3>${param.txtCageName}</h3>
+
                     <table>
                          <thead>
                               <tr>
                                    <th>No.</th>
                                    <th>MaterialID</th>
-                                   <th>Name</th>
+                                   <th>Name / Unit</th>
                                    <th>Quantity</th>
                                    <th>Origin</th>
                                    <th>Price/Unit</th>
-                                   <th>Unit</th>
                                    <th>Edit</th>
                               </tr>
                          </thead>
 
                          <tbody>
-                              <c:forEach var="dto" items="" varStatus="counter">
+                              <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
                               <div action="MainController">
                                    <tr>
-                                        <td></td>
-
                                         <td>
-                                             <input type="hidden" name="txtMaterialID" value="" />
+                                             ${counter.count}
                                         </td>
 
-                                        <td></td>
+                                        <td>
+                                             ${dto.getMaterialID()}
+                                             <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
+                                        </td>
+
+                                        <td>
+                                             ${dto.getName()} / ${dto.getUnit()}
+                                        </td>
 
                                         <td>
                                              <div class="input-container">
-                                                  <input placeholder="Quantity" class="input-field" type="number" value="" min="0"
-                                                         max="100" name="txtQuantity" value="">
+                                                  <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+                                                         name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100">
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
 
-                                        <td></td>
+                                        <td>
+                                             ${dto.getOrigin()}
+                                        </td>
 
-                                        <td></td>
+                                        <td>
+                                             ${dto.getPrice()}
+                                        </td>
 
-                                        <td></td>
+
 
                                         <td class="edit_button">
                                              <div class="update_button">
-                                                  <button type="submit" value="updateDesign" name="btAction">
+                                                  <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                  <button type="submit" value="UpdateMaterialofCage" name="btAction">
+
                                                        <i class="fa fa-pencil-square"></i>
                                                   </button>
                                              </div>
                                              <div class="separator">/</div>
                                              <div class="delete_button">
-                                                  <button type="submit" value="deleteDesign" name="btAction">
-                                                       <i class="fa fa-trash"></i>
+                                                  <button type="submit" value="DeleteMaterialofCage" name="btAction">
+                                     <i class="fa fa-trash"></i>
                                                   </button>
                                              </div>
                                         </td>
@@ -173,7 +191,8 @@
                     </select>
                </form>
 
-               <c:if test="">
+               <c:if test="${not empty materialwilladd}">
+
                     <div class="material_form1">
                          <form action="MainController">
                               <table class="material_form">
@@ -182,7 +201,9 @@
                                         <td>
                                              <label for="MaterialID_name">MaterialID :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" value="" readonly>
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getMaterialID()}" readonly>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -190,7 +211,8 @@
                                         <td>
                                              <label for="Name">Name :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" value="" readonly>
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getName()}" readonly>
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -198,7 +220,9 @@
                                         <td>
                                              <label for="Origin_name">Origin :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" value="" readonly>
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getOrigin()}" readonly>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -208,7 +232,9 @@
                                         <td>
                                              <label for="Price_name">Price :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" value="" readonly>
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getPrice()}" readonly>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -216,7 +242,8 @@
                                         <td>
                                              <label for="Unit_name">Unit :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" value="" readonly>
+                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                         value="${materialwilladd.getUnit()}" readonly>
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -224,9 +251,10 @@
                                         <td>
                                              <label for="Quantity_name">Quantity :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="number" name="txtNumberOfEmployee" value="" min="0"
-                                                         max="10">
-                                                  <span class="input-highlight"></span>
+                                                  <input class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+                                                         name="txtNumberOfEmployee" value="0" min="0" max="100">
+
+                                     <span class="input-highlight"></span>
                                              </div>
                                         </td>
                                    </tr>
@@ -234,10 +262,12 @@
                               <button class="submit_button" type="submit">Submit</button>
                          </form>
                     </div>
-
                </c:if>
                <div class="button_2">
-                    <a href="EditDesign.html"><button class="next_button"><i class="fas fa-arrow-right"></i></button></a>
+                    
+                    <a href="${DesignPage}"><button class="next_button"><i class="fas fa-arrow-right"></i></button></a>
+
+
                </div>
           </section>
      </body>

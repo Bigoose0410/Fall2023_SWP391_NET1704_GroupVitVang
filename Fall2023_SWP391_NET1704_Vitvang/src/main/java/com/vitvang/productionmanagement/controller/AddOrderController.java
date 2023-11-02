@@ -8,7 +8,6 @@ import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderInsertError;
 import com.vitvang.productionmanagement.model.CageDTO;
-import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -48,8 +47,7 @@ public class AddOrderController extends HttpServlet {
                   }
             int total = Integer.parseInt(totalprice);
             String Address = request.getParameter("txtAddress");
-            String quantity = request.getParameter("txtQuantity");
-            int quantityCheck = Integer.parseInt(quantity);
+            
             String[] CageID = request.getParameterValues("txtOrderCageID");
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
@@ -60,44 +58,39 @@ public class AddOrderController extends HttpServlet {
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO dao = new OrderDAO();
                  
-                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
-                        error.setAddressNumberErr("Pls type again Address, with have at least "
-                                + "one char and one number");
-                        foundErr = true;
-                  }
+//                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
+//                        error.setAddressNumberErr("Pls type again Address, with have at least "
+//                                + "one char and one number");
+//                        foundErr = true;
+//                  }
                   if (Address.trim().length() < 6) {
                         error.setAddressLengthErr("Pls type again, Address too short, maybe something wrong!!");
-                        foundErr = false;
-                  }
-
-                  if (!checkFormat(Address, ADDRESS_FORM_PATTERN, true)) {
-                        error.setAddressFormErr("Pls type again Address, e.g: 123 Hiệp Hòa, Biên Hòa Đồng Nai ");
-                        foundErr = true;
-                  }
-                  if (!checkFormat(quantity, QUANTITY_PATTERN, true)) {
-                        error.setNullQuantityErr("PLs type again Quantity!!!");
-                        foundErr = true;
-                  }
-                  if (quantityCheck < 100 || quantityCheck > 100000) {
-                        error.setQuantityValidErr("Pls type again quantity > 100 and < 100000");
                         foundErr = true;
                   }
 
+//                  if (!checkFormat(Address, ADDRESS_FORM_PATTERN, true)) {
+//                        error.setAddressFormErr("Pls type again Address, e.g: 123 Hiệp Hòa, Biên Hòa Đồng Nai ");
+//                        foundErr = true;
+//                  }                
+                  if (cart == null) {
+                        error.setEmptyCartErr("Your cart is empty, Add more product please! ");
+                        foundErr = true;
+                  }                
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
-                        url = "MainController" + "?btAction=New Order";
+                        url = "MainController?btAction=New Order";
                   } else {
                         boolean result = dao.insertOrder(now, total, Address);
                         dao.addUserOrder(customerId);
                         int quantityTmp = 1;
                         for (CageDTO value : cart.getProductItems().values()) {
                               dao.addOrderDetail(value.getCageID(), value.getQuantityOrder());
-
                         }
                         if (result) {
+                            cart = null ;
                               url = "MainController"
                                       + "?btAction=Order";
-
+                              session.setAttribute("CART", cart);
                         }
                   }
             } catch (SQLException ex) {

@@ -4,60 +4,44 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
-import com.vitvang.productionmanagement.model.DesignForProcessDTO;
-import jakarta.servlet.RequestDispatcher;
+import com.vitvang.productionmanagement.dao.account.AccountDAO;
+import com.vitvang.productionmanagement.model.AccountDTO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
-public class EditDesignController extends HttpServlet {
-      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
+@WebServlet(name = "ManageAccountController", urlPatterns = {"/ManageAccountController"})
+public class ManageAccountController extends HttpServlet {
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+              throws ServletException, IOException, SQLException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
-            String cageID = request.getParameter("txtCageID");
-            String url = "";
-           try {
-                  //1. new DAO
-                  DesignForProcessDAO designdao = new DesignForProcessDAO();
-                  //2. Call method
-                  // get design
-                  designdao.ViewDesignForProcess(cageID);
-                  //3. process result     
-                  List<DesignForProcessDTO> result1 = designdao.getDesignProcessList();
-
-                  request.setAttribute("DESIGN_PROCESS", result1);
-                  url = DESIGN_PROCESS_PAGE;
-
-            } catch (SQLException ex) {
-                  String msg = ex.getMessage();
-                  log("EditDesignController SQL" + msg);
-            } catch (NamingException ex) {
-                  log("EditDesignController _ NAMING " + ex.getMessage());
+            String url = "NewLogin.jsp";
+            try {
+                  AccountDAO dao = new AccountDAO();
+                  dao.showListAccount();
+                  List<AccountDTO> list = dao.getListAccount();
+                  request.setAttribute("ACCOUNT_RESULT", list);
+                  url = AdminCustomerAccount;
+            } catch (SQLException e) {
+                  log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+                  request.getRequestDispatcher(url).forward(request, response);
             }
       }
 
@@ -73,7 +57,13 @@ public class EditDesignController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (SQLException ex) {
+                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NamingException ex) {
+                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -87,7 +77,13 @@ public class EditDesignController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (SQLException ex) {
+                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NamingException ex) {
+                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**

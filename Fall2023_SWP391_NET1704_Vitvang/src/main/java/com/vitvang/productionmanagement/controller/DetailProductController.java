@@ -4,10 +4,11 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.model.CageMaterialDTO;
-import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.CageMaterialDTO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,6 +48,7 @@ public class DetailProductController extends HttpServlet {
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   
                   //2. Call method
+                  CageDTO cage = cagedao.GetCageByID(cageID);
                   // get material list
                   cagedao.ViewCageMaterial2(cageID);
                   // get design
@@ -58,6 +60,7 @@ public class DetailProductController extends HttpServlet {
                   List<DesignForProcessDTO> result3 = designdao.getDesignProcessList();
                   int processPrice = designdao.TotalPriceProcess();
                   request.setAttribute("CAGE_MATERIAL", result1);
+                  request.setAttribute("CAGE_DTO", cage);
                   request.setAttribute("DESIGN_PROCESS", result3);
                   request.setAttribute("MATERIAL_PRICE", materialPirce);
                   request.setAttribute("PROCESS_PRICE", processPrice);

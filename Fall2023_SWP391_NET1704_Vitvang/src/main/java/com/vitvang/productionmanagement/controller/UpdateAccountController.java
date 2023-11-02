@@ -4,65 +4,56 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.dao.cage.CageDAO;
-import com.vitvang.productionmanagement.dao.cart.CartObj;
-import com.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
-import com.vitvang.productionmanagement.model.CageDTO;
-import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.model.AccountDTO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import javax.naming.NamingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ListCageController", urlPatterns = {"/ListCageController"})
-public class ListCageController extends HttpServlet {
-
-      private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
+@WebServlet(name = "UpdateAccountController", urlPatterns = {"/UpdateAccountController"})
+public class UpdateAccountController extends HttpServlet {
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+              throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "";
+            String url = "NewLogin.jsp";
+            String UserID = request.getParameter("txtUserID");
+            String Username = request.getParameter("txtUsername");
+            String Password = request.getParameter("txtPassword");
+            String Email = request.getParameter("txtEmail");
+            String Address = request.getParameter("txtAddress");
+            String PhoneNumber = request.getParameter("txtPhoneNumber");
+
             try {
-                  HttpSession session = request.getSession();
-                  CartObj cart = (CartObj) session.getAttribute("CART");
-                  List<CageDTO> cageCart = new ArrayList<CageDTO>();
-                  if (cart != null) {
-                        for (CageDTO cage : cart.getProductItems().values()) {
-                              cageCart.add(cage);
-                        }
-                  }
-                  //1. call DAO
-                  CageDAO dao = new CageDAO();
                   UserDAO userdao = new UserDAO();
-                  OrderDAO orderdao = new OrderDAO();
-                  //1.2. call method
-                  dao.AllProduction();
-                  userdao.getAllCustomer();
-                  orderdao.getListOrders();
-                  // process result
-                  List<CageDTO> result1 = dao.getListCage();
-                  List<UserDTO> result2 = userdao.getListUser();
-                  session.setAttribute("CAGE_LIST", result1);
-                  session.setAttribute("CUSTOMER_LIST", result2);
-                  request.setAttribute("CARTLIST", cageCart);
-                  url = ADD_ORDER_PAGE;
+                  AccountDAO dao = new AccountDAO();
+                  dao.ViewAccountDetail(UserID);
+                  List<AccountDTO> detail = dao.getListAccount();
+                  request.setAttribute("ACCOUNT_DETAIL", detail);
+                  Password = userdao.EncodePass(Password);
+                  boolean update = dao.UpdateAccount(UserID, Username, Password, Email, Address, PhoneNumber);
+                  if (update) {
+                        url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
+                        request.setAttribute("MESSAGE", "Update successfully");
+                  } else {
+                        url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
+                        request.setAttribute("MESSAGE", "Update failed");
+                  }
             } catch (SQLException e) {
-                  log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
-            } catch (NamingException e) {
-                  log("SEARCHCAGESERVLET _ SQL" + e.getMessage());
+                  e.printStackTrace();
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
@@ -80,7 +71,11 @@ public class ListCageController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (Exception ex) {
+                  Logger.getLogger(UpdateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -94,7 +89,11 @@ public class ListCageController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (Exception ex) {
+                  Logger.getLogger(UpdateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -106,4 +105,5 @@ public class ListCageController extends HttpServlet {
       public String getServletInfo() {
             return "Short description";
       }// </editor-fold>
+
 }

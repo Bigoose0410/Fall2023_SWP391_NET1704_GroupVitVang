@@ -200,17 +200,12 @@
                                                   <br>
                                                   <input placeholder="Quantity" class="input-field" type="number" min="1"
                                                          name="txtQuantity" value="" oninput="this.value = Math.abs(this.value)"
->                                                 
+                                                         >                                                 
                                                   <c:if test="${not empty errors.getQuantityValidErr()}">
                                                        <font color="red">
                                                        ${errors.getQuantityValidErr()}
                                                        </font>
-                                                  </c:if>
-                                                       <c:if test="${not empty errors.getNullQuantityErr()}">
-                                                       <font color="red">
-                                                       ${errors.getNullQuantityErr()}
-                                                       </font>
-                                                  </c:if>
+                                                  </c:if>                                                 
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -222,6 +217,11 @@
                                         </td>
                                    </tr>
                                    <!-- Add more rows as needed -->
+                                   <c:if test="${not empty errors.getEmptyCartErr()}">
+                                        <font color="red">
+                                        ${errors.getEmptyCartErr()}
+                                        </font>
+                                   </c:if>
                               </table>
 
                               <c:set var="cart" value="${sessionScope.CART}" />
