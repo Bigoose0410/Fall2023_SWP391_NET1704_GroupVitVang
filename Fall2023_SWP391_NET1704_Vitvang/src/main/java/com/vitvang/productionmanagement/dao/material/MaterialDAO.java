@@ -19,7 +19,67 @@ import javax.naming.NamingException;
  * @author Admin
  */
 public class MaterialDAO {
+      
+       List<CageMaterialDTO> AllMaterial;
 
+      public List<CageMaterialDTO> getAllMaterial() {
+            return AllMaterial;
+      }
+      
+      // get material from list to add to cart
+       public CageMaterialDTO getMaterialByID(String ID) {
+            for (CageMaterialDTO cageDTO : getAllMaterial()) {
+                  if (ID.equals(cageDTO.getCageID())) {
+                        return cageDTO;
+                  }
+            }
+            return null;
+      }
+       
+       public CageMaterialDTO AllMaterial()
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            CageMaterialDTO result = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+
+                        String sql = "SELECT * "
+                                + "FROM   Material d ";
+                        stm = con.prepareStatement(sql);                   
+                        rs = stm.executeQuery();
+
+                        while (rs.next()) {
+                              String MaterialID = rs.getString("MaterialID");
+                              String Name = rs.getString("Name");
+                              String Origin = rs.getString("Origin");
+                              int Price = rs.getInt("Price");
+                              String Unit = rs.getString("Unit");
+                              // Call DTO
+                              CageMaterialDTO Material = new CageMaterialDTO(MaterialID, Name, Origin, Price, Unit);
+                              if (this.AllMaterial == null) {
+                                    this.AllMaterial = new ArrayList<CageMaterialDTO>();
+                              }
+                              this.AllMaterial.add(Material);
+                        }
+                  }
+                  return result;
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+      }
+      
       public boolean AddMaterialBuild(String CageID, String MaterialID, int Quanity)
               throws SQLException, NamingException {
             Connection con = null;
@@ -250,5 +310,6 @@ public class MaterialDAO {
                   }
             }
       }
+      
 
 }
