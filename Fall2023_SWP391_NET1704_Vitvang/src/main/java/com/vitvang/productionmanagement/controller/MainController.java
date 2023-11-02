@@ -34,6 +34,7 @@ public class MainController extends HttpServlet {
       private final String DetailProductController = "DetailProductController";
       private final String EditDesignController = "EditDesignController";
       private final String EditMaterialController = "EditMaterialController";
+      private final String ShowAddCageFormController = "ShowAddCageFormController";
       //create-add
       private final String AddOrderController = "AddOrderController";
       private final String AddItemToCartController = "AddItemToCartController";
@@ -41,6 +42,7 @@ public class MainController extends HttpServlet {
       private final String CreateUserController = "CreateUserController";
       private final String AddMaterialToCageController = "AddMaterialToCageController";
       private final String AddAutoProcessController = "ProductionProcessController";
+      private final String AddCageController = "AddCageController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
       private final String UpdateDesignProcessController = "UpdateDesignProcessController";
@@ -128,6 +130,10 @@ public class MainController extends HttpServlet {
                         url = UpdateStatusProcessController;
                   } else if (button.equals("UpdateEmployee")) {
                         url = UpdateEmpProcessController;
+                  } else if (button.equals("AddNewCage")) {
+                        url = AddCageController;
+                  } else if (button.equals("FormAddCage")) {
+                        url = ShowAddCageFormController;
                   } else if (button.equals("Manage Account")) {
                         url = ManageAccountController;
                   } else if (button.equals("ViewAccountDetail")) {

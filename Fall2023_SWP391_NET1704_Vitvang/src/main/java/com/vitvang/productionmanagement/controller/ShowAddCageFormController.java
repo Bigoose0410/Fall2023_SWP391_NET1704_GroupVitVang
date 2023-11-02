@@ -1,12 +1,9 @@
-package com.vitvang.productionmanagement.controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
-import com.vitvang.productionmanagement.exception.processs.DesignProcessErr;
-import com.vitvang.productionmanagement.model.DesignForProcessDTO;
+package com.vitvang.productionmanagement.controller;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,18 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(urlPatterns = {"/AddDesignProcess"})
-public class AddDesignProcess extends HttpServlet {
-
-      private final String EDITDESIGN_PAGE = "EditDeisgn.jsp";
-      private final String STEP_PATTERN = "P\\d{3}";
+@WebServlet(name = "ShowAddCageFormController", urlPatterns = {"/ShowAddCageFormController"})
+public class ShowAddCageFormController extends HttpServlet {
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,46 +30,18 @@ public class AddDesignProcess extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String Phrase = request.getParameter("txtPhrase");
-            String CageID = request.getParameter("txtCageID");
-            String TimeProcess = request.getParameter("txtTimeProcess");
-            String Description = request.getParameter("txtDescription");
-            String CompletionCage = request.getParameter("txtCompletionCage");
-            DesignProcessErr error = new DesignProcessErr();
-            boolean foundErr = false;
-            String url = EDITDESIGN_PAGE;
+            String status = request.getParameter("txtFormStatus");
+            String url = "MainController?btAction=SearchCage";
             try {
-                   if(Description.length()< 5 || Description.length() > 251){
-                        error.setDescriptionLengthErr("Your description from 6-251 chars please");
-                        foundErr = true;
+                  if(status.equals("open") || status.equals("error")){
+                  request.setAttribute("SHOW_FORM_ADD", "ShowForm");
                   }
-                  if(foundErr){
-                        request.setAttribute("UPDATE_DESIGN_ERR", error);
-                  } else {
-                        
-                  int timeprocess;
-                  timeprocess = (TimeProcess != null) ? Integer.parseInt(TimeProcess) : 1;
-                  int numcompletetion;
-                  numcompletetion = (CompletionCage != null) ? Integer.parseInt(CompletionCage) : 1;
-
-                  DesignForProcessDAO designdao = new DesignForProcessDAO();
-                  DesignForProcessDTO design = new DesignForProcessDTO(Phrase, CageID, timeprocess, Description, 1, numcompletetion);
-                  designdao.AddDesignPrcess(design);
-                  }
-                  url = "MainController"
-                          + "?btAction=EditDesign"
-                          + "&txtCageID="+CageID;
-            } catch (SQLException ex) {
-                  log("AddDesignProcess _ SQL " + ex.getMessage());
-                  error.setDuplicateIDErr("Not accept Null quantity!!!");
-                  request.setAttribute("UPDATE_DESIGN_ERR", error);
-            } catch (NamingException ex) {
-                  log("AddDesignProcess _ Naming " + ex.getMessage());
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
             }
       }
+
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
       /**
        * Handles the HTTP <code>GET</code> method.
