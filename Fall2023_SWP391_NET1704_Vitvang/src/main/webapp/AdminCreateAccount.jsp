@@ -119,63 +119,77 @@
                                    <div class="form-row">
                                         <label for="name">Name: </label>
                                         <input type="text" id="name" name="txtName" value="" placeholder="Name" required="">
-                                   <c:if test="${not empty err.getNameLengthErr()}"></c:if>
+                                   <c:if test="${not empty err.getNameLengthErr()}">
+                                        <h5>${err.getNameLengthErr()}</h5>
+                                   </c:if>
 
-                                        <label for="email">Email:</label>
-                                        <input type="email" id="email" name="txtEmail" value="" placeholder="Email" required="">
-                                   <c:if test="${not empty err.getGmailTypeErr()}"></c:if>
-                                   </div>
+                                   <label for="email">Email:</label>
+                                   <input type="email" id="email" name="txtEmail" value="" placeholder="Email" required="">
+                                   <c:if test="${not empty err.getGmailTypeErr()}">
+                                        <h5>${err.getGmailTypeErr()}</h5>
+                                   </c:if>
+                              </div>
 
-                                   <div class="form-row">
-                                        <label for="phone">Phone Number: </label>
-                                        <input type="tel" id="phone" name="txtPhoneNumber" value="" placeholder="Phone Number" required="">
+                              <div class="form-row">
+                                   <label for="phone">Phone Number: </label>
+                                   <input type="tel" id="phone" name="txtPhoneNumber" value="" placeholder="Phone Number" required="">
                                    <c:if test="${not empty err.getPhoneNumberTypeErr()}"></c:if>
 
                                         <label for="address">Address:</label>
                                         <input type="text" id="address" name="txtAdress" value="" placeholder="Address" required="">
-                                   <c:if test="${not empty err.getAddressLenghtErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="birthday">Birth Date: </label>
-                                        <input type="date" id="birthday" name="txtBirthDate" value="" placeholder="Birth Date" required="">
-                                   <c:if test="${not empty err.getPasswordLengthErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="username">Username: </label>
-                                        <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
-                                   <c:if test="${not empty err.getUsernameLengthErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="password">Password: </label>
-                                        <input type="password" id="password" name="txtPassword" value="" placeholder="Password" required="">
-                                   <c:if test="${not empty err.getPasswordLengthErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="password">Confirm Password: </label>
-                                        <input type="password" id="password" name="txtConfirmPassword" value="" placeholder="Confirm Password" required="">
-                                   <c:if test="${not empty err.getConfirmNotMatch()}"></c:if>
-                                   </div>
-
-
-
-                                   <div class="form-row">
-                                        <label for="gender">Gender: </label>
-
-                                        <label for="male">Male</label>
-                                        <input type="radio" id="male" name="txtSex" value="M">
-
-                                        <label for="female">Female</label>
-                                        <input type="radio" id="female" name="txtSex" value="F">
-                                   </div>
-
-                                   <div class="form-row1">
-                                        <button type="submit" id="CreateButton" value="CreateAccount" name="btAction">Create</button>
-                                   </div>
+                                   <c:if test="${not empty err.getAddressLenghtErr()}">
+                                        <h5>${err.getAddressLenghtErr()}</h5>
+                                   </c:if>
                               </div>
+
+                              <div class="form-row">
+                                   <label for="birthday">Birth Date: </label>
+                                   <input type="date" id="birthday" name="txtBirthDate" value="" placeholder="Birth Date" required="">
+                                   <c:if test="${not empty err.getBirthDateVaildErr()}">
+                                        <h5>${err.getBirthDateVaildErr()}</h5>
+                                   </c:if>
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="username">Username: </label>
+                                   <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
+                                   <c:if test="${not empty err.getUsernameLengthErr()}">
+                                        <h5>${err.getUsernameLengthErr()}</h5>
+                                   </c:if>
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="password">Password: </label>
+                                   <input type="password" id="password" name="txtPassword" value="" placeholder="Password" required="">
+                                   <c:if test="${not empty err.getPasswordLengthErr()}">
+                                        <h5>${err.getPasswordLengthErr()}</h5>
+                                   </c:if>
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="password">Confirm Password: </label>
+                                   <input type="password" id="password" name="txtConfirmPassword" value="" placeholder="Confirm Password" required="">
+                                   <c:if test="${not empty err.getConfirmNotMatch()}">
+                                        <h5>${err.getConfirmNotMatch()}</h5>
+                                   </c:if>
+                              </div>
+
+
+
+                              <div class="form-row">
+                                   <label for="gender">Gender: </label>
+
+                                   <label for="male">Male</label>
+                                   <input type="radio" id="male" name="txtSex" value="M" checked="">
+
+                                   <label for="female">Female</label>
+                                   <input type="radio" id="female" name="txtSex" value="F">
+                              </div>
+
+                              <div class="form-row1">
+                                   <button type="submit" id="CreateButton" value="CreateAccount" name="btAction">Create</button>
+                              </div>
+                         </div>
                          <c:if test="${not empty message}">
                               <h3>${message}</h3>
                          </c:if>
