@@ -164,7 +164,7 @@
                               <form action="MainController">
                                    <div class="dbl-field">
                                         <div class="field" >
-                                             <input type="text" name="txtCageIDadd" placeholder="CageID" value="${param.txtCageIDadd}">
+                                             <input type="text" name="txtCageID" placeholder="CageID" value="${param.txtCageID}">
                                              <i class="fa-solid fa-feather"></i>
                                         </div>
                                         <c:if test="${not empty error.getIDFormatErr()}">
@@ -178,7 +178,7 @@
                                              </font>
                                         </c:if>
                                         <div class="field" style="margin-top: 25px">
-                                             <input type="text" name="txtCageNameadd" value="${param.txtCageName}" placeholder="Cage name" >
+                                             <input type="text" name="txtCageName" value="${param.txtCageName}" placeholder="Cage name" >
                                              <i class="fa-solid fa-crow"></i>
                                         </div>
                                         <c:if test="${not empty error.getNameLengthErr()}">

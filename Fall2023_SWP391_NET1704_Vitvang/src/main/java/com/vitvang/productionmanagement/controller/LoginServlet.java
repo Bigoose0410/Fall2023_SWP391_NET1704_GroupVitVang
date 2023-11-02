@@ -4,6 +4,8 @@
  */
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.users.UserDAO;
+import com.vitvang.productionmanagement.exception.users.UserLoginError;
 import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -18,8 +20,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import com.vitvang.productionmanagement.dao.users.UserDAO;
-import com.vitvang.productionmanagement.exception.users.UserLoginError;
 
 /**
  *
@@ -28,9 +28,9 @@ import com.vitvang.productionmanagement.exception.users.UserLoginError;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "MainController?btAction=Order";
-        private static final String StaffPage = "MainController?btAction=Order";
-        private static final String ManagerPage ="MainController?btAction=Order ";
+        private static final String AdminPage = "MainController?btAction=Search";
+        private static final String StaffPage = "MainController?btAction=Search";
+        private static final String ManagerPage ="MainController?btAction=Search ";
         private static final String LoginPage = "NewLogin.jsp";
 
         
