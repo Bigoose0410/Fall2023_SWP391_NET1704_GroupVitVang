@@ -141,7 +141,7 @@
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
 
                               <div class="input-container">
-                                   <label for="startdateinput">Start Date</label>
+                                   <label for="startdateinput">Order Date</label>
                                    <fmt:formatDate var="date" value="${now}" pattern="MM-dd-yyyy" />
                                    <!--${date}-->
                                    <input type="text" readonly="true" id="startdateinput" value="${date}"
