@@ -56,6 +56,10 @@ public class MainController extends HttpServlet {
       private final String CustomerController = "CustomerController";
       private final String UpdateStatusProcessController = "UpdateStatusProcessController";
       private final String UpdateEmpProcessController = "UpdateEmpProcessController";
+      private final String ManageAccountController = "ManageAccountController";
+      private final String UpdateAccountController = "UpdateAccountController";
+      private final String ViewAccountDetailController = "ViewAccountDetailController";
+      private final String CreateAccountController = "CreateAccountController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -130,6 +134,14 @@ public class MainController extends HttpServlet {
                         url = AddCageController;
                   } else if (button.equals("FormAddCage")) {
                         url = ShowAddCageFormController;
+                  } else if (button.equals("Manage Account")) {
+                        url = ManageAccountController;
+                  } else if (button.equals("ViewAccountDetail")) {
+                        url = ViewAccountDetailController;
+                  } else if (button.equals("UpdateAccount")) {
+                        url = UpdateAccountController;
+                  } else if (button.equals("CreateAccount")) {
+                        url = CreateAccountController;
                   }
 
             } finally {

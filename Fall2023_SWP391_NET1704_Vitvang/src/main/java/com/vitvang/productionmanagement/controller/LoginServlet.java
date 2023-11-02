@@ -28,7 +28,7 @@ import com.vitvang.productionmanagement.exception.users.UserLoginError;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        private static final String AdminPage = "MainController?btAction=Order";
+        private static final String AdminPage = "AdminHomePage.jsp";
         private static final String StaffPage = "MainController?btAction=Order";
         private static final String ManagerPage ="MainController?btAction=Order ";
         private static final String LoginPage = "NewLogin.jsp";

@@ -107,6 +107,7 @@
                <h1>Material</h1>
                <div class="table-container">
                     <h3>${param.txtCageName}</h3>
+
                     <table>
                          <thead>
                               <tr>
@@ -141,6 +142,7 @@
                                              <div class="input-container">
                                                   <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
                                                          name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100">
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -159,13 +161,14 @@
                                              <div class="update_button">
                                                   <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
                                                   <button type="submit" value="UpdateMaterialofCage" name="btAction">
+
                                                        <i class="fa fa-pencil-square"></i>
                                                   </button>
                                              </div>
                                              <div class="separator">/</div>
                                              <div class="delete_button">
                                                   <button type="submit" value="DeleteMaterialofCage" name="btAction">
-                                                       <i class="fa fa-trash"></i>
+                                     <i class="fa fa-trash"></i>
                                                   </button>
                                              </div>
                                         </td>
@@ -180,15 +183,16 @@
                     <strong>Add More Marterial: </strong>
                     <select onchange="this.form.submit()" name="slMateriaID">
                          <option selected>Open this select menu</option>
-                         <c:forEach var="dto" items="${materialnotuse}">
-                              <option value="${dto.getMaterialID()}">${dto.getName()}</option>
+                         <c:forEach var="dto" items="">
+                              <option value="$"></option>
                          </c:forEach>
                          <input type="hidden" name="btAction" value="EditMaterial" />
-                         <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
+                         <input type="hidden" name="txtCageID" value="" />
                     </select>
                </form>
 
                <c:if test="${not empty materialwilladd}">
+
                     <div class="material_form1">
                          <form action="MainController">
                               <table class="material_form">
@@ -199,6 +203,7 @@
                                              <div class="input-container1">
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
                                                          value="${materialwilladd.getMaterialID()}" readonly>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -217,6 +222,7 @@
                                              <div class="input-container1">
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
                                                          value="${materialwilladd.getOrigin()}" readonly>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -228,6 +234,7 @@
                                              <div class="input-container1">
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
                                                          value="${materialwilladd.getPrice()}" readonly>
+
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -247,7 +254,7 @@
                                                   <input class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
                                                          name="txtNumberOfEmployee" value="0" min="0" max="100">
 
-                                                  <span class="input-highlight"></span>
+                                     <span class="input-highlight"></span>
                                              </div>
                                         </td>
                                    </tr>
@@ -259,6 +266,7 @@
                <div class="button_2">
                     
                     <a href="${DesignPage}"><button class="next_button"><i class="fas fa-arrow-right"></i></button></a>
+
 
                </div>
           </section>

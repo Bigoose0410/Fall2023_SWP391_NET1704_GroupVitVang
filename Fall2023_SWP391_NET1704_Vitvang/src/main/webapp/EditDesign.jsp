@@ -7,16 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+
 
      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/CreateProcess.css">
-          <!--<link rel="stylesheet" href="css/HomePage.css">-->
+          <link rel="stylesheet" href="css/EditDesign.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -253,6 +249,7 @@
           </section>
           <script src="js/CreateProcess.js"></script>
      </body>
+
 
 </html>
 

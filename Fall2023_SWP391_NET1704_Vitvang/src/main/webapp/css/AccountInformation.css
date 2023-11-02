@@ -2,11 +2,6 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
-/* 
-    Created on : Oct 31, 2023, 2:24:17 PM
-    Author     : Admin
-*/
-
 * {
      margin: 0;
      padding: 0;
@@ -294,7 +289,7 @@ body.dark nav {
 /*Dashboard*/
 /*form*/
 .form {
-     width: 90%;
+     width: 95%;
      margin: 0 auto;
      padding: 20px;
      border: 1px solid #ccc;
@@ -304,23 +299,41 @@ body.dark nav {
 }
 
 .info_form {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
      border-bottom: 1px solid #ccc;
+     padding-bottom: 10px; /* Add padding to maintain spacing */
 }
 
 .info_form h2 {
      font-size: 1.5em;
-     margin-bottom: 10px;
+     margin: 0;
 }
 
 .info_form p {
-     font-size: 0.8em;
+     margin: 10px 0px;
+     font-size: 1em;
      color: #777;
-     margin-bottom: 20px;
 }
 
+#deleteButton {
+     background-color: #ff0000;
+     color: #fff;
+     border: none;
+     padding: 10px 20px;
+     font-size: 16px;
+     cursor: pointer;
+     border-radius: 5px;
+}
+
+/* Add some hover effect to the button */
+#deleteButton:hover {
+     background-color: #cc0000;
+}
 /*form1*/
 .info_form1 {
-     max-width: 1000px;
+     max-width: 1050px;
      margin: 0 auto;
      padding: 20px;
      border-radius: 5px;
@@ -335,15 +348,14 @@ body.dark nav {
 
 .form-row label {
      flex: 1;
-     font-size: 1em;
+     font-size: 1.4em;
      margin: 10px 10px;
 }
 
 .form-row input[type="text"],
 .form-row input[type="password"],
-.form-row input[type="radio"],
-.form-row input[type="tel"],
-.form-row input[type="email"] {
+.form-row input[type="email"],
+.form-row input[type="tel"] {
      flex: 2;
      width: 100%;
      padding: 8px;
@@ -352,18 +364,15 @@ body.dark nav {
      box-sizing: border-box;
 }
 
-.form-row input[type="date"] {
-     flex: 1;
-     width: 100%;
-     padding: 8px;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-     box-sizing: border-box;
+#phone {
+     margin-right: 605px;
 }
 
-.form-row input[type="radio"] {
-     width: auto;
-     margin-right: 5px;
+#email,
+#password,
+#username,
+#address {
+     margin-right: 100px;
 }
 
 .form-row i {
@@ -371,50 +380,49 @@ body.dark nav {
      margin-right: 82%;
 }
 
-.form-row input[type="radio"] + label {
-     margin-right: 20px;
-}
-
-.form-row input[type="radio"]:last-child {
-     margin-right: 700px;
-}
 
 /* Optional: Style the labels for male and female */
-.form-row label[for="male"], .form-row label[for="female"] {
+.form-row label[for="male"],
+.form-row label[for="female"] {
      font-weight: bold;
-     margin-left: 60px;
 }
 
-button {
-     background-color: #4CAF50;
-     color: white;
+/*button update,delete*/
+.form-row1 {
+     text-align: center;
+}
+
+.form-row1 button {
      padding: 10px 20px;
+     margin: 0 10px;
      font-size: 1em;
+     cursor: pointer;
+}
+
+#updateButton {
+     background-color: #0E4BF1;
+     color: white;
      border: none;
      border-radius: 5px;
-     cursor: pointer;
-     margin-top: 10px;
-     margin-left: 400px;
 }
 
-button:hover {
-     background-color: #358b38;
+#updateButton:hover {
+     background-color: #153dac;
 }
 
-#email,
-#password,
-#username,
-#address,
-#userID,
-#name,
-#phone,
-#roleID,
-#birthday {
-     margin-right: 100px;
+.form-row2 {
+     display: flex;
+     align-items: center;
+     margin-bottom: 10px;
 }
 
-#birthday {
-     margin-right: 695px;
+.form-row2 label {
+     flex: 1;
+     font-size: 1.4em;
+     margin: 10px 10px;
 }
 
-
+.form-row2 i {
+     font-size: 1em;
+     margin-right: 32%;
+}

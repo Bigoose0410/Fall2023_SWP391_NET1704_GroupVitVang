@@ -1,19 +1,6 @@
 /*
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
-*/
-/* 
-    Created on : Oct 31, 2023, 1:28:09 PM
-    Author     : Nguyen Ba Tung
-*/
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Oct 10, 2023, 2:07:18 PM
-    Author     : Admin
-*/
 * {
     margin: 0;
     padding: 0;
@@ -114,6 +101,18 @@ nav {
 }
 
 
+.nav-links {
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-links li {
+    padding: 10px 0;
+}
+
 nav.close {
     width: 73px;
 }
@@ -204,18 +203,6 @@ nav.close li a .link-name {
     pointer-events: none;
 }
 
-.nav-links {
-    flex: 1 1 auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.nav-links li {
-    padding: 10px 0;
-}
-
 .nav-links li a:hover i,
 .nav-links li a:hover .link-name {
     color: var(--primary-color);
@@ -294,15 +281,54 @@ body.dark nav {
     background-color: var(--panel-color);
     min-height: 100vh;
     width: calc(100% - 250px);
-    padding: 10px 14px;
+    padding: 10px 5px;
     transition: var(--tran-05);
 }
 
 /*Dashboard*/
+/* Search Styles */
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.search input {
+    width: 300px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search input:hover {
+    border: 1px solid #333;
+}
+
+.search button {
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+    /* Change the button color as needed */
+    color: #fff;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: rgb(14, 14, 180);
+    /* Change the button color as needed */
+}
+
 h1 {
     text-align: center;
-    margin: 10px 0px;
-    font-size: xx-large;
+    margin: 10px;
+}
+
+/*account table*/
+.account_table,
+.processing_table {
+    margin-top: 20px;
 }
 
 .table-container {
@@ -324,285 +350,80 @@ h1 {
 
 .table-container th {
     color: white;
-    background-color: #007bff;
+    background-color: #2193b0;
 }
 
 .table-container tbody tr:nth-child(even) {
     background-color: #e6fcfa;
 }
 
-/*button Update*/
-.update_button button .fa {
-    background: none;
-    border: none;
+.table-container tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Button Styling */
+button {
     cursor: pointer;
-    font-size: 24px;
-    color: #757575;
-    /* Adjust the color as needed */
+    color: black;
 }
 
-.update_button button .fa:focus {
-    outline: none;
-}
-
-.update_button button .fa:hover {
-    color: blue;
-    /* Change color on hover if desired */
-}
-
-.update_button button {
-    border: none;
-}
-
-/*button Delete*/
-.delete_button button .fa {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 22px;
-    color: #757575;
-    /* Adjust the color as needed */
-}
-
-.delete_button button .fa:focus {
-    outline: none;
-}
-
-.delete_button button .fa:hover {
-    color: red;
-    /* Change color on hover if desired */
-}
-
-.delete_button button {
-    border: none;
-}
-
-/*Form select*/
-form {
-    margin: 20px 0;
-    font-family: 'Poppins', sans-serif;
-    /* Set your desired font */
-}
-
-strong {
-    font-weight: bold;
-}
-
-select {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Optional: Style the submit button if needed */
-input[type="submit"] {
-    padding: 8px 16px;
-    font-size: 16px;
-    background-color: #0E4BF1;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+/* Button Hover Effect */
+button:hover {
     cursor: pointer;
 }
 
-/* Optional: Style the selected option */
-select option[selected] {
-    font-weight: bold;
-    color: #0E4BF1;
-}
-
-/* Style for input fields */
-.input-field {
-    position: relative;
-}
-
-/* Style for inputs */
-.input-field input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+.button a {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
     border-radius: 4px;
-}
-
-/* Style for labels */
-.input-field label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 14px;
-    color: #777;
-    pointer-events: none;
-    transition: 0.2s ease all;
-}
-
-/* Style for labels when input is focused or has value */
-.input-field input:focus+label,
-.input-field input:not(:placeholder-shown)+label {
-    top: -12px;
-    font-size: 12px;
-    color: #333;
-}
-
-/* Input field */
-.input-field {
-    display: block;
-    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
     padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    outline: none;
-    background-color: transparent;
 }
 
-/* Input field:focus styles */
-.input-field:focus+.input-label {
-    top: -20px;
-    font-size: 12px;
-    color: #007bff;
+.button a:hover {
+    background-color: #206fc5;
 }
 
-.input-field:focus+.input-label+.input-highlight {
-    width: 100%;
-}
-
-.input-field {
-    width: 50px;
-    /* Set the desired width */
-    padding: 5px;
-}
-
-
-
-/*Table add more Material*/
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-/* Style labels */
-label {
-    font-weight: bold;
-    display: inline-block;
-    /* Make label behave like an inline element */
-    width: 120px;
-    /* Adjust the width as needed */
-    margin-bottom: 5px;
-    /* Add some space below the label */
-}
-
-/* Style input fields */
-input[type="text"] {
-    width: calc(50% - 100px);
-    /* Calculate width to leave space for the label */
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-/* Style the submit button (optional) */
-.submit_button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
-    margin-left: 260px;
-    border-radius: 10px;
-}
-
-.submit_button:hover {
-    background-color: #348637;
-}
-
-@media screen and (min-width: 1060px) {
-    .material_form input[type="text"] {
-        padding: 8px;
-        width: 50px;
-        border-radius: 4px;
-        box-sizing: border-box;
-
-    }
-}
-
-/* Style input fields */
-.material_form1 {
-    margin: 0 auto;
-    width: 50%;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: 2px solid #007bff;
-}
-
-.material_form1 h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-
-}
-
-.material_form td {
-    padding: 8px;
-}
-
-.material_form input[type="text"] {
-    padding: 8px;
-    width: calc(100% - 16px);
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-
-.material_form input[type="text"]:focus {
-    outline: none;
-    border-color: #007bff;
-}
-
-.edit_button {
+.header {
     display: flex;
-    text-align: center;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    /* Optional: Align elements vertically */
+    padding: 10px 0px;
+}
+
+/*Group box*/
+.group-box {
+    display: inline-block;
+    width: 30%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.group-box p {
+    margin: 5px 5px;
+}
+
+.group-content {
     margin-top: 10px;
 }
 
-.separator {
-    display: inline-block;
-    width: 15px;
-    /* Adjust the width as needed */
-    font-size: 25px;
-    color: #777;
+.box {
+    margin-left: 50px;
 }
 
-/*Done,Next Button*/
-.button_2 {
-    text-align: end;
-    /* Center align the buttons */
+span a {
+    text-decoration: none; /* Remove the default underline */
 }
 
-.next_button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
+span a:hover {
+    text-decoration: underline; /* Add underline on hover */
 }
-
-.next_button:hover {
-    background-color: #1367c1;
-}
-
-.input-container input[type="number"] {
-    position: relative;
-    width: 150px;
-    margin: 0 auto
-
-}
-
-
-
