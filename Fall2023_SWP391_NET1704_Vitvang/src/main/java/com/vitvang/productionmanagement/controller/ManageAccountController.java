@@ -7,7 +7,6 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.model.AccountDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,11 +26,12 @@ import javax.naming.NamingException;
 public class ManageAccountController extends HttpServlet {
 
       private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
+            private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             try {
                   AccountDAO dao = new AccountDAO();
                   dao.showListAccount();

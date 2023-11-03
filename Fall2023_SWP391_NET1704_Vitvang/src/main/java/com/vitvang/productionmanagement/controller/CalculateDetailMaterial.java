@@ -25,22 +25,15 @@ import javax.naming.NamingException;
 public class CalculateDetailMaterial extends HttpServlet {
 
       private final String CAGE_MATERIAL_PAGE = "CageMaterialDetail.jsp";
-
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      private static final String ERROR_PAGE = "ErrorPage.html";
+      
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String[] CageIDList = request.getParameterValues("txtCageID");
             String[] QuantityList = request.getParameterValues("txtQuantity");
             int i = 0;
-            String url = "ErrorPageLogin.html";
+            String url = ERROR_PAGE;
             try {
                   // new DAO
                   CageDAO dao = new CageDAO();
