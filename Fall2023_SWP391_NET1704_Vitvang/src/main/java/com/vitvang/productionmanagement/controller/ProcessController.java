@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package com.vitvang.productionmanagement.controller;
 
+package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
@@ -27,11 +23,11 @@ public class ProcessController extends HttpServlet {
 
       private final String Process = "Process.jsp";
       private final String ProcessDetail = "ProcessDetail.jsp";
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = Process;
+            String url = ERROR_PAGE;
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
             String ProcessID = request.getParameter("txtProcessID");

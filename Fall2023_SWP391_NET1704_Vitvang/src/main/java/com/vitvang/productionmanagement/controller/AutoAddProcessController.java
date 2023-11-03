@@ -31,8 +31,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
 public class AutoAddProcessController extends HttpServlet {
 
-      private final String PROCESS_OF_CAGE_PAGE = "Process.jsp";
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
@@ -45,7 +44,7 @@ public class AutoAddProcessController extends HttpServlet {
             String Quantity = request.getParameter("txtQuantity");
             int quantityorder = Integer.parseInt(Quantity);
             String newStatus = "";
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             AutoAddProcessErr error = new AutoAddProcessErr();
             boolean foundErr = false;
             boolean result1 = false;

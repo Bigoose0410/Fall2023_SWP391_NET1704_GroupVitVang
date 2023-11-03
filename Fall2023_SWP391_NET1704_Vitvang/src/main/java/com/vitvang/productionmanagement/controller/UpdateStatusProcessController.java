@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
+import com.vitvang.productionmanagement.model.ProcessDTO;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +23,8 @@ import javax.naming.NamingException;
 @WebServlet(name = "UpdateStatusProcessController", urlPatterns = {"/UpdateStatusProcessController"})
 public class UpdateStatusProcessController extends HttpServlet {
 
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
@@ -41,7 +41,8 @@ public class UpdateStatusProcessController extends HttpServlet {
             int quantityCompleted = Integer.parseInt(txtquantityCompleted);
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
-            String url = "NewLogin.jsp";
+
+            String url = ERROR_PAGE;
             boolean result = false;
             boolean full = false;
             boolean laststep = false;
@@ -64,6 +65,7 @@ public class UpdateStatusProcessController extends HttpServlet {
                               if (orderdone) {
                                   result =  orderdao.updateOrderStatus(OrderID, now, "Done");
                               }
+
                         }
                   } else {
                         result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);

@@ -4,10 +4,15 @@
  */
 package com.vitvang.productionmanagement.model;
 
-/**
- *
- * @author Admin
- */
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class DetailOrderDTO {
       private String DetailOrder;
       private String CageID;
@@ -104,4 +109,5 @@ public class DetailOrderDTO {
             this.Description = Description;
       }
       
+
 }

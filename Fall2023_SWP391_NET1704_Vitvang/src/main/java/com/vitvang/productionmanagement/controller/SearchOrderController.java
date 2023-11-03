@@ -1,11 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
-
-import com.vitvang.productionmanagement.dao.order.OrderDAO;
-import com.vitvang.productionmanagement.model.OrderDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,14 +17,14 @@ import java.util.List;
 public class SearchOrderController extends HttpServlet {
 
       private final String OrderSearch = "Order.jsp";
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String searchValue = request.getParameter("txtSearchValue");
             String page = request.getParameter("page");
 
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             try {
                   OrderDAO dao = new OrderDAO();
                   if (searchValue == null) {

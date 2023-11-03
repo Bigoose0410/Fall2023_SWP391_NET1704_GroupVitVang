@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
-
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import com.vitvang.productionmanagement.exception.processs.DesignProcessErr;
 import jakarta.servlet.RequestDispatcher;
@@ -16,10 +11,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "UpdateDesignProcessController", urlPatterns = {"/UpdateDesignProcessController"})
 public class UpdateDesignProcessController extends HttpServlet {
 

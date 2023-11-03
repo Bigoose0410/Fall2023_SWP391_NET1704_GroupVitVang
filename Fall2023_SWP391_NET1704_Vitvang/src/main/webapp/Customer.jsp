@@ -24,6 +24,9 @@
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
           </c:url>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
+          </c:url>
           <c:set var="searchValue" value="${param.txtSearchvalue}" />
           <c:set var="ShowForm" value="${requestScope.SHOW_CUS_CREATE_FORM}" />
           <c:set var="CustomerList" value="${requestScope.SEARCH_CUS_RESULT}"/>s

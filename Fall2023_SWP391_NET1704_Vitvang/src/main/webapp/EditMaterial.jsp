@@ -256,6 +256,7 @@
                               </table>
                                 <input type="hidden" name="txtCageID" value="${param.txtCageID}"/>
                               <button class="submit_button" type="submit" name="btAction" value="AddMaterialToCage">Add</button>
+
                          </form>
                     </div>
                </c:if>

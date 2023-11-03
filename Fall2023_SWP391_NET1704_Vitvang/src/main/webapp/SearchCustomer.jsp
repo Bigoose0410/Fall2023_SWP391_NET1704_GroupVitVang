@@ -286,7 +286,7 @@
                               </div>
                               <br>
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
-                                   Create New customer
+                                   Create New customer 
                               </button>
                               <c:if test="${not empty errors.getCustomerIDexistErr()}">
                                         <font color = "red">

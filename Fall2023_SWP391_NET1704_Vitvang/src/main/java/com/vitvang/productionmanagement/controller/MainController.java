@@ -12,10 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
@@ -56,13 +52,20 @@ public class MainController extends HttpServlet {
       private final String CustomerController = "CustomerController";
       private final String UpdateStatusProcessController = "UpdateStatusProcessController";
       private final String UpdateEmpProcessController = "UpdateEmpProcessController";
+      private final String ManageAccountController = "ManageAccountController";
+      private final String UpdateAccountController = "UpdateAccountController";
+      private final String ViewAccountDetailController = "ViewAccountDetailController";
+      private final String CreateAccountController = "CreateAccountController";
+      private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String DeleteAccountController = "DeleteAccountController";
+      private final String SearchAccountController = "SearchAccountController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
 
             String button = request.getParameter("btAction");
-            String url = "errorPageLogin.html";
+            String url = ERROR_PAGE;
             try {
                   if (button == null) {
                         url = StartUpController;
@@ -130,6 +133,18 @@ public class MainController extends HttpServlet {
                         url = AddCageController;
                   } else if (button.equals("FormAddCage")) {
                         url = ShowAddCageFormController;
+                  } else if (button.equals("Manage Account")) {
+                        url = ManageAccountController;
+                  } else if (button.equals("ViewAccountDetail")) {
+                        url = ViewAccountDetailController;
+                  } else if (button.equals("UpdateAccount")) {
+                        url = UpdateAccountController;
+                  } else if (button.equals("CreateAccount")) {
+                        url = CreateAccountController;
+                  } else if (button.equals("DeleteAccount")) {
+                        url = DeleteAccountController;
+                  } else if (button.equals("SearchAccount")) {
+                        url = SearchAccountController;
                   }
 
             } finally {

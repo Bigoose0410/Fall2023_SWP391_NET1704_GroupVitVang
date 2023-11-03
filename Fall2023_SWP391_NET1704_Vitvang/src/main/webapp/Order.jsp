@@ -165,6 +165,45 @@
                     </div>
                </div>
 
+                         <c:set var="searchValue" value="${param.txtSearchValue}"></c:set>
+
+                         <c:set var="result" value="${requestScope.SEARCH_RESULT}"></c:set>
+                         <c:if test="${empty searchValue}">
+                              <c:if test="${not empty result}">
+                                   <table style="width:100%">
+                                        <thead>
+                                             <tr>
+
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">No</th>
+
+
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">OrderID</span> </th>
+
+                                                  <th    class="data-title" style="text-align: start ;color:blue;font-size:23px">Order Date </th>
+                                                  <th   class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">City</th>
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status </th>
+                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Details</th>
+
+
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+
+                                             <c:forEach var="dto" items="${result}" varStatus="counter">
+
+                                             <form class="form-order" action="MainController" method="get">
+                                                  <div class="activity-data">
+                                                       <tr>
+                                                            <td class="data-list" style="text-align: start;font-size:18px; ">${counter.count}</td>
+
+                                                            <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
+                                                                 <input type="hidden" name="txtOrderID" 
+                                                                        value="${dto.getOrderID()}"/></td>
+
+
+                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
+
 
                <c:set var="searchValue" value="${param.txtSearchValue}"></c:set>
 
@@ -206,6 +245,17 @@
                                         <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
                                              <input type="hidden" name="txtOrderID" 
                                                     value="${dto.getOrderID()}"/></td>
+                                                       <div class="data status">
+                                                            <c:url value="EditOrder.jsp" var="editLink">
+                                                                 <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
+                                                                 <c:param name="txtStartDate" value="${dto.getStartDate()}" />
+                                                                 <c:param name="txtAddress" value="${dto.getAddress()}" />
+                                                                 <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
+                                                                 <c:param name="lastSearchValue" value="${searchValue}"/>
+                                                            </c:url>
+                                                       </div>
+                                                       <!--<input type="submit" value="Detail" name="btAction" />-->
+                                                       <td class="data-list" style="text-align: start ">
 
 
                                         <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
@@ -238,6 +288,7 @@
                                    </div>
                                    <!--<input type="submit" value="Detail" name="btAction" />-->
                                    <td class="data-list" style="text-align: start ">
+                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Order Date</th>
 
                                         <button value="Detail" name="btAction" style="font-size:20px; outline: none;background-color: transparent; border:none;margin-left: 30px" d q/>
                                         <i class="uil uil-file-info-alt"></i>
@@ -338,6 +389,7 @@
 
 
                          <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
+                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
 
 
 
@@ -360,6 +412,17 @@
           </div>
           <input type="submit" value="Detail" name="btAction" />
           <td class="data-list" style="text-align: start ">
+                                                                 <div class="data status">
+                                                                      <c:url value="EditOrder.jsp" var="editLink">
+                                                                           <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
+                                                                           <c:param name="txtStartDate" value="${dto.getStartDate()}" />
+                                                                           <c:param name="txtAddress" value="${dto.getAddress()}" />
+                                                                           <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
+                                                                           <c:param name="lastSearchValue" value="${searchValue}"/>
+                                                                      </c:url>
+                                                                 </div>
+                                                                 <!--<input type="submit" value="Detail" name="btAction" />-->
+                                                                <td class="data-list" style="text-align: start ">
 
                <button value="Detail" name="btAction" style="font-size:20px; outline: none;background-color: transparent; border:none;margin-left: 30px" d q/>
                <i class="uil uil-file-info-alt"></i>

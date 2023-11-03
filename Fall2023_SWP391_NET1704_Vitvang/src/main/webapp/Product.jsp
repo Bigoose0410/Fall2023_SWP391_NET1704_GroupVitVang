@@ -123,7 +123,7 @@
                                                        <div class="main-wrapper">
                                                             <h3 class="main-header"> ${dto.getCageID()} </h3>
                                                             <h1 class="main-title"> ${dto.getName()} </h1>
-                                                            <h2 class="main-subtitle"> ${dto.getPrice()}đ </h2>
+                                                            <h2 class="main-subtitle"> ${dto.getPrice()} </h2>
                                                        </div>
                                                        <div class="main-content">
                                                             <div class="main-content__title">Come From: ${dto.getOrigin()}

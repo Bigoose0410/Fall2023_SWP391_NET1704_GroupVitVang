@@ -117,7 +117,7 @@ public class OrderDAO implements Serializable {
             }
       }
 
-      public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
+       public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
