@@ -100,6 +100,7 @@
 
                     <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
                     <c:set var="processID" value="${requestScope.HIGHLIGHT}"></c:set>
+                    <c:set var="stepProcess" value="${requestScope.STEP_PROCESS}"></c:set>
                          <section class="dashboard">
                               <header>
                                    <h1>Process Detail<i class="fas fa-cogs"></i></h1>
@@ -113,7 +114,8 @@
 
                                         <i class="fa fa-shopping-cart"></i>
                                         <label for="field2">OrderID:</label>
-                                        <i>${result[1].getOrderID()}</i>
+                                        <a href="MainController?txtOrderID=${result[1].getOrderID()}&btAction=Detail"><i>${result[1].getOrderID()}</i></a>  
+                                        <!--<i>${result[1].getOrderID()}</i>-->
 
                                         <i class="fa fa-cube"></i>
                                         <label for="field3">Cage:</label>
@@ -127,14 +129,16 @@
                                         <c:set var="perFinish" value="0"></c:set>
                                              <ul>
                                              <c:forEach var="dto" items="${result}" varStatus="counter">
-                                                  <li class="step ${dto.getProcessID()} active">
-                                                       <div class="step-inner">
-                                                            ${dto.getProcessName()}
-                                                            <c:set var="perFinish"
-                                                                   value="${perFinish + ( 100/result.size() * (dto.getCompletedQuantity() / dto.getQuantity()))}">
-                                                            </c:set>
-                                                       </div>
-                                                  </li>
+                                                  <a href="MainController?txtOrderID=${dto.getOrderID()}&txtCageID=${dto.getCageID()}&txtProcessID=${dto.getProcessID()}&btAction=ViewProcessDetail">
+                                                       <li class="step ${dto.getProcessID()} active" style="width: ${100/result.size()}%;">
+                                                            <div class="step-inner">
+                                                                 <i> ${dto.getProcessName()}</i>
+                                                                 <c:set var="perFinish"
+                                                                        value="${perFinish + ( 100/result.size() * (dto.getCompletedQuantity() / dto.getQuantity()))}">
+                                                                 </c:set>
+                                                            </div>
+                                                       </li>
+                                                  </a>
                                              </c:forEach>
                                         </ul>
                                         <div id="line">
@@ -144,13 +148,15 @@
 
                                    <div id="progress-content-section">
 
-                                        <c:forEach var="dto" items="${result}" varStatus="counter">
-                                             <input type="hidden" name="LastStep" 
+                                        <%--<c:forEach var="dto" items="${result}" varStatus="counter">--%>
+                                        <c:if test="${not empty stepProcess}">
+                                             
+                                        <input type="hidden" name="LastStep" 
                                                     <c:if test="${counter.count == result.size()}">
                                                          value="true";
                                                     </c:if> />
                                              <div class="section-content discovery active"  
-                                                  <c:if test="${!dto.getProcessID().equals(processID)}"> 
+                                                  <c:if test="${!stepProcess.getProcessID().equals(processID)}"> 
                                                        style="opacity: 0.2"</c:if>
                                                        >
 
@@ -172,34 +178,34 @@
                                                                              test="${counter.count == result.size()}">
                                                                              value="true";
                                                                         </c:if> />
-                                                                 <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
-                                                                 <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                                 <input type="hidden" name="txtProcessID" value="${dto.getProcessID()}" />
+                                                                 <input type="hidden" name="txtOrderID" value="${stepProcess.getOrderID()}" />
+                                                                 <input type="hidden" name="txtCageID" value="${stepProcess.getCageID()}" />
+                                                                 <input type="hidden" name="txtProcessID" value="${stepProcess.getProcessID()}" />
                                                                  <tr data-ng-repeat="pdiskmovie in people| filter: table">
-                                                                      <td>${dto.getProcessName()}</td>
+                                                                      <td>${stepProcess.getProcessName()}</td>
 
                                                                       <td width="25%" class="description"> <!-- Placeholder for details -->
-                                                                 <li><strong>Start Date:</strong> ${dto.getStartDate()}</li>
-                                                                 <li><strong>End Date:</strong> ${dto.getEndDate()}</li>
+                                                                 <li><strong>Start Date:</strong> ${stepProcess.getStartDate()}</li>
+                                                                 <li><strong>End Date:</strong> ${stepProcess.getEndDate()}</li>
                                                                  <li>
                                                                       <strong>Completed :  </strong> 
-                                                                      ${dto.getCompletedQuantity()} \ ${dto.getQuantity()}
+                                                                      ${stepProcess.getCompletedQuantity()} \ ${stepProcess.getQuantity()}
                                                                  </li>
                                                                  <li>
                                                                       <strong>Number Employee</strong> 
-                                                                      ${dto.getNumberOfEmployee()}
+                                                                      ${stepProcess.getNumberOfEmployee()}
                                                                  </li>
                                                                  </td>
                                                                  <td>
                                                                       <strong>Add More Completed:</strong>
                                                                       <div class="quantity">
-                                                                           <input placeholder="Quantity" class="input-field" type="number" min="0"
-                                                                                  name="txtCompletedAdd" value="0" max="${dto.getQuantity() - dto.getCompletedQuantity()}">
-                                                                           <input type="hidden" name="txtTotalQuantity" value="${dto.getQuantity()}" />
-                                                                           <input type="hidden" name="txtquantityCompleted" value="${dto.getCompletedQuantity()}" />
+                                                                           <input placeholder="Quantity" class="input-field" type="number" min="0" oninput="this.value = Math.abs(this.value)"
+                                                                                  name="txtCompletedAdd"  max="${stepProcess.getQuantity() - stepProcess.getCompletedQuantity()}">
+                                                                           <input type="hidden" name="txtTotalQuantity" value="${stepProcess.getQuantity()}" />
+                                                                           <input type="hidden" name="txtquantityCompleted" value="${stepProcess.getCompletedQuantity()}" />
                                                                            <div class="tick_button">
                                                                                 <button  type="submit" value="UpdateStatusProcess" name="btAction"
-                                                                                         <c:if test="${!dto.getProcessID().equals(processID)}">
+                                                                                         <c:if test="${!stepProcess.getProcessID().equals(processID)}">
                                                                                               disabled style="opacity: 0.2";
                                                                                          </c:if>>
                                                                                      <i class="fa fa-check-square"></i></button>
@@ -207,11 +213,11 @@
                                                                       </div>
                                                                       <strong>Number of Employees:</strong>
                                                                       <div class="employee" >
-                                                                           <input placeholder="Employee" class="input-field" type="number" 
-                                                                                  name="txtNumberOfEmployee" min="0" max="10" value="${dto.getNumberOfEmployee()}">
+                                                                           <input placeholder="Employee" class="input-field" type="number"  oninput="this.value = Math.abs(this.value)"
+                                                                                  name="txtNumberOfEmployee" min="0" max="10" value="${stepProcess.getNumberOfEmployee()}">
                                                                            <div class="tick_button">
                                                                                 <button type="submit" value="UpdateEmployee"
-                                                                                        <c:if test="${!dto.getProcessID().equals(processID)}">
+                                                                                        <c:if test="${!stepProcess.getProcessID().equals(processID)}">
                                                                                              disabled ;
                                                                                              style="opacity: 0.2";
                                                                                         </c:if>
@@ -222,7 +228,7 @@
                                                                  <td class="process_button">
                                                                       <div class="input-container">
                                                                            <select class="input-field" name="txtStatus">
-                                                                                <option selected="selected">${dto.getStatus()}</option>
+                                                                                <option selected="selected">${stepProcess.getStatus()}</option>
 
                                                                            </select>
                                                                            <span class="input-highlight"></span>
@@ -237,7 +243,8 @@
                                                        </div>
                                                   </div>
                                              </div>
-                                        </c:forEach>
+                                        </c:if>
+                                        <%--</c:forEach>--%>
                                    </div>
                               </c:if>
                               <c:if test="${empty result}">

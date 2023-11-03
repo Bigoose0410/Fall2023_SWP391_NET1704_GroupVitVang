@@ -47,16 +47,15 @@ public class DetailOrderController extends HttpServlet {
                   UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
                   OrderDTO order = orderdao.getListOrders().get(0);
                   List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
+                  
                   for (DetailOrderDTO detailOrderDTO : orderDetailList) {
                         dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
-                        dao.searchProductionbyID(detailOrderDTO.getCageID());
                   }
                   List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
-                  List<CageDTO> cageList = dao.getListCage();
 
                   request.setAttribute("CUS_ORDER", customer);
                   request.setAttribute("CAGE_MATERIAL", cageMaterialList);
-                  request.setAttribute("CAGE_ORDER", cageList);
+                  request.setAttribute("CAGE_ORDER", orderDetailList);
                   request.setAttribute("ORDER", order);
                   url = ORDER_DETAIL_PAGE;
 

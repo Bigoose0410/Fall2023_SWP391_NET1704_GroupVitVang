@@ -30,6 +30,7 @@ public class ProcessController extends HttpServlet {
             String url = ERROR_PAGE;
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
+            String ProcessID = request.getParameter("txtProcessID");
             String button = request.getParameter("btAction");
             try {
                   ProcessDAO dao = new ProcessDAO();
@@ -39,12 +40,17 @@ public class ProcessController extends HttpServlet {
                         request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
                         url = Process;
                   } else {
+                        if(ProcessID == null){
+                              ProcessID = "PR001";
+                        }
                         dao.ViewProcessingOrder(OrderID, CageID, CageID);
                         List<ProcessDTO> process = dao.getListOrdersProcess();
-                        for (ProcessDTO proces : process) {
-                              if(proces.getStatus().equals("Processing")){
-                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
-                                    break;
+                        ProcessDTO eachStep = new ProcessDTO();
+                        eachStep = dao.GetProcessingbyID(OrderID, CageID, ProcessID);
+                        if (eachStep != null) {
+                              request.setAttribute("STEP_PROCESS", eachStep);
+                              if (eachStep.getStatus().equals("Processing")) {
+                                    request.setAttribute("HIGHLIGHT", eachStep.getProcessID());
                               }
                         }
                         request.setAttribute("PROCESS_RESULT", process);

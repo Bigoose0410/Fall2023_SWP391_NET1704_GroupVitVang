@@ -123,53 +123,55 @@
                          <tbody>
                               <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
                               <div action="MainController">
-                                   <tr>
-                                        <td>
-                                             ${counter.count}
-                                        </td>
+                                   <form action="MainController">
+                                        <tr>
+                                             <td>
+                                                  ${counter.count}
+                                             </td>
 
-                                        <td>
-                                             ${dto.getMaterialID()}
-                                             <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
-                                        </td>
+                                             <td>
+                                                  ${dto.getMaterialID()}
+                                                  <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
+                                             </td>
 
-                                        <td>
-                                             ${dto.getName()} / ${dto.getUnit()}
-                                        </td>
+                                             <td>
+                                                  ${dto.getName()} / ${dto.getUnit()}
+                                             </td>
 
-                                        <td>
-                                             <div class="input-container">
-                                                  <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
-                                                         name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100">
-                                                  <span class="input-highlight"></span>
-                                             </div>
-                                        </td>
+                                             <td>
+                                                  <div class="input-container">
+                                                       <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+                                                              name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100">
+                                                       <span class="input-highlight"></span>
+                                                  </div>
+                                             </td>
 
-                                        <td>
-                                             ${dto.getOrigin()}
-                                        </td>
+                                             <td>
+                                                  ${dto.getOrigin()}
+                                             </td>
 
-                                        <td>
-                                             ${dto.getPrice()}
-                                        </td>
+                                             <td>
+                                                  ${dto.getPrice()}
+                                             </td>
 
 
 
-                                        <td class="edit_button">
-                                             <div class="update_button">
+                                             <td class="edit_button">
                                                   <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                  <button type="submit" value="UpdateMaterialofCage" name="btAction">
-                                                       <i class="fa fa-pencil-square"></i>
-                                                  </button>
-                                             </div>
-                                             <div class="separator">/</div>
-                                             <div class="delete_button">
-                                                  <button type="submit" value="DeleteMaterialofCage" name="btAction">
-                                                       <i class="fa fa-trash"></i>
-                                                  </button>
-                                             </div>
-                                        </td>
-                                   </tr>
+                                                  <div class="update_button">
+                                                       <button type="submit" value="UpdateMaterialofCage" name="btAction">
+                                                            <i class="fa fa-pencil-square"></i>
+                                                       </button>
+                                                  </div>
+                                                  <div class="separator">/</div>
+                                                  <div class="delete_button">
+                                                       <button type="submit" value="DeleteMaterialofCage" name="btAction">
+                                                            <i class="fa fa-trash"></i>
+                                                       </button>
+                                                  </div>
+                                             </td>
+                                        </tr>
+                                   </form>
                               </div>
                          </c:forEach>
                          </tbody>
@@ -206,7 +208,7 @@
                                         <td>
                                              <label for="Name">Name :</label>
                                              <div class="input-container1">
-                                                  <input class="input-field" type="text" name="txtNumberOfEmployee" 
+                                                  <input class="input-field" type="text" name="txtName" 
                                                          value="${materialwilladd.getName()}" readonly>
                                                   <span class="input-highlight"></span>
                                              </div>
@@ -252,8 +254,9 @@
                                         </td>
                                    </tr>
                               </table>
-                                                  <input type="hidden" name="txtCageID" value="${param.txtCageID}"/>
-                                                  <button class="submit_button" type="submit" name="btAction" value="AddMaterialToCage">Submit</button>
+                                <input type="hidden" name="txtCageID" value="${param.txtCageID}"/>
+                              <button class="submit_button" type="submit" name="btAction" value="AddMaterialToCage">Add</button>
+
                          </form>
                     </div>
                </c:if>

@@ -11,11 +11,29 @@ package com.vitvang.productionmanagement.exception.processs;
 public class DesignProcessErr {
       private String DescriptionLengthErr;
       private String EmployeeFormatErr;
-      private String CompletionCageErr;
+      private String TimeProcessErr;
       private String DuplicateIDErr;
+      private String ComletetionCagErr;
 
       public DesignProcessErr() {
       }
+
+      public String getComletetionCagErr() {
+            return ComletetionCagErr;
+      }
+
+      public void setComletetionCagErr(String ComletetionCagErr) {
+            this.ComletetionCagErr = ComletetionCagErr;
+      }
+      
+      public String getTimeProcessErr() {
+            return TimeProcessErr;
+      }
+
+      public void setTimeProcessErr(String TimeProcessErr) {
+            this.TimeProcessErr = TimeProcessErr;
+      }
+
       
       public String getDuplicateIDErr() {
             return DuplicateIDErr;
@@ -43,13 +61,7 @@ public class DesignProcessErr {
             this.EmployeeFormatErr = EmployeeFormatErr;
       }
 
-      public String getCompletionCageErr() {
-            return CompletionCageErr;
-      }
-
-      public void setCompletionCageErr(String CompletionCageErr) {
-            this.CompletionCageErr = CompletionCageErr;
-      }
+    
       
       
 }

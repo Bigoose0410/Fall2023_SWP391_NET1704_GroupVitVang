@@ -1,5 +1,6 @@
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
-import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 
 /**
  *
@@ -29,8 +29,7 @@ public class UpdateMaterialofCageController extends HttpServlet {
             String url = ERROR_PAGE;
             try {
                   int qunaitybuild;
-                  qunaitybuild = (quantity != null) ? Integer.parseInt(quantity) : 1;
-
+                  qunaitybuild = (quantity != null && !quantity.equals("0")) ? Integer.parseInt(quantity) : 1;
                   MaterialDAO dao = new MaterialDAO();
                   dao.updateMaterialOfCage(CageID, materialID, qunaitybuild);
                   url = "MainController"
