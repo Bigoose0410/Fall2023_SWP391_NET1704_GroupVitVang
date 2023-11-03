@@ -28,11 +28,12 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 public class CustomerController extends HttpServlet {
 
       private final String CustomerPage = "Customer.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             String UserName = request.getParameter("txtUsername");
             try {
                   // 1. new dao

@@ -12,10 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
@@ -60,6 +56,7 @@ public class MainController extends HttpServlet {
       private final String UpdateAccountController = "UpdateAccountController";
       private final String ViewAccountDetailController = "ViewAccountDetailController";
       private final String CreateAccountController = "CreateAccountController";
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String DeleteAccountController = "DeleteAccountController";
       private final String SearchAccountController = "SearchAccountController";
 
@@ -68,7 +65,7 @@ public class MainController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
 
             String button = request.getParameter("btAction");
-            String url = "errorPageLogin.html";
+            String url = ERROR_PAGE;
             try {
                   if (button == null) {
                         url = StartUpController;

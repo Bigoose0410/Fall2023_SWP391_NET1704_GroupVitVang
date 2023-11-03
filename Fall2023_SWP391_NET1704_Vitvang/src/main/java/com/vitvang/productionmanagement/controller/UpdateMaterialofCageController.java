@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
 
 import jakarta.servlet.RequestDispatcher;
@@ -22,27 +18,19 @@ import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 @WebServlet(name = "UpdateMaterialofCageController", urlPatterns = {"/UpdateMaterialofCageController"})
 public class UpdateMaterialofCageController extends HttpServlet {
 
-      private final String EDIT_MATERIAL_PAGE = "EditMaterial.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String materialID = request.getParameter("txtMaterialID").trim();
             String CageID = request.getParameter("txtCageID").trim();
             String quantity = request.getParameter("txtQuantity").trim();
-            String url = EDIT_MATERIAL_PAGE;
+            String url = ERROR_PAGE;
             try {
                   int qunaitybuild;
                   qunaitybuild = (quantity != null) ? Integer.parseInt(quantity) : 1;
-                  
+
                   MaterialDAO dao = new MaterialDAO();
                   dao.updateMaterialOfCage(CageID, materialID, qunaitybuild);
                   url = "MainController"

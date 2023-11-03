@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
@@ -26,12 +22,13 @@ import java.util.logging.Logger;
 public class ViewAccountDetailController extends HttpServlet {
 
       private final String AccountInformation = "AccountInformation.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
             String UserID = request.getParameter("txtUserID");
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             try {
                   /* TODO output your page here. You may use following sample code. */
                   AccountDAO dao = new AccountDAO();

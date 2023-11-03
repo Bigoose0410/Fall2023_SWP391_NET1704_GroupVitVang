@@ -279,8 +279,8 @@ public class MaterialDAO {
                   // tra ra null or k.
                   if (con != null) {
 
-                        String sql = "SELECT * "
-                                + "FROM   Material d "
+                        String sql = "SELECT MaterialID, Name, Origin, Price, Unit "
+                                + "FROM Material "
                                 + "WHERE MaterialID = ?";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, materialid);

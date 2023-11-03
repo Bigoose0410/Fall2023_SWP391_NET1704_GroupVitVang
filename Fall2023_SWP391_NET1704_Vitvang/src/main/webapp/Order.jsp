@@ -185,12 +185,7 @@
 
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">OrderID</span> </th>
 
-                                                  <!--                                        <div class="data email">
-                                                                                               <span class="data-title">CustomerID</span>
-                                                                                          </div>-->
-
-                                                  <th    class="data-title" style="text-align: start ;color:blue;font-size:23px">StartDate </th>
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">EndDate</th>
+                                                  <th    class="data-title" style="text-align: start ;color:blue;font-size:23px">Order Date </th>
                                                   <th   class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">City</th>
                                                   <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status </th>
@@ -217,7 +212,6 @@
 
 
 
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
 
 
 
@@ -235,7 +229,6 @@
                                                             <c:url value="EditOrder.jsp" var="editLink">
                                                                  <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
                                                                  <c:param name="txtStartDate" value="${dto.getStartDate()}" />
-                                                                 <c:param name="txtEndDate" value="${dto.getEndDate()}" />
                                                                  <c:param name="txtAddress" value="${dto.getAddress()}" />
                                                                  <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
                                                                  <c:param name="lastSearchValue" value="${searchValue}"/>
@@ -276,10 +269,8 @@
                                              <th class="data-title" style="text-align: start ;color:blue;font-size:23px">OrderID</th>
 
 
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">StartDate</th>
+                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Order Date</th>
 
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">EndDate</th>
 
 
                                              <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
@@ -317,12 +308,6 @@
 
                                                                       <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
 
-
-
-                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
-
-
-
                                                                       <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
 
 
@@ -338,7 +323,6 @@
                                                                       <c:url value="EditOrder.jsp" var="editLink">
                                                                            <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
                                                                            <c:param name="txtStartDate" value="${dto.getStartDate()}" />
-                                                                           <c:param name="txtEndDate" value="${dto.getEndDate()}" />
                                                                            <c:param name="txtAddress" value="${dto.getAddress()}" />
                                                                            <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
                                                                            <c:param name="lastSearchValue" value="${searchValue}"/>

@@ -33,7 +33,7 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "CreateAccountController", urlPatterns = {"/CreateAccountController"})
 public class CreateAccountController extends HttpServlet {
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
@@ -45,6 +45,8 @@ public class CreateAccountController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                  
             /* TODO output your page here. You may use following sample code. */
             String UserID = request.getParameter("txtUserID");
             String txtRoleID = request.getParameter("txtRoleID");
