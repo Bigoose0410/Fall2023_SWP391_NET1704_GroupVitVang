@@ -32,15 +32,21 @@
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction" />
           </c:url>
-          <c:set var="result" value="${requestScope.ACCOUNT_DETAIL}"></c:set>
-               <nav>
 
-                    <div class="logo-name">
-                         <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
+          <style>
+               p {
+                    font-size: 15px;
+                    color: red;
+               }
+          </style>
+          <nav>
 
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+               <div class="logo-name">
+                    <div class="logo-image">
+                         <img src="images/logo.png" alt="">
+                    </div>
+
+                    <span class="logo_name">${sessionScope.USER.getName()}</span>
                </div>
 
                <div class="menu-items">
@@ -98,15 +104,18 @@
                     </ul>
                </div>
           </nav>
-          <section class="dashboard">
-               <div class="form">
-                    <div class="info_form">
-                         <div class="info">
-                              <h2>Information</h2>
-                              <p>Manage profile information for account security</p>
-                         </div>
+          <c:set var="result" value="${requestScope.ACCOUNT_DETAIL}"></c:set>
+          <c:set var="err" value="${requestScope.UPDATE_ACCOUNT_ERR}"></c:set>
+          <c:set var="message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
+               <section class="dashboard">
+                    <div class="form">
+                         <div class="info_form">
+                              <div class="info">
+                                   <h2>Information</h2>
+                                   <p>Manage profile information for account security</p>
+                              </div>
 
-                    </div>
+                         </div>
                     <c:forEach var="dto" items="${result}">
                          <div class="info_form1">
                               <form action="MainController">
@@ -126,23 +135,58 @@
 
                                    <div class="form-row">
                                         <label for="username">Username: </label>
+                                        <br>
+                                        <br>
                                         <input type="text" id="username" name="txtUsername" value="${dto.getUsername()}" required="">
-
+                                        <br>
+                                        <br>
+                                        <c:if test="${not empty err.getUsernameFormatErr()}">
+                                             <p >${err.getUsernameFormatErr()}</p>
+                                        </c:if>
+                                        <br>
                                         <label for="password" >Password: </label>
-                                        <input type="password" id="password" name="txtPassword" value="${dto.getPassword()}" required="">
+                                        <br>
+                                        <br>
+                                        <input type="password"  id="password" name="txtPassword" value="${dto.getPassword()}" required="">
+                                        <br>
+                                        <br>
+                                        <c:if test="${not empty err.getPasswordFormatErr()}">
+                                             <p>${err.getPasswordFormatErr()}</p>
+                                        </c:if>
                                    </div>
 
                                    <div class="form-row">
                                         <label for="email">Email: </label>
+                                        <br>
+                                        <br>
                                         <input type="email" id="email" name="txtEmail" value="${dto.getEmail()}" required="">
+                                        <br>
+                                        <br>
+                                        <c:if test="${not empty err.getEmailFormatErr()}">
+                                             <p>${err.getEmailFormatErr()}</p>
+                                        </c:if>
 
                                         <label for="address">Address: </label>
+                                        <br>
+                                        <br>
                                         <input type="text" id="address" name="txtAddress" value="${dto.getAdress()}" required="">
+                                        <br>
+                                        <br>
+                                        <c:if test="${not empty err.getAddressFormatErr()}">
+                                             <p>${err.getAddressFormatErr()}</p>
+                                        </c:if>
                                    </div>
 
                                    <div class="form-row">
                                         <label for="phone">Phone: </label>
+                                        <br>
+                                        <br>
                                         <input type="text" id="phone" name="txtPhoneNumber" value="${dto.getPhoneNumber()}" required="">
+                                        <br>
+                                        <br>
+                                        <c:if test="${not empty err.getPhoneNumberFormatErr()}">
+                                             <p>${err.getPhoneNumberFormatErr()}</p>
+                                        </c:if>
                                    </div>
 
                                    <div class="form-row">
@@ -155,8 +199,8 @@
                               </form>
                          </div>
                     </c:forEach>
-                    <c:if test="${not empty MESSAGE}">
-                         <h1>${MESSAGE}</h1>
+                    <c:if test="${not empty message}">
+                         <h1>${message}</h1>
                     </c:if>
                </div>
 

@@ -91,7 +91,7 @@ public class AccountDAO implements Serializable {
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID "
-                                + "Where UserID = ? ";
+                                + "Where UserID = ? AND Users.UserStatus = 'True'";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, UserID);
                         rs = stm.executeQuery();

@@ -75,15 +75,15 @@
                                    <span class="link-name">Logout</span>
                               </a></li>
 
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
+                         <li class="mode">
+                              <a href="#">
+                                   <i class="uil uil-moon"></i>
+                                   <span class="link-name">Dark Mode</span>
+                              </a>
 
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
+                              <div class="mode-toggle">
+                                   <span class="switch"></span>
+                              </div>
                          </li>
                     </ul>
                </div>
@@ -108,12 +108,15 @@
                <c:set var="searchResult" value="${requestScope.SEARCH_ACCOUNT_RESULT}" />
                <%--<c:set var="status" value="${requestScope.USER_STATUS}" />--%>
                <div class="box">
+
                     <c:if test="${empty searchAccount}">
                          <c:if test="${not empty result}">
-                              <form action="MainController" method="POST">
-                                   <c:forEach var="dto" items="${result}">
-                                        <c:if test="${dto.isUserStatus()}">
-                                             <div class="group-box">
+
+                              <c:forEach var="dto" items="${result}">
+                                   <c:if test="${dto.isUserStatus()}">
+
+                                        <div class="group-box">
+                                             <form action="MainController">
                                                   <span><a href="Information.html">${dto.getUserID()}</a></span>
 
                                                   <div class="group-content">
@@ -125,10 +128,10 @@
                                                   <input type="hidden" name="txtUserID" value="${dto.getUserID()}" />
                                                   <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
 
-                                             </div>
-                                        </c:if>
-                                   </c:forEach>
-                              </form>
+                                             </form>
+                                        </div>
+                                   </c:if>
+                              </c:forEach>
                          </c:if>
                          <c:if test="${empty result}">
                               <h3 style="color: red">Account list is empty !!!</h3>
@@ -136,7 +139,7 @@
                     </c:if>
                     <c:if test="${not empty searchAccount}">
                          <c:if test="${not empty searchResult}">
-                              <form action="MainController" method="POST">
+                              <form action="MainController">
                                    <c:forEach var="dto1" items="${searchResult}">
                                         <div class="group-box">
                                              <span><a href="Information.html">${dto1.getUserID()}</a></span>
