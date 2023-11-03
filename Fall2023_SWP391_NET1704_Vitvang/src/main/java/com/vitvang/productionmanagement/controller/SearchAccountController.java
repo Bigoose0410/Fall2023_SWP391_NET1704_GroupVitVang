@@ -15,36 +15,30 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ManageAccountController", urlPatterns = {"/ManageAccountController"})
-public class ManageAccountController extends HttpServlet {
+@WebServlet(name = "SearchAccountController", urlPatterns = {"/SearchAccountController"})
+public class SearchAccountController extends HttpServlet {
 
       private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException, SQLException, NamingException {
+              throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "NewLogin.jsp";
+            String SearchAccount = request.getParameter("txtSearchAccount");
             try {
+                  /* TODO output your page here. You may use following sample code. */
                   AccountDAO dao = new AccountDAO();
-                  dao.showListAccount();
+                  dao.searchAccount(SearchAccount);
                   List<AccountDTO> list = dao.getListAccount();
-//                  for (AccountDTO accountDTO : list) {
-//                        if (accountDTO.isUserStatus()) {
-//                              request.setAttribute("USER_STATUS", "True");
-//                        }
-//                  }
-                  request.setAttribute("ACCOUNT_RESULT", list);
-                  url = AdminCustomerAccount;
+                  request.setAttribute("SEARCH_ACCOUNT_RESULT", list);
+                  url = "MainController?btAction=Manage Account&txtSearchAccount=" + SearchAccount;
             } catch (SQLException e) {
-                  log("LOGINSERVLET _ SQL" + e.getMessage());
+                  e.printStackTrace();
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
@@ -62,13 +56,7 @@ public class ManageAccountController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            try {
-                  processRequest(request, response);
-            } catch (SQLException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NamingException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            processRequest(request, response);
       }
 
       /**
@@ -82,13 +70,7 @@ public class ManageAccountController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            try {
-                  processRequest(request, response);
-            } catch (SQLException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NamingException ex) {
-                  Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            processRequest(request, response);
       }
 
       /**

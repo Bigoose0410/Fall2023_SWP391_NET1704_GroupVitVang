@@ -24,6 +24,12 @@
      </head>
 
      <body>
+          <style>
+               p {
+                    font-size: 5px;
+                    color: red;
+               }
+          </style>
           <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="" />
                <c:param value="Log Out" name="btAction" />
@@ -49,34 +55,34 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
-                         <li><a href="MainController?btAction=Order">
+                         <li><a href="AdminHomePage.jsp">
                                    <i class="uil uil-bill"></i>
-                                   <span class="link-name">Order</span>
+                                   <span class="link-name">Home</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="MainController?btAction=Manage Account">
                                    <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
+                                   <span class="link-name">Manage Account</span>
                               </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Production</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
+                         <!--                         <li><a href="#">
+                                                            <i class="uil uil-grin"></i>
+                                                            <span class="link-name">Production</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-chart-line"></i>
+                                                            <span class="link-name">Production process</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-clipboard-alt"></i>
+                                                            <span class="link-name">Reports</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-screw"></i>
+                                                            <span class="link-name">Material</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-archive-alt"></i>
+                                                            <span class="link-name">Inventory</span>
+                                                       </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -110,72 +116,123 @@
                                    <div class="form-row">
                                         <label for="userID">UserID: </label>
                                         <input type="text" id="userID" name="txtUserID" value="" placeholder="UserID" required="">
-                                   <c:if test="${not empty err.getCustomerIDexistErr()}"></c:if>
 
                                         <label for="roleID">RoleID: </label>
                                         <input type="text" id="roleID" name="txtRoleID" value="" placeholder="RoleID" required="">
+
                                    </div>
+                              <c:if test="${not empty err.getUserIDExistErr()}">
+                                   <p>${err.getUserIDExistErr()}</p>
+                              </c:if>
+                              <c:if test="${not empty err.getRoleIDFormatErr()}">
+                                   <p>${err.getRoleIDFormatErr()}</p>
+                              </c:if>
 
-                                   <div class="form-row">
-                                        <label for="name">Name: </label>
-                                        <input type="text" id="name" name="txtName" value="" placeholder="Name" required="">
-                                   <c:if test="${not empty err.getNameLengthErr()}"></c:if>
+                              <div class="form-row">
+                                   <label for="name">Name: </label>
+                                   <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
 
-                                        <label for="email">Email:</label>
-                                        <input type="email" id="email" name="txtEmail" value="" placeholder="Email" required="">
-                                   <c:if test="${not empty err.getGmailTypeErr()}"></c:if>
-                                   </div>
+                                   <label for="email">Email:</label>
+                                   <input type="email" id="email" name="txtEmail" value="${param.txtEmail}" placeholder="Email" required="">
 
-                                   <div class="form-row">
-                                        <label for="phone">Phone Number: </label>
-                                        <input type="tel" id="phone" name="txtPhoneNumber" value="" placeholder="Phone Number" required="">
-                                   <c:if test="${not empty err.getPhoneNumberTypeErr()}"></c:if>
-
-                                        <label for="address">Address:</label>
-                                        <input type="text" id="address" name="txtAdress" value="" placeholder="Address" required="">
-                                   <c:if test="${not empty err.getAddressLenghtErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="birthday">Birth Date: </label>
-                                        <input type="date" id="birthday" name="txtBirthDate" value="" placeholder="Birth Date" required="">
-                                   <c:if test="${not empty err.getPasswordLengthErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="username">Username: </label>
-                                        <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
-                                   <c:if test="${not empty err.getUsernameLengthErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="password">Password: </label>
-                                        <input type="password" id="password" name="txtPassword" value="" placeholder="Password" required="">
-                                   <c:if test="${not empty err.getPasswordLengthErr()}"></c:if>
-                                   </div>
-
-                                   <div class="form-row">
-                                        <label for="password">Confirm Password: </label>
-                                        <input type="password" id="password" name="txtConfirmPassword" value="" placeholder="Confirm Password" required="">
-                                   <c:if test="${not empty err.getConfirmNotMatch()}"></c:if>
-                                   </div>
-
-
-
-                                   <div class="form-row">
-                                        <label for="gender">Gender: </label>
-
-                                        <label for="male">Male</label>
-                                        <input type="radio" id="male" name="txtSex" value="M">
-
-                                        <label for="female">Female</label>
-                                        <input type="radio" id="female" name="txtSex" value="F">
-                                   </div>
-
-                                   <div class="form-row1">
-                                        <button type="submit" id="CreateButton" value="CreateAccount" name="btAction">Create</button>
-                                   </div>
                               </div>
+                              <div class="form-row">
+                                   <c:if test="${not empty err.getNameFormatErr()}">
+
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getNameFormatErr()}</label>
+                                   </c:if>
+                                   <c:if test="${not empty err.getEmailFormatErr()}">
+
+                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 14%">${err.getEmailFormatErr()}</label>
+                                   </c:if>
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="phone">Phone Number: </label>
+                                   <input type="tel" id="phone" name="txtPhoneNumber" value="${param.txtPhoneNumber}" placeholder="Phone Number" required="">
+
+
+                                   <label for="address">Address:</label>
+                                   <input type="text" id="address" name="txtAdress" value="${param.txtAdress}" placeholder="Address" required="">
+
+                              </div>
+                              <div class="form-row">
+                                   <c:if test="${not empty err.getPhoneNumberFormatErr()}">
+
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getPhoneNumberFormatErr()}</label>
+                                   </c:if>
+                                   <c:if test="${not empty err.getAddressFormatErr()}">
+
+                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 14%">${err.getAddressFormatErr()}</label>
+                                   </c:if>
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="birthday">Birth Date: </label>
+                                   <input type="date" id="birthday" name="txtBirthDate" value="${param.txtBirthDate}" placeholder="Birth Date" required="">
+                                   <c:if test="${not empty err.getBirthDateValidErr()}">
+                                        <p>${err.getBirthDateValidErr()}</p>
+                                   </c:if>
+                              </div>
+                              <div class="form-row">
+                                   <c:if test="${not empty err.getBirthDateValidErr()}">
+
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getBirthDateValidErr()}</label>
+                                   </c:if>
+
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="username">Username: </label>
+                                   <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
+
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="password">Password: </label>
+                                   <input type="password" id="password" name="txtPassword" value="" placeholder="Password" required="">
+
+                              </div>
+                              <div class="form-row">
+                                   <c:if test="${not empty err.getPasswordFormatErr()}">
+
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 31%">${err.getPasswordFormatErr()}</label>
+                                   </c:if>
+                                   <c:if test="${not empty err.getUsernameFormatErr()}">
+
+                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 31%">${err.getUsernameFormatErr()}</label>
+                                   </c:if>
+                              </div>
+
+                              <div class="form-row">
+                                   <label for="password">Confirm Password: </label>
+                                   <input type="password" id="password" name="txtConfirmPassword" value="" placeholder="Confirm Password" required="">
+                                 
+                              </div>
+                                   
+                                   <div class="form-row">
+                                   <c:if test="${not empty err.getConfirmPasswordNotMatchErr()}">
+
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 31%">${err.getConfirmPasswordNotMatchErr()}</label>
+                                   </c:if>
+                              </div>
+
+
+
+                              <div class="form-row">
+                                   <label for="gender">Gender: </label>
+
+                                   <label for="male">Male</label>
+                                   <input type="radio" id="male" name="txtSex" value="M" checked="">
+
+                                   <label for="female">Female</label>
+                                   <input type="radio" id="female" name="txtSex" value="F">
+                              </div>
+
+                              <div class="form-row1">
+                                   <button type="submit" id="CreateButton" value="CreateAccount" name="btAction">Create</button>
+                              </div>
+                         </div>
                          <c:if test="${not empty message}">
                               <h3>${message}</h3>
                          </c:if>

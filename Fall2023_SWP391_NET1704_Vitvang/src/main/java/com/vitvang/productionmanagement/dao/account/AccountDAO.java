@@ -38,9 +38,9 @@ public class AccountDAO implements Serializable {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
                         //2. create SQL statement string
-                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename "
+                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
-                                + "ON Users.RoleID = Role.RoleID ";
+                                + "ON Users.RoleID = Role.RoleID AND Users.UserStatus = 'True' ";
                         //3. Create statement object
                         stm = con.prepareStatement(sql);
                         //4. Excute query
@@ -58,13 +58,15 @@ public class AccountDAO implements Serializable {
                               String Password = rs.getString("Password");
                               int RoleID = rs.getInt("RoleID");
                               String RoleName = rs.getString("Rolename");
-                              AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, RoleName);
+                              Boolean UserStatus = rs.getBoolean("UserStatus");
+                              AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, RoleName, UserStatus);
                               if (this.listAccount == null) {
                                     this.listAccount = new ArrayList<AccountDTO>();
                               }
                               this.listAccount.add(account);
                         }//end username and password are checked
-                  } // end of connection has opend
+                  }
+                  // end of connection has opend
             } finally {
                   if (rs != null) {
                         rs.close();
@@ -86,10 +88,10 @@ public class AccountDAO implements Serializable {
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
-                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename "
+                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID "
-                                + "Where UserID = ? ";
+                                + "Where UserID = ? AND Users.UserStatus = 'True'";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, UserID);
                         rs = stm.executeQuery();
@@ -105,7 +107,8 @@ public class AccountDAO implements Serializable {
                         String Password = rs.getString("Password");
                         int RoleID = rs.getInt("RoleID");
                         String RoleName = rs.getString("Rolename");
-                        AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, RoleName);
+                        Boolean UserStatus = rs.getBoolean("UserStatus");
+                        AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, RoleName, UserStatus);
                         if (this.listAccount == null) {
                               this.listAccount = new ArrayList<AccountDTO>();
                         }
@@ -170,8 +173,8 @@ public class AccountDAO implements Serializable {
                   if (con != null) {
                         //2. create SQL statement string
 
-                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID) "
-                                + "VALUES (?, ?, ? , ?, ?, ?, ?, ?, ?, ?)";
+                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
+                                + "VALUES (?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?)";
                         //3. Create statement object
                         stm = con.prepareStatement(sql);
                         stm.setString(1, account.getUserID());
@@ -184,7 +187,7 @@ public class AccountDAO implements Serializable {
                         stm.setString(8, account.getUsername());
                         stm.setString(9, account.getPassword());
                         stm.setInt(10, account.getRoleID());
-
+                        stm.setBoolean(11, account.isUserStatus());
                         //4. Excute query
                         int row = stm.executeUpdate();
                         //5. Process
@@ -206,6 +209,82 @@ public class AccountDAO implements Serializable {
                   }
             }
             return false;
+      }
+
+      public boolean deleteAccount(String Username) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "UPDATE Users "
+                                + "SET UserStatus = 'False' "
+                                + "WHERE Username = ? ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, Username);
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+
+      public void searchAccount(String SearchAccount) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
+                                + "FROM Users JOIN Role "
+                                + "ON Users.RoleID = Role.RoleID "
+                                + "WHERE Name LIKE ? AND UserStatus = 'True' ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, "%" + SearchAccount + "%");
+                        rs = stm.executeQuery();
+                  }
+                  while (rs.next()) {
+                        String UserID = rs.getString("UserID");
+                        String Name = rs.getString("Name");
+                        String PhoneNumber = rs.getString("PhoneNumber");
+                        String Sex = rs.getString("Sex");
+                        String Adress = rs.getString("Adress");
+                        Date BirthDate = rs.getDate("BirthDate");
+                        String Email = rs.getString("Email");
+                        String Username = rs.getString("Username");
+                        String Password = rs.getString("Password");
+                        int RoleID = rs.getInt("RoleID");
+                        String RoleName = rs.getString("Rolename");
+                        Boolean UserStatus = rs.getBoolean("UserStatus");
+                        AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, RoleName, UserStatus);
+                        if (this.listAccount == null) {
+                              this.listAccount = new ArrayList<AccountDTO>();
+                        }
+                        this.listAccount.add(account);
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+            }
       }
 
 }

@@ -39,34 +39,34 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
-                         <li><a href="MainController?btAction=Order">
+                         <li><a href="AdminHomePage.jsp">
                                    <i class="uil uil-bill"></i>
-                                   <span class="link-name">Order</span>
+                                   <span class="link-name">Home</span>
                               </a></li>
-                         <li><a href="#">
+                         <li><a href="MainController?btAction=Manage Account">
                                    <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
+                                   <span class="link-name">Manage Account</span>
                               </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Production</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
+                         <!--                         <li><a href="}">
+                                                            <i class="uil uil-grin"></i>
+                                                            <span class="link-name">Production</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-chart-line"></i>
+                                                            <span class="link-name">Production process</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-clipboard-alt"></i>
+                                                            <span class="link-name">Reports</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-screw"></i>
+                                                            <span class="link-name">Material</span>
+                                                       </a></li>
+                                                  <li><a href="#">
+                                                            <i class="uil uil-archive-alt"></i>
+                                                            <span class="link-name">Inventory</span>
+                                                       </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -90,35 +90,78 @@
           </nav>
           <section class="dashboard">
                <h1><strong>Account</strong></h1>
-               <div class="header">
-                    <div class="search">
-                         <input type="text" placeholder="Customer...">
-                         <button type="button">Search</button>
+               <form action="MainController">
+                    <div class="header">
+                         <div class="search">
+                              <input type="text" name="txtSearchAccount" value="" placeholder="Customer...">
+                              <button type="submit" name="btAction" value="SearchAccount">Search</button>
+                         </div>
+                         <div class="button">
+                              <a href="AdminCreateAccount.jsp">+ Create</a>
+                         </div>
                     </div>
-                    <div class="button">
-                         <a href="AdminCreateAccount.jsp">+ Create</a>
-                    </div>
-               </div>
+               </form>
 
                <!--Group box account-->
+               <c:set var="searchAccount" value="${param.txtSearchAccount}"></c:set>
                <c:set var="result" value="${requestScope.ACCOUNT_RESULT}" />
+               <c:set var="searchResult" value="${requestScope.SEARCH_ACCOUNT_RESULT}" />
+               <%--<c:set var="status" value="${requestScope.USER_STATUS}" />--%>
                <div class="box">
-                    <c:forEach var="dto" items="${result}">
 
-                         <div class="group-box">
-                              <span><a href="Information.html">${dto.getUserID()}</a></span>
+                    <c:if test="${empty searchAccount}">
+                         <c:if test="${not empty result}">
 
-                              <div class="group-content">
-                                   <p>Name: <i>${dto.getName()}</i></p>
-                                   <p>Phone: <i>${dto.getPhoneNumber()}</i></p>
-                                   <p>Role: <i>${dto.getRoleName()}</i></p>
-                              </div>
+                              <c:forEach var="dto" items="${result}">
+                                   <c:if test="${dto.isUserStatus()}">
+
+                                        <div class="group-box">
+                                             <form action="MainController">
+                                                  <span><a href="Information.html">${dto.getUserID()}</a></span>
+
+                                                  <div class="group-content">
+                                                       <p>Name: <i>${dto.getName()}</i></p>
+                                                       <p>Phone: <i>${dto.getPhoneNumber()}</i></p>
+                                                       <p>Role: <i>${dto.getRoleName()}</i></p>
+                                                  </div>
+
+                                                  <input type="hidden" name="txtUserID" value="${dto.getUserID()}" />
+                                                  <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
+
+                                             </form>
+                                        </div>
+                                   </c:if>
+                              </c:forEach>
+                         </c:if>
+                         <c:if test="${empty result}">
+                              <h3 style="color: red">Account list is empty !!!</h3>
+                         </c:if>
+                    </c:if>
+                    <c:if test="${not empty searchAccount}">
+                         <c:if test="${not empty searchResult}">
                               <form action="MainController">
-                                   <input type="hidden" name="txtUserID" value="${dto.getUserID()}" />
-                                   <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
+                                   <c:forEach var="dto1" items="${searchResult}">
+                                        <div class="group-box">
+                                             <span><a href="Information.html">${dto1.getUserID()}</a></span>
+
+                                             <div class="group-content">
+                                                  <p>Name: <i>${dto1.getName()}</i></p>
+                                                  <p>Phone: <i>${dto1.getPhoneNumber()}</i></p>
+                                                  <p>Role: <i>${dto1.getRoleName()}</i></p>
+                                             </div>
+
+                                             <input type="hidden" name="txtUserID" value="${dto1.getUserID()}" />
+                                             <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
+
+                                        </div>
+
+                                   </c:forEach>
                               </form>
-                         </div>
-                    </c:forEach>
+                         </c:if>
+                         <c:if test="${empty searchResult}">
+                              <h3 style="color: red">Your search account is not available !!!</h3>
+                         </c:if>
+                    </c:if>
                </div>
           </section>
      </body>
