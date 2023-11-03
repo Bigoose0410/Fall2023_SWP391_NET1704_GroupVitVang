@@ -24,6 +24,7 @@
 		Username NVARCHAR(50) NOT NULL,
 		Password NVARCHAR(MAX) NOT NULL,
 		RoleID INT NOT NULL,
+		UserStatus BIT,
 		FOREIGN KEY (RoleID) REFERENCES Role(RoleID),
 		UNIQUE(Username)
 	)
@@ -136,11 +137,11 @@
 	(4, 'Customer');
 
 
-	INSERT INTO Users (UserID,Name,PhoneNumber,Sex,Adress,BirthDate,Email,Username,Password,RoleID) VALUES 
-('CS003','nguyen van a',987456321,'M','Hue','2001/01/04','abc@gmail.com','AC003','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu' ,4),
-('CS004','Trien Chieu',741258963,'F','Quang ninh','2000/09/15','xyz@gmail.com', 'AC004','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu',4),
-('AC001','thetam',123456789,'M','binh duong','2023/10/14','thetam@gmail.com','AC001','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu',1),
-('AC002','batung',9876544321,'F','ho chi minh','2002/7/15','batung@gmail.com','AC002','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu',2);
+	INSERT INTO Users (UserID,Name,PhoneNumber,Sex,Adress,BirthDate,Email,Username,Password,RoleID,UserStatus) VALUES 
+('CS003','nguyen van a',987456321,'M','Hue','2001/01/04','abc@gmail.com','AC003','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu' ,4, 'True'),
+('CS004','Trien Chieu',741258963,'F','Quang ninh','2000/09/15','xyz@gmail.com', 'AC004','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu',4, 'True'),
+('AC001','thetam',123456789,'M','binh duong','2023/10/14','thetam@gmail.com','AC001','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu',1, 'True'),
+('AC002','batung',9876544321,'F','ho chi minh','2002/7/15','batung@gmail.com','AC002','000b5u00071u0006au000c8u000a6u0009eu000e5u000b8u0003au0000fu00001u00034u00093u00059u000c3u0004cu',2, 'True');
 
 INSERT INTO Orderr (OrderID,StartDate,EndDate,TotalPrice,Address,StatusProgress) VALUES 
 ('OD001',CAST('2023/10/10'AS DATE),CAST('2023/12/12'AS DATE),0,'Binh Duong','new order'),

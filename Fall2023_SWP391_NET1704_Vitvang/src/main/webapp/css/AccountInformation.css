@@ -341,7 +341,7 @@ body.dark nav {
 }
 
 .form-row {
-     display: flex;
+     /*display: flex;*/
      align-items: center;
      margin-bottom: 10px;
 }
@@ -357,7 +357,7 @@ body.dark nav {
 .form-row input[type="email"],
 .form-row input[type="tel"] {
      flex: 2;
-     width: 100%;
+     width: 63%;
      padding: 8px;
      border: 1px solid #ccc;
      border-radius: 5px;
@@ -377,7 +377,7 @@ body.dark nav {
 
 .form-row i {
      font-size: 1.3em;
-     margin-right: 82%;
+     margin-right: 70%;
 }
 
 
