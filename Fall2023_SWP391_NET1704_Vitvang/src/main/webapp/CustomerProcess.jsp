@@ -1,21 +1,18 @@
 <%-- 
-    Document   : processs
-    Created on : Oct 7, 2023, 11:32:39 AM
+    Document   : CustomerProcess
+    Created on : Nov 5, 2023, 11:25:48 PM
     Author     : Admin
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/ProcessDetail1.css">
+          <link rel="stylesheet" href="css/CustomerProcess.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -23,52 +20,60 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-          <!--<script src="index.js"></script>-->
-
-          <title>Production Process</title>
+          <title>Processing</title>
      </head>
 
      <body>
-          <nav>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="" />
+               <c:param value="Log Out" name="btAction" />
+          </c:url>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction" />
+          </c:url>
+          <c:set var="CageID" value="${param.txtCageID}"></c:set>
+          <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
+               <nav>
 
-               <div class="logo-name"style="display: block;">
+                    <div class="logo-name">
+                         <div class="logo-image">
+                              <img src="images/logo.png" alt="">
+                         </div>
 
-                    <div class="logo-image">
-                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
-                    </div>
                </div>
+
                <div class="menu-items">
                     <ul class="nav-links">
-                         <!--                              <li ><a href="#">
-                                                                 <i class="uil uil-estate"></i>
-                                                                 <span class="link-name">Dahsboard</span>
-                                                            </a></li>-->
-                         <li ><a href="MainController?btAction=Order">
+                         <li><a href="#">
+                                   <i class="uil uil-estate"></i>
+                                   <span class="link-name">Dahsboard</span>
+                              </a></li>
+                         <li><a href="MainController?btAction=Order">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
-                         <li ><a href="MainController?btAction=Customers">
-                                   <i class="uil uil-bill"></i>
+                         <li><a href="#">
+                                   <i class="uil uil-grin"></i>
                                    <span class="link-name">Customers</span>
                               </a></li>
-                         <li ><a href="${productionList}">
+                         <li><a href="${productionList}">
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
-                         <li ><a href="MainController?btAction=Production process">
+                         <li><a href="#">
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
-                         <li > <a href="#">
+                         <li><a href="#">
                                    <i class="uil uil-clipboard-alt"></i>
                                    <span class="link-name">Reports</span>
                               </a></li>
-                         <li ><a href="#">
+                         <li><a href="#">
                                    <i class="uil uil-screw"></i>
                                    <span class="link-name">Material</span>
                               </a></li>
-                         <li > <a href="#">
+                         <li><a href="#">
                                    <i class="uil uil-archive-alt"></i>
                                    <span class="link-name">Inventory</span>
                               </a></li>
@@ -77,7 +82,7 @@
                     <ul class="logout-mode">
                          <li><a href="${logout_query}">
                                    <i class="uil uil-signout"></i>
-                                   <span class="link-name" >Logout</span>
+                                   <span class="link-name">Logout</span>
                               </a></li>
 
                          <li class="mode">
@@ -93,12 +98,13 @@
                     </ul>
                </div>
           </nav>
+
           <section class="dashboard1">
                <div id="processing-form">
                     <!--Processing-->
                     <!--<h1>Processing</h1>-->
 
-                    <c:set var="result" value="${requestScope.PROCESS_RESULT}"></c:set>
+                    <c:set var="result" value="${requestScope.PROCESS_ORDER_RESULT}"></c:set>
                     <c:set var="processID" value="${requestScope.HIGHLIGHT}"></c:set>
                          <section class="dashboard">
                               <header>
@@ -162,7 +168,7 @@
 
                                                                            <th>Process Name</th>
                                                                            <th>Description</th>
-                                                                           <th class="nosort">Update</th>
+                                                                           <!--<th class="nosort">Update</th>-->
                                                                            <th class="nosort">Status</th>
                                                                       </tr>
                                                                  </thead>
@@ -190,6 +196,7 @@
                                                                       ${dto.getNumberOfEmployee()}
                                                                  </li>
                                                                  </td>
+                                                                 <%--
                                                                  <td>
                                                                       <strong>Add More Completed:</strong>
                                                                       <div class="quantity">
@@ -200,8 +207,8 @@
                                                                            <div class="tick_button">
                                                                                 <button  type="submit" value="UpdateStatusProcess" name="btAction"
                                                                                          <c:if test="${!dto.getProcessID().equals(processID)}">
-                                                                                              disabled style="opacity: 0.2";
-                                                                                         </c:if>>
+                                                                                          disabled style="opacity: 0.2";
+                                                                                     </c:if>>
                                                                                      <i class="fa fa-check-square"></i></button>
                                                                            </div>
                                                                       </div>
@@ -212,16 +219,17 @@
                                                                            <div class="tick_button">
                                                                                 <button type="submit" value="UpdateEmployee"
                                                                                         <c:if test="${!dto.getProcessID().equals(processID)}">
-                                                                                             disabled ;
-                                                                                             style="opacity: 0.2";
-                                                                                        </c:if>
-                                                                                        name="btAction"><i class="fa fa-check-square"></i></button>
+                                                                                          disabled ;
+                                                                                          style="opacity: 0.2";
+                                                                                     </c:if>
+                                                                                     name="btAction"><i class="fa fa-check-square"></i></button>
                                                                            </div>
                                                                       </div>
                                                                  </td>
+                                                                 --%>
                                                                  <td class="process_button">
                                                                       <div class="input-container">
-                                                                           <select class="input-field" name="txtStatus">
+                                                                           <select class="input-field" name="txtStatus" disabled="">
                                                                                 <option selected="selected">${dto.getStatus()}</option>
 
                                                                            </select>
@@ -248,5 +256,8 @@
                     <script src="ProcessDetail.js"></script>
                </div>
           </section>
+
+          <script src="js/CustomerProcess.js"></script>
      </body>
+
 </html>

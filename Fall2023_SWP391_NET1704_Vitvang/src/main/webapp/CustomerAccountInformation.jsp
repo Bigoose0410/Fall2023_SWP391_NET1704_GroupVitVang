@@ -47,18 +47,18 @@
 
                     <div class="menu-items">
                          <ul class="nav-links">
-                              <li><a href="MainController?btAction=Dashboard">
+                              <li><a href="CustomerHomePage.jsp">
                                         <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dashboard</span>
-                                   </a></li>
-
-                              <li><a href="AdminHomePage.jsp">
-                                        <i class="uil uil-bill"></i>
                                         <span class="link-name">Home</span>
                                    </a></li>
-                              <li><a href="MainController?btAction=Manage Account">
+
+                              <li><a href="MainController?btAction=Customer's Account">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Account</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=Customer's Order">
                                         <i class="uil uil-grin"></i>
-                                        <span class="link-name">Manage Account</span>
+                                        <span class="link-name">Order</span>
                                    </a></li>
                               <!--                                   <li><a href="MainController?btAction=Production process">
                                                                            <i class="uil uil-chart-line"></i>
@@ -106,7 +106,7 @@
                     </div>
 
           </nav>
-          <c:set var="result" value="${requestScope.ACCOUNT_DETAIL}"></c:set>
+          <c:set var="result" value="${requestScope.CUSTOMER_ACCOUNT}"></c:set>
           <c:set var="err" value="${requestScope.UPDATE_ACCOUNT_ERR}"></c:set>
           <c:set var="message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
                <section class="dashboard">
@@ -125,7 +125,7 @@
                                         <label for="userID">User ID: <i>${dto.getUserID()}</i></label>
                                         <input type="hidden" id="userID" name="txtUserID" value="${dto.getUserID()}">
 
-                                        <label for="roleID">Role ID: <i>${dto.getRoleName()}</i></label>
+                                        <label for="roleID">Role: <i>${dto.getRoleName()}</i></label>
                                    </div>
 
                                    <div class="form-row2">

@@ -87,7 +87,7 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "select OrderID, CageID , Quantity "
+                        String sql = "select OrderID, CageID , Quantity, OrderDetailStatus "
                                 + "from OrderDetail "
                                 + "where OrderID = ? AND CageID = ?";
                         stm = con.prepareStatement(sql);
@@ -394,6 +394,39 @@ public class OrderDAO implements Serializable {
             return false;
 
       }
+      
+     public String NewestOrder()
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            String newestOrder = "";
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "Select top 1 * "
+                                + "From Orderr "
+                                + "Where StatusProgress like 'new order' "
+                                + "Order by OrderID desc ";
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              newestOrder = rs.getString("OrderID");
+                              return newestOrder;
+                        }
+                        // hoan chinh roi thi excutequery
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return newestOrder;
+      }
 
       public boolean addOrderDetail(String CageID, int quantity)
               throws SQLException, NamingException {
@@ -609,6 +642,43 @@ public class OrderDAO implements Serializable {
                   }
             }
             return 0;
+      }
+      
+      public boolean countOrderDetailnotDone(String OrderID)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "Select count(*) "
+                                + "From OrderDetail "
+                                + "where OrderID like ? "
+                                + "AND OrderDetailStatus not like 'Done'";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, "%" + OrderID + "%");
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              int total = rs.getInt(1);
+                              if (total == 0) {
+                              return true;
+                              }
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
       }
 
 }

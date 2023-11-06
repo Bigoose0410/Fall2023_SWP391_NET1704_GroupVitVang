@@ -47,7 +47,7 @@ public class AddDesignProcess extends HttpServlet {
             String url = ERROR_PAGE;
             try {
                   if (Description.length() < 5 || Description.length() > 251) {
-                        error.setDescriptionLengthErr("     Your description from 6-251 chars please");
+                        error.setDescriptionLengthErr("     Your description must from 6-251 chars please");
                         foundErr = true;
                   }
                   int timeprocess;

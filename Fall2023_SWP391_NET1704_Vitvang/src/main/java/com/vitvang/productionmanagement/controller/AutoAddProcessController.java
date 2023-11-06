@@ -11,6 +11,7 @@ import com.vitvang.productionmanagement.exception.processs.AutoAddProcessErr;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
+import static com.vitvang.productionmanagement.util.tool.nextdate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ import javax.naming.NamingException;
  *
  * @author thetam
  */
-@WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
+@WebServlet(name = "AutoAddProcessController", urlPatterns = {"/AutoAddProcessController"})
 public class AutoAddProcessController extends HttpServlet {
 
       private static final String ERROR_PAGE = "ErrorPage.html";
@@ -86,7 +87,7 @@ public class AutoAddProcessController extends HttpServlet {
                                       designDTO.getNumCompletionCage(), 1);
                               result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity(), designDTO);
                               i++;
-                              startdate = endDate;
+                              startdate = nextdate(endDate);
                         }
                         result2 = processdao.updateStatusNewOrder(orderID, cageID);
 

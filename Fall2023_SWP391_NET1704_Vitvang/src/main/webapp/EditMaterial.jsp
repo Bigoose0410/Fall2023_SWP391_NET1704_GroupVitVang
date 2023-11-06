@@ -49,11 +49,19 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
+<<<<<<< HEAD
 <!--                              <li ><a href="#">
                                         <i class="uil uil-estate"></i>
                                         <span class="link-name">Dahsboard</span>
                                    </a></li>-->
                               <li ><a href="MainController?btAction=Order">
+=======
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
+                              <li ><a href="MainController?btAction=Search">
+>>>>>>> 5e3c144c3fe79b26c984af5334d6a208df613300
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -134,7 +142,7 @@
                                                   <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
                                              </td>
 
-                                             <td>
+                                             <td class="td3" style="text-align: left; display: flex; justify-content: center">
                                                   ${dto.getName()} / ${dto.getUnit()}
                                              </td>
 
