@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Cuprum&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+background-color: rgb(2 255 143 / 5%);
+  background-size: 100% 100%;
+}
+.center{
+  position: relative;
+  padding: 50px 50px;
+  backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 1px ; 
+  border-radius: 10px;
+  color: rgb(49 37 37);
+  background-color: #00d9ff4d;
+}
+h1{
+  font-size: 3em;
+  padding: 10px;
+  color: rgb(12, 12, 12);
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  padding-left: 10px;
+  text-align: center;
+}
+.inputbox{
+  position: relative;
+  width: 400px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #110e0e;
+  color: #3b737c;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.inputbox:last-child{
+  margin-bottom: 0;
+}
+.inputbox span{
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+    font-family: Cuprum;
+}
+.inputbox input:focus ~ span,
+.inputbox input:valid ~ span{
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+.button{
+  display: flex;
+  justify-content: center;
+}
+.btn{
+  width: 60px;
+  height: 20px;
+  border-radius: 20px;
+  border:#c21111;
+ 
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn:hover{
+  background-color: rgb(207, 207, 207);
+}
+.submit-button {
+  border: 1px solid transparent;
+
+  padding: 10px 20px;
+ font-size: 20px;
+ border-radius: 20px;
+ color:rgb(241, 238, 232);
+ background-color: #7679cd;
+}
+
+/* .submit-button:hover {
+  border-color: pink;
+  background-color: rgb(237, 228, 230);
+  border-radius: 10px;
+} */
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.login{
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 1px ; 
+}
+img{
+  width:500px;
+  
+}
+.a{
+   display:flex;
+   text-align: center;
+    padding: 50px 50px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgb(#121ab7ee);
+  box-shadow: -3px 4px 1px #0c1da554; 
+  border-radius: 10px;
+}

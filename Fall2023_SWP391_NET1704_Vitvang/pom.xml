@@ -1,79 +1,154 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany</groupId>
-    <artifactId>Fall2023_SWP391_NET1704_Vitvang</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>Fall2023_SWP391_NET1704_Vitvang-1.0-SNAPSHOT</name>
+     <modelVersion>4.0.0</modelVersion>
+     <groupId>com.mycompany</groupId>
+     <artifactId>Fall2023_SWP391_NET1704_Vitvang</artifactId>
+     <version>1.0-SNAPSHOT</version>
+     <packaging>war</packaging>
+     <name>Fall2023_SWP391_NET1704_Vitvang-1.0-SNAPSHOT</name>
     
-    <properties>
-        <maven.compiler.release>11</maven.compiler.release>
-        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-        <jakartaee>9.1.0</jakartaee>
-    </properties>
+     <properties>
+          <maven.compiler.release>11</maven.compiler.release>
+          <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <jakartaee>9.1.0</jakartaee>
+          <sitemesh.version>2.4.2</sitemesh.version>
+     </properties>
     
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
-<dependency>
-    <groupId>jakarta.platform</groupId>
-    <artifactId>jakarta.jakartaee-api</artifactId>
-    <version>10.0.0</version>
-    <scope>provided</scope>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-servlet</artifactId>
-    <version>3.1.3</version>
-</dependency>
+     <dependencies>
 
-    </dependencies>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <compilerArgs>
-                        <args>-Djava.endorsed.dirs=${endorsed.dir}</args>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${endorsed.dir}</outputDirectory>
-                            <silent>true</silent>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>jakarta.platform</groupId>
-                                    <artifactId>jakarta.jakartaee-api</artifactId>
-                                    <version>${jakartaee}</version>
-                                    <type>jar</type>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+          <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
+          <dependency>
+               <groupId>jakarta.platform</groupId>
+               <artifactId>jakarta.jakartaee-api</artifactId>
+               <version>10.0.0</version>
+               <scope>provided</scope>
+          </dependency>
+          <dependency>
+               <groupId>org.glassfish.jersey.containers</groupId>
+               <artifactId>jersey-container-servlet</artifactId>
+               <version>3.1.3</version>
+          </dependency>
+          <dependency>
+               <!--ho tro json -->
+               <groupId>org.glassfish.jersey.inject</groupId>
+               <artifactId>jersey-hk2</artifactId>
+               <version>3.1.3</version>
+          </dependency>
+          <dependency>
+               <groupId>org.glassfish.jersey.media</groupId>
+               <artifactId>jersey-media-json-jackson</artifactId>
+               <version>3.1.3</version>
+          </dependency>
+          <dependency>
+               <groupId>com.microsoft.sqlserver</groupId>
+               <artifactId>mssql-jdbc</artifactId>
+               <version>10.2.1.jre17</version>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+          <dependency>
+               <groupId>org.projectlombok</groupId>
+               <artifactId>lombok</artifactId>
+               <version>1.18.30</version>
+               <scope>provided</scope>
+          </dependency>
+
+
+          <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+          <dependency>
+               <groupId>org.projectlombok</groupId>
+               <artifactId>lombok</artifactId>
+               <version>1.18.28</version>
+               <scope>provided</scope>
+          </dependency>
+          <dependency>
+
+               <groupId>cloud.piranha.core</groupId>
+               <artifactId>piranha-core-servlet-api</artifactId>
+               <version>22.6.0</version>
+               <type>jar</type>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
+      
+          <dependency>
+               <groupId>opensymphony</groupId>
+               <artifactId>sitemesh</artifactId>
+               <version>${sitemesh.version}</version>
+          </dependency>
+        
+          <dependency>
+               <groupId>jakarta.servlet.jsp.jstl</groupId>
+               <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+               <version>3.0.0</version>
+          </dependency>
+          <dependency>
+               <groupId>org.glassfish.web</groupId>
+               <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+               <version>3.0.1</version>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail -->
+          <dependency>
+               <groupId>com.sun.mail</groupId>
+               <artifactId>jakarta.mail</artifactId>
+               <version>2.0.1</version>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/com.sun.activation/jakarta.activation -->
+          <dependency>
+               <groupId>com.sun.activation</groupId>
+               <artifactId>jakarta.activation</artifactId>
+               <version>2.0.1</version>
+          </dependency>
+          <dependency>
+               <groupId>jakarta.activation</groupId>
+               <artifactId>jakarta.activation-api</artifactId>
+               <version>2.1.2</version>
+          </dependency>
+
+
+     </dependencies>
+     <build>
+          <plugins>
+               <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                    <configuration>
+                         <compilerArgs>
+                              <args>-Djava.endorsed.dirs=${endorsed.dir}</args>
+                         </compilerArgs>
+                    </configuration>
+               </plugin>
+               <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.3.2</version>
+               </plugin>
+               <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <executions>
+                         <execution>
+                              <phase>validate</phase>
+                              <goals>
+                                   <goal>copy</goal>
+                              </goals>
+                              <configuration>
+                                   <outputDirectory>${endorsed.dir}</outputDirectory>
+                                   <silent>true</silent>
+                                   <artifactItems>
+                                        <artifactItem>
+                                             <groupId>jakarta.platform</groupId>
+                                             <artifactId>jakarta.jakartaee-api</artifactId>
+                                             <version>${jakartaee}</version>
+                                             <type>jar</type>
+                                        </artifactItem>
+                                   </artifactItems>
+                              </configuration>
+                         </execution>
+                    </executions>
+               </plugin>
+          </plugins>
+     </build>
 </project>

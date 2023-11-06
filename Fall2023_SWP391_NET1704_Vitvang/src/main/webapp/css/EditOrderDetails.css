@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+}
+
+header h1 {
+    margin-right: 30%;
+}
+
+/* Container styles */
+.container {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: normal;
+    /* padding-bottom: 200px; */
+}
+
+.navbar .content-navebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Image styles */
+img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    padding: 0px 10px;
+}
+
+/* Logo styles */
+.logo {
+    font-size: 24px;
+    color: white;
+    /* Added text color */
+}
+
+/* Navigation links styles */
+.nav-links {
+    list-style: none;
+    padding-left: 30px;
+    margin: 0;
+    /* display: flex; */
+}
+
+.nav-links ul {
+    display: flex;
+    padding-right: 100px;
+}
+
+.nav-links li {
+    display: inline;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.main-Info {
+    /* border: 1px solid yellow; */
+    width: 350px;
+    /* justify-items: flex-end; */
+    /* font-size: 100px; */
+
+}
+
+.main-Info :first-child {
+    font-size: 10px;
+    display: inline;
+
+}
+
+.main-Info :first-child input {
+    font-size: 10px;
+    padding: 3px;
+}
+
+.main-Info :last-child {
+    font-size: 10px;
+    display: inline;
+}
+
+.main-content {
+    /* padding: 150px 100px; */
+    border: 1px solid black;
+
+}
+
+.table-content {
+    margin-top: 100px;
+    width: 100px;
+    /* padding-right: 35%; */
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* padding: 50px 50px 7px; */
+}
+
+table td, th {
+    /* width: 90%; */
+    /* background-color: aqua; */
+    border: 1px solid;
+    padding: 10px;
+}
+
+table th {
+    background-color: rgb(197, 196, 196);
+}
+
+td, th {
+    padding: 10px 20px;
+}
+
+.main-content ul {
+    width: 100px;
+    list-style: none;
+    align-items: center;
+    padding-right: 130px;
+    margin: 30px;
+}
+
+.main-content ul li {
+    padding-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    padding-right: 100px;
+}
+
+.main-content ul li input {
+    width: 250px;
+    padding: 10px;
+}
+
+/* Footer styles */
+footer {
+    background-color: black;
+    ;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Sidebar styles */
+aside {
+    width: 17%;
+    background-color: rgb(53, 52, 52);
+    height: 875px;
+}
+
+/* Main content styles */
+main {
+    padding-bottom: 250px;
+    padding-left: 20px;
+    height: 85vh;
+    /* margin: 0 auto; */
+}
+
+/* Additional styles for links inside sidebar */
+aside .nav-links li a {
+    display: flex;
+    padding: 10px;
+    color: white;
+}
+
+main .text-right {
+    padding-top: 10px;
+    justify-content: left;
+}
+
+.submit-button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 1000px;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+.hide {
+    display: none;
+}
+
+.notification {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+* {
+margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+:root {
+  --dark: #34495E;
+  --light: #ffffff;
+  --success: #0ABF30;
+  --error: #E24D4C;
+  --warning: #E9BD0C;
+  --info: #3498DB;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--dark);
+}
+.notifications {
+  position: fixed;
+  top: 30px;
+  right: 20px;
+}
+.notifications :where(.toast, .column) {
+  display: flex;
+  align-items: center;
+}
+.notifications .toast {
+  width: 400px;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  border-radius: 4px;
+  padding: 16px 17px;
+  margin-bottom: 10px;
+  background: var(--light);
+  justify-content: space-between;
+  animation: show_toast 0.3s ease forwards;
+}
+@keyframes show_toast {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-5%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+.notifications .toast.hide {
+  animation: hide_toast 0.3s ease forwards;
+}
+@keyframes hide_toast {
+  0% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(calc(100% + 20px));
+  }
+}
+.toast::before {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  animation: progress 5s linear forwards;
+}
+@keyframes progress {
+  100% {
+    width: 0%;
+  }
+}
+.toast.success::before, .btn#success {
+  background: var(--success);
+}
+.toast.error::before, .btn#error {
+  background: var(--error);
+}
+.toast.warning::before, .btn#warning {
+  background: var(--warning);
+}
+.toast.info::before, .btn#info {
+  background: var(--info);
+}
+.toast .column i {
+  font-size: 1.75rem;
+}
+.toast.success .column i {
+  color: var(--success);
+}
+.toast.error .column i {
+  color: var(--error);
+}
+.toast.warning .column i {
+  color: var(--warning);
+}
+.toast.info .column i {
+  color: var(--info);
+}
+.toast .column span {
+  font-size: 1.07rem;
+  margin-left: 12px;
+}
+.toast i:last-child {
+  color: #aeb0d7;
+  cursor: pointer;
+}
+.toast i:last-child:hover {
+  color: var(--dark);
+}
+.buttons .btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0 5px;
+  color: var(--light);
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+@media screen and (max-width: 530px) {
+  .notifications {
+    width: 95%;
+  }
+  .notifications .toast {
+    width: 100%;
+    font-size: 1rem;
+    margin-left: 20px;
+  }
+  .buttons .btn {
+    margin: 0 1px;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+  }
+}
+}
