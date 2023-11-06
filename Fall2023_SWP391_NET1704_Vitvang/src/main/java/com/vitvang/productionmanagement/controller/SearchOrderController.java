@@ -1,7 +1,8 @@
 package com.vitvang.productionmanagement.controller;
-import com.vitvang.productionmanagement.dao.order.OrderDAO;
-import com.vitvang.productionmanagement.model.OrderDTO;
-import jakarta.servlet.RequestDispatcher;
+
+import com.vitvang.productionmanagement.dao.process.ProcessDAO;
+import com.vitvang.productionmanagement.model.ProcessDTO;
+import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,75 +11,79 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "SearchOrderController", urlPatterns = {"/SearchOrderController"})
-public class SearchOrderController extends HttpServlet {
+@WebServlet(name = "ProcessController", urlPatterns = {"/ProcessController"})
+public class ProcessController extends HttpServlet {
 
-      private final String OrderSearch = "Order.jsp";
+      private final String Process = "Process.jsp";
+      private final String ProcessDetail = "ProcessDetail.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+              throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            String searchValue = request.getParameter("txtSearchValue");
-            String page = request.getParameter("page");
-
             String url = ERROR_PAGE;
+            String OrderID = request.getParameter("txtOrderID");
+            String CageID = request.getParameter("txtCageID");
+            String ProcessID = request.getParameter("txtProcessID");
+            String button = request.getParameter("btAction");
             try {
-                  OrderDAO dao = new OrderDAO();
-                  if (searchValue == null) {
-                        searchValue = "";
-                  }
-                  if (page == null) {
-                        page = "1";
-                  }
-                  int indexPage = Integer.parseInt(page);
-                  int fieldShow = 5;
+//                  ProcessDAO dao = new ProcessDAO();
+//                  if (!button.equals("ViewProcessDetail")) {
+//                        dao.ViewNewOrder();
+//                        List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
+//                        request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
+//                        url = Process;
+//                  } else {
+//                        if(ProcessID == null){
+//                              ProcessID = "PR001";
+//                        }
+//                        dao.ViewProcessingOrder(OrderID, CageID, CageID);
+////                        List<ProcessDTO> process = dao.getListOrdersProcess();
+//                        ProcessDTO eachStep = new ProcessDTO();
+//                        eachStep = dao.GetProcessingbyID(OrderID, CageID, ProcessID);
+//                        if (eachStep != null) {
+//                              request.setAttribute("STEP_PROCESS" , eachStep);
+//                              if (eachStep.getStatus().equals("Processing")) {
+//                                    request.setAttribute("HIGHLIGHT" , eachStep.getProcessID());
+//                              }
+//                        }
+//                        request.setAttribute("PROCESS_RESULT", dao.getListOrdersProcess());
+//                        url = ProcessDetail;
 
-                  int endPage = dao.getNumberPage( searchValue.trim(), fieldShow);
-                  List<OrderDTO> result = dao.getPagingByCreateDateDesc(indexPage, searchValue.trim(), fieldShow);
-                  int start = 1;
-                  int distance = 3;
-
-                  int end;
-                  if (endPage < distance) {
-                        end = endPage;
+//                  }
+                  ProcessDAO dao = new ProcessDAO();
+                  if (!button.equals("ViewProcessDetail")) {
+                        dao.ViewNewOrder();
+                        List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
+                        request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
+                        url = Process;
                   } else {
-                        end = start + distance;
-                  }
-
-                  if (indexPage >= 3) {
-                        start = indexPage - 2;
-                        end = indexPage + 2;
-                        if (indexPage + distance >= endPage) {
-                              start = endPage - distance;
-                              end = endPage;
+                        dao.ViewProcessingOrder(OrderID, CageID, CageID);
+                        List<ProcessDTO> process = dao.getListOrdersProcess();
+                        for (ProcessDTO proces : process) {
+                              if (proces.getStatus().equals("Processing")) {
+                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
+                                    break;
+                              }
                         }
+                        request.setAttribute("PROCESS_RESULT", process);
+                        url = ProcessDetail;
                   }
-                 
-                  url = OrderSearch;
-                  request.setAttribute("TOTAL_ORDER", result.size());
-                  request.setAttribute("PROCESS_ORDER", dao.countProcessingOrder());
-                  request.setAttribute("NEW_ORDER", dao.countNewOrder());
-                  request.setAttribute("START", start);
-                  request.setAttribute("END", end);
-                  request.setAttribute("indexCurrent", indexPage);
-                  request.setAttribute("endPage", endPage);
-                  request.setAttribute("SEARCH_RESULT", result);
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-            } catch (ClassNotFoundException ex) {
-                  ex.printStackTrace();
+            } catch (SQLException e) {
+                  log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+                  request.getRequestDispatcher(url).forward(request, response);
             }
       }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
       /**
        * Handles the HTTP <code>GET</code> method.
        *
@@ -90,7 +95,11 @@ public class SearchOrderController extends HttpServlet {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (SQLException ex) {
+                  Logger.getLogger(ProcessController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
@@ -104,7 +113,11 @@ public class SearchOrderController extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
-            processRequest(request, response);
+            try {
+                  processRequest(request, response);
+            } catch (SQLException ex) {
+                  Logger.getLogger(ProcessController.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       /**
