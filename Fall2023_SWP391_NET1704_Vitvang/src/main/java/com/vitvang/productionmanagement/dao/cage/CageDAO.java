@@ -13,8 +13,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.naming.NamingException;
 
 /**
@@ -78,7 +80,7 @@ public class CageDAO {
             }
             return result;
       }
-      
+
       public CageDTO GetCageByID(String CageId)
               throws SQLException, NamingException {
             Connection con = null;
@@ -90,16 +92,16 @@ public class CageDAO {
                   // tra ra null or k.
                   if (con != null) {
 
-                       String sql = "Select * "
+                        String sql = "Select * "
                                 + "From Cage "
                                 + "where CageID = ?";
 
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, CageId);       
+                        stm.setString(1, CageId);
                         rs = stm.executeQuery();
                         //5. Process
                         if (rs.next()) {
-                               String CageID = rs.getString("CageID");
+                              String CageID = rs.getString("CageID");
                               String Name = rs.getString("Name");
                               int Price = rs.getInt("Price");
                               String Origin = rs.getString("Origin");

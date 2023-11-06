@@ -60,14 +60,11 @@ public class MainController extends HttpServlet {
       private static final String ERROR_PAGE = "ErrorPage.html";
       private final String DeleteAccountController = "DeleteAccountController";
       private final String SearchAccountController = "SearchAccountController";
-<<<<<<< HEAD
       private final String ViewMaterialController = "ViewMaterialController";
-=======
       private final String DashboardController = "DashboardController";
       private final String CustomerAccountController = "CustomerAccountController";
       private final String CustomerOrderController = "CustomerOrderController";
       private final String CustomerProcessController = "CustomerProcessController";
->>>>>>> 5e3c144c3fe79b26c984af5334d6a208df613300
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {

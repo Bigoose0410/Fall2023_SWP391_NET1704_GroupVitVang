@@ -5,13 +5,7 @@
 package com.vitvang.productionmanagement.model;
 
 
-<<<<<<< HEAD
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Getter
-//@Setter
-=======
->>>>>>> 5e3c144c3fe79b26c984af5334d6a208df613300
+
 public class DetailOrderDTO {
       private String DetailOrder;
       private String CageID;
