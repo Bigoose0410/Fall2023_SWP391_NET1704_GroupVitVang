@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
 
+=======
+package com.vitvang.productionmanagement.controller;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
@@ -28,6 +32,7 @@ import javax.naming.NamingException;
 public class DetailProductController extends HttpServlet {
 
       private final String CAGE_DETAIL_PAGE = "ProductDetail.jsp";
+<<<<<<< HEAD
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,11 +42,19 @@ public class DetailProductController extends HttpServlet {
        * @throws ServletException if a servlet-specific error occurs
        * @throws IOException if an I/O error occurs
        */
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+    
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String cageID = request.getParameter("txtCageID");
+<<<<<<< HEAD
             String url = "errorPageLogin.html";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             try {
                   //1. new DAO
                   CageDAO cagedao = new CageDAO();

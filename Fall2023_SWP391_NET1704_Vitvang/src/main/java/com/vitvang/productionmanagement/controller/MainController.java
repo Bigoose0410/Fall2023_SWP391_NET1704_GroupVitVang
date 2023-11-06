@@ -12,10 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+<<<<<<< HEAD
 /**
  *
  * @author Admin
  */
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
@@ -41,7 +44,11 @@ public class MainController extends HttpServlet {
       private final String AddDesignProcess = "AddDesignProcess";
       private final String CreateUserController = "CreateUserController";
       private final String AddMaterialToCageController = "AddMaterialToCageController";
+<<<<<<< HEAD
       private final String AddAutoProcessController = "ProductionProcessController";
+=======
+      private final String AutoAddProcessController = "AutoAddProcessController";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       private final String AddCageController = "AddCageController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
@@ -60,15 +67,29 @@ public class MainController extends HttpServlet {
       private final String UpdateAccountController = "UpdateAccountController";
       private final String ViewAccountDetailController = "ViewAccountDetailController";
       private final String CreateAccountController = "CreateAccountController";
+<<<<<<< HEAD
       private final String DeleteAccountController = "DeleteAccountController";
       private final String SearchAccountController = "SearchAccountController";
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String DeleteAccountController = "DeleteAccountController";
+      private final String SearchAccountController = "SearchAccountController";
+      private final String DashboardController = "DashboardController";
+      private final String CustomerAccountController = "CustomerAccountController";
+      private final String CustomerOrderController = "CustomerOrderController";
+      private final String CustomerProcessController = "CustomerProcessController";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
 
             String button = request.getParameter("btAction");
+<<<<<<< HEAD
             String url = "errorPageLogin.html";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             try {
                   if (button == null) {
                         url = StartUpController;
@@ -123,7 +144,11 @@ public class MainController extends HttpServlet {
                   } else if (button.equals("Production process")) {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {
+<<<<<<< HEAD
                         url = UpdateSatusNewOrderController;
+=======
+                        url = AutoAddProcessController;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   } else if (button.equals("Customers")) {
                         url = CustomerController;
                   } else if (button.equals("ViewProcessDetail")) {
@@ -148,6 +173,17 @@ public class MainController extends HttpServlet {
                         url = DeleteAccountController;
                   } else if (button.equals("SearchAccount")) {
                         url = SearchAccountController;
+<<<<<<< HEAD
+=======
+                  } else if (button.equals("Dashboard")) {
+                        url = DashboardController;
+                  } else if (button.equals("Customer's Account")) {
+                        url = CustomerAccountController;
+                  } else if (button.equals("Customer's Order")) {
+                        url = CustomerOrderController;
+                  } else if (button.equals("Customer Tracking")) {
+                        url = CustomerProcessController;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   }
 
             } finally {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%-- 
     Document   : CreateProcess
     Created on : Oct 17, 2023, 10:58:50 AM
@@ -9,6 +10,11 @@
 <!DOCTYPE html>
 
 
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
      <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
@@ -20,8 +26,12 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
           <script src="Material.js"></script>
           <title>BCMS</title>
+=======
+          <title>EditDesign</title>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
      </head>
 
      <body>
@@ -34,13 +44,21 @@
           </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
+<<<<<<< HEAD
           <c:set var="error" value="${requestScope.UPDATE_DESIGN_ERR}"></c:set>
+=======
+          <c:set var="errorADD" value="${requestScope.ADD_DESIGN_ERR}"></c:set>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                <nav>
 
                     <div class="logo-name">
                          <div class="logo-image">
                               <img src="images/logo.png" alt="">
                          </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                </div>
 
@@ -50,11 +68,19 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
+<<<<<<< HEAD
                          <li><a href="MainController?btAction=Order">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
                          <li><a href="MainController?btAction=Customers">
+=======
+                         <li><a href="MainController?btAction=Search">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li><a href="#">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Customers</span>
                               </a></li>
@@ -62,7 +88,11 @@
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
+<<<<<<< HEAD
                          <li><a href="MainController?btAction=Production process">
+=======
+                         <li ><a href="MainController?btAction=Production process">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
@@ -99,11 +129,19 @@
                     </ul>
                </div>
           </nav>
+<<<<<<< HEAD
           <h1>Design</h1>
           <h3>Cage: ${param.txtCageName}</h3>
           <section class="dashboard">
                <div id="process-form">
                     <table class="tablesorter-custom">
+=======
+          <section class="dashboard">
+               <h1>Design</h1>
+               <h3>Cage: ${param.txtCageName}</h3>
+               <div class="table-container">
+                    <table>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                          <thead>
                               <tr>
                                    <th>No.</th>
@@ -117,6 +155,11 @@
 
                          <tbody>
                               <c:set var="countPhare" value=""></c:set>
+<<<<<<< HEAD
+=======
+                              <c:set var="errorUpdate" value="${requestScope.UPDATE_DESIGN_ERR}"></c:set>
+                              <c:set var="errorUpdateInPhrase" value="${requestScope.UPDATE_DESIGN_ERR_IN_PHRASE}"></c:set>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                               <c:forEach var="dto" items="${Design}" varStatus="counter">
                               <form action="MainController">
                                    <tr>
@@ -124,7 +167,10 @@
                                              ${counter.count}
                                              <c:set var="countPhare" value="${counter.count}"></c:set>
                                              </td>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                              <td>
                                              ${dto.getPhrase()}
                                              <input type="hidden" name="txtPhrase" value="${dto.getPhrase()}" />
@@ -132,10 +178,23 @@
 
                                         <td>
                                              <div class="input-container1">
+<<<<<<< HEAD
                                                   <input placeholder="Time Process" class="input-field" oninput="this.value = Math.abs(this.value)"
                                                          type="number" name="txtTimeProcess" value="${dto.getTimeProcess()}">
                                                   <span class="input-highlight"></span>
                                              </div>                
+=======
+                                                  <input placeholder="Time Process" class="input-field"
+                                                         oninput="this.value = Math.abs(this.value)" type="number"
+                                                         name="txtTimeProcess" value="${dto.getTimeProcess()}">
+                                                  <span class="input-highlight"></span>
+                                                  <c:if test="${not empty errorUpdate.getTimeProcessErr() and dto.getPhrase().equals(errorUpdateInPhrase)}">
+                                                       <font color="red">
+                                                       ${errorUpdate.getTimeProcessErr()}
+                                                       </font>
+                                                  </c:if>
+                                             </div>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         </td>
 
                                         <td>
@@ -143,12 +202,24 @@
                                                   <input placeholder="Description" class="input-field" type="text"
                                                          name="txtDescription" value="${dto.getDescription()}">
                                                   <span class="input-highlight"></span>
+<<<<<<< HEAD
                                              </div>         
+=======
+                                                  <div class="error">
+                                                       <c:if test="${not empty errorUpdate.getDescriptionLengthErr() and dto.getPhrase().equals(errorUpdateInPhrase)}">
+                                                            <font color="red">
+                                                            ${errorUpdate.getDescriptionLengthErr()}
+                                                            </font>
+                                                       </c:if>
+                                                  </div>
+                                             </div>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         </td>
 
                                         <td>
                                              <div class="input-container1">
                                                   <input placeholder="Employee Need" class="input-field" type="number"
+<<<<<<< HEAD
                                                          name="txtNumberOfEmployee" value="${dto.getNumberOfEmployee()}" oninput="this.value = Math.abs(this.value)">
                                                   <span class="input-highlight"></span>
                                              </div>               
@@ -156,6 +227,22 @@
 
                                         <td class="update_button">
                                              <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+=======
+                                                         name="txtNumberOfEmployee" value="${dto.getNumberOfEmployee()}"
+                                                         oninput="this.value = Math.abs(this.value)">
+
+                                                  <c:if test="${not empty errorUpdate.getEmployeeFormatErr() and dto.getPhrase().equals(errorUpdateInPhrase)}">
+                                                       <font color="red">
+                                                       ${errorUpdate.getEmployeeFormatErr()}
+                                                       </font>
+                                                  </c:if>
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </td>
+                                        <td class="update_button">
+                                             <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                             <input type="hidden" name="txtCageName" value="${param.txtCageName}" />
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                              <button type="submit" value="updateDesign" name="btAction">
                                                   <i class="fa fa-pencil-square"></i>
                                              </button>
@@ -163,6 +250,7 @@
                                    </tr>
                               </form>
                          </c:forEach>
+<<<<<<< HEAD
                               <c:if test="${not empty error.getDescriptionLengthErr()}">
                                    <font color="red">
                                    ${error.getDescriptionLengthErr()}
@@ -253,3 +341,128 @@
 
 </html>
 
+=======
+
+                         </tbody>
+                    </table>
+               </div>
+
+               <button class="custom-btn btn-1">Add Phrase</button>
+               <c:if test="${not empty errorADD.getDuplicateIDErr()}">
+                    <font color="red">
+                    <h4>${errorADD.getDuplicateIDErr()}</h4>
+                    </font>
+               </c:if>
+               <c:if test="${not empty errorADD.getTimeProcessErr()}">
+                    <font color="red">
+                    <h4>${errorADD.getTimeProcessErr()}</h4>
+                    </font>
+               </c:if>
+               <c:if test="${not empty errorADD.getDescriptionLengthErr()}">
+                    <font color="red">
+                    <h4>${errorADD.getDescriptionLengthErr()}</h4>
+                    </font>
+               </c:if>
+               <c:if test="${not empty errorADD.getEmployeeFormatErr()}">
+                    <font color="red">
+                    <h4>${errorADD.getEmployeeFormatErr()}</h4>
+                    </font>
+               </c:if>
+               <div class="tablesorter-custom1" style="display: none;">
+                    <form action="MainController">
+                         <div class="step">
+                              <div class="step-header">
+                                   <h2>New Phrase</h2>
+                              </div>
+
+                              <div class="form-step">
+                                   <label for="Phrase">Phrase</label>
+                                   <div class="input-container">
+                                        <input placeholder="Phrase" class="input-field" type="text" name="txtPhrase"
+                                               value="${param.txtPhrase}">
+                                        <span class="input-highlight"></span>
+                                        <div class="error">
+
+                                             <!-- xuat loi trung ID-->
+
+                                        </div>
+                                   </div>
+                              </div>
+
+                              <div class="form-step">
+                                   <label for="Time">Time Process</label>
+                                   <div class="input-container">
+                                        <input placeholder="Time" class="input-field" type="number" name="txtTimeProcess" min="0"
+                                               max="100" value="1" oninput="this.value = Math.abs(this.value)">
+                                        <span class="input-highlight"></span>
+                                        <!-- xuat loi time process-->
+
+                                   </div>
+                              </div>
+
+                              <div class="form-step">
+                                   <label for="Description">Description</label>
+                                   <div class="input-container">
+                                        <input placeholder="Description" class="input-field" type="text" name="txtDescription"
+                                               value="${param.txtDescription}">
+                                        <span class="input-highlight"></span>
+                                        <!-- xuat loi Desscription-->
+
+                                   </div>
+                              </div>
+
+                              <div class="form-step">
+                                   <label for="username">Number Of Employee</label>
+                                   <div class="input-container">
+                                        <input placeholder="Employee" class="input-field" type="number" min="0" max="10"
+                                               name="txtNumberOfEmployee" value="1" oninput="this.value = Math.abs(this.value)">
+                                        <span class="input-highlight"></span>
+                                        <!-- xuat loi Number of employee-->
+                                   </div>
+                              </div>
+
+                              <div class="form-step">
+                                   <label for="username">Note:</label>
+                                   <div class="input-container">
+                                        <!--                                        <input placeholder="Employee" class="input-field" type="number" readonly=""
+                                                                                       name="txtCompletionCage" value="1" oninput="this.value = Math.abs(this.value)">-->
+                                        <h5>"Time process" and "Number of employee" are for 1 cage</h5>
+                                        <p>Check detail before submit</p>
+                                        <span class="input-highlight"></span>
+                                   </div>
+                              </div>
+
+                              <div class="form-step">
+
+                              </div>
+
+                              <div class="form-step">
+
+                              </div>
+
+                              <div class="form-step">
+
+                              </div>
+
+                              <div class="form-step1">
+                                   <input type="hidden" name="txtCageID" value="${CageID}" />
+                                   <button class="create-button" type="submit" value="AddDesignProcess"
+                                           name="btAction">Create</button>
+                              </div>
+                    </form>
+               </div>
+          </div>
+
+          <div class="button_2">
+               <a href="MainController?btAction=DetailProduct&txtCageID=${CageID}"><button class="next_button"><i
+                              class="fas fa-arrow-right"></i></button></a>
+          </div>
+     </section>
+
+     <script src="js/EditDesign.js"></script>
+
+</html>
+
+</body>
+</html>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea

@@ -12,7 +12,11 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/Accounts.css">
+<<<<<<< HEAD
 
+=======
+          <link rel="stylesheet" href="css/Dashboard.css">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -23,6 +27,7 @@
           <title>Customer Accounts</title>
      </head>
      <body>
+<<<<<<< HEAD
           <nav>
 
                <div class="logo-name">
@@ -87,6 +92,81 @@
                          </li>
                     </ul>
                </div>
+=======
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="" />
+               <c:param value="Log Out" name="btAction" />
+          </c:url>
+          <nav>
+
+               <div class="logo-name" style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+                    </div>
+
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <li><a href="MainController?btAction=Dashboard">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dashboard</span>
+                                   </a></li>
+
+                              <li><a href="AdminHomePage.jsp">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Home</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=Manage Account">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Manage Account</span>
+                                   </a></li>
+                              <!--                                   <li><a href="MainController?btAction=Production process">
+                                                                           <i class="uil uil-chart-line"></i>
+                                                                           <span class="link-name">Production process</span>
+                                                                      </a></li>-->
+                              <!--                                   <li><a href="#">
+                                                                           <i class="uil uil-clipboard-alt"></i>
+                                                                           <span class="link-name">Reports</span>
+                                                                      </a></li>
+                                                                 <li><a href="#">
+                                                                           <i class="uil uil-screw"></i>
+                                                                           <span class="link-name">Material</span>
+                                                                      </a></li>
+                                                                 <li><a href="#">
+                                                                           <i class="uil uil-archive-alt"></i>
+                                                                           <span class="link-name">Inventory</span>
+                                                                      </a></li>-->
+                              <ul class="logout-mode">
+                                   <li><a href="${logout_query}">
+                                             <i class="uil uil-signout"></i>
+                                             <span class="link-name">Logout</span>
+                                        </a></li>
+
+                                   <!--                              <li class="mode">
+                                              <a href="#">
+                                                   <i class="uil uil-moon"></i>
+                                                   <span class="link-name">Dark Mode</span>
+                                              </a>-->
+
+                                   <!--                                   <div class="mode-toggle">
+                                                   <span class="switch"></span>
+                                              </div>-->
+                                   <!--                                   <li class="mode">
+                                                                           <a href="#">
+                                                                                <i class="uil uil-moon"></i>
+                                                                                <span class="link-name">Dark Mode</span>
+                                                                           </a>
+                                   
+                                                                           <div class="mode-toggle">
+                                                                                <span class="switch"></span>
+                                                                           </div>
+                                                                      </li>-->
+                              </ul>
+                         </ul>
+                    </div>
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
           </nav>
           <section class="dashboard">
                <h1><strong>Account</strong></h1>
@@ -164,5 +244,9 @@
                     </c:if>
                </div>
           </section>
+<<<<<<< HEAD
+=======
+          <script src="js/DarkMode.js"></script>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
      </body>
 </html>

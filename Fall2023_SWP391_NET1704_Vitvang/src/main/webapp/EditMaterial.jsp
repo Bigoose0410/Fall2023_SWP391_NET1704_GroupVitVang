@@ -53,7 +53,11 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
+<<<<<<< HEAD
                               <li ><a href="MainController?btAction=Order">
+=======
+                              <li ><a href="MainController?btAction=Search">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -107,7 +111,10 @@
                <h1>Material</h1>
                <div class="table-container">
                     <h3>${param.txtCageName}</h3>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     <table>
                          <thead>
                               <tr>
@@ -124,6 +131,7 @@
                          <tbody>
                               <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
                               <div action="MainController">
+<<<<<<< HEAD
                                    <tr>
                                         <td>
                                              ${counter.count}
@@ -173,6 +181,57 @@
                                              </div>
                                         </td>
                                    </tr>
+=======
+                                   <form action="MainController">
+                                        <tr>
+                                             <td>
+                                                  ${counter.count}
+                                             </td>
+
+                                             <td>
+                                                  ${dto.getMaterialID()}
+                                                  <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
+                                             </td>
+
+                                             <td class="td3" style="text-align: left; display: flex; justify-content: center">
+                                                  ${dto.getName()} / ${dto.getUnit()}
+                                             </td>
+
+                                             <td>
+                                                  <div class="input-container">
+                                                       <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+                                                              name="txtQuantity" value="${dto.getQuantityNeed()}" min="0" max="100">
+                                                       <span class="input-highlight"></span>
+                                                  </div>
+                                             </td>
+
+                                             <td>
+                                                  ${dto.getOrigin()}
+                                             </td>
+
+                                             <td>
+                                                  ${dto.getPrice()}
+                                             </td>
+
+
+
+                                             <td class="edit_button">
+                                                  <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                  <div class="update_button">
+                                                       <button type="submit" value="UpdateMaterialofCage" name="btAction">
+                                                            <i class="fa fa-pencil-square"></i>
+                                                       </button>
+                                                  </div>
+                                                  <div class="separator">/</div>
+                                                  <div class="delete_button">
+                                                       <button type="submit" value="DeleteMaterialofCage" name="btAction">
+                                                            <i class="fa fa-trash"></i>
+                                                       </button>
+                                                  </div>
+                                             </td>
+                                        </tr>
+                                   </form>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                               </div>
                          </c:forEach>
                          </tbody>
@@ -183,16 +242,27 @@
                     <strong>Add More Marterial: </strong>
                     <select onchange="this.form.submit()" name="slMateriaID">
                          <option selected>Open this select menu</option>
+<<<<<<< HEAD
                          <c:forEach var="dto" items="">
                               <option value="$"></option>
                          </c:forEach>
                          <input type="hidden" name="btAction" value="EditMaterial" />
                          <input type="hidden" name="txtCageID" value="" />
+=======
+                         <c:forEach var="dto" items="${materialnotuse}">
+                              <option value="${dto.getMaterialID()}" >${dto.getName()}</option>
+                         </c:forEach>
+                         <input type="hidden" name="btAction" value="EditMaterial" />
+                         <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     </select>
                </form>
 
                <c:if test="${not empty materialwilladd}">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     <div class="material_form1">
                          <form action="MainController">
                               <table class="material_form">
@@ -201,9 +271,14 @@
                                         <td>
                                              <label for="MaterialID_name">MaterialID :</label>
                                              <div class="input-container1">
+<<<<<<< HEAD
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
                                                          value="${materialwilladd.getMaterialID()}" readonly>
 
+=======
+                                                  <input class="input-field" type="text" name="txtMaterialID" 
+                                                         value="${materialwilladd.getMaterialID()}" readonly>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -211,7 +286,11 @@
                                         <td>
                                              <label for="Name">Name :</label>
                                              <div class="input-container1">
+<<<<<<< HEAD
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
+=======
+                                                  <input class="input-field" type="text" name="txtName" 
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                          value="${materialwilladd.getName()}" readonly>
                                                   <span class="input-highlight"></span>
                                              </div>
@@ -220,9 +299,14 @@
                                         <td>
                                              <label for="Origin_name">Origin :</label>
                                              <div class="input-container1">
+<<<<<<< HEAD
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
                                                          value="${materialwilladd.getOrigin()}" readonly>
 
+=======
+                                                  <input class="input-field" type="text" name="txtOrigin" 
+                                                         value="${materialwilladd.getOrigin()}" readonly>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -232,9 +316,14 @@
                                         <td>
                                              <label for="Price_name">Price :</label>
                                              <div class="input-container1">
+<<<<<<< HEAD
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
                                                          value="${materialwilladd.getPrice()}" readonly>
 
+=======
+                                                  <input class="input-field" type="text" name="txtPrice" 
+                                                         value="${materialwilladd.getPrice()}" readonly>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
@@ -242,7 +331,11 @@
                                         <td>
                                              <label for="Unit_name">Unit :</label>
                                              <div class="input-container1">
+<<<<<<< HEAD
                                                   <input class="input-field" type="text" name="txtNumberOfEmployee" 
+=======
+                                                  <input class="input-field" type="text" name="txtUnit" 
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                          value="${materialwilladd.getUnit()}" readonly>
                                                   <span class="input-highlight"></span>
                                              </div>
@@ -252,22 +345,38 @@
                                              <label for="Quantity_name">Quantity :</label>
                                              <div class="input-container1">
                                                   <input class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
+<<<<<<< HEAD
                                                          name="txtNumberOfEmployee" value="0" min="0" max="100">
 
                                      <span class="input-highlight"></span>
+=======
+                                                         name="txtQuantity" value="0" min="0" max="100">
+
+                                                  <span class="input-highlight"></span>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                              </div>
                                         </td>
                                    </tr>
                               </table>
+<<<<<<< HEAD
                               <button class="submit_button" type="submit">Submit</button>
+=======
+                                <input type="hidden" name="txtCageID" value="${param.txtCageID}"/>
+                              <button class="submit_button" type="submit" name="btAction" value="AddMaterialToCage">Add</button>
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                          </form>
                     </div>
                </c:if>
                <div class="button_2">
+<<<<<<< HEAD
                     
                     <a href="${DesignPage}"><button class="next_button"><i class="fas fa-arrow-right"></i></button></a>
 
 
+=======
+                    <a href="${DesignPage}"><button class="next_button"><i class="fas fa-arrow-right"></i></button></a>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                </div>
           </section>
      </body>

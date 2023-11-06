@@ -113,7 +113,11 @@
 
                                         <i class="fa fa-shopping-cart"></i>
                                         <label for="field2">OrderID:</label>
+<<<<<<< HEAD
                                         <i>${result[1].getOrderID()}</i>
+=======
+                                        <a href="MainController?txtOrderID=${result[1].getOrderID()}&btAction=Detail"><i>${result[1].getOrderID()}</i></a>  
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
                                         <i class="fa fa-cube"></i>
                                         <label for="field3">Cage:</label>
@@ -127,7 +131,11 @@
                                         <c:set var="perFinish" value="0"></c:set>
                                              <ul>
                                              <c:forEach var="dto" items="${result}" varStatus="counter">
+<<<<<<< HEAD
                                                   <li class="step ${dto.getProcessID()} active">
+=======
+                                                  <li class="step ${dto.getProcessID()} active" style="width: ${100/result.size()}%;">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                        <div class="step-inner">
                                                             ${dto.getProcessName()}
                                                             <c:set var="perFinish"

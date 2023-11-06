@@ -26,6 +26,7 @@ public class AddCageController extends HttpServlet {
 
       private static String ADD_CAGE_PAGE = "AddProductionInfo.jsp";
       private static final String CAGEID_PATTERN = "CG\\d{3}";
+<<<<<<< HEAD
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,6 +36,11 @@ public class AddCageController extends HttpServlet {
        * @throws ServletException if a servlet-specific error occurs
        * @throws IOException if an I/O error occurs
        */
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
+      
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -50,7 +56,11 @@ public class AddCageController extends HttpServlet {
             boolean result = false;
             CageInsertError error = new CageInsertError();
             boolean foundErr = false;
+<<<<<<< HEAD
             String url = "NewLogin.jsp";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             try {
                   if (checkFormat(CageName, CAGEID_PATTERN, true)) {
                         error.setIDFormatErr("Cage ID must has fromat CGxxx, e.g: CG001");

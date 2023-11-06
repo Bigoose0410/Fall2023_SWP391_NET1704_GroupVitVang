@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
 
+=======
+package com.vitvang.productionmanagement.controller;
+
+import com.vitvang.productionmanagement.dao.material.MaterialDAO;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +19,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
+<<<<<<< HEAD
 import com.vitvang.productionmanagement.dao.material.MaterialDAO;
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
 /**
  *
@@ -22,6 +31,7 @@ import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 @WebServlet(name = "UpdateMaterialofCageController", urlPatterns = {"/UpdateMaterialofCageController"})
 public class UpdateMaterialofCageController extends HttpServlet {
 
+<<<<<<< HEAD
       private final String EDIT_MATERIAL_PAGE = "EditMaterial.jsp";
 
       /**
@@ -32,17 +42,28 @@ public class UpdateMaterialofCageController extends HttpServlet {
        * @throws ServletException if a servlet-specific error occurs
        * @throws IOException if an I/O error occurs
        */
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String materialID = request.getParameter("txtMaterialID").trim();
             String CageID = request.getParameter("txtCageID").trim();
             String quantity = request.getParameter("txtQuantity").trim();
+<<<<<<< HEAD
             String url = EDIT_MATERIAL_PAGE;
             try {
                   int qunaitybuild;
                   qunaitybuild = (quantity != null) ? Integer.parseInt(quantity) : 1;
                   
+=======
+            String url = ERROR_PAGE;
+            try {
+                  int qunaitybuild;
+                  qunaitybuild = (quantity != null && !quantity.equals("0")) ? Integer.parseInt(quantity) : 1;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   MaterialDAO dao = new MaterialDAO();
                   dao.updateMaterialOfCage(CageID, materialID, qunaitybuild);
                   url = "MainController"

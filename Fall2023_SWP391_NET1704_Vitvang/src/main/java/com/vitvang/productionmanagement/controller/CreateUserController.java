@@ -29,8 +29,12 @@ import com.vitvang.productionmanagement.util.tool;
  */
 @WebServlet(name = "CreateUserController", urlPatterns = {"/CreateUserController"})
 public class CreateUserController extends HttpServlet {
+<<<<<<< HEAD
 
       private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       private final String SEARCH_CUS_PAGE = "SearchCustomer.jsp";
       private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
@@ -56,7 +60,11 @@ public class CreateUserController extends HttpServlet {
             // parse to suitable data
             Date BirthDate = Date.valueOf(BirthDateStr);
             
+<<<<<<< HEAD
             String url = SEARCH_CUS_PAGE;
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             boolean foundErr = false;
             UserCreateError error = new UserCreateError();
             try {
@@ -103,7 +111,11 @@ public class CreateUserController extends HttpServlet {
                         UserDAO dao = new UserDAO();
                         // 2. call method
                         Password = dao.EncodePass(Password);
+<<<<<<< HEAD
                         UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 4);
+=======
+                        UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 0, true);
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         boolean result = dao.createAccount(user);
                         if (result) {
                               HttpSession session = request.getSession();

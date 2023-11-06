@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
 
+=======
+package com.vitvang.productionmanagement.controller;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderUpdateError;
@@ -24,6 +28,7 @@ import javax.naming.NamingException;
 public class UpdateOrderController extends HttpServlet {
 
       private final String ERROR_UPDATE_PAGE = "EditOrder.jsp";
+<<<<<<< HEAD
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,6 +44,14 @@ public class UpdateOrderController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String CUSTOMER_PATTERN = "CS\\d{3}";
 
+=======
+            private static final String ERROR_PAGE = "ErrorPage.html";
+
+     
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             String OrderID = request.getParameter("txtOrderID");
             String StartDate = request.getParameter("txtStartDate");
             String EndDate = request.getParameter("txtEndDate");
@@ -49,7 +62,11 @@ public class UpdateOrderController extends HttpServlet {
             String searchValue = request.getParameter("lastSearchValue");
             Date productStartDate = Date.valueOf(StartDate);
             Date productEndDate = Date.valueOf(EndDate);
+<<<<<<< HEAD
             String url = ERROR_UPDATE_PAGE;
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             boolean foundErr = false;
             OrderUpdateError error = new OrderUpdateError();
             try {

@@ -42,9 +42,16 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
+<<<<<<< HEAD
                         String sql = "select * "
                                 + "from OrderDetail "
                                 + "where OrderID like ?";
+=======
+                        String sql = " select d.OrderID, d.CageID, d.Quantity, d.OrderDetailStatus, c.Name, c.Description, c.Origin, c.Price  "
+                                + "from OrderDetail d inner join Cage c "
+                                + "on d.CageID = c.CageID "
+                                + "where OrderID like  ? ";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         stm = con.prepareStatement(sql);
                         stm.setString(1, "%" + SearchValue + "%");
                         rs = stm.executeQuery();
@@ -52,8 +59,18 @@ public class OrderDAO implements Serializable {
                               String OrderID = rs.getString("OrderID");
                               String CageID = rs.getString("CageID");
                               int Quantity = rs.getInt("Quantity");
+<<<<<<< HEAD
 
                               DetailOrderDTO detailorder = new DetailOrderDTO(OrderID, CageID, Quantity);
+=======
+                              String status = rs.getString("OrderDetailStatus");
+                              String Name = rs.getString("Name");
+                              String Description = rs.getString("Description");
+                              String Origin = rs.getString("Origin");
+                              int Price = rs.getInt("Price");
+
+                              DetailOrderDTO detailorder = new DetailOrderDTO(OrderID, CageID, Name, Price, Origin, Quantity, status, Description);
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                               if (this.listDetailOrder == null) {
                                     this.listDetailOrder = new ArrayList<DetailOrderDTO>();
                               }
@@ -71,6 +88,7 @@ public class OrderDAO implements Serializable {
                         con.close();
                   }
             }
+<<<<<<< HEAD
 
       }
       
@@ -112,6 +130,49 @@ public class OrderDAO implements Serializable {
     }
 
       public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
+=======
+      }
+
+      public DetailOrderDTO query1LineOrderDetail(String OrderID, String CageID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "select OrderID, CageID , Quantity, OrderDetailStatus "
+                                + "from OrderDetail "
+                                + "where OrderID = ? AND CageID = ?";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, OrderID);
+                        stm.setString(2, CageID);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              String orderID = rs.getString("OrderID");
+                              String cageID = rs.getString("CageID");
+                              int Quantity = rs.getInt("Quantity");
+                              String status = rs.getString("OrderDetailStatus");
+                              DetailOrderDTO detailorder = new DetailOrderDTO(orderID, cageID, Quantity, status);
+                              return detailorder;
+                        }
+                  }
+                  return null;
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+      }
+
+       public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -156,12 +217,62 @@ public class OrderDAO implements Serializable {
             return result;
       }
 
+<<<<<<< HEAD
+=======
+      public boolean updateOrderStatus(String OrderID, Date EndDate, String StatusProgress)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+
+            try {
+                  //1. Make connection
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+                        String sql = "UPDATE Orderr "
+                                + "SET EndDate = ?, StatusProgress = ? "
+                                + "WHERE OrderID = ? ";
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setDate(1, (java.sql.Date) EndDate);
+                        stm.setString(2, StatusProgress);
+                        stm.setString(3, OrderID);
+                        //4. Excute query
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+            }
+            return result;
+      }
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       List<OrderDTO> listOrders;
 
       public List<OrderDTO> getListOrders() {
             return listOrders;
       }
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public void searchOrder(String SearchValue) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -247,6 +358,73 @@ public class OrderDAO implements Serializable {
 
       }
 
+<<<<<<< HEAD
+=======
+      public int countNewOrder() throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            int neworder = 0;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "Select COUNT(*)"
+                                + " From Orderr "
+                                + " Where StatusProgress like 'new order'";
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              neworder = rs.getInt(1);
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return neworder;
+      }
+
+      public int countProcessingOrder() throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            int Processingorder = 0;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "Select COUNT(*)"
+                                + " From Orderr "
+                                + " Where StatusProgress like 'Processing'";
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              Processingorder = rs.getInt(1);
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return Processingorder;
+      }
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public boolean insertOrder(Date startDate, int totalprice, String Addres)
               throws SQLException, NamingException {
             Connection con = null;
@@ -263,7 +441,10 @@ public class OrderDAO implements Serializable {
                         stm.setDate(1, startDate);
                         stm.setInt(2, totalprice);
                         stm.setString(3, Addres);
+<<<<<<< HEAD
                        
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
                         int row = stm.executeUpdate();
                         if (row > 0) {
@@ -282,6 +463,42 @@ public class OrderDAO implements Serializable {
             return false;
 
       }
+<<<<<<< HEAD
+=======
+      
+     public String NewestOrder()
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            String newestOrder = "";
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "Select top 1 * "
+                                + "From Orderr "
+                                + "Where StatusProgress like 'new order' "
+                                + "Order by OrderID desc ";
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              newestOrder = rs.getString("OrderID");
+                              return newestOrder;
+                        }
+                        // hoan chinh roi thi excutequery
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return newestOrder;
+      }
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       public boolean addOrderDetail(String CageID, int quantity)
               throws SQLException, NamingException {
@@ -410,4 +627,133 @@ public class OrderDAO implements Serializable {
             return result;
       }
 
+<<<<<<< HEAD
+=======
+      // paging
+      public List<OrderDTO> getPagingByCreateDateDesc(int index, String searchValue, int fieldShow)
+              throws SQLException, ClassNotFoundException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+
+            try {
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress "
+                                + "                                From Orderr "
+                                + "                             Where OrderID like ?"
+                                + "							 Order by OrderID desc"
+                                + "								OFFSET ? ROWS "
+                                + "							FETCH FIRST ? ROWS ONLY";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, "%" + searchValue + "%");
+                        stm.setInt(2, (index - 1) * fieldShow);
+                        stm.setInt(3, fieldShow);
+                        rs = stm.executeQuery();
+                        while (rs.next()) {
+                              String OrderID = rs.getString("OrderID");
+                              Date StartDate = rs.getDate("StartDate");
+                              Date EndDate = rs.getDate("EndDate");
+                              int TotalPrice = rs.getInt("TotalPrice");
+                              String Address = rs.getString("Address");
+                              String StatusProgress = rs.getString("StatusProgress");
+
+                              OrderDTO order = new OrderDTO(OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress);
+                              if (this.listOrders == null) {
+                                    this.listOrders = new ArrayList<OrderDTO>();
+                              }
+                              this.listOrders.add(order);
+                        }
+                        return this.listOrders;
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return null;
+      }
+
+      public int getNumberPage(String searchValue, int fieldShow)
+              throws SQLException, ClassNotFoundException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "Select count(*) "
+                                + "From Orderr "
+                                + "where OrderID like ? ";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, "%" + searchValue + "%");
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              int total = rs.getInt(1);
+                              int countPage = total / fieldShow;
+                              if (total % fieldShow != 0) {
+                                    countPage++;
+                              }
+                              return countPage;
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return 0;
+      }
+      
+      public boolean countOrderDetailnotDone(String OrderID)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "Select count(*) "
+                                + "From OrderDetail "
+                                + "where OrderID like ? "
+                                + "AND OrderDetailStatus not like 'Done'";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, "%" + OrderID + "%");
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              int total = rs.getInt(1);
+                              if (total == 0) {
+                              return true;
+                              }
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return false;
+      }
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }

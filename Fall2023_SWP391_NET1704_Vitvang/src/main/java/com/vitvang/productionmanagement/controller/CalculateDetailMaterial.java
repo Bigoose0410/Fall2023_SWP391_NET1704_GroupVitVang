@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
@@ -26,6 +29,7 @@ import javax.naming.NamingException;
 public class CalculateDetailMaterial extends HttpServlet {
 
       private final String CAGE_MATERIAL_PAGE = "CageMaterialDetail.jsp";
+<<<<<<< HEAD
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,13 +39,21 @@ public class CalculateDetailMaterial extends HttpServlet {
        * @throws ServletException if a servlet-specific error occurs
        * @throws IOException if an I/O error occurs
        */
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+      
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String[] CageIDList = request.getParameterValues("txtCageID");
             String[] QuantityList = request.getParameterValues("txtQuantity");
             int i = 0;
+<<<<<<< HEAD
             String url = "ErrorPageLogin.html";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             try {
                   // new DAO
                   CageDAO dao = new CageDAO();

@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 
+<<<<<<< HEAD
 /**
  *
  * @author Admin
@@ -33,12 +34,25 @@ public class EditDesignController extends HttpServlet {
        * @throws ServletException if a servlet-specific error occurs
        * @throws IOException if an I/O error occurs
        */
+=======
+@WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
+public class EditDesignController extends HttpServlet {
+
+      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String cageID = request.getParameter("txtCageID");
+<<<<<<< HEAD
             String url = "";
            try {
+=======
+            String url = ERROR_PAGE;
+            try {
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   //1. new DAO
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   //2. Call method

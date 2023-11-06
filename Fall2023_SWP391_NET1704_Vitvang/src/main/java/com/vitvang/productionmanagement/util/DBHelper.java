@@ -19,7 +19,11 @@ public class DBHelper {
         public static Connection makeConnection() {
                 Connection conn = null;
                 try {
+<<<<<<< HEAD
                          String dbURL = "jdbc:sqlserver://ADMIN\\TEW_SQLEXPRESS:1433;databaseName=ProductionManagement;encrypt=true;trustServerCertificate=true;";
+=======
+                         String dbURL = "jdbc:sqlserver://ADMIN\\TEW_SQLEXPRESS:1433;databaseName=ProductionManagement2;encrypt=true;trustServerCertificate=true;";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         String user = "sa";
                         String pass = "12345";
                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

@@ -11,6 +11,10 @@ import com.vitvang.productionmanagement.exception.processs.AutoAddProcessErr;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
+<<<<<<< HEAD
+=======
+import static com.vitvang.productionmanagement.util.tool.nextdate;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,11 +32,18 @@ import javax.naming.NamingException;
  *
  * @author thetam
  */
+<<<<<<< HEAD
 @WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
 public class AutoAddProcessController extends HttpServlet {
 
       private final String PROCESS_OF_CAGE_PAGE = "Process.jsp";
 
+=======
+@WebServlet(name = "AutoAddProcessController", urlPatterns = {"/AutoAddProcessController"})
+public class AutoAddProcessController extends HttpServlet {
+
+      private static final String ERROR_PAGE = "ErrorPage.html";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
@@ -45,7 +56,11 @@ public class AutoAddProcessController extends HttpServlet {
             String Quantity = request.getParameter("txtQuantity");
             int quantityorder = Integer.parseInt(Quantity);
             String newStatus = "";
+<<<<<<< HEAD
             String url = "NewLogin.jsp";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             AutoAddProcessErr error = new AutoAddProcessErr();
             boolean foundErr = false;
             boolean result1 = false;
@@ -87,7 +102,11 @@ public class AutoAddProcessController extends HttpServlet {
                                       designDTO.getNumCompletionCage(), 1);
                               result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity(), designDTO);
                               i++;
+<<<<<<< HEAD
                               startdate = endDate;
+=======
+                              startdate = nextdate(endDate);
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         }
                         result2 = processdao.updateStatusNewOrder(orderID, cageID);
 

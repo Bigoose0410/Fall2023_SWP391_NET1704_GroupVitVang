@@ -45,7 +45,11 @@
                                                                  <i class="uil uil-estate"></i>
                                                                  <span class="link-name">Dahsboard</span>
                                                             </a></li>-->
+<<<<<<< HEAD
                          <li ><a href="MainController?btAction=Order">
+=======
+                         <li ><a href="MainController?btAction=Search">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
@@ -123,7 +127,11 @@
                                                        <div class="main-wrapper">
                                                             <h3 class="main-header"> ${dto.getCageID()} </h3>
                                                             <h1 class="main-title"> ${dto.getName()} </h1>
+<<<<<<< HEAD
                                                             <h2 class="main-subtitle"> ${dto.getPrice()}đ </h2>
+=======
+                                                            <h2 class="main-subtitle"> ${dto.getPrice()} </h2>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                        </div>
                                                        <div class="main-content">
                                                             <div class="main-content__title">Come From: ${dto.getOrigin()}
@@ -164,7 +172,11 @@
                               <form action="MainController">
                                    <div class="dbl-field">
                                         <div class="field" >
+<<<<<<< HEAD
                                              <input type="text" name="txtCageIDadd" placeholder="CageID" value="${param.txtCageIDadd}">
+=======
+                                             <input type="text" name="txtCageID" placeholder="CageID" value="${param.txtCageID}">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                              <i class="fa-solid fa-feather"></i>
                                         </div>
                                         <c:if test="${not empty error.getIDFormatErr()}">
@@ -178,7 +190,11 @@
                                              </font>
                                         </c:if>
                                         <div class="field" style="margin-top: 25px">
+<<<<<<< HEAD
                                              <input type="text" name="txtCageNameadd" value="${param.txtCageName}" placeholder="Cage name" >
+=======
+                                             <input type="text" name="txtCageName" value="${param.txtCageName}" placeholder="Cage name" >
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                              <i class="fa-solid fa-crow"></i>
                                         </div>
                                         <c:if test="${not empty error.getNameLengthErr()}">

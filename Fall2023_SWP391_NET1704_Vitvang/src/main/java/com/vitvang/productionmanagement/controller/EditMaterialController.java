@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
@@ -24,6 +27,7 @@ import com.vitvang.productionmanagement.dao.material.MaterialDAO;
  */
 @WebServlet(name = "EditMaterialController", urlPatterns = {"/EditMaterialController"})
 public class EditMaterialController extends HttpServlet {
+<<<<<<< HEAD
       private static String CAGE_MATERIAL_PAGE = "EditMaterial.jsp";
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,6 +44,19 @@ public class EditMaterialController extends HttpServlet {
            String Materialselect = request.getParameter("slMateriaID");
             String url = "HomePage.html";
            try {
+=======
+
+      private static String CAGE_MATERIAL_PAGE = "EditMaterial.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            String cageID = request.getParameter("txtCageID");
+            String Materialselect = request.getParameter("slMateriaID");
+            String url = ERROR_PAGE;
+            try {
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   //1. new DAO
                   CageDAO cagedao = new CageDAO();
                   MaterialDAO materialdao = new MaterialDAO();
@@ -56,7 +73,11 @@ public class EditMaterialController extends HttpServlet {
                   request.setAttribute("MATERIAL_PRICE", materialPirce);
                   request.setAttribute("MATERIAL_NOT_USE", listmaterialnotbuild);
                   request.setAttribute("MATERIAL_WILL_ADD", materAdd);
+<<<<<<< HEAD
                   
+=======
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   url = CAGE_MATERIAL_PAGE;
 
             } catch (SQLException ex) {

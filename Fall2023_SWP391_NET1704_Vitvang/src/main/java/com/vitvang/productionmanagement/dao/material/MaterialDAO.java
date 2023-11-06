@@ -279,8 +279,13 @@ public class MaterialDAO {
                   // tra ra null or k.
                   if (con != null) {
 
+<<<<<<< HEAD
                         String sql = "SELECT * "
                                 + "FROM   Material d "
+=======
+                        String sql = "SELECT MaterialID, Name, Origin, Price, Unit "
+                                + "FROM Material "
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                 + "WHERE MaterialID = ?";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, materialid);

@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.vitvang.productionmanagement.controller;
 
+=======
+
+package com.vitvang.productionmanagement.controller;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
@@ -31,6 +36,7 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 public class DetailOrderController extends HttpServlet {
 
       private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
+<<<<<<< HEAD
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,11 +46,19 @@ public class DetailOrderController extends HttpServlet {
        * @throws ServletException if a servlet-specific error occurs
        * @throws IOException if an I/O error occurs
        */
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+      
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String OrderID = request.getParameter("txtOrderID");
+<<<<<<< HEAD
             String url = "ErrorPageLogin.html";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             try {
                   // new DAO
                   OrderDAO orderdao = new OrderDAO();
@@ -58,6 +72,7 @@ public class DetailOrderController extends HttpServlet {
                   UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
                   OrderDTO order = orderdao.getListOrders().get(0);
                   List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
+<<<<<<< HEAD
                   for (DetailOrderDTO detailOrderDTO : orderDetailList) {
                         dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
                         dao.searchProductionbyID(detailOrderDTO.getCageID());
@@ -68,6 +83,17 @@ public class DetailOrderController extends HttpServlet {
                   request.setAttribute("CUS_ORDER", customer);
                   request.setAttribute("CAGE_MATERIAL", cageMaterialList);
                   request.setAttribute("CAGE_ORDER", cageList);
+=======
+                  
+                  for (DetailOrderDTO detailOrderDTO : orderDetailList) {
+                        dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
+                  }
+                  List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
+
+                  request.setAttribute("CUS_ORDER", customer);
+                  request.setAttribute("CAGE_MATERIAL", cageMaterialList);
+                  request.setAttribute("CAGE_ORDER", orderDetailList);
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   request.setAttribute("ORDER", order);
                   url = ORDER_DETAIL_PAGE;
 

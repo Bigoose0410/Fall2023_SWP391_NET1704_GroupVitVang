@@ -58,7 +58,11 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
+<<<<<<< HEAD
                          <li><a href="MainController?btAction=Order">
+=======
+                         <li><a href="MainController?btAction=Search">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
@@ -70,7 +74,11 @@
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
+<<<<<<< HEAD
                          <li><a href="#">
+=======
+                         <li ><a href="MainController?btAction=Production process">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
@@ -141,7 +149,11 @@
                               <a class="fa fa-search" href="${searchCustomer}">Customer</a> </br>
 
                               <div class="input-container">
+<<<<<<< HEAD
                                    <label for="startdateinput">Start Date</label>
+=======
+                                   <label for="startdateinput">Order Date</label>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                    <fmt:formatDate var="date" value="${now}" pattern="MM-dd-yyyy" />
                                    <!--${date}-->
                                    <input type="text" readonly="true" id="startdateinput" value="${date}"

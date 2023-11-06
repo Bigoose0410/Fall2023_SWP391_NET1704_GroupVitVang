@@ -105,6 +105,22 @@ nav {
      padding: 10px 0;
 }
 
+<<<<<<< HEAD
+=======
+
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 nav.close {
      width: 73px;
 }
@@ -283,7 +299,15 @@ h1 {
      margin: 10px 0px;
      font-size: xx-large;
 }
+<<<<<<< HEAD
 
+=======
+h4 {
+     padding: 5px;
+     text-align: left;
+     margin: 10px 15px;
+}
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 .table-container {
      overflow-x: auto;
      border-radius: 10px;
@@ -303,11 +327,19 @@ h1 {
 
 .table-container th {
      color: white;
+<<<<<<< HEAD
      background-color: #2193b0;
 }
 
 .table-container tbody tr:nth-child(even) {
      background-color: #e6fcfa;
+=======
+     background-color: #0275ef;
+}
+
+.table-container tbody tr:nth-child(even) {
+     background-color: #edf5fc;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }
 
 .table-container tbody tr:hover {
@@ -327,6 +359,12 @@ h1 {
 }
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 /* Style for the plus button */
 .plus_button button {
      background-color: rgb(24, 175, 24);
@@ -343,11 +381,23 @@ h1 {
 
 
 .input-container1 input[type="number"]  {
+<<<<<<< HEAD
      width: 80%;
+=======
+     width: 60%;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
      margin: 0 auto;
      /* Center align the input field */
 }
 
+<<<<<<< HEAD
+=======
+.input-container1 input[type="text"] {
+     width: 60%;
+     margin: 0 auto;
+}
+
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 /* Input label */
 .input-label {
      position: absolute;
@@ -538,17 +588,45 @@ h2 {
      text-align: end; /* Center align the buttons */
 }
 
+<<<<<<< HEAD
 .done_button {
+=======
+.next_button {
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
      padding: 10px 20px;
      font-size: 16px;
      margin: 5px;
      cursor: pointer;
      border: none;
      border-radius: 5px;
+<<<<<<< HEAD
      background-color: #4caf50;
      color: #fff;
 }
 
 .done_button:hover {
      background-color: #318936;
+=======
+     background-color: #007bff;
+     color: #fff;
+}
+
+.next_button:hover {
+     background-color: #1367c1;
+}
+
+.input-container input[type="number"] {
+     position: relative;
+     width: 150px;
+     /* margin: 0 auto; */
+}
+
+h3 {
+     margin: 20px 0px;
+     margin-left: 20px;
+}
+
+.error {
+     margin-top: 10px;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }

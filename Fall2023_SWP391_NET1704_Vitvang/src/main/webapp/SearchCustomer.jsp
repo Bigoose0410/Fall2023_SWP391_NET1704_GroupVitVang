@@ -38,7 +38,11 @@
                                         <i class="uil uil-estate"></i>
                                         <span class="link-name">Dahsboard</span>
                                    </a></li>
+<<<<<<< HEAD
                               <li ><a href="MainController?btAction=Order">
+=======
+                              <li ><a href="MainController?btAction=Search">
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -150,7 +154,12 @@
                                                             ${dto.getEmail()}
                                                        </td>
                                                        <td>
+<<<<<<< HEAD
                                                             <c:url value="OrderAdd.jsp" var="AdddLink">
+=======
+                                                            <c:url value="MainController" var="AdddLink">
+                                                                 <c:param name="btAction" value="New Order"/>
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                                  <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
                                                             </c:url>
                                                             <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
@@ -286,7 +295,11 @@
                               </div>
                               <br>
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
+<<<<<<< HEAD
                                    Create New customer
+=======
+                                   Create New customer 
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                               </button>
                               <c:if test="${not empty errors.getCustomerIDexistErr()}">
                                         <font color = "red">

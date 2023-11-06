@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+=======
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
@@ -30,11 +33,19 @@ import javax.naming.NamingException;
 public class ListCageController extends HttpServlet {
 
       private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
+<<<<<<< HEAD
+=======
+      private static final String ERROR_PAGE = "ErrorPage.html";
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
+<<<<<<< HEAD
             String url = "";
+=======
+            String url = ERROR_PAGE;
+>>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             try {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
