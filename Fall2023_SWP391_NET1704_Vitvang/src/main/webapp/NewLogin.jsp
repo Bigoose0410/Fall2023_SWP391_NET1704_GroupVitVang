@@ -52,14 +52,7 @@
                               <input type="hidden" name="lastpassword" value="${Password}" />
                               <button  value="Login" type="submit" class="submit-button" name="btAction" ><span><i class="uil uil-estate"></i></span>Login</button>
                          </div>
-<<<<<<< HEAD
-
-                    </form>
-                    </body>
-                    </html>
-=======
                     </form>
                </div>
      </body>
 </html>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea

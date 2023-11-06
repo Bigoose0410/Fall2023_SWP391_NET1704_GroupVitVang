@@ -4,16 +4,6 @@
  */
 package com.vitvang.productionmanagement.model;
 
-<<<<<<< HEAD
-/**
- *
- * @author Admin
- */
-public class DetailOrderDTO {
-      private String DetailOrder;
-      private String CageID;
-      private int Quantity;
-=======
 
 public class DetailOrderDTO {
       private String DetailOrder;
@@ -35,17 +25,10 @@ public class DetailOrderDTO {
             this.Status = Status;
             this.Description = Description;
       }
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       public DetailOrderDTO() {
       }
 
-<<<<<<< HEAD
-      public DetailOrderDTO(String DetailOrder, String CageID, int Quantity) {
-            this.DetailOrder = DetailOrder;
-            this.CageID = CageID;
-            this.Quantity = Quantity;
-=======
       
       public DetailOrderDTO(String DetailOrder, String CageID, int Quantity, String Status) {
             this.DetailOrder = DetailOrder;
@@ -60,7 +43,6 @@ public class DetailOrderDTO {
 
       public void setStatus(String Status) {
             this.Status = Status;
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       }
 
       public String getDetailOrder() {
@@ -86,9 +68,6 @@ public class DetailOrderDTO {
       public void setQuantity(int Quantity) {
             this.Quantity = Quantity;
       }
-<<<<<<< HEAD
-      
-=======
 
       public String getName() {
             return Name;
@@ -123,5 +102,4 @@ public class DetailOrderDTO {
       }
       
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }

@@ -9,25 +9,18 @@ package com.vitvang.productionmanagement.model;
  * @author Admin
  */
 public class CageDTO {
-<<<<<<< HEAD
-=======
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       private String CageID;
       private String Name;
       private int Price;
       private String Origin;
       private String Description;
       private int quantityOrder;
-<<<<<<< HEAD
-      
-=======
       private int CageQuantity;
       private String OrderDetailStatus;
       private String OrderStatus;
       private String OrderID;
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public CageDTO() {
       }
 
@@ -48,8 +41,6 @@ public class CageDTO {
             this.quantityOrder = quantityOrder;
       }
 
-<<<<<<< HEAD
-=======
       public CageDTO(String CageID, String Name, int CageQuantity) {
             this.CageID = CageID;
             this.Name = Name;
@@ -79,7 +70,6 @@ public class CageDTO {
             this.OrderStatus = OrderStatus;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public int getQuantityOrder() {
             return quantityOrder;
       }
@@ -87,12 +77,7 @@ public class CageDTO {
       public void setQuantityOrder(int quantityOrder) {
             this.quantityOrder = quantityOrder;
       }
-<<<<<<< HEAD
-      
-      
-=======
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public String getCageID() {
             return CageID;
       }
@@ -132,12 +117,6 @@ public class CageDTO {
       public void setDescription(String Description) {
             this.Description = Description;
       }
-<<<<<<< HEAD
-      
-      
-      
-              
-=======
 
       public int getCageQuantity() {
             return CageQuantity;
@@ -171,5 +150,4 @@ public class CageDTO {
             this.OrderID = OrderID;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }

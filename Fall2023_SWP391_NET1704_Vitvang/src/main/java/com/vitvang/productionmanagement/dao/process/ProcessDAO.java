@@ -110,17 +110,6 @@ public class ProcessDAO implements Serializable {
                                 + "JOIN Cage "
                                 + "ON Process.CageID = Cage.CageID "
                                 + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
-<<<<<<< HEAD
-//                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Process.Phrase  ,Process.ProcessID, ProcessName, Process.StartDate, Process.EndDate, OrderDetail.Quantity, Process.NumberOfEmployee,OrderDetail.OrderDetailStatus, Process.Status, Orderr.StatusProgress "
-//                                + "FROM UserOrder JOIN Orderr "
-//                                + "ON UserOrder.OrderID = Orderr.OrderID "
-//                                + "JOIN OrderDetail "
-//                                + "ON Orderr.OrderID = OrderDetail.OrderID "
-//                                + "JOIN Process "
-//                                + "ON Orderr.OrderID = Process.OrderID "
-//                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
-=======
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         stm = con.prepareStatement(sql);
                         stm.setString(1, OrderID);
                         stm.setString(2, CageID);
@@ -163,8 +152,6 @@ public class ProcessDAO implements Serializable {
             }
 
       }
-<<<<<<< HEAD
-=======
       public ProcessDTO GetProcessingbyID(String OrderID, String CageID, String ProcessID) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -228,7 +215,6 @@ public class ProcessDAO implements Serializable {
             }
             return  result;
       }
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       public boolean updateStatusNewOrder(String OrderID, String CageID) throws SQLException {
             Connection con = null;

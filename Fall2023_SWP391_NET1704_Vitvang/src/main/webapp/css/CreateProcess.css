@@ -483,8 +483,6 @@ body {
   width: 50px; /* Set the desired width */
   padding: 5px;
 }
-<<<<<<< HEAD
-=======
 .button_2 {
     text-align: end;
     /* Center align the buttons */
@@ -510,7 +508,6 @@ body {
     width: 150px;
     margin: 0 auto
 }
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
 /* Add this rule to override the width for larger screens if needed */
 @media (min-width: 768px) {
@@ -524,7 +521,4 @@ body {
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea

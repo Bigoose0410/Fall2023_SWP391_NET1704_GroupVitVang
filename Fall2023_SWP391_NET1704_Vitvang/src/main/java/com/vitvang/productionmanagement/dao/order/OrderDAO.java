@@ -42,16 +42,10 @@ public class OrderDAO implements Serializable {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-<<<<<<< HEAD
-                        String sql = "select * "
-                                + "from OrderDetail "
-                                + "where OrderID like ?";
-=======
                         String sql = " select d.OrderID, d.CageID, d.Quantity, d.OrderDetailStatus, c.Name, c.Description, c.Origin, c.Price  "
                                 + "from OrderDetail d inner join Cage c "
                                 + "on d.CageID = c.CageID "
                                 + "where OrderID like  ? ";
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         stm = con.prepareStatement(sql);
                         stm.setString(1, "%" + SearchValue + "%");
                         rs = stm.executeQuery();
@@ -59,10 +53,6 @@ public class OrderDAO implements Serializable {
                               String OrderID = rs.getString("OrderID");
                               String CageID = rs.getString("CageID");
                               int Quantity = rs.getInt("Quantity");
-<<<<<<< HEAD
-
-                              DetailOrderDTO detailorder = new DetailOrderDTO(OrderID, CageID, Quantity);
-=======
                               String status = rs.getString("OrderDetailStatus");
                               String Name = rs.getString("Name");
                               String Description = rs.getString("Description");
@@ -70,7 +60,6 @@ public class OrderDAO implements Serializable {
                               int Price = rs.getInt("Price");
 
                               DetailOrderDTO detailorder = new DetailOrderDTO(OrderID, CageID, Name, Price, Origin, Quantity, status, Description);
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                               if (this.listDetailOrder == null) {
                                     this.listDetailOrder = new ArrayList<DetailOrderDTO>();
                               }
@@ -88,49 +77,6 @@ public class OrderDAO implements Serializable {
                         con.close();
                   }
             }
-<<<<<<< HEAD
-
-      }
-      
-      public DetailOrderDTO query1LineOrderDetail(String OrderID, String CageID) throws SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            con = DBHelper.makeConnection();
-            // tra ra null or k.
-            if (con != null) {
-                String sql = "select OrderID, CageID , Quantity "
-                        + "from OrderDetail "
-                        + "where OrderID = ? AND CageID = ?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1,  OrderID );
-                stm.setString (2, CageID );
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    String orderID = rs.getString("OrderID");
-                    String cageID = rs.getString("CageID");
-                    int Quantity = rs.getInt("Quantity");
-                    DetailOrderDTO detailorder = new DetailOrderDTO(orderID, cageID, Quantity);
-                    return detailorder;
-                }
-            }
-            return null;
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-    }
-
-      public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
-=======
       }
 
       public DetailOrderDTO query1LineOrderDetail(String OrderID, String CageID) throws SQLException {
@@ -172,7 +118,6 @@ public class OrderDAO implements Serializable {
       }
 
        public boolean updateOrder(String OrderID, Date StartDate, Date EndDate, String Address, String StatusProgress)
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -217,8 +162,6 @@ public class OrderDAO implements Serializable {
             return result;
       }
 
-<<<<<<< HEAD
-=======
       public boolean updateOrderStatus(String OrderID, Date EndDate, String StatusProgress)
               throws SQLException, NamingException {
             Connection con = null;
@@ -262,17 +205,12 @@ public class OrderDAO implements Serializable {
             return result;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       List<OrderDTO> listOrders;
 
       public List<OrderDTO> getListOrders() {
             return listOrders;
       }
-<<<<<<< HEAD
-      
-=======
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public void searchOrder(String SearchValue) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -358,8 +296,6 @@ public class OrderDAO implements Serializable {
 
       }
 
-<<<<<<< HEAD
-=======
       public int countNewOrder() throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -424,7 +360,6 @@ public class OrderDAO implements Serializable {
             return Processingorder;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public boolean insertOrder(Date startDate, int totalprice, String Addres)
               throws SQLException, NamingException {
             Connection con = null;
@@ -441,10 +376,6 @@ public class OrderDAO implements Serializable {
                         stm.setDate(1, startDate);
                         stm.setInt(2, totalprice);
                         stm.setString(3, Addres);
-<<<<<<< HEAD
-                       
-=======
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
                         int row = stm.executeUpdate();
                         if (row > 0) {
@@ -463,8 +394,6 @@ public class OrderDAO implements Serializable {
             return false;
 
       }
-<<<<<<< HEAD
-=======
       
      public String NewestOrder()
               throws SQLException, NamingException {
@@ -498,7 +427,6 @@ public class OrderDAO implements Serializable {
             }
             return newestOrder;
       }
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       public boolean addOrderDetail(String CageID, int quantity)
               throws SQLException, NamingException {
@@ -627,8 +555,6 @@ public class OrderDAO implements Serializable {
             return result;
       }
 
-<<<<<<< HEAD
-=======
       // paging
       public List<OrderDTO> getPagingByCreateDateDesc(int index, String searchValue, int fieldShow)
               throws SQLException, ClassNotFoundException {
@@ -755,5 +681,4 @@ public class OrderDAO implements Serializable {
             return false;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }

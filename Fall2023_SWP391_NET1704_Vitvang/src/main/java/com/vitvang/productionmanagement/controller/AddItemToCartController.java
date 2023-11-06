@@ -25,32 +25,16 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "AddItemToCartController", urlPatterns = {"/AddItemToCartController"})
 public class AddItemToCartController extends HttpServlet {
-<<<<<<< HEAD
-      private final String ORDER_ADD_PAGE = "MainController?btAction=New Order";
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
-=======
 //      private final String ORDER_ADD_PAGE = "MainController?btAction=New Order";
       private static final String ERROR_PAGE = "ErrorPage.html";
       
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
         String sku = request.getParameter("txtCageID");
         String quantity = request.getParameter("txtQuantity");
         int RequestQuantity = (!quantity.isEmpty()) ? Integer.parseInt(quantity) : 1;
-<<<<<<< HEAD
-        String url = ORDER_ADD_PAGE;
-=======
         String url = ERROR_PAGE;
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
         try {
             // 1. Cus goes to chartt's place
             // 2. Cus takes his cart

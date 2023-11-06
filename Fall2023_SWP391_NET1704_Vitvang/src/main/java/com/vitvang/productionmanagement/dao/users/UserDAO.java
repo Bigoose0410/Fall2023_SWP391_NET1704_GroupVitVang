@@ -84,12 +84,8 @@ public class UserDAO implements Serializable {
                               Date BirthDate = rs.getDate("BirthDate");
                               String Email = rs.getString("Email");
                               int RoleID = rs.getInt("RoleID");
-<<<<<<< HEAD
-                              result = new UserDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID);
-=======
                               Boolean UserStatus = rs.getBoolean("UserStatus");
                               result = new UserDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus);
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         }//end username and password are checked
                   } // end of connection has opend
 
@@ -166,12 +162,8 @@ public class UserDAO implements Serializable {
                   }
             }
       }
-<<<<<<< HEAD
-        public void getAllCustomer()
-=======
 
       public void getAllCustomer()
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -348,11 +340,7 @@ public class UserDAO implements Serializable {
             return result;
       }
 
-<<<<<<< HEAD
-     public boolean createAccount(UserDTO user)
-=======
       public boolean createAccount(UserDTO user)
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -364,15 +352,9 @@ public class UserDAO implements Serializable {
                   if (con != null) {
                         //2. create SQL statement string
 
-<<<<<<< HEAD
-                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID) "
-                                + "VALUES ("
-                                + "?, ?, ? , ?, ?, ?, ?, ?, ?, ?"
-=======
                         String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
                                 + "VALUES ("
                                 + "?, ?, ? , ?, ?, ?, ?, ?, ?, ?, 'True'"
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                 + ")";
 
                         //3. Create statement object
@@ -387,11 +369,7 @@ public class UserDAO implements Serializable {
                         stm.setString(8, user.getUsername());
                         stm.setString(9, user.getPassword());
                         stm.setInt(10, user.getRoleID());
-<<<<<<< HEAD
-
-=======
                         stm.setBoolean(11, user.isUserStatus());
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                         //4. Excute query
                         int effectRows = stm.executeUpdate();
                         //5. Process

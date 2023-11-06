@@ -305,14 +305,11 @@ h1 {
     font-size: xx-large;
 }
 
-<<<<<<< HEAD
-=======
 .table-container h3 {
     margin-top: 13px;
     margin-left: 10px;
 }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 .table-container {
     overflow-x: auto;
     border-radius: 10px;
@@ -324,12 +321,9 @@ h1 {
     border-collapse: collapse;
 }
 
-<<<<<<< HEAD
-=======
 td.td3{
      text-align: left;
 }
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 .table-container th,
 .table-container td {
     padding: 10px;

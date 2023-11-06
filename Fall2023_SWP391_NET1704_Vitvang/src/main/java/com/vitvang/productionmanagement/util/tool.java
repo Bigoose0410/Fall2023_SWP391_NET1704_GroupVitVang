@@ -87,9 +87,6 @@ public final class tool {
             return EndDate;
       }
 
-<<<<<<< HEAD
- public static long getVaildYob(Date birthDate) {
-=======
       // tang 1 ngay tu ngay nhap vao
       public static Date nextdate(Date startDate) {
 
@@ -203,17 +200,12 @@ public final class tool {
       }
 
       public static long getVaildYob(Date birthDate) {
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             long millis = System.currentTimeMillis();
             java.sql.Date currentDate = new java.sql.Date(millis);
 
             long ageInMillis = currentDate.getTime() - birthDate.getTime();
             long ageInYears = ageInMillis / (1000 * 60 * 60 * 24 * 365);
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
             return ageInYears;
       }
 }

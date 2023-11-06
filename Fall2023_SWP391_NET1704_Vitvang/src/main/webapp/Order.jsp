@@ -50,11 +50,7 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-<<<<<<< HEAD
-                              <li ><a href="MainController?btAction=Order">
-=======
                               <li ><a href="MainController?btAction=Search">
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -109,21 +105,10 @@
                <div class="top">
                     <i class="uil uil-bars sidebar-toggle"></i>
                     <div class="search-box">
-<<<<<<< HEAD
-                         <i class="uil uil-search"></i>
-                         <form action="MainController">
-
-                              <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" required="" placeholder="Search here..." class="searchh" >
-
-
-
-                              <button class="add-btn" value="Search" name="btAction"></button>
-=======
                          <form action="MainController"> 
 
                               <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" placeholder="Search here..." class="searchh" >
                               <button value="Search" name="btAction"><i class="uil uil-search"></i></button>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                          </form>
                     </div>
                </div>
@@ -154,239 +139,6 @@
                               </div>
                          </div>
                     </div>
-<<<<<<< HEAD
-
-                    <div class="activity">
-                         <div class="title">
-                              <!--<div style="width: 30%" >--> 
-                              <i class="uil uil-clock-three"> </i>
-                              <span class="text">Recent Order</span> 
-
-                              <form action="MainController" method="POST">
-                                   <button type="submit" id="btn" value="New Order" name="btAction" class="button-icon" style="
-                                                                  background-color: #e6e5e500;
-                                                                  color: blue;
-                                                                  font-size: 16px;
-                                                                  padding: 8px;
-                                                                  border: none;
-                                                                  cursor: pointer;
-                                                                  outline: none;
-                                                                  font-size:30px;
-                                                                  margin-top:-100px;
-                                                                  margin-left: 1000px;
-                                                                  ">
-                                        <i class="uil uil-plus"></i>
-                                   </button> 
-                                   </form>
-                         </div>
-                         <div> 
-                         </div>
-
-
-                         <c:set var="searchValue" value="${param.txtSearchValue}"></c:set>
-
-                         <c:set var="result" value="${requestScope.SEARCH_RESULT}"></c:set>
-                         <c:if test="${empty searchValue}">
-                              <c:if test="${not empty result}">
-                                   <table style="width:100%">
-                                        <thead>
-                                             <tr>
-
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">No</th>
-
-
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">OrderID</span> </th>
-
-                                                  <!--                                        <div class="data email">
-                                                                                               <span class="data-title">CustomerID</span>
-                                                                                          </div>-->
-
-                                                  <th    class="data-title" style="text-align: start ;color:blue;font-size:23px">StartDate </th>
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">EndDate</th>
-                                                  <th   class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">City</th>
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status </th>
-                                                  <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Details</th>
-
-
-                                             </tr>
-                                        </thead>
-                                        <tbody>
-
-                                             <c:forEach var="dto" items="${result}" varStatus="counter">
-
-                                             <form class="form-order" action="MainController" method="get">
-                                                  <div class="activity-data">
-                                                       <tr>
-                                                            <td class="data-list" style="text-align: start;font-size:18px; ">${counter.count}</td>
-
-                                                            <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
-                                                                 <input type="hidden" name="txtOrderID" 
-                                                                        value="${dto.getOrderID()}"/></td>
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start ;font-size:18px">${dto.getAddress()}</td>
-
-
-
-                                                            <td class="data-list" style="text-align: start">${dto.getStatusProgress()}</td>
-
-                                                       <div class="data status">
-                                                            <c:url value="EditOrder.jsp" var="editLink">
-                                                                 <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
-                                                                 <c:param name="txtStartDate" value="${dto.getStartDate()}" />
-                                                                 <c:param name="txtEndDate" value="${dto.getEndDate()}" />
-                                                                 <c:param name="txtAddress" value="${dto.getAddress()}" />
-                                                                 <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
-                                                                 <c:param name="lastSearchValue" value="${searchValue}"/>
-                                                            </c:url>
-                                                       </div>
-                                                       <!--<input type="submit" value="Detail" name="btAction" />-->
-                                                       <td class="data-list" style="text-align: start ">
-
-                                                            <button value="Detail" name="btAction" style="font-size:20px; outline: none;background-color: transparent; border:none;margin-left: 30px" d q/>
-                                                            <i class="uil uil-file-info-alt"></i>
-                                                            <p class="data-list"><a href="${editLink}"></p>
-                                                       </td>
-
-
-                                                  </tr>
-                                                   </div>
-                                             </form>                                 
-
-                                        </c:forEach>
-
-                                        </tbody>
-                                   </table>
-
-                              </c:if>
-
-                         </c:if>
-
-                         <c:if test="${not empty searchValue}">
-                              <c:if test="${not empty result}">
-                                   <table style="width:100%">
-                                        <thead>
-                                             <tr>
-                                        <div class="activity-data">
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">No</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">OrderID</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">StartDate</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">EndDate</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Total Price</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Address</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px">Status</th>
-
-
-                                             <th class="data-title" style="text-align: start ;color:blue;font-size:23px"></th>
-
-                                             </<div>
-                                                  </tr>
-                                                  </thead>
-                                                  <tbody>
-
-                                                       <c:forEach var="dto" items="${result}" varStatus="counter">
-                                                            <%--<c:if test="${dto.getStatusProgress().equals('new order')}">--%>
-                                                       <div class="activity-data">
-                                                            <form class="form-order" action="MainController" method="get">
-                                                                 <tr>
-
-
-                                                                      <td class="data-list" style="text-align: start;font-size:18px">${counter.count}</td>
-
-
-
-                                                                      <td class="data-list" style="text-align: start;font-size:18px">${dto.getOrderID()}
-                                                                           <input type="hidden" name="txtOrderID" 
-                                                                                  value="${dto.getOrderID()}"/></td>
-
-
-
-                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getStartDate()}</td>
-
-
-
-                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>
-
-
-
-                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getTotalPrice()}</td>
-
-
-
-                                                                      <td class="data-list" style="text-align: start ;font-size:18px">${dto.getAddress()}</td>
-
-
-
-                                                                      <td class="data-list" style="text-align: start">${dto.getStatusProgress()}</td>
-
-
-                                                                 <div class="data status">
-                                                                      <c:url value="EditOrder.jsp" var="editLink">
-                                                                           <c:param name="txtOrderID" value="${dto.getOrderID()}"/>
-                                                                           <c:param name="txtStartDate" value="${dto.getStartDate()}" />
-                                                                           <c:param name="txtEndDate" value="${dto.getEndDate()}" />
-                                                                           <c:param name="txtAddress" value="${dto.getAddress()}" />
-                                                                           <c:param name="txtStatusProgress" value="${dto.getStatusProgress()}"/>
-                                                                           <c:param name="lastSearchValue" value="${searchValue}"/>
-                                                                      </c:url>
-                                                                 </div>
-                                                                 <!--<input type="submit" value="Detail" name="btAction" />-->
-                                                                <td class="data-list" style="text-align: start ">
-
-                                                            <button value="Detail" name="btAction" style="font-size:20px; outline: none;background-color: transparent; border:none;margin-left: 30px" d q/>
-                                                            <i class="uil uil-file-info-alt"></i>
-                                                            <p class="data-list"><a href="${editLink}"></p>
-                                                       </td>
-
-                                                                 </tr>
-                                                            </form>
-                                                       </div>
-
-                                                  </c:forEach>
-                                                  </tbody>
-                                                  </table>
-                                             </c:if>
-                                        </c:if>
-                                        <c:if test="${ empty result}">
-                                             <font color="red">
-                                             <h2>
-                                                  No match record!!!
-                                             </h2>
-                                             </font>
-                                        </c:if>
-                                        </section>
-                                        <script src="js/darkMode.js"></script>      
-                                        <script src="js/OrderAdd.js"></script>      
-
-                                        </body>
-                                        </html> 
-=======
                </div>          
                <div class="activity">
                     <div class="title">
@@ -563,4 +315,3 @@
 
 </body>
 </html> 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea

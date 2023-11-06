@@ -12,22 +12,6 @@ import java.sql.Date;
  */
 public class UserDTO {
 
-<<<<<<< HEAD
-        private String UserID;
-        private String Name;
-        private String PhoneNumber;
-        private String Sex;
-        private String Adress;
-        private Date BirthDate;
-        private String Email;
-        private String Username;
-        private String Password;
-        private int RoleID;
-
-
-        public UserDTO() {
-        }
-=======
       private String UserID;
       private String Name;
       private String PhoneNumber;
@@ -42,7 +26,6 @@ public class UserDTO {
 
       public UserDTO() {
       }
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
       public UserDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID) {
             this.UserID = UserID;
@@ -57,8 +40,6 @@ public class UserDTO {
             this.RoleID = RoleID;
       }
 
-<<<<<<< HEAD
-=======
       public UserDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, boolean UserStatus) {
             this.UserID = UserID;
             this.Name = Name;
@@ -73,7 +54,6 @@ public class UserDTO {
             this.UserStatus = UserStatus;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
       public String getUserID() {
             return UserID;
       }
@@ -99,15 +79,9 @@ public class UserDTO {
       }
 
       public String getSex() {
-<<<<<<< HEAD
-            if(Sex.trim().equals("F")){
-                  Sex = "Female";
-            }else {
-=======
             if (Sex.trim().equals("F")) {
                   Sex = "Female";
             } else {
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                   Sex = "Male";
             }
             return Sex;
@@ -164,10 +138,6 @@ public class UserDTO {
       public void setRoleID(int RoleID) {
             this.RoleID = RoleID;
       }
-<<<<<<< HEAD
-      
-       
-=======
 
       public boolean isUserStatus() {
             return UserStatus;
@@ -177,5 +147,4 @@ public class UserDTO {
             this.UserStatus = UserStatus;
       }
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 }

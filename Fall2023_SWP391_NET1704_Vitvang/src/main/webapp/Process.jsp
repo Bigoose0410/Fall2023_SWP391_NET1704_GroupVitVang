@@ -51,11 +51,7 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-<<<<<<< HEAD
-                              <li ><a href="MainController?btAction=Order">
-=======
                               <li ><a href="MainController?btAction=Search">
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -109,11 +105,7 @@
 
                <div class="neworder_table">
                     <!--Material table-->
-<<<<<<< HEAD
-                    <h1>New Order</h1>
-=======
                     <h1>New Production</h1>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     <div class="table-container">
                          <c:set var="result" value="${requestScope.PROCESSNEWORDER_RESULT}"></c:set>
                          <c:set var="error" value="${requestScope.AUTO_ADD_ERR}"></c:set>
@@ -140,55 +132,6 @@
                                         </tr>
                                    </thead>
                                    <c:set var="count" value="0" />
-<<<<<<< HEAD
-                                   <c:forEach var="dto" items="${result}">
-                                        <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
-                                             <tbody>
-                                             <form action="MainController"method="get" >         
-                                                  <tr>
-                                                       <td> 
-                                                            <c:set var="count" value="${count + 1}" />
-                                                            ${count}
-                                                       </td>
-                                                       <td>
-                                                            <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrderID()}
-                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getCageName()}
-                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getStartDate()}
-                                                            <input type="hidden" name="txtStartDate" value="${dto.getStartDate()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getQuantity()}
-                                                            <input type="hidden" name="txtQuantity" value="${dto.getQuantity()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrderDetailStatus()}
-                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />
-                                                       </td>
-                                                       <td>
-                                                            <button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction">
-                                                            </button>
-                                                       </td>
-                                                       <c:if test="${not empty error.getDesignListLength()}">
-                                                       <a href="MainController?txtCageID=${dto.getCageID()}&btAction=EditDesign"></a>
-                                                       <font color="red">
-                                                       ${error.getDesignListLength()}
-                                                       </font>
-                                                       </c:if>
-                                                  </tr>
-                                             </form>
-                                             </tbody>
-                                        </c:if>
-                                   </c:forEach>
-=======
                                    <tbody>
                                         <c:forEach var="dto" items="${result}">
                                              <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
@@ -241,7 +184,6 @@
                                         </c:if>
                                    </c:forEach>
                                    </tbody>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                               </table>
                          </c:if>
                          <br>
@@ -253,44 +195,11 @@
                               </font>
                          </c:if>
 
-<<<<<<< HEAD
-                         <tbody>
-                         <form id="addForm" action="MainController">
-                              <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
-                                   <tr>
-                                        <td>${counter.count}</td>
-
-                                        <td>${dto.getUserID()}</td>
-
-                                        <td>${dto.getOrderID()}</td>
-
-                                        <td>${dto.getCageID()}</td>
-
-                                        <td>${dto.getStartDate()}</td>
-
-                                        <td>${dto.getQuantity()}</td>
-
-                                        <td>${dto.getOrderDetailStatus()}</td>
-
-                                        <td class="add_button">
-                                             <button type="button" class="add-btn" onclick="confirmAdd()"><i class="fa fa-cog"></i></button>
-                                        </td>
-                                   </tr>
-                              </c:forEach>
-                         </form>
-                         </tbody>
-                         </table>
-=======
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     </div>
                </div>
 
                <div class="processing_table">
-<<<<<<< HEAD
-                    <h1>Processing</h1>
-=======
                     <h1>In Production</h1>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     <!--Design Processing table-->
                     <div class="table-container1">
 
@@ -394,8 +303,6 @@
 
                     </div>
                </div>
-<<<<<<< HEAD
-=======
                <br/>
                <div class="processing_table">
                     <h1>Done</h1>
@@ -502,7 +409,6 @@
 
                     </div>
                </div>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
           </section>
 
           <script src="js/ProductProcess.js"></script>

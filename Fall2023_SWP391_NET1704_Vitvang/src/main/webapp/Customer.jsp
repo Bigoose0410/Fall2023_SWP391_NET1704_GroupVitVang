@@ -24,12 +24,9 @@
                <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
                <c:param value="Log Out" name="btAction"/>
           </c:url>
-<<<<<<< HEAD
-=======
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
           <c:set var="searchValue" value="${param.txtSearchvalue}" />
           <c:set var="ShowForm" value="${requestScope.SHOW_CUS_CREATE_FORM}" />
           <c:set var="CustomerList" value="${requestScope.SEARCH_CUS_RESULT}"/>s
@@ -48,11 +45,7 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-<<<<<<< HEAD
-                              <li ><a href="MainController?btAction=Order">
-=======
                               <li ><a href="MainController?btAction=Search">
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>

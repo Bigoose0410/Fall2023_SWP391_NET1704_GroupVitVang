@@ -49,20 +49,12 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-<<<<<<< HEAD
-                              <li ><a href="MainController?btAction=Order">
-=======
                               <li ><a href="MainController?btAction=Search">
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Customers">
-<<<<<<< HEAD
-<i class="uil uil-bill"></i>
-=======
                                         <i class="uil uil-bill"></i>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
@@ -117,11 +109,7 @@
 
           <section class="dashboard" style="   "}
 
-<<<<<<< HEAD
-">
-=======
                    ">
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                <!-- <c:if test="${not empty customer}">
 <table class="tablesorter-custom1">
                     <!--Form OrderID
@@ -166,11 +154,6 @@
                     <h1 style="font-size: 30px">Detail</h1>
                     <br>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     <div style="border-style: outset; padding:10px;width:700px;background-color: white" > 
                          <h1>Order Information </h1>
                          <p> Order : ${OrderInfo.getOrderID()} </p>
@@ -204,15 +187,9 @@
                     ${OrderInfo.getOrderID()}
                </td>
                <td>
-<<<<<<< HEAD
-${OrderInfo.getStartDate()}
-               </td>
-               <td>
-=======
                     ${OrderInfo.getStartDate()}
                                    </td>
                                    <td>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                     ${OrderInfo.getEndDate()}
                </td>
                <td>
@@ -240,19 +217,11 @@ ${OrderInfo.getStartDate()}
 
                          <thead>
                               <tr>
-<<<<<<< HEAD
-<!--                                   <th class="data-title" style="text-align: start ;color:black;font-size:20px">CageID</th>-->
-                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px;padding:10px">Name</th>
-                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
-                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
-                                   <!--                                   <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Origin</th>-->
-=======
                                    <!--                                   <th class="data-title" style="text-align: start ;color:black;font-size:20px">CageID</th>-->
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px;padding:10px">Name</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
                                    <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Process</th>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
 
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
                               </tr>
@@ -264,15 +233,9 @@ ${OrderInfo.getStartDate()}
                               <c:forEach items="${CageList}" var="cage" varStatus="status">
 
                                    <tr>
-<<<<<<< HEAD
-<!--                                        <td style="color:purple">
-                                             ${cage.getCageID()}
-                                        </td>-->
-=======
                                         <!--                                        <td style="color:purple">
                                         ${cage.getCageID()}
                                    </td>-->
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                         <td style="font-family: sans-serif">
                                              ${cage.getName()}
                                         </td>
@@ -282,18 +245,11 @@ ${OrderInfo.getStartDate()}
                                         <td>
                                              ${cage.getPrice()}
                                         </td>
-<<<<<<< HEAD
-                                        <!--                                        <td>
-                                        ${cage.getOrigin()}
-                                   </td>-->
-<td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
-=======
                                         <td>
                                              <a href="MainController?txtOrderID=${cage.getDetailOrder()}&txtCageID=${cage.getCageID()}&btAction=ViewProcessDetail">${cage.getStatus()}</a>
                                              
                                         </td>
                                         <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                        </tr>
                                                        <tr class="hidden" id="expand-${   status.index}">
 
@@ -319,11 +275,7 @@ ${OrderInfo.getStartDate()}
                                                                       <tr style="padding:100px">
                                                                            <th class="data-title" style="text-align: start ;color:green;font-size:16px">No</th>
 
-<<<<<<< HEAD
-<!--                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Material ID</th>-->
-=======
                                                                            <!--                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Material ID</th>-->
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Name</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Origin</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Need </th>
@@ -341,15 +293,9 @@ ${OrderInfo.getStartDate()}
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px;color: red;padding:10px">
                                                                                                ${counter.count}
                                                                                           </td>
-<<<<<<< HEAD
-<!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;">
-                                                                                               ${dto.getMaterialID()}
-                                                                                          </td>-->
-=======
                                                                                           <!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px;">
                                                                                           ${dto.getMaterialID()}
                                                                                      </td>-->
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getName()}
                                                                                           </td>
@@ -370,11 +316,7 @@ ${OrderInfo.getStartDate()}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                <c:set var="totalQuantity"
-<<<<<<< HEAD
-value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
-=======
                                                                                                       value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                                                                ${totalQuantity}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
@@ -389,11 +331,7 @@ value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
                                                                       </tbody>
                                                                  </table> 
                                                                  <hr>
-<<<<<<< HEAD
-                                                               
-=======
 
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                                             </td>
 
 
@@ -406,19 +344,6 @@ value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
 
                                                   </tbody>
                                                   </table>
-<<<<<<< HEAD
-                    <hr>
-                                             </c:if> 
-                    <br>
-                    <div style=" width:60%; height: 100px ; background-color: white     ">
-                         <p>  <span style="margin-right:50px">Start Day:<span style="color: #ff6600">${OrderInfo.getStartDate()}</span> </span> 
-                         <span style="margin-right:50px">Billing Address:  ${customer.getAdress()} </span>
-                         
-                         <span >Delivery Address: ${OrderInfo.getAddress()} </span></p>
-                    </div>
-          </section>
-                    <script src="js/OrderMaterial.js"></script>
-=======
                                                   <hr>
                                              </c:if> 
                                              <br>
@@ -430,6 +355,5 @@ value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
                                              </div>
                                              </section>
                                              <script src="js/OrderMaterial.js"></script>
->>>>>>> 38b102bc31c8e824cb6853399fa1c0d56ca036ea
                                              </body>
                                              </html>
