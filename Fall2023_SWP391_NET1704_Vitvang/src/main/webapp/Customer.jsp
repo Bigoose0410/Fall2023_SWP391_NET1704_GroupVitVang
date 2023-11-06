@@ -41,10 +41,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-                              <!--                              <li ><a href="#">
-                                                                      <i class="uil uil-estate"></i>
-                                                                      <span class="link-name">Dahsboard</span>
-                                                                 </a></li>-->
+<!--                              <li ><a href="#">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>-->
                               <li ><a href="MainController?btAction=Order">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -54,25 +54,25 @@
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
-                                        <i class="uil uil-grin"></i>
+                                        <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Production</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Production process">
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
-                              <li > <a href="#">
+<!--                              <li > <a href="#">
                                         <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Reports</span>
-                                   </a></li>
-                              <li ><a href="#">
+                                   </a></li>-->
+                              <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
-                              <li > <a href="#">
+<!--                              <li > <a href="#">
                                         <i class="uil uil-archive-alt"></i>
                                         <span class="link-name">Inventory</span>
-                                   </a></li>
+                                   </a></li>-->
                          </ul>
 
                          <ul class="logout-mode">
