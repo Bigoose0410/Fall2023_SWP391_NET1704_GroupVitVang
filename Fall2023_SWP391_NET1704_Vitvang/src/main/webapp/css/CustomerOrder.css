@@ -3,9 +3,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
 /* 
-    Created on : Oct 20, 2023, 8:51:49 AM
-    Author     : Nguyen Ba Tung
+    Created on : Nov 5, 2023, 6:42:46 PM
+    Author     : Admin
 */
+
 * {
      margin: 0;
      padding: 0;
@@ -92,19 +93,6 @@ nav {
      background-color: var(--box1-color);
      border-color: #e6e6cc;
 }
-
-.nav-links {
-     flex: 1 1 auto;
-
-     display: flex;
-     flex-direction: column;
-     justify-content: space-between;
-}
-
-.nav-links li {
-     padding: 10px 0;
-}
-
 
 .nav-links {
      flex: 1 1 auto;
@@ -286,309 +274,206 @@ body.dark nav {
      background-color: var(--panel-color);
      min-height: 100vh;
      width: calc(100% - 250px);
-     padding: 10px 5px;
+     padding: 0px 0px;
      transition: var(--tran-05);
 }
 
 /*Dashboard*/
-h1 {
-     text-align: center;
-     margin: 10px 0px;
-     font-size: xx-large;
-}
-h4 {
-     padding: 5px;
-     text-align: left;
-     margin: 10px 15px;
-}
-.table-container {
-     overflow-x: auto;
-     border-radius: 10px;
-     border: 1px solid black;
+/* Header Styles */
+.header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     background-color: #2193b0; /* Change the background color as needed */
+     color: #fff; /* Change the text color as needed */
+     padding: 15px 20px;
+     position: sticky;
+     top: 0;
+     position: -webkit-sticky;
+     z-index: 1;
 }
 
-.table-container table {
-     width: 100%;
-     border-collapse: collapse;
+/* Logo Styles */
+.header h1 {
+     font-size: 24px;
+     margin: 0;
 }
 
-.table-container th,
-.table-container td {
+/* Search Styles */
+.search {
+     display: flex;
+     align-items: center;
+}
+
+.search input {
+     width: 500px;
      padding: 10px;
-     text-align: center;
+     margin-right: 10px;
+     border: none;
+     border-radius: 5px;
+     outline: none;
 }
 
-.table-container th {
-     color: white;
-     background-color: #0275ef;
+.search button {
+     padding: 10px 10px;
+     border: none;
+     border-radius: 5px;
+     background-color: blue; /* Change the button color as needed */
+     color: #fff;
+     cursor: pointer;
 }
 
-.table-container tbody tr:nth-child(even) {
-     background-color: #edf5fc;
+.search button:hover {
+     background-color: rgb(14, 14, 180); /* Change the button color as needed */
 }
 
-.table-container tbody tr:hover {
-     background-color: #ddd;
+/* Navigation Styles */
+header ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
 }
 
-/* Style for the table */
-.tablesorter-custom1 {
-     width: 100%;
-     border-collapse: collapse;
+header li {
+     display: inline;
+     margin-left: 20px; /* Adjust the spacing between items */
+}
+
+header a {
+     text-decoration: none;
+     color: #fff;
+     font-weight: bold;
+     font-size: 16px;
+}
+
+/* Container */
+.container {
+     max-width: 1200px;
+     margin: 0 auto;
+}
+
+.menu-icon {
+     color: #333;
+     text-decoration: none;
+}
+
+.logo {
+     max-width: 100%;
+     height: auto;
+}
+
+/* Swiper Slider */
+.mySwiper {
+     position: relative;
+}
+
+.swiper-wrapper {
+     display: flex;
+     transition: transform 0.3s ease;
+}
+
+.swiper-slide {
+     flex: 0 0 33.33%;
+     box-sizing: border-box;
+     padding: 20px;
+}
+
+/* Main Content */
+.main {
+     display: flex;
+     border-radius: 10px;
+     overflow: hidden;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-side {
+     flex: 1;
+     padding: 30px;
+}
+
+.main-wrapper {
      margin-bottom: 20px;
 }
 
-/* Style for table cells */
-.tablesorter-custom1 td {
-     padding: 2px;
-}
-
-
-
-
-
-/* Style for the plus button */
-.plus_button button {
-     background-color: rgb(24, 175, 24);
-     color: #fff;
-     border: none;
-     padding: 5px 20px;
-     cursor: pointer;
-     border-radius: 4px;
-     font-size: 16px;
-     margin-top: 5px;
-     margin-right: 20px;
-}
-
-
-
-.input-container1 input[type="number"]  {
-     width: 60%;
-     margin: 0 auto;
-     /* Center align the input field */
-}
-
-.input-container1 input[type="text"] {
-     width: 60%;
-     margin: 0 auto;
-}
-
-/* Input label */
-.input-label {
-     position: absolute;
-     top: 0;
-     left: 0;
-     font-size: 16px;
-     color: rgba(204, 204, 204, 0);
-     pointer-events: none;
-     transition: all 0.3s ease;
-}
-
-/* Input highlight */
-.input-highlight {
-     position: absolute;
-     bottom: 0;
-     left: 0;
-     height: 2px;
-     width: 0;
-     background-color: #007bff;
-     transition: all 0.3s ease;
-}
-
-/*button modify*/
-.update_button button .fa {
-     background: none;
-     border: none;
-     cursor: pointer;
-     font-size: 24px;
-     color: #757575;
-     /* Adjust the color as needed */
-}
-
-.update_button button .fa:focus {
-     outline: none;
-}
-
-.update_button button .fa:hover {
-     color: blue;
-     /* Change color on hover if desired */
-}
-
-.update_button button {
-     border: none;
-}
-
-/*new step button*/
-.custom-btn {
-     width: 120px;
-     height: 40px;
-     color: #fff;
-     border-radius: 5px;
-     padding: 10px 25px;
-     font-family: 'Lato', sans-serif;
-     font-weight: 500;
-     background: transparent;
-     cursor: pointer;
-     transition: all 0.3s ease;
-     position: relative;
-     display: inline-block;
-     outline: none;
-     margin: 10px 0px;
-}
-
-/* 1 */
-.btn-1 {
-     background: #007bff;
-     border: none;
-}
-
-.btn-1:hover {
-     background: #0755a9;
-}
-
-/*form*/
-h2 {
-     margin: 10px 0px;
-}
-
-.step {
-     display: flex;
-     flex-wrap: wrap;
-     border: 1px solid #333;
-     border-top: 5px solid #007bff;
-     margin: 20px;
-     padding: 10px;
-     border-radius: 15px;
-}
-
-.step-header {
-     flex: 1 1 100%;
-     margin-bottom: 10px;
-     margin-left: 15px;
-}
-
-.form-step {
-     flex: 0 0 calc(25% - 10px);
-     box-sizing: border-box;
-     padding: 10px;
-     border-radius: 4px;
-     margin-bottom: 10px;
-}
-
-.form-step label {
-     display: block;
-     font-weight: bold;
-     margin-bottom: 5px;
-}
-
-/* Style for input fields */
-.input-field {
-     position: relative;
-     display: block;
-     width: 100%;
-     padding: 10px;
-     font-size: 16px;
-     border: none;
-     border-bottom: 2px solid #ccc;
-     outline: none;
-     background-color: transparent;
-     width: 70%;
-}
-
-/* Style for inputs */
-.input-field input {
-     width: 100%;
-     padding: 8px;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-}
-
-/* Style for labels */
-.input-field label {
-     position: absolute;
-     top: 0;
-     left: 0;
-     font-size: 14px;
-     color: #777;
-     pointer-events: none;
-     transition: 0.2s ease all;
-}
-
-/* Style for labels when input is focused or has value */
-.input-field input:focus+label,
-.input-field input:not(:placeholder-shown)+label {
-     top: -12px;
-     font-size: 12px;
+.main-header {
+     font-size: 18px;
      color: #333;
 }
 
+.main-title {
+     font-size: 32px;
+     font-weight: bold;
+     color: #333;
+}
 
-/* Input field:focus styles */
-.input-field:focus+.input-label {
-     top: -20px;
-     font-size: 12px;
+.main-subtitle {
+     font-size: 24px;
+     font-weight: bold;
+     color: #333;
+}
+
+.main-content__title,
+.main-content__subtitle {
+     margin-bottom: 10px;
+     font-size: 16px;
+     color: #555;
+}
+
+/* Right Side Image */
+.center {
+     flex: 0 0 66.66%;
+     position: relative;
+     overflow: hidden;
+}
+
+.right-side__img {
+     position: absolute;
+     top: 0;
+     left: -50px;
+     width: 100%;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.bottle-bg {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: cover;
+}
+
+/* Button Icon */
+.toggle-button,
+.toggle-button1 {
+     background: none;
+     border: none;
+     cursor: pointer;
+}
+
+.toggle-button i {
+     font-size: 24px;
+     color: #333;
+}
+
+/* Button Hover Effect */
+.toggle-button:hover,
+.toggle-button1:hover {
      color: #007bff;
 }
 
-.input-field:focus+.input-label+.input-highlight {
-     width: 100%;
+.more-menu {
+     background-color: #007bff; /* Set the background color */
+     color: #fff; /* Set the text color */
+     padding: 10px 20px; /* Set padding (top/bottom, left/right) */
+     border: none; /* Remove border */
+     border-radius: 5px; /* Add rounded corners */
+     font-size: 16px; /* Set font size */
+     cursor: pointer; /* Change cursor on hover */
+     margin-top: 20px;
 }
 
-/*button*/
-.create-button {
-     background-color: #4caf50;
-     color: #ffffff;
-     border: none;
-     padding: 10px 20px;
-     font-size: 16px;
-     cursor: pointer;
-     border-radius: 4px;
-     margin-left: 20px;
-     margin-bottom: 15px;
-}
-
-.create-button:hover {
-     background-color: #318936;
-}
-
-.input-container2 {
-     width: 73%;
-     margin-left: 80px;
-     /* Center align the input field */
-     text-align: center;
-     /* Center-align the text inside the input field */
-}
-
-.button_2 {
-     text-align: end; /* Center align the buttons */
-}
-
-.next_button {
-     padding: 10px 20px;
-     font-size: 16px;
-     margin: 5px;
-     cursor: pointer;
-     border: none;
-     border-radius: 5px;
-     background-color: #007bff;
-     color: #fff;
-}
-
-.next_button:hover {
-     background-color: #1367c1;
-}
-
-.input-container input[type="number"] {
-     position: relative;
-     width: 150px;
-     /* margin: 0 auto; */
-}
-
-h3 {
-     margin: 20px 0px;
-     margin-left: 20px;
-}
-
-.error {
-     margin-top: 10px;
+.more-menu:hover {
+     background-color: #0056b3; /* Change background color on hover */
 }

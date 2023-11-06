@@ -4,50 +4,48 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
-import com.vitvang.productionmanagement.model.DesignForProcessDTO;
-import jakarta.servlet.RequestDispatcher;
+import com.vitvang.productionmanagement.dao.customer.CustomerDAO;
+import com.vitvang.productionmanagement.model.AccountDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
-import javax.naming.NamingException;
 
-@WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
-public class EditDesignController extends HttpServlet {
+/**
+ *
+ * @author Admin
+ */
+@WebServlet(name = "CustomerAccountController", urlPatterns = {"/CustomerAccountController"})
+public class CustomerAccountController extends HttpServlet {
 
-      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
-      private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String CustomerAccountInformation = "CustomerAccountInformation.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String cageID = request.getParameter("txtCageID");
-            String url = ERROR_PAGE;
+            String url = "ErrorPage.html";
             try {
-                  //1. new DAO
-                  DesignForProcessDAO designdao = new DesignForProcessDAO();
-                  //2. Call method
-                  // get design
-                  designdao.ViewDesignForProcess(cageID);
-                  //3. process result     
-                  List<DesignForProcessDTO> result1 = designdao.getDesignProcessList();
+                  /* TODO output your page here. You may use following sample code. */
+                  HttpSession session = request.getSession();
+                  UserDTO account = (UserDTO) session.getAttribute("USER");
+                  String Username = account.getUsername();
 
-                  request.setAttribute("DESIGN_PROCESS", result1);
-                  url = DESIGN_PROCESS_PAGE;
-
-            } catch (SQLException ex) {
-                  String msg = ex.getMessage();
-                  log("EditDesignController SQL" + msg);
-            } catch (NamingException ex) {
-                  log("EditDesignController _ NAMING " + ex.getMessage());
+                  CustomerDAO dao = new CustomerDAO();
+                  dao.getCustomerAccount(Username);
+                  List<AccountDTO> list = dao.getListAccount();
+                  request.setAttribute("CUSTOMER_ACCOUNT", list);
+                  url = CustomerAccountInformation;
+            } catch (SQLException e) {
+                  e.printStackTrace();
             } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+                  request.getRequestDispatcher(url).forward(request, response);
             }
       }
 

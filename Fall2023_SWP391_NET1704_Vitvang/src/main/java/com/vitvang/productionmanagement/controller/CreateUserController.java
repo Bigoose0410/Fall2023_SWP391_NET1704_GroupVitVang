@@ -102,7 +102,7 @@ public class CreateUserController extends HttpServlet {
                         UserDAO dao = new UserDAO();
                         // 2. call method
                         Password = dao.EncodePass(Password);
-                        UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 4);
+                        UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 0, true);
                         boolean result = dao.createAccount(user);
                         if (result) {
                               HttpSession session = request.getSession();

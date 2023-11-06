@@ -53,7 +53,7 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -134,7 +134,7 @@
                                                   <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
                                              </td>
 
-                                             <td>
+                                             <td class="td3" style="text-align: left; display: flex; justify-content: center">
                                                   ${dto.getName()} / ${dto.getUnit()}
                                              </td>
 

@@ -28,9 +28,10 @@ import javax.naming.NamingException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-      private static final String Admin_Page = "MainController?btAction=Search";
+      private static final String Admin_Page = "AdminHomePage.jsp";
       private static final String Staff_Page = "MainController?btAction=Search";
       private static final String Manager_Page = "MainController?btAction=Search";
+      private static final String Customer_Page = "CustomerHomePage.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
       private static final String Login_PAGE = "NewLogin.jsp";
 
@@ -71,10 +72,13 @@ public class LoginServlet extends HttpServlet {
                                           url = Admin_Page;
                                           break;
                                     case 2:
+                                          url = Staff_Page;
+                                          break;
+                                    case 3:
                                           url = Manager_Page;
                                           break;
-                                    default:
-                                          url = Staff_Page;
+                                    case 4:
+                                          url = Customer_Page;
                                           break;
                               }
                               HttpSession session = request.getSession();

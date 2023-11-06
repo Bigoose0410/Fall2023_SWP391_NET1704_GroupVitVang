@@ -46,7 +46,7 @@
                                         <i class="uil uil-estate"></i>
                                         <span class="link-name">Dahsboard</span>
                                    </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>

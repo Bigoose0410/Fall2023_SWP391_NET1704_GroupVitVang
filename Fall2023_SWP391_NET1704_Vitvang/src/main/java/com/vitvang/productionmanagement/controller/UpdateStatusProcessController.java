@@ -2,15 +2,16 @@ package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
-import com.vitvang.productionmanagement.model.DetailOrderDTO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
-import java.io.IOException;
+import static com.vitvang.productionmanagement.util.tool.DateAfterReduce;
+import static com.vitvang.productionmanagement.util.tool.calculateDateReduce;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,26 +47,50 @@ public class UpdateStatusProcessController extends HttpServlet {
             boolean result = false;
             boolean full = false;
             boolean laststep = false;
+            boolean updatefrom = false;
+            Date startDate = null;
+            Date endDate = null;
+            int dateWillReduce = 0;
             try {
                   if (!LastStep.trim().isEmpty()) {
                         laststep = true;
                   }
                   ProcessDAO processdao = new ProcessDAO();
+                  OrderDAO orderdao = new OrderDAO();
                   if (addcompleted >= totalquanNeed - quantityCompleted) {
                         full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
                         if (full) {
                               result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
-                              OrderDAO orderdao = new OrderDAO();
-                              boolean orderdone = false;
-                              for (DetailOrderDTO listOrderDetail : orderdao.getListOrderDetails()) {
-                                    if (listOrderDetail.getStatus() != "Done") {
-                                          orderdone = false;
+                              if (laststep) {
+                                    orderdao.queryOrderDetail(OrderID);
+                                    boolean orderdone = false;
+                                    orderdone = orderdao.countOrderDetailnotDone(OrderID);
+                                    if (orderdone) {
+                                          result = orderdao.updateOrderStatus(OrderID, now, "Done");
+                                    }
+                              } else {
+                                    // get all process of processing of this order with cage
+                                    processdao.ViewProcessingOrder(OrderID, CageID, CageID);
+                                    for (ProcessDTO process : processdao.getListOrdersProcess()) {
+                                          // kiem tra xem can update tu buoc nao
+                                          if (process.getProcessID().equals(ProcessID)) {
+                                                // update tu buoc nay
+                                                updatefrom = true;
+                                                // cap nhat endate cua buoc dau tien la thoi diem hien tai
+                                                processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, process.getStartDate(), now, process.getNumberOfEmployee());
+                                                dateWillReduce = calculateDateReduce(process.getEndDate(), now);
+                                          }
+                                          if (updatefrom == true && !process.getProcessID().equals(ProcessID) ) {
+                                                
+                                                endDate = DateAfterReduce(process.getStartDate(), dateWillReduce);
+                                                processdao.updateTimeProcess(process.getProcessID(), 
+                                                        OrderID, CageID, 
+                                                        DateAfterReduce(process.getStartDate(), dateWillReduce), 
+                                                        DateAfterReduce(process.getEndDate(), dateWillReduce), 
+                                                        process.getNumberOfEmployee());
+                                          }
                                     }
                               }
-                              if (orderdone) {
-                                  result =  orderdao.updateOrderStatus(OrderID, now, "Done");
-                              }
-
                         }
                   } else {
                         result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);

@@ -44,13 +44,13 @@ public class UpdateDesignProcessController extends HttpServlet {
                   int timeprocess;
                   timeprocess = (TimeProcess != null ) ? Integer.parseInt(TimeProcess) : 1;
                   if (timeprocess < 1 || timeprocess > 10) {
-                        error.setTimeProcessErr("time process can not be "+ TimeProcess +" again please");
+                        error.setTimeProcessErr("time process can not be '"+ TimeProcess +"', check again please");
                         foundErr = true;
                   }
                   int numemployee;
                   numemployee = (NumberOfEmployee != null ) ? Integer.parseInt(NumberOfEmployee) : 1;
                   if (numemployee < 1 || numemployee > 10) {
-                        error.setEmployeeFormatErr("Number of employee "+NumberOfEmployee+" again please");
+                        error.setEmployeeFormatErr("Number of employee can not '"+NumberOfEmployee+"' check again please");
                         foundErr = true;
                   }
                   if (foundErr) {
