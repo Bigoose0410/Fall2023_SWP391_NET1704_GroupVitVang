@@ -49,24 +49,21 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<<<<<<< HEAD
 <!--                              <li ><a href="#">
                                         <i class="uil uil-estate"></i>
                                         <span class="link-name">Dahsboard</span>
                                    </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
-=======
+                              <li ><a href="MainController?btAction=search">
                               <!--                              <li ><a href="#">
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-                              <li ><a href="MainController?btAction=Search">
->>>>>>> 5e3c144c3fe79b26c984af5334d6a208df613300
+                             
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
+                                        <i class="uil uil-user"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
