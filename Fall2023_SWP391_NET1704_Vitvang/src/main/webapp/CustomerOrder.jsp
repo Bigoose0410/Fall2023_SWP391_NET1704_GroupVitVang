@@ -43,6 +43,7 @@
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                </div>
 
+               
                <div class="menu-items">
                     <ul class="nav-links">
                          <li><a href="#">
@@ -132,7 +133,7 @@
                                                                  Description: ${dto.getDescription()}
                                                             </div>
                                                             <!--<a href="Process.html"> <button class="more-menu"><strong>Process</strong></button></a>-->
-                                                            <button type="submit" class="more-menu" name="btAction" value="Customer Tracking"><strong>Process</strong></button>
+                                                            <button type="submit" class="more-menu" name="btAction" value="CustomerTracking"><strong>Process</strong></button>
                                                        </div>
                                                   </div>
                                                   <div class="center">

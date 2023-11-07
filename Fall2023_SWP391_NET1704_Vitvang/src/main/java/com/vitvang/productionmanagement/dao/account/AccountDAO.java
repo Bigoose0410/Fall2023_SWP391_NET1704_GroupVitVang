@@ -273,6 +273,7 @@ public class AccountDAO implements Serializable {
             return false;
       }
 
+      
       public void searchAccount(String SearchAccount) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -317,6 +318,52 @@ public class AccountDAO implements Serializable {
                   if (con != null) {
                         con.close();
                         DBHelper.closeConnection(con);
+                  }
+            }
+      }
+
+      List<AccountDTO> listCheck;
+
+      public List<AccountDTO> getListCheck() {
+            return listCheck;
+      }
+
+      public void checkBeforeDelete(String UserID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "SELECT UserOrder.UserID, OrderDetail.OrderID, OrderDetail.CageID, OrderDetail.OrderDetailStatus "
+                                + "FROM UserOrder JOIN OrderDetail "
+                                + "ON UserOrder.OrderID = OrderDetail.OrderID "
+                                + "WHERE UserOrder.UserID = ?";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, UserID);
+                        rs = stm.executeQuery();
+
+                        while (rs.next()) {
+                              String OrderID = rs.getString("OrderID");
+                              String CageID = rs.getString("CageID");
+                              String OrderDetailStatus = rs.getString("OrderDetailStatus");
+                              AccountDTO account = new AccountDTO(UserID, OrderID, CageID, OrderDetailStatus);
+                              if (this.listCheck == null) {
+                                    this.listCheck = new ArrayList<AccountDTO>();
+                              }
+                              this.listCheck.add(account);
+                        }
+                  }
+            } finally {
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (rs != null) {
+                        rs.close();
                   }
             }
       }

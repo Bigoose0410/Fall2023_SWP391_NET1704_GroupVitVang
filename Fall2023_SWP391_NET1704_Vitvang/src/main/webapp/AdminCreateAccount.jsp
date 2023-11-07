@@ -42,6 +42,41 @@
                          display: block;">
                          <div class="logo-image">
                               <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         </div>
+
+                         <div class="menu-items">
+                              <ul class="nav-links">
+                                   <li><a href="MainController?btAction=Dashboard">
+                                             <i class="uil uil-estate"></i>
+                                             <span class="link-name">Dashboard</span>
+                                        </a></li>
+
+                                   <li><a href="AdminHomePage.jsp">
+                                             <i class="uil uil-bill"></i>
+                                             <span class="link-name">Home</span>
+                                        </a></li>
+                                   <li><a href="MainController?btAction=Manage Account">
+                                             <i class="uil uil-grin"></i>
+                                             <span class="link-name">Manage Account</span>
+                                        </a></li>
+                                   <!--                                   <li><a href="MainController?btAction=Production process">
+                                                                                <i class="uil uil-chart-line"></i>
+                                                                                <span class="link-name">Production process</span>
+                                                                           </a></li>-->
+                                   <!--                                   <li><a href="#">
+                                                                                <i class="uil uil-clipboard-alt"></i>
+                                                                                <span class="link-name">Reports</span>
+                                                                           </a></li>
+                                                                      <li><a href="#">
+                                                                                <i class="uil uil-screw"></i>
+                                                                                <span class="link-name">Material</span>
+                                                                           </a></li>
+                                                                      <li><a href="#">
+                                                                                <i class="uil uil-archive-alt"></i>
+                                                                                <span class="link-name">Inventory</span>
+                                                                           </a></li>-->
+                                   <ul class="logout-mode">
+                                        <li><a href="${logout_query}">
                               <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
@@ -136,6 +171,7 @@
 
                                    </div>
                                    <div class="form-row">
+
                                         <label for="name">Name: </label>
                                         <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
 

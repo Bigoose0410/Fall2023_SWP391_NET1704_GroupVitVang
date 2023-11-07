@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 
+
 /**
  *
  * @author Admin
@@ -30,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 
       private static final String Admin_Page = "AdminHomePage.jsp";
       private static final String Staff_Page = "MainController?btAction=Search";
-      private static final String Manager_Page = "MainController?btAction=Search";
+      private static final String Manager_Page = "ManagerHomePage.jsp";
       private static final String Customer_Page = "CustomerHomePage.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
       private static final String Login_PAGE = "NewLogin.jsp";

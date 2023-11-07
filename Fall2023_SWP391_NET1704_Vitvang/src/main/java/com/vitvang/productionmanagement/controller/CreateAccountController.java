@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 
+
 /**
  *
  * @author Admin
@@ -67,6 +68,7 @@ public class CreateAccountController extends HttpServlet {
             String url = ERROR_PAGE;
             CreateAccountError error = new CreateAccountError();
             try {
+
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;
@@ -95,6 +97,7 @@ public class CreateAccountController extends HttpServlet {
                         foundErr = true;
                   } else if (!checkFormat(Name, NAME_PATTERN, true)) {
                         error.setNameFormatErr("Name cannot include number");
+                        foundErr = true;
                   }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {

@@ -5,6 +5,7 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
+import com.vitvang.productionmanagement.model.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.List;
+
 
 /**
  *
@@ -26,12 +29,30 @@ public class DeleteAccountController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = "NewLogin.jsp";
             try {
-                  /* TODO output your page here. You may use following sample code. */
                   String Username = request.getParameter("txtUsername");
+                  String UserID = request.getParameter("txtUserID");
+                  String RoleID = request.getParameter("txtRoleID");
+                  boolean check = true;
+
                   AccountDAO dao = new AccountDAO();
-                  boolean result = dao.deleteAccount(Username);
-                  if (result) {
-                        url = "MainController?btAction=Manage Account";
+                  dao.checkBeforeDelete(UserID);
+                  List<AccountDTO> list = dao.getListCheck();
+                  if (list != null) {
+                        for (AccountDTO account : list) {
+                              if (account.getOrderDetailStatus().equalsIgnoreCase("new order") || account.getOrderDetailStatus().equalsIgnoreCase("Processing")) {
+                                    check = false;
+                                    break;
+                              }
+                        }
+                  }
+                  if (check && !RoleID.equals("1")) {
+                        boolean result = dao.deleteAccount(Username);
+                        if (result) {
+                              url = "MainController?btAction=Manage Account";
+                        }
+                  } else {
+                        request.setAttribute("DELETE_MESSAGE", "Cannot delete account!!!");
+                        url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
                   }
             } catch (SQLException e) {
                   e.printStackTrace();
