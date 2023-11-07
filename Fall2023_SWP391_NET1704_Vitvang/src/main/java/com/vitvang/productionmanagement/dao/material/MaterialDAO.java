@@ -6,6 +6,7 @@ package com.vitvang.productionmanagement.dao.material;
 
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
+import com.vitvang.productionmanagement.model.MaterialDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,15 +20,20 @@ import javax.naming.NamingException;
  * @author Admin
  */
 public class MaterialDAO {
-      
-       List<CageMaterialDTO> AllMaterial;
+
+      List<CageMaterialDTO> AllMaterial;
 
       public List<CageMaterialDTO> getAllMaterial() {
             return AllMaterial;
       }
-      
+      List<MaterialDTO> ListMaterial;
+
+      public List<MaterialDTO> getListMaterial() {
+            return ListMaterial;
+      }
+
       // get material from list to add to cart
-       public CageMaterialDTO getMaterialByID(String ID) {
+      public CageMaterialDTO getMaterialByID(String ID) {
             for (CageMaterialDTO cageDTO : getAllMaterial()) {
                   if (ID.equals(cageDTO.getCageID())) {
                         return cageDTO;
@@ -35,8 +41,8 @@ public class MaterialDAO {
             }
             return null;
       }
-       
-       public CageMaterialDTO AllMaterial()
+
+      public CageMaterialDTO AllMaterial()
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -49,7 +55,7 @@ public class MaterialDAO {
 
                         String sql = "SELECT * "
                                 + "FROM   Material d ";
-                        stm = con.prepareStatement(sql);                   
+                        stm = con.prepareStatement(sql);
                         rs = stm.executeQuery();
 
                         while (rs.next()) {
@@ -79,7 +85,7 @@ public class MaterialDAO {
                   }
             }
       }
-      
+
       public boolean AddMaterialBuild(String CageID, String MaterialID, int Quanity)
               throws SQLException, NamingException {
             Connection con = null;
@@ -123,6 +129,99 @@ public class MaterialDAO {
                   }
             }
             return result;
+      }
+
+      public boolean AddMaterial(MaterialDTO material)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            try {
+                  //1. Make connection
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+
+                        String sql = "DECLARE @MaterialID NVARCHAR(10) "
+                                + "SET @MaterialID = dbo.GetNextMaterialID() "
+                                + "INSERT INTO Material (MaterialID, Name, Origin, Price, Quantity, Unit) "
+                                + "VALUES (@MaterialID, ?, ?, ?, ?, ?)";
+
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, material.getNameMaterial());
+                        stm.setString(2, material.getOrigin());
+                        stm.setInt(3, material.getPrice());
+                        stm.setInt(4, material.getQuantity());
+                        stm.setString(5, material.getUnit());
+                        //4. Excute query
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+                        //end username and password are checked
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
+      }
+
+      public void AllMaterialDB() throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+
+                        String sql = "Select * "
+                                + "From Material ";
+
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+
+                        while (rs.next()) {
+                              String MaterialID = rs.getString("MaterialID");
+                              String Name = rs.getString("Name");
+                              int Price = rs.getInt("Price");
+                              String Origin = rs.getString("Origin");
+                              int Quantity = rs.getInt("Quantity");
+                              String Unit = rs.getString("Unit");
+
+                              // Call DTO
+                              MaterialDTO material = new MaterialDTO(Name, Price, Quantity, Origin, Unit, MaterialID);
+
+                              if (this.ListMaterial == null) {
+                                    this.ListMaterial = new ArrayList<MaterialDTO>();
+                              }
+                              this.ListMaterial.add(material);
+
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
       }
 
       public boolean updateMaterialOfCage(String CageID, String MaterialID, int Quanity)
@@ -310,6 +409,5 @@ public class MaterialDAO {
                   }
             }
       }
-      
 
 }

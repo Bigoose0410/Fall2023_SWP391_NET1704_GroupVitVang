@@ -39,6 +39,7 @@ public class MainController extends HttpServlet {
       private final String AddMaterialToCageController = "AddMaterialToCageController";
       private final String AutoAddProcessController = "AutoAddProcessController";
       private final String AddCageController = "AddCageController";
+      private final String AddMaterialController = "AddMaterialController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
       private final String UpdateDesignProcessController = "UpdateDesignProcessController";
@@ -59,6 +60,7 @@ public class MainController extends HttpServlet {
       private static final String ERROR_PAGE = "ErrorPage.html";
       private final String DeleteAccountController = "DeleteAccountController";
       private final String SearchAccountController = "SearchAccountController";
+      private final String ViewMaterialController = "ViewMaterialController";
       private final String DashboardController = "DashboardController";
       private final String CustomerAccountController = "CustomerAccountController";
       private final String CustomerOrderController = "CustomerOrderController";
@@ -158,6 +160,13 @@ public class MainController extends HttpServlet {
                   } else if (button.equals("Customer Tracking")) {
                         url = CustomerProcessController;
                   }
+                  else if (button.equals("AddMaterial")) {
+                        url = AddMaterialController;
+                  
+                          }
+                  else if (button.equals("View All Material")) {
+                        url = ViewMaterialController;
+                          }
 
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
