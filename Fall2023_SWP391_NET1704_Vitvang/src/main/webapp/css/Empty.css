@@ -1,0 +1,354 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
+}
+
+/* Root Variables (Colors and Transitions) */
+:root {
+     /* ===== Colors ===== */
+     --primary-color: #0E4BF1;
+     --panel-color: #FFF;
+     --text-color: #000;
+     --black-light-color: #707070;
+     --border-color: #e6e5e5;
+     --toggle-color: #DDD;
+     --box1-color: #4DA3FF;
+     --box2-color: #FFE6AC;
+     --box3-color: #E7D1FC;
+     --title-icon-color: #fff;
+     --cream-color: #f5f5dc;
+     --hover-color: #333;
+     --dark-text: #fff;
+     /* ====== Transition ====== */
+     --tran-05: all 0.5s ease;
+     --tran-03: all 0.3s ease;
+     --tran-03: all 0.2s ease;
+}
+
+/* Light Mode */
+body {
+     min-height: 100vh;
+     background-color: white;
+}
+
+/* Dark Mode */
+body.dark {
+     --primary-color: #3A3B3C;
+     --panel-color: #242526;
+     --text-color: #CCC;
+     --black-light-color: #CCC;
+     --border-color: #4D4C4C;
+     --toggle-color: #FFF;
+     --box1-color: #3A3B3C;
+     --box2-color: #3A3B3C;
+     --box3-color: #3A3B3C;
+     --title-icon-color: #CCC;
+}
+
+/* === Custom Scroll Bar CSS === */
+
+::-webkit-scrollbar-track {
+     background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+     background: var(--primary-color);
+     border-radius: 12px;
+     transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+     background: #0b3cc1;
+}
+
+body.dark::-webkit-scrollbar-thumb:hover,
+body.dark .activity-data::-webkit-scrollbar-thumb:hover {
+     background: #3A3B3C;
+}
+
+nav {
+     position: fixed;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 250px;
+     padding: 10px 14px;
+     background-color: var(--panel-color);
+     border-right: 1px solid var(--border-color);
+     transition: var(--tran-05);
+     background-color: var(--box1-color);
+     border-color: #e6e6cc;
+}
+
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
+
+nav.close {
+     width: 73px;
+}
+
+nav .logo-name {
+     display: flex;
+     align-items: center;
+}
+
+nav .logo-image {
+     display: flex;
+     justify-content: center;
+     min-width: 45px;
+}
+
+nav .logo-image img {
+     width: 40px;
+     object-fit: cover;
+     border-radius: 50%;
+}
+
+nav .logo-name .logo_name {
+     font-size: 25px;
+     font-weight: 600;
+     color: var(--text-color);
+     margin-right: 13px;
+     transition: var(--tran-05);
+}
+
+nav.close .logo_name {
+     opacity: 0;
+     pointer-events: none;
+}
+
+nav .menu-items {
+     margin-top: 40px;
+     height: calc(100% - 90px);
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.menu-items li {
+     list-style: none;
+}
+
+.menu-items li a {
+     display: flex;
+     align-items: center;
+     height: 50px;
+     text-decoration: none;
+     position: relative;
+}
+
+.nav-links li a:hover:before {
+     content: "";
+     position: absolute;
+     left: -7px;
+     height: 5px;
+     width: 5px;
+     border-radius: 50%;
+     background-color: var(--primary-color);
+}
+
+body.dark li a:hover:before {
+     background-color: var(--text-color);
+}
+
+.menu-items li a i {
+     font-size: 24px;
+     min-width: 45px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: black;
+}
+
+.menu-items li a .link-name {
+     font-size: 18px;
+     font-weight: 400;
+     color: black;
+     transition: var(--tran-05);
+}
+
+nav.close li a .link-name {
+     opacity: 0;
+     pointer-events: none;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+     color: var(--primary-color);
+}
+
+body.dark .nav-links li a:hover i,
+body.dark .nav-links li a:hover .link-name {
+     color: var(--text-color);
+}
+
+.menu-items .logout-mode {
+     padding-top: 10px;
+     border-top: 1px solid var(--border-color);
+}
+
+.menu-items .mode {
+     display: flex;
+     align-items: center;
+     white-space: nowrap;
+}
+
+.menu-items .mode-toggle {
+     position: absolute;
+     right: 14px;
+     height: 50px;
+     min-width: 45px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
+}
+
+.mode-toggle .switch {
+     position: relative;
+     display: inline-block;
+     height: 22px;
+     width: 40px;
+     border-radius: 25px;
+     background-color: var(--toggle-color);
+}
+
+.switch:before {
+     content: "";
+     position: absolute;
+     left: 5px;
+     top: 50%;
+     transform: translateY(-50%);
+     height: 15px;
+     width: 15px;
+     background-color: var(--panel-color);
+     border-radius: 50%;
+     transition: var(--tran-03);
+}
+
+body.dark .switch:before {
+     left: 20px;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+     color: var(--hover-color);
+}
+
+body.dark .nav-links li a i,
+body.dark .nav-links li a .link-name {
+     color: var(--dark-text);
+}
+
+body.dark nav {
+     background-color: #222;
+}
+
+.dashboard {
+     position: relative;
+     left: 250px;
+     background-color: var(--panel-color);
+     min-height: 100vh;
+     width: calc(100% - 250px);
+     padding: 0px 0px;
+     transition: var(--tran-05);
+}
+
+/*Dashboard*/
+h1 {
+     background: #207893;
+     background: -moz-linear-gradient(45deg, #207893 25%, #2ea3b7 100%);
+     background: -webkit-linear-gradient(45deg, #207893 25%, #2ea3b7 100%);
+     background: linear-gradient(45deg, #207893 25%, #2ea3b7 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#207893', endColorstr='#2ea3b7', GradientType=1);
+     color: rgba(255, 255, 255, 1);
+     font-weight: 700;
+     margin: 0;
+     padding: 40px 10% 0 10%;
+     text-align: right;
+     text-transform: uppercase;
+     letter-spacing: 4px;
+     line-height: 23px;
+}
+
+body.blue h1 {
+     background: rgb(206, 119, 68);
+     background: -moz-linear-gradient(left, rgba(206, 119, 68, 1) 0%, rgba(230, 125, 36, 1) 100%);
+     background: -webkit-linear-gradient(left, rgba(206, 119, 68, 1) 0%, rgba(230, 125, 36, 1) 100%);
+     background: linear-gradient(to right, rgba(206, 119, 68, 1) 0%, rgba(230, 125, 36, 1) 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce7744', endColorstr='#e67d24', GradientType=1);
+}
+
+i.fas.fa-cogs {
+     font-size: 1.5em;
+     color: black;
+     margin-left: 1050px;
+     order: 5;
+     /* Set the order to 2 to move the gear icon to the end */
+}
+
+p {
+     font-size: 25px;
+     color: #FF5733;
+     /* You can change the color to your preference */
+     font-weight: bold;
+     /* Make the text bold */
+     margin-top: 20px;
+}
+
+/*EMPTY*/
+.empty {
+     text-align: center;
+     margin-top: 100px;
+}
+
+h2 {
+     color: red;
+     font-size: 40px;
+}
+
+p {
+     color: #666;
+}
+
+.button {
+     display: inline-block;
+     padding: 10px 20px;
+     font-size: 20px;
+     font-weight: bold;
+     color: #fff;
+     background-color: #007BFF;
+     border: none;
+     border-radius: 5px;
+     text-decoration: none;
+     cursor: pointer;
+     margin-top: 20px;
+}
+
+.button:hover {
+     background-color: #0056b3;
+}
+
+.fa {
+     margin-left: 5px;
+}
+
+.fa-arrow-circle-left:before {
+     content: "\f0a8";
+}
+
+img {
+     width: 25%;
+}

@@ -127,6 +127,8 @@ public class MainController extends HttpServlet {
                         url = AutoAddProcessController;
                   } else if (button.equals("Customers")) {
                         url = CustomerController;
+                  } else if (button.equals("StaffViewCustomerDetail")) {
+                        url = CustomerController;
                   } else if (button.equals("ViewProcessDetail")) {
                         url = ProcessController;
                   } else if (button.equals("UpdateStatusProcess")) {
@@ -151,14 +153,15 @@ public class MainController extends HttpServlet {
                         url = SearchAccountController;
                   } else if (button.equals("Dashboard")) {
                         url = DashboardController;
-                  } else if (button.equals("Customer's Account")) {
+                  } else if (button.equals("Customer Account")) {
                         url = CustomerAccountController;
                   } else if (button.equals("Customer's Order")) {
                         url = CustomerOrderController;
-                  } else if (button.equals("Customer Tracking")) {
+                  } else if (button.equals("CustomerTracking")) {
                         url = CustomerProcessController;
                   }
 
+                  
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);

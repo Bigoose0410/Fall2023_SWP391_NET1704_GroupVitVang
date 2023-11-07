@@ -1,10 +1,11 @@
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
-import static com.vitvang.productionmanagement.util.tool.DateAfterReduce;
-import static com.vitvang.productionmanagement.util.tool.calculateDateReduce;
+import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,9 +14,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+
 
 /**
  *
@@ -51,8 +54,9 @@ public class UpdateStatusProcessController extends HttpServlet {
             Date startDate = null;
             Date endDate = null;
             int dateWillReduce = 0;
+            int index = 0;
             try {
-                  if (!LastStep.trim().isEmpty()) {
+                  if (LastStep != null) {
                         laststep = true;
                   }
                   ProcessDAO processdao = new ProcessDAO();
@@ -69,8 +73,13 @@ public class UpdateStatusProcessController extends HttpServlet {
                                           result = orderdao.updateOrderStatus(OrderID, now, "Done");
                                     }
                               } else {
+                                    //get list design of process
+                                    DesignForProcessDAO designdao = new DesignForProcessDAO();
+                                    designdao.ViewDesignForProcess(CageID);
+                                    List<DesignForProcessDTO> designList = designdao.getDesignProcessList();
                                     // get all process of processing of this order with cage
                                     processdao.ViewProcessingOrder(OrderID, CageID, CageID);
+
                                     for (ProcessDTO process : processdao.getListOrdersProcess()) {
                                           // kiem tra xem can update tu buoc nao
                                           if (process.getProcessID().equals(ProcessID)) {
@@ -78,16 +87,26 @@ public class UpdateStatusProcessController extends HttpServlet {
                                                 updatefrom = true;
                                                 // cap nhat endate cua buoc dau tien la thoi diem hien tai
                                                 processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, process.getStartDate(), now, process.getNumberOfEmployee());
-                                                dateWillReduce = calculateDateReduce(process.getEndDate(), now);
+                                                // ngày kết thúc của bước trc sẽ thành ngày bắt đầu của bước sau
+                                                startDate = now;
+
                                           }
-                                          if (updatefrom == true && !process.getProcessID().equals(ProcessID) ) {
-                                                
-                                                endDate = DateAfterReduce(process.getStartDate(), dateWillReduce);
-                                                processdao.updateTimeProcess(process.getProcessID(), 
-                                                        OrderID, CageID, 
-                                                        DateAfterReduce(process.getStartDate(), dateWillReduce), 
-                                                        DateAfterReduce(process.getEndDate(), dateWillReduce), 
-                                                        process.getNumberOfEmployee());
+                                          if (updatefrom == true && !process.getProcessID().equals(ProcessID)) {
+
+                                                for (DesignForProcessDTO design : designList) {
+                                                      if (process.getPhrase().equals(design.getPhrase())) {
+//                                                            tính ngày dựa trên thiết kế trong design
+                                                            endDate = calculateProcessDate(startDate, process.getQuantity(),
+                                                                    design.getTimeProcess(), design.getNumberOfEmployee(),
+                                                                    design.getNumCompletionCage(), process.getNumberOfEmployee());
+                                                            processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
+                                                            // ngày kết thúc của bước trc sẽ thành ngày bắt đầu của bước sau
+                                                            startDate = endDate;
+//                                                            nếu đã update bước đó xong thì qua bước tiếp, không để chạy hết vòng lặp
+                                                            break;
+                                                      }
+                                                }
+                                               
                                           }
                                     }
                               }
