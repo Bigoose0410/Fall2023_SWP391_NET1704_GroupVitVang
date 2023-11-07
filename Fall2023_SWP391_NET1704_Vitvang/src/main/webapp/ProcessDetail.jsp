@@ -28,8 +28,11 @@
           <title>Production Process</title>
      </head>
 
-     
+
      <body>
+          <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
+          </c:url>      
           <nav>
 
                <div class="logo-name"style="display: block;">
@@ -40,48 +43,48 @@
                     </div>
                </div>
                <div class="menu-items">
-                         <ul class="nav-links">
-                              <li ><a href="MainController?btAction=Search">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Order</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-user"></i>
-                                        <span class="link-name">Customers</span>
-                                   </a></li>
-                              <li ><a href="${productionList}">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Production</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Production process">
-                                        <i class="uil uil-chart-line"></i>
-                                        <span class="link-name">Production process</span>
-                                   </a></li>
+                    <ul class="nav-links">
+                         <li ><a href="MainController?btAction=Search">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Customers">
+                                   <i class="uil uil-user"></i>
+                                   <span class="link-name">Customers</span>
+                              </a></li>
+                         <li ><a href="${productionList}">
+                                   <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Production process">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>
 
-                              <li ><a href="MainController?btAction=View All Material">
-                                        <i class="uil uil-screw"></i>
-                                        <span class="link-name">Material</span>
-                                   </a></li>
+                         <li ><a href="MainController?btAction=View All Material">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
 
-                         </ul>
-                         <ul class="logout-mode">
-                              <li><a href="${logout_query}">
-                                        <i class="uil uil-signout"></i>
-                                        <span class="link-name" >Logout</span>
-                                   </a></li>
+                    </ul>
+                    <ul class="logout-mode">
+                         <li><a href="${logout_query}">
+                                   <i class="uil uil-signout"></i>
+                                   <span class="link-name" >Logout</span>
+                              </a></li>
 
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
+                         <li class="mode">
+                              <a href="#">
+                                   <i class="uil uil-moon"></i>
+                                   <span class="link-name">Dark Mode</span>
+                              </a>
 
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
-                         </ul>
-                    </div>
+                              <div class="mode-toggle">
+                                   <span class="switch"></span>
+                              </div>
+                         </li>
+                    </ul>
+               </div>
           </nav>
           <section class="dashboard1">
                <div id="processing-form">
@@ -109,7 +112,7 @@
 
                                         <i class="fa fa-cube"></i>
                                         <label for="field3">Cage:</label>
-                                        <a href="MainController?btAction=Customers"><i>${result[1].getCageName()}</i></a>   
+                                        <a href="MainController?txtCageID=${result[1].getCageID()}&txtCageName=${result[1].getCageName()}&btAction=DetailProduct"><i>${result[1].getCageName()}</i></a>   
                                    </div>
                               </div>
 

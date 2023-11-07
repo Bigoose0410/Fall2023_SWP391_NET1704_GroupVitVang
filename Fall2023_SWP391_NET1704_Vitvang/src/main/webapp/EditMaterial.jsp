@@ -120,7 +120,7 @@
                                    <th>Name / Unit</th>
                                    <th>Quantity</th>
                                    <th>Origin</th>
-                                   <th>Price/Unit</th>
+                                   <!--<th>Price/Unit</th>-->
                                    <th>Edit</th>
                               </tr>
                          </thead>
@@ -138,11 +138,9 @@
                                                   ${dto.getMaterialID()}
                                                   <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
                                              </td>
-
                                              <td class="td3" style="text-align: left; display: flex; justify-content: center">
                                                   ${dto.getName()} / ${dto.getUnit()}
                                              </td>
-
                                              <td>
                                                   <div class="input-container">
                                                        <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
@@ -154,11 +152,11 @@
                                              <td>
                                                   ${dto.getOrigin()}
                                              </td>
-
+                                             <%--
                                              <td>
                                                   ${dto.getPrice()}
                                              </td>
-
+                                             --%>
 
 
                                              <td class="edit_button">
