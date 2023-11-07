@@ -42,7 +42,6 @@
                          display: block;">
                          <div class="logo-image">
                               <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-<<<<<<< HEAD
                          </div>
 
                          <div class="menu-items">
@@ -78,7 +77,6 @@
                                                                            </a></li>-->
                                    <ul class="logout-mode">
                                         <li><a href="${logout_query}">
-=======
                               <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
@@ -115,7 +113,6 @@
                                                                       </a></li>-->
                               <ul class="logout-mode">
                                    <li><a href="${logout_query}">
->>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                              <i class="uil uil-signout"></i>
                                              <span class="link-name">Logout</span>
                                         </a></li>
@@ -166,12 +163,7 @@
                                    <c:if test="${not empty err.getUserIDExistErr()}">
                                         <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUserIDExistErr()}</label>
                                    </c:if>
-<<<<<<< HEAD
-=======
-                                   <c:if test="${not empty err.getUserIDFormatErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUserIDFormatErr()}</label>
-                                   </c:if>
->>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
+
                                    <c:if test="${not empty err.getRoleIDFormatErr()}">
                                         <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getRoleIDFormatErr()}</label>
                                    </c:if>

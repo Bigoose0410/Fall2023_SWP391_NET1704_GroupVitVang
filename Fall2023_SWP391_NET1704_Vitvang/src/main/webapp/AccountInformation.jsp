@@ -42,10 +42,7 @@
                     display: block;">
                     <div class="logo-image">
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-<<<<<<< HEAD
-=======
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
->>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                     </div>
 
                     <div class="menu-items">

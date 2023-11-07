@@ -33,10 +33,9 @@
                     display: block;">
                     <div class="logo-image">
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-<<<<<<< HEAD
-=======
+
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
->>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
+
                     </div>
 
                     <div class="menu-items">
@@ -76,38 +75,6 @@
                                              <span class="link-name">Logout</span>
                                         </a></li>
 
-                                   <!--                              <li class="mode">
-                                              <a href="#">
-                                                   <i class="uil uil-moon"></i>
-                                                   <span class="link-name">Dark Mode</span>
-                                              </a>-->
-
-                                   <!--                                   <div class="mode-toggle">
-                                                   <span class="switch"></span>
-                                              </div>-->
-<<<<<<< HEAD
-<!--                                   <li class="mode">
-                                        <a href="#">
-                                             <i class="uil uil-moon"></i>
-                                             <span class="link-name">Dark Mode</span>
-                                        </a>
-
-                                        <div class="mode-toggle">
-                                             <span class="switch"></span>
-                                        </div>
-                                   </li>-->
-=======
-                                   <!--                                   <li class="mode">
-                                                                           <a href="#">
-                                                                                <i class="uil uil-moon"></i>
-                                                                                <span class="link-name">Dark Mode</span>
-                                                                           </a>
-                                   
-                                                                           <div class="mode-toggle">
-                                                                                <span class="switch"></span>
-                                                                           </div>
-                                                                      </li>-->
->>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                               </ul>
                          </ul>
                     </div>
