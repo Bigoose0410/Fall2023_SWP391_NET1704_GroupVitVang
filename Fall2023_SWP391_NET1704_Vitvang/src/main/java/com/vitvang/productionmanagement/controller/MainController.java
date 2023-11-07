@@ -155,7 +155,7 @@ public class MainController extends HttpServlet {
                         url = SearchAccountController;
                   } else if (button.equals("Dashboard")) {
                         url = DashboardController;
-                  } else if (button.equals("Customer's Account")) {
+                  } else if (button.equals("Customer Account")) {
                         url = CustomerAccountController;
                   } else if (button.equals("Customer's Order")) {
                         url = CustomerOrderController;

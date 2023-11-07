@@ -273,7 +273,7 @@
                                                                            <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Price </th>-->
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Unit</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>
-                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Total Quantity</th>
+                                                                           <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Total Quantity</th>-->
                                                                            <!--<th  style="text-align: start ;color:black;font-size:16px">Total Price</th>-->
                                                                       </tr>
                                                                       </thead>
@@ -304,9 +304,11 @@
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getUnit()}
                                                                                           </td>
+                                                                                          <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
+                                                                                          --%>
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                <c:set var="totalQuantity"
                                                                                                       value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>

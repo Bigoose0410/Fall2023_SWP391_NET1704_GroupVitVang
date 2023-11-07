@@ -145,8 +145,8 @@ public class CreateAccountController extends HttpServlet {
                                     result = userdao.createNewAccountCustomerWithRole(user);
                                     break;
                         }
-//                        boolean sendMail = SendEmail.sendEmailAccount(Email, Username, PasswordOrigin, "Create New Account");
-                        if (result) {
+                        boolean sendMail = SendEmail.sendEmailAccount(Email, Username, PasswordOrigin, "Create New Account");
+                        if (result && sendMail) {
                               url = "MainController?btAction=Manage Account";
                         }
                   }
