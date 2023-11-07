@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
      <head>
@@ -70,7 +71,7 @@
                                         <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Reports</span>
                                    </a></li>
-                              <li ><a href="#">
+                              <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
@@ -225,14 +226,11 @@
 
 
 
-                                                <!--<td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>-->
-
 
 
                                              <td class="data-list" style="text-align: start ;font-size:18px">
-                                                  ${dto.getTotalPrice()}</td>
-
-
+                                               <fmt:formatNumber value="${dto.getTotalPrice()}" type="number" pattern="#,##0" /> ₫
+                              </td>
 
                                              <td class="data-list" style="text-align: start ;font-size:18px">
                                                   ${dto.getAddress()}</td>
@@ -314,4 +312,4 @@
      <script src="js/OrderAdd.js"></script>      
 
 </body>
-</html> 
+</html>

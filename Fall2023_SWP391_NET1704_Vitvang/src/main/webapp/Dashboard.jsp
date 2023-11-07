@@ -24,7 +24,10 @@
           <!-- Custom CSS -->
           <link rel="stylesheet" href="css/Dashboard.css">
 
+<<<<<<< HEAD
+=======
           <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script> 
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
           <title>Dashboard page</title>
      </head>
      <body>
@@ -89,6 +92,18 @@
                                                   <span class="link-name" >Logout</span>
                                              </a></li>
 
+<<<<<<< HEAD
+                                             <!--                                        <li class="mode">
+                                                                                          <a href="#">
+                                                                                               <i class="uil uil-moon"></i>
+                                                                                               <span class="link-name">Dark Mode</span>
+                                                                                          </a>
+                                             
+                                                                                          <div class="mode-toggle">
+                                                                                               <span class="switch"></span>
+                                                                                          </div>
+                                                                                     </li>-->
+=======
                                         <!--                                        <li class="mode">
                                                                                      <a href="#">
                                                                                           <i class="uil uil-moon"></i>
@@ -99,6 +114,7 @@
                                                                                           <span class="switch"></span>
                                                                                      </div>
                                                                                 </li>-->
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                    </ul>
                               </ul>
                          </div>
@@ -123,8 +139,12 @@
                               <div class="card">
                                    <div class="card-inner">
                                         <h3>Current Bird Cage</h3>
+<<<<<<< HEAD
+                                        <span class="material-icons-outlined">inventory_2</span>
+=======
                                         <!--<span class="material-icons-outlined">inventory_2</span>-->
                                         <iconify-icon icon="fe:cage" style="color: white;" width="35" height="35"></iconify-icon>
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                    </div>
                                    <h1>${quantity_cage}</h1>
                               </div>
@@ -132,8 +152,12 @@
                               <div class="card">
                                    <div class="card-inner">
                                         <h3>New Order</h3>
+<<<<<<< HEAD
+                                        <span class="material-icons-outlined">category</span>
+=======
                                         <!--<span class="material-icons-outlined">category</span>-->
                                         <span class="material-symbols-outlined">orders</span>
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                    </div>
                                    <h1>${quantity_neworder}</h1>
                               </div>
@@ -141,8 +165,12 @@
                               <div class="card">
                                    <div class="card-inner">
                                         <h3>Processing Order</h3>
+<<<<<<< HEAD
+                                        <span class="material-icons-outlined">groups</span>
+=======
                                         <!--<span class="material-icons-outlined">groups</span>-->
                                         <span class="material-symbols-outlined">manufacturing</span>
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                    </div>
                                    <h1>${quantity_processingorder}</h1>
                               </div>
@@ -150,10 +178,16 @@
                               <div class="card">
                                    <div class="card-inner">
                                         <h3>Done Order</h3>
+<<<<<<< HEAD
+                                        <span class="material-symbols-outlined">
+                                             autorenew
+                                        </span>
+=======
                                         <!--                                        <span class="material-symbols-outlined">
                                                                                      autorenew
                                                                                 </span>-->
                                         <span class="material-symbols-outlined">done_all</span>
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                    </div>
                                    <h1>${quantity_doneorder}</h1>
                               </div>

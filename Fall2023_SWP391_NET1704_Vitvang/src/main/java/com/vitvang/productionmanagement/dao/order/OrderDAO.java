@@ -568,7 +568,7 @@ public class OrderDAO implements Serializable {
                         String sql = "Select OrderID, StartDate, EndDate, TotalPrice, Address, StatusProgress "
                                 + "                                From Orderr "
                                 + "                             Where OrderID like ?"
-                                + "							 Order by OrderID desc"
+                                + "							 Order by OrderID ASC "
                                 + "								OFFSET ? ROWS "
                                 + "							FETCH FIRST ? ROWS ONLY";
                         stm = con.prepareStatement(sql);

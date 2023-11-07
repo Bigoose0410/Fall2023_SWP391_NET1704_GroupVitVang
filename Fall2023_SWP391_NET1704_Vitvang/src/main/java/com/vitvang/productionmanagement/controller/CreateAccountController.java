@@ -9,18 +9,15 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
 import com.vitvang.productionmanagement.exception.users.UserCreateError;
 import com.vitvang.productionmanagement.model.AccountDTO;
-import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.util.tool;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,6 +32,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "CreateAccountController", urlPatterns = {"/CreateAccountController"})
 public class CreateAccountController extends HttpServlet {
 
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
@@ -43,7 +41,7 @@ public class CreateAccountController extends HttpServlet {
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
       private final String NAME_PATTERN = "^[^0-9]*$"; //khong chua so
 
-      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
             /* TODO output your page here. You may use following sample code. */
@@ -204,5 +202,4 @@ public class CreateAccountController extends HttpServlet {
       public String getServletInfo() {
             return "Short description";
       }// </editor-fold>
-
 }
