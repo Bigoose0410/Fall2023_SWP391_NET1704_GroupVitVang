@@ -16,13 +16,16 @@
           <div class="a">
                <img src="img\Gold & Cream Modern Abstract Bird Studio Logo (1).png " class="logo">
                <div class="center">
-                    <h1>Đăng Nhập</h1>
-                    <p class="loginInfo" style="text-align: center; color: rgb(103, 103, 103);">Đăng nhập bằng tài khoản nội bộ hoặc tài khoản được cấp của bạn</p>
+                    <h1>Login</h1>
+                    <p class="loginInfo" style="text-align: center; color: rgb(103, 103, 103);">Sign in with your local or granted account</p>
                     <br> 
                     <br> 
                     <form action="MainController">
                          <div class="inputbox">
                               <input type="text" name="txtUsername" value="${param.txtUsername}">
+                             <br/>
+                             <br/>
+                             <br/>
                               <c:if test="${not empty error.getIsEmptyUsername()}">
                                    <font style="color: red;">
                                    <!--print out error-->
@@ -33,20 +36,23 @@
                          </div>
                          <div class="inputbox">
                               <input type="password" name="txtPassword" value="${param.txtPassword}">
+                              <br/>
+                              <br/>
+                              <br/>
                               <c:if test="${not empty error.getIsEmptyPassword()}">
                                    <font style="color: red;">
-                                   print out error
                                    ${error.getIsEmptyPassword()}
                                    </font><br/>                                                   
                               </c:if>
-                              <span>Password</span>
-                         </div>
-                         <c:if test="${not empty error.getIsWrongAccount()}">
+                                   <c:if test="${not empty error.getIsWrongAccount()}">
                               <font style="color: red;">
                               <!--print out error-->
                               ${error.getIsWrongAccount()}
                               </font><br/>
                          </c:if>
+                              <span>Password</span>
+                         </div>
+                         
                          <div class="button" >
                               <input type="hidden" name="lastUsername" value="${Username}" />
                               <input type="hidden" name="lastpassword" value="${Password}" />

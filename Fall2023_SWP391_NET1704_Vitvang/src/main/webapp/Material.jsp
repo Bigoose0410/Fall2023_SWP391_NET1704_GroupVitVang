@@ -224,7 +224,7 @@
                               <div class="form-step">
                                    <label for="username">Quantity</label>
                                    <div class="input-container">
-                                        <input placeholder="Quantity" class="input-field1" type="number" min="0" max="100000000000" oninput="this.value = Math.abs(this.value)"
+                                        <input placeholder="Quantity" class="input-field1" type="number" min="0" max="100000000" oninput="this.value = Math.abs(this.value)"
                                                name="txtQuantity" value="${param.txtQuantity}">
                                         <span class="input-highlight"></span>
                                    </div>

@@ -173,18 +173,7 @@
                          <c:set var="errors" value="${requestScope.CREATE_CUS_ERROR}" />
 
                          <form action="MainController" method="get" style="display:flex; flex-wrap: wrap;justify-content: space-between">
-                              <div style="width:48%">
-                                   CustomerID 
-
-                                   <input type="text" class="form-control" value="${param.txtUserID}" 
-                                          placeholder="Customer ID" name="txtUserID" >
-                                   <c:if test="${not empty errors.getCustomerIDFormatErr()}">
-                                        <font color = "red">
-                                        ${errors.getCustomerIDFormatErr()}
-                                        </font>
-                                   </c:if>
-                                     
-                              </div>
+                              
                               <br>
                               <div style="width:48%">
                                    Customer Name
@@ -289,11 +278,7 @@
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
                                    Create New customer 
                               </button>
-                              <c:if test="${not empty errors.getCustomerIDexistErr()}">
-                                        <font color = "red">
-                                        ${errors.getCustomerIDexistErr()}
-                                        </font>
-                                   </c:if>  
+                              
                          </form>
 
                     </c:if>

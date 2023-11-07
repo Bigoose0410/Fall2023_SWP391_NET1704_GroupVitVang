@@ -163,6 +163,39 @@ public class UserDAO implements Serializable {
             }
       }
 
+      public String NewestCustomer()
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            String newestCustomer = "";
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "Select top 1 * "
+                                + "                               From Users "
+                                + "                                Where RoleID like '4' "
+                                + "                            Order by UserID desc ";
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              newestCustomer = rs.getString("UserID");
+                              return newestCustomer;
+                        }
+                        // hoan chinh roi thi excutequery
+                  }
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return newestCustomer;
+      }
+
       public void getAllCustomer()
               throws SQLException, NamingException {
             Connection con = null;
@@ -340,7 +373,7 @@ public class UserDAO implements Serializable {
             return result;
       }
 
-      public boolean createAccount(UserDTO user)
+      public boolean createNewAccountCustomer(UserDTO user)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -352,24 +385,231 @@ public class UserDAO implements Serializable {
                   if (con != null) {
                         //2. create SQL statement string
 
-                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
-                                + "VALUES ("
-                                + "?, ?, ? , ?, ?, ?, ?, ?, ?, ?, 'True'"
-                                + ")";
+                        String sql = "DECLARE @CustomerID NVARCHAR(10) "
+                                + "SET @CustomerID = dbo.GetNextCustomerID() "
+                                + "INSERT INTO Users(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
+                                + "VALUES (@CustomerID, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                         //3. Create statement object
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, user.getUserID());
-                        stm.setString(2, user.getName());
-                        stm.setString(3, user.getPhoneNumber());
-                        stm.setString(4, user.getSex());
-                        stm.setString(5, user.getAdress());
-                        stm.setDate(6, user.getBirthDate());
-                        stm.setString(7, user.getEmail());
-                        stm.setString(8, user.getUsername());
-                        stm.setString(9, user.getPassword());
-                        stm.setInt(10, user.getRoleID());
-                        stm.setBoolean(11, user.isUserStatus());
+                        stm.setString(1, user.getName());
+                        stm.setString(2, user.getPhoneNumber());
+                        stm.setString(3, user.getSex());
+                        stm.setString(4, user.getAdress());
+                        stm.setDate(5, user.getBirthDate());
+                        stm.setString(6, user.getEmail());
+                        stm.setString(7, user.getUsername());
+                        stm.setString(8, user.getPassword());
+                        stm.setInt(9, user.getRoleID());
+                        stm.setBoolean(10, user.isUserStatus());
+                        //4. Excute query
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+                        //end username and password are checked
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
+      }
+
+      public boolean createNewAccountCustomerWithRole(UserDTO user)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            try {
+                  //1. Make connection
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+
+                        String sql = "DECLARE @CustomerID NVARCHAR(10) "
+                                + "SET @CustomerID = dbo.GetNextCustomerIDWithRoleID(4) "
+                                + "INSERT INTO Users(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
+                                + "VALUES (@CustomerID, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, user.getName());
+                        stm.setString(2, user.getPhoneNumber());
+                        stm.setString(3, user.getSex());
+                        stm.setString(4, user.getAdress());
+                        stm.setDate(5, user.getBirthDate());
+                        stm.setString(6, user.getEmail());
+                        stm.setString(7, user.getUsername());
+                        stm.setString(8, user.getPassword());
+                        stm.setInt(9, user.getRoleID());
+                        stm.setBoolean(10, user.isUserStatus());
+                        //4. Excute query
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+                        //end username and password are checked
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
+      }
+
+      public boolean createNewAccountAdmin(UserDTO user)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            try {
+                  //1. Make connection
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+
+                        String sql = "DECLARE @AdminID NVARCHAR(10) "
+                                + "SET @AdminID = dbo.GetNextAdminIDWithRoleID(1) "
+                                + "INSERT INTO Users(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
+                                + "VALUES (@AdminID, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, user.getName());
+                        stm.setString(2, user.getPhoneNumber());
+                        stm.setString(3, user.getSex());
+                        stm.setString(4, user.getAdress());
+                        stm.setDate(5, user.getBirthDate());
+                        stm.setString(6, user.getEmail());
+                        stm.setString(7, user.getUsername());
+                        stm.setString(8, user.getPassword());
+                        stm.setInt(9, user.getRoleID());
+                        stm.setBoolean(10, user.isUserStatus());
+                        //4. Excute query
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+                        //end username and password are checked
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
+      }
+
+      public boolean createNewAccountStaff(UserDTO user)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            try {
+                  //1. Make connection
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+
+                        String sql = "DECLARE @StaffID NVARCHAR(10) "
+                                + "SET @StaffID = dbo.GetNextStaffIDWithRoleID(2) "
+                                + "INSERT INTO Users(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
+                                + "VALUES (@StaffID, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, user.getName());
+                        stm.setString(2, user.getPhoneNumber());
+                        stm.setString(3, user.getSex());
+                        stm.setString(4, user.getAdress());
+                        stm.setDate(5, user.getBirthDate());
+                        stm.setString(6, user.getEmail());
+                        stm.setString(7, user.getUsername());
+                        stm.setString(8, user.getPassword());
+                        stm.setInt(9, user.getRoleID());
+                        stm.setBoolean(10, user.isUserStatus());
+                        //4. Excute query
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+                        //end username and password are checked
+                  } // end of connection has opend
+
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
+      }
+
+      public boolean createNewAccountManager(UserDTO user)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            try {
+                  //1. Make connection
+                  con = DBHelper.makeConnection();
+                  if (con != null) {
+                        //2. create SQL statement string
+
+                        String sql = "DECLARE @ManagerID NVARCHAR(10) "
+                                + "SET @ManagerID = dbo.GetNextManagerIDWithRoleID(3) "
+                                + "INSERT INTO Users(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
+                                + "VALUES (@ManagerID, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        //3. Create statement object
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, user.getName());
+                        stm.setString(2, user.getPhoneNumber());
+                        stm.setString(3, user.getSex());
+                        stm.setString(4, user.getAdress());
+                        stm.setDate(5, user.getBirthDate());
+                        stm.setString(6, user.getEmail());
+                        stm.setString(7, user.getUsername());
+                        stm.setString(8, user.getPassword());
+                        stm.setInt(9, user.getRoleID());
+                        stm.setBoolean(10, user.isUserStatus());
                         //4. Excute query
                         int effectRows = stm.executeUpdate();
                         //5. Process

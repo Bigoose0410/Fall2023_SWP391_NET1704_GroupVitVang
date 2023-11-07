@@ -116,28 +116,28 @@
                          <form action="MainController">
                               <div class="info_form1">
                                    <div class="form-row">
-                                        <label for="userID">UserID: </label>
-                                        <input type="text" id="userID" name="txtUserID" value="" placeholder="UserID" required="">
 
-                                        <label for="roleID">RoleID: </label>
-                                        <input type="text" id="roleID" name="txtRoleID" value="" placeholder="RoleID" required="">
+
+                                        <label for="status">Role</label>
+                                        <div class="form-row">
+                                             <div class="input-container">
+
+                                                  <select class="input-field" name="txtRoleID" id="roleID" style="margin-right: 700px;
+                                                          ">
+                                                       <option value="1">Admin</option>
+                                                       <option value="2">Staff</option>
+                                                       <option value="3">Manager</option>
+                                                       <option value="4">Customer</option>
+                                                  </select>
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </div>
+
 
                                    </div>
-
                                    <div class="form-row">
-                                   <c:if test="${not empty err.getUserIDExistErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUserIDExistErr()}</label>
-                                   </c:if>
-                                   <c:if test="${not empty err.getUserIDFormatErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUserIDFormatErr()}</label>
-                                   </c:if>
-                                   <c:if test="${not empty err.getRoleIDFormatErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getRoleIDFormatErr()}</label>
-                                   </c:if>
-                              </div>
-                              <div class="form-row">
-                                   <label for="name">Name: </label>
-                                   <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
+                                        <label for="name">Name: </label>
+                                        <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
 
                                    <label for="email">Email:</label>
                                    <input type="email" id="email" name="txtEmail" value="${param.txtEmail}" placeholder="Email" required="">
@@ -187,7 +187,7 @@
 
                               <div class="form-row">
                                    <label for="username">Username: </label>
-                                   <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
+                                   <input type="text" id="username" name="txtUsername" value="${param.txtUsername}" placeholder="Username" required="">
 
                               </div>
 

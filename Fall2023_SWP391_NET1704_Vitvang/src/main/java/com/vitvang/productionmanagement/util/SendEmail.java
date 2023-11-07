@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.vitvang.productionmanagement.util;
-
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
 import jakarta.mail.PasswordAuthentication;
@@ -84,7 +83,7 @@ public class SendEmail {
       }
 
       public static void main(String[] args) {
-            boolean result = sendEmailAccount("tambtse171869@fpt.edu.vn", "CS004", "123456", "Test email");
+            boolean result = sendEmailAccount("nhatlmse171573@fpt.edu.vn", "CS004", "123456", "Test email");
             if (result == true) {
                   System.out.println("Gui thanh cong");
             }
