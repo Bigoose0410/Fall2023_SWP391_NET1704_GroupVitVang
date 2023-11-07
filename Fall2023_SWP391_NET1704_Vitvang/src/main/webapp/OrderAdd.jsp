@@ -270,7 +270,7 @@
                                         </c:forEach>
                                         </tr>         
                                    </table>
-                                   <p>Total Price: ${totalprice}</p>
+                                                  <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice}" type="number" pattern="#,##0.00" /> ₫</span> </p>
                                    <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
                               </c:if>
                               <%--</c:if>--%>

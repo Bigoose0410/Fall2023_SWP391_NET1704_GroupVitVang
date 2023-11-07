@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
      <head>
@@ -159,7 +160,7 @@
                          <p> Order : ${OrderInfo.getOrderID()} </p>
                          <br>
                          <hr>
-                         <p> <span style="color:blue;font-family: sans-serif">CusID: </span>  ${customer.getUserID()}</p>
+                         <p> <span style="color:blue;font-family: sans-serif">CustomerID: </span>  ${customer.getUserID()}</p>
                          <p> <span style="color:blue"> Name : </span>  ${customer.getName()} </p> <br>
                          <p>   <span style="color:blue"> Phone : </span>  ${customer.getPhoneNumber()} |<span style="color:blue">    Email:</span> ${customer.getEmail()}  <p><br>
                          <p> Billing Address : ${OrderInfo.getAddress()}</p>
@@ -206,7 +207,8 @@
 </table>
                </c:if>-->
                <br><!-- comment -->
-               <h2 style="">      <span style="margin-right: 500px"> Order <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span> Total :${OrderInfo.getTotalPrice()} </span> </h2>
+               <h2 style="">      <span style="margin-right: 500px"> Order: <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span  > Total : <span style="color:red"><fmt:formatNumber currencySymbol="₫" value="${OrderInfo.getTotalPrice()}" type="number" pattern="#,##0"  /> ₫</span>
+ </span> </h2>
                <br>
                <p> Product: </p>
                <hr>
@@ -221,7 +223,7 @@
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px;padding:10px">Name</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
-                                   <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Process</th>
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Process</th>
 
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
                               </tr>
@@ -243,11 +245,11 @@
                                              ${cage.getDescription()}
                                         </td>
                                         <td>
-                                             ${cage.getPrice()}
+                                              <fmt:formatNumber value="${cage.getPrice()}" type="number" pattern="#,##0" /> ₫
                                         </td>
                                         <td>
-                                             <a href="MainController?txtOrderID=${cage.getDetailOrder()}&txtCageID=${cage.getCageID()}&btAction=ViewProcessDetail">${cage.getStatus()}</a>
-                                             
+                                            <a style="text-decoration: none" href="MainController?txtOrderID=${cage.getDetailOrder()}&txtCageID=${cage.getCageID()}&btAction=ViewProcessDetail">${cage.getStatus()}</a>
+
                                         </td>
                                         <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
                                                        </tr>
@@ -279,11 +281,11 @@
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Name</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Origin</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Need </th>
-                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Price </th>
+                                                                           <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Price </th>-->
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Unit</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Total Quantity</th>
-                                                                           <th  style="text-align: start ;color:black;font-size:16px">Total Price</th>
+                                                                           <!--<th  style="text-align: start ;color:black;font-size:16px">Total Price</th>-->
                                                                       </tr>
                                                                       </thead>
                                                                       <tbody>
@@ -305,9 +307,11 @@
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px">
                                                                                                ${dto.getQuantityNeed()}
                                                                                           </td>
+                                                                                          <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getPrice()}
                                                                                           </td>
+                                                                                         --%>
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getUnit()}
                                                                                           </td>
@@ -319,11 +323,13 @@
                                                                                                       value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
                                                                                                ${totalQuantity}
                                                                                           </td>
+                                                                                          <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
                                                                                                <c:set var="totalPrice" 
                                                                                                       value="${dto.getPrice() * totalQuantity }"></c:set>
-                                                                                               ${totalPrice}
+                                                                                               ${totalprice}
                                                                                           </td>
+                                                                                          --%>
                                                                                      </tr>
 
                                                                                 </c:if>

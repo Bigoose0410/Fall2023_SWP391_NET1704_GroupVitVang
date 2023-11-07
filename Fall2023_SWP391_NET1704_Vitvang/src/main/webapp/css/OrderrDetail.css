@@ -378,6 +378,7 @@ img {
     margin-top: 20px;
     white-space: nowrap;
     color: var(--text-color);
+     text-align: center;
 }
 
 @media (max-width: 1000px) {

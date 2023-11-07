@@ -5,6 +5,7 @@
 package com.vitvang.productionmanagement.model;
 
 
+
 public class DetailOrderDTO {
       private String DetailOrder;
       private String CageID;
