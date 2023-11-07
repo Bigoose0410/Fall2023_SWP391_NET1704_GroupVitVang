@@ -32,8 +32,8 @@ public class AddCageController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-            String cageID = request.getParameter("txtCageIDadd");
-            String CageName = request.getParameter("txtCageNameadd");
+            String cageID = request.getParameter("txtCageID");
+            String CageName = request.getParameter("txtCageName");
             String Origin = request.getParameter("txtOrigin");
             String Description = request.getParameter("txtDescription");
             String Price = request.getParameter("txtPrice");

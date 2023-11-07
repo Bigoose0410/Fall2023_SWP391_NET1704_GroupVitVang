@@ -128,7 +128,7 @@ public class AccountDAO implements Serializable {
             }
       }
 
-      public boolean UpdateAccount(String UserID, String Username, String Password, String Email, String Address, String PhoneNumber) throws SQLException {
+      public boolean UpdateAccountWithPassowd(String UserID, String Username, String Password, String Email, String Address, String PhoneNumber) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             try {
@@ -144,6 +144,40 @@ public class AccountDAO implements Serializable {
                         stm.setString(4, Address);
                         stm.setString(5, PhoneNumber);
                         stm.setString(6, UserID);
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+
+                  }
+
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+            }
+            return false;
+      }
+
+      public boolean UpdateAccountWithoutPassword(String UserID, String Username, String Email, String Address, String PhoneNumber) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "UPDATE Users "
+                                + "SET Username = ?, Email= ?, Adress= ?, PhoneNumber= ? "
+                                + "WHERE UserID = ? ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, Username);
+                        stm.setString(2, Email);
+                        stm.setString(3, Address);
+                        stm.setString(4, PhoneNumber);
+                        stm.setString(5, UserID);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
@@ -210,7 +244,7 @@ public class AccountDAO implements Serializable {
             }
             return false;
       }
-
+   
       public boolean deleteAccount(String Username) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;

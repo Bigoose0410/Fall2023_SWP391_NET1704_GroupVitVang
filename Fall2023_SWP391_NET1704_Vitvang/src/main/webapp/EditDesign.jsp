@@ -12,7 +12,7 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-          <title>EditDesign</title>
+          <title>Edit Design</title>
      </head>
 
      <body>
@@ -36,19 +36,14 @@
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                </div>
 
-<<<<<<< HEAD
               <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
+                                        <i class="uil uil-user"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
@@ -59,57 +54,13 @@
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
-<!--                              <li > <a href="#">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Reports</span>
-                                   </a></li>-->
+
                               <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
-<!--                              <li > <a href="#">
-                                        <i class="uil uil-archive-alt"></i>
-                                        <span class="link-name">Inventory</span>
-                                   </a></li>-->
-                         </ul>
-=======
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Search">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
-                              </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Production</span>
-                              </a></li>
-                         <li ><a href="MainController?btAction=Production process">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
->>>>>>> 5e3c144c3fe79b26c984af5334d6a208df613300
 
+                         </ul>
                          <ul class="logout-mode">
                               <li><a href="${logout_query}">
                                         <i class="uil uil-signout"></i>

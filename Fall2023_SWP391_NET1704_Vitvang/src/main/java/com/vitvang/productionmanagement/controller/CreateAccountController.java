@@ -7,8 +7,9 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
-import com.vitvang.productionmanagement.exception.users.UserCreateError;
 import com.vitvang.productionmanagement.model.AccountDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.SendEmail;
 import com.vitvang.productionmanagement.util.tool;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import jakarta.servlet.RequestDispatcher;
@@ -32,8 +33,8 @@ import javax.naming.NamingException;
 @WebServlet(name = "CreateAccountController", urlPatterns = {"/CreateAccountController"})
 public class CreateAccountController extends HttpServlet {
 
-      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
@@ -41,11 +42,11 @@ public class CreateAccountController extends HttpServlet {
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
       private final String NAME_PATTERN = "^[^0-9]*$"; //khong chua so
 
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
             /* TODO output your page here. You may use following sample code. */
-            String UserID = request.getParameter("txtUserID");
+//            String UserID = request.getParameter("txtUserID");
             String txtRoleID = request.getParameter("txtRoleID");
             String Name = request.getParameter("txtName");
             String PhoneNumber = request.getParameter("txtPhoneNumber");
@@ -57,19 +58,16 @@ public class CreateAccountController extends HttpServlet {
             String Password = request.getParameter("txtPassword");
             String ConfirmPassword = request.getParameter("txtConfirmPassword");
 //                  String txtUserStatus = request.getParameter("txtUserStatus");
+            String PasswordOrigin = Password;
 
             Date BirthDate = Date.valueOf(txtBirthDate);
             int RoleID = Integer.parseInt(txtRoleID);
 //                  Boolean UserStatus = Boolean.parseBoolean("txtUserStatus");
-
-            String url = AdminCreateAccount;
+            boolean result = false;
             boolean foundErr = false;
+            String url = ERROR_PAGE;
             CreateAccountError error = new CreateAccountError();
             try {
-                  if (!checkFormat(UserID, USERID_PATTERN, true)) {
-                        error.setUserIDFormatErr("Wrong format");
-                        foundErr = true;
-                  }
 
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
@@ -127,25 +125,32 @@ public class CreateAccountController extends HttpServlet {
                         request.setAttribute("MESSAGE_CREATE_FAIL", "Create new account failed!!!");
                         url = AdminCreateAccount;
                   } else {
+                         // 1. new DAO
                         UserDAO userdao = new UserDAO();
-                        // 1. new DAO
-                        AccountDAO accountdao = new AccountDAO();
                         // 2. call method
                         Password = userdao.EncodePass(Password);
-                        AccountDTO account = new AccountDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, Username, true);
-                        boolean result = accountdao.createNewAccount(account);
+                        UserDTO user = new UserDTO(Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, true);
+                        //3. Create Account with RoleID
+                        switch (RoleID) {
+                              case 1:
+                                    result = userdao.createNewAccountAdmin(user);
+                                    break;
+                              case 2:
+                                    result = userdao.createNewAccountStaff(user);
+                                    break;
+                              case 3:
+                                    result = userdao.createNewAccountManager(user);
+                                    break;
+                              case 4:
+                                    result = userdao.createNewAccountCustomerWithRole(user);
+                                    break;
+                        }
+//                        boolean sendMail = SendEmail.sendEmailAccount(Email, Username, PasswordOrigin, "Create New Account");
                         if (result) {
-//                                    HttpSession session = request.getSession();
-//                                    session.removeAttribute("SHOW_CUS_CREATE_FORM");
-//                              
                               url = "MainController?btAction=Manage Account";
                         }
                   }
             } catch (SQLException ex) {
-//                  String msg = ex.getMessage();
-//                  log("CreateUserControlerr_ SQL" + msg);
-
-                  error.setUserIDExistErr(UserID + " is existed");
                   error.setUsernameExistErr(Username + " is existed");
                   request.setAttribute("MESSAGE_CREATE_FAIL", "Create new account failed!!!");
             } catch (NamingException ex) {

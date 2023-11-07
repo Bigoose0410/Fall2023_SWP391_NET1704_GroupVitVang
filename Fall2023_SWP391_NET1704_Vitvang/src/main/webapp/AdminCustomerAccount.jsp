@@ -13,6 +13,7 @@
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/Accounts.css">
           <link rel="stylesheet" href="css/Dashboard.css">
+
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -81,7 +82,7 @@
 
           </nav>
           <section class="dashboard">
-               <h1><strong>Account</strong></h1>
+               <h1 style="color: black; font-weight: 800"><strong>Account</strong></h1>
                <form action="MainController">
                     <div class="header">
                          <div class="search">
@@ -99,7 +100,7 @@
                <c:set var="result" value="${requestScope.ACCOUNT_RESULT}" />
                <c:set var="searchResult" value="${requestScope.SEARCH_ACCOUNT_RESULT}" />
                <%--<c:set var="status" value="${requestScope.USER_STATUS}" />--%>
-               <div class="box">
+               <div class="box" style="color: black">
 
                     <c:if test="${empty searchAccount}">
                          <c:if test="${not empty result}">
@@ -109,7 +110,7 @@
 
                                         <div class="group-box">
                                              <form action="MainController">
-                                                  <span><a href="Information.html">${dto.getUserID()}</a></span>
+                                                  <span style="font-weight: 800; color: #213555;">${dto.getUserID()}</span>
 
                                                   <div class="group-content">
                                                        <p>Name: <i>${dto.getName()}</i></p>
@@ -118,7 +119,14 @@
                                                   </div>
 
                                                   <input type="hidden" name="txtUserID" value="${dto.getUserID()}" />
-                                                  <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
+                                                  <button type="submit" value="ViewAccountDetail" name="btAction" style="background-color: #E5D283;
+                                                          color: white;
+                                                          padding:5px;
+                                                          border: none;
+                                                          border-radius: 4px;
+                                                          cursor: pointer;
+                                                          text-decoration: none;
+                                                          ">Detail</button>
 
                                              </form>
                                         </div>
