@@ -223,7 +223,7 @@
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px;padding:10px">Name</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
-                                   <th  class="data-title" style="text-align: start ;color:blue;font-size:20px">Process</th>
+                                   <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Process</th>
 
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
                               </tr>

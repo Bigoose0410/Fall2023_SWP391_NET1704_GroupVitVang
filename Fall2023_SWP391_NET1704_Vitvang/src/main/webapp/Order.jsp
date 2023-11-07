@@ -71,7 +71,7 @@
                                         <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Reports</span>
                                    </a></li>
-                              <li ><a href="#">
+                              <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
