@@ -140,7 +140,8 @@ public class CreateAccountController extends HttpServlet {
 //                  String msg = ex.getMessage();
 //                  log("CreateUserControlerr_ SQL" + msg);
 
-                  error.setUserIDExistErr(UserID + " is existed!!!");
+                  error.setUserIDExistErr(UserID + " is existed");
+                  error.setUsernameExistErr(Username + " is existed");
                   request.setAttribute("MESSAGE_CREATE_FAIL", "Create new account failed!!!");
             } catch (NamingException ex) {
                   log("CreateUserController _ NAMING " + ex.getMessage());

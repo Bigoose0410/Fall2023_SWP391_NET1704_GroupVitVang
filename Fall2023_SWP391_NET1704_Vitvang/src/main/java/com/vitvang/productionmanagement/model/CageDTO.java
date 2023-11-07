@@ -9,13 +9,15 @@ package com.vitvang.productionmanagement.model;
  * @author Admin
  */
 public class CageDTO {
+
       private String CageID;
       private String Name;
       private int Price;
       private String Origin;
       private String Description;
       private int quantityOrder;
-      
+      private int CageQuantity;
+
       public CageDTO() {
       }
 
@@ -36,6 +38,12 @@ public class CageDTO {
             this.quantityOrder = quantityOrder;
       }
 
+      public CageDTO(String CageID, String Name, int CageQuantity) {
+            this.CageID = CageID;
+            this.Name = Name;
+            this.CageQuantity = CageQuantity;
+      }
+
       public int getQuantityOrder() {
             return quantityOrder;
       }
@@ -43,8 +51,7 @@ public class CageDTO {
       public void setQuantityOrder(int quantityOrder) {
             this.quantityOrder = quantityOrder;
       }
-      
-      
+
       public String getCageID() {
             return CageID;
       }
@@ -84,8 +91,13 @@ public class CageDTO {
       public void setDescription(String Description) {
             this.Description = Description;
       }
-      
-      
-      
-              
+
+      public int getCageQuantity() {
+            return CageQuantity;
+      }
+
+      public void setCageQuantity(int CageQuantity) {
+            this.CageQuantity = CageQuantity;
+      }
+
 }

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
@@ -24,9 +25,13 @@
           <title>Home Page</title>
      </head>
      <body>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="" />
+               <c:param value="Log Out" name="btAction" />
+          </c:url>
           <nav>
 
-               <div class="logo-name"style="
+               <div class="logo-name" style="
                     display: block;">
                     <div class="logo-image">
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
@@ -34,51 +39,60 @@
 
                     <div class="menu-items">
                          <ul class="nav-links">
-                              <li><a href="#">
+                              <li><a href="MainController?btAction=Dashboard">
                                         <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
+                                        <span class="link-name">Dashboard</span>
                                    </a></li>
 
-                              <!--                              <li><a href="MainController?btAction=Order">
-                                                                      <i class="uil uil-bill"></i>
-                                                                      <span class="link-name">Order</span>
-                                                                 </a></li>-->
+                              <li><a href="AdminHomePage.jsp">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Home</span>
+                                   </a></li>
                               <li><a href="MainController?btAction=Manage Account">
                                         <i class="uil uil-grin"></i>
                                         <span class="link-name">Manage Account</span>
                                    </a></li>
-                              <!--                              <li><a href="MainController?btAction=Production process">
-                                                                      <i class="uil uil-chart-line"></i>
-                                                                      <span class="link-name">Production process</span>
-                                                                 </a></li>
-                                                            <li><a href="#">
-                                                                      <i class="uil uil-clipboard-alt"></i>
-                                                                      <span class="link-name">Reports</span>
-                                                                 </a></li>
-                                                            <li><a href="#">
-                                                                      <i class="uil uil-screw"></i>
-                                                                      <span class="link-name">Material</span>
-                                                                 </a></li>
-                                                            <li><a href="#">
-                                                                      <i class="uil uil-archive-alt"></i>
-                                                                      <span class="link-name">Inventory</span>
-                                                                 </a></li>-->
+                              <!--                                   <li><a href="MainController?btAction=Production process">
+                                                                           <i class="uil uil-chart-line"></i>
+                                                                           <span class="link-name">Production process</span>
+                                                                      </a></li>-->
+                              <!--                                   <li><a href="#">
+                                                                           <i class="uil uil-clipboard-alt"></i>
+                                                                           <span class="link-name">Reports</span>
+                                                                      </a></li>
+                                                                 <li><a href="#">
+                                                                           <i class="uil uil-screw"></i>
+                                                                           <span class="link-name">Material</span>
+                                                                      </a></li>
+                                                                 <li><a href="#">
+                                                                           <i class="uil uil-archive-alt"></i>
+                                                                           <span class="link-name">Inventory</span>
+                                                                      </a></li>-->
                               <ul class="logout-mode">
-                                   <li><a href="index.html">
+                                   <li><a href="${logout_query}">
                                              <i class="uil uil-signout"></i>
-                                             <span class="link-name" >Logout</span>
+                                             <span class="link-name">Logout</span>
                                         </a></li>
 
-                                   <li class="mode">
-                                        <a href="#">
-                                             <i class="uil uil-moon"></i>
-                                             <span class="link-name">Dark Mode</span>
-                                        </a>
+                                   <!--                              <li class="mode">
+                                              <a href="#">
+                                                   <i class="uil uil-moon"></i>
+                                                   <span class="link-name">Dark Mode</span>
+                                              </a>-->
 
-                                        <div class="mode-toggle">
-                                             <span class="switch"></span>
-                                        </div>
-                                   </li>
+                                   <!--                                   <div class="mode-toggle">
+                                                   <span class="switch"></span>
+                                              </div>-->
+                                   <!--                                   <li class="mode">
+                                                                           <a href="#">
+                                                                                <i class="uil uil-moon"></i>
+                                                                                <span class="link-name">Dark Mode</span>
+                                                                           </a>
+                                   
+                                                                           <div class="mode-toggle">
+                                                                                <span class="switch"></span>
+                                                                           </div>
+                                                                      </li>-->
                               </ul>
                          </ul>
                     </div>

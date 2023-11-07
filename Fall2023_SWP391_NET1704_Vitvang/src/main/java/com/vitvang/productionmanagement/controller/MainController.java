@@ -62,6 +62,7 @@ public class MainController extends HttpServlet {
       private final String CreateAccountController = "CreateAccountController";
       private final String DeleteAccountController = "DeleteAccountController";
       private final String SearchAccountController = "SearchAccountController";
+      private final String DashboardController = "DashboardController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -148,6 +149,8 @@ public class MainController extends HttpServlet {
                         url = DeleteAccountController;
                   } else if (button.equals("SearchAccount")) {
                         url = SearchAccountController;
+                  } else if (button.equals("Dashboard")) {
+                        url = DashboardController;
                   }
 
             } finally {
