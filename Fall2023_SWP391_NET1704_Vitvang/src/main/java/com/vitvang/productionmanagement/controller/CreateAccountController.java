@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 
+
 /**
  *
  * @author Admin
@@ -33,12 +34,12 @@ public class CreateAccountController extends HttpServlet {
 
       private static final String ERROR_PAGE = "ErrorPage.html";
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
-      private final String USERID_PATTERN = "(CS|ST|AD)\\\\d{3}";
+      private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
       private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";//check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
-      private final String NAME_PATTERN = "^[^0-9]$"; //khong chua so
+      private final String NAME_PATTERN = "^[^0-9]*$"; //khong chua so
 
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
@@ -69,7 +70,7 @@ public class CreateAccountController extends HttpServlet {
                         error.setUserIDFormatErr("Wrong format");
                         foundErr = true;
                   }
-                  
+
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;
@@ -98,6 +99,7 @@ public class CreateAccountController extends HttpServlet {
                         foundErr = true;
                   } else if (!checkFormat(Name, NAME_PATTERN, true)) {
                         error.setNameFormatErr("Name cannot include number");
+                        foundErr = true;
                   }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {

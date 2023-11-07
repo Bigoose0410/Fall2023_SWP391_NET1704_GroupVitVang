@@ -108,7 +108,8 @@
           </nav>
           <c:set var="result" value="${requestScope.ACCOUNT_DETAIL}"></c:set>
           <c:set var="err" value="${requestScope.UPDATE_ACCOUNT_ERR}"></c:set>
-          <c:set var="message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
+          <c:set var="update_message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
+          <c:set var="delete_message" value="${requestScope.DELETE_MESSAGE}"></c:set>
                <section class="dashboard">
                     <div class="form" style="color: black;">
                          <div class="info_form">
@@ -125,7 +126,8 @@
                                         <label for="userID">User ID: <i>${dto.getUserID()}</i></label>
                                         <input type="hidden" id="userID" name="txtUserID" value="${dto.getUserID()}">
 
-                                        <label for="roleID">Role ID: <i>${dto.getRoleName()}</i></label>
+                                        <label for="roleID">Role: <i>${dto.getRoleName()}</i></label>
+                                        <input type="hidden" name="txtRoleID" value="${dto.getRoleID()}" />
                                    </div>
 
                                    <div class="form-row2">
@@ -152,7 +154,8 @@
                                         <label for="password" >Password: </label>
                                         <br>
                                         <br>
-                                        <input type="password"  id="password" name="txtPassword" value="${dto.getPassword()}" required="">
+                                        <input type="password"  id="password" name="txtPassword" value="**********" required="">
+                                        <input type="hidden"  id="password" name="txtPassword" value="" required="">
                                         <br>
                                         <br>
                                         <c:if test="${not empty err.getPasswordFormatErr()}">
@@ -160,6 +163,7 @@
                                         </c:if>
                                    </div>
 
+                                        
                                    <div class="form-row">
                                         <label for="email">Email: </label>
                                         <br>
@@ -204,8 +208,11 @@
                               </form>
                          </div>
                     </c:forEach>
-                    <c:if test="${not empty message}">
-                         <h1>${message}</h1>
+                    <c:if test="${not empty update_message}">
+                         <h1>${update_message}</h1>
+                    </c:if>
+                    <c:if test="${not empty delete_message}">
+                         <h1>${delete_message}</h1>
                     </c:if>
                </div>
 

@@ -7,6 +7,7 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.dashboard.DashboardDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.OrderDTO;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "DashboardController", urlPatterns = {"/DashboardController"})
 public class DashboardController extends HttpServlet {
+
 
       /**
        * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

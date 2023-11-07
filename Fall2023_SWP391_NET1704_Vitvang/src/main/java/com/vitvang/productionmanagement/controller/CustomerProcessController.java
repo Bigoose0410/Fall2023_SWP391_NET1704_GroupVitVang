@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author Admin
@@ -40,10 +41,12 @@ public class CustomerProcessController extends HttpServlet {
                   CustomerDAO dao = new CustomerDAO();
                   dao.ViewProcessingOrder(OrderID, CageID, CageID);
                   List<ProcessDTO> list = dao.getListOrdersProcess();
-                  for (ProcessDTO proces : list) {
-                        if (proces.getStatus().equals("Processing")) {
-                              request.setAttribute("HIGHLIGHT", proces.getProcessID());
-                              break;
+                  if (list != null) {
+                        for (ProcessDTO proces : list) {
+                              if (proces.getStatus().equals("Processing")) {
+                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
+                                    break;
+                              }
                         }
                   }
                   request.setAttribute("PROCESS_ORDER_RESULT", list);

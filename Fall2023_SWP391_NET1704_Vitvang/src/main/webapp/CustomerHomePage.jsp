@@ -46,7 +46,8 @@
                                    <span class="link-name">Home</span>
                               </a></li>
 
-                         <li><a href="MainController?btAction=Customer's Account">
+                              
+                         <li><a href="MainController?btAction=Customer Account">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Account</span>
                               </a></li>

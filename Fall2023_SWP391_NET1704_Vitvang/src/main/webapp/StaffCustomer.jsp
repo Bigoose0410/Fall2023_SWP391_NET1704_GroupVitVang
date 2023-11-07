@@ -28,14 +28,11 @@
                <c:param value="Log Out" name="btAction" />
           </c:url>
           <nav>
-
                <div class="logo-name" style="
                     display: block;">
                     <div class="logo-image">
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
-
                     </div>
 
                     <div class="menu-items">
@@ -75,6 +72,25 @@
                                              <span class="link-name">Logout</span>
                                         </a></li>
 
+                                   <!--                              <li class="mode">
+                                              <a href="#">
+                                                   <i class="uil uil-moon"></i>
+                                                   <span class="link-name">Dark Mode</span>
+                                              </a>-->
+
+                                   <!--                                   <div class="mode-toggle">
+                                                   <span class="switch"></span>
+                                              </div>-->
+                                   <!--                                   <li class="mode">
+                                                                           <a href="#">
+                                                                                <i class="uil uil-moon"></i>
+                                                                                <span class="link-name">Dark Mode</span>
+                                                                           </a>
+                                   
+                                                                           <div class="mode-toggle">
+                                                                                <span class="switch"></span>
+                                                                           </div>
+                                                                      </li>-->
                               </ul>
                          </ul>
                     </div>
@@ -96,7 +112,7 @@
 
                <!--Group box account-->
                <c:set var="searchAccount" value="${param.txtSearchAccount}"></c:set>
-               <c:set var="result" value="${requestScope.ACCOUNT_RESULT}" />
+               <c:set var="result" value="${requestScope.CUSTOMER_HAVE_ORDER_LIST}" />
                <c:set var="searchResult" value="${requestScope.SEARCH_ACCOUNT_RESULT}" />
                <%--<c:set var="status" value="${requestScope.USER_STATUS}" />--%>
                <div class="box">
@@ -114,11 +130,10 @@
                                                   <div class="group-content">
                                                        <p>Name: <i>${dto.getName()}</i></p>
                                                        <p>Phone: <i>${dto.getPhoneNumber()}</i></p>
-                                                       <p>Role: <i>${dto.getRoleName()}</i></p>
                                                   </div>
 
                                                   <input type="hidden" name="txtUserID" value="${dto.getUserID()}" />
-                                                  <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
+                                                  <button type="submit" value="StaffViewCustomerDetail" name="btAction" >Detail</button>
 
                                              </form>
                                         </div>
