@@ -4,6 +4,7 @@
     Author     : Nguyen Ba Tung
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -48,7 +49,7 @@
                               <i class="uil uil-estate"></i>
                               <span class="link-name">Dahsboard</span>
                          </a></li>
-                    <li><a href="MainController?btAction=Order">
+                    <li><a href="MainController?btAction=Search">
                               <i class="uil uil-bill"></i>
                               <span class="link-name">Order</span>
                          </a></li>
@@ -60,10 +61,10 @@
                               <i class="uil uil-grin"></i>
                               <span class="link-name">Production</span>
                          </a></li>
-                    <li><a href="#">
-                              <i class="uil uil-chart-line"></i>
-                              <span class="link-name">Production process</span>
-                         </a></li>
+                     <li ><a href="MainController?btAction=Production process">
+                                        <i class="uil uil-chart-line"></i>
+                                        <span class="link-name">Production process</span>
+                                   </a></li>
                     <li><a href="#">
                               <i class="uil uil-clipboard-alt"></i>
                               <span class="link-name">Reports</span>

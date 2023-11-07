@@ -7,336 +7,340 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     Author     : Nguyen Ba Tung
 */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
 }
 
 /* Root Variables (Colors and Transitions) */
 :root {
-    /* ===== Colors ===== */
-    --primary-color: #0E4BF1;
-    --panel-color: #FFF;
-    --text-color: #000;
-    --black-light-color: #707070;
-    --border-color: #e6e5e5;
-    --toggle-color: #DDD;
-    --box1-color: #4DA3FF;
-    --box2-color: #FFE6AC;
-    --box3-color: #E7D1FC;
-    --title-icon-color: #fff;
-    --cream-color: #f5f5dc;
-    --hover-color: #333;
-    --dark-text: #fff;
-    /* ====== Transition ====== */
-    --tran-05: all 0.5s ease;
-    --tran-03: all 0.3s ease;
-    --tran-03: all 0.2s ease;
+     /* ===== Colors ===== */
+     --primary-color: #0E4BF1;
+     --panel-color: #FFF;
+     --text-color: #000;
+     --black-light-color: #707070;
+     --border-color: #e6e5e5;
+     --toggle-color: #DDD;
+     --box1-color: #4DA3FF;
+     --box2-color: #FFE6AC;
+     --box3-color: #E7D1FC;
+     --title-icon-color: #fff;
+     --cream-color: #f5f5dc;
+     --hover-color: #333;
+     --dark-text: #fff;
+     /* ====== Transition ====== */
+     --tran-05: all 0.5s ease;
+     --tran-03: all 0.3s ease;
+     --tran-03: all 0.2s ease;
 }
 
 /* Light Mode */
 body {
-    min-height: 100vh;
-    background-color: white;
+     min-height: 100vh;
+     background-color: white;
 }
 
 /* Dark Mode */
 body.dark {
-    --primary-color: #3A3B3C;
-    --panel-color: #242526;
-    --text-color: #CCC;
-    --black-light-color: #CCC;
-    --border-color: #4D4C4C;
-    --toggle-color: #FFF;
-    --box1-color: #3A3B3C;
-    --box2-color: #3A3B3C;
-    --box3-color: #3A3B3C;
-    --title-icon-color: #CCC;
+     --primary-color: #3A3B3C;
+     --panel-color: #242526;
+     --text-color: #CCC;
+     --black-light-color: #CCC;
+     --border-color: #4D4C4C;
+     --toggle-color: #FFF;
+     --box1-color: #3A3B3C;
+     --box2-color: #3A3B3C;
+     --box3-color: #3A3B3C;
+     --title-icon-color: #CCC;
 }
 
 /* === Custom Scroll Bar CSS === */
 ::-webkit-scrollbar {
-    width: 8px;
+     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+     background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 12px;
-    transition: all 0.3s ease;
+     background: var(--primary-color);
+     border-radius: 12px;
+     transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0b3cc1;
+     background: #0b3cc1;
 }
 
 body.dark::-webkit-scrollbar-thumb:hover,
 body.dark .activity-data::-webkit-scrollbar-thumb:hover {
-    background: #3A3B3C;
+     background: #3A3B3C;
 }
 
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background-color: var(--panel-color);
-    border-right: 1px solid var(--border-color);
-    transition: var(--tran-05);
-    background-color: var(--box1-color);
-    border-color: #e6e6cc;
+     position: fixed;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 250px;
+     padding: 10px 14px;
+     background-color: var(--panel-color);
+     border-right: 1px solid var(--border-color);
+     transition: var(--tran-05);
+     background-color: var(--box1-color);
+     border-color: #e6e6cc;
 }
 
 .nav-links {
-    flex: 1 1 auto;
+     flex: 1 1 auto;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
 }
 
 .nav-links li {
-    padding: 10px 0;
+     padding: 10px 0;
 }
 
 
 .nav-links {
-    flex: 1 1 auto;
+     flex: 1 1 auto;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
 }
 
 .nav-links li {
-    padding: 10px 0;
+     padding: 10px 0;
 }
 
 nav.close {
-    width: 73px;
+     width: 73px;
 }
 
 nav .logo-name {
-    display: flex;
-    align-items: center;
+     display: flex;
+     align-items: center;
 }
 
 nav .logo-image {
-    display: flex;
-    justify-content: center;
-    min-width: 45px;
+     display: flex;
+     justify-content: center;
+     min-width: 45px;
 }
 
 nav .logo-image img {
-    width: 40px;
-    object-fit: cover;
-    border-radius: 50%;
+     width: 40px;
+     object-fit: cover;
+     border-radius: 50%;
 }
 
 nav .logo-name .logo_name {
-    font-size: 25px;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-right: 13px;
-    transition: var(--tran-05);
+     font-size: 25px;
+     font-weight: 600;
+     color: var(--text-color);
+     margin-right: 13px;
+     transition: var(--tran-05);
 }
 
 nav.close .logo_name {
-    opacity: 0;
-    pointer-events: none;
+     opacity: 0;
+     pointer-events: none;
 }
 
 nav .menu-items {
-    margin-top: 40px;
-    height: calc(100% - 90px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+     margin-top: 40px;
+     height: calc(100% - 90px);
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
 }
 
 .menu-items li {
-    list-style: none;
+     list-style: none;
 }
 
 .menu-items li a {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    text-decoration: none;
-    position: relative;
+     display: flex;
+     align-items: center;
+     height: 50px;
+     text-decoration: none;
+     position: relative;
 }
 
 .nav-links li a:hover:before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
+     content: "";
+     position: absolute;
+     left: -7px;
+     height: 5px;
+     width: 5px;
+     border-radius: 50%;
+     background-color: var(--primary-color);
 }
 
 body.dark li a:hover:before {
-    background-color: var(--text-color);
+     background-color: var(--text-color);
 }
 
 .menu-items li a i {
-    font-size: 24px;
-    min-width: 45px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
+     font-size: 24px;
+     min-width: 45px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: black;
 }
 
 .menu-items li a .link-name {
-    font-size: 18px;
-    font-weight: 400;
-    color: black;
-    transition: var(--tran-05);
+     font-size: 18px;
+     font-weight: 400;
+     color: black;
+     transition: var(--tran-05);
 }
 
 nav.close li a .link-name {
-    opacity: 0;
-    pointer-events: none;
+     opacity: 0;
+     pointer-events: none;
 }
 
 .nav-links li a:hover i,
 .nav-links li a:hover .link-name {
-    color: var(--primary-color);
+     color: var(--primary-color);
 }
 
 body.dark .nav-links li a:hover i,
 body.dark .nav-links li a:hover .link-name {
-    color: var(--text-color);
+     color: var(--text-color);
 }
 
 .menu-items .logout-mode {
-    padding-top: 10px;
-    border-top: 1px solid var(--border-color);
+     padding-top: 10px;
+     border-top: 1px solid var(--border-color);
 }
 
 .menu-items .mode {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
+     display: flex;
+     align-items: center;
+     white-space: nowrap;
 }
 
 .menu-items .mode-toggle {
-    position: absolute;
-    right: 14px;
-    height: 50px;
-    min-width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+     position: absolute;
+     right: 14px;
+     height: 50px;
+     min-width: 45px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
 }
 
 .mode-toggle .switch {
-    position: relative;
-    display: inline-block;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
+     position: relative;
+     display: inline-block;
+     height: 22px;
+     width: 40px;
+     border-radius: 25px;
+     background-color: var(--toggle-color);
 }
 
 .switch:before {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 15px;
-    width: 15px;
-    background-color: var(--panel-color);
-    border-radius: 50%;
-    transition: var(--tran-03);
+     content: "";
+     position: absolute;
+     left: 5px;
+     top: 50%;
+     transform: translateY(-50%);
+     height: 15px;
+     width: 15px;
+     background-color: var(--panel-color);
+     border-radius: 50%;
+     transition: var(--tran-03);
 }
 
 body.dark .switch:before {
-    left: 20px;
+     left: 20px;
 }
 
 .nav-links li a:hover i,
 .nav-links li a:hover .link-name {
-    color: var(--hover-color);
+     color: var(--hover-color);
 }
 
 body.dark .nav-links li a i,
 body.dark .nav-links li a .link-name {
-    color: var(--dark-text);
+     color: var(--dark-text);
 }
 
 body.dark nav {
-    background-color: #222;
+     background-color: #222;
 }
 
 .dashboard {
-    position: relative;
-    left: 250px;
-    background-color: var(--panel-color);
-    min-height: 100vh;
-    width: calc(100% - 250px);
-    padding: 10px 5px;
-    transition: var(--tran-05);
+     position: relative;
+     left: 250px;
+     background-color: var(--panel-color);
+     min-height: 100vh;
+     width: calc(100% - 250px);
+     padding: 10px 5px;
+     transition: var(--tran-05);
 }
 
 /*Dashboard*/
 h1 {
-    text-align: center;
-    margin: 10px 0px;
-    font-size: xx-large;
+     text-align: center;
+     margin: 10px 0px;
+     font-size: xx-large;
 }
-
+h4 {
+     padding: 5px;
+     text-align: left;
+     margin: 10px 15px;
+}
 .table-container {
-    overflow-x: auto;
-    border-radius: 10px;
-    border: 1px solid black;
+     overflow-x: auto;
+     border-radius: 10px;
+     border: 1px solid black;
 }
 
 .table-container table {
-    width: 100%;
-    border-collapse: collapse;
+     width: 100%;
+     border-collapse: collapse;
 }
 
 .table-container th,
 .table-container td {
-    padding: 10px;
-    text-align: center;
+     padding: 10px;
+     text-align: center;
 }
 
 .table-container th {
-    color: white;
-    background-color: #0275ef;
+     color: white;
+     background-color: #0275ef;
 }
 
 .table-container tbody tr:nth-child(even) {
-    background-color: #edf5fc;
+     background-color: #edf5fc;
 }
 
 .table-container tbody tr:hover {
-    background-color: #ddd;
+     background-color: #ddd;
 }
 
 /* Style for the table */
 .tablesorter-custom1 {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+     width: 100%;
+     border-collapse: collapse;
+     margin-bottom: 20px;
 }
 
 /* Style for table cells */
 .tablesorter-custom1 td {
-    padding: 2px;
+     padding: 2px;
 }
 
 
@@ -345,246 +349,246 @@ h1 {
 
 /* Style for the plus button */
 .plus_button button {
-    background-color: rgb(24, 175, 24);
-    color: #fff;
-    border: none;
-    padding: 5px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-top: 5px;
-    margin-right: 20px;
+     background-color: rgb(24, 175, 24);
+     color: #fff;
+     border: none;
+     padding: 5px 20px;
+     cursor: pointer;
+     border-radius: 4px;
+     font-size: 16px;
+     margin-top: 5px;
+     margin-right: 20px;
 }
 
 
 
 .input-container1 input[type="number"]  {
-    width: 60%;
-    margin: 0 auto;
-    /* Center align the input field */
+     width: 60%;
+     margin: 0 auto;
+     /* Center align the input field */
 }
 
 .input-container1 input[type="text"] {
-    width: 60%;
-    margin: 0 auto;
+     width: 60%;
+     margin: 0 auto;
 }
 
 /* Input label */
 .input-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 16px;
-    color: rgba(204, 204, 204, 0);
-    pointer-events: none;
-    transition: all 0.3s ease;
+     position: absolute;
+     top: 0;
+     left: 0;
+     font-size: 16px;
+     color: rgba(204, 204, 204, 0);
+     pointer-events: none;
+     transition: all 0.3s ease;
 }
 
 /* Input highlight */
 .input-highlight {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 0;
-    background-color: #007bff;
-    transition: all 0.3s ease;
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     height: 2px;
+     width: 0;
+     background-color: #007bff;
+     transition: all 0.3s ease;
 }
 
 /*button modify*/
 .update_button button .fa {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: #757575;
-    /* Adjust the color as needed */
+     background: none;
+     border: none;
+     cursor: pointer;
+     font-size: 24px;
+     color: #757575;
+     /* Adjust the color as needed */
 }
 
 .update_button button .fa:focus {
-    outline: none;
+     outline: none;
 }
 
 .update_button button .fa:hover {
-    color: blue;
-    /* Change color on hover if desired */
+     color: blue;
+     /* Change color on hover if desired */
 }
 
 .update_button button {
-    border: none;
+     border: none;
 }
 
 /*new step button*/
 .custom-btn {
-    width: 120px;
-    height: 40px;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 25px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    margin: 10px 0px;
+     width: 120px;
+     height: 40px;
+     color: #fff;
+     border-radius: 5px;
+     padding: 10px 25px;
+     font-family: 'Lato', sans-serif;
+     font-weight: 500;
+     background: transparent;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     position: relative;
+     display: inline-block;
+     outline: none;
+     margin: 10px 0px;
 }
 
 /* 1 */
 .btn-1 {
-    background: #007bff;
-    border: none;
+     background: #007bff;
+     border: none;
 }
 
 .btn-1:hover {
-    background: #0755a9;
+     background: #0755a9;
 }
 
 /*form*/
 h2 {
-    margin: 10px 0px;
+     margin: 10px 0px;
 }
 
 .step {
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid #333;
-    border-top: 5px solid #007bff;
-    margin: 20px;
-    padding: 10px;
-    border-radius: 15px;
+     display: flex;
+     flex-wrap: wrap;
+     border: 1px solid #333;
+     border-top: 5px solid #007bff;
+     margin: 20px;
+     padding: 10px;
+     border-radius: 15px;
 }
 
 .step-header {
-    flex: 1 1 100%;
-    margin-bottom: 10px;
-    margin-left: 15px;
+     flex: 1 1 100%;
+     margin-bottom: 10px;
+     margin-left: 15px;
 }
 
 .form-step {
-    flex: 0 0 calc(25% - 10px);
-    box-sizing: border-box;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 10px;
+     flex: 0 0 calc(25% - 10px);
+     box-sizing: border-box;
+     padding: 10px;
+     border-radius: 4px;
+     margin-bottom: 10px;
 }
 
 .form-step label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+     display: block;
+     font-weight: bold;
+     margin-bottom: 5px;
 }
 
 /* Style for input fields */
 .input-field {
-    position: relative;
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    outline: none;
-    background-color: transparent;
-    width: 70%;
+     position: relative;
+     display: block;
+     width: 100%;
+     padding: 10px;
+     font-size: 16px;
+     border: none;
+     border-bottom: 2px solid #ccc;
+     outline: none;
+     background-color: transparent;
+     width: 70%;
 }
 
 /* Style for inputs */
 .input-field input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+     width: 100%;
+     padding: 8px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
 }
 
 /* Style for labels */
 .input-field label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 14px;
-    color: #777;
-    pointer-events: none;
-    transition: 0.2s ease all;
+     position: absolute;
+     top: 0;
+     left: 0;
+     font-size: 14px;
+     color: #777;
+     pointer-events: none;
+     transition: 0.2s ease all;
 }
 
 /* Style for labels when input is focused or has value */
 .input-field input:focus+label,
 .input-field input:not(:placeholder-shown)+label {
-    top: -12px;
-    font-size: 12px;
-    color: #333;
+     top: -12px;
+     font-size: 12px;
+     color: #333;
 }
 
 
 /* Input field:focus styles */
 .input-field:focus+.input-label {
-    top: -20px;
-    font-size: 12px;
-    color: #007bff;
+     top: -20px;
+     font-size: 12px;
+     color: #007bff;
 }
 
 .input-field:focus+.input-label+.input-highlight {
-    width: 100%;
+     width: 100%;
 }
 
 /*button*/
 .create-button {
-    background-color: #4caf50;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-left: 20px;
-    margin-bottom: 15px;
+     background-color: #4caf50;
+     color: #ffffff;
+     border: none;
+     padding: 10px 20px;
+     font-size: 16px;
+     cursor: pointer;
+     border-radius: 4px;
+     margin-left: 20px;
+     margin-bottom: 15px;
 }
 
 .create-button:hover {
-    background-color: #318936;
+     background-color: #318936;
 }
 
 .input-container2 {
-    width: 73%;
-    margin-left: 80px;
-    /* Center align the input field */
-    text-align: center;
-    /* Center-align the text inside the input field */
+     width: 73%;
+     margin-left: 80px;
+     /* Center align the input field */
+     text-align: center;
+     /* Center-align the text inside the input field */
 }
 
 .button_2 {
-    text-align: end; /* Center align the buttons */
+     text-align: end; /* Center align the buttons */
 }
 
 .next_button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
+     padding: 10px 20px;
+     font-size: 16px;
+     margin: 5px;
+     cursor: pointer;
+     border: none;
+     border-radius: 5px;
+     background-color: #007bff;
+     color: #fff;
 }
 
 .next_button:hover {
-    background-color: #1367c1;
+     background-color: #1367c1;
 }
 
 .input-container input[type="number"] {
-    position: relative;
-    width: 150px;
-    /* margin: 0 auto; */
+     position: relative;
+     width: 150px;
+     /* margin: 0 auto; */
 }
 
 h3 {
-    margin: 20px 0px;
-    margin-left: 20px;
+     margin: 20px 0px;
+     margin-left: 20px;
 }
 
 .error {
-    margin-top: 10px;
+     margin-top: 10px;
 }

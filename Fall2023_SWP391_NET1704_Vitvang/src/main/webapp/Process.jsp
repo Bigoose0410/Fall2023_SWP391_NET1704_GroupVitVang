@@ -51,7 +51,7 @@
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
                                                                  </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -132,54 +132,59 @@
                                         </tr>
                                    </thead>
                                    <c:set var="count" value="0" />
-                                   <c:forEach var="dto" items="${result}">
-                                        <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
-                                             <tbody>
-                                             <form action="MainController"method="get" >         
+                                   <tbody>
+                                        <c:forEach var="dto" items="${result}">
+                                             <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
                                                   <tr>
-                                                       <td> 
-                                                            <c:set var="count" value="${count + 1}" />
-                                                            ${count}
-                                                       </td>
-                                                       <td>
-                                                            <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrderID()}
-                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getCageName()}
-                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getStartDate()}
-                                                            <input type="hidden" name="txtStartDate" value="${dto.getStartDate()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getQuantity()}
-                                                            <input type="hidden" name="txtQuantity" value="${dto.getQuantity()}" />
-                                                       </td>
-                                                       <td>
-                                                            ${dto.getOrderDetailStatus()}
-                                                            <input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />
-                                                       </td>
-                                                       <td>
-                                                            <button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction">
-                                                            </button>
-                                                       </td>
-                                                       <c:if test="${not empty error.getDesignListLength()}">
-                                                       <a href="MainController?txtCageID=${dto.getCageID()}&btAction=EditDesign"></a>
-                                                       <font color="red">
-                                                       ${error.getDesignListLength()}
-                                                       </font>
-                                                       </c:if>
-                                                  </tr>
+                                             <form action="MainController" method="GET">       
+                                                  <td> 
+                                                       <c:set var="count" value="${count + 1}" />
+                                                       ${count}
+                                                  </td>
+                                                  <td>
+                                                       <a href="MainController?btAction=Customers" style="text-decoration: none; color: black;">${dto.getUserID()}</a>
+                                                  </td>
+                                                  <td>
+                                                       ${dto.getOrderID()}
+                                                       <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                  </td>
+                                                  <td>
+                                                       ${dto.getCageName()}
+                                                       <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                                  </td>
+                                                  <td>
+                                                       ${dto.getStartDate()}
+                                                       <input type="hidden" name="txtStartDate" value="${dto.getStartDate()}" />
+                                                  </td>
+                                                  <td>
+                                                       ${dto.getQuantity()}
+                                                       <input type="hidden" name="txtQuantity" value="${dto.getQuantity()}" />
+                                                  </td>
+                                                  <td>
+                                                       ${dto.getOrderDetailStatus()}
+                                                       <!--<input type="hidden" name="updateStatusNewOrder" value="${dto.getOrderDetailStatus()}" />-->
+                                                  </td>
+                                                  <td>
+                                                       <a 
+                                                            href="MainController?txtOrderID=${dto.getOrderID()}&txtCageID=${dto.getCageID()}&txtStartDate=${dto.getStartDate()}&txtQuantity=${dto.getQuantity()}&btAction=AddToProcess">
+                                                            <i class="fa fa-cog"></i>
+                                                       </a>
+<!--                                                       <button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction">
+                                                       </button>-->
+                                                  </td>
+                                                  <c:if test="${not empty error.getDesignListLength() and count == 1}">
+                                                       <a href="MainController?txtCageID=${dto.getCageID()}&txtCageName=${dto.getCageName()}&btAction=EditDesign">
+                                                            <font color="red">
+                                                            ${error.getDesignListLength()}
+                                                            </font>
+                                                       </a>
+                                                  </c:if>
                                              </form>
-                                             </tbody>
+                                             </tr>
                                         </c:if>
                                    </c:forEach>
-                              </table>
+                                   </tbody>
+                              </table>                        
                          </c:if>
                          <br>
                          <c:if test="${empty result}">
@@ -190,32 +195,6 @@
                               </font>
                          </c:if>
 
-                         <tbody>
-                         <form id="addForm" action="MainController">
-                              <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
-                                   <tr>
-                                        <td>${counter.count}</td>
-
-                                        <td>${dto.getUserID()}</td>
-
-                                        <td>${dto.getOrderID()}</td>
-
-                                        <td>${dto.getCageID()}</td>
-
-                                        <td>${dto.getStartDate()}</td>
-
-                                        <td>${dto.getQuantity()}</td>
-
-                                        <td>${dto.getOrderDetailStatus()}</td>
-
-                                        <td class="add_button">
-                                             <button type="button" class="add-btn" onclick="confirmAdd()"><i class="fa fa-cog"></i></button>
-                                        </td>
-                                   </tr>
-                              </c:forEach>
-                         </form>
-                         </tbody>
-                         </table>
                     </div>
                </div>
 

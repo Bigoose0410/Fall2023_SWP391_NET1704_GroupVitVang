@@ -28,7 +28,7 @@ import javax.naming.NamingException;
  *
  * @author thetam
  */
-@WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
+@WebServlet(name = "AutoAddProcessController", urlPatterns = {"/AutoAddProcessController"})
 public class AutoAddProcessController extends HttpServlet {
 
       private static final String ERROR_PAGE = "ErrorPage.html";
@@ -75,6 +75,7 @@ public class AutoAddProcessController extends HttpServlet {
                         //2. call method
                         //3. process result
                         DetailOrderDTO getquantity = orderdao.query1LineOrderDetail(orderID, cageID);
+                        System.out.println("Auto add process to Order");
                         for (DesignForProcessDTO designDTO : designList) {
                               if (i == 1) {
                                     newStatus = "Processing";
@@ -86,7 +87,12 @@ public class AutoAddProcessController extends HttpServlet {
                                       designDTO.getNumCompletionCage(), 1);
                               result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity(), designDTO);
                               i++;
-                              startdate = endDate;
+                              System.out.println("Buoc " + i);
+                              System.out.println("StartDate:" + startdate);
+                              System.out.println("End Date:" + endDate);
+                              System.out.println("------------------------------");
+                              startdate =(endDate);
+                              
                         }
                         result2 = processdao.updateStatusNewOrder(orderID, cageID);
 

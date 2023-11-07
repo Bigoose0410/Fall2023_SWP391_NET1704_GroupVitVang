@@ -37,7 +37,7 @@ public class MainController extends HttpServlet {
       private final String AddDesignProcess = "AddDesignProcess";
       private final String CreateUserController = "CreateUserController";
       private final String AddMaterialToCageController = "AddMaterialToCageController";
-      private final String AddAutoProcessController = "ProductionProcessController";
+      private final String AutoAddProcessController = "AutoAddProcessController";
       private final String AddCageController = "AddCageController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
@@ -120,7 +120,7 @@ public class MainController extends HttpServlet {
                   } else if (button.equals("Production process")) {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {
-                        url = UpdateSatusNewOrderController;
+                        url = AutoAddProcessController;
                   } else if (button.equals("Customers")) {
                         url = CustomerController;
                   } else if (button.equals("ViewProcessDetail")) {

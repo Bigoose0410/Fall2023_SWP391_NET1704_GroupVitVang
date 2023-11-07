@@ -1,5 +1,6 @@
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,14 +13,13 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
-import com.vitvang.productionmanagement.dao.users.UserDAO;
 
 @WebServlet(name = "StartUpController", urlPatterns = {"/StartUpController"})
 public class StartUpController extends HttpServlet {
 
       private static final String AdminPage = "AdminHomePage.jsp";
-      private static final String StaffPage = "HomePage.html";
-      private static final String ManagerPage = "HomePage.html";
+      private static final String StaffPage = "MainController?btAction=Search";
+      private static final String ManagerPage = "MainController?btAction=Search";
       private static final String ERROR_PAGE = "ErrorPage.html";
 
      

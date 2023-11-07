@@ -110,14 +110,6 @@ public class ProcessDAO implements Serializable {
                                 + "JOIN Cage "
                                 + "ON Process.CageID = Cage.CageID "
                                 + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
-//                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Process.Phrase  ,Process.ProcessID, ProcessName, Process.StartDate, Process.EndDate, OrderDetail.Quantity, Process.NumberOfEmployee,OrderDetail.OrderDetailStatus, Process.Status, Orderr.StatusProgress "
-//                                + "FROM UserOrder JOIN Orderr "
-//                                + "ON UserOrder.OrderID = Orderr.OrderID "
-//                                + "JOIN OrderDetail "
-//                                + "ON Orderr.OrderID = OrderDetail.OrderID "
-//                                + "JOIN Process "
-//                                + "ON Orderr.OrderID = Process.OrderID "
-//                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, OrderID);
                         stm.setString(2, CageID);
@@ -182,7 +174,7 @@ public class ProcessDAO implements Serializable {
                                 + "ON UserOrder.UserID = Users.UserID "
                                 + "JOIN Cage "
                                 + "ON Process.CageID = Cage.CageID "
-                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? AND Process.ProcessID =?";
+                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? AND Process.ProcessID = ? ";
 
                         stm = con.prepareStatement(sql);
                         stm.setString(1, OrderID);
@@ -206,7 +198,7 @@ public class ProcessDAO implements Serializable {
                               String cageName = rs.getString("Cage Name");
                               ProcessDTO process = new ProcessDTO(UserID, cusName, OrderID, CageID, cageName, Phrase, ProcessID, ProcessName, CompletedQuantity,
                                       Quantity, StartDate, EndDate, Status, NumberOfEmployee, OrderDetailStatus, StatusProgress);
-                              return result = process;
+                              result = process;
 
                         }
                   }
@@ -295,7 +287,7 @@ public class ProcessDAO implements Serializable {
             }
             return false;
       }
-
+   
       public boolean updateQuantityCompleted(int quanCompleted, String ProcessID, String OrderID, String CageID) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;

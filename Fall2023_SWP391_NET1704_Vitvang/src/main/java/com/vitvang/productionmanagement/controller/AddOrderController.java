@@ -89,8 +89,9 @@ public class AddOrderController extends HttpServlet {
                         if (result) {
                               cart = null;
                               url = "MainController"
-                                      + "?btAction=Order1";
-                              session.setAttribute("CART", cart);
+                                      + "?btAction=Detail"
+                                      + "&txtOrderID="+ dao.NewestOrder();
+                              session.removeAttribute("CART");
                         }
                   }
             } catch (SQLException ex) {

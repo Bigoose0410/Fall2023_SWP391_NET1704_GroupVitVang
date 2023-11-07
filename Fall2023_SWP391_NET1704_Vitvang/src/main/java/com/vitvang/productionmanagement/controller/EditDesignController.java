@@ -20,7 +20,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
 public class EditDesignController extends HttpServlet {
 
-      private final String DESIGN_PROCESS_PAGE = "EditDesignOLD.jsp";
+      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)

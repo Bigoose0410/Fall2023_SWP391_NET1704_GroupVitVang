@@ -28,7 +28,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-      private static final String Admin_Page = "MainController?btAction=Search";
+      private static final String Admin_Page = "AdminHomePage.jsp";
       private static final String Staff_Page = "MainController?btAction=Search";
       private static final String Manager_Page = "MainController?btAction=Search";
       private static final String ERROR_PAGE = "ErrorPage.html";

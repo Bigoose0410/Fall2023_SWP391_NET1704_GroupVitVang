@@ -42,7 +42,7 @@
                                    <i class="uil uil-estate"></i>
                                    <span class="link-name">Dahsboard</span>
                               </a></li>
-                         <li><a href="MainController?btAction=Order">
+                         <li><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
@@ -54,7 +54,7 @@
                                    <i class="uil uil-grin"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
-                         <li><a href="#">
+                         <li ><a href="MainController?btAction=Production process">
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
@@ -168,6 +168,7 @@
                                         </td>
                                         <td class="update_button">
                                              <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
+                                             <input type="hidden" name="txtCageName" value="${param.txtCageName}" />
                                              <button type="submit" value="updateDesign" name="btAction">
                                                   <i class="fa fa-pencil-square"></i>
                                              </button>
@@ -255,10 +256,12 @@
                               </div>
 
                               <div class="form-step">
-                                   <label for="username">Completion Cage</label>
+                                   <label for="username">Note:</label>
                                    <div class="input-container">
-                                        <input placeholder="Employee" class="input-field" type="number" readonly=""
-                                               name="txtCompletionCage" value="1" oninput="this.value = Math.abs(this.value)">
+                                        <!--                                        <input placeholder="Employee" class="input-field" type="number" readonly=""
+                                                                                       name="txtCompletionCage" value="1" oninput="this.value = Math.abs(this.value)">-->
+                                        <h5>"Time process" and "Number of employee" are for 1 cage</h5>
+                                        <p>Check detail before submit</p>
                                         <span class="input-highlight"></span>
                                    </div>
                               </div>
