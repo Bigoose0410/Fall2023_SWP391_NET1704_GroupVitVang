@@ -110,14 +110,6 @@ public class ProcessDAO implements Serializable {
                                 + "JOIN Cage "
                                 + "ON Process.CageID = Cage.CageID "
                                 + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
-//                        String sql = "SELECT UserOrder.UserID, Orderr.OrderID, OrderDetail.CageID, Process.Phrase  ,Process.ProcessID, ProcessName, Process.StartDate, Process.EndDate, OrderDetail.Quantity, Process.NumberOfEmployee,OrderDetail.OrderDetailStatus, Process.Status, Orderr.StatusProgress "
-//                                + "FROM UserOrder JOIN Orderr "
-//                                + "ON UserOrder.OrderID = Orderr.OrderID "
-//                                + "JOIN OrderDetail "
-//                                + "ON Orderr.OrderID = OrderDetail.OrderID "
-//                                + "JOIN Process "
-//                                + "ON Orderr.OrderID = Process.OrderID "
-//                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? ";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, OrderID);
                         stm.setString(2, CageID);
@@ -159,6 +151,69 @@ public class ProcessDAO implements Serializable {
                   }
             }
 
+      }
+      public ProcessDTO GetProcessingbyID(String OrderID, String CageID, String ProcessID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            ProcessDTO result = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+
+                        String sql = "SELECT UserOrder.UserID,Users.Name as 'Customer', Orderr.OrderID, OrderDetail.CageID ,Cage.Name as 'Cage Name', Process.Phrase , Process.ProcessID, ProcessName,Process.CompletedQuantity "
+                                + ", Process.QuanityNeedProduct, Process.StartDate, Process.EndDate, OrderDetail.Quantity, Process.NumberOfEmployee, OrderDetail.OrderDetailStatus, Process.Status, Orderr.StatusProgress "
+                                + "FROM UserOrder JOIN Orderr "
+                                + "ON UserOrder.OrderID = Orderr.OrderID "
+                                + "JOIN OrderDetail "
+                                + "ON Orderr.OrderID = OrderDetail.OrderID "
+                                + "JOIN Process "
+                                + "ON Orderr.OrderID = Process.OrderID "
+                                + "JOIN Users "
+                                + "ON UserOrder.UserID = Users.UserID "
+                                + "JOIN Cage "
+                                + "ON Process.CageID = Cage.CageID "
+                                + "WHERE OrderDetail.OrderID = ? AND OrderDetail.CageID = ? AND Process.CageID = ? AND Process.ProcessID = ? ";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, OrderID);
+                        stm.setString(2, CageID);
+                        stm.setString(3, CageID);
+                        stm.setString(4, ProcessID);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              String UserID = rs.getString("UserID");
+                              String cusName = rs.getString("Customer");
+                              String ProcessName = rs.getString("ProcessName");
+                              String Phrase = rs.getString("Phrase");
+                              int CompletedQuantity = rs.getInt("CompletedQuantity");
+                              int Quantity = rs.getInt("QuanityNeedProduct");
+                              Date StartDate = rs.getDate("StartDate");
+                              Date EndDate = rs.getDate("EndDate");
+                              int NumberOfEmployee = rs.getInt("NumberOfEmployee");
+                              String OrderDetailStatus = rs.getString("OrderDetailStatus");
+                              String Status = rs.getString("Status");
+                              String StatusProgress = rs.getString("StatusProgress");
+                              String cageName = rs.getString("Cage Name");
+                              ProcessDTO process = new ProcessDTO(UserID, cusName, OrderID, CageID, cageName, Phrase, ProcessID, ProcessName, CompletedQuantity,
+                                      Quantity, StartDate, EndDate, Status, NumberOfEmployee, OrderDetailStatus, StatusProgress);
+                              result = process;
+
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return  result;
       }
 
       public boolean updateStatusNewOrder(String OrderID, String CageID) throws SQLException {

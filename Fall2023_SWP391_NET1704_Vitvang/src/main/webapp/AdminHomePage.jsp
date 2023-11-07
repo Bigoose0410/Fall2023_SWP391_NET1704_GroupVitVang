@@ -16,13 +16,13 @@
 
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/HomePage.css">
-
+          <link rel="stylesheet" href="css/Dashboard.css">
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-          <title>Home Page</title>
+          <title>Admin Home Page</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -35,6 +35,7 @@
                     display: block;">
                     <div class="logo-image">
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
                     <div class="menu-items">
@@ -106,7 +107,7 @@
           </section>
 
 
-          <script src="js/HomePage.js"></script>
-          <script src="js/DarkMode.js"></script>
+          <!--          <script src="js/HomePage.js"></script>
+                    <script src="js/DarkMode.js"></script>-->
      </body>
 </html>

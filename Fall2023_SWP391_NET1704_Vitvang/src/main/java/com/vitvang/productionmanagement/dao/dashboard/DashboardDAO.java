@@ -121,7 +121,11 @@ public class DashboardDAO implements Serializable {
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
+<<<<<<< HEAD
                         String sql = "SELECT Cage.CageID, Cage.Name, COUNT(Cage.CageID) AS 'CageQuantity' "
+=======
+                        String sql = "SELECT Cage.CageID, Cage.Name, COALESCE(COUNT(Cage.CageID), 0) AS 'CageQuantity' "
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                                 + "FROM OrderDetail JOIN Cage ON OrderDetail.CageID = Cage.CageID "
                                 + "GROUP BY Cage.CageID, Cage.Name ";
                         stm = con.prepareStatement(sql);

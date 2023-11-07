@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
@@ -27,15 +23,41 @@ public class ProcessController extends HttpServlet {
 
       private final String Process = "Process.jsp";
       private final String ProcessDetail = "ProcessDetail.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = Process;
+            String url = ERROR_PAGE;
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
+            String ProcessID = request.getParameter("txtProcessID");
             String button = request.getParameter("btAction");
             try {
+//                  ProcessDAO dao = new ProcessDAO();
+//                  if (!button.equals("ViewProcessDetail")) {
+//                        dao.ViewNewOrder();
+//                        List<ProcessNewOrderDTO> processNewOrder = dao.getListProcessNewOrder();
+//                        request.setAttribute("PROCESSNEWORDER_RESULT", processNewOrder);
+//                        url = Process;
+//                  } else {
+//                        if(ProcessID == null){
+//                              ProcessID = "PR001";
+//                        }
+//                        dao.ViewProcessingOrder(OrderID, CageID, CageID);
+////                        List<ProcessDTO> process = dao.getListOrdersProcess();
+//                        ProcessDTO eachStep = new ProcessDTO();
+//                        eachStep = dao.GetProcessingbyID(OrderID, CageID, ProcessID);
+//                        if (eachStep != null) {
+//                              request.setAttribute("STEP_PROCESS" , eachStep);
+//                              if (eachStep.getStatus().equals("Processing")) {
+//                                    request.setAttribute("HIGHLIGHT" , eachStep.getProcessID());
+//                              }
+//                        }
+//                        request.setAttribute("PROCESS_RESULT", dao.getListOrdersProcess());
+//                        url = ProcessDetail;
+
+//                  }
                   ProcessDAO dao = new ProcessDAO();
                   if (!button.equals("ViewProcessDetail")) {
                         dao.ViewNewOrder();
@@ -46,7 +68,7 @@ public class ProcessController extends HttpServlet {
                         dao.ViewProcessingOrder(OrderID, CageID, CageID);
                         List<ProcessDTO> process = dao.getListOrdersProcess();
                         for (ProcessDTO proces : process) {
-                              if(proces.getStatus().equals("Processing")){
+                              if (proces.getStatus().equals("Processing")) {
                                     request.setAttribute("HIGHLIGHT", proces.getProcessID());
                                     break;
                               }

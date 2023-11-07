@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
-
 import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -26,22 +21,14 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 public class SearchCustomerController extends HttpServlet {
 
       private final String SEARCH_CUSTOMER_PAGE = "SearchCustomer.jsp";
-
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      private static final String ERROR_PAGE = "ErrorPage.html";
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String searchName = request.getParameter("txtSearchvalue");
             String RoleID = request.getParameter("txtRoleSearch");
             int role = Integer.parseInt(RoleID);
-            String url = "ErrorPageLogin.html";
+            String url = ERROR_PAGE;
             try {
                   // 1. new dao
                   UserDAO dao = new UserDAO();

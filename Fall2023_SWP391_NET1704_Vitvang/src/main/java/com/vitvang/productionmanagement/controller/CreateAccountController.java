@@ -33,9 +33,9 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "CreateAccountController", urlPatterns = {"/CreateAccountController"})
 public class CreateAccountController extends HttpServlet {
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
-      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
+      private final String USERID_PATTERN = "(CS|ST|AD)\\\\d{3}";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
       private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";//check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
@@ -45,6 +45,8 @@ public class CreateAccountController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                  
             /* TODO output your page here. You may use following sample code. */
             String UserID = request.getParameter("txtUserID");
             String txtRoleID = request.getParameter("txtRoleID");
@@ -67,6 +69,11 @@ public class CreateAccountController extends HttpServlet {
             boolean foundErr = false;
             CreateAccountError error = new CreateAccountError();
             try {
+                  if (!checkFormat(UserID, USERID_PATTERN, true)) {
+                        error.setUserIDFormatErr("Wrong format");
+                        foundErr = true;
+                  }
+                  
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;

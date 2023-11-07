@@ -84,7 +84,8 @@ public class UserDAO implements Serializable {
                               Date BirthDate = rs.getDate("BirthDate");
                               String Email = rs.getString("Email");
                               int RoleID = rs.getInt("RoleID");
-                              result = new UserDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID);
+                              Boolean UserStatus = rs.getBoolean("UserStatus");
+                              result = new UserDTO(UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus);
                         }//end username and password are checked
                   } // end of connection has opend
 
@@ -161,7 +162,8 @@ public class UserDAO implements Serializable {
                   }
             }
       }
-        public void getAllCustomer()
+
+      public void getAllCustomer()
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -338,7 +340,7 @@ public class UserDAO implements Serializable {
             return result;
       }
 
-     public boolean createAccount(UserDTO user)
+      public boolean createAccount(UserDTO user)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -350,9 +352,9 @@ public class UserDAO implements Serializable {
                   if (con != null) {
                         //2. create SQL statement string
 
-                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID) "
+                        String sql = "INSERT INTO Users (UserID, Name, PhoneNumber, Sex, Adress, BirthDate, Email, Username, Password, RoleID, UserStatus) "
                                 + "VALUES ("
-                                + "?, ?, ? , ?, ?, ?, ?, ?, ?, ?"
+                                + "?, ?, ? , ?, ?, ?, ?, ?, ?, ?, 'True'"
                                 + ")";
 
                         //3. Create statement object
@@ -367,7 +369,7 @@ public class UserDAO implements Serializable {
                         stm.setString(8, user.getUsername());
                         stm.setString(9, user.getPassword());
                         stm.setInt(10, user.getRoleID());
-
+                        stm.setBoolean(11, user.isUserStatus());
                         //4. Excute query
                         int effectRows = stm.executeUpdate();
                         //5. Process

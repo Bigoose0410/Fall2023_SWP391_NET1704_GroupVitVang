@@ -17,28 +17,18 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "EditDesignController", urlPatterns = {"/EditDesignController"})
 public class EditDesignController extends HttpServlet {
-      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      private final String DESIGN_PROCESS_PAGE = "EditDesign.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String cageID = request.getParameter("txtCageID");
-            String url = "";
-           try {
+            String url = ERROR_PAGE;
+            try {
                   //1. new DAO
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   //2. Call method

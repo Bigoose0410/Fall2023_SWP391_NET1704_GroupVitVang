@@ -17,6 +17,12 @@ public class CageDTO {
       private String Description;
       private int quantityOrder;
       private int CageQuantity;
+<<<<<<< HEAD
+=======
+      private String OrderDetailStatus;
+      private String OrderStatus;
+      private String OrderID;
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
 
       public CageDTO() {
       }
@@ -44,6 +50,32 @@ public class CageDTO {
             this.CageQuantity = CageQuantity;
       }
 
+<<<<<<< HEAD
+=======
+      public CageDTO(String CageID, String Name, int Price, String Origin, String Description, int quantityOrder, String OrderDetailStatus, String OrderStatus) {
+            this.CageID = CageID;
+            this.Name = Name;
+            this.Price = Price;
+            this.Origin = Origin;
+            this.Description = Description;
+            this.quantityOrder = quantityOrder;
+            this.OrderDetailStatus = OrderDetailStatus;
+            this.OrderStatus = OrderStatus;
+      }
+
+      public CageDTO(String OrderID, String CageID, String Name, int Price, String Origin, String Description, int quantityOrder, String OrderDetailStatus, String OrderStatus) {
+            this.OrderID = OrderID;
+            this.CageID = CageID;
+            this.Name = Name;
+            this.Price = Price;
+            this.Origin = Origin;
+            this.Description = Description;
+            this.quantityOrder = quantityOrder;
+            this.OrderDetailStatus = OrderDetailStatus;
+            this.OrderStatus = OrderStatus;
+      }
+
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
       public int getQuantityOrder() {
             return quantityOrder;
       }
@@ -100,4 +132,31 @@ public class CageDTO {
             this.CageQuantity = CageQuantity;
       }
 
+<<<<<<< HEAD
+=======
+      public String getOrderDetailStatus() {
+            return OrderDetailStatus;
+      }
+
+      public void setOrderDetailStatus(String OrderDetailStatus) {
+            this.OrderDetailStatus = OrderDetailStatus;
+      }
+
+      public String getOrderStatus() {
+            return OrderStatus;
+      }
+
+      public void setOrderStatus(String OrderStatus) {
+            this.OrderStatus = OrderStatus;
+      }
+
+      public String getOrderID() {
+            return OrderID;
+      }
+
+      public void setOrderID(String OrderID) {
+            this.OrderID = OrderID;
+      }
+
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
 }

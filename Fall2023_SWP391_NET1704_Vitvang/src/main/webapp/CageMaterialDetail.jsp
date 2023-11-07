@@ -19,7 +19,7 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-          <title>BCPM</title>
+          <title>Cage Materail Detail</title>
      </head>
      <body>
           
@@ -46,7 +46,7 @@
                                         <i class="uil uil-estate"></i>
                                         <span class="link-name">Dahsboard</span>
                                    </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>

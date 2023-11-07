@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package com.vitvang.productionmanagement.controller;
 
+package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
@@ -31,20 +27,13 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 public class DetailOrderController extends HttpServlet {
 
       private final String ORDER_DETAIL_PAGE = "OrderDetail.jsp";
-
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+      private static final String ERROR_PAGE = "ErrorPage.html";
+      
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String OrderID = request.getParameter("txtOrderID");
-            String url = "ErrorPageLogin.html";
+            String url = ERROR_PAGE;
             try {
                   // new DAO
                   OrderDAO orderdao = new OrderDAO();
@@ -58,16 +47,15 @@ public class DetailOrderController extends HttpServlet {
                   UserDTO customer = userdao.queryCusFromUserOrder(OrderID);
                   OrderDTO order = orderdao.getListOrders().get(0);
                   List<DetailOrderDTO> orderDetailList = orderdao.getListOrderDetails();
+                  
                   for (DetailOrderDTO detailOrderDTO : orderDetailList) {
                         dao.ViewCageMaterial(detailOrderDTO.getCageID(), detailOrderDTO.getQuantity());
-                        dao.searchProductionbyID(detailOrderDTO.getCageID());
                   }
                   List<CageMaterialDTO> cageMaterialList = dao.getListCageMaterial();
-                  List<CageDTO> cageList = dao.getListCage();
 
                   request.setAttribute("CUS_ORDER", customer);
                   request.setAttribute("CAGE_MATERIAL", cageMaterialList);
-                  request.setAttribute("CAGE_ORDER", cageList);
+                  request.setAttribute("CAGE_ORDER", orderDetailList);
                   request.setAttribute("ORDER", order);
                   url = ORDER_DETAIL_PAGE;
 

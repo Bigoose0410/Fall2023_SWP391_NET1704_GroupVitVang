@@ -38,7 +38,7 @@
                                         <i class="uil uil-estate"></i>
                                         <span class="link-name">Dahsboard</span>
                                    </a></li>
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -150,7 +150,8 @@
                                                             ${dto.getEmail()}
                                                        </td>
                                                        <td>
-                                                            <c:url value="OrderAdd.jsp" var="AdddLink">
+                                                            <c:url value="MainController" var="AdddLink">
+                                                                 <c:param name="btAction" value="New Order"/>
                                                                  <c:param name="txtCustomerID" value="${dto.getUserID()}"/>
                                                             </c:url>
                                                             <span class="data-list"><a href="${AdddLink}">Generate Order</a></span>
@@ -286,7 +287,7 @@
                               </div>
                               <br>
                               <button class="btn btn-md btn-primary" name = "btAction" type="submit" value = "New Customer">
-                                   Create New customer
+                                   Create New customer 
                               </button>
                               <c:if test="${not empty errors.getCustomerIDexistErr()}">
                                         <font color = "red">

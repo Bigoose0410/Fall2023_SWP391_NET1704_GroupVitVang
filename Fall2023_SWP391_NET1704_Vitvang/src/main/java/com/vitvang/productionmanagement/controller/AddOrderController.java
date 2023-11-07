@@ -27,7 +27,7 @@ import javax.naming.NamingException;
  */
 public class AddOrderController extends HttpServlet {
 
-      private final String ORDER_PAGE = "OrderAdd.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String ADDRESS_FORM_PATTERN = "([0-9]{1,4}[A-Z]?/[0-9]{1,3}\\s[a-zA-Z"
               + "ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơ"
               + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈ"
@@ -38,16 +38,16 @@ public class AddOrderController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, ParseException {
             response.setContentType("text/html;charset=UTF-8");
-            String url = ORDER_PAGE;
+            String url = ERROR_PAGE;
             // test
             String customerId = request.getParameter("txtCustomerID");
             String totalprice = request.getParameter("txtTotalPrice");
-             if (totalprice == null ) {
-                        totalprice = "0";
-                  }
+            if (totalprice == null) {
+                  totalprice = "0";
+            }
             int total = Integer.parseInt(totalprice);
             String Address = request.getParameter("txtAddress");
-            
+
             String[] CageID = request.getParameterValues("txtOrderCageID");
             long millis = System.currentTimeMillis();
             java.sql.Date now = new java.sql.Date(millis);
@@ -57,7 +57,7 @@ public class AddOrderController extends HttpServlet {
                   HttpSession session = request.getSession();
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO dao = new OrderDAO();
-                 
+
 //                  if (!checkFormat(Address, ADDRESS_NUMBERANDCHAR_PATTERN, true)) {
 //                        error.setAddressNumberErr("Pls type again Address, with have at least "
 //                                + "one char and one number");
@@ -75,7 +75,7 @@ public class AddOrderController extends HttpServlet {
                   if (cart == null) {
                         error.setEmptyCartErr("Your cart is empty, Add more product please! ");
                         foundErr = true;
-                  }                
+                  }
                   if (foundErr) {
                         request.setAttribute("ADD_ORDER_ERROR", error);
                         url = "MainController?btAction=New Order";
@@ -87,10 +87,11 @@ public class AddOrderController extends HttpServlet {
                               dao.addOrderDetail(value.getCageID(), value.getQuantityOrder());
                         }
                         if (result) {
-                            cart = null ;
+                              cart = null;
                               url = "MainController"
-                                      + "?btAction=Order";
-                              session.setAttribute("CART", cart);
+                                      + "?btAction=Detail"
+                                      + "&txtOrderID="+ dao.NewestOrder();
+                              session.removeAttribute("CART");
                         }
                   }
             } catch (SQLException ex) {
@@ -100,7 +101,7 @@ public class AddOrderController extends HttpServlet {
                   request.setAttribute("ADD_ORDER_ERROR", error);
             } catch (NamingException ex) {
                   log("UpdateAccountServlet _ Naming " + ex.getMessage());
-            } catch (NumberFormatException  ex) {
+            } catch (NumberFormatException ex) {
                   String msg = ex.getMessage();
                   log("UpdateAccountServlet _ SQL " + msg);
                   error.setNullQuantityErr("Not accept Null quantity!!!");

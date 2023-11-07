@@ -12,10 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
 
@@ -41,7 +37,7 @@ public class MainController extends HttpServlet {
       private final String AddDesignProcess = "AddDesignProcess";
       private final String CreateUserController = "CreateUserController";
       private final String AddMaterialToCageController = "AddMaterialToCageController";
-      private final String AddAutoProcessController = "ProductionProcessController";
+      private final String AutoAddProcessController = "AutoAddProcessController";
       private final String AddCageController = "AddCageController";
       //update
       private final String UpdateOrderController = "UpdateOrderController";
@@ -60,16 +56,23 @@ public class MainController extends HttpServlet {
       private final String UpdateAccountController = "UpdateAccountController";
       private final String ViewAccountDetailController = "ViewAccountDetailController";
       private final String CreateAccountController = "CreateAccountController";
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String DeleteAccountController = "DeleteAccountController";
       private final String SearchAccountController = "SearchAccountController";
       private final String DashboardController = "DashboardController";
+<<<<<<< HEAD
+=======
+      private final String CustomerAccountController = "CustomerAccountController";
+      private final String CustomerOrderController = "CustomerOrderController";
+      private final String CustomerProcessController = "CustomerProcessController";
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
 
             String button = request.getParameter("btAction");
-            String url = "errorPageLogin.html";
+            String url = ERROR_PAGE;
             try {
                   if (button == null) {
                         url = StartUpController;
@@ -124,7 +127,7 @@ public class MainController extends HttpServlet {
                   } else if (button.equals("Production process")) {
                         url = ProcessController;
                   } else if (button.equals("AddToProcess")) {
-                        url = UpdateSatusNewOrderController;
+                        url = AutoAddProcessController;
                   } else if (button.equals("Customers")) {
                         url = CustomerController;
                   } else if (button.equals("ViewProcessDetail")) {
@@ -151,6 +154,15 @@ public class MainController extends HttpServlet {
                         url = SearchAccountController;
                   } else if (button.equals("Dashboard")) {
                         url = DashboardController;
+<<<<<<< HEAD
+=======
+                  } else if (button.equals("Customer's Account")) {
+                        url = CustomerAccountController;
+                  } else if (button.equals("Customer's Order")) {
+                        url = CustomerOrderController;
+                  } else if (button.equals("Customer Tracking")) {
+                        url = CustomerProcessController;
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
                   }
 
             } finally {

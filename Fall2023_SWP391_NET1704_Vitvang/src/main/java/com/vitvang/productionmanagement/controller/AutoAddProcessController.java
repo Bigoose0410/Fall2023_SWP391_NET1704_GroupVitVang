@@ -11,6 +11,7 @@ import com.vitvang.productionmanagement.exception.processs.AutoAddProcessErr;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
+import static com.vitvang.productionmanagement.util.tool.nextdate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,11 +29,10 @@ import javax.naming.NamingException;
  *
  * @author thetam
  */
-@WebServlet(name = "UpdateSatusNewOrderController", urlPatterns = {"/UpdateSatusNewOrderController"})
+@WebServlet(name = "AutoAddProcessController", urlPatterns = {"/AutoAddProcessController"})
 public class AutoAddProcessController extends HttpServlet {
 
-      private final String PROCESS_OF_CAGE_PAGE = "Process.jsp";
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
@@ -45,7 +45,7 @@ public class AutoAddProcessController extends HttpServlet {
             String Quantity = request.getParameter("txtQuantity");
             int quantityorder = Integer.parseInt(Quantity);
             String newStatus = "";
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             AutoAddProcessErr error = new AutoAddProcessErr();
             boolean foundErr = false;
             boolean result1 = false;
@@ -87,7 +87,7 @@ public class AutoAddProcessController extends HttpServlet {
                                       designDTO.getNumCompletionCage(), 1);
                               result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity(), designDTO);
                               i++;
-                              startdate = endDate;
+                              startdate = nextdate(endDate);
                         }
                         result2 = processdao.updateStatusNewOrder(orderID, cageID);
 

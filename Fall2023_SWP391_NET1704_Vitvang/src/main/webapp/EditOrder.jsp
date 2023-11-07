@@ -43,7 +43,7 @@
 
                <div class="menu-items">
                     <ul class="nav-links">
-                         <li><a href="MainController?btAction=Order">
+                         <li><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>>
                                    <span class="link-name">Order</span>
                               </a></li>

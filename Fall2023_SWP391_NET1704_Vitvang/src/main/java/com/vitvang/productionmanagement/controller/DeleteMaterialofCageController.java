@@ -21,16 +21,18 @@ import com.vitvang.productionmanagement.dao.material.MaterialDAO;
  */
 @WebServlet(name = "DeleteMaterialofCageController", urlPatterns = {"/DeleteMaterialofCageController"})
 public class DeleteMaterialofCageController extends HttpServlet {
+
       private final String EDIT_MATERIAL_PAGE = "EditMaterial.jsp";
-    
+      private static final String ERROR_PAGE = "ErrorPage.html";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
-             String materialID = request.getParameter("txtMaterialID").trim();
+            String materialID = request.getParameter("txtMaterialID").trim();
             String CageID = request.getParameter("txtCageID").trim();
-            String url = EDIT_MATERIAL_PAGE;
+            String url = ERROR_PAGE;
             try {
-                  
+
                   MaterialDAO dao = new MaterialDAO();
                   dao.deleteMaterialOfCage(materialID, CageID);
                   url = "MainController"

@@ -7,15 +7,28 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.dashboard.DashboardDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.OrderDTO;
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.PrintWriter;
+=======
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.util.List;
+=======
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
 
 /**
  *
@@ -24,6 +37,17 @@ import java.util.List;
 @WebServlet(name = "DashboardController", urlPatterns = {"/DashboardController"})
 public class DashboardController extends HttpServlet {
 
+<<<<<<< HEAD
+=======
+      /**
+       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+       *
+       * @param request servlet request
+       * @param response servlet response
+       * @throws ServletException if a servlet-specific error occurs
+       * @throws IOException if an I/O error occurs
+       */
+>>>>>>> 6c7328056a33b9fcd7a9d8679e94c4b00580764c
       private final String Dashboard = "Dashboard.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
