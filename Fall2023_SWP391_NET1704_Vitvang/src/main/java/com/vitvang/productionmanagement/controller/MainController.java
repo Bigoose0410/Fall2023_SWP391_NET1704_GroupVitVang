@@ -65,6 +65,7 @@ public class MainController extends HttpServlet {
       private final String CustomerAccountController = "CustomerAccountController";
       private final String CustomerOrderController = "CustomerOrderController";
       private final String CustomerProcessController = "CustomerProcessController";
+      private final String CustomerUpdateAccountController = "CustomerUpdateAccountController";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
@@ -155,9 +156,9 @@ public class MainController extends HttpServlet {
                         url = SearchAccountController;
                   } else if (button.equals("Dashboard")) {
                         url = DashboardController;
-                  } else if (button.equals("Customer Account")) {
+                  } else if (button.equals("CustomerAccount")) {
                         url = CustomerAccountController;
-                  } else if (button.equals("Customer's Order")) {
+                  } else if (button.equals("CustomerOrder")) {
                         url = CustomerOrderController;
                   } else if (button.equals("CustomerTracking")) {
                         url = CustomerProcessController;
@@ -165,6 +166,8 @@ public class MainController extends HttpServlet {
                         url = AddMaterialController;
                   } else if (button.equals("View All Material")) {
                         url = ViewMaterialController;
+                  } else if (button.equals("CustomerUpdaterAccount")) {
+                        url = CustomerUpdateAccountController;
                   }
 
             } finally {
