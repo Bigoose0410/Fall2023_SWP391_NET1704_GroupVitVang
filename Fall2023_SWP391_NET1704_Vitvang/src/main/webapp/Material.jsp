@@ -48,16 +48,12 @@
                </div>
                <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
-                              <li ><a href="MainController?btAction=Order">
+                              <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
+                                        <i class="uil uil-user"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
@@ -68,20 +64,13 @@
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
-<!--                              <li > <a href="#">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Reports</span>
-                                   </a></li>-->
+
                               <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
-<!--                              <li > <a href="#">
-                                        <i class="uil uil-archive-alt"></i>
-                                        <span class="link-name">Inventory</span>
-                                   </a></li>-->
-                         </ul>
 
+                         </ul>
                          <ul class="logout-mode">
                               <li><a href="${logout_query}">
                                         <i class="uil uil-signout"></i>
@@ -224,7 +213,7 @@
                               <div class="form-step">
                                    <label for="username">Quantity</label>
                                    <div class="input-container">
-                                        <input placeholder="Quantity" class="input-field1" type="number" min="0" max="100000000000" oninput="this.value = Math.abs(this.value)"
+                                        <input placeholder="Quantity" class="input-field1" type="number" min="0" max="100000000" oninput="this.value = Math.abs(this.value)"
                                                name="txtQuantity" value="${param.txtQuantity}">
                                         <span class="input-highlight"></span>
                                    </div>

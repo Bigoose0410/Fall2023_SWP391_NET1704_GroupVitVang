@@ -405,16 +405,14 @@ button:hover {
 #password,
 #username,
 #address,
-#userID,
 #name,
 #phone,
-#roleID,
 #birthday {
      margin-right: 100px;
 }
 
 #birthday {
-     margin-right: 695px;
+     margin-right: 72%;
 }
 
 

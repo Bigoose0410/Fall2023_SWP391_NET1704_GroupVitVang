@@ -36,48 +36,13 @@
           </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
-               <nav>
+                <nav>
 
-                    <div class="logo-name" style="
-                         display: block;">
-                         <div class="logo-image">
-                              <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                         </div>
-
-                         <div class="menu-items">
-                              <ul class="nav-links">
-                                   <li><a href="MainController?btAction=Dashboard">
-                                             <i class="uil uil-estate"></i>
-                                             <span class="link-name">Dashboard</span>
-                                        </a></li>
-
-                                   <li><a href="AdminHomePage.jsp">
-                                             <i class="uil uil-bill"></i>
-                                             <span class="link-name">Home</span>
-                                        </a></li>
-                                   <li><a href="MainController?btAction=Manage Account">
-                                             <i class="uil uil-grin"></i>
-                                             <span class="link-name">Manage Account</span>
-                                        </a></li>
-                                   <!--                                   <li><a href="MainController?btAction=Production process">
-                                                                                <i class="uil uil-chart-line"></i>
-                                                                                <span class="link-name">Production process</span>
-                                                                           </a></li>-->
-                                   <!--                                   <li><a href="#">
-                                                                                <i class="uil uil-clipboard-alt"></i>
-                                                                                <span class="link-name">Reports</span>
-                                                                           </a></li>
-                                                                      <li><a href="#">
-                                                                                <i class="uil uil-screw"></i>
-                                                                                <span class="link-name">Material</span>
-                                                                           </a></li>
-                                                                      <li><a href="#">
-                                                                                <i class="uil uil-archive-alt"></i>
-                                                                                <span class="link-name">Inventory</span>
-                                                                           </a></li>-->
-                                   <ul class="logout-mode">
-                                        <li><a href="${logout_query}">
-                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+               <div class="logo-name" style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
                     <div class="menu-items">
@@ -95,47 +60,11 @@
                                         <i class="uil uil-grin"></i>
                                         <span class="link-name">Manage Account</span>
                                    </a></li>
-                              <!--                                   <li><a href="MainController?btAction=Production process">
-                                                                           <i class="uil uil-chart-line"></i>
-                                                                           <span class="link-name">Production process</span>
-                                                                      </a></li>-->
-                              <!--                                   <li><a href="#">
-                                                                           <i class="uil uil-clipboard-alt"></i>
-                                                                           <span class="link-name">Reports</span>
-                                                                      </a></li>
-                                                                 <li><a href="#">
-                                                                           <i class="uil uil-screw"></i>
-                                                                           <span class="link-name">Material</span>
-                                                                      </a></li>
-                                                                 <li><a href="#">
-                                                                           <i class="uil uil-archive-alt"></i>
-                                                                           <span class="link-name">Inventory</span>
-                                                                      </a></li>-->
                               <ul class="logout-mode">
                                    <li><a href="${logout_query}">
                                              <i class="uil uil-signout"></i>
                                              <span class="link-name">Logout</span>
                                         </a></li>
-
-                                   <!--                              <li class="mode">
-                                              <a href="#">
-                                                   <i class="uil uil-moon"></i>
-                                                   <span class="link-name">Dark Mode</span>
-                                              </a>-->
-
-                                   <!--                                   <div class="mode-toggle">
-                                                   <span class="switch"></span>
-                                              </div>-->
-                                   <!--                                   <li class="mode">
-                                                                           <a href="#">
-                                                                                <i class="uil uil-moon"></i>
-                                                                                <span class="link-name">Dark Mode</span>
-                                                                           </a>
-                                   
-                                                                           <div class="mode-toggle">
-                                                                                <span class="switch"></span>
-                                                                           </div>
-                                                                      </li>-->
                               </ul>
                          </ul>
                     </div>
@@ -151,26 +80,29 @@
                          <form action="MainController">
                               <div class="info_form1">
                                    <div class="form-row">
-                                        <label for="userID">UserID: </label>
-                                        <input type="text" id="userID" name="txtUserID" value="" placeholder="UserID" required="">
 
-                                        <label for="roleID">RoleID: </label>
-                                        <input type="text" id="roleID" name="txtRoleID" value="" placeholder="RoleID" required="">
+
+                                        <label for="status">Role</label>
+                                        <div class="form-row">
+                                             <div class="input-container">
+
+                                                  <select class="input-field" name="txtRoleID" id="roleID" style="margin-right: 700px;
+                                                          ">
+                                                       <option value="1">Admin</option>
+                                                       <option value="2">Staff</option>
+                                                       <option value="3">Manager</option>
+                                                       <option value="4">Customer</option>
+                                                  </select>
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </div>
+
 
                                    </div>
-
                                    <div class="form-row">
-                                   <c:if test="${not empty err.getUserIDExistErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUserIDExistErr()}</label>
-                                   </c:if>
 
-                                   <c:if test="${not empty err.getRoleIDFormatErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getRoleIDFormatErr()}</label>
-                                   </c:if>
-                              </div>
-                              <div class="form-row">
-                                   <label for="name">Name: </label>
-                                   <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
+                                        <label for="name">Name: </label>
+                                        <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
 
                                    <label for="email">Email:</label>
                                    <input type="email" id="email" name="txtEmail" value="${param.txtEmail}" placeholder="Email" required="">
@@ -220,7 +152,7 @@
 
                               <div class="form-row">
                                    <label for="username">Username: </label>
-                                   <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
+                                   <input type="text" id="username" name="txtUsername" value="${param.txtUsername}" placeholder="Username" required="">
 
                               </div>
 

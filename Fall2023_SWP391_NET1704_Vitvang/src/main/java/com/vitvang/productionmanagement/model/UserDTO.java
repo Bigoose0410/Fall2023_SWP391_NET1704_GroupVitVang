@@ -53,6 +53,18 @@ public class UserDTO {
             this.RoleID = RoleID;
             this.UserStatus = UserStatus;
       }
+      public UserDTO(String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, boolean UserStatus) {
+            this.Name = Name;
+            this.PhoneNumber = PhoneNumber;
+            this.Sex = Sex;
+            this.Adress = Adress;
+            this.BirthDate = BirthDate;
+            this.Email = Email;
+            this.Username = Username;
+            this.Password = Password;
+            this.RoleID = RoleID;
+            this.UserStatus = UserStatus;
+      }
 
       public String getUserID() {
             return UserID;
