@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 
-
 /**
  *
  * @author Admin
@@ -50,8 +49,11 @@ public class DeleteAccountController extends HttpServlet {
                         if (result) {
                               url = "MainController?btAction=Manage Account";
                         }
-                  } else {
-                        request.setAttribute("DELETE_MESSAGE", "Cannot delete account!!!");
+                  } else if (!check && !RoleID.equals("1")) {
+                        request.setAttribute("DELETE_MESSAGE", "Cannot delete !!! This account has order");
+                        url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
+                  } else if (RoleID.equals("1")) {
+                        request.setAttribute("DELETE_MESSAGE", "Cannot delete admin's account");
                         url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
                   }
             } catch (SQLException e) {

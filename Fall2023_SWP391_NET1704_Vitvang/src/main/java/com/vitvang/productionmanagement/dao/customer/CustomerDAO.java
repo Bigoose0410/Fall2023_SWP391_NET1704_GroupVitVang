@@ -38,7 +38,7 @@ public class CustomerDAO implements Serializable {
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
-                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename "
+                        String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Users.UserStatus, Role.Rolename "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID AND Users.UserStatus = 'True' "
                                 + "JOIN UserOrder ON Users.UserID = UserOrder.UserID "

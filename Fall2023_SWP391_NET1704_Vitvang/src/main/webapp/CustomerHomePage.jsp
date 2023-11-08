@@ -38,67 +38,30 @@
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
-               </div>
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="CustomerHomePage.jsp">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Home</span>
-                              </a></li>
 
-                              
-                         <li><a href="MainController?btAction=Customer Account">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Account</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Customer's Order">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <!--                                   <li><a href="MainController?btAction=Production process">
-                                                                      <i class="uil uil-chart-line"></i>
-                                                                      <span class="link-name">Production process</span>
-                                                                 </a></li>-->
-                         <!--                                   <li><a href="#">
-                                                                      <i class="uil uil-clipboard-alt"></i>
-                                                                      <span class="link-name">Reports</span>
-                                                                 </a></li>
-                                                            <li><a href="#">
-                                                                      <i class="uil uil-screw"></i>
-                                                                      <span class="link-name">Material</span>
-                                                                 </a></li>
-                                                            <li><a href="#">
-                                                                      <i class="uil uil-archive-alt"></i>
-                                                                      <span class="link-name">Inventory</span>
-                                                                 </a></li>-->
-                         <ul class="logout-mode">
-                              <li><a href="${logout_query}">
-                                        <i class="uil uil-signout"></i>
-                                        <span class="link-name">Logout</span>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <li><a href="CustomerHomePage.jsp">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Home</span>
                                    </a></li>
 
-                              <!--                              <li class="mode">
-                                         <a href="#">
-                                              <i class="uil uil-moon"></i>
-                                              <span class="link-name">Dark Mode</span>
-                                         </a>-->
-
-                              <!--                                   <div class="mode-toggle">
-                                              <span class="switch"></span>
-                                         </div>-->
-                              <!--                                   <li class="mode">
-                                                                      <a href="#">
-                                                                           <i class="uil uil-moon"></i>
-                                                                           <span class="link-name">Dark Mode</span>
-                                                                      </a>
-                              
-                                                                      <div class="mode-toggle">
-                                                                           <span class="switch"></span>
-                                                                      </div>
-                                                                 </li>-->
+                              <li><a href="MainController?btAction=CustomerAccount">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Account</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=CustomerOrder">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <ul class="logout-mode">
+                                   <li><a href="${logout_query}">
+                                             <i class="uil uil-signout"></i>
+                                             <span class="link-name">Logout</span>
+                                        </a></li>
+                              </ul>
                          </ul>
-                    </ul>
-               </div>
+                    </div>
 
           </nav>
 
