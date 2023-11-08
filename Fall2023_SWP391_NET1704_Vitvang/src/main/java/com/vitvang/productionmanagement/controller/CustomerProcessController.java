@@ -5,7 +5,9 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.customer.CustomerDAO;
+import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
+import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Admin
@@ -28,29 +29,54 @@ public class CustomerProcessController extends HttpServlet {
 
       private final String CustomerProcess = "CustomerProcess.jsp";
 
+      private final String ProcessDetail = "CustomerProcess.jsp";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "ErrorPage.html";
+            String OrderID = request.getParameter("txtOrderID");
+            String CageID = request.getParameter("txtCageID");
+            String ProcessID = request.getParameter("txtProcessID");
+            String button = request.getParameter("btAction");
             try {
                   /* TODO output your page here. You may use following sample code. */
-                  String UserID = request.getParameter("txtUserID");
-                  String OrderID = request.getParameter("txtOrderID");
-                  String CageID = request.getParameter("txtCageID");
+//                  String UserID = request.getParameter("txtUserID");
+//                  String OrderID = request.getParameter("txtOrderID");
+//                  String CageID = request.getParameter("txtCageID");
+//
+//                  CustomerDAO dao = new CustomerDAO();
+//                  dao.ViewProcessingOrder(OrderID, CageID, CageID);
+//                  List<ProcessDTO> list = dao.getListOrdersProcess();
+//                  if (list != null) {
+//                        for (ProcessDTO proces : list) {
+//                              if (proces.getStatus().equals("Processing")) {
+//                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
+//                                    break;
+//                              }
+//                        }
+//                  }
+//                  request.setAttribute("PROCESS_ORDER_RESULT", list);
+//                  url = CustomerProcess;
 
-                  CustomerDAO dao = new CustomerDAO();
+                  ProcessDAO dao = new ProcessDAO();
+
+                  if (ProcessID == null) {
+                        ProcessID = "PR001";
+                  }
                   dao.ViewProcessingOrder(OrderID, CageID, CageID);
-                  List<ProcessDTO> list = dao.getListOrdersProcess();
-                  if (list != null) {
-                        for (ProcessDTO proces : list) {
-                              if (proces.getStatus().equals("Processing")) {
-                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
-                                    break;
-                              }
+//                        List<ProcessDTO> process = dao.getListOrdersProcess();
+                  ProcessDTO eachStep = new ProcessDTO();
+                  eachStep = dao.GetProcessingbyID(OrderID, CageID, ProcessID);
+                  if (eachStep != null) {
+                        request.setAttribute("CURRENT_STEP", eachStep);
+                        System.out.println(eachStep.getProcessID());
+                        if (eachStep.getStatus().equals("Processing")) {
+                              request.setAttribute("HIGHLIGHT", eachStep.getProcessID());
                         }
                   }
-                  request.setAttribute("PROCESS_ORDER_RESULT", list);
-                  url = CustomerProcess;
+                  request.setAttribute("PROCESS_RESULT", dao.getListOrdersProcess());
+                  url = ProcessDetail;
             } catch (SQLException e) {
                   e.printStackTrace();
             } finally {

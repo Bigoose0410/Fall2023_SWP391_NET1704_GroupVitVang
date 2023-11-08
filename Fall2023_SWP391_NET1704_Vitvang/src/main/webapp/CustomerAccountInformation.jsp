@@ -36,6 +36,10 @@
                     color: red;
                }
           </style>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="" />
+               <c:param value="Log Out" name="btAction" />
+          </c:url>
           <nav>
 
                <div class="logo-name" style="
@@ -52,56 +56,19 @@
                                         <span class="link-name">Home</span>
                                    </a></li>
 
-                                   
-                              <li><a href="MainController?btAction=Customer Account">
+                              <li><a href="MainController?btAction=CustomerAccount">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Account</span>
                                    </a></li>
-                              <li><a href="MainController?btAction=Customer's Order">
+                              <li><a href="MainController?btAction=CustomerOrder">
                                         <i class="uil uil-grin"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
-                              <!--                                   <li><a href="MainController?btAction=Production process">
-                                                                           <i class="uil uil-chart-line"></i>
-                                                                           <span class="link-name">Production process</span>
-                                                                      </a></li>-->
-                              <!--                                   <li><a href="#">
-                                                                           <i class="uil uil-clipboard-alt"></i>
-                                                                           <span class="link-name">Reports</span>
-                                                                      </a></li>
-                                                                 <li><a href="#">
-                                                                           <i class="uil uil-screw"></i>
-                                                                           <span class="link-name">Material</span>
-                                                                      </a></li>
-                                                                 <li><a href="#">
-                                                                           <i class="uil uil-archive-alt"></i>
-                                                                           <span class="link-name">Inventory</span>
-                                                                      </a></li>-->
                               <ul class="logout-mode">
                                    <li><a href="${logout_query}">
                                              <i class="uil uil-signout"></i>
                                              <span class="link-name">Logout</span>
                                         </a></li>
-
-                                   <!--                              <li class="mode">
-                                              <a href="#">
-                                                   <i class="uil uil-moon"></i>
-                                                   <span class="link-name">Dark Mode</span>
-                                              </a>-->
-
-                                   <!--                                   <div class="mode-toggle">
-                                                   <span class="switch"></span>
-                                              </div>-->
-                                   <!--                                   <li class="mode">
-                                                                           <a href="#">
-                                                                                <i class="uil uil-moon"></i>
-                                                                                <span class="link-name">Dark Mode</span>
-                                                                           </a>
-                                   
-                                                                           <div class="mode-toggle">
-                                                                                <span class="switch"></span>
-                                                                           </div>
-                                                                      </li>-->
                               </ul>
                          </ul>
                     </div>
@@ -171,7 +138,7 @@
                                         <c:if test="${not empty err.getEmailFormatErr()}">
                                              <p>${err.getEmailFormatErr()}</p>
                                         </c:if>
-
+                                        <br/>
                                         <label for="address">Address: </label>
                                         <br>
                                         <br>
@@ -199,8 +166,8 @@
                                         <label for="birthday">Birthday: <i>${dto.getBirthDate()}</i></label>
                                    </div>
                                    <div class="form-row1">
-                                        <button type="submit" id="updateButton" value="UpdateAccount" name="btAction">Update</button>
-                                        <button type="submit" id="deleteButton" value="DeleteAccount" name="btAction">Delete</button>
+                                        <button type="submit" id="updateButton" value="CustomerUpdaterAccount" name="btAction">Update</button>
+                                        <!--<button type="submit" id="deleteButton" value="DeleteAccount" name="btAction">Delete</button>-->
                                    </div>
                               </form>
                          </div>

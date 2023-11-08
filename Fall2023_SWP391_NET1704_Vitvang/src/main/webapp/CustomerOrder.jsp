@@ -13,6 +13,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/CustomerOrder.css">
+          <link rel="stylesheet" href="css/Dashboard.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -23,81 +24,49 @@
           <title>Customer</title>
      </head>
 
-     <body>
-          <c:url var="logout_query" value="MainController">
-               <c:param name="cookiekey" value="" />
-               <c:param value="Log Out" name="btAction" />
-          </c:url>
+     <body>                    
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction" />
           </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
-               <nav>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="" />
+               <c:param value="Log Out" name="btAction" />
+          </c:url>
+          <nav>
 
-                    <div class="logo-name">
-                         <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
-
+               <div class="logo-name" style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
+                    </div>
 
-               
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Order">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
-                              </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Production</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <li><a href="CustomerHomePage.jsp">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Home</span>
+                                   </a></li>
 
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
-                              </a></li>
+                              <li><a href="MainController?btAction=CustomerAccount">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Account</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=CustomerOrder">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <ul class="logout-mode">
+                                   <li><a href="${logout_query}">
+                                             <i class="uil uil-signout"></i>
+                                             <span class="link-name">Logout</span>
+                                        </a></li>
+                              </ul>
+                         </ul>
+                    </div>
 
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
           </nav>
           <c:set var="result" value="${requestScope.CUSTOMER_ORDER}" />
           <section class="dashboard">
@@ -117,13 +86,12 @@
                                              <div class="main">
                                                   <div class="left-side">
                                                        <div class="main-wrapper">
-                                                            <h3 class="main-header">${dto.getCageID()}</h3>
+                                                            <h3 class="main-header" style="font-weight: bold">${dto.getCageID()}/       ${dto.getOrderID()}</h3>
                                                             <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                            <h1 class="main-title">${dto.getName()}</h1>
-                                                            <h3 class="main-header">${dto.getOrderID()}</h3>
                                                             <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+                                                            <h1 class="main-title">${dto.getName()}</h1>
                                                             <h2 class="main-subtitle">Status: ${dto.getOrderDetailStatus()}</h2>
-                                                            <h4>Quantity: ${dto.getQuantityOrder()}</h4>
+                                                            <h3>Quantity: ${dto.getQuantityOrder()}</h3>
                                                        </div>
                                                        <div class="main-content">
                                                             <div class="main-content__title">
