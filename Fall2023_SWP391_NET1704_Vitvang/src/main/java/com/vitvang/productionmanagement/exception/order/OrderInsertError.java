@@ -10,18 +10,26 @@ import java.io.Serializable;
  *
  * @author Admin
  */
-public class OrderInsertError implements Serializable{
+public class OrderInsertError implements Serializable {
+
       private String orderIdFormatErr;
       private String AddressLengthErr;
       private String NullQuantityErr;
       private String QuantityValidErr;
       private String AddressNumberErr;
       private String AddressFormErr;
-      
-          
-      
-        public OrderInsertError() {
-        }
+      private String EmptyCartErr;
+
+      public OrderInsertError() {
+      }
+
+      public String getEmptyCartErr() {
+            return EmptyCartErr;
+      }
+
+      public void setEmptyCartErr(String EmptyCartErr) {
+            this.EmptyCartErr = EmptyCartErr;
+      }
 
       public String getOrderIdFormatErr() {
             return orderIdFormatErr;
@@ -70,8 +78,5 @@ public class OrderInsertError implements Serializable{
       public void setAddressFormErr(String AddressFormErr) {
             this.AddressFormErr = AddressFormErr;
       }
-        
 
-     
-      
 }

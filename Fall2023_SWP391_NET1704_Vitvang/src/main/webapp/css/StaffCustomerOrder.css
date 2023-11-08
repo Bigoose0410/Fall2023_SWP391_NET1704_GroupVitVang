@@ -3,8 +3,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
 /* 
-    Created on : Oct 27, 2023, 9:39:32 PM
-    Author     : Nguyen Ba Tung
+    Created on : Nov 6, 2023, 11:52:31 PM
+    Author     : Admin
 */
 * {
      margin: 0;
@@ -104,7 +104,6 @@ nav {
 .nav-links li {
      padding: 10px 0;
 }
-
 
 nav.close {
      width: 73px;
@@ -279,122 +278,34 @@ body.dark nav {
 }
 
 /*Dashboard*/
+/*button add process*/
 h1 {
      text-align: center;
-     font-size: xx-large;
-}
-
-.header-row h1,
-.header-row form {
-     display: inline-block;
-     vertical-align: middle; /* Optional: Aligns elements vertically */
-     margin-right: 10px; /* Adjust as needed for spacing between elements */
-}
-
-.header-row {
-     text-align: center;
-}
-
-.section {
-     border: 1px solid #ccc;
-     padding: 20px;
-     margin: 10px;
-     border-radius: 10px;
-     background-color: #f9f9f9;
-}
-
-.info {
-     display: flex;
-     align-items: center;
-}
-
-.info img {
-     max-width: 500px;
-     border-radius: 5px;
-     margin: 0px 30px;
-}
-
-.info-details {
-     flex-grow: 1;
-}
-
-.info-item {
-     margin-left: 40px;
-     margin-bottom: 10px;
      font-size: 40px;
-     font-family: "utm";
-     color: gray ;
+     color: #007BFF;
 }
 
-.info-details span {
-     color: #333;
-     font-family: "roboto";
-}
-
-.toggle-button {
-     background-color: #28a745;
-     color: #fff;
+.add_button button {
+     background: none;
      border: none;
-     border-radius: 5px;
-     padding: 5px 10px;
      cursor: pointer;
-     font-size: 16px;
-     margin-top: 5px;
 }
 
-.toggle-button:hover {
-     background-color: #28a745;
-     color: #fff;
+.add_button button .fa {
+     font-size: 22px;
+     color: #757575; /* Adjust the color as needed */
+     transition: color 0.3s; /* Add transition for hover effect */
 }
 
-.toggle-button1 {
-     background-color: #28a745;
-     color: #fff;
-     border: none;
-     border-radius: 5px;
-     padding: 5px 10px;
-     cursor: pointer;
-     font-size: 16px;
-     margin-top: 5px;
+.add_button button .fa:focus {
+     outline: none;
 }
 
-.toggle-button1:hover {
-     background-color: #28a745;
-     color: #fff;
+.add_button button:hover .fa {
+     color: orange; /* Change color on hover if desired */
 }
 
-/*Material table*/
-.table-container {
-     overflow-x: auto;
-     border-radius: 10px;
-     border: 1px solid black;
-}
-
-.table-container table {
-     width: 100%;
-     border-collapse: collapse;
-}
-
-.table-container th,
-.table-container td {
-     padding: 10px;
-     text-align: center;
-}
-
-.table-container th {
-     color: white;
-     background-color: #2193b0;
-}
-
-.table-container tbody tr:nth-child(even) {
-     background-color: #e6fcfa;
-}
-
-.table-container tbody tr:hover {
-     background-color: #ddd;
-}
-
-/*Design Process table*/
+/*Design Processing table*/
 .table-container1 {
      overflow-x: auto;
      border-radius: 10px;
@@ -414,7 +325,7 @@ h1 {
 
 .table-container1 th {
      color: white;
-     background-color: #2193b0;
+     background-color: #007BFF;
 }
 
 .table-container1 tbody tr:nth-child(even) {
@@ -423,6 +334,27 @@ h1 {
 
 .table-container1 tbody tr:hover {
      background-color: #ddd;
+}
+
+/*button view processing*/
+.view_button button {
+     background: none;
+     border: none;
+     cursor: pointer;
+}
+
+.view_button button .fa {
+     font-size: 22px;
+     color: #757575; /* Adjust the color as needed */
+     transition: color 0.3s; /* Add transition for hover effect */
+}
+
+.view_button button .fa:focus {
+     outline: none;
+}
+
+.view_button button:hover .fa {
+     color: purple; /* Change color on hover if desired */
 }
 
 /*Show table*/
@@ -435,42 +367,59 @@ h1 {
      margin: 10px 0px;
 }
 
-/*button modify*/
-form {
-     display: inline-block; /* Ensures form and button are on the same line */
-     margin-bottom: 10px; /* Adjust as needed for spacing */
+/*Information*/
+/* Định dạng container chứa hình ảnh và thông tin */
+.information {
+     max-width: 70%;
+     display: flex;
+     align-items: center;
+     margin: 20px;
+     border: 1px solid #ccc;
+     padding: 15px;
+     box-shadow: -13px 20px 10px 5px rgba(0, 0, 0, 0.1); /* Thêm shadow */
 }
 
-/*button modify*/
-button {
-     background: none;
-     border: none;
-     cursor: pointer;
-     font-size: 24px;
-     color: #757575;
-     /* Adjust the color as needed */
-     margin-top: 10px;
+h2 {
+     text-align: center;
+     margin-bottom: 40px;
 }
 
-button:focus {
-     outline: none;
+/* Styles for the icon */
+.icon img {
+     max-width: 120px;
+     height: auto;
+     margin-right: 20px;
+     padding: 10px;
+     border: 2px solid #333;
 }
 
-button:hover {
-     color: blue;
-     /* Change color on hover if desired */
+/* Styles for the information section */
+.info {
+     flex: 1;
 }
 
-button {
-     border: none;
+/* Styles for the form and table */
+.info form {
+     width: 100%;
 }
 
-
-.show-table {
-     display: block !important;
-}
-
-.material_table,
-.process_table {
+.info table {
+     width: 100%;
+     border-collapse: collapse;
      margin-top: 20px;
+}
+
+.info td {
+     padding: 0px 0px;
+     text-align: left;
+}
+
+.info label {
+     font-weight: bold;
+     margin-left: 20px;
+     margin: 0px 20px;
+}
+
+.info i {
+     margin-right: 50px;
 }

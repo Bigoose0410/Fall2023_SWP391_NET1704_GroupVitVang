@@ -24,14 +24,14 @@ import javax.naming.NamingException;
  */
 @WebServlet(name = "DeleteOrderController", urlPatterns = {"/DeleteOrderController"})
 public class DeleteOrderController extends HttpServlet {
-
+      private static final String ERROR_PAGE = "ErrorPage.html";
  
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String OrderID = request.getParameter("pk");
             String searchValue = request.getParameter("lastSearchValue");
-            String url = "EditOrder.jsp";
+            String url = ERROR_PAGE;
             try {
                   HttpSession session = request.getSession();
                   int roleID = ((UserDTO) session.getAttribute("USER")).getRoleID();

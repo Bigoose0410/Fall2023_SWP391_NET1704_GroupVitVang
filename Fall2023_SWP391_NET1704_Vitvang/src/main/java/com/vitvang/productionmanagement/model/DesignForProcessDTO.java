@@ -4,10 +4,6 @@
  */
 package com.vitvang.productionmanagement.model;
 
-/**
- *
- * @author Admin
- */
 public class DesignForProcessDTO {
 
       private String Phrase;
@@ -17,7 +13,7 @@ public class DesignForProcessDTO {
       private int NumberOfEmployee;
       private int NumCompletionCage;
       private int TotalpriceOfProcess;
-
+      
       public DesignForProcessDTO() {
       }
 

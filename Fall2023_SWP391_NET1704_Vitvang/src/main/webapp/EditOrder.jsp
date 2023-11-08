@@ -41,9 +41,53 @@
                    
                </div>
 
+
+ <div class="menu-items">
+                         <ul class="nav-links">
+                              <li ><a href="MainController?btAction=Search">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Customers">
+                                        <i class="uil uil-user"></i>
+                                        <span class="link-name">Customers</span>
+                                   </a></li>
+                              <li ><a href="${productionList}">
+                                        <i class="uil uil-clipboard-alt"></i>
+                                        <span class="link-name">Production</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Production process">
+                                        <i class="uil uil-chart-line"></i>
+                                        <span class="link-name">Production process</span>
+                                   </a></li>
+
+                              <li ><a href="MainController?btAction=View All Material">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
+
+                         </ul>
+                         <ul class="logout-mode">
+                              <li><a href="${logout_query}">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
+
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
+
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
                <div class="menu-items">
                     <ul class="nav-links">
-                         <li><a href="MainController?btAction=Order">
+                         <li><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>>
                                    <span class="link-name">Order</span>
                               </a></li>
@@ -72,6 +116,7 @@
                                    <span class="link-name">Inventory</span>
                               </a></li>
                     </ul>
+>>>>>>> 5e3c144c3fe79b26c984af5334d6a208df613300
 
                     <ul class="logout-mode">
                          <li><a href="${logout_query}">

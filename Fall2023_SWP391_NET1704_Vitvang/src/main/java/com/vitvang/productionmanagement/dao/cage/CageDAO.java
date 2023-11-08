@@ -4,17 +4,19 @@
  */
 package com.vitvang.productionmanagement.dao.cage;
 
+import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.util.DBHelper;
-import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.naming.NamingException;
 
 /**
@@ -36,6 +38,91 @@ public class CageDAO {
                   }
             }
             return null;
+      }
+
+      public boolean CreateCage(String CageId, String Name, int Price, String Origin, String Description)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            boolean result = false;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+
+                        String sql = "Insert into Cage (CageID, Name, Price, Origin, Description) "
+                                + "VALUES (?, ?, ?, ?, ?) ";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, CageId);
+                        stm.setString(2, Name);
+                        stm.setInt(3, Price);
+                        stm.setString(4, Origin);
+                        stm.setString(5, Description);
+                        int effectRows = stm.executeUpdate();
+                        //5. Process
+                        if (effectRows > 0) {
+                              result = true;
+                        }
+
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
+      }
+
+      public CageDTO GetCageByID(String CageId)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            CageDTO result = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+
+                        String sql = "Select * "
+                                + "From Cage "
+                                + "where CageID = ?";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, CageId);
+                        rs = stm.executeQuery();
+                        //5. Process
+                        if (rs.next()) {
+                              String CageID = rs.getString("CageID");
+                              String Name = rs.getString("Name");
+                              int Price = rs.getInt("Price");
+                              String Origin = rs.getString("Origin");
+                              String Description = rs.getString("Description");
+                              // Call DTO
+                              CageDTO cage = new CageDTO(CageID, Name, Price, Origin, Description);
+                              result = cage;
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
       }
 
       public void searchProductionbyName(String searchValue) throws SQLException, NamingException {
@@ -278,7 +365,7 @@ public class CageDAO {
       public int TotalPriceMaterial()
               throws NamingException, SQLException {
             int total = 0;
-            if(this.getListCageMaterial()!= null) {
+            if (this.getListCageMaterial() != null) {
                   for (CageMaterialDTO cageMaterialDTO : this.getListCageMaterial()) {
                         total += cageMaterialDTO.getPrice() * cageMaterialDTO.getQuantityNeed();
                   }

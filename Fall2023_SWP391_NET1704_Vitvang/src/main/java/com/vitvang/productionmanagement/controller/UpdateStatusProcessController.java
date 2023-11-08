@@ -1,23 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
+import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
-import java.io.IOException;
-
+import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
+
 
 /**
  *
@@ -25,6 +26,8 @@ import java.util.logging.Logger;
  */
 @WebServlet(name = "UpdateStatusProcessController", urlPatterns = {"/UpdateStatusProcessController"})
 public class UpdateStatusProcessController extends HttpServlet {
+
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
@@ -40,20 +43,73 @@ public class UpdateStatusProcessController extends HttpServlet {
             int addcompleted = Integer.parseInt(addComplete);
             int totalquanNeed = Integer.parseInt(quanneedproduct);
             int quantityCompleted = Integer.parseInt(txtquantityCompleted);
+            long millis = System.currentTimeMillis();
+            java.sql.Date now = new java.sql.Date(millis);
 
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             boolean result = false;
             boolean full = false;
             boolean laststep = false;
+            boolean updatefrom = false;
+            Date startDate = null;
+            Date endDate = null;
+            int dateWillReduce = 0;
+            int index = 0;
             try {
-                  if (!LastStep.trim().isEmpty()) {
+                  if (LastStep != null) {
                         laststep = true;
                   }
                   ProcessDAO processdao = new ProcessDAO();
+                  OrderDAO orderdao = new OrderDAO();
                   if (addcompleted >= totalquanNeed - quantityCompleted) {
                         full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
                         if (full) {
-                            result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
+                              result = processdao.updateStatusProcessToDone("Done", ProcessID, OrderID, CageID, laststep);
+                              if (laststep) {
+                                    orderdao.queryOrderDetail(OrderID);
+                                    boolean orderdone = false;
+                                    orderdone = orderdao.countOrderDetailnotDone(OrderID);
+                                    if (orderdone) {
+                                          result = orderdao.updateOrderStatus(OrderID, now, "Done");
+                                    }
+                              } else {
+                                    //get list design of process
+                                    DesignForProcessDAO designdao = new DesignForProcessDAO();
+                                    designdao.ViewDesignForProcess(CageID);
+                                    List<DesignForProcessDTO> designList = designdao.getDesignProcessList();
+                                    // get all process of processing of this order with cage
+                                    processdao.ViewProcessingOrder(OrderID, CageID, CageID);
+
+                                    for (ProcessDTO process : processdao.getListOrdersProcess()) {
+                                          // kiem tra xem can update tu buoc nao
+                                          if (process.getProcessID().equals(ProcessID)) {
+                                                // update tu buoc nay
+                                                updatefrom = true;
+                                                // cap nhat endate cua buoc dau tien la thoi diem hien tai
+                                                processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, process.getStartDate(), now, process.getNumberOfEmployee());
+                                                // ngày kết thúc của bước trc sẽ thành ngày bắt đầu của bước sau
+                                                startDate = now;
+
+                                          }
+                                          if (updatefrom == true && !process.getProcessID().equals(ProcessID)) {
+
+                                                for (DesignForProcessDTO design : designList) {
+                                                      if (process.getPhrase().equals(design.getPhrase())) {
+//                                                            tính ngày dựa trên thiết kế trong design
+                                                            endDate = calculateProcessDate(startDate, process.getQuantity(),
+                                                                    design.getTimeProcess(), design.getNumberOfEmployee(),
+                                                                    design.getNumCompletionCage(), process.getNumberOfEmployee());
+                                                            processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
+                                                            // ngày kết thúc của bước trc sẽ thành ngày bắt đầu của bước sau
+                                                            startDate = endDate;
+//                                                            nếu đã update bước đó xong thì qua bước tiếp, không để chạy hết vòng lặp
+                                                            break;
+                                                      }
+                                                }
+                                               
+                                          }
+                                    }
+                              }
                         }
                   } else {
                         result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
@@ -62,19 +118,15 @@ public class UpdateStatusProcessController extends HttpServlet {
                   if (result) {
                         url = "MainController?btAction=ViewProcessDetail";
                   }
-            } catch (SQLException e) {
-                  e.printStackTrace();
+            } catch (SQLException ex) {
+                  String msg = ex.getMessage();
+                  log("UpdateStatusProcessController SQL" + msg);
+            } catch (NamingException ex) {
+                  String msg = ex.getMessage();
+                  log("UpdateStatusProcessController NAMING" + msg);
             } finally {
                   request.getRequestDispatcher(url).forward(request, response);
             }
-      }
-
-      private static String getNextProcessID(String processID) {
-            String prefix = processID.substring(0, 2); // Lấy phần tiền tố "PR"
-            int number = Integer.parseInt(processID.substring(2)); // Lấy phần số xxx
-            int nextNumber = number + 1; // Tăng giá trị số xxx lên 1
-            String nextNumberString = String.format("%03d", nextNumber); // Định dạng lại số xxx thành chuỗi có 3 chữ số
-            return prefix + nextNumberString; // Tạo chuỗi processID mới bằng cách kết hợp phần tiền tố và phần số
       }
 
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

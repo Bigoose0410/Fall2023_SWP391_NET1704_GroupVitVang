@@ -24,13 +24,15 @@ public class UserInformationDTO {
       private int RoleID;
       private String OrderID;
       private String CageID;
+      private String CageName;
       private int Quantity;
       private String OrderDetailStatus;
+      private Boolean UserStatus;
 
       public UserInformationDTO() {
       }
 
-      public UserInformationDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, String OrderID, String CageID, int Quantity, String OrderDetailStatus) {
+      public UserInformationDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, String OrderID, String CageID, int Quantity, String OrderDetailStatus, String CageName) {
             this.UserID = UserID;
             this.Name = Name;
             this.PhoneNumber = PhoneNumber;
@@ -43,8 +45,20 @@ public class UserInformationDTO {
             this.RoleID = RoleID;
             this.OrderID = OrderID;
             this.CageID = CageID;
+            this.CageName = CageName;
             this.Quantity = Quantity;
             this.OrderDetailStatus = OrderDetailStatus;
+      }
+
+      public UserInformationDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, boolean UserStatus) {
+            this.UserID = UserID;
+            this.Name = Name;
+            this.PhoneNumber = PhoneNumber;
+            this.Sex = Sex;
+            this.Adress = Adress;
+            this.BirthDate = BirthDate;
+            this.Email = Email;
+            this.UserStatus = UserStatus;
       }
 
       public String getUserID() {
@@ -72,6 +86,11 @@ public class UserInformationDTO {
       }
 
       public String getSex() {
+            if (Sex.trim().equals("F")) {
+                  Sex = "Female";
+            } else {
+                  Sex = "Male";
+            }
             return Sex;
       }
 
@@ -157,6 +176,22 @@ public class UserInformationDTO {
 
       public void setOrderDetailStatus(String OrderDetailStatus) {
             this.OrderDetailStatus = OrderDetailStatus;
+      }
+
+      public Boolean isUserStatus() {
+            return UserStatus;
+      }
+
+      public void setUserStatus(Boolean UserStatus) {
+            this.UserStatus = UserStatus;
+      }
+
+      public String getCageName() {
+            return CageName;
+      }
+
+      public void setCageName(String CageName) {
+            this.CageName = CageName;
       }
 
 }

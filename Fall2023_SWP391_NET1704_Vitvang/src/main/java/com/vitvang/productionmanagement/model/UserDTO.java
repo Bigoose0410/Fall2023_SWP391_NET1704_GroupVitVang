@@ -12,20 +12,20 @@ import java.sql.Date;
  */
 public class UserDTO {
 
-        private String UserID;
-        private String Name;
-        private String PhoneNumber;
-        private String Sex;
-        private String Adress;
-        private Date BirthDate;
-        private String Email;
-        private String Username;
-        private String Password;
-        private int RoleID;
+      private String UserID;
+      private String Name;
+      private String PhoneNumber;
+      private String Sex;
+      private String Adress;
+      private Date BirthDate;
+      private String Email;
+      private String Username;
+      private String Password;
+      private int RoleID;
+      private boolean UserStatus;
 
-
-        public UserDTO() {
-        }
+      public UserDTO() {
+      }
 
       public UserDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID) {
             this.UserID = UserID;
@@ -38,6 +38,32 @@ public class UserDTO {
             this.Username = Username;
             this.Password = Password;
             this.RoleID = RoleID;
+      }
+
+      public UserDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, boolean UserStatus) {
+            this.UserID = UserID;
+            this.Name = Name;
+            this.PhoneNumber = PhoneNumber;
+            this.Sex = Sex;
+            this.Adress = Adress;
+            this.BirthDate = BirthDate;
+            this.Email = Email;
+            this.Username = Username;
+            this.Password = Password;
+            this.RoleID = RoleID;
+            this.UserStatus = UserStatus;
+      }
+      public UserDTO(String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, boolean UserStatus) {
+            this.Name = Name;
+            this.PhoneNumber = PhoneNumber;
+            this.Sex = Sex;
+            this.Adress = Adress;
+            this.BirthDate = BirthDate;
+            this.Email = Email;
+            this.Username = Username;
+            this.Password = Password;
+            this.RoleID = RoleID;
+            this.UserStatus = UserStatus;
       }
 
       public String getUserID() {
@@ -65,9 +91,9 @@ public class UserDTO {
       }
 
       public String getSex() {
-            if(Sex.trim().equals("F")){
+            if (Sex.trim().equals("F")) {
                   Sex = "Female";
-            }else {
+            } else {
                   Sex = "Male";
             }
             return Sex;
@@ -124,6 +150,13 @@ public class UserDTO {
       public void setRoleID(int RoleID) {
             this.RoleID = RoleID;
       }
-      
-       
+
+      public boolean isUserStatus() {
+            return UserStatus;
+      }
+
+      public void setUserStatus(boolean UserStatus) {
+            this.UserStatus = UserStatus;
+      }
+
 }

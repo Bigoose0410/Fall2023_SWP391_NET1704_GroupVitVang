@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 import com.vitvang.productionmanagement.exception.users.UserCreateError;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
+import com.vitvang.productionmanagement.util.SendEmail;
 import com.vitvang.productionmanagement.util.tool;
 
 /**
@@ -30,9 +31,9 @@ import com.vitvang.productionmanagement.util.tool;
 @WebServlet(name = "CreateUserController", urlPatterns = {"/CreateUserController"})
 public class CreateUserController extends HttpServlet {
 
-      private final String ADD_ORDER_PAGE = "OrderAdd.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
       private final String SEARCH_CUS_PAGE = "SearchCustomer.jsp";
-      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
+//      private final String CUSTOMERID_PATTERN = "CS\\d{3}";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String GMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
 //   > 8 chars, one upper letters, 
@@ -43,7 +44,7 @@ public class CreateUserController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
 
             // get parameter from form
-            String CusID = request.getParameter("txtUserID");
+//            String CusID = request.getParameter("txtUserID");
             String Name = request.getParameter("txtName");
             String PhoneNumber = request.getParameter("txtPhoneNumber");
             String Sex = request.getParameter("txtGender");
@@ -55,23 +56,24 @@ public class CreateUserController extends HttpServlet {
             String Confirm = request.getParameter("txtConfirm");
             // parse to suitable data
             Date BirthDate = Date.valueOf(BirthDateStr);
-            
-            String url = SEARCH_CUS_PAGE;
+            String PasswordOrigin = Password;
+
+            String url = ERROR_PAGE;
             boolean foundErr = false;
             UserCreateError error = new UserCreateError();
             try {
                   if (Name.trim().length() < 6 || Name.trim().length() > 30) {
-                        error.setNameLengthErr("Please enter again full name within (6 -> 30 chars)" );
+                        error.setNameLengthErr("Please enter again full name within (6 -> 30 chars)");
                         foundErr = true;
                   }
                   if (Username.trim().length() < 6 || Username.trim().length() > 30) {
                         error.setUsernameLengthErr("Please enter Username within (6 -> 30 chars)");
                         foundErr = true;
                   }
-                  if (!checkFormat(CusID, CUSTOMERID_PATTERN, true)) {
-                        error.setCustomerIDFormatErr("Please type again, CustomerID with correct format CSxxx");
-                        foundErr = true;
-                  }
+//                  if (!checkFormat(CusID, CUSTOMERID_PATTERN, true)) {
+//                        error.setCustomerIDFormatErr("Please type again, CustomerID with correct format CSxxx");
+//                        foundErr = true;
+//                  }
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         foundErr = true;
                         error.setPasswordLengthErr("Password is required typed ( more 8 chars, at least one upper letter)");
@@ -83,15 +85,15 @@ public class CreateUserController extends HttpServlet {
                         error.setAddressLenghtErr("Addres too short,please enter detail address");
                         foundErr = true;
                   }
-                  if(tool.getVaildYob(BirthDate) < 18){
+                  if (tool.getVaildYob(BirthDate) < 18) {
                         error.setBirthDateVaildErr("Please type the BirthDate form > 18+ ");
                         foundErr = true;
                   }
-                  if(!checkFormat(Gmail, GMAIL_PATTERN, true)){
+                  if (!checkFormat(Gmail, GMAIL_PATTERN, true)) {
                         error.setGmailTypeErr("Please type follow to the format Gmail");
                         foundErr = true;
                   }
-                   if(!checkFormat(PhoneNumber, PHONENUMBER_PATTERN, true)){
+                  if (!checkFormat(PhoneNumber, PHONENUMBER_PATTERN, true)) {
                         error.setPhoneNumberTypeErr("Please type again PhoneNumber");
                         foundErr = true;
                   }
@@ -103,15 +105,16 @@ public class CreateUserController extends HttpServlet {
                         UserDAO dao = new UserDAO();
                         // 2. call method
                         Password = dao.EncodePass(Password);
-                        UserDTO user = new UserDTO(CusID, Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 4);
-                        boolean result = dao.createAccount(user);
-                        if (result) {
+                        boolean sendMail = SendEmail.sendEmailAccount(Gmail, Username, PasswordOrigin, "Create New Account");
+                        UserDTO user = new UserDTO(Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 4, true);
+                        boolean result = dao.createNewAccountCustomer(user);
+                        if (result && sendMail) {
                               HttpSession session = request.getSession();
                               session.removeAttribute("SHOW_CUS_CREATE_FORM");
 //                              
                               url = "MainController"
                                       + "?btAction=New Order"
-                                      + "&txtCustomerID=" + CusID;
+                                      + "&txtCustomerID=" + dao.NewestCustomer();
                         }
                   }
             } catch (SQLException ex) {
@@ -119,8 +122,7 @@ public class CreateUserController extends HttpServlet {
                   log("CreateUserControlerr_ SQL" + msg);
 
                   if (msg.contains("duplicate")) {
-                        error.setCustomerIDexistErr(CusID + " is existed!!!");
-                        request.setAttribute("CREATE_CUS_ERROR", error);
+                       
                   }
             } catch (NamingException ex) {
                   log("CreateUserController _ NAMING " + ex.getMessage());

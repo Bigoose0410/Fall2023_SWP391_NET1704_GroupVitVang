@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.model.CageDTO;
@@ -23,19 +19,13 @@ import java.util.List;
 @WebServlet(name = "RemoveItemFromCartController", urlPatterns = {"/RemoveItemFromCartController"})
 public class RemoveItemFromCartController extends HttpServlet {
 
-      /**
-       * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-       *
-       * @param request servlet request
-       * @param response servlet response
-       * @throws ServletException if a servlet-specific error occurs
-       * @throws IOException if an I/O error occurs
-       */
+           private static final String ERROR_PAGE = "ErrorPage.html";
+
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String sku = request.getParameter("txtOrderCageID");
-            String url = "NewLogin.jsp";
+            String url = ERROR_PAGE;
             try {
                   if (sku == null) {
                         return;
@@ -52,16 +42,17 @@ public class RemoveItemFromCartController extends HttpServlet {
                   cart.removeItemFromPay(sku);
                   if (cart.getProductItems() == null) {
                         cart = null;
+                  } else {
+                        List<CageDTO> cageCart = new ArrayList<CageDTO>();
+                        for (CageDTO cage : cart.getProductItems().values()) {
+                              cageCart.add(cage);
+                        }
+                        request.setAttribute("CARTLIST", cageCart);
+                        // cus coutinous shopping
                   }
-                  List<CageDTO> cageCart = new ArrayList<CageDTO>();
-                  for (CageDTO cage : cart.getProductItems().values()) {
-                        cageCart.add(cage);
-                  }
-                  request.setAttribute("CARTLIST", cageCart);
-                  session.setAttribute("CART", cart);
-                  // cus coutinous shopping
-                  url = "MainController"
-                          + "?btAction=New Order";
+                        session.setAttribute("CART", cart);
+                        url = "MainController"
+                                + "?btAction=New Order";
 
             } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
