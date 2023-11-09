@@ -1,5 +1,5 @@
- 
 package com.vitvang.productionmanagement.controller;
+
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
@@ -18,10 +18,11 @@ import java.util.logging.Logger;
 
 @WebServlet(name = "CustomerUpdateAccountController", urlPatterns = {"/CustomerUpdateAccountController"})
 public class CustomerUpdateAccountController extends HttpServlet {
+
       private static final String ERROR_PAGE = "ErrorPage.html";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
-      private final String PASSWORD_PATTERN ="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"; //check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
+      private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"; //check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
       private final String NAME_PATTERN = "^[^0-9]$"; //khong chua so
 
@@ -38,6 +39,7 @@ public class CustomerUpdateAccountController extends HttpServlet {
 
             boolean foundErr = false;
             CreateAccountError error = new CreateAccountError();
+             boolean update = false;
 
             try {
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
@@ -51,6 +53,9 @@ public class CustomerUpdateAccountController extends HttpServlet {
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         error.setPasswordFormatErr("Password (at least 1 upper letter, 1 lower letter, 1 number)");
                         foundErr = true;
+                        if(Password.equalsIgnoreCase("")){
+                              foundErr = false;
+                        }
                   }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {
@@ -77,8 +82,12 @@ public class CustomerUpdateAccountController extends HttpServlet {
                         dao.ViewAccountDetail(UserID);
                         List<AccountDTO> detail = dao.getListAccount();
                         request.setAttribute("ACCOUNT_DETAIL", detail);
-                        Password = userdao.EncodePass(Password);
-                        boolean update = dao.UpdateAccount(UserID, Username, Password, Email, Address, PhoneNumber);
+                        if (Password.equalsIgnoreCase("")) {
+                              update = dao.UpdateAccountWithoutPassword(UserID, Username, Email, Address, PhoneNumber);
+                        } else {
+                              Password = userdao.EncodePass(Password);
+                              update = dao.UpdateAccountWithPassowd(UserID, Username, Password, Email, Address, PhoneNumber);
+                        }
                         if (update) {
                               url = "MainController?btAction=CustomerAccount&UserID=" + UserID;
                               request.setAttribute("MESSAGE", "Update successfully");

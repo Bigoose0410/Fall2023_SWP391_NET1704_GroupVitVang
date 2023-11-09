@@ -26,7 +26,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-          <title>Admin Dashboard Panel</title>
+          <title>Order Add</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -53,59 +53,48 @@
                </div>
 
                <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Search">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Order</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Customers</span>
-                              </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Production</span>
-                              </a></li>
-                         <li ><a href="MainController?btAction=Production process">
-                                   <i class="uil uil-chart-line"></i>
-                                   <span class="link-name">Production process</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-screw"></i>
-                                   <span class="link-name">Material</span>
-                              </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
+                         <ul class="nav-links">
+                              <li ><a href="MainController?btAction=Search">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Order</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Customers">
+                                        <i class="uil uil-user"></i>
+                                        <span class="link-name">Customers</span>
+                                   </a></li>
+                              <li ><a href="${productionList}">
+                                        <i class="uil uil-clipboard-alt"></i>
+                                        <span class="link-name">Production</span>
+                                   </a></li>
+                              <li ><a href="MainController?btAction=Production process">
+                                        <i class="uil uil-chart-line"></i>
+                                        <span class="link-name">Production process</span>
+                                   </a></li>
 
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name" >Logout</span>
-                              </a></li>
+                              <li ><a href="MainController?btAction=View All Material">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
 
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
+                         </ul>
+                         <ul class="logout-mode">
+                              <li><a href="${logout_query}">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
 
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
+
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
           </nav>
           <section class="dashboard">
                <h1>PURCHASE</h1>
