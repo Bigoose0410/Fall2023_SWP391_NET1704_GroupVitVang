@@ -370,7 +370,7 @@ h1 {
 /*Information*/
 /* Định dạng container chứa hình ảnh và thông tin */
 .information {
-     max-width: 70%;
+     max-width: 85%;
      display: flex;
      align-items: center;
      margin: 20px;

@@ -78,6 +78,7 @@
                               <input type="text" name="txtSearchAccount" value="" placeholder="Search By Name...">
                               <button type="submit" name="btAction" value="SearchAccount">Search</button>
                          </div>
+
                          <div class="button">
                               <a href="AdminCreateAccount.jsp">+ Create</a>
                          </div>
