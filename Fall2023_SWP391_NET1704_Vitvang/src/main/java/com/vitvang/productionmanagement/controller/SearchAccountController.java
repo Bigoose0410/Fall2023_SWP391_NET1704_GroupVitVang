@@ -23,7 +23,7 @@ import java.util.List;
 @WebServlet(name = "SearchAccountController", urlPatterns = {"/SearchAccountController"})
 public class SearchAccountController extends HttpServlet {
 
-      private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
+      private final String AdminCustomerAccount = "AdminManageAccount.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException {

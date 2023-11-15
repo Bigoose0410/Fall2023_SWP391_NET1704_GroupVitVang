@@ -25,7 +25,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 
-
 /**
  *
  * @author Admin
@@ -40,7 +39,8 @@ public class CreateAccountController extends HttpServlet {
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
       private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";//check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
-      private final String NAME_PATTERN = "^[^0-9]*$"; //khong chua so
+      private final String NOT_NUMBER_PATTERN = "^[^0-9]*$"; //khong chua so
+      private final String CHECK_SPACE_PATTERN = "^(?!.*\\s{2})\\S+(\\s\\S+)?\\s{0,4}\\S+$"; //dau va cuoi khong co khoang trang, giua 2 tu khong qua 2 khoang trang, toi da 5 khoang trang
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
@@ -80,6 +80,9 @@ public class CreateAccountController extends HttpServlet {
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         error.setPasswordFormatErr("Password (at least 1 upper letter, 1 lower letter, 1 number)");
                         foundErr = true;
+                  } else if (!checkFormat(Password, SPACE_PATTERN, true)) {
+                        error.setPasswordFormatErr("Password cannot inclue space");
+                        foundErr = true;
                   }
 
                   if (!ConfirmPassword.trim().equals(Password.trim())) {
@@ -95,13 +98,19 @@ public class CreateAccountController extends HttpServlet {
                   if (Name.trim().length() < 6 || Name.trim().length() > 30) {
                         error.setNameFormatErr("Name (6 - 30 chars)");
                         foundErr = true;
-                  } else if (!checkFormat(Name, NAME_PATTERN, true)) {
+                  } else if (!checkFormat(Name, NOT_NUMBER_PATTERN, true)) {
                         error.setNameFormatErr("Name cannot include number");
+                        foundErr = true;
+                  } else if (!checkFormat(Name, CHECK_SPACE_PATTERN, true)) {
+                        error.setNameFormatErr("Wrong format about space");
                         foundErr = true;
                   }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {
                         error.setEmailFormatErr("Wrong format email (***@gmail.com");
+                        foundErr = true;
+                  } else if (!checkFormat(Email, CHECK_SPACE_PATTERN, true)) {
+                        error.setEmailFormatErr("Email cannot inclue space");
                         foundErr = true;
                   }
 
@@ -112,6 +121,9 @@ public class CreateAccountController extends HttpServlet {
 
                   if (Adress.trim().length() < 6) {
                         error.setAddressFormatErr("Addrress too short (>6)");
+                        foundErr = true;
+                  } else if (!checkFormat(Adress, CHECK_SPACE_PATTERN, true)) {
+                        error.setAddressFormatErr("Wrong format about space");
                         foundErr = true;
                   }
 
@@ -125,7 +137,7 @@ public class CreateAccountController extends HttpServlet {
                         request.setAttribute("MESSAGE_CREATE_FAIL", "Create new account failed!!!");
                         url = AdminCreateAccount;
                   } else {
-                         // 1. new DAO
+                        // 1. new DAO
                         UserDAO userdao = new UserDAO();
                         // 2. call method
                         Password = userdao.EncodePass(Password);
@@ -161,7 +173,7 @@ public class CreateAccountController extends HttpServlet {
             }
       }
 
-      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
       /**
        * Handles the HTTP <code>GET</code> method.
        *
@@ -175,8 +187,10 @@ public class CreateAccountController extends HttpServlet {
               throws ServletException, IOException {
             try {
                   processRequest(request, response);
+
             } catch (Exception ex) {
-                  Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(CreateAccountController.class
+                          .getName()).log(Level.SEVERE, null, ex);
             }
       }
 
@@ -193,8 +207,10 @@ public class CreateAccountController extends HttpServlet {
               throws ServletException, IOException {
             try {
                   processRequest(request, response);
+
             } catch (Exception ex) {
-                  Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                  Logger.getLogger(CreateAccountController.class
+                          .getName()).log(Level.SEVERE, null, ex);
             }
       }
 

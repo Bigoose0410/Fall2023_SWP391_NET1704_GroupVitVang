@@ -13,7 +13,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/CreateAccount.css">
-          <link rel="stylesheet" href="css/Dashboard.css">
+          <link rel="stylesheet" href="css/AdminManageAccount.css">
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -36,13 +36,13 @@
           </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
-                <nav>
+               <nav>
 
-               <div class="logo-name" style="
-                    display: block;">
-                    <div class="logo-image">
-                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+                    <div class="logo-name" style="
+                         display: block;">
+                         <div class="logo-image">
+                              <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
                     <div class="menu-items">
@@ -88,7 +88,7 @@
 
                                                   <select class="input-field" name="txtRoleID" id="roleID" style="margin-right: 700px;
                                                           ">
-                                                       <option value="1">Admin</option>
+                                                       <!--<option value="1">Admin</option>-->
                                                        <option value="2">Staff</option>
                                                        <option value="3">Manager</option>
                                                        <option value="4">Customer</option>
@@ -155,6 +155,15 @@
                                    <input type="text" id="username" name="txtUsername" value="${param.txtUsername}" placeholder="Username" required="">
 
                               </div>
+                              <div class="form-row">
+                                   <c:if test="${not empty err.getUsernameFormatErr()}">
+
+                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 31%">${err.getUsernameFormatErr()}</label>
+                                   </c:if>
+                                   <c:if test="${not empty err.getUsernameExistErr()}">
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUsernameExistErr()}</label>
+                                   </c:if>
+                              </div>
 
                               <div class="form-row">
                                    <label for="password">Password: </label>
@@ -165,13 +174,6 @@
                                    <c:if test="${not empty err.getPasswordFormatErr()}">
 
                                         <label for="error" style="color: red; font-size: 13px; margin-left: 31%">${err.getPasswordFormatErr()}</label>
-                                   </c:if>
-                                   <c:if test="${not empty err.getUsernameFormatErr()}">
-
-                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 31%">${err.getUsernameFormatErr()}</label>
-                                   </c:if>
-                                   <c:if test="${not empty err.getUsernameExistErr()}">
-                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUsernameExistErr()}</label>
                                    </c:if>
                               </div>
 
