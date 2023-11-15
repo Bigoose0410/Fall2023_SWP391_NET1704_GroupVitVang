@@ -12,7 +12,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/Accounts.css">
-
+          <link rel="stylesheet" href="css/Dashboard.css">
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -23,56 +23,50 @@
           <title>Customer Accounts</title>
      </head>
      <body>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="" />
+               <c:param value="Log Out" name="btAction" />
+          </c:url>
+         <c:url var="productionList" value="MainController">
+               <c:param value="SearchCage" name="btAction"/>
+          </c:url>
           <nav>
-
-               <div class="logo-name">
+               <div class="logo-name" style="
+                    display: block;">
                     <div class="logo-image">
-                         <img src="images/logo.png" alt="">
+                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
-                    <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
-
-               <div class="menu-items">
+                    <div class="menu-items">
                     <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="AdminHomePage.jsp">
+                         <li ><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>
-                                   <span class="link-name">Home</span>
+                                   <span class="link-name">Order</span>
                               </a></li>
-                         <li><a href="MainController?btAction=Manage Account">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Manage Account</span>
+                         <li ><a href="MainController?btAction=Customers">
+                                   <i class="uil uil-user"></i>
+                                   <span class="link-name">Customers</span>
                               </a></li>
-                         <!--                         <li><a href="}">
-                                                            <i class="uil uil-grin"></i>
-                                                            <span class="link-name">Production</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-chart-line"></i>
-                                                            <span class="link-name">Production process</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-clipboard-alt"></i>
-                                                            <span class="link-name">Reports</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-screw"></i>
-                                                            <span class="link-name">Material</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-archive-alt"></i>
-                                                            <span class="link-name">Inventory</span>
-                                                       </a></li>-->
-                    </ul>
+                         <li ><a href="${productionList}">
+                                   <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Production process">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>
 
+                         <li ><a href="MainController?btAction=View All Material">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
+
+                    </ul>
                     <ul class="logout-mode">
                          <li><a href="${logout_query}">
                                    <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
+                                   <span class="link-name" >Logout</span>
                               </a></li>
 
                          <li class="mode">
@@ -87,6 +81,7 @@
                          </li>
                     </ul>
                </div>
+
           </nav>
           <section class="dashboard">
                <h1><strong>Account</strong></h1>
@@ -104,7 +99,7 @@
 
                <!--Group box account-->
                <c:set var="searchAccount" value="${param.txtSearchAccount}"></c:set>
-               <c:set var="result" value="${requestScope.ACCOUNT_RESULT}" />
+               <c:set var="result" value="${requestScope.CUSTOMER_HAVE_ORDER_LIST}" />
                <c:set var="searchResult" value="${requestScope.SEARCH_ACCOUNT_RESULT}" />
                <%--<c:set var="status" value="${requestScope.USER_STATUS}" />--%>
                <div class="box">
@@ -122,11 +117,10 @@
                                                   <div class="group-content">
                                                        <p>Name: <i>${dto.getName()}</i></p>
                                                        <p>Phone: <i>${dto.getPhoneNumber()}</i></p>
-                                                       <p>Role: <i>${dto.getRoleName()}</i></p>
                                                   </div>
 
                                                   <input type="hidden" name="txtUserID" value="${dto.getUserID()}" />
-                                                  <button type="submit" value="ViewAccountDetail" name="btAction" >Detail</button>
+                                                  <button type="submit" value="StaffViewCustomerDetail" name="btAction" >Detail</button>
 
                                              </form>
                                         </div>
@@ -164,5 +158,6 @@
                     </c:if>
                </div>
           </section>
+          <script src="js/DarkMode.js"></script>
      </body>
 </html>

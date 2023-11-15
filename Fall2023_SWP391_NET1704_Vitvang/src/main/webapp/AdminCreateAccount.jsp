@@ -13,7 +13,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/CreateAccount.css">
-
+          <link rel="stylesheet" href="css/AdminManageAccount.css">
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,103 +34,75 @@
                <c:param name="cookiekey" value="" />
                <c:param value="Log Out" name="btAction" />
           </c:url>
-          <c:url var="productionList" value="MainController">
-               <c:param value="SearchCage" name="btAction" />
-          </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
                <nav>
 
-                    <div class="logo-name">
+                    <div class="logo-name" style="
+                         display: block;">
                          <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
+                              <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+                    </div>
 
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <li><a href="MainController?btAction=Dashboard">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dashboard</span>
+                                   </a></li>
 
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="AdminHomePage.jsp">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Home</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Manage Account">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Manage Account</span>
-                              </a></li>
-                         <!--                         <li><a href="#">
-                                                            <i class="uil uil-grin"></i>
-                                                            <span class="link-name">Production</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-chart-line"></i>
-                                                            <span class="link-name">Production process</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-clipboard-alt"></i>
-                                                            <span class="link-name">Reports</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-screw"></i>
-                                                            <span class="link-name">Material</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-archive-alt"></i>
-                                                            <span class="link-name">Inventory</span>
-                                                       </a></li>-->
-                    </ul>
+                              <li><a href="AdminHomePage.jsp">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Home</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=Manage Account">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Manage Account</span>
+                                   </a></li>
+                              <ul class="logout-mode">
+                                   <li><a href="${logout_query}">
+                                             <i class="uil uil-signout"></i>
+                                             <span class="link-name">Logout</span>
+                                        </a></li>
+                              </ul>
+                         </ul>
+                    </div>
 
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
-                              </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
           </nav>
           <c:set var="message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
           <c:set var="err" value="${requestScope.CREATE_ACCOUNT_ERR}"></c:set>
                <section class="dashboard">
-                    <div class="form">
+                    <div class="form" style="color: black;">
                          <div class="info_form">
                               <h2>New Account</h2>
                          </div>
                         <form action="MainController" method="POST">
                               <div class="info_form1">
                                    <div class="form-row">
-                                        <label for="userID">UserID: </label>
-                                        <input type="text" id="userID" name="txtUserID" value="" placeholder="UserID" required="">
 
-                                        <label for="roleID">RoleID: </label>
-                                        <input type="text" id="roleID" name="txtRoleID" value="" placeholder="RoleID" required="">
+
+                                        <label for="status">Role</label>
+                                        <div class="form-row">
+                                             <div class="input-container">
+
+                                                  <select class="input-field" name="txtRoleID" id="roleID" style="margin-right: 700px;
+                                                          ">
+                                                       <!--<option value="1">Admin</option>-->
+                                                       <option value="2">Staff</option>
+                                                       <option value="3">Manager</option>
+                                                       <option value="4">Customer</option>
+                                                  </select>
+                                                  <span class="input-highlight"></span>
+                                             </div>
+                                        </div>
+
 
                                    </div>
-                              <c:if test="${not empty err.getUserIDExistErr()}">
-                                   <p>${err.getUserIDExistErr()}</p>
-                              </c:if>
-                              <c:if test="${not empty err.getRoleIDFormatErr()}">
-                                   <p>${err.getRoleIDFormatErr()}</p>
-                              </c:if>
+                                   <div class="form-row">
 
-                              <div class="form-row">
-                                   <label for="name">Name: </label>
-                                   <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
+                                        <label for="name">Name: </label>
+                                        <input type="text" id="name" name="txtName" value="${param.txtName}" placeholder="Name" required="">
 
                                    <label for="email">Email:</label>
                                    <input type="email" id="email" name="txtEmail" value="${param.txtEmail}" placeholder="Email" required="">
@@ -170,22 +142,27 @@
                               <div class="form-row">
                                    <label for="birthday">Birth Date: </label>
                                    <input type="date" id="birthday" name="txtBirthDate" value="${param.txtBirthDate}" placeholder="Birth Date" required="">
-                                   <c:if test="${not empty err.getBirthDateValidErr()}">
-                                        <p>${err.getBirthDateValidErr()}</p>
-                                   </c:if>
                               </div>
                               <div class="form-row">
                                    <c:if test="${not empty err.getBirthDateValidErr()}">
 
                                         <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getBirthDateValidErr()}</label>
                                    </c:if>
-
                               </div>
 
                               <div class="form-row">
                                    <label for="username">Username: </label>
-                                   <input type="text" id="username" name="txtUsername" value="" placeholder="Username" required="">
+                                   <input type="text" id="username" name="txtUsername" value="${param.txtUsername}" placeholder="Username" required="">
 
+                              </div>
+                              <div class="form-row">
+                                   <c:if test="${not empty err.getUsernameFormatErr()}">
+
+                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 31%">${err.getUsernameFormatErr()}</label>
+                                   </c:if>
+                                   <c:if test="${not empty err.getUsernameExistErr()}">
+                                        <label for="error" style="color: red; font-size: 13px; margin-left: 14%">${err.getUsernameExistErr()}</label>
+                                   </c:if>
                               </div>
 
                               <div class="form-row">
@@ -198,19 +175,15 @@
 
                                         <label for="error" style="color: red; font-size: 13px; margin-left: 31%">${err.getPasswordFormatErr()}</label>
                                    </c:if>
-                                   <c:if test="${not empty err.getUsernameFormatErr()}">
-
-                                        <label for="email"  style="color: red; font-size: 13px; margin-left: 31%">${err.getUsernameFormatErr()}</label>
-                                   </c:if>
                               </div>
 
                               <div class="form-row">
                                    <label for="password">Confirm Password: </label>
                                    <input type="password" id="password" name="txtConfirmPassword" value="" placeholder="Confirm Password" required="">
-                                 
+
                               </div>
-                                   
-                                   <div class="form-row">
+
+                              <div class="form-row">
                                    <c:if test="${not empty err.getConfirmPasswordNotMatchErr()}">
 
                                         <label for="error" style="color: red; font-size: 13px; margin-left: 31%">${err.getConfirmPasswordNotMatchErr()}</label>
@@ -240,7 +213,7 @@
                </div>
 
           </section>
-
+          <script src="js/DarkMode.js"></script>
      </body>
 
 </html>

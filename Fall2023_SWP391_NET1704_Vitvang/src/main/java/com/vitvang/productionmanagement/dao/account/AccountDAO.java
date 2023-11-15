@@ -40,7 +40,8 @@ public class AccountDAO implements Serializable {
                         //2. create SQL statement string
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
-                                + "ON Users.RoleID = Role.RoleID AND Users.UserStatus = 'True' ";
+                                + "ON Users.RoleID = Role.RoleID AND Users.UserStatus = 'True' "
+                                + "WHERE NOT (Users.RoleID = 1) ";
                         //3. Create statement object
                         stm = con.prepareStatement(sql);
                         //4. Excute query
@@ -91,7 +92,7 @@ public class AccountDAO implements Serializable {
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID "
-                                + "Where UserID = ? AND Users.UserStatus = 'True'";
+                                + "Where UserID = ? AND Users.UserStatus = 'True' AND NOT (Users.RoleID = 1)";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, UserID);
                         rs = stm.executeQuery();
@@ -128,7 +129,7 @@ public class AccountDAO implements Serializable {
             }
       }
 
-      public boolean UpdateAccount(String UserID, String Username, String Password, String Email, String Address, String PhoneNumber) throws SQLException {
+      public boolean UpdateAccountWithPassowd(String UserID, String Username, String Password, String Email, String Address, String PhoneNumber) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             try {
@@ -144,6 +145,40 @@ public class AccountDAO implements Serializable {
                         stm.setString(4, Address);
                         stm.setString(5, PhoneNumber);
                         stm.setString(6, UserID);
+                        int row = stm.executeUpdate();
+                        if (row > 0) {
+                              return true;
+                        }
+
+                  }
+
+            } finally {
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+            }
+            return false;
+      }
+
+      public boolean UpdateAccountWithoutPassword(String UserID, String Username, String Email, String Address, String PhoneNumber) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "UPDATE Users "
+                                + "SET Username = ?, Email= ?, Adress= ?, PhoneNumber= ? "
+                                + "WHERE UserID = ? ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, Username);
+                        stm.setString(2, Email);
+                        stm.setString(3, Address);
+                        stm.setString(4, PhoneNumber);
+                        stm.setString(5, UserID);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
@@ -210,7 +245,7 @@ public class AccountDAO implements Serializable {
             }
             return false;
       }
-
+   
       public boolean deleteAccount(String Username) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -239,6 +274,7 @@ public class AccountDAO implements Serializable {
             return false;
       }
 
+      
       public void searchAccount(String SearchAccount) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -249,7 +285,7 @@ public class AccountDAO implements Serializable {
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID "
-                                + "WHERE Name LIKE ? AND UserStatus = 'True' ";
+                                + "WHERE Name LIKE ? AND UserStatus = 'True' AND NOT (Users.RoleID = 1)";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, "%" + SearchAccount + "%");
                         rs = stm.executeQuery();
@@ -283,6 +319,52 @@ public class AccountDAO implements Serializable {
                   if (con != null) {
                         con.close();
                         DBHelper.closeConnection(con);
+                  }
+            }
+      }
+
+      List<AccountDTO> listCheck;
+
+      public List<AccountDTO> getListCheck() {
+            return listCheck;
+      }
+
+      public void checkBeforeDelete(String UserID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "SELECT UserOrder.UserID, OrderDetail.OrderID, OrderDetail.CageID, OrderDetail.OrderDetailStatus "
+                                + "FROM UserOrder JOIN OrderDetail "
+                                + "ON UserOrder.OrderID = OrderDetail.OrderID "
+                                + "WHERE UserOrder.UserID = ?";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, UserID);
+                        rs = stm.executeQuery();
+
+                        while (rs.next()) {
+                              String OrderID = rs.getString("OrderID");
+                              String CageID = rs.getString("CageID");
+                              String OrderDetailStatus = rs.getString("OrderDetailStatus");
+                              AccountDTO account = new AccountDTO(UserID, OrderID, CageID, OrderDetailStatus);
+                              if (this.listCheck == null) {
+                                    this.listCheck = new ArrayList<AccountDTO>();
+                              }
+                              this.listCheck.add(account);
+                        }
+                  }
+            } finally {
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (rs != null) {
+                        rs.close();
                   }
             }
       }

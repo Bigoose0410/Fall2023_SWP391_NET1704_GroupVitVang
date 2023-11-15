@@ -25,6 +25,9 @@ public class AccountDTO implements Serializable {
       private int RoleID;
       private String RoleName;
       private boolean UserStatus;
+      private String OrderID;
+      private String CageID;
+      private String OrderDetailStatus;
 
       public AccountDTO() {
       }
@@ -42,6 +45,29 @@ public class AccountDTO implements Serializable {
             this.RoleID = RoleID;
             this.RoleName = RoleName;
             this.UserStatus = UserStatus;
+      }
+
+      public AccountDTO(String UserID, String Name, String PhoneNumber, String Sex, String Adress, Date BirthDate, String Email, String Username, String Password, int RoleID, String RoleName, boolean UserStatus, String OrderID) {
+            this.UserID = UserID;
+            this.Name = Name;
+            this.PhoneNumber = PhoneNumber;
+            this.Sex = Sex;
+            this.Adress = Adress;
+            this.BirthDate = BirthDate;
+            this.Email = Email;
+            this.Username = Username;
+            this.Password = Password;
+            this.RoleID = RoleID;
+            this.RoleName = RoleName;
+            this.UserStatus = UserStatus;
+            this.OrderID = OrderID;
+      }
+
+      public AccountDTO(String UserID, String OrderID, String CageID, String OrderDetailStatus) {
+            this.UserID = UserID;
+            this.OrderID = OrderID;
+            this.CageID = CageID;
+            this.OrderDetailStatus = OrderDetailStatus;
       }
 
       public String getUserID() {
@@ -145,4 +171,27 @@ public class AccountDTO implements Serializable {
             this.UserStatus = UserStatus;
       }
 
+      public String getOrderID() {
+            return OrderID;
+      }
+
+      public void setOrderID(String OrderID) {
+            this.OrderID = OrderID;
+      }
+
+      public String getCageID() {
+            return CageID;
+      }
+
+      public void setCageID(String CageID) {
+            this.CageID = CageID;
+      }
+
+      public String getOrderDetailStatus() {
+            return OrderDetailStatus;
+      }
+
+      public void setOrderDetailStatus(String OrderDetailStatus) {
+            this.OrderDetailStatus = OrderDetailStatus;
+      }
 }

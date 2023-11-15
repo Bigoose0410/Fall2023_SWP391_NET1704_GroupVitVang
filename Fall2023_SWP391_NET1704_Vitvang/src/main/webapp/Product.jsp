@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
      <head>
@@ -20,7 +21,7 @@
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-          <title>Admin Dashboard Panel</title>
+          <title>Production</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -75,24 +76,30 @@
                               </a></li>
                     </ul>
 
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name" >Logout</span>
-                              </a></li>
+                              <li ><a href="MainController?btAction=View All Material">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
 
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
+                         </ul>
+                         <ul class="logout-mode">
+                              <li><a href="${logout_query}">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
 
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
-               </div>
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
+
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
           </nav>
           <section class="dashboard">
                <div class="header">
@@ -123,7 +130,7 @@
                                                        <div class="main-wrapper">
                                                             <h3 class="main-header"> ${dto.getCageID()} </h3>
                                                             <h1 class="main-title"> ${dto.getName()} </h1>
-                                                            <h2 class="main-subtitle"> ${dto.getPrice()} </h2>
+                                                            <h2 class="main-subtitle"><fmt:formatNumber value="${dto.getPrice()}" type="number" pattern="#,##0" /> ₫ </h2>
                                                        </div>
                                                        <div class="main-content">
                                                             <div class="main-content__title">Come From: ${dto.getOrigin()}

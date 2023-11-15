@@ -49,6 +49,11 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
+<!--                              <li ><a href="#">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>-->
+                              <li ><a href="MainController?btAction=search">
                               <!--                              <li ><a href="#">
                                                                       <i class="uil uil-estate"></i>
                                                                       <span class="link-name">Dahsboard</span>
@@ -58,29 +63,29 @@
                                         <span class="link-name">Order</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-bill"></i>
+                                        <i class="uil uil-user"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
                               <li ><a href="${productionList}">
-                                        <i class="uil uil-grin"></i>
+                                        <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Production</span>
                                    </a></li>
                               <li ><a href="MainController?btAction=Production process">
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
-                              <li > <a href="#">
+<!--                              <li > <a href="#">
                                         <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Reports</span>
-                                   </a></li>
-                              <li ><a href="#">
+                                   </a></li>-->
+                              <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
-                              <li > <a href="#">
+<!--                              <li > <a href="#">
                                         <i class="uil uil-archive-alt"></i>
                                         <span class="link-name">Inventory</span>
-                                   </a></li>
+                                   </a></li>-->
                          </ul>
 
                          <ul class="logout-mode">
@@ -115,7 +120,7 @@
                                    <th>Name / Unit</th>
                                    <th>Quantity</th>
                                    <th>Origin</th>
-                                   <th>Price/Unit</th>
+                                   <!--<th>Price/Unit</th>-->
                                    <th>Edit</th>
                               </tr>
                          </thead>
@@ -137,7 +142,6 @@
                                              <td class="td3" style="text-align: left; display: flex; justify-content: center">
                                                   ${dto.getName()} / ${dto.getUnit()}
                                              </td>
-
                                              <td>
                                                   <div class="input-container">
                                                        <input placeholder="Quantity" class="input-field" type="number" oninput="this.value = Math.abs(this.value)"
@@ -149,11 +153,11 @@
                                              <td>
                                                   ${dto.getOrigin()}
                                              </td>
-
+                                             <%--
                                              <td>
                                                   ${dto.getPrice()}
                                              </td>
-
+                                             --%>
 
 
                                              <td class="edit_button">

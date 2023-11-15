@@ -14,7 +14,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
           <link rel="stylesheet" href="css/AccountInformation.css">
-
+          <link rel="stylesheet" href="css/Dashboard.css">
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -29,9 +29,6 @@
                <c:param name="cookiekey" value="" />
                <c:param value="Log Out" name="btAction" />
           </c:url>
-          <c:url var="productionList" value="MainController">
-               <c:param value="SearchCage" name="btAction" />
-          </c:url>
 
           <style>
                p {
@@ -41,74 +38,80 @@
           </style>
           <nav>
 
-               <div class="logo-name">
+               <div class="logo-name" style="
+                    display: block;">
                     <div class="logo-image">
-                         <img src="images/logo.png" alt="">
+                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
-                    <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
+                    <div class="menu-items">
+                         <ul class="nav-links">
+                              <li><a href="MainController?btAction=Dashboard">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dashboard</span>
+                                   </a></li>
 
-               <div class="menu-items">
-                    <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
-                         <li><a href="AdminHomePage.jsp">
-                                   <i class="uil uil-bill"></i>
-                                   <span class="link-name">Home</span>
-                              </a></li>
-                         <li><a href="MainController?btAction=Manage Account">
-                                   <i class="uil uil-grin"></i>
-                                   <span class="link-name">Manage Account</span>
-                              </a></li>
-                         <!--                         <li><a href="">
-                                                            <i class="uil uil-grin"></i>
-                                                            <span class="link-name">Production</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-chart-line"></i>
-                                                            <span class="link-name">Production process</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-clipboard-alt"></i>
-                                                            <span class="link-name">Reports</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-screw"></i>
-                                                            <span class="link-name">Material</span>
-                                                       </a></li>
-                                                  <li><a href="#">
-                                                            <i class="uil uil-archive-alt"></i>
-                                                            <span class="link-name">Inventory</span>
-                                                       </a></li>-->
-                    </ul>
+                              <li><a href="AdminHomePage.jsp">
+                                        <i class="uil uil-bill"></i>
+                                        <span class="link-name">Home</span>
+                                   </a></li>
+                              <li><a href="MainController?btAction=Manage Account">
+                                        <i class="uil uil-grin"></i>
+                                        <span class="link-name">Manage Account</span>
+                                   </a></li>
+                              <!--                                   <li><a href="MainController?btAction=Production process">
+                                                                           <i class="uil uil-chart-line"></i>
+                                                                           <span class="link-name">Production process</span>
+                                                                      </a></li>-->
+                              <!--                                   <li><a href="#">
+                                                                           <i class="uil uil-clipboard-alt"></i>
+                                                                           <span class="link-name">Reports</span>
+                                                                      </a></li>
+                                                                 <li><a href="#">
+                                                                           <i class="uil uil-screw"></i>
+                                                                           <span class="link-name">Material</span>
+                                                                      </a></li>
+                                                                 <li><a href="#">
+                                                                           <i class="uil uil-archive-alt"></i>
+                                                                           <span class="link-name">Inventory</span>
+                                                                      </a></li>-->
+                              <ul class="logout-mode">
+                                   <li><a href="${logout_query}">
+                                             <i class="uil uil-signout"></i>
+                                             <span class="link-name">Logout</span>
+                                        </a></li>
 
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
-                              </a></li>
+                                   <!--                              <li class="mode">
+                                              <a href="#">
+                                                   <i class="uil uil-moon"></i>
+                                                   <span class="link-name">Dark Mode</span>
+                                              </a>-->
 
-                         <!--                         <li class="mode">
-                                                       <a href="#">
-                                                            <i class="uil uil-moon"></i>
-                                                            <span class="link-name">Dark Mode</span>
-                                                       </a>
-                         
-                                                       <div class="mode-toggle">
-                                                            <span class="switch"></span>
-                                                       </div>
-                                                  </li>-->
-                    </ul>
-               </div>
+                                   <!--                                   <div class="mode-toggle">
+                                                   <span class="switch"></span>
+                                              </div>-->
+                                   <!--                                   <li class="mode">
+                                                                           <a href="#">
+                                                                                <i class="uil uil-moon"></i>
+                                                                                <span class="link-name">Dark Mode</span>
+                                                                           </a>
+                                   
+                                                                           <div class="mode-toggle">
+                                                                                <span class="switch"></span>
+                                                                           </div>
+                                                                      </li>-->
+                              </ul>
+                         </ul>
+                    </div>
+
           </nav>
           <c:set var="result" value="${requestScope.ACCOUNT_DETAIL}"></c:set>
           <c:set var="err" value="${requestScope.UPDATE_ACCOUNT_ERR}"></c:set>
-          <c:set var="message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
+          <c:set var="update_message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
+          <c:set var="delete_message" value="${requestScope.DELETE_MESSAGE}"></c:set>
                <section class="dashboard">
-                    <div class="form">
+                    <div class="form" style="color: black;">
                          <div class="info_form">
                               <div class="info">
                                    <h2>Information</h2>
@@ -123,7 +126,8 @@
                                         <label for="userID">User ID: <i>${dto.getUserID()}</i></label>
                                         <input type="hidden" id="userID" name="txtUserID" value="${dto.getUserID()}">
 
-                                        <label for="roleID">Role ID: <i>${dto.getRoleName()}</i></label>
+                                        <label for="roleID">Role: <i>${dto.getRoleName()}</i></label>
+                                        <input type="hidden" name="txtRoleID" value="${dto.getRoleID()}" />
                                    </div>
 
                                    <div class="form-row2">
@@ -138,6 +142,9 @@
                                         <br>
                                         <br>
                                         <input type="text" id="username" name="txtUsername" value="${dto.getUsername()}" required="">
+                                        <c:if test="${not empty err.getUsernameExistErr()}">
+                                             <p>${err.getUsernameExistErr()}</p>
+                                        </c:if>
                                         <br>
                                         <br>
                                         <c:if test="${not empty err.getUsernameFormatErr()}">
@@ -147,7 +154,7 @@
                                         <label for="password" >Password: </label>
                                         <br>
                                         <br>
-                                        <input type="password"  id="password" name="txtPassword" value="${dto.getPassword()}" required="">
+                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}""required="" placeholder="***************************">
                                         <br>
                                         <br>
                                         <c:if test="${not empty err.getPasswordFormatErr()}">
@@ -155,6 +162,7 @@
                                         </c:if>
                                    </div>
 
+                                        
                                    <div class="form-row">
                                         <label for="email">Email: </label>
                                         <br>
@@ -199,13 +207,16 @@
                               </form>
                          </div>
                     </c:forEach>
-                    <c:if test="${not empty message}">
-                         <h1>${message}</h1>
+                    <c:if test="${not empty update_message}">
+                         <h1>${update_message}</h1>
+                    </c:if>
+                    <c:if test="${not empty delete_message}">
+                         <h1>${delete_message}</h1>
                     </c:if>
                </div>
 
           </section>
-
+          <script src="js/DarkMode.js"></script>
      </body>
 
 </html>

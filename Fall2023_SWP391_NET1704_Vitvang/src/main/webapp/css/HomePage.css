@@ -499,10 +499,10 @@ color: var(--dark-text);
 body.dark nav {
 background-color: #222;
 }
-.menu-items {
-  display: flex;
-  flex-direction: column;
-}
+.menu-items li a { display: flex; align-items: center;
+                  height: 50px; 
+                  text-decoration: none;
+                  position: relative; }
 .nav-links {
   flex: 1 1 auto; /* chiếm khoảng trống còn lại */
 
@@ -511,7 +511,7 @@ background-color: #222;
   justify-content: space-between;
 }
 .nav-links li {
-  padding: 10px 0; 
+  padding: 30px 0; 
 
 }
 button:active {

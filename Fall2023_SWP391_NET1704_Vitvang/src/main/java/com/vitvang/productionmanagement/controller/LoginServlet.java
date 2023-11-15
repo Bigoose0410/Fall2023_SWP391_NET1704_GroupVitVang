@@ -30,7 +30,8 @@ public class LoginServlet extends HttpServlet {
 
       private static final String Admin_Page = "AdminHomePage.jsp";
       private static final String Staff_Page = "MainController?btAction=Search";
-      private static final String Manager_Page = "MainController?btAction=Search";
+      private static final String Manager_Page = "ManagerHomePage.jsp";
+      private static final String Customer_Page = "CustomerHomePage.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
       private static final String Login_PAGE = "NewLogin.jsp";
 
@@ -64,17 +65,20 @@ public class LoginServlet extends HttpServlet {
                         //1.2 Call method
                         password = dao.EncodePass(password);
                         UserDTO result = dao.checkLogin(username, password);
-                        if (result != null) {
+                        if (result != null && result.isUserStatus()) {
 
                               switch (result.getRoleID()) {
                                     case 1:
                                           url = Admin_Page;
                                           break;
                                     case 2:
+                                          url = Staff_Page;
+                                          break;
+                                    case 3:
                                           url = Manager_Page;
                                           break;
-                                    default:
-                                          url = Staff_Page;
+                                    case 4:
+                                          url = Customer_Page;
                                           break;
                               }
                               HttpSession session = request.getSession();
@@ -82,8 +86,12 @@ public class LoginServlet extends HttpServlet {
                               Cookie cookie = new Cookie(username, password);
                               cookie.setMaxAge(60 * 3);
                               response.addCookie(cookie);
-                        } else {
+                        } else if (result == null) {
                               error.setIsWrongAccount("Wrong username or password");
+                              request.setAttribute("LOGIN_ERRORS", error);
+                              url = Login_PAGE;
+                        } else if (!result.isUserStatus()) {
+                              error.setIsWrongAccount("Your account is not available");
                               request.setAttribute("LOGIN_ERRORS", error);
                               url = Login_PAGE;
                         }

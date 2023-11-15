@@ -21,7 +21,7 @@ public class DBHelper {
                 try {
                          String dbURL = "jdbc:sqlserver://HandInTheAIR:1433;databaseName=ProductionManagement;encrypt=true;trustServerCertificate=true;";
                         String user = "sa";
-                        String pass = "12345";
+                        String pass = "123456";
                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                         conn = DriverManager.getConnection(dbURL, user, pass);
                 } catch (ClassNotFoundException | SQLException ex) {

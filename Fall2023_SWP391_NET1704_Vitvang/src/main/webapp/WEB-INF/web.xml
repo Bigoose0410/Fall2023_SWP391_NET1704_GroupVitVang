@@ -20,6 +20,14 @@
         <servlet-name>UpdateEmpProcessController</servlet-name>
         <servlet-class>com.vitvang.productionmanagement.controller.UpdateEmpProcessController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddMaterialController</servlet-name>
+        <servlet-class>com.vitvang.productionmanagement.controller.AddMaterialController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMaterialController</servlet-name>
+        <servlet-class>com.vitvang.productionmanagement.controller.ViewMaterialController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>UpdateEmpProcessController</servlet-name>
         <url-pattern>/UpdateEmpProcessController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMaterialController</servlet-name>
+        <url-pattern>/AddMaterialController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMaterialController</servlet-name>
+        <url-pattern>/ViewMaterialController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

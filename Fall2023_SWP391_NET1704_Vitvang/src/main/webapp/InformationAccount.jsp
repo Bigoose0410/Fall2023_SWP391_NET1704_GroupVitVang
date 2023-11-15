@@ -79,24 +79,30 @@
                          </a></li>
                </ul>
 
-               <ul class="logout-mode">
-                    <li><a href="${logout_query}">
-                              <i class="uil uil-signout"></i>
-                              <span class="link-name">Logout</span>
-                         </a></li>
+                              <li ><a href="MainController?btAction=View All Material">
+                                        <i class="uil uil-screw"></i>
+                                        <span class="link-name">Material</span>
+                                   </a></li>
 
-                    <li class="mode">
-                         <a href="#">
-                              <i class="uil uil-moon"></i>
-                              <span class="link-name">Dark Mode</span>
-                         </a>
+                         </ul>
+                         <ul class="logout-mode">
+                              <li><a href="${logout_query}">
+                                        <i class="uil uil-signout"></i>
+                                        <span class="link-name" >Logout</span>
+                                   </a></li>
 
-                         <div class="mode-toggle">
-                              <span class="switch"></span>
-                         </div>
-                    </li>
-               </ul>
-          </div>
+                              <li class="mode">
+                                   <a href="#">
+                                        <i class="uil uil-moon"></i>
+                                        <span class="link-name">Dark Mode</span>
+                                   </a>
+
+                                   <div class="mode-toggle">
+                                        <span class="switch"></span>
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
      </nav>
 
      <section class="dashboard">
