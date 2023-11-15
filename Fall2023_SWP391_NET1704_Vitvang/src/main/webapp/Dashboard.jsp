@@ -22,7 +22,7 @@
 
           <!-- Custom CSS -->
           <link rel="stylesheet" href="css/Dashboard.css">
-
+          <link rel="stylesheet" href="css/AdminManageAccount.css">
 
           <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script> 
           <title>Dashboard page</title>
@@ -144,9 +144,9 @@
                               <div class="card">
                                    <div class="card-inner">
                                         <h3>Done Order</h3>
-<!--                                        <span class="material-symbols-outlined">
-                                             autorenew
-                                        </span>-->
+                                        <!--                                        <span class="material-symbols-outlined">
+                                                                                     autorenew
+                                                                                </span>-->
                                         <!--                                        <span class="material-symbols-outlined">
                                                                                      autorenew
                                                                                 </span>-->
