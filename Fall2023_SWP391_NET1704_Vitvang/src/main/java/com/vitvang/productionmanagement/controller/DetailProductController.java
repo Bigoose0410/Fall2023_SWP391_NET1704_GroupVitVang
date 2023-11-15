@@ -4,12 +4,14 @@ import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.CageMaterialDTO;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,6 +33,12 @@ public class DetailProductController extends HttpServlet {
             String cageID = request.getParameter("txtCageID");
             String url = ERROR_PAGE;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  
                   //1. new DAO
                   CageDAO cagedao = new CageDAO();
                   DesignForProcessDAO designdao = new DesignForProcessDAO();

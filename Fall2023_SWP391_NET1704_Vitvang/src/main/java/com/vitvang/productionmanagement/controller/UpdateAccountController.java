@@ -4,7 +4,7 @@ import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
 import com.vitvang.productionmanagement.model.AccountDTO;
-import com.vitvang.productionmanagement.util.tool;
+import com.vitvang.productionmanagement.model.UserDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -46,6 +47,16 @@ public class UpdateAccountController extends HttpServlet {
             CreateAccountError error = new CreateAccountError();
 
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;

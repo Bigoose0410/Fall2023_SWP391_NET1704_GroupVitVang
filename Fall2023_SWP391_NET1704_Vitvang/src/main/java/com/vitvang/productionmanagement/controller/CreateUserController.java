@@ -4,8 +4,14 @@
  */
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.users.UserDAO;
+import com.vitvang.productionmanagement.exception.users.UserCreateError;
 import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import com.vitvang.productionmanagement.util.SendEmail;
+import com.vitvang.productionmanagement.util.tool;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,10 +25,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import com.vitvang.productionmanagement.exception.users.UserCreateError;
-import com.vitvang.productionmanagement.dao.users.UserDAO;
-import com.vitvang.productionmanagement.util.SendEmail;
-import com.vitvang.productionmanagement.util.tool;
 
 /**
  *
@@ -62,6 +64,16 @@ public class CreateUserController extends HttpServlet {
             boolean foundErr = false;
             UserCreateError error = new UserCreateError();
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   if (Name.trim().length() < 6 || Name.trim().length() > 30) {
                         error.setNameLengthErr("Please enter again full name within (6 -> 30 chars)");
                         foundErr = true;
@@ -109,7 +121,6 @@ public class CreateUserController extends HttpServlet {
                         UserDTO user = new UserDTO(Name, PhoneNumber, Sex, Adress, BirthDate, Gmail, Username, Password, 4, true);
                         boolean result = dao.createNewAccountCustomer(user);
                         if (result && sendMail) {
-                              HttpSession session = request.getSession();
                               session.removeAttribute("SHOW_CUS_CREATE_FORM");
 //                              
                               url = "MainController"

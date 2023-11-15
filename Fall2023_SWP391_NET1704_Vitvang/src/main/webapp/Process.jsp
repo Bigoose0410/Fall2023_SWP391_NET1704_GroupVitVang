@@ -47,10 +47,6 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-                              <!--                              <li ><a href="#">
-                                                                      <i class="uil uil-estate"></i>
-                                                                      <span class="link-name">Dahsboard</span>
-                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -162,8 +158,8 @@
                                                             href="MainController?txtOrderID=${dto.getOrderID()}&txtCageID=${dto.getCageID()}&txtStartDate=${dto.getStartDate()}&txtQuantity=${dto.getQuantity()}&btAction=AddToProcess">
                                                             <i class="fa fa-cog"></i>
                                                        </a>
-<!--                                                       <button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction">
-                                                       </button>-->
+                                                       <!--                                                       <button class="fa fa-cog"  type="submit" value="AddToProcess" name="btAction">
+                                                                                                              </button>-->
                                                   </td>
                                                   <c:if test="${not empty error.getDesignListLength() and count == 1}">
                                                        <a href="MainController?txtCageID=${dto.getCageID()}&txtCageName=${dto.getCageName()}&btAction=EditDesign">
@@ -177,6 +173,7 @@
                                         </c:if>
                                    </c:forEach>
                                    </tbody>
+                              </table>
                          </c:if>
                          <br>
                          <c:if test="${empty result}">
@@ -406,4 +403,3 @@
           <script src="js/ProductProcess.js"></script>
      </body>
 </html>
-                                   

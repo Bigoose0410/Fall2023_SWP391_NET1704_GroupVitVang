@@ -1,6 +1,9 @@
 package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,11 +30,20 @@ public class RemoveItemFromCartController extends HttpServlet {
             String sku = request.getParameter("txtOrderCageID");
             String url = ERROR_PAGE;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   if (sku == null) {
                         return;
                   }
                   // 1. cus go to cart place
-                  HttpSession session = request.getSession();
                   // 2. cus take his cart
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   if (cart == null) {

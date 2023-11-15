@@ -10,13 +10,16 @@ import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.exception.processs.AutoAddProcessErr;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
-import static com.vitvang.productionmanagement.util.tool.nextdate;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -52,6 +55,16 @@ public class AutoAddProcessController extends HttpServlet {
             boolean result2 = false;
             int i = 1;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   designdao.ViewDesignForProcess(cageID);
                   List<DesignForProcessDTO> designList = null;

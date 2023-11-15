@@ -8,7 +8,6 @@ import com.vitvang.productionmanagement.dao.customer.CustomerDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,8 +33,17 @@ public class CustomerOrderController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = "ErrorPage.html";
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   /* TODO output your page here. You may use following sample code. */
-                  HttpSession session = request.getSession();
                   UserDTO user = (UserDTO) session.getAttribute("USER");
                   String UserID = user.getUserID();
 

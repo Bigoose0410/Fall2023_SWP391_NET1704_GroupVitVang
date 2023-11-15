@@ -1,15 +1,20 @@
-
 package com.vitvang.productionmanagement.controller;
+
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.dao.historyupdateprocess.HistoryUpdateProcessDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -25,7 +30,7 @@ import javax.naming.NamingException;
 @WebServlet(name = "UpdateEmpProcessController", urlPatterns = {"/UpdateEmpProcessController"})
 public class UpdateEmpProcessController extends HttpServlet {
 
-           private static final String ERROR_PAGE = "ErrorPage.html";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
@@ -34,14 +39,29 @@ public class UpdateEmpProcessController extends HttpServlet {
             String OrderID = request.getParameter("txtOrderID");
             String CageID = request.getParameter("txtCageID");
             String NumberOfEmployee = request.getParameter("txtNumberOfEmployee");
+            long millis = System.currentTimeMillis();
+            java.sql.Date now = new java.sql.Date(millis);
             int employee = Integer.parseInt(NumberOfEmployee);
             Date startDate = null;
             Date endDate = null;
             boolean flag = false;
+            boolean result = false;
+            String content =  "Update number of employee to: " + NumberOfEmployee;
             String url = ERROR_PAGE;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager)) {
+                        return;
+                  }
                   // 1.new DAO
                   ProcessDAO processdao = new ProcessDAO();
+                  HistoryUpdateProcessDAO historydao = new HistoryUpdateProcessDAO();
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   //2. call method DAO
                   designdao.ViewDesignForProcess(CageID);
@@ -51,33 +71,41 @@ public class UpdateEmpProcessController extends HttpServlet {
                   // proces result
                   for (ProcessDTO process : processdao.getListOrdersProcess()) {
                         if (process.getProcessID().equals(ProcessID)) {
-//                              startDate = process.getStartDate();
-                              for (DesignForProcessDTO design : designList) {
-                                    if (process.getPhrase().equals(design.getPhrase())) {
+                              if (process.getNumberOfEmployee() == employee) {
+                                    url = "MainController?btAction=ViewProcessDetail";
+                                    return;
+                              }
+//                              for (DesignForProcessDTO design : designList) {
+                                   DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
+                                    if (design != null) {
                                           endDate = calculateProcessDate(process.getStartDate(), process.getQuantity(),
                                                   design.getTimeProcess(), design.getNumberOfEmployee(),
                                                   design.getNumCompletionCage(), employee);
                                           processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, process.getStartDate(), endDate, employee);
                                           startDate = endDate;
                                           flag = true;
-                                          break;
+//                                          break;
                                     }
-                              }
+//                              }
                         } else if (flag) {
-                              for (DesignForProcessDTO design : designList) {
-                                    if (process.getPhrase().equals(design.getPhrase())) {
+//                              for (DesignForProcessDTO design : designList) {
+                                     DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
+                                    if (design != null) {
                                           endDate = calculateProcessDate(startDate, process.getQuantity(),
                                                   design.getTimeProcess(), design.getNumberOfEmployee(),
                                                   design.getNumCompletionCage(), process.getNumberOfEmployee());
                                           processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
                                           startDate = endDate;
                                           flag = true;
-                                          break;
+//                                          break;
                                     }
-                              }
+//                              }
                         }
                   }
-                  url = "MainController?btAction=ViewProcessDetail";
+                  result = historydao.insertHistory(ProcessID, OrderID, CageID, now, content , "Employee");
+                  if (result) {
+                        url = "MainController?btAction=ViewProcessDetail";
+                  }
             } catch (SQLException ex) {
                   log("UpdateEmpProcessController _ SQL" + ex.getMessage());
             } catch (NamingException ex) {
