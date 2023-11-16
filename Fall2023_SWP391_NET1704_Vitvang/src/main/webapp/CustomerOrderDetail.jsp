@@ -12,7 +12,7 @@
      <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
-          <link rel="stylesheet" href="css/CustomerOrder.css">
+          <link rel="stylesheet" href="css/CustomerOrderDetail.css">
           <link rel="stylesheet" href="css/Dashboard.css">
 
           <!----===== Iconscout CSS ===== -->

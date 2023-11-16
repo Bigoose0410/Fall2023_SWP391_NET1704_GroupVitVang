@@ -16,29 +16,29 @@ import java.util.logging.Logger;
  */
 public class DBHelper {
 
-        public static Connection makeConnection() {
-                Connection conn = null;
-                try {
-                         String dbURL = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=ProductionManagementV_5;encrypt=true;trustServerCertificate=true;";
-                        String user = "sa";
-                        String pass = "12345";
-                        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                        conn = DriverManager.getConnection(dbURL, user, pass);
-                } catch (ClassNotFoundException | SQLException ex) {
-                      System.out.println("Error DB");
-                }
-                return conn;
-        }
+      public static Connection makeConnection() {
+            Connection conn = null;
+            try {
+                  String dbURL = "jdbc:sqlserver://ADMIN\\TEW_SQLEXPRESS:1433;databaseName=ProductionManagement;encrypt=true;trustServerCertificate=true;";
+                  String user = "sa";
+                  String pass = "123456";
+                  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                  conn = DriverManager.getConnection(dbURL, user, pass);
+            } catch (ClassNotFoundException | SQLException ex) {
+                  System.out.println("Error DB");
+            }
+            return conn;
+      }
 
-        public static void closeConnection(Connection conn) {
+      public static void closeConnection(Connection conn) {
 
-                if (conn != null) {
-                        try {
-                                conn.close();
-                        } catch (SQLException ex) {
-                                Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                }
-        }
-      
+            if (conn != null) {
+                  try {
+                        conn.close();
+                  } catch (SQLException ex) {
+                        Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+            }
+      }
+
 }

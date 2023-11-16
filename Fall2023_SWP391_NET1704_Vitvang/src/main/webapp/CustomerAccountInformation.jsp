@@ -160,7 +160,7 @@
                                         <label for="password" >Password: </label>
                                         <br>
                                         <br>
-                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}" required="" placeholder="***************************">
+                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}" placeholder="***************************">
                                         <br>
                                         <br>
                                         <c:if test="${not empty err.getPasswordFormatErr()}">

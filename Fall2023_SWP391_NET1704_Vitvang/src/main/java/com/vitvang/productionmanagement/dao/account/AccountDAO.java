@@ -140,11 +140,11 @@ public class AccountDAO implements Serializable {
                                 + "WHERE UserID = ? ";
                         stm = con.prepareStatement(sql);
 //                        stm.setString(1, Username);
-                        stm.setString(2, Password);
-                        stm.setString(3, Email);
-                        stm.setString(4, Address);
-                        stm.setString(5, PhoneNumber);
-                        stm.setString(6, UserID);
+                        stm.setString(1, Password);
+                        stm.setString(2, Email);
+                        stm.setString(3, Address);
+                        stm.setString(4, PhoneNumber);
+                        stm.setString(5, UserID);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
@@ -175,10 +175,10 @@ public class AccountDAO implements Serializable {
                                 + "WHERE UserID = ? ";
                         stm = con.prepareStatement(sql);
 //                        stm.setString(1, Username);
-                        stm.setString(2, Email);
-                        stm.setString(3, Address);
-                        stm.setString(4, PhoneNumber);
-                        stm.setString(5, UserID);
+                        stm.setString(1, Email);
+                        stm.setString(2, Address);
+                        stm.setString(3, PhoneNumber);
+                        stm.setString(4, UserID);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
