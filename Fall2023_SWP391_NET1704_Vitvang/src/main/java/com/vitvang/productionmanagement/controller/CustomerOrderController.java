@@ -7,6 +7,8 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.customer.CustomerDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,31 +29,41 @@ import java.util.logging.Logger;
 public class CustomerOrderController extends HttpServlet {
 
       private final String CustomerOrder = "CustomerOrder.jsp";
+      private final String CustomerOrderDetail = "CustomerOrderDetail.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "ErrorPage.html";
             try {
+                  String button = request.getParameter("btAction");
+                  String OrderID = request.getParameter("txtOrderID");
                   HttpSession session = request.getSession();// phai luon co san session
-                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
-                  if (currUser == null) {
-                        return;
-                  }
-//                  int roleID = currUser.getRoleID();
-                  //0. check role 
-//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                  UserDTO user = (UserDTO) session.getAttribute("USER");
+//                  if (user == null) {
+//                        return;
+//                  }
+//                  int roleID = user.getRoleID();
+////                  0. check role 
+//                  if (!checkRole(roleID, Constant.isCustomer)) {
 //                        return;
 //                  }
                   /* TODO output your page here. You may use following sample code. */
-                  UserDTO user = (UserDTO) session.getAttribute("USER");
+
                   String UserID = user.getUserID();
 
                   CustomerDAO dao = new CustomerDAO();
-                  dao.getCustomerOrder(UserID);
-                  List<CageDTO> list = dao.getListOrder();
-                  request.setAttribute("CUSTOMER_ORDER", list);
-                  url = CustomerOrder;
+                  if (!button.equals("View Order Detail")) {
+                        dao.getCustomerOrder(UserID);
+                        List<CageDTO> list = dao.getListOrder();
+                        request.setAttribute("CUSTOMER_ORDER", list);
+                        url = CustomerOrder;
+                  } else {
+                        dao.getCustomerOrderDetail(UserID, OrderID);
+                        List<CageDTO> list = dao.getListOrder();
+                        request.setAttribute("CUSTOMER_ORDER_DETAIL", list);
+                        url = CustomerOrderDetail;
+                  }
             } catch (SQLException e) {
                   e.printStackTrace();
             } finally {

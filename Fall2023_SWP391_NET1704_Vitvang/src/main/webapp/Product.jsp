@@ -20,7 +20,53 @@
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
           <title>Production</title>
      </head>
      <body>
@@ -36,26 +82,24 @@
                <div class="logo-name" style="display: block;">
 
                     <div class="logo-image">
-                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                </div>
                <div class="menu-items">
                     <ul class="nav-links">
-                         <!--                              <li ><a href="#">
-                                                                 <i class="uil uil-estate"></i>
-                                                                 <span class="link-name">Dahsboard</span>
-                                                            </a></li>-->
+
                          <li ><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
                          <li ><a href="MainController?btAction=Customers">
-                                   <i class="uil uil-bill"></i>
+                                   <i class="uil uil-user"></i>
                                    <span class="link-name">Customers</span>
                               </a></li>
                          <li ><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
+                                   <i class="uil uil-clipboard-alt"></i>
+
                                    <span class="link-name">Production</span>
                               </a></li>
                          <li ><a href="MainController?btAction=Production process">
@@ -74,17 +118,6 @@
                                    <i class="uil uil-signout"></i>
                                    <span class="link-name" >Logout</span>
                               </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
                     </ul>
                </div>
           </nav>
@@ -92,7 +125,7 @@
                <div class="header">
                     <h1>Production List</h1>
                     <div class="search">
-                         <form action="MainController" method="POST">
+                        <form action="MainController" method="POST">
                               <input type="text" placeholder="Search name..." name="txtSearchValue" value="${param.txtSearchValue}" name="txtSearchValue">
                               <button type="submit" value="SearchCage" name="btAction">Search</button>
                          </form>
@@ -117,7 +150,7 @@
                                                        <div class="main-wrapper">
                                                             <h3 class="main-header"> ${dto.getCageID()} </h3>
                                                             <h1 class="main-title"> ${dto.getName()} </h1>
-                                                            <h2 class="main-subtitle"><fmt:formatNumber value="${dto.getPrice()}" type="number" pattern="#,##0" /> ₫ </h2>
+                                                            <h2 class="main-subtitle"><fmt:formatNumber value="${dto.getPrice() * 10000}" type="number" pattern="#,##0" /> ₫ </h2>
                                                        </div>
                                                        <div class="main-content">
                                                             <div class="main-content__title">Come From: ${dto.getOrigin()}

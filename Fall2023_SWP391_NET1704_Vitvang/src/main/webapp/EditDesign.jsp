@@ -12,7 +12,54 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-          <title>Edit Design</title>
+          <title>Edit Design of Cage</title>
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chi?m kho?ng tr?ng còn l?i */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 300px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
 
      <body>
@@ -28,15 +75,14 @@
           <c:set var="errorADD" value="${requestScope.ADD_DESIGN_ERR}"></c:set>
                <nav>
 
-                    <div class="logo-name">
+                    <div class="logo-name"style="
+                         display: block;">
                          <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
+                              <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
+                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+                    </div>
 
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
-
-              <div class="menu-items">
+                    <div class="menu-items">
                          <ul class="nav-links">
                               <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
@@ -66,23 +112,14 @@
                                         <i class="uil uil-signout"></i>
                                         <span class="link-name" >Logout</span>
                                    </a></li>
-
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
-
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
                          </ul>
                     </div>
           </nav>
           <section class="dashboard">
                <h1>Design</h1>
-               <h3>Cage: ${param.txtCageName}</h3>
+               <h3>Cage Name: <font style="color: red">
+                    ${param.txtCageName}
+                    </font> </h3>
                <div class="table-container">
                     <table>
                          <thead>
@@ -244,16 +281,17 @@
                                    </div>
                               </div>
 
-                              <div class="form-step">
-                                   <label for="username">Note:</label>
-                                   <div class="input-container">
-                                        <!--                                        <input placeholder="Employee" class="input-field" type="number" readonly=""
-                                                                                       name="txtCompletionCage" value="1" oninput="this.value = Math.abs(this.value)">-->
-                                        <h5>"Time process" and "Number of employee" are for 1 cage</h5>
-                                        <p>Check detail before submit</p>
-                                        <span class="input-highlight"></span>
-                                   </div>
+                              <!--<div class="form-step">-->
+                              <label for="username" style="color: red; font-weight: 800">Note:</label>
+                              <br>
+                              <div class="input-container">
+                                   <!--                                        <input placeholder="Employee" class="input-field" type="number" readonly=""
+                                                                                  name="txtCompletionCage" value="1" oninput="this.value = Math.abs(this.value)">-->
+                                   <h4>"Time process" and "Number of employee" are for 1 cage.</h4>
+                                   <h4>Check detail before submit.</h4>
+                                   <span class="input-highlight"></span>
                               </div>
+                              <!--</div>-->
 
                               <div class="form-step">
 

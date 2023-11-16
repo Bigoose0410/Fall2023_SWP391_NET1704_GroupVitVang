@@ -35,13 +35,14 @@ public class CreateAccountController extends HttpServlet {
 
       private static final String ERROR_PAGE = "ErrorPage.html";
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
-      private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
       private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";//check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
-      private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
+      private final String SPACE_PATTERN = "^\\S+$"; //check neu khong co khoang trong
       private final String NOT_NUMBER_PATTERN = "^[^0-9]*$"; //khong chua so
       private final String CHECK_SPACE_PATTERN = "^(?!.*\\s{2})\\S+(\\s\\S+)?\\s{0,4}\\S+$"; //dau va cuoi khong co khoang trang, giua 2 tu khong qua 2 khoang trang, toi da 5 khoang trang
+      private final String CHECK_SPACE_FOR_ADDRESS = "^\\w+(\\s\\w+)*$"; //dau cuoi khong co khoang trang, giua 2 tu toi da 1 khoang trang
+      private final String CHECK_SPACE_FOR_NAME = "^(?!.*\\s{6,})\\w+(\\s\\w+){0,5}$"; //dau cuoi khong co khoang trang, giua 2 tu toi da 1 khoang trang, tong cong toi da 5 khoang trang
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
@@ -77,7 +78,8 @@ public class CreateAccountController extends HttpServlet {
                   }
                   int roleID = currUser.getRoleID();
                   //0. check role 
-                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                  if (!checkRole(roleID, Constant.isAdmin )) {
+
                         return;
                   }
 
@@ -102,18 +104,17 @@ public class CreateAccountController extends HttpServlet {
                         foundErr = true;
                   }
 
-                  if (RoleID < 1 || RoleID > 4) {
-                        error.setRoleIDFormatErr("Role ID (1 - 4)");
-                        foundErr = true;
-                  }
-
+//                  if (RoleID < 1 || RoleID > 4) {
+//                        error.setRoleIDFormatErr("Role ID (1 - 4)");
+//                        foundErr = true;
+//                  }
                   if (Name.trim().length() < 6 || Name.trim().length() > 30) {
                         error.setNameFormatErr("Name (6 - 30 chars)");
                         foundErr = true;
                   } else if (!checkFormat(Name, NOT_NUMBER_PATTERN, true)) {
                         error.setNameFormatErr("Name cannot include number");
                         foundErr = true;
-                  } else if (!checkFormat(Name, CHECK_SPACE_PATTERN, true)) {
+                  } else if (!checkFormat(Name, CHECK_SPACE_FOR_NAME, true)) {
                         error.setNameFormatErr("Wrong format about space");
                         foundErr = true;
                   }
@@ -121,7 +122,7 @@ public class CreateAccountController extends HttpServlet {
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {
                         error.setEmailFormatErr("Wrong format email (***@gmail.com");
                         foundErr = true;
-                  } else if (!checkFormat(Email, CHECK_SPACE_PATTERN, true)) {
+                  } else if (!checkFormat(Email, SPACE_PATTERN, true)) {
                         error.setEmailFormatErr("Email cannot inclue space");
                         foundErr = true;
                   }
@@ -134,7 +135,7 @@ public class CreateAccountController extends HttpServlet {
                   if (Adress.trim().length() < 6) {
                         error.setAddressFormatErr("Addrress too short (>6)");
                         foundErr = true;
-                  } else if (!checkFormat(Adress, CHECK_SPACE_PATTERN, true)) {
+                  } else if (!checkFormat(Adress, CHECK_SPACE_FOR_ADDRESS, true)) {
                         error.setAddressFormatErr("Wrong format about space");
                         foundErr = true;
                   }
@@ -227,6 +228,5 @@ public class CreateAccountController extends HttpServlet {
                           .getName()).log(Level.SEVERE, null, ex);
             }
       }
-
 
 }

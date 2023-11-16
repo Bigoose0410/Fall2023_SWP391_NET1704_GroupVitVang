@@ -74,100 +74,154 @@ public class MainController extends HttpServlet {
             String button = request.getParameter("btAction");
             String url = ERROR_PAGE;
             try {
-                  if (button == null) {
+                  if (null == button) {
                         url = StartUpController;
-                  } else if (button.equals("Login")) {
-                        url = LoginController;
-                  } else if (button.equals("Log Out")) {
-                        url = LogOutController;
-                  } else if (button.equals("Search")) {
-                        url = SearchOrderController;
-                  } else if (button.equals("Update")) {
-                        url = UpdateOrderController;
-                  } else if (button.equals("Delete")) {
-                        url = DeleteOrderController;
-                  } else if (button.equals("Order")) {
-                        url = OrderHistoryController;
-                  } else if (button.equals("New Order")) {
-                        url = ListCageController;
-                  } else if (button.equals("Create Order")) {
-                        url = AddOrderController;
-                  } else if (button.equals("addToCart")) {
-                        url = AddItemToCartController;
-                  } else if (button.equals("RemoveItemFromCart")) {
-                        url = RemoveItemFromCartController;
-                  } else if (button.equals("Search Customer")) {
-                        url = SearchCustomerController;
-                  } else if (button.equals("New Customer")) {
-                        url = CreateUserController;
-                  } else if (button.equals("Create New Customer")) {
-                        url = ShowCusCreateFormController;
-                  } else if (button.equals("View Detail")) {
-                        url = CalculateDetailMaterial;
-                  } else if (button.equals("Detail")) {
-                        url = DetailOrderController;
-                  } else if (button.equals("SearchCage")) {
-                        url = SearchCageController;
-                  } else if (button.equals("DetailProduct")) {
-                        url = DetailProductController;
-                  } else if (button.equals("EditDesign")) {
-                        url = EditDesignController;
-                  } else if (button.equals("AddDesignProcess")) {
-                        url = AddDesignProcess;
-                  } else if (button.equals("updateDesign")) {
-                        url = UpdateDesignProcessController;
-                  } else if (button.equals("UpdateMaterialofCage")) {
-                        url = UpdateMaterialofCageController;
-                  } else if (button.equals("EditMaterial")) {
-                        url = EditMaterialController;
-                  } else if (button.equals("DeleteMaterialofCage")) {
-                        url = DeleteMaterialofCageController;
-                  } else if (button.equals("AddMaterialToCage")) {
-                        url = AddMaterialToCageController;
-                  } else if (button.equals("Production process")) {
-                        url = ProcessController;
-                  } else if (button.equals("AddToProcess")) {
-                        url = AutoAddProcessController;
-                  } else if (button.equals("Customers")) {
-                        url = CustomerController;
-                  } else if (button.equals("StaffViewCustomerDetail")) {
-                        url = CustomerController;
-                  } else if (button.equals("ViewProcessDetail")) {
-                        url = ProcessController;
-                  } else if (button.equals("UpdateStatusProcess")) {
-                        url = UpdateStatusProcessController;
-                  } else if (button.equals("UpdateEmployee")) {
-                        url = UpdateEmpProcessController;
-                  } else if (button.equals("AddNewCage")) {
-                        url = AddCageController;
-                  } else if (button.equals("FormAddCage")) {
-                        url = ShowAddCageFormController;
-                  } else if (button.equals("Manage Account")) {
-                        url = ManageAccountController;
-                  } else if (button.equals("ViewAccountDetail")) {
-                        url = ViewAccountDetailController;
-                  } else if (button.equals("UpdateAccount")) {
-                        url = UpdateAccountController;
-                  } else if (button.equals("CreateAccount")) {
-                        url = CreateAccountController;
-                  } else if (button.equals("DeleteAccount")) {
-                        url = DeleteAccountController;
-                  } else if (button.equals("SearchAccount")) {
-                        url = SearchAccountController;
-                  } else if (button.equals("Dashboard")) {
-                        url = DashboardController;
-                  } else if (button.equals("CustomerAccount")) {
-                        url = CustomerAccountController;
-                  } else if (button.equals("CustomerOrder")) {
-                        url = CustomerOrderController;
-                  } else if (button.equals("CustomerTracking")) {
-                        url = CustomerProcessController;
-                  } else if (button.equals("AddMaterial")) {
-                        url = AddMaterialController;
-                  } else if (button.equals("View All Material")) {
-                        url = ViewMaterialController;
-                  } else if (button.equals("CustomerUpdaterAccount")) {
-                        url = CustomerUpdateAccountController;
+                  } else {
+                        switch (button) {
+                              case "Login":
+                                    url = LoginController;
+                                    break;
+                              case "Log Out":
+                                    url = LogOutController;
+                                    break;
+                              case "Search":
+                                    url = SearchOrderController;
+                                    break;
+                              case "Update":
+                                    url = UpdateOrderController;
+                                    break;
+                              case "Delete":
+                                    url = DeleteOrderController;
+                                    break;
+                              case "Order":
+                                    url = OrderHistoryController;
+                                    break;
+                              case "New Order":
+                                    url = ListCageController;
+                                    break;
+                              case "Create Order":
+                                    url = AddOrderController;
+                                    break;
+                              case "addToCart":
+                                    url = AddItemToCartController;
+                                    break;
+                              case "RemoveItemFromCart":
+                                    url = RemoveItemFromCartController;
+                                    break;
+                              case "Search Customer":
+                                    url = SearchCustomerController;
+                                    break;
+                              case "New Customer":
+                                    url = CreateUserController;
+                                    break;
+                              case "Create New Customer":
+                                    url = ShowCusCreateFormController;
+                                    break;
+                              case "View Detail":
+                                    url = CalculateDetailMaterial;
+                                    break;
+                              case "Detail":
+                                    url = DetailOrderController;
+                                    break;
+                              case "SearchCage":
+                                    url = SearchCageController;
+                                    break;
+                              case "DetailProduct":
+                                    url = DetailProductController;
+                                    break;
+                              case "EditDesign":
+                                    url = EditDesignController;
+                                    break;
+                              case "AddDesignProcess":
+                                    url = AddDesignProcess;
+                                    break;
+                              case "updateDesign":
+                                    url = UpdateDesignProcessController;
+                                    break;
+                              case "UpdateMaterialofCage":
+                                    url = UpdateMaterialofCageController;
+                                    break;
+                              case "EditMaterial":
+                                    url = EditMaterialController;
+                                    break;
+                              case "DeleteMaterialofCage":
+                                    url = DeleteMaterialofCageController;
+                                    break;
+                              case "AddMaterialToCage":
+                                    url = AddMaterialToCageController;
+                                    break;
+                              case "Production process":
+                                    url = ProcessController;
+                                    break;
+                              case "AddToProcess":
+                                    url = AutoAddProcessController;
+                                    break;
+                              case "Customers":
+                                    url = CustomerController;
+                                    break;
+                              case "StaffViewCustomerDetail":
+                                    url = CustomerController;
+                                    break;
+                              case "ViewProcessDetail":
+                                    url = ProcessController;
+                                    break;
+                              case "UpdateStatusProcess":
+                                    url = UpdateStatusProcessController;
+                                    break;
+                              case "UpdateEmployee":
+                                    url = UpdateEmpProcessController;
+                                    break;
+                              case "AddNewCage":
+                                    url = AddCageController;
+                                    break;
+                              case "FormAddCage":
+                                    url = ShowAddCageFormController;
+                                    break;
+                              case "Manage Account":
+                                    url = ManageAccountController;
+                                    break;
+                              case "ViewAccountDetail":
+                                    url = ViewAccountDetailController;
+                                    break;
+                              case "UpdateAccount":
+                                    url = UpdateAccountController;
+                                    break;
+                              case "CreateAccount":
+                                    url = CreateAccountController;
+                                    break;
+                              case "DeleteAccount":
+                                    url = DeleteAccountController;
+                                    break;
+                              case "SearchAccount":
+                                    url = SearchAccountController;
+                                    break;
+                              case "Dashboard":
+                                    url = DashboardController;
+                                    break;
+                              case "CustomerAccount":
+                                    url = CustomerAccountController;
+                                    break;
+                              case "CustomerOrder":
+                                    url = CustomerOrderController;
+                                    break;
+                              case "CustomerTracking":
+                                    url = CustomerProcessController;
+                                    break;
+                              case "AddMaterial":
+                                    url = AddMaterialController;
+                                    break;
+                              case "View All Material":
+                                    url = ViewMaterialController;
+                                    break;
+                              case "CustomerUpdaterAccount":
+                                    url = CustomerUpdateAccountController;
+                                    break;
+                              case "View Order Detail":
+                                    url = CustomerOrderController;
+                                    break;
+                              default:
+                                    break;
+                        }
                   }
 
             } finally {

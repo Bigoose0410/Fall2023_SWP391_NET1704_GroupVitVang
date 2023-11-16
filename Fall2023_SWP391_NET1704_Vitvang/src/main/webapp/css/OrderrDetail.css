@@ -148,6 +148,27 @@ nav {
         justify-content: center;
         color: #222;
     }
+    .nav-links li a:hover:before{
+        content: "";
+        position: absolute;
+        left: -7px;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+    }
+    body.dark li a:hover:before{
+        background-color: var(--text-color);
+    }
+    .menu-items li a i{
+        font-size: 24px;
+        min-width: 45px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #222;
+    }
     .menu-items li a .link-name{
         font-size: 20px;
         font-weight: 400;
@@ -380,6 +401,10 @@ img {
     color: var(--text-color);
      text-align: center;
 }
+.menu-items .logout-mode {
+    padding-bottom: 300px;
+    border-top: 1px solid var(--border-color);
+}
 
 @media (max-width: 1000px) {
     nav{
@@ -512,7 +537,7 @@ background-color: #222;
   justify-content: space-between;
 }
 .nav-links li {
-  padding: 10px 0; 
+  padding: 20px 0; 
 
 }
 button:active {

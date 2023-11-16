@@ -19,7 +19,7 @@ public class DBHelper {
         public static Connection makeConnection() {
                 Connection conn = null;
                 try {
-                         String dbURL = "jdbc:sqlserver://HandInTheAIR:1433;databaseName=ProductionManagementV_5;encrypt=true;trustServerCertificate=true;";
+                         String dbURL = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=ProductionManagementV_7;encrypt=true;trustServerCertificate=true;";
                         String user = "sa";
                         String pass = "12345";
                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -30,15 +30,16 @@ public class DBHelper {
                 return conn;
         }
 
-        public static void closeConnection(Connection conn) {
 
-                if (conn != null) {
-                        try {
-                                conn.close();
-                        } catch (SQLException ex) {
-                                Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                }
-        }
-      
+      public static void closeConnection(Connection conn) {
+
+            if (conn != null) {
+                  try {
+                        conn.close();
+                  } catch (SQLException ex) {
+                        Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+            }
+      }
+
 }

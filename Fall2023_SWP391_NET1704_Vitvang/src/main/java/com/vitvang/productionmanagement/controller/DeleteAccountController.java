@@ -58,7 +58,7 @@ public class DeleteAccountController extends HttpServlet {
                         }
                   }
                   if (check && !RoleID.equals("1")) {
-                        boolean result = dao.deleteAccount(Username);
+                        boolean result = dao.deleteAccount(UserID);
                         if (result) {
                               url = "MainController?btAction=Manage Account";
                         }

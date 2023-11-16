@@ -22,7 +22,53 @@
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
           <link href="../java/bootstrap-5.3.2-dist/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
           <title>Order</title>
      </head>   
      <body>
@@ -38,33 +84,32 @@
           <c:set var="NumNewOrder" value="${requestScope.NEW_ORDER}"></c:set>
 
                <nav>
-
                     <div class="logo-name"style="
                          display: block;">
                          <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                               <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
-                     <div class="menu-items">
+                    <div class="menu-items">
                          <ul class="nav-links">
-                              <li ><a href="MainController?btAction=Search">
+                              <li><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
-                              <li ><a href="MainController?btAction=Customers">
+                              <li><a href="MainController?btAction=Customers">
                                         <i class="uil uil-user"></i>
                                         <span class="link-name">Customers</span>
                                    </a></li>
-                              <li ><a href="${productionList}">
+                              <li><a href="${productionList}">
                                         <i class="uil uil-clipboard-alt"></i>
                                         <span class="link-name">Production</span>
                                    </a></li>
-                              <li ><a href="MainController?btAction=Production process">
+                              <li><a href="MainController?btAction=Production process">
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
 
-                              <li ><a href="MainController?btAction=View All Material">
+                              <li><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
@@ -75,17 +120,6 @@
                                         <i class="uil uil-signout"></i>
                                         <span class="link-name" >Logout</span>
                                    </a></li>
-
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
-
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
                          </ul>
                     </div>
 
@@ -220,8 +254,8 @@
 
 
                                              <td class="data-list" style="text-align: start ;font-size:18px">
-                                                  ${dto.getTotalPrice()}</td>
-
+                                                  <fmt:formatNumber value="${dto.getTotalPrice()}" type="number" pattern="#,##0" /> ₫
+                                             </td>
 
 
                                              <td class="data-list" style="text-align: start ;font-size:18px">
@@ -270,7 +304,7 @@
                     <div class="pagination">
                          <div class="pagination__option" style="text-align: end">
                               <c:if test="${requestScope.indexCurrent > 1}">
-                                   <a class="page" href="MainController?btAction=Search&txtSearchValue=${searchValue}&page=1">Frist</a>
+                                   <a class="page" href="MainController?btAction=Search&txtSearchValue=${searchValue}&page=1">First</a>
                                    <a class="page" href="MainController?btAction=Search&txtSearchValue=${searchValue}&page=${requestScope.indexCurrent-1}">
                                         <i class="fa fa-angle-left"></i>
                                    </a>

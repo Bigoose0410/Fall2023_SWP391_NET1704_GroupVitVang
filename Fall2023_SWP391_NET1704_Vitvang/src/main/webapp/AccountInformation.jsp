@@ -22,6 +22,53 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
           <title>Account's Information</title>
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
 
      <body>
@@ -41,7 +88,7 @@
                <div class="logo-name" style="
                     display: block;">
                     <div class="logo-image">
-                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a src="HomePage.html"><img src="img/admin.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
@@ -110,6 +157,7 @@
           <c:set var="err" value="${requestScope.UPDATE_ACCOUNT_ERR}"></c:set>
           <c:set var="update_message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
           <c:set var="delete_message" value="${requestScope.DELETE_MESSAGE}"></c:set>
+          <c:set var="message" value="${requestScope.MESSAGE}" ></c:set>
                <section class="dashboard">
                     <div class="form" style="color: black;">
                          <div class="info_form">
@@ -121,7 +169,7 @@
                          </div>
                     <c:forEach var="dto" items="${result}">
                          <div class="info_form1">
-                             <form action="MainController" method="POST">
+                              <form action="MainController" method="POST">
                                    <div class="form-row2">
                                         <label for="userID">User ID: <i>${dto.getUserID()}</i></label>
                                         <input type="hidden" id="userID" name="txtUserID" value="${dto.getUserID()}">
@@ -136,25 +184,16 @@
                                         <label for="gender">Gender: <i>${dto.getSex()}</i></label>    
                                    </div>
 
-
+                                   <div class="form-row2">
+                                        <label for="name">Username: <i>${dto.getUsername()}</i></label>                  
+                                   </div>
                                    <div class="form-row">
-                                        <label for="username">Username: </label>
-                                        <br>
-                                        <br>
-                                        <input type="text" id="username" name="txtUsername" value="${dto.getUsername()}" required="">
-                                        <c:if test="${not empty err.getUsernameExistErr()}">
-                                             <p>${err.getUsernameExistErr()}</p>
-                                        </c:if>
-                                        <br>
-                                        <br>
-                                        <c:if test="${not empty err.getUsernameFormatErr()}">
-                                             <p >${err.getUsernameFormatErr()}</p>
-                                        </c:if>
-                                        <br>
+
                                         <label for="password" >Password: </label>
                                         <br>
                                         <br>
-                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}""required="" placeholder="***************************">
+                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}" placeholder="***************************">
+
                                         <br>
                                         <br>
                                         <c:if test="${not empty err.getPasswordFormatErr()}">
@@ -162,7 +201,7 @@
                                         </c:if>
                                    </div>
 
-                                        
+
                                    <div class="form-row">
                                         <label for="email">Email: </label>
                                         <br>
@@ -207,8 +246,8 @@
                               </form>
                          </div>
                     </c:forEach>
-                    <c:if test="${not empty update_message}">
-                         <h1>${update_message}</h1>
+                    <c:if test="${not empty message}">
+                         <h1>${message}</h1>
                     </c:if>
                     <c:if test="${not empty delete_message}">
                          <h1>${delete_message}</h1>

@@ -3,9 +3,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
 /* 
-    Created on : Oct 30, 2023, 2:11:39 PM
-    Author     : Nguyen Ba Tung
+    Created on : Nov 5, 2023, 6:42:46 PM
+    Author     : Admin
 */
+
 * {
      margin: 0;
      padding: 0;
@@ -92,19 +93,6 @@ nav {
      background-color: var(--box1-color);
      border-color: #e6e6cc;
 }
-
-.nav-links {
-     flex: 1 1 auto;
-
-     display: flex;
-     flex-direction: column;
-     justify-content: space-between;
-}
-
-.nav-links li {
-     padding: 10px 0;
-}
-
 
 .nav-links {
      flex: 1 1 auto;
@@ -286,11 +274,31 @@ body.dark nav {
      background-color: var(--panel-color);
      min-height: 100vh;
      width: calc(100% - 250px);
-     padding: 10px 5px;
+     padding: 0px 0px;
      transition: var(--tran-05);
 }
 
 /*Dashboard*/
+/* Header Styles */
+.header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     background-color: #2193b0; /* Change the background color as needed */
+     color: #fff; /* Change the text color as needed */
+     padding: 15px 20px;
+     position: sticky;
+     top: 0;
+     position: -webkit-sticky;
+     z-index: 1;
+}
+
+/* Logo Styles */
+.header h1 {
+     font-size: 24px;
+     margin: 0;
+}
+
 /* Search Styles */
 .search {
      display: flex;
@@ -298,137 +306,174 @@ body.dark nav {
 }
 
 .search input {
-     width: 300px;
+     width: 500px;
      padding: 10px;
      margin-right: 10px;
-     border: 1px solid #757575;
+     border: none;
      border-radius: 5px;
      outline: none;
-}
-
-.search input:hover {
-     border: 1px solid #333;
 }
 
 .search button {
      padding: 10px 10px;
      border: none;
      border-radius: 5px;
-     background-color: blue;
-     /* Change the button color as needed */
+     background-color: blue; /* Change the button color as needed */
      color: #fff;
      cursor: pointer;
 }
 
 .search button:hover {
-     background-color: rgb(14, 14, 180);
-     /* Change the button color as needed */
+     background-color: rgb(14, 14, 180); /* Change the button color as needed */
 }
 
-h1 {
-     text-align: center;
-     margin: 10px;
+/* Navigation Styles */
+header ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
 }
 
-/*account table*/
-.account_table,
-.processing_table {
-     margin-top: 20px;
+header li {
+     display: inline;
+     margin-left: 20px; /* Adjust the spacing between items */
 }
 
-.table-container {
-     overflow-x: auto;
+header a {
+     text-decoration: none;
+     color: #fff;
+     font-weight: bold;
+     font-size: 16px;
+}
+
+/* Container */
+.container {
+     max-width: 1200px;
+     margin: 0 auto;
+}
+
+.menu-icon {
+     color: #333;
+     text-decoration: none;
+}
+
+.logo {
+     max-width: 100%;
+     height: auto;
+}
+
+/* Swiper Slider */
+.mySwiper {
+     position: relative;
+}
+
+.swiper-wrapper {
+     display: flex;
+     transition: transform 0.3s ease;
+}
+
+.swiper-slide {
+     flex: 0 0 33.33%;
+     box-sizing: border-box;
+     padding: 20px;
+}
+
+/* Main Content */
+.main {
+     display: flex;
      border-radius: 10px;
-     border: 1px solid black;
+     overflow: hidden;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.table-container table {
+.left-side {
+     flex: 1;
+     padding: 30px;
+}
+
+.main-wrapper {
+     margin-bottom: 20px;
+}
+
+.main-header {
+     font-size: 18px;
+     color: #333;
+}
+
+.main-title {
+     font-size: 32px;
+     font-weight: bold;
+     color: #333;
+}
+
+.main-subtitle {
+     font-size: 24px;
+     font-weight: bold;
+     color: #333;
+}
+
+.main-content__title,
+.main-content__subtitle {
+     margin-bottom: 10px;
+     font-size: 16px;
+     color: #555;
+}
+
+/* Right Side Image */
+.center {
+     flex: 0 0 66.66%;
+     position: relative;
+     overflow: hidden;
+}
+
+.right-side__img {
+     position: absolute;
+     top: 0;
+     left: -50px;
      width: 100%;
-     border-collapse: collapse;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
 }
 
-.table-container th,
-.table-container td {
-     padding: 10px;
-     text-align: center;
+.bottle-bg {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: cover;
 }
 
-.table-container th {
-     color: white;
-     background-color: #2193b0;
-}
-
-.table-container tbody tr:nth-child(even) {
-     background-color: #e6fcfa;
-}
-
-.table-container tbody tr:hover {
-     background-color: #ddd;
-}
-
-/* Button Styling */
-button {
+/* Button Icon */
+.toggle-button,
+.toggle-button1 {
+     background: none;
+     border: none;
      cursor: pointer;
-     color: black;
+}
+
+.toggle-button i {
+     font-size: 24px;
+     color: #333;
 }
 
 /* Button Hover Effect */
-button:hover {
-     cursor: pointer;
+.toggle-button:hover,
+.toggle-button1:hover {
+     color: #007bff;
 }
 
-.button a {
-     background-color: #007bff;
-     color: white;
-     padding: 5px 10px;
-     border: none;
-     border-radius: 4px;
-     cursor: pointer;
-     text-decoration: none;
-     margin-right: 10px;
-     padding: 10px;
+.more-menu {
+     background-color: #007bff; /* Set the background color */
+     color: #fff; /* Set the text color */
+     padding: 10px 20px; /* Set padding (top/bottom, left/right) */
+     border: none; /* Remove border */
+     border-radius: 5px; /* Add rounded corners */
+     font-size: 16px; /* Set font size */
+     cursor: pointer; /* Change cursor on hover */
+     margin-top: 20px;
 }
 
-.button a:hover {
-     background-color: #206fc5;
-}
-
-.header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     /* Optional: Align elements vertically */
-     padding: 10px 0px;
-}
-
-/*Group box*/
-.group-box {
-     display: inline-block;
-     width: 30%;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-     padding: 10px;
-     margin: 10px;
-     background-color: #f9f9f9;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.group-box p {
-     margin: 5px 5px;
-}
-
-.group-content {
-     margin-top: 10px;
-}
-
-.box {
-     margin-left: 50px;
-}
-
-span a {
-     text-decoration: none; /* Remove the default underline */
-}
-
-span a:hover {
-     text-decoration: underline; /* Add underline on hover */
+.more-menu:hover {
+     background-color: #0056b3; /* Change background color on hover */
 }
