@@ -27,6 +27,53 @@
           <!--<script src="index.js"></script>-->
 
           <title>Production Process</title>
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
 
      <body>
@@ -42,7 +89,7 @@
                <div class="logo-name"style="
                     display: block;">
                     <div class="logo-image">
-                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                     <div class="menu-items">
@@ -75,17 +122,6 @@
                                         <i class="uil uil-signout"></i>
                                         <span class="link-name" >Logout</span>
                                    </a></li>
-
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
-
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
                          </ul>
                     </div>
           </nav>
@@ -101,14 +137,6 @@
                          <c:if test="${not empty result}">
                               <table class="tablesorter-custom">
                                    <thead>
-                                        <tr class="search1">
-                                             <td></td>
-                                             <td> <input type="search" data-column="1" placeholder="Customer Name"></td>
-                                             <td> <input type="search" data-column="2" placeholder="OrderID"></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                        </tr>
                                         <tr>
                                              <th>No.</th>
                                              <th>Customer Name</th>
@@ -197,14 +225,6 @@
                          <c:if test="${not empty result}">
                               <table class="tablesorter-custom">
                                    <thead>
-                                        <tr class="search1">
-                                             <td></td>
-                                             <td> <input type="search" data-column="1" placeholder="Customer Name"></td>
-                                             <td> <input type="search" data-column="2" placeholder="OrderID"></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                        </tr>
                                         <tr>
                                              <th>No.</th>
                                              <th>Customer Name</th>
@@ -303,14 +323,6 @@
                          <c:if test="${not empty result}">
                               <table class="tablesorter-custom">
                                    <thead>
-                                        <tr class="search1">
-                                             <td></td>
-                                             <td> <input type="search" data-column="1" placeholder="Customer Name"></td>
-                                             <td> <input type="search" data-column="2" placeholder="OrderID"></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                        </tr>
                                         <tr>
                                              <th>No.</th>
                                              <th>Customer Name</th>

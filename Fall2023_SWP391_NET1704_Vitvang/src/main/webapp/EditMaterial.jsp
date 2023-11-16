@@ -20,6 +20,53 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
           <title>Edit Material</title>
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -44,21 +91,15 @@
                     <div class="logo-name"style="
                          display: block;">
                          <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                               <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
-<!--                              <li ><a href="#">
-                                        <i class="uil uil-estate"></i>
-                                        <span class="link-name">Dahsboard</span>
-                                   </a></li>-->
+                         
                               <li ><a href="MainController?btAction=search">
-                              <!--                              <li ><a href="#">
-                                                                      <i class="uil uil-estate"></i>
-                                                                      <span class="link-name">Dahsboard</span>
-                                                                 </a></li>-->
-                             
+                                       
+
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -74,36 +115,18 @@
                                         <i class="uil uil-chart-line"></i>
                                         <span class="link-name">Production process</span>
                                    </a></li>
-<!--                              <li > <a href="#">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Reports</span>
-                                   </a></li>-->
+                             
                               <li ><a href="MainController?btAction=View All Material">
                                         <i class="uil uil-screw"></i>
                                         <span class="link-name">Material</span>
                                    </a></li>
-<!--                              <li > <a href="#">
-                                        <i class="uil uil-archive-alt"></i>
-                                        <span class="link-name">Inventory</span>
-                                   </a></li>-->
+                           
                          </ul>
-
                          <ul class="logout-mode">
                               <li><a href="${logout_query}">
                                         <i class="uil uil-signout"></i>
                                         <span class="link-name" >Logout</span>
                                    </a></li>
-
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
-
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
                          </ul>
                     </div>
           </nav>
@@ -128,7 +151,7 @@
                          <tbody>
                               <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
                               <div action="MainController">
-                                   <form action="MainController">
+                                   <form action="MainController" method="POST">
                                         <tr>
                                              <td>
                                                   ${counter.count}
@@ -257,7 +280,7 @@
                                         </td>
                                    </tr>
                               </table>
-                                <input type="hidden" name="txtCageID" value="${param.txtCageID}"/>
+                              <input type="hidden" name="txtCageID" value="${param.txtCageID}"/>
                               <button class="submit_button" type="submit" name="btAction" value="AddMaterialToCage">Add</button>
 
                          </form>

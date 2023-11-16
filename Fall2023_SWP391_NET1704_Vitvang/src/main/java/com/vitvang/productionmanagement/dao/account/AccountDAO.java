@@ -40,7 +40,8 @@ public class AccountDAO implements Serializable {
                         //2. create SQL statement string
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
-                                + "ON Users.RoleID = Role.RoleID AND Users.UserStatus = 'True' ";
+                                + "ON Users.RoleID = Role.RoleID AND Users.UserStatus = 'True' "
+                                + "WHERE NOT (Users.RoleID = 1) ";
                         //3. Create statement object
                         stm = con.prepareStatement(sql);
                         //4. Excute query
@@ -91,7 +92,7 @@ public class AccountDAO implements Serializable {
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID "
-                                + "Where UserID = ? AND Users.UserStatus = 'True'";
+                                + "Where UserID = ? AND Users.UserStatus = 'True' AND NOT (Users.RoleID = 1)";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, UserID);
                         rs = stm.executeQuery();
@@ -284,7 +285,7 @@ public class AccountDAO implements Serializable {
                         String sql = "SELECT Users.UserID, Users.Name, Users.PhoneNumber, Users.Sex, Users.Adress, Users.BirthDate, Users.Email, Users.Username, Users.Password, Users.RoleID, Role.Rolename, Users.UserStatus "
                                 + "FROM Users JOIN Role "
                                 + "ON Users.RoleID = Role.RoleID "
-                                + "WHERE Name LIKE ? AND UserStatus = 'True' ";
+                                + "WHERE Name LIKE ? AND UserStatus = 'True' AND NOT (Users.RoleID = 1)";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, "%" + SearchAccount + "%");
                         rs = stm.executeQuery();

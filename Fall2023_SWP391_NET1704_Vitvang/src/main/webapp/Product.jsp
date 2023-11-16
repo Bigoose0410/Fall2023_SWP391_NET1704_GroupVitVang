@@ -20,7 +20,53 @@
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
           <title>Production</title>
      </head>
      <body>
@@ -36,63 +82,52 @@
                <div class="logo-name" style="display: block;">
 
                     <div class="logo-image">
-                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                </div>
-                 <div class="menu-items">
-                         <ul class="nav-links">
-                              <li ><a href="MainController?btAction=Search">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Order</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-user"></i>
-                                        <span class="link-name">Customers</span>
-                                   </a></li>
-                              <li ><a href="${productionList}">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Production</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Production process">
-                                        <i class="uil uil-chart-line"></i>
-                                        <span class="link-name">Production process</span>
-                                   </a></li>
+               <div class="menu-items">
+                    <ul class="nav-links">
+                         <li ><a href="MainController?btAction=Search">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Customers">
+                                   <i class="uil uil-user"></i>
+                                   <span class="link-name">Customers</span>
+                              </a></li>
+                         <li ><a href="${productionList}">
+                                   <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Production process">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>
 
-                              <li ><a href="MainController?btAction=View All Material">
-                                        <i class="uil uil-screw"></i>
-                                        <span class="link-name">Material</span>
-                                   </a></li>
+                         <li ><a href="MainController?btAction=View All Material">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
 
-                         </ul>
-                         <ul class="logout-mode">
-                              <li><a href="${logout_query}">
-                                        <i class="uil uil-signout"></i>
-                                        <span class="link-name" >Logout</span>
-                                   </a></li>
-
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
-
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
-                         </ul>
-                    </div>
+                    </ul>
+                    <ul class="logout-mode">
+                         <li><a href="${logout_query}">
+                                   <i class="uil uil-signout"></i>
+                                   <span class="link-name" >Logout</span>
+                              </a></li>
+                    </ul>
+               </div>
           </nav>
           <section class="dashboard">
                <div class="header">
                     <h1>Danh Mục Sản Phẩm</h1>
                     <div class="search">
-                         <form action="MainController">
+                        <form action="MainController" method="POST">
                               <input type="text" placeholder="Search name..." name="txtSearchValue" value="${param.txtSearchValue}" name="txtSearchValue">
                               <button type="submit" value="SearchCage" name="btAction">Search</button>
                          </form>
-                         <form action="MainController">
+                         <form action="MainController" method="POST">
                               <button id="addBtn" style="background-color: greenyellow; color:black;margin-left: 30px"
                                       name="btAction" value="FormAddCage"
                                       >Add</button>
@@ -106,7 +141,7 @@
                          <div class="mySwiper">
                          <c:if test="${not empty result}">        
                               <c:forEach var="dto" items="${result}" varStatus="counter">
-                                   <form action="MainController">
+                                   <form action="MainController" method="POST">
                                         <div class="swiper-slide" id="savanna">
                                              <div class="main">
                                                   <div class="left-side">
@@ -151,7 +186,7 @@
                     <div id="popupForm" >
                          <div class="wrapper">
                               <header>Add New Cage</header>
-                              <form action="MainController">
+                              <form action="MainController" method="POST">
                                    <div class="dbl-field">
                                         <div class="field" >
                                              <input type="text" name="txtCageID" placeholder="CageID" value="${param.txtCageID}">
@@ -193,11 +228,11 @@
                                              <input type="text" name="txtOrigin" value="${param.txtOrigin}" placeholder="Origin">
                                              <i class="fa-solid fa-globe"></i>    
                                         </div>
-                                             <c:if test="${not empty error.getOriginLengthErr()}">
-                                                  <font color="red">
-                                                  ${error.getOriginLengthErr()}
-                                                  </font>
-                                             </c:if>
+                                        <c:if test="${not empty error.getOriginLengthErr()}">
+                                             <font color="red">
+                                             ${error.getOriginLengthErr()}
+                                             </font>
+                                        </c:if>
                                         <div class="message" style="margin-top:  25px">
                                              <textarea placeholder="Description"  name="txtDescription">${param.txtDescription}</textarea>
                                              <i class="fa-solid fa-pen"></i>

@@ -476,6 +476,15 @@ nav.close ~ .dashboard .top{
   font-size: 15px;
   cursor: pointer;
 }
+.nav-links li{
+     padding: 20px 0;
+}
+.nav-links {
+     flex: 1 1 auto; /* chiếm khoảng trống còn lại */
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
 .nav-links li a:hover i,
 .nav-links li a:hover .link-name {
 color: var(--hover-color);

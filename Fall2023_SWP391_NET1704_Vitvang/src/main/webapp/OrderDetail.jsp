@@ -21,6 +21,53 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
           <title>Order Detail</title>
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 300px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
      <body>
           <!-- log out link -->
@@ -41,52 +88,42 @@
                     <div class="logo-name"style="
                          display: block;">
                          <div class="logo-image">
-                              <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                              <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                               <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
-                    <div class="menu-items">
-                         <ul class="nav-links">
-                              <li ><a href="MainController?btAction=Search">
-                                        <i class="uil uil-bill"></i>
-                                        <span class="link-name">Order</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Customers">
-                                        <i class="uil uil-user"></i>
-                                        <span class="link-name">Customers</span>
-                                   </a></li>
-                              <li ><a href="${productionList}">
-                                        <i class="uil uil-clipboard-alt"></i>
-                                        <span class="link-name">Production</span>
-                                   </a></li>
-                              <li ><a href="MainController?btAction=Production process">
-                                        <i class="uil uil-chart-line"></i>
-                                        <span class="link-name">Production process</span>
-                                   </a></li>
+               </div>
+               <div class="menu-items">
+                    <ul class="nav-links">
+                         <li ><a href="MainController?btAction=Search">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Customers">
+                                   <i class="uil uil-user"></i>
+                                   <span class="link-name">Customers</span>
+                              </a></li>
+                         <li ><a href="${productionList}">
+                                   <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Production process">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>
 
-                              <li ><a href="MainController?btAction=View All Material">
-                                        <i class="uil uil-screw"></i>
-                                        <span class="link-name">Material</span>
-                                   </a></li>
+                         <li ><a href="MainController?btAction=View All Material">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
 
-                         </ul>
-                         <ul class="logout-mode">
-                              <li><a href="${logout_query}">
-                                        <i class="uil uil-signout"></i>
-                                        <span class="link-name" >Logout</span>
-                                   </a></li>
-
-                              <li class="mode">
-                                   <a href="#">
-                                        <i class="uil uil-moon"></i>
-                                        <span class="link-name">Dark Mode</span>
-                                   </a>
-
-                                   <div class="mode-toggle">
-                                        <span class="switch"></span>
-                                   </div>
-                              </li>
-                         </ul>
-                    </div>
+                    </ul>
+                    <ul class="logout-mode">
+                         <li><a href="${logout_query}">
+                                   <i class="uil uil-signout"></i>
+                                   <span class="link-name" >Logout</span>
+                              </a></li>
+                    </ul>
+               </div>
           </nav>
 
           <!--          <div class="search-box">
@@ -197,7 +234,7 @@
                </c:if>-->
                <br><!-- comment -->
                <h2 style="">      <span style="margin-right: 500px"> Order: <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span  > Total : <span style="color:red"><fmt:formatNumber currencySymbol="₫" value="${OrderInfo.getTotalPrice()}" type="number" pattern="#,##0"  /> ₫</span>
- </span> </h2>
+                    </span> </h2>
                <br>
                <p> Product: </p>
                <hr>
@@ -213,7 +250,6 @@
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Description</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Price</th>
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">Process</th>
-
                                    <th  class="data-title" style="text-align: start ;color:black;font-size:20px">   Material </th>
                               </tr>
 
@@ -234,10 +270,10 @@
                                              ${cage.getDescription()}
                                         </td>
                                         <td>
-                                              <fmt:formatNumber value="${cage.getPrice()}" type="number" pattern="#,##0" /> ₫
+                                             <fmt:formatNumber value="${cage.getPrice()}" type="number" pattern="#,##0" /> ₫
                                         </td>
                                         <td>
-                                            <a style="text-decoration: none" href="MainController?txtOrderID=${cage.getDetailOrder()}&txtCageID=${cage.getCageID()}&btAction=ViewProcessDetail">${cage.getStatus()}</a>
+                                             <a style="text-decoration: none" href="MainController?txtOrderID=${cage.getDetailOrder()}&txtCageID=${cage.getCageID()}&btAction=ViewProcessDetail">${cage.getStatus()}</a>
 
                                         </td>
                                         <td> <button id="toggleBtn-${status.index}" style="border:none; outline:none;margin-left:30px;font-size: 20px;color:#0056b3;background-color: white" > <i class="uil uil-eye"></i> <button> </td>
@@ -272,7 +308,7 @@
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Need </th>
                                                                            <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Price </th>-->
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Unit</th>
-                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>
+                                                                           <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>-->
                                                                            <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Total Quantity</th>-->
                                                                            <!--<th  style="text-align: start ;color:black;font-size:16px">Total Price</th>-->
                                                                       </tr>
@@ -295,12 +331,13 @@
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px">
                                                                                                ${dto.getQuantityNeed()}
+
                                                                                           </td>
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getPrice()}
                                                                                           </td>
-                                                                                         --%>
+                                                                                          --%>
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getUnit()}
                                                                                           </td>
@@ -309,11 +346,13 @@
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
                                                                                           --%>
+                                                                                          <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                <c:set var="totalQuantity"
                                                                                                       value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
                                                                                                ${totalQuantity}
                                                                                           </td>
+                                                                                          --%>
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
                                                                                                <c:set var="totalPrice" 

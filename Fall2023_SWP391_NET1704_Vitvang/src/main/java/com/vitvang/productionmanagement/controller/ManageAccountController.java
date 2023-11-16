@@ -25,8 +25,8 @@ import javax.naming.NamingException;
 @WebServlet(name = "ManageAccountController", urlPatterns = {"/ManageAccountController"})
 public class ManageAccountController extends HttpServlet {
 
-      private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
-            private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String AdminManageAccount = "AdminManageAccount.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException, NamingException {
@@ -42,7 +42,7 @@ public class ManageAccountController extends HttpServlet {
 //                        }
 //                  }
                   request.setAttribute("ACCOUNT_RESULT", list);
-                  url = AdminCustomerAccount;
+                  url = AdminManageAccount;
             } catch (SQLException e) {
                   log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {

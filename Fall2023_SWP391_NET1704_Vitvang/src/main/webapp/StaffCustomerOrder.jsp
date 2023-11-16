@@ -36,13 +36,12 @@
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
                <nav>
 
-                    <div class="logo-name">
-                         <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
-
+                    <div class="logo-name" style="
+                    display: block;">
+                    <div class="logo-image">
+                         <a src="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
-               </div>
+                    </div>
 
                <div class="menu-items">
                     <ul class="nav-links">
