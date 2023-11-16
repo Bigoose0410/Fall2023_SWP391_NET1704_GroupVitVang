@@ -94,12 +94,8 @@ public class CustomerDAO implements Serializable {
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
-                        String sql = "SELECT UserOrder.OrderID, Cage.*, OrderDetail.Quantity, OrderDetail.OrderDetailStatus, Orderr.StatusProgress "
-                                + "FROM UserOrder JOIN OrderDetail "
-                                + "ON UserOrder.OrderID = OrderDetail.OrderID "
-                                + "JOIN Cage "
-                                + "ON OrderDetail.CageID = Cage.CageID "
-                                + "JOIN Orderr "
+                        String sql = "SELECT * "
+                                + "FROM Orderr JOIN UserOrder "
                                 + "ON UserOrder.OrderID = Orderr.OrderID "
                                 + "WHERE UserOrder.UserID = ? ";
                         stm = con.prepareStatement(sql);
@@ -107,6 +103,52 @@ public class CustomerDAO implements Serializable {
                         rs = stm.executeQuery();
                         while (rs.next()) {
                               String OrderID = rs.getString("OrderID");
+                              Date StartDate = rs.getDate("StartDate");
+                              int TotalPrice = rs.getInt("TotalPrice");
+                              String OrderStatus = rs.getString("StatusProgress");
+                              CageDTO cage = new CageDTO(OrderStatus, OrderID, StartDate, TotalPrice);
+                              if (this.listOrder == null) {
+                                    this.listOrder = new ArrayList<CageDTO>();
+                              }
+                              this.listOrder.add(cage);
+                        }
+                  }
+            } finally {
+                  if (con != null) {
+                        con.close();
+                        DBHelper.closeConnection(con);
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (rs != null) {
+                        rs.close();
+                  }
+            }
+      }
+
+      public void getCustomerOrderDetail(String UserID, String OrderID) throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+
+            try {
+                  con = (Connection) DBHelper.makeConnection();
+                  if (con != null) {
+                        String sql = "SELECT UserOrder.OrderID, Cage.*, OrderDetail.Quantity, OrderDetail.OrderDetailStatus, Orderr.StatusProgress "
+                                + "FROM UserOrder JOIN OrderDetail "
+                                + "ON UserOrder.OrderID = OrderDetail.OrderID "
+                                + "JOIN Cage "
+                                + "ON OrderDetail.CageID = Cage.CageID "
+                                + "JOIN Orderr "
+                                + "ON UserOrder.OrderID = Orderr.OrderID "
+                                + "WHERE UserOrder.UserID = ? AND UserOrder.OrderID = ? ";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, UserID);
+                        stm.setString(2, OrderID);
+                        rs = stm.executeQuery();
+                        while (rs.next()) {
+//                              String OrderID = rs.getString("OrderID");
                               String CageID = rs.getString("CageID");
                               String Name = rs.getString("Name");
                               int Price = rs.getInt("Price");

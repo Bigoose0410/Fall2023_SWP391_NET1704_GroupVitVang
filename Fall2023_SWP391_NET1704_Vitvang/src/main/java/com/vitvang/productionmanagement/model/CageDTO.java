@@ -4,6 +4,8 @@
  */
 package com.vitvang.productionmanagement.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -20,6 +22,8 @@ public class CageDTO {
       private String OrderDetailStatus;
       private String OrderStatus;
       private String OrderID;
+      private Date StartDate;
+      private int TotalPrice;
 
       public CageDTO() {
       }
@@ -68,6 +72,13 @@ public class CageDTO {
             this.quantityOrder = quantityOrder;
             this.OrderDetailStatus = OrderDetailStatus;
             this.OrderStatus = OrderStatus;
+      }
+
+      public CageDTO(String OrderStatus, String OrderID, Date StartDate, int TotalPrice) {
+            this.OrderStatus = OrderStatus;
+            this.OrderID = OrderID;
+            this.StartDate = StartDate;
+            this.TotalPrice = TotalPrice;
       }
 
       public int getQuantityOrder() {
@@ -149,5 +160,23 @@ public class CageDTO {
       public void setOrderID(String OrderID) {
             this.OrderID = OrderID;
       }
+
+      public Date getStartDate() {
+            return StartDate;
+      }
+
+      public void setStartDate(Date StartDate) {
+            this.StartDate = StartDate;
+      }
+
+      public int getTotalPrice() {
+            return TotalPrice;
+      }
+
+      public void setTotalPrice(int TotalPrice) {
+            this.TotalPrice = TotalPrice;
+      }
+      
+      
 
 }

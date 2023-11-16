@@ -168,6 +168,8 @@ public class MainController extends HttpServlet {
                         url = ViewMaterialController;
                   } else if (button.equals("CustomerUpdaterAccount")) {
                         url = CustomerUpdateAccountController;
+                  } else if (button.equals("View Order Detail")) {
+                        url = CustomerOrderController;
                   }
 
             } finally {
