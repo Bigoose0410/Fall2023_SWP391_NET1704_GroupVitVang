@@ -50,7 +50,7 @@ public class CustomerOrderController extends HttpServlet {
                   }
                   /* TODO output your page here. You may use following sample code. */
 
-                  String UserID = user.getUserID();
+                  String UserID = currUser.getUserID();
 
                   CustomerDAO dao = new CustomerDAO();
                   if (!button.equals("View Order Detail")) {
