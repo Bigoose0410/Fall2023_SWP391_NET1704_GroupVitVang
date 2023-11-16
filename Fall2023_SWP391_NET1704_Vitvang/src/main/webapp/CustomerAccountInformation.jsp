@@ -124,7 +124,7 @@
           </nav>
           <c:set var="result" value="${requestScope.CUSTOMER_ACCOUNT}"></c:set>
           <c:set var="err" value="${requestScope.UPDATE_ACCOUNT_ERR}"></c:set>
-          <c:set var="message" value="${requestScope.MESSAGE_CREATE_FAIL}"></c:set>
+          <c:set var="message" value="${requestScope.MESSAGE}"></c:set>
                <section class="dashboard">
                     <div class="form" style="color: black;">
                          <div class="info_form">

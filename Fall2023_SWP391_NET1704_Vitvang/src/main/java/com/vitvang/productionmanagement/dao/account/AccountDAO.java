@@ -246,7 +246,7 @@ public class AccountDAO implements Serializable {
             return false;
       }
    
-      public boolean deleteAccount(String Username) throws SQLException {
+      public boolean deleteAccount(String UserID) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             try {
@@ -254,9 +254,9 @@ public class AccountDAO implements Serializable {
                   if (con != null) {
                         String sql = "UPDATE Users "
                                 + "SET UserStatus = 'False' "
-                                + "WHERE Username = ? ";
+                                + "WHERE UserID = ? ";
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, Username);
+                        stm.setString(1, UserID);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;
