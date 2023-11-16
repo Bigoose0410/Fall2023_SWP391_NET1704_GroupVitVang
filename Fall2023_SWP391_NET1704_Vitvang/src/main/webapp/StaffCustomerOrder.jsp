@@ -32,11 +32,14 @@
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
-          <nav>
-               <div class="logo-name" style="
+          <c:set var="CageID" value="${param.txtCageID}"></c:set>
+          <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
+               <nav>
+
+                    <div class="logo-name" style="
                     display: block;">
                     <div class="logo-image">
-                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a src="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
@@ -83,7 +86,53 @@
                               </li>
                          </ul>
                     </div>
+               <div class="menu-items">
+                    <ul class="nav-links">
+<!--                         <li><a href="#">
+                                   <i class="uil uil-estate"></i>
+                                   <span class="link-name">Dahsboard</span>
+                              </a></li>-->
+                         <li><a href="MainController?btAction=Search">
+                                   <i class="uil uil-bill"></i>
+                                   <span class="link-name">Order</span>
+                              </a></li>
+                         <li ><a href="MainController?btAction=Customers">
+                                   <i class="uil uil-grin"></i>
+                                   <span class="link-name">Customers</span>
+                              </a></li>
+                         <li><a href="${productionList}">
+                                 <i class="uil uil-clipboard-alt"></i>
+                                   <span class="link-name">Production</span>
+                              </a></li>
+                          <li ><a href="MainController?btAction=Production process">
+                                   <i class="uil uil-chart-line"></i>
+                                   <span class="link-name">Production process</span>
+                              </a></li>                       
+                         <li ><a href="MainController?btAction=View All Material">
+                                   <i class="uil uil-screw"></i>
+                                   <span class="link-name">Material</span>
+                              </a></li>
+                        
+                    </ul>
 
+                    <ul class="logout-mode">
+                         <li><a href="${logout_query}">
+                                   <i class="uil uil-signout"></i>
+                                   <span class="link-name">Logout</span>
+                              </a></li>
+
+                         <li class="mode">
+                              <a href="#">
+                                   <i class="uil uil-moon"></i>
+                                   <span class="link-name">Dark Mode</span>
+                              </a>
+
+                              <div class="mode-toggle">
+                                   <span class="switch"></span>
+                              </div>
+                         </li>
+                    </ul>
+               </div>
           </nav>
           <c:set var="result_cus" value="${requestScope.CUSTOMER_HAVE_ORDER_LIST}" />
           <c:set var="result_order" value="${requestScope.CUSTOMER_ORDER_PROCESS}" />
@@ -153,7 +202,7 @@
                               <tbody>
                                    <c:forEach var="dto1" items="${result_order}" varStatus="counter">
                                         <tr>
-                                   <form action="MainController">
+                                   <form action="MainController" method="POST">
                                         <td>${counter.count}</td>
 
                                         <td>${dto1.getOrderID()}</td>

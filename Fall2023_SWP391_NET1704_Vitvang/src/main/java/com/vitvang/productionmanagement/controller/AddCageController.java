@@ -6,13 +6,17 @@ package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
 import com.vitvang.productionmanagement.exception.cage.CageInsertError;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
@@ -46,6 +50,16 @@ public class AddCageController extends HttpServlet {
             boolean foundErr = false;
             String url = ERROR_PAGE;
             try {
+                  HttpSession session  = request.getSession();
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }  
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  } 
                   if (checkFormat(CageName, CAGEID_PATTERN, true)) {
                         error.setIDFormatErr("Cage ID must has fromat CGxxx, e.g: CG001");
                         foundErr = true;

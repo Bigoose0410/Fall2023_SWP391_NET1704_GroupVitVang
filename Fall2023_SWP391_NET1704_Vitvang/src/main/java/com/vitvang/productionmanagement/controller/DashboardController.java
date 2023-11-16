@@ -7,12 +7,9 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.dashboard.DashboardDAO;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.OrderDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -20,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -44,6 +42,11 @@ public class DashboardController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = "NewLogin.jsp";
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
                   int quantity_newOrder = 0;
                   int quantity_processingOrder = 0;
                   int quantity_doneOrder = 0;

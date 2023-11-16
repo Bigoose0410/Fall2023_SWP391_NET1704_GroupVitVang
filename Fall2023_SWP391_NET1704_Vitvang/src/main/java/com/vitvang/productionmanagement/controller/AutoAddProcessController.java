@@ -10,13 +10,16 @@ import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.exception.processs.AutoAddProcessErr;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.DetailOrderDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
-import static com.vitvang.productionmanagement.util.tool.nextdate;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -52,6 +55,16 @@ public class AutoAddProcessController extends HttpServlet {
             boolean result2 = false;
             int i = 1;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   DesignForProcessDAO designdao = new DesignForProcessDAO();
                   designdao.ViewDesignForProcess(cageID);
                   List<DesignForProcessDTO> designList = null;
@@ -76,6 +89,7 @@ public class AutoAddProcessController extends HttpServlet {
                         //2. call method
                         //3. process result
                         DetailOrderDTO getquantity = orderdao.query1LineOrderDetail(orderID, cageID);
+                        System.out.println("Auto add process to Order");
                         for (DesignForProcessDTO designDTO : designList) {
                               if (i == 1) {
                                     newStatus = "Processing";
@@ -87,7 +101,12 @@ public class AutoAddProcessController extends HttpServlet {
                                       designDTO.getNumCompletionCage(), 1);
                               result1 = processdao.AutoAddProcess(i, orderID, newStatus, startdate, endDate, getquantity.getQuantity(), designDTO);
                               i++;
-                              startdate = nextdate(endDate);
+                              System.out.println("Buoc " + i);
+                              System.out.println("StartDate:" + startdate);
+                              System.out.println("End Date:" + endDate);
+                              System.out.println("------------------------------");
+                              startdate =(endDate);
+                              
                         }
                         result2 = processdao.updateStatusNewOrder(orderID, cageID);
 

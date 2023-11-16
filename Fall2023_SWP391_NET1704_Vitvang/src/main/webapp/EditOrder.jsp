@@ -34,7 +34,7 @@
 
                <div class="logo-name">
                     <div class="logo-image">
-                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a src="HomePage.html"><img src="img/staff.png" alt=""></a>
                           <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 

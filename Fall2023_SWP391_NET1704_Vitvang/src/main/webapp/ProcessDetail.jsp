@@ -3,6 +3,7 @@
     Created on : Oct 7, 2023, 11:32:39 AM
     Author     : Admin
 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,10 +27,62 @@
           <!--<script src="index.js"></script>-->
 
           <title>Production Process</title>
+
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
 
 
      <body>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
+               <c:param value="Log Out" name="btAction"/>
+          </c:url>
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>      
@@ -38,7 +91,7 @@
                <div class="logo-name"style="display: block;">
 
                     <div class="logo-image">
-                         <a href="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
                </div>
@@ -72,17 +125,6 @@
                                    <i class="uil uil-signout"></i>
                                    <span class="link-name" >Logout</span>
                               </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
                     </ul>
                </div>
           </nav>
@@ -170,7 +212,7 @@
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
-                                                                 <form action="MainController">
+                                                                 <form action="MainController" method="POST">
                                                                       <!--lastStep-->
                                                                  <c:if test="${ result[result.size()-1].getProcessID().equals(currentStep.getProcessID())}">
                                                                       <input type="hidden" name="LastStep" 
@@ -184,8 +226,10 @@
                                                                       <td>${currentStep.getProcessName()}</td>
 
                                                                       <td width="25%" class="description"> <!-- Placeholder for details -->
-                                                                 <li><strong>Start Date:</strong> ${currentStep.getStartDate()}</li>
-                                                                 <li><strong>End Date:</strong> ${currentStep.getEndDate()}</li>
+                                                                           <fmt:formatDate var="date" value="${currentStep.getStartDate()}" pattern="dd-MM-yyyy" />
+                                                                 <li><strong>Start Date:</strong> ${date}</li>
+                                                                      <fmt:formatDate var="date" value="${currentStep.getEndDate()}" pattern="dd-MM-yyyy" />
+                                                                 <li><strong>End Date:</strong> ${date}</li>
                                                                  <li>
                                                                       <strong>Completed :  </strong> 
                                                                       ${currentStep.getCompletedQuantity()} \ ${currentStep.getQuantity()}
@@ -198,7 +242,7 @@
                                                                  <td>
                                                                       <strong>Add More Completed:</strong>
                                                                       <div class="quantity">
-                                                                           <input placeholder="Quantity" class="input-field" type="number" min="0" oninput="this.value = Math.abs(this.value)"
+                                                                           <input placeholder="Quantity" class="input-field" type="number" min="1" oninput="this.value = Math.abs(this.value)"
                                                                                   name="txtCompletedAdd"  max="${currentStep.getQuantity() - currentStep.getCompletedQuantity()}">
                                                                            <input type="hidden" name="txtTotalQuantity" value="${currentStep.getQuantity()}" />
                                                                            <input type="hidden" name="txtquantityCompleted" value="${currentStep.getCompletedQuantity()}" />
@@ -213,7 +257,7 @@
                                                                       <strong>Number of Employees:</strong>
                                                                       <div class="employee" >
                                                                            <input placeholder="Employee" class="input-field" type="number"  oninput="this.value = Math.abs(this.value)"
-                                                                                  name="txtNumberOfEmployee" min="0" max="10" value="${currentStep.getNumberOfEmployee()}">
+                                                                                  name="txtNumberOfEmployee" min="1" max="10" value="${currentStep.getNumberOfEmployee()}">
                                                                            <div class="tick_button">
                                                                                 <button type="submit" value="UpdateEmployee"
                                                                                         <c:if test="${!currentStep.getProcessID().equals(processID)}">
@@ -244,11 +288,55 @@
                                              </div>
                                         </c:if>
                                         <font color="red">
-                                        <h5>
-                                             Note: This day of process is premeditated base on average Labor Productivity of <strong>' 1 '</strong> employee. 
-                                        </h5>
+                                        <h3 style="font-weight: 800">
+                                             Note: 
+                                        </h3>
+                                       
                                         </font>
+                                         <h4> This day of process is premeditated base on average Labor Productivity of <strong>' 1 '</strong> employee.</h4>
                                    </div>
+                                   <c:set var="history" value="${requestScope.HISTORY_UPDATE}"></c:set>
+                                   <c:if test="${not empty history}">
+                                        <div class="processing_table">
+                                             <h3>History update</h3>
+                                             <!--Design Processing table-->
+                                             <div class="table-container1">
+                                                  <table>
+                                                       <thead>
+                                                            <tr>
+                                                                 <th>No.</th>
+                                                                 <th>Process Name</th>
+                                                                 <th>Type Update</th>
+                                                                 <th>Update Content</th>
+                                                                 <th>User Update</th>
+                                                                 <th>Update date</th>
+                                                            </tr>
+                                                       </thead>
+
+                                                       <tbody>
+                                                            <c:forEach var="dto" items="${history}" varStatus="counter">
+                                                                 <tr>
+                                                                      <td>${counter.count}</td>
+
+                                                                      <td>${dto.getProcessName()}</td>
+
+                                                                      <td>${dto.getTypeOfUpdate()}</td>
+
+                                                                      <td>${dto.getContent()}</td>
+                                                                      
+                                                                      <td>${dto.getUserIDUpdate()} - ${dto.getUserNameUpdate()}</td>
+
+                                                                      <td>
+                                                                           <fmt:formatDate var="date" value="${dto.getUpdateDate()}" pattern="dd-MM-yyyy" />
+                                                                           ${date}
+                                                                      </td>
+                                                                 </tr>
+                                                            </c:forEach>
+                                                       </tbody>
+                                                  </table>
+                                             </div>
+                                        </div>
+                                   </c:if>
                               </c:if>
                               <c:if test="${empty result}">
                                    <p>Yours order is not in processing!!!</p>

@@ -8,6 +8,9 @@ import com.vitvang.productionmanagement.dao.cart.CartObj;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderInsertError;
 import com.vitvang.productionmanagement.model.CageDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -54,7 +57,16 @@ public class AddOrderController extends HttpServlet {
             boolean foundErr = false;
             OrderInsertError error = new OrderInsertError();
             try {
-                  HttpSession session = request.getSession();
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   OrderDAO dao = new OrderDAO();
 
@@ -64,7 +76,7 @@ public class AddOrderController extends HttpServlet {
 //                        foundErr = true;
 //                  }
                   if (Address.trim().length() < 6) {
-                        error.setAddressLengthErr("Pls type again, Address too short, maybe something wrong!!");
+                        error.setAddressLengthErr("Pls type again, Address too short");
                         foundErr = true;
                   }
 

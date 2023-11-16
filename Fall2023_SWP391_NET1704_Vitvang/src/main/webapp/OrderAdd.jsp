@@ -25,8 +25,52 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode {
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
 
-          <title>Admin Dashboard Panel</title>
+          </style>
+          <title>Order Add</title>
      </head>
      <body>
           <c:url var="logout_query" value="MainController">
@@ -43,67 +87,44 @@
           <c:set var="CusList" value="${sessionScope.CUSTOMER_LIST}"></c:set>
           <c:set var="orderID" value="${requestScope.ORDERID}"></c:set>
                <nav>
-
-                    <div class="logo-name">
+                    <div class="logo-name"style="
+                         display: block;">
                          <div class="logo-image">
-                              <img src="images/logo.png" alt="">
-                         </div>
-
-                         <span class="logo_name">${sessionScope.USER.getName()}</span>
+                              <a href="HomePage.html"><img src="img/staff.png" alt=""></a>
+                              <span class="logo_name">${sessionScope.USER.getName()}</span>
+                    </div>
                </div>
 
                <div class="menu-items">
                     <ul class="nav-links">
-                         <li><a href="#">
-                                   <i class="uil uil-estate"></i>
-                                   <span class="link-name">Dahsboard</span>
-                              </a></li>
                          <li><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
                               </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-grin"></i>
+                         <li ><a href="MainController?btAction=Customers">
+                                   <i class="uil uil-user"></i>
                                    <span class="link-name">Customers</span>
                               </a></li>
-                         <li><a href="${productionList}">
-                                   <i class="uil uil-grin"></i>
+                         <li ><a href="${productionList}">
+                                   <i class="uil uil-clipboard-alt"></i>
                                    <span class="link-name">Production</span>
                               </a></li>
                          <li ><a href="MainController?btAction=Production process">
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-clipboard-alt"></i>
-                                   <span class="link-name">Reports</span>
-                              </a></li>
-                         <li><a href="#">
+
+                         <li ><a href="MainController?btAction=View All Material">
                                    <i class="uil uil-screw"></i>
                                    <span class="link-name">Material</span>
                               </a></li>
-                         <li><a href="#">
-                                   <i class="uil uil-archive-alt"></i>
-                                   <span class="link-name">Inventory</span>
-                              </a></li>
-                    </ul>
 
+                    </ul>
                     <ul class="logout-mode">
                          <li><a href="${logout_query}">
                                    <i class="uil uil-signout"></i>
                                    <span class="link-name" >Logout</span>
                               </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
                     </ul>
                </div>
           </nav>
@@ -111,7 +132,7 @@
                <h1>PURCHASE</h1>
                <div class="form">
 
-                    <form action="MainController" method="GET" novalidate="novalidate">
+                    <form action="MainController" method="POST" novalidate="novalidate">
                          <fieldset id="info">
                               <legend>Order Info</legend>
 
@@ -240,7 +261,7 @@
                                         <tr>
                                              <c:set var="totalprice" value=""></c:set>
                                              <c:forEach items="${cartlist}" var="key" varStatus="counter">
-                                             <form action="MainController" method="GET">
+                                             <form action="MainController" method="POST">
                                                   <tr>
                                                        <td>
                                                             ${counter.count}
@@ -270,7 +291,7 @@
                                         </c:forEach>
                                         </tr>         
                                    </table>
-                                                  <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice}" type="number" pattern="#,##0.00" /> ₫</span> </p>
+                                   <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice}" type="number" pattern="#,##0.00" /> ₫</span> </p>
                                    <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
                               </c:if>
                               <%--</c:if>--%>

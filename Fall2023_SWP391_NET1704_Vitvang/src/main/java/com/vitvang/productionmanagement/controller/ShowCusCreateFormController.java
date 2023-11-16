@@ -1,5 +1,8 @@
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,7 +23,16 @@ public class ShowCusCreateFormController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = ERROR_PAGE;
             try {
-                  HttpSession session = request.getSession();
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   String showForm = "Show Form";
                   session.setAttribute("SHOW_CUS_CREATE_FORM", showForm);
                   url = SEARCH_CUSTOMER_PAGE;

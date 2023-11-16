@@ -1,9 +1,9 @@
 package com.vitvang.productionmanagement.controller;
-
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
 import com.vitvang.productionmanagement.model.AccountDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 
 @WebServlet(name = "CustomerUpdateAccountController", urlPatterns = {"/CustomerUpdateAccountController"})
 public class CustomerUpdateAccountController extends HttpServlet {
+
 
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
@@ -39,11 +41,21 @@ public class CustomerUpdateAccountController extends HttpServlet {
             String Email = request.getParameter("txtEmail");
             String Address = request.getParameter("txtAddress");
             String PhoneNumber = request.getParameter("txtPhoneNumber");
-            Boolean update = false;
             boolean foundErr = false;
             CreateAccountError error = new CreateAccountError();
+            boolean update = false;
 
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;
@@ -55,6 +67,9 @@ public class CustomerUpdateAccountController extends HttpServlet {
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         error.setPasswordFormatErr("Password (at least 1 upper letter, 1 lower letter, 1 number)");
                         foundErr = true;
+                        if(Password.equalsIgnoreCase("")){
+                              foundErr = false;
+                        }
                   }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {

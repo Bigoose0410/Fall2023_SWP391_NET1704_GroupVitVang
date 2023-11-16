@@ -296,6 +296,37 @@ public class OrderDAO implements Serializable {
 
       }
 
+       public int countAllOrder() throws SQLException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            int allOrder = 0;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+                        String sql = "Select COUNT(*)"
+                                + " From Orderr ";                            
+                        stm = con.prepareStatement(sql);
+                        rs = stm.executeQuery();
+                        if (rs.next()) {
+                              allOrder = rs.getInt(1);
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return allOrder;
+      }
+       
       public int countNewOrder() throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -427,7 +458,6 @@ public class OrderDAO implements Serializable {
             }
             return newestOrder;
       }
-      
 
       public boolean addOrderDetail(String CageID, int quantity)
               throws SQLException, NamingException {

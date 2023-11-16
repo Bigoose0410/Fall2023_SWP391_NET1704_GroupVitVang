@@ -21,15 +21,61 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
           <title>Create Account</title>
-     </head>
-
-     <body>
           <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
                p {
                     font-size: 5px;
                     color: red;
                }
           </style>
+     </head>
+
+     <body>
+          
           <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="" />
                <c:param value="Log Out" name="btAction" />
@@ -41,7 +87,7 @@
                     <div class="logo-name" style="
                          display: block;">
                          <div class="logo-image">
-                              <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                             <a src="HomePage.html"><img src="img/admin.png" alt=""></a>
                               <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
@@ -77,7 +123,7 @@
                          <div class="info_form">
                               <h2>New Account</h2>
                          </div>
-                         <form action="MainController">
+                        <form action="MainController" method="POST">
                               <div class="info_form1">
                                    <div class="form-row">
 

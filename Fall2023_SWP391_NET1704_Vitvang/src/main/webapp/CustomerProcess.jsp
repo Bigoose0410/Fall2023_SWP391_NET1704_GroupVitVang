@@ -22,6 +22,53 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
           <title>Processing</title>
+          <style>
+               .nav-links li{
+                    padding: 20px 0;
+               }
+               .nav-links {
+                    flex: 2 4 auto; /* chiếm khoảng trống còn lại */
+                    display: flex;
+                    flex-direction: column;
+                    /*justify-content: space-between;*/
+               }
+               .menu-items li a .link-name{
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: black;
+                    transition: var(--tran-05);
+               }
+               nav .logo-image img {
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 35%;
+               }
+               nav .logo-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 45px;
+               }
+               nav .logo-name .logo_name {
+                    font-size: 25px;
+                    font-weight: 600;
+                    /* color: var(--text-color); */
+                    /* margin-right: 30px; */
+                    background-color: transparent;
+                    border: none;
+                    transition: var(--tran-05);
+                    justify-content: center;
+                    padding-left: 20px;
+               }
+               .menu-items .logout-mode{
+                    padding-bottom: 100px;
+                    border-top: 1px solid var(--border-color);
+               }
+               nav{
+                    background-color: var(--box1-color);
+               }
+          </style>
      </head>
 
      <body>
@@ -30,7 +77,7 @@
           </c:url>
           <c:set var="CageID" value="${param.txtCageID}"></c:set>
           <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
-           <c:url var="logout_query" value="MainController">
+          <c:url var="logout_query" value="MainController">
                <c:param name="cookiekey" value="" />
                <c:param value="Log Out" name="btAction" />
           </c:url>
@@ -39,7 +86,7 @@
                <div class="logo-name" style="
                     display: block;">
                     <div class="logo-image">
-                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a src="HomePage.html"><img src="img/customer.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 
@@ -68,11 +115,11 @@
                     </div>
 
           </nav>
-<%--
-          <section class="dashboard1">
-               <div id="processing-form">
-                    <!--Processing-->
-                    <!--<h1>Processing</h1>-->
+          <%--
+                    <section class="dashboard1">
+                         <div id="processing-form">
+                              <!--Processing-->
+                              <!--<h1>Processing</h1>-->
 
                     <c:set var="result" value="${requestScope.PROCESS_ORDER_RESULT}"></c:set>
                     <c:set var="processID" value="${requestScope.HIGHLIGHT}"></c:set>
@@ -166,42 +213,42 @@
                                                                       ${dto.getNumberOfEmployee()}
                                                                  </li>
                                                                  </td>
-                                                                 <%--
-                                                                 <td>
-                                                                      <strong>Add More Completed:</strong>
-                                                                      <div class="quantity">
-                                                                           <input placeholder="Quantity" class="input-field" type="number" min="0"
-                                                                                  name="txtCompletedAdd" value="0" max="${dto.getQuantity() - dto.getCompletedQuantity()}">
-                                                                           <input type="hidden" name="txtTotalQuantity" value="${dto.getQuantity()}" />
-                                                                           <input type="hidden" name="txtquantityCompleted" value="${dto.getCompletedQuantity()}" />
-                                                                           <div class="tick_button">
-                                                                                <button  type="submit" value="UpdateStatusProcess" name="btAction"
-                                                                                         <c:if test="${!dto.getProcessID().equals(processID)}">
-                                                                                          disabled style="opacity: 0.2";
-                                                                                     </c:if>>
-                                                                                     <i class="fa fa-check-square"></i></button>
-                                                                           </div>
-                                                                      </div>
-                                                                      <strong>Number of Employees:</strong>
-                                                                      <div class="employee" >
-                                                                           <input placeholder="Employee" class="input-field" type="number" 
-                                                                                  name="txtNumberOfEmployee" min="0" max="10" value="${dto.getNumberOfEmployee()}">
-                                                                           <div class="tick_button">
-                                                                                <button type="submit" value="UpdateEmployee"
-                                                                                        <c:if test="${!dto.getProcessID().equals(processID)}">
-                                                                                          disabled ;
-                                                                                          style="opacity: 0.2";
-                                                                                     </c:if>
-                                                                                     name="btAction"><i class="fa fa-check-square"></i></button>
-                                                                           </div>
-                                                                      </div>
-                                                                 </td>
-                                                                 --%>
-                                                                 <%--
-                                                                 <td class="process_button">
-                                                                      <div class="input-container">
-                                                                           <select class="input-field" name="txtStatus" disabled="">
-                                                                                <option selected="selected">${dto.getStatus()}</option>
+          <%--
+          <td>
+               <strong>Add More Completed:</strong>
+               <div class="quantity">
+                    <input placeholder="Quantity" class="input-field" type="number" min="0"
+                           name="txtCompletedAdd" value="0" max="${dto.getQuantity() - dto.getCompletedQuantity()}">
+                    <input type="hidden" name="txtTotalQuantity" value="${dto.getQuantity()}" />
+                    <input type="hidden" name="txtquantityCompleted" value="${dto.getCompletedQuantity()}" />
+                    <div class="tick_button">
+                         <button  type="submit" value="UpdateStatusProcess" name="btAction"
+                                  <c:if test="${!dto.getProcessID().equals(processID)}">
+                                   disabled style="opacity: 0.2";
+                              </c:if>>
+                              <i class="fa fa-check-square"></i></button>
+                    </div>
+               </div>
+               <strong>Number of Employees:</strong>
+               <div class="employee" >
+                    <input placeholder="Employee" class="input-field" type="number" 
+                           name="txtNumberOfEmployee" min="0" max="10" value="${dto.getNumberOfEmployee()}">
+                    <div class="tick_button">
+                         <button type="submit" value="UpdateEmployee"
+                                 <c:if test="${!dto.getProcessID().equals(processID)}">
+                                   disabled ;
+                                   style="opacity: 0.2";
+                              </c:if>
+                              name="btAction"><i class="fa fa-check-square"></i></button>
+                    </div>
+               </div>
+          </td>
+          --%>
+          <%--
+          <td class="process_button">
+               <div class="input-container">
+                    <select class="input-field" name="txtStatus" disabled="">
+                         <option selected="selected">${dto.getStatus()}</option>
 
                                                                            </select>
                                                                            <span class="input-highlight"></span>
@@ -227,8 +274,8 @@
                     <script src="ProcessDetail.js"></script>
                </div>
           </section>
-                         --%>
-<section class="dashboard1">
+          --%>
+          <section class="dashboard1">
                <div id="processing-form">
                     <!--Processing-->
                     <!--<h1>Processing</h1>-->
@@ -311,7 +358,7 @@
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
-                                                                 <form action="MainController">
+                                                                 <form action="MainController" method="POST">
                                                                       <!--lastStep-->
                                                                  <c:if test="${ result[result.size()-1].getProcessID().equals(currentStep.getProcessID())}">
                                                                       <input type="hidden" name="LastStep" 
@@ -336,7 +383,7 @@
                                                                       ${currentStep.getNumberOfEmployee()}
                                                                  </li>
                                                                  </td>
-       
+
                                                                  <td class="process_button">
                                                                       <div class="input-container">
                                                                            <select class="input-field" name="txtStatus" disabled="">
