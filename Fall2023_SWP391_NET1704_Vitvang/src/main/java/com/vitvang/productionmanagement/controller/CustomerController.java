@@ -21,7 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 
-
 /**
  *
  * @author Admin
@@ -39,6 +38,7 @@ public class CustomerController extends HttpServlet {
             String url = ERROR_PAGE;
             String button = request.getParameter("btAction");
             String UserID = request.getParameter("txtUserID");
+            String searchValue = request.getParameter("txtSearchCustomer");
             try {
                   HttpSession session = request.getSession();// phai luon co san session
                   UserDTO currUser = (UserDTO) session.getAttribute("USER");
@@ -52,14 +52,13 @@ public class CustomerController extends HttpServlet {
 //                  }
                   // 1. new dao
                   UserDAO dao = new UserDAO();
-
                   if (!button.equals("StaffViewCustomerDetail")) {
-                        dao.getCustomerHaveOrder();
+                        dao.getCustomerHaveOrder(searchValue);
                         List<UserInformationDTO> list = dao.getListCustomerHaveOrder();
                         request.setAttribute("CUSTOMER_HAVE_ORDER_LIST", list);
                         url = StaffCustomer;
                   } else {
-                        dao.getCustomerHaveOrder(UserID);
+                        dao.getInforCustomerHaveOrder(UserID);
                         List<UserInformationDTO> list = dao.getListCustomerHaveOrder();
                         request.setAttribute("CUSTOMER_HAVE_ORDER_LIST", list);
 
