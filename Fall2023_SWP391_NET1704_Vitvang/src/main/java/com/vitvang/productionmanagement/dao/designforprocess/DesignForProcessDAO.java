@@ -44,8 +44,8 @@ public class DesignForProcessDAO {
                         stm.setString(1, "%" + CageID + "%");
                         rs = stm.executeQuery();
                         if (this.listProcessDesign == null) {
-                                    this.listProcessDesign = new ArrayList<DesignForProcessDTO>();
-                              }
+                              this.listProcessDesign = new ArrayList<DesignForProcessDTO>();
+                        }
                         while (rs.next()) {
                               String Pharse = rs.getString("Phrase");
                               String Cage = rs.getString("CageID");
@@ -55,7 +55,7 @@ public class DesignForProcessDAO {
                               int NumCompletionCage = rs.getInt("NumCompletionCage");
                               DesignForProcessDTO dto
                                       = new DesignForProcessDTO(Pharse, Cage, TimeProcess, Description, NumberOfEmployee, NumCompletionCage);
-                              
+
                               this.listProcessDesign.add(dto);
                         }
                   }
@@ -70,6 +70,52 @@ public class DesignForProcessDAO {
                         con.close();
                   }
             }
+      }
+
+      public DesignForProcessDTO getCurentDesign(String CageID, String Phrase)
+              throws SQLException, NamingException {
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            DesignForProcessDTO result = null;
+            try {
+                  con = DBHelper.makeConnection();
+                  // tra ra null or k.
+                  if (con != null) {
+
+                        String sql = "select Phrase, CageID, TimeProcess, Description, NumberOfEmployee, NumCompletionCage "
+                                + "from DesignForProcess "
+                                + "where CageID like ? "
+                                + "AND Phrase like ? ";
+
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, "%" + CageID + "%");
+                        stm.setString(2, "%" + Phrase + "%");
+                        rs = stm.executeQuery();
+                        while (rs.next()) {
+                              String Pharse = rs.getString("Phrase");
+                              String Cage = rs.getString("CageID");
+                              int TimeProcess = rs.getInt("TimeProcess");
+                              String Description = rs.getString("Description");
+                              int NumberOfEmployee = rs.getInt("NumberOfEmployee");
+                              int NumCompletionCage = rs.getInt("NumCompletionCage");
+                              DesignForProcessDTO dto
+                                      = new DesignForProcessDTO(Pharse, Cage, TimeProcess, Description, NumberOfEmployee, NumCompletionCage);
+                              result = dto;
+                        }
+                  }
+            } finally {
+                  if (rs != null) {
+                        rs.close();
+                  }
+                  if (stm != null) {
+                        stm.close();
+                  }
+                  if (con != null) {
+                        con.close();
+                  }
+            }
+            return result;
       }
 
       public boolean AddDesignPrcess(DesignForProcessDTO design)
@@ -119,7 +165,7 @@ public class DesignForProcessDAO {
             }
             return result;
       }
-      
+
       public boolean updateDesign(String PharseID, String CageID, int TimeProcess, String Description, int NumberOfEmployee)
               throws SQLException, NamingException {
             Connection con = null;
@@ -165,8 +211,8 @@ public class DesignForProcessDAO {
             }
             return result;
       }
-      
-       public boolean deleteDesign(String Phrase)
+
+      public boolean deleteDesign(String Phrase)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -215,6 +261,8 @@ public class DesignForProcessDAO {
                         total += designForProcessDTO.getTimeProcess() * designForProcessDTO.getNumberOfEmployee() * 3000;
                   }
                   return total;
-            } else return 0;
+            } else {
+                  return 0;
+            }
       }
 }

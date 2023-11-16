@@ -83,7 +83,7 @@
           </nav>
           <section class="dashboard">
                <h1><strong>Account</strong></h1>
-               <form action="MainController">
+               <form action="MainController" method="POST">
                     <div class="header">
                          <div class="search">
                               <input type="text" name="txtSearchCustomer" value="" placeholder="Customer...">
@@ -97,8 +97,6 @@
                <c:set var="result" value="${requestScope.CUSTOMER_HAVE_ORDER_LIST}" />
                <c:set var="searchResult" value="${requestScope.SEARCH_ACCOUNT_RESULT}" />
                <%--<c:set var="status" value="${requestScope.USER_STATUS}" />--%>
-
-
                <div class="table-container">
                     <table>
                          <thead>

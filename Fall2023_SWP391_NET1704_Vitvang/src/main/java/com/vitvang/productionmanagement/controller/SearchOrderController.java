@@ -1,12 +1,14 @@
 package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.model.OrderDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,9 +27,14 @@ public class SearchOrderController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String searchValue = request.getParameter("txtSearchValue");
             String page = request.getParameter("page");
-
+            
             String url = ERROR_PAGE;
             try {
+                  HttpSession session  = request.getSession();
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }                
                   OrderDAO dao = new OrderDAO();
                   if (searchValue == null) {
                         searchValue = "";
@@ -60,7 +67,7 @@ public class SearchOrderController extends HttpServlet {
                   }
                  
                   url = OrderSearch;
-                  request.setAttribute("TOTAL_ORDER", result.size());
+                  request.setAttribute("TOTAL_ORDER", dao.countAllOrder());
                   request.setAttribute("PROCESS_ORDER", dao.countProcessingOrder());
                   request.setAttribute("NEW_ORDER", dao.countNewOrder());
                   request.setAttribute("START", start);

@@ -20,7 +20,7 @@
                     <p class="loginInfo" style="text-align: center; color: rgb(103, 103, 103);">Sign in with your local or granted account</p>
                     <br> 
                     <br> 
-                    <form action="MainController">
+                    <form action="MainController" method="POST">
                          <div class="inputbox">
                               <input type="text" name="txtUsername" value="${param.txtUsername}">
                              <br/>

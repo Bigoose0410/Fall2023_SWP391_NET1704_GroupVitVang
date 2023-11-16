@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -35,6 +36,7 @@
                          <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
+               <!--</div>-->
 
                     <div class="menu-items">
                          <ul class="nav-links">
@@ -58,7 +60,8 @@
                                         </a></li>
                               </ul>
                          </ul>
-                    </div>
+                    </ul>
+               </div>
 
           </nav>
 

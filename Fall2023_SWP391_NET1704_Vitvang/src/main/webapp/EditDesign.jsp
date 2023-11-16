@@ -101,7 +101,7 @@
                               <c:set var="errorUpdate" value="${requestScope.UPDATE_DESIGN_ERR}"></c:set>
                               <c:set var="errorUpdateInPhrase" value="${requestScope.UPDATE_DESIGN_ERR_IN_PHRASE}"></c:set>
                               <c:forEach var="dto" items="${Design}" varStatus="counter">
-                              <form action="MainController">
+                              <form action="MainController" method="POST">
                                    <tr>
                                         <td>
                                              ${counter.count}
@@ -192,7 +192,7 @@
                     </font>
                </c:if>
                <div class="tablesorter-custom1" style="display: none;">
-                    <form action="MainController">
+                    <form action="MainController" method="POST">
                          <div class="step">
                               <div class="step-header">
                                    <h2>New Phrase</h2>

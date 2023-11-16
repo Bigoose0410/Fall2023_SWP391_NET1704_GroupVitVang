@@ -1,7 +1,8 @@
 package com.vitvang.productionmanagement.controller;
-import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.exception.order.OrderUpdateError;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,9 +41,16 @@ public class UpdateOrderController extends HttpServlet {
             OrderUpdateError error = new OrderUpdateError();
             try {
                   //0. check role 
-                  HttpSession session = request.getSession();
-                  int roleID = ((UserDTO) session.getAttribute("USER")).getRoleID();
-
+                HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   // get user session
                   if (compareDate(productStartDate, productEndDate)) {
                         foundErr = true;

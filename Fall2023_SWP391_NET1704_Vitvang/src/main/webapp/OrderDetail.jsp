@@ -46,6 +46,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
+                              <!--                              <li ><a href="#">
+                                                                      <i class="uil uil-estate"></i>
+                                                                      <span class="link-name">Dahsboard</span>
+                                                                 </a></li>-->
                               <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -272,7 +276,7 @@
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Need </th>
                                                                            <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Price </th>-->
                                                                            <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Unit</th>
-                                                                           <th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>
+                                                                           <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Quantity Order</th>-->
                                                                            <!--<th  class="data-title"style="text-align: start ;color:green;font-size:16px">Total Quantity</th>-->
                                                                            <!--<th  style="text-align: start ;color:black;font-size:16px">Total Price</th>-->
                                                                       </tr>
@@ -294,7 +298,10 @@
                                                                                                ${dto.getOrigin()}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px">
-                                                                                               ${dto.getQuantityNeed()}
+                                                                                               <!--${dto.getQuantityNeed()}-->
+                                                                                                <c:set var="totalQuantity"
+                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
+                                                                                               ${totalQuantity}
                                                                                           </td>
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
@@ -309,11 +316,11 @@
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
                                                                                           --%>
-                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
-                                                                                               <c:set var="totalQuantity"
-                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
+<!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               <%--<c:set var="totalQuantity"--%>
+                                                                                                      <%--value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>--%>
                                                                                                ${totalQuantity}
-                                                                                          </td>
+                                                                                          </td>-->
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
                                                                                                <c:set var="totalPrice" 
@@ -345,7 +352,7 @@
                                              </c:if> 
                                              <br>
                                              <div style=" width:60%; height: 100px ; background-color: white     ">
-                                                  <p>  <span style="margin-right:50px">Start Day:<span style="color: #ff6600">${OrderInfo.getStartDate()}</span> </span> 
+                                                  <p>  <span style="margin-right:50px">Order Day:<span style="color: #ff6600">${OrderInfo.getStartDate()}</span> </span> 
                                                        <span style="margin-right:50px">Billing Address:  ${customer.getAdress()} </span>
 
                                                        <span >Delivery Address: ${OrderInfo.getAddress()} </span></p>

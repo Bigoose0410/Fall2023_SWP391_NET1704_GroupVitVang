@@ -4,21 +4,22 @@
  */
 package com.vitvang.productionmanagement.controller;
 
+import com.vitvang.productionmanagement.dao.users.UserDAO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.model.UserInformationDTO;
 import jakarta.servlet.RequestDispatcher;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import com.vitvang.productionmanagement.dao.users.UserDAO;
 
 /**
  *
@@ -39,6 +40,16 @@ public class CustomerController extends HttpServlet {
             String UserID = request.getParameter("txtUserID");
             String searchValue = request.getParameter("txtSearchCustomer");
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isAdmin) &&!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   // 1. new dao
                   UserDAO dao = new UserDAO();
                   if (!button.equals("StaffViewCustomerDetail")) {
@@ -57,7 +68,6 @@ public class CustomerController extends HttpServlet {
 
                         url = StaffCustomerOrder;
                   }
-                  HttpSession session = request.getSession();
                   session.removeAttribute("SHOW_CUS_CREATE_FORM");
 
             } catch (SQLException ex) {

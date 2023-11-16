@@ -33,7 +33,11 @@ public class ListCageController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = ERROR_PAGE;
             try {
-                  HttpSession session = request.getSession();
+                  HttpSession session  = request.getSession();
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  } 
                   CartObj cart = (CartObj) session.getAttribute("CART");
                   List<CageDTO> cageCart = new ArrayList<CageDTO>();
                   if (cart != null) {

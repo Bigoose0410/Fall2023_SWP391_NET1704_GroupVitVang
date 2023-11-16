@@ -4,19 +4,17 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.dao.customer.CustomerDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
-import com.vitvang.productionmanagement.model.ProcessNewOrderDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,25 +38,16 @@ public class CustomerProcessController extends HttpServlet {
             String ProcessID = request.getParameter("txtProcessID");
             String button = request.getParameter("btAction");
             try {
-                  /* TODO output your page here. You may use following sample code. */
-//                  String UserID = request.getParameter("txtUserID");
-//                  String OrderID = request.getParameter("txtOrderID");
-//                  String CageID = request.getParameter("txtCageID");
-//
-//                  CustomerDAO dao = new CustomerDAO();
-//                  dao.ViewProcessingOrder(OrderID, CageID, CageID);
-//                  List<ProcessDTO> list = dao.getListOrdersProcess();
-//                  if (list != null) {
-//                        for (ProcessDTO proces : list) {
-//                              if (proces.getStatus().equals("Processing")) {
-//                                    request.setAttribute("HIGHLIGHT", proces.getProcessID());
-//                                    break;
-//                              }
-//                        }
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
 //                  }
-//                  request.setAttribute("PROCESS_ORDER_RESULT", list);
-//                  url = CustomerProcess;
-
                   ProcessDAO dao = new ProcessDAO();
 
                   if (ProcessID == null) {

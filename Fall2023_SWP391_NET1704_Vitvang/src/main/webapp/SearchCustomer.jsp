@@ -34,6 +34,10 @@
                     </div>
                     <div class="menu-items">
                          <ul class="nav-links">
+                              <li ><a href="#">
+                                        <i class="uil uil-estate"></i>
+                                        <span class="link-name">Dahsboard</span>
+                                   </a></li>
                               <li ><a href="MainController?btAction=Search">
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
@@ -161,7 +165,7 @@
                     <c:if test="${not empty ShowForm}">
                          <c:set var="errors" value="${requestScope.CREATE_CUS_ERROR}" />
 
-                         <form action="MainController" method="get" style="display:flex; flex-wrap: wrap;justify-content: space-between">
+                         <form action="MainController" method="POST" style="display:flex; flex-wrap: wrap;justify-content: space-between">
                               
                               <br>
                               <div style="width:48%">

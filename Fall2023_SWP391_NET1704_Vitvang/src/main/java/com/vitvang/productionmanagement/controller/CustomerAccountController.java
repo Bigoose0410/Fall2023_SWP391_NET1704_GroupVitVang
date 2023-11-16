@@ -7,14 +7,13 @@ package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.dao.customer.CustomerDAO;
 import com.vitvang.productionmanagement.model.AccountDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -31,9 +30,11 @@ public class CustomerAccountController extends HttpServlet {
               throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "NewLogin.jsp";
-            try {
-                  /* TODO output your page here. You may use following sample code. */
-                  HttpSession session = request.getSession();
+            try {HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }               
                   UserDTO account = (UserDTO) session.getAttribute("USER");
                   String Username = account.getUsername();
 
