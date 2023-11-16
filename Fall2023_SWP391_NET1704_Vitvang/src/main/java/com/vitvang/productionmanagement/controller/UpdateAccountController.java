@@ -5,7 +5,9 @@ import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
 import com.vitvang.productionmanagement.model.AccountDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -52,11 +54,11 @@ public class UpdateAccountController extends HttpServlet {
                   if (currUser == null) {
                         return;
                   }
-//                  int roleID = currUser.getRoleID();
-//                  //0. check role 
-//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
-//                        return;
-//                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isAdmin)) {
+                        return;
+                  }
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;

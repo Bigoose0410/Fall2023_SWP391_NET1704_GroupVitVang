@@ -219,7 +219,7 @@
                                         <td>
                                              <div class="input-container1">
                                                   <br>
-                                                  <input placeholder="Quantity" class="input-field" type="number" min="1"
+                                                  <input placeholder="Quantity" class="input-field" type="number" min="1" max="1000"
                                                          name="txtQuantity" value="" oninput="this.value = Math.abs(this.value)"
                                                          >                                                 
                                                   <c:if test="${not empty errors.getQuantityValidErr()}">
@@ -291,7 +291,7 @@
                                         </c:forEach>
                                         </tr>         
                                    </table>
-                                   <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice}" type="number" pattern="#,##0.00" /> ₫</span> </p>
+                                   <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice}" type="number" pattern="#,##0" /> ₫</span> </p>
                                    <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
                               </c:if>
                               <%--</c:if>--%>

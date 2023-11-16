@@ -77,7 +77,7 @@ public class CreateAccountController extends HttpServlet {
                   }
                   int roleID = currUser.getRoleID();
                   //0. check role 
-                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                  if (!checkRole(roleID, Constant.isAdmin )) {
                         return;
                   }
 

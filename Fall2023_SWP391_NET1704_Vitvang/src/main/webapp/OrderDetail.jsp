@@ -329,16 +329,8 @@
                                                                                                ${dto.getOrigin()}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px">
-<<<<<<< HEAD
                                                                                                ${dto.getQuantityNeed()}
-
-=======
-                                                                                               <!--${dto.getQuantityNeed()}-->
-                                                                                                <c:set var="totalQuantity"
-                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
-                                                                                               ${totalQuantity}
->>>>>>> d3b5ffab72960f48294a9f3d1324d218587076e1
-                                                                                          </td>
+                                     </td>
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getPrice()}
@@ -351,22 +343,7 @@
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
-                                                                                          --%>
-<<<<<<< HEAD
-                                                                                          <%--
-                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
-                                                                                               <c:set var="totalQuantity"
-                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
-                                                                                               ${totalQuantity}
-                                                                                          </td>
-                                                                                          --%>
-=======
-<!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
-                                                                                               <%--<c:set var="totalQuantity"--%>
-                                                                                                      <%--value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>--%>
-                                                                                               ${totalQuantity}
-                                                                                          </td>-->
->>>>>>> d3b5ffab72960f48294a9f3d1324d218587076e1
+   
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
                                                                                                <c:set var="totalPrice" 
