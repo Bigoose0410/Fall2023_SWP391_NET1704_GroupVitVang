@@ -48,7 +48,7 @@ public class AddOrderController extends HttpServlet {
             if (totalprice == null) {
                   totalprice = "0";
             }
-            int total = Integer.parseInt(totalprice);
+            int total = Integer.parseInt(totalprice) / 10000;
             String Address = request.getParameter("txtAddress");
 
             String[] CageID = request.getParameterValues("txtOrderCageID");

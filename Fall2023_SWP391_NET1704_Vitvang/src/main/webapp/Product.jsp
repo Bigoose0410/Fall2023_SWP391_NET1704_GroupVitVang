@@ -150,7 +150,7 @@
                                                        <div class="main-wrapper">
                                                             <h3 class="main-header"> ${dto.getCageID()} </h3>
                                                             <h1 class="main-title"> ${dto.getName()} </h1>
-                                                            <h2 class="main-subtitle"><fmt:formatNumber value="${dto.getPrice()}" type="number" pattern="#,##0" /> ₫ </h2>
+                                                            <h2 class="main-subtitle"><fmt:formatNumber value="${dto.getPrice() * 10000}" type="number" pattern="#,##0" /> ₫ </h2>
                                                        </div>
                                                        <div class="main-content">
                                                             <div class="main-content__title">Come From: ${dto.getOrigin()}

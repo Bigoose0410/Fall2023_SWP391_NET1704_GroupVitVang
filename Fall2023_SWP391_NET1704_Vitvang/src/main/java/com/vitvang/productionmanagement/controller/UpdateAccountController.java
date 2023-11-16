@@ -59,6 +59,7 @@ public class UpdateAccountController extends HttpServlet {
                   //0. check role 
                   if (!checkRole(roleID, Constant.isAdmin)) {
                         return;
+
                   }
 //                  if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
 //                        error.setUsernameFormatErr("Username cannot inclue space");

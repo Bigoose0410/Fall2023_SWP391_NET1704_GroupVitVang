@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -137,7 +138,7 @@
                          <div class="info-details">
                               <div class="info-item">CageID: <span> ${cage.getCageID()}</span></div>
                               <div class="info-item">Name: <span>${cage.getName()}</span></div>
-                              <div class="info-item">Price: <span>${cage.getPrice()}</span></div>
+                              <div class="info-item">Price: <span><fmt:formatNumber value="${cage.getPrice()* 10000}" type="number" pattern="#,##0" /> ₫</span></div>
                               <div class="info-item">Origin: <span>${cage.getOrigin()}</span></div>
                               <div class="info-item">Description: <span>${cage.getDescription()}</span></div>
                               <div class="info-item">
@@ -184,7 +185,7 @@
                                         <th>No.</th>
                                         <th>Name</th>
                                         <th>Origin</th>
-                                        <th>Price/Unit</th>
+                                        <!--<th>Price/Unit</th>-->
                                         <th>Unit</th>
                                    </tr>
                               </thead>
@@ -202,14 +203,15 @@
                                              <td>
                                                   ${dto.getOrigin()}
                                              </td>
-
+                                             <%--
                                              <td>
                                                   ${dto.getPrice()}
                                              </td>
-
+                                             --%>
                                              <td>
                                                   ${dto.getUnit()}
                                              </td>
+                                             
                                         </tr>
                                    </c:forEach>
                               </tbody>

@@ -232,7 +232,7 @@
 </table>
                </c:if>-->
                <br><!-- comment -->
-               <h2 style="">      <span style="margin-right: 500px"> Order: <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span  > Total : <span style="color:red"><fmt:formatNumber currencySymbol="₫" value="${OrderInfo.getTotalPrice()}" type="number" pattern="#,##0"  /> ₫</span>
+               <h2 style="">      <span style="margin-right: 500px"> Order: <span style="color:red">#${OrderInfo.getOrderID()}</span></span>  <span  > Total : <span style="color:red"><fmt:formatNumber currencySymbol="₫" value="${OrderInfo.getTotalPrice() * 10000}" type="number" pattern="#,##0"  /> ₫</span>
                     </span> </h2>
                <br>
                <p> Product: </p>
@@ -269,7 +269,7 @@
                                              ${cage.getDescription()}
                                         </td>
                                         <td>
-                                             <fmt:formatNumber value="${cage.getPrice()}" type="number" pattern="#,##0" /> ₫
+                                             <fmt:formatNumber value="${cage.getPrice() * 10000}" type="number" pattern="#,##0" /> ₫
                                         </td>
                                         <td>
                                              <a style="text-decoration: none" href="MainController?txtOrderID=${cage.getDetailOrder()}&txtCageID=${cage.getCageID()}&btAction=ViewProcessDetail">${cage.getStatus()}</a>
@@ -284,20 +284,7 @@
                                                                       <br>
                                                                       <thead >
                                                                       <hr>
-                                                                      <!--Form Materia
-                                                                      <!--                                        <tr class="search">
-                                                                                                                   <td> <input type="search" data-column="0" placeholder="No."></td>
-                                                                                                                   <td> <input type="search" data-column="1" placeholder="CageID"></td>
-                                                                                                                   <td> <input type="search" data-column="2" placeholder="MaterialID"></td>
-                                                                                                                   <td> <input type="search" data-column="3" placeholder="Name"></td>
-                                                                                                                   <td> <input type="search" data-column="4" placeholder="Origin"></td>
-                                                                                                                   <td> <input type="search" data-column="5" placeholder="Need/Cage"></td>
-                                                                                                                   <td> <input type="search" data-column="6" placeholder="Price/Unit"></td>
-                                                                                                                   <td> <input type="search" data-column="7" placeholder="Unit"></td>
-                                                                                                                   <td> <input type="search" data-column="8" placeholder="Quantity Order"></td>
-                                                                                                                   <td> <input type="search" data-column="9" placeholder="Total Quantity"></td>
-<td> <input type="search" data-column="10" placeholder="Total Price"></td>
-                                                                                                              </tr>-->
+                                                                     
                                                                       <tr style="padding:100px">
                                                                            <th class="data-title" style="text-align: start ;color:green;font-size:16px">No</th>
 
@@ -329,16 +316,8 @@
                                                                                                ${dto.getOrigin()}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px">
-<<<<<<< HEAD
                                                                                                ${dto.getQuantityNeed()}
-
-=======
-                                                                                               <!--${dto.getQuantityNeed()}-->
-                                                                                                <c:set var="totalQuantity"
-                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
-                                                                                               ${totalQuantity}
->>>>>>> d3b5ffab72960f48294a9f3d1324d218587076e1
-                                                                                          </td>
+                                     </td>
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getPrice()}
@@ -351,22 +330,7 @@
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
-                                                                                          --%>
-<<<<<<< HEAD
-                                                                                          <%--
-                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
-                                                                                               <c:set var="totalQuantity"
-                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
-                                                                                               ${totalQuantity}
-                                                                                          </td>
-                                                                                          --%>
-=======
-<!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
-                                                                                               <%--<c:set var="totalQuantity"--%>
-                                                                                                      <%--value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>--%>
-                                                                                               ${totalQuantity}
-                                                                                          </td>-->
->>>>>>> d3b5ffab72960f48294a9f3d1324d218587076e1
+   
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
                                                                                                <c:set var="totalPrice" 
