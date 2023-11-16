@@ -358,7 +358,7 @@
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
-                                                                 <form action="MainController">
+                                                                 <form action="MainController" method="POST">
                                                                       <!--lastStep-->
                                                                  <c:if test="${ result[result.size()-1].getProcessID().equals(currentStep.getProcessID())}">
                                                                       <input type="hidden" name="LastStep" 

@@ -88,6 +88,7 @@
                </div>
                <div class="menu-items">
                     <ul class="nav-links">
+
                          <li ><a href="MainController?btAction=Search">
                                    <i class="uil uil-bill"></i>
                                    <span class="link-name">Order</span>
@@ -98,6 +99,7 @@
                               </a></li>
                          <li ><a href="${productionList}">
                                    <i class="uil uil-clipboard-alt"></i>
+
                                    <span class="link-name">Production</span>
                               </a></li>
                          <li ><a href="MainController?btAction=Production process">
@@ -121,7 +123,7 @@
           </nav>
           <section class="dashboard">
                <div class="header">
-                    <h1>Danh Mục Sản Phẩm</h1>
+                    <h1>Production List</h1>
                     <div class="search">
                         <form action="MainController" method="POST">
                               <input type="text" placeholder="Search name..." name="txtSearchValue" value="${param.txtSearchValue}" name="txtSearchValue">

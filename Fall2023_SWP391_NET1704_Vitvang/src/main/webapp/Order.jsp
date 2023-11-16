@@ -129,7 +129,7 @@
                <div class="top">
                     <i class="uil uil-bars sidebar-toggle"></i>
                     <div class="search-box">
-                         <form action="MainController"> 
+                        <form action="MainController" method="POST"> 
 
                               <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" placeholder="Search here..." class="searchh" >
                               <button value="Search" name="btAction"><i class="uil uil-search"></i></button>
@@ -249,11 +249,14 @@
 
 
 
+                                                <!--<td class="data-list" style="text-align: start ;font-size:18px">${dto.getEndDate()}</td>-->
+
 
 
                                              <td class="data-list" style="text-align: start ;font-size:18px">
                                                   <fmt:formatNumber value="${dto.getTotalPrice()}" type="number" pattern="#,##0" /> ₫
                                              </td>
+
 
                                              <td class="data-list" style="text-align: start ;font-size:18px">
                                                   ${dto.getAddress()}</td>
@@ -335,4 +338,4 @@
      <script src="js/OrderAdd.js"></script>      
 
 </body>
-</html>
+</html> 

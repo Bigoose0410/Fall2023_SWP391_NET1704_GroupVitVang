@@ -4,8 +4,9 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -33,11 +34,16 @@ public class DeleteOrderController extends HttpServlet {
             String searchValue = request.getParameter("lastSearchValue");
             String url = ERROR_PAGE;
             try {
-                  HttpSession session = request.getSession();
-                  int roleID = ((UserDTO) session.getAttribute("USER")).getRoleID();
+                  HttpSession session  = request.getSession();
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }  
+                  int roleID = currUser.getRoleID();
                   //0. check role 
-                  if (checkRole(roleID, 1)) {
-
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                         //1. call model
                         //1.1 new DAO
                         OrderDAO dao = new OrderDAO();
@@ -51,7 +57,6 @@ public class DeleteOrderController extends HttpServlet {
                                       + "&txtSearchValue=" + searchValue;
                               //noti to user that delete sucess
                         }
-                  } 
             } catch (SQLException ex) {
                   log("UpdateAccountServlet _ SQL " + ex.getMessage());
             } catch (NamingException ex) {

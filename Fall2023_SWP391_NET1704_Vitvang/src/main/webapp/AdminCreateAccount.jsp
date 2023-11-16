@@ -123,7 +123,7 @@
                          <div class="info_form">
                               <h2>New Account</h2>
                          </div>
-                         <form action="MainController">
+                        <form action="MainController" method="POST">
                               <div class="info_form1">
                                    <div class="form-row">
 

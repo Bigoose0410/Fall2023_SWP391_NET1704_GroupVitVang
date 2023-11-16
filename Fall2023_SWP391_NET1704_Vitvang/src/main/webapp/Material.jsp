@@ -110,7 +110,6 @@
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
-
                          <li ><a href="MainController?btAction=View All Material">
                                    <i class="uil uil-screw"></i>
                                    <span class="link-name">Material</span>
@@ -123,6 +122,7 @@
                                    <span class="link-name" >Logout</span>
                               </a></li>
                     </ul>
+
                </div>
 
                <ul class="logout-mode">
@@ -205,6 +205,13 @@
                                         </div>
 
                                    </td>
+<!--                                   <th>No.</th>
+                                   <th>MaterialID</th>
+                                   <th>Name / Unit</th>
+                                   <th>Origin</th>
+                                   <th>Price</th>
+                                   <th>Quantity</th>
+                                   <th>Edit</th>-->
                               </tr>
                          </c:forEach>
                     </tbody>
@@ -214,9 +221,8 @@
           <button class="custom-btn btn-1">New Material</button>
 
           <div class="tablesorter-custom1" style="display: none;">
-               <form action="MainController">
+              <form action="MainController" method="POST">
 
-                    <div class="step">
                          <div class="step-header">
                               <h2>+ New Material</h2>
                          </div>
@@ -225,9 +231,6 @@
                               <div class="input-container">
                                    <input placeholder="Material Name" class="input-field" type="text" name="txtMaterialName" value="${param.txtMaterialName}">
                                    <span class="input-highlight"></span>
-                              </div>
-                         </div>
-
                          <div class="form-step">
                               <label for="username">Origin</label>
                               <div class="input-container">

@@ -110,7 +110,6 @@
                                    <i class="uil uil-chart-line"></i>
                                    <span class="link-name">Production process</span>
                               </a></li>
-
                          <li ><a href="MainController?btAction=View All Material">
                                    <i class="uil uil-screw"></i>
                                    <span class="link-name">Material</span>
@@ -330,8 +329,15 @@
                                                                                                ${dto.getOrigin()}
                                                                                           </td>
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px">
+<<<<<<< HEAD
                                                                                                ${dto.getQuantityNeed()}
 
+=======
+                                                                                               <!--${dto.getQuantityNeed()}-->
+                                                                                                <c:set var="totalQuantity"
+                                                                                                      value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>
+                                                                                               ${totalQuantity}
+>>>>>>> d3b5ffab72960f48294a9f3d1324d218587076e1
                                                                                           </td>
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
@@ -346,6 +352,7 @@
                                                                                                ${dto.getQuantity()}
                                                                                           </td>
                                                                                           --%>
+<<<<<<< HEAD
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:15px">
                                                                                                <c:set var="totalQuantity"
@@ -353,6 +360,13 @@
                                                                                                ${totalQuantity}
                                                                                           </td>
                                                                                           --%>
+=======
+<!--                                                                                          <td class="data-list" style="text-align: start ;font-size:15px">
+                                                                                               <%--<c:set var="totalQuantity"--%>
+                                                                                                      <%--value="${dto.getQuantityNeed() * dto.getQuantity() }"></c:set>--%>
+                                                                                               ${totalQuantity}
+                                                                                          </td>-->
+>>>>>>> d3b5ffab72960f48294a9f3d1324d218587076e1
                                                                                           <%--
                                                                                           <td class="data-list" style="text-align: start ;font-size:18px"ss>
                                                                                                <c:set var="totalPrice" 
@@ -384,7 +398,7 @@
                                              </c:if> 
                                              <br>
                                              <div style=" width:60%; height: 100px ; background-color: white     ">
-                                                  <p>  <span style="margin-right:50px">Start Day:<span style="color: #ff6600">${OrderInfo.getStartDate()}</span> </span> 
+                                                  <p>  <span style="margin-right:50px">Order Day:<span style="color: #ff6600">${OrderInfo.getStartDate()}</span> </span> 
                                                        <span style="margin-right:50px">Billing Address:  ${customer.getAdress()} </span>
 
                                                        <span >Delivery Address: ${OrderInfo.getAddress()} </span></p>

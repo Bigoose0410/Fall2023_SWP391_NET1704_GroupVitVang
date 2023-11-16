@@ -127,7 +127,7 @@
                <c:if test="${not empty result}">
                     <div class="container">
                          <c:forEach var="dto" items="${result}" >
-                              <form action="MainController">
+                              <form action="MainController" method="POST">
                                    <div class="mySwiper">
                                         <div class="swiper-slide" id="savanna">
                                              <div class="main">

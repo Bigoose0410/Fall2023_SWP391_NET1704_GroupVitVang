@@ -3,6 +3,7 @@
     Created on : Oct 7, 2023, 11:32:39 AM
     Author     : Admin
 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -78,6 +79,10 @@
 
 
      <body>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
+               <c:param value="Log Out" name="btAction"/>
+          </c:url>
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>      
@@ -207,7 +212,7 @@
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
-                                                                 <form action="MainController">
+                                                                 <form action="MainController" method="POST">
                                                                       <!--lastStep-->
                                                                  <c:if test="${ result[result.size()-1].getProcessID().equals(currentStep.getProcessID())}">
                                                                       <input type="hidden" name="LastStep" 
@@ -221,8 +226,10 @@
                                                                       <td>${currentStep.getProcessName()}</td>
 
                                                                       <td width="25%" class="description"> <!-- Placeholder for details -->
-                                                                 <li><strong>Start Date:</strong> ${currentStep.getStartDate()}</li>
-                                                                 <li><strong>End Date:</strong> ${currentStep.getEndDate()}</li>
+                                                                           <fmt:formatDate var="date" value="${currentStep.getStartDate()}" pattern="dd-MM-yyyy" />
+                                                                 <li><strong>Start Date:</strong> ${date}</li>
+                                                                      <fmt:formatDate var="date" value="${currentStep.getEndDate()}" pattern="dd-MM-yyyy" />
+                                                                 <li><strong>End Date:</strong> ${date}</li>
                                                                  <li>
                                                                       <strong>Completed :  </strong> 
                                                                       ${currentStep.getCompletedQuantity()} \ ${currentStep.getQuantity()}
@@ -235,7 +242,7 @@
                                                                  <td>
                                                                       <strong>Add More Completed:</strong>
                                                                       <div class="quantity">
-                                                                           <input placeholder="Quantity" class="input-field" type="number" min="0" oninput="this.value = Math.abs(this.value)"
+                                                                           <input placeholder="Quantity" class="input-field" type="number" min="1" oninput="this.value = Math.abs(this.value)"
                                                                                   name="txtCompletedAdd"  max="${currentStep.getQuantity() - currentStep.getCompletedQuantity()}">
                                                                            <input type="hidden" name="txtTotalQuantity" value="${currentStep.getQuantity()}" />
                                                                            <input type="hidden" name="txtquantityCompleted" value="${currentStep.getCompletedQuantity()}" />
@@ -250,7 +257,7 @@
                                                                       <strong>Number of Employees:</strong>
                                                                       <div class="employee" >
                                                                            <input placeholder="Employee" class="input-field" type="number"  oninput="this.value = Math.abs(this.value)"
-                                                                                  name="txtNumberOfEmployee" min="0" max="10" value="${currentStep.getNumberOfEmployee()}">
+                                                                                  name="txtNumberOfEmployee" min="1" max="10" value="${currentStep.getNumberOfEmployee()}">
                                                                            <div class="tick_button">
                                                                                 <button type="submit" value="UpdateEmployee"
                                                                                         <c:if test="${!currentStep.getProcessID().equals(processID)}">
@@ -288,6 +295,48 @@
                                         </font>
                                          <h4> This day of process is premeditated base on average Labor Productivity of <strong>' 1 '</strong> employee.</h4>
                                    </div>
+                                   <c:set var="history" value="${requestScope.HISTORY_UPDATE}"></c:set>
+                                   <c:if test="${not empty history}">
+                                        <div class="processing_table">
+                                             <h3>History update</h3>
+                                             <!--Design Processing table-->
+                                             <div class="table-container1">
+                                                  <table>
+                                                       <thead>
+                                                            <tr>
+                                                                 <th>No.</th>
+                                                                 <th>Process Name</th>
+                                                                 <th>Type Update</th>
+                                                                 <th>Update Content</th>
+                                                                 <th>User Update</th>
+                                                                 <th>Update date</th>
+                                                            </tr>
+                                                       </thead>
+
+                                                       <tbody>
+                                                            <c:forEach var="dto" items="${history}" varStatus="counter">
+                                                                 <tr>
+                                                                      <td>${counter.count}</td>
+
+                                                                      <td>${dto.getProcessName()}</td>
+
+                                                                      <td>${dto.getTypeOfUpdate()}</td>
+
+                                                                      <td>${dto.getContent()}</td>
+                                                                      
+                                                                      <td>${dto.getUserIDUpdate()} - ${dto.getUserNameUpdate()}</td>
+
+                                                                      <td>
+                                                                           <fmt:formatDate var="date" value="${dto.getUpdateDate()}" pattern="dd-MM-yyyy" />
+                                                                           ${date}
+                                                                      </td>
+                                                                 </tr>
+                                                            </c:forEach>
+                                                       </tbody>
+                                                  </table>
+                                             </div>
+                                        </div>
+                                   </c:if>
                               </c:if>
                               <c:if test="${empty result}">
                                    <p>Yours order is not in processing!!!</p>

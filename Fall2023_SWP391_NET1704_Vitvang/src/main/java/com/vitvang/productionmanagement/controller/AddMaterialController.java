@@ -6,13 +6,16 @@ package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 import com.vitvang.productionmanagement.model.MaterialDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -32,21 +35,31 @@ public class AddMaterialController extends HttpServlet {
             String Price = request.getParameter("txtPrice");
             String Quantity = request.getParameter("txtQuantity");
             String Unit = request.getParameter("txtUnit");
-            
+
             try {
-            int numadd, numdPrice;
-            numadd = (Quantity != null) ? Integer.parseInt(Quantity) : 1;
-            numdPrice = (Price != null) ? Integer.parseInt(Price) : 1;
-                        // 1. new DAO
-                        MaterialDAO materialDao = new MaterialDAO();
-                        // 2. call method
-                        MaterialDTO material = new MaterialDTO(NameMaterial, numdPrice, numadd, Origin, Unit);
-                        boolean result = materialDao.AddMaterial(material);
-                        if (result) {
-                              url = MATERIAL_PAGE;
-                        }
+                  HttpSession session = request.getSession(); // phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
+                  int numadd, numdPrice;
+                  numadd = (Quantity != null) ? Integer.parseInt(Quantity) : 1;
+                  numdPrice = (Price != null) ? Integer.parseInt(Price) : 1;
+                  // 1. new DAO
+                  MaterialDAO materialDao = new MaterialDAO();
+                  // 2. call method
+                  MaterialDTO material = new MaterialDTO(NameMaterial, numdPrice, numadd, Origin, Unit);
+                  boolean result = materialDao.AddMaterial(material);
+                  if (result) {
+                        url = MATERIAL_PAGE;
+                  }
             } catch (Exception e) {
-            }finally {
+            } finally {
                   RequestDispatcher rd = request.getRequestDispatcher(url);
                   rd.forward(request, response);
             }

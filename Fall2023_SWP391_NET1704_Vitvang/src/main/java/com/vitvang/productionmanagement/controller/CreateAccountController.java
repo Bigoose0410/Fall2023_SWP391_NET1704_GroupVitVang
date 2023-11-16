@@ -4,21 +4,22 @@
  */
 package com.vitvang.productionmanagement.controller;
 
-import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
-import com.vitvang.productionmanagement.model.AccountDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import com.vitvang.productionmanagement.util.SendEmail;
 import com.vitvang.productionmanagement.util.tool;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -32,8 +33,8 @@ import javax.naming.NamingException;
 @WebServlet(name = "CreateAccountController", urlPatterns = {"/CreateAccountController"})
 public class CreateAccountController extends HttpServlet {
 
-      private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
@@ -45,6 +46,7 @@ public class CreateAccountController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
             response.setContentType("text/html;charset=UTF-8");
+
             /* TODO output your page here. You may use following sample code. */
 //            String UserID = request.getParameter("txtUserID");
             String txtRoleID = request.getParameter("txtRoleID");
@@ -68,6 +70,16 @@ public class CreateAccountController extends HttpServlet {
             String url = ERROR_PAGE;
             CreateAccountError error = new CreateAccountError();
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
 
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
@@ -90,10 +102,10 @@ public class CreateAccountController extends HttpServlet {
                         foundErr = true;
                   }
 
-                  if (RoleID < 1 || RoleID > 4) {
-                        error.setRoleIDFormatErr("Role ID (1 - 4)");
-                        foundErr = true;
-                  }
+//                  if (RoleID < 1 || RoleID > 4) {
+//                        error.setRoleIDFormatErr("Role ID (1 - 4)");
+//                        foundErr = true;
+//                  }
 
                   if (Name.trim().length() < 6 || Name.trim().length() > 30) {
                         error.setNameFormatErr("Name (6 - 30 chars)");
@@ -163,8 +175,10 @@ public class CreateAccountController extends HttpServlet {
                         }
                   }
             } catch (SQLException ex) {
-                  error.setUsernameExistErr(Username + " is existed");
-                  request.setAttribute("MESSAGE_CREATE_FAIL", "Create new account failed!!!");
+                  String msg = ex.getMessage();
+                  log("CreateUserControlerr_ SQL" + msg);
+//                  error.setUserIDExistErr(UserID + " is existed!!!");
+//                  request.setAttribute("MESSAGE_CREATE_FAIL", "Create new account failed!!!");
             } catch (NamingException ex) {
                   log("CreateUserController _ NAMING " + ex.getMessage());
             } finally {
@@ -214,13 +228,5 @@ public class CreateAccountController extends HttpServlet {
             }
       }
 
-      /**
-       * Returns a short description of the servlet.
-       *
-       * @return a String containing servlet description
-       */
-      @Override
-      public String getServletInfo() {
-            return "Short description";
-      }// </editor-fold>
+
 }

@@ -98,8 +98,6 @@
                          <ul class="nav-links">
                          
                               <li ><a href="MainController?btAction=search">
-                                       
-
                                         <i class="uil uil-bill"></i>
                                         <span class="link-name">Order</span>
                                    </a></li>
@@ -151,7 +149,7 @@
                          <tbody>
                               <c:forEach var="dto" items="${ListMaterial}" varStatus="counter">
                               <div action="MainController">
-                                   <form action="MainController" method="POST">
+                                  <form action="MainController" method="POST">
                                         <tr>
                                              <td>
                                                   ${counter.count}
@@ -161,6 +159,7 @@
                                                   ${dto.getMaterialID()}
                                                   <input type="hidden" name="txtMaterialID" value="${dto.getMaterialID()}" />
                                              </td>
+
                                              <td class="td3" style="text-align: left; display: flex; justify-content: center">
                                                   ${dto.getName()} / ${dto.getUnit()}
                                              </td>
@@ -204,7 +203,7 @@
                     </table>
                </div>
 
-               <form action="MainController">
+                    <form action="MainController" method="POST">
                     <strong>Add More Marterial: </strong>
                     <select onchange="this.form.submit()" name="slMateriaID">
                          <option selected>Open this select menu</option>
@@ -218,7 +217,7 @@
 
                <c:if test="${not empty materialwilladd}">
                     <div class="material_form1">
-                         <form action="MainController">
+                         <form action="MainController" method="POST">
                               <table class="material_form">
                                    <h2><span>Add</span> Material</h2>
                                    <tr>

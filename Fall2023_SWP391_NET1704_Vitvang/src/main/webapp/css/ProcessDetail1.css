@@ -757,3 +757,39 @@ table thead th.nosort {
 .quantity {
     display: flex;
 }
+
+/* Style for the processing table container */
+.processing_table {
+    width: 80%;
+    margin: 10px 130px;
+}
+
+.processing_table h1 {
+    margin: 20px 0px;
+}
+
+/* Style for the table heading (thead) */
+.table-container1 table thead {
+    background-color: #f2f2f2;
+}
+
+/* Style for the table cells (th, td) */
+.table-container1 table th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: white;
+    text-align: center;
+    background-color: #27a1c7;
+}
+
+.table-container1 table td {
+    padding: 20px 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background-color: #b1cbe5;
+}
+
+/* Style for alternate row colors in the table */
+.table-container1 table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

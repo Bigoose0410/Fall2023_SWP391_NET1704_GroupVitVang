@@ -1,16 +1,21 @@
 package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.designforprocess.DesignForProcessDAO;
+import com.vitvang.productionmanagement.dao.historyupdateprocess.HistoryUpdateProcessDAO;
 import com.vitvang.productionmanagement.dao.order.OrderDAO;
 import com.vitvang.productionmanagement.dao.process.ProcessDAO;
 import com.vitvang.productionmanagement.model.DesignForProcessDTO;
 import com.vitvang.productionmanagement.model.ProcessDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.calculateProcessDate;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -18,7 +23,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-
 
 /**
  *
@@ -53,14 +57,24 @@ public class UpdateStatusProcessController extends HttpServlet {
             boolean updatefrom = false;
             Date startDate = null;
             Date endDate = null;
-            int dateWillReduce = 0;
-            int index = 0;
+            String content = "";
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   if (LastStep != null) {
                         laststep = true;
                   }
                   ProcessDAO processdao = new ProcessDAO();
                   OrderDAO orderdao = new OrderDAO();
+                  HistoryUpdateProcessDAO historydao = new HistoryUpdateProcessDAO();
                   if (addcompleted >= totalquanNeed - quantityCompleted) {
                         full = processdao.updateQuantityCompleted(totalquanNeed, ProcessID, OrderID, CageID);
                         if (full) {
@@ -92,31 +106,34 @@ public class UpdateStatusProcessController extends HttpServlet {
 
                                           }
                                           if (updatefrom == true && !process.getProcessID().equals(ProcessID)) {
-
-                                                for (DesignForProcessDTO design : designList) {
-                                                      if (process.getPhrase().equals(design.getPhrase())) {
+//                                                for (DesignForProcessDTO design : designList) {
+                                                DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
+                                                if (design != null) {
 //                                                            tính ngày dựa trên thiết kế trong design
-                                                            endDate = calculateProcessDate(startDate, process.getQuantity(),
-                                                                    design.getTimeProcess(), design.getNumberOfEmployee(),
-                                                                    design.getNumCompletionCage(), process.getNumberOfEmployee());
-                                                            processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
-                                                            // ngày kết thúc của bước trc sẽ thành ngày bắt đầu của bước sau
-                                                            startDate = endDate;
+                                                      endDate = calculateProcessDate(startDate, process.getQuantity(),
+                                                              design.getTimeProcess(), design.getNumberOfEmployee(),
+                                                              design.getNumCompletionCage(), process.getNumberOfEmployee());
+                                                      processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
+                                                      // ngày kết thúc của bước trc sẽ thành ngày bắt đầu của bước sau
+                                                      startDate = endDate;
 //                                                            nếu đã update bước đó xong thì qua bước tiếp, không để chạy hết vòng lặp
-                                                            break;
-                                                      }
+//                                                      break;
                                                 }
-                                               
                                           }
+
+//                                          }
                                     }
                               }
                         }
                   } else {
                         result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
                   }
-
+                  content = "Update Quantity Complete in step: " + addComplete;
+                  result = historydao.insertHistory(ProcessID, OrderID, CageID, now, content, "Quantity Complete", currUser.getUserID());
                   if (result) {
-                        url = "MainController?btAction=ViewProcessDetail";
+                        url = "MainController?btAction=ViewProcessDetail"
+                                + "&ProcessID="+ ProcessID
+                                + "&CageID="+CageID;
                   }
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
@@ -125,6 +142,7 @@ public class UpdateStatusProcessController extends HttpServlet {
                   String msg = ex.getMessage();
                   log("UpdateStatusProcessController NAMING" + msg);
             } finally {
+//                   response.sendRedirect(url); // dùng RequestDispatcher cũng được
                   request.getRequestDispatcher(url).forward(request, response);
             }
       }

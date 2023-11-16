@@ -6,11 +6,13 @@ package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 import com.vitvang.productionmanagement.model.MaterialDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -28,6 +30,16 @@ public class ViewMaterialController extends HttpServlet {
 
             String url = ERROR_PAGE;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   MaterialDAO dao = new MaterialDAO();
                   dao.AllMaterialDB();
                   List<MaterialDTO> show = dao.getListMaterial();

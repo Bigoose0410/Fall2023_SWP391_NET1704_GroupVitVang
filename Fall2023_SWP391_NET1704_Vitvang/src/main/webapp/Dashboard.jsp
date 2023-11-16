@@ -137,7 +137,7 @@
                                    dashboard_customize
                               </span> DASHBOARD</h2>
                     </div>
-                    <form action="MainController">
+                   <form action="MainController" method="POST">
                          <div class="main-cards">
 
                               <div class="card">

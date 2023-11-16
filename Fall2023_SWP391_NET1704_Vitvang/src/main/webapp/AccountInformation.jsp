@@ -168,7 +168,7 @@
                          </div>
                     <c:forEach var="dto" items="${result}">
                          <div class="info_form1">
-                              <form action="MainController">
+                             <form action="MainController" method="POST">
                                    <div class="form-row2">
                                         <label for="userID">User ID: <i>${dto.getUserID()}</i></label>
                                         <input type="hidden" id="userID" name="txtUserID" value="${dto.getUserID()}">
@@ -199,8 +199,8 @@
                                         </c:if>
                                         <br>
                                         <label for="password" >Password: </label>
-                                        <br>
-                                        <br>
+                                             <br>
+                                             <br>
                                         <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}""required="" placeholder="***************************">
                                         <br>
                                         <br>
