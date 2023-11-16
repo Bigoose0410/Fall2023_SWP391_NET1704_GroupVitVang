@@ -125,7 +125,7 @@
                                         <c:forEach var="dto" items="${result}">
                                              <c:if test="${dto.getOrderDetailStatus().equals('new order')}">
                                                   <tr>
-                                             <form action="MainController" method="GET">       
+                                             <form action="MainController" method="POST">       
                                                   <td> 
                                                        <c:set var="count" value="${count + 1}" />
                                                        ${count}
@@ -220,7 +220,7 @@
                                    <c:forEach var="dto" items="${result}">
                                         <c:if test="${dto.getOrderDetailStatus().equals('Processing')}">
                                              <tbody>
-                                             <form action="MainController">         
+                                             <form action="MainController" method="POST">         
                                                   <tr>
                                                        <td>
                                                             <c:set var="count1" value="${count1 + 1}" />
@@ -326,7 +326,7 @@
                                    <c:forEach var="dto" items="${result}">
                                         <c:if test="${dto.getOrderDetailStatus().equals('Done')}">
                                              <tbody>
-                                             <form action="MainController">         
+                                             <form action="MainController" method="POST">         
                                                   <tr>
                                                        <td>
                                                             <c:set var="count1" value="${count1 + 1}" />

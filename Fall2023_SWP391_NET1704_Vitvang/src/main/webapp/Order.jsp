@@ -95,7 +95,7 @@
                <div class="top">
                     <i class="uil uil-bars sidebar-toggle"></i>
                     <div class="search-box">
-                         <form action="MainController"> 
+                        <form action="MainController" method="POST"> 
 
                               <input type="text" value="${param.txtSearchValue}" name="txtSearchValue" placeholder="Search here..." class="searchh" >
                               <button value="Search" name="btAction"><i class="uil uil-search"></i></button>
@@ -197,7 +197,7 @@
 
                               <c:forEach var="dto" items="${result}" varStatus="counter">
 
-                              <form class="form-order" action="MainController" method="get">
+                              <form class="form-order" action="MainController" method="POST">
                                    <div class="activity-data">
                                         <tr>
                                              <td class="data-list" style="text-align: start;font-size:18px; ">

@@ -20,6 +20,8 @@ public class HistoryUpdateProcessDTO {
       private Date UpdateDate;
       private String Content;
       private String TypeOfUpdate;
+      private String UserIDUpdate;
+      private String UserNameUpdate;
 
       public HistoryUpdateProcessDTO() {
       }
@@ -33,6 +35,35 @@ public class HistoryUpdateProcessDTO {
             this.UpdateDate = UpdateDate;
             this.TypeOfUpdate = TypeOfUpdate;
       }
+
+      public HistoryUpdateProcessDTO(String ProcessName, String ProcessID, String OrderID, String CageID, String Content, Date UpdateDate ,String TypeOfUpdate, String UserIDUpdate, String UserNameUpdate) {
+            this.ProcessName = ProcessName;
+            this.ProcessID = ProcessID;
+            this.OrderID = OrderID;
+            this.CageID = CageID;
+            this.Content = Content;
+            this.UpdateDate = UpdateDate;
+            this.TypeOfUpdate = TypeOfUpdate;
+            this.UserIDUpdate = UserIDUpdate;
+            this.UserNameUpdate = UserNameUpdate;
+      }
+
+      public String getUserIDUpdate() {
+            return UserIDUpdate;
+      }
+
+      public void setUserIDUpdate(String UserIDUpdate) {
+            this.UserIDUpdate = UserIDUpdate;
+      }
+
+      public String getUserNameUpdate() {
+            return UserNameUpdate;
+      }
+
+      public void setUserNameUpdate(String UserNameUpdate) {
+            this.UserNameUpdate = UserNameUpdate;
+      }
+      
 
       public int getHistoryID() {
             return HistoryID;

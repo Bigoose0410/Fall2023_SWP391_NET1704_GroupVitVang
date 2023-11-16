@@ -76,7 +76,7 @@ public class AddOrderController extends HttpServlet {
 //                        foundErr = true;
 //                  }
                   if (Address.trim().length() < 6) {
-                        error.setAddressLengthErr("Pls type again, Address too short, maybe something wrong!!");
+                        error.setAddressLengthErr("Pls type again, Address too short");
                         foundErr = true;
                   }
 

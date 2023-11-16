@@ -4,7 +4,6 @@ import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.checkRole;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -67,8 +66,9 @@ public class RemoveItemFromCartController extends HttpServlet {
                                 + "?btAction=New Order";
 
             } finally {
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+                  response.sendRedirect(url);
+//                  RequestDispatcher rd = request.getRequestDispatcher(url);
+//                  rd.forward(request, response);
 
             }
       }

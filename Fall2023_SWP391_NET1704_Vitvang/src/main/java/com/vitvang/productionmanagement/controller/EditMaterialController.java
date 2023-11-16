@@ -42,7 +42,7 @@ public class EditMaterialController extends HttpServlet {
                   }
                   int roleID = currUser.getRoleID();
                   //0. check role 
-                  if (!checkRole(roleID, Constant.isManager)) {
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
                         return;
                   }
                   //1. new DAO

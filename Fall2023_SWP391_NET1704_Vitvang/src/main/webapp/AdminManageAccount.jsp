@@ -105,7 +105,7 @@
                                    <c:if test="${not empty result}">
                                         <c:forEach var="dto" items="${result}">
                                              <c:if test="${dto.isUserStatus()}">
-                                             <form action="MainController">
+                                             <form action="MainController" method="POST">
                                                   <tr>
                                                        <td>
                                                             <c:set var="count" value="${count + 1}" />
@@ -138,7 +138,7 @@
                          <c:if test="${not empty searchAccount}">
                               <c:if test="${not empty searchResult}">
                                    <c:forEach var="dto1" items="${searchResult}">
-                                        <form action="MainController">
+                                        <form action="MainController" method="POST">
                                              <tr>
                                                   <td>
                                                        <c:set var="count" value="${count + 1}" />

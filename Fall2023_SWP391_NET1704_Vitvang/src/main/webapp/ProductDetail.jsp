@@ -133,7 +133,7 @@
                <div class="material_table" style="display: none;">
                     <div class="header-row">
                          <h1>Material</h1>
-                         <form action="MainController">
+                         <form action="MainController" method="POST">
                               <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
                               <input type="hidden" name="txtCageName" value="${param.txtCageName}" />
                               <button type="submit" value="EditMaterial" name="btAction"><i
@@ -184,7 +184,7 @@
                <div class="process_table" style="display: none;">
                     <div class="header-row">
                          <h1>Design Process</h1>
-                         <form action="MainController">
+                         <form action="MainController" method="POST">
                               <input type="hidden" name="txtCageID" value="${param.txtCageID}" />
                               <input type="hidden" name="txtCageName" value="${param.txtCageName}" />
                               <button type="submit" value="EditDesign" name="btAction"><i

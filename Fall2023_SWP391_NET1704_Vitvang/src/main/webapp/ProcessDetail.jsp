@@ -31,6 +31,10 @@
 
 
      <body>
+          <c:url var="logout_query" value="MainController">
+               <c:param name="cookiekey" value="${sessionScope.USER.getName()}"/>
+               <c:param value="Log Out" name="btAction"/>
+          </c:url>
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>      
@@ -171,7 +175,7 @@
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
-                                                                 <form action="MainController">
+                                                                 <form action="MainController" method="POST">
                                                                       <!--lastStep-->
                                                                  <c:if test="${ result[result.size()-1].getProcessID().equals(currentStep.getProcessID())}">
                                                                       <input type="hidden" name="LastStep" 
@@ -265,6 +269,7 @@
                                                                  <th>Process Name</th>
                                                                  <th>Type Update</th>
                                                                  <th>Update Content</th>
+                                                                 <th>User Update</th>
                                                                  <th>Update date</th>
                                                             </tr>
                                                        </thead>
@@ -279,6 +284,8 @@
                                                                       <td>${dto.getTypeOfUpdate()}</td>
 
                                                                       <td>${dto.getContent()}</td>
+                                                                      
+                                                                      <td>${dto.getUserIDUpdate()} - ${dto.getUserNameUpdate()}</td>
 
                                                                       <td>
                                                                            <fmt:formatDate var="date" value="${dto.getUpdateDate()}" pattern="dd-MM-yyyy" />

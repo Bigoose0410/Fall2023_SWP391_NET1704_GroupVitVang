@@ -66,7 +66,7 @@ public class UpdateStatusProcessController extends HttpServlet {
                   }
                   int roleID = currUser.getRoleID();
                   //0. check role 
-                  if (!checkRole(roleID, Constant.isManager)) {
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
                         return;
                   }
                   if (LastStep != null) {
@@ -129,9 +129,11 @@ public class UpdateStatusProcessController extends HttpServlet {
                         result = processdao.updateQuantityCompleted(addcompleted + quantityCompleted, ProcessID, OrderID, CageID);
                   }
                   content = "Update Quantity Complete in step: " + addComplete;
-                  result = historydao.insertHistory(ProcessID, OrderID, CageID, now, content, "Quantity Complete");
+                  result = historydao.insertHistory(ProcessID, OrderID, CageID, now, content, "Quantity Complete", currUser.getUserID());
                   if (result) {
-                        url = "MainController?btAction=ViewProcessDetail";
+                        url = "MainController?btAction=ViewProcessDetail"
+                                + "&ProcessID="+ ProcessID
+                                + "&CageID="+CageID;
                   }
             } catch (SQLException ex) {
                   String msg = ex.getMessage();
@@ -140,6 +142,7 @@ public class UpdateStatusProcessController extends HttpServlet {
                   String msg = ex.getMessage();
                   log("UpdateStatusProcessController NAMING" + msg);
             } finally {
+//                   response.sendRedirect(url); // dùng RequestDispatcher cũng được
                   request.getRequestDispatcher(url).forward(request, response);
             }
       }

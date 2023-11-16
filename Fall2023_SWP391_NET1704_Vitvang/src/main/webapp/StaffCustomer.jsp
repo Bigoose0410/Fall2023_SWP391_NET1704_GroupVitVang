@@ -85,7 +85,7 @@
           </nav>
           <section class="dashboard">
                <h1><strong>Account</strong></h1>
-               <form action="MainController">
+               <form action="MainController" method="POST">
                     <div class="header">
                          <div class="search">
                               <input type="text" name="txtSearchAccount" value="" placeholder="Customer...">
@@ -111,7 +111,7 @@
                                    <c:if test="${dto.isUserStatus()}">
 
                                         <div class="group-box">
-                                             <form action="MainController">
+                                             <form action="MainController" method="POST">
                                                   <span><a href="Information.html">${dto.getUserID()}</a></span>
 
                                                   <div class="group-content">
@@ -133,7 +133,7 @@
                     </c:if>
                     <c:if test="${not empty searchAccount}">
                          <c:if test="${not empty searchResult}">
-                              <form action="MainController">
+                              <form action="MainController" method="POST">
                                    <c:forEach var="dto1" items="${searchResult}">
                                         <div class="group-box">
                                              <span><a href="Information.html">${dto1.getUserID()}</a></span>

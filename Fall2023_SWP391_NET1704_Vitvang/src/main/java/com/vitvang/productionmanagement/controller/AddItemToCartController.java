@@ -9,7 +9,6 @@ import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.model.UserDTO;
 import com.vitvang.productionmanagement.util.Constant;
 import static com.vitvang.productionmanagement.util.tool.checkRole;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -76,9 +75,9 @@ public class AddItemToCartController extends HttpServlet {
                   String msg = ex.getMessage();
                   log("CalculateDetailMaterial SQL" + msg);
             } finally {
-//            response.sendRedirect(url); // dùng RequestDispatcher cũng được
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                  rd.forward(request, response);
+            response.sendRedirect(url); // dùng RequestDispatcher cũng được
+//                  RequestDispatcher rd = request.getRequestDispatcher(url);
+//                  rd.forward(request, response);
             }
       }
 

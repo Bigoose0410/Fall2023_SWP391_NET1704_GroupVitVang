@@ -46,7 +46,7 @@ public class UpdateEmpProcessController extends HttpServlet {
             Date endDate = null;
             boolean flag = false;
             boolean result = false;
-            String content =  "Update number of employee to: " + NumberOfEmployee;
+            String content = "Update number of employee to: " + NumberOfEmployee;
             String url = ERROR_PAGE;
             try {
                   HttpSession session = request.getSession();// phai luon co san session
@@ -56,7 +56,7 @@ public class UpdateEmpProcessController extends HttpServlet {
                   }
                   int roleID = currUser.getRoleID();
                   //0. check role 
-                  if (!checkRole(roleID, Constant.isManager)) {
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
                         return;
                   }
                   // 1.new DAO
@@ -72,45 +72,50 @@ public class UpdateEmpProcessController extends HttpServlet {
                   for (ProcessDTO process : processdao.getListOrdersProcess()) {
                         if (process.getProcessID().equals(ProcessID)) {
                               if (process.getNumberOfEmployee() == employee) {
-                                    url = "MainController?btAction=ViewProcessDetail";
+                                    url = "MainController?btAction=ViewProcessDetail"
+                                            + "&ProcessID=" + ProcessID
+                                            + "&CageID=" + CageID;;
                                     return;
                               }
 //                              for (DesignForProcessDTO design : designList) {
-                                   DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
-                                    if (design != null) {
-                                          endDate = calculateProcessDate(process.getStartDate(), process.getQuantity(),
-                                                  design.getTimeProcess(), design.getNumberOfEmployee(),
-                                                  design.getNumCompletionCage(), employee);
-                                          processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, process.getStartDate(), endDate, employee);
-                                          startDate = endDate;
-                                          flag = true;
+                              DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
+                              if (design != null) {
+                                    endDate = calculateProcessDate(process.getStartDate(), process.getQuantity(),
+                                            design.getTimeProcess(), design.getNumberOfEmployee(),
+                                            design.getNumCompletionCage(), employee);
+                                    processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, process.getStartDate(), endDate, employee);
+                                    startDate = endDate;
+                                    flag = true;
 //                                          break;
-                                    }
+                              }
 //                              }
                         } else if (flag) {
 //                              for (DesignForProcessDTO design : designList) {
-                                     DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
-                                    if (design != null) {
-                                          endDate = calculateProcessDate(startDate, process.getQuantity(),
-                                                  design.getTimeProcess(), design.getNumberOfEmployee(),
-                                                  design.getNumCompletionCage(), process.getNumberOfEmployee());
-                                          processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
-                                          startDate = endDate;
-                                          flag = true;
+                              DesignForProcessDTO design = designdao.getCurentDesign(CageID, process.getPhrase());
+                              if (design != null) {
+                                    endDate = calculateProcessDate(startDate, process.getQuantity(),
+                                            design.getTimeProcess(), design.getNumberOfEmployee(),
+                                            design.getNumCompletionCage(), process.getNumberOfEmployee());
+                                    processdao.updateTimeProcess(process.getProcessID(), OrderID, CageID, startDate, endDate, process.getNumberOfEmployee());
+                                    startDate = endDate;
+                                    flag = true;
 //                                          break;
-                                    }
+                              }
 //                              }
                         }
                   }
-                  result = historydao.insertHistory(ProcessID, OrderID, CageID, now, content , "Employee");
+                  result = historydao.insertHistory(ProcessID, OrderID, CageID, now, content, "Employee", currUser.getUserID());
                   if (result) {
-                        url = "MainController?btAction=ViewProcessDetail";
+                        url = "MainController?btAction=ViewProcessDetail"
+                                + "&ProcessID=" + ProcessID
+                                + "&CageID=" + CageID;
                   }
             } catch (SQLException ex) {
                   log("UpdateEmpProcessController _ SQL" + ex.getMessage());
             } catch (NamingException ex) {
                   log("UpdateEmpProcessController _ NAMING" + ex.getMessage());
             } finally {
+//                  response.sendRedirect(url); // dùng RequestDispatcher cũng được
                   request.getRequestDispatcher(url).forward(request, response);
             }
       }

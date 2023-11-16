@@ -37,12 +37,14 @@ public class HistoryUpdateProcessDAO {
                   // tra ra null or k.
                   if (con != null) {
 
-                        String sql = "select c.ProcessName, h.OrderID, h.Phrase, h.CageID ,h.ProcessID ,h.Content, h.UpdateDate, h.TypeOfUpdate " +
+                        String sql = "select c.ProcessName, h.OrderID, h.Phrase, h.CageID ,h.ProcessID ,h.Content, h.UpdateDate, h.TypeOfUpdate, h.UserIDUpdate , u.Name " +
 "                                from  HistoryUpdateProcess h inner join Process c  " +
 "                                on h.ProcessID = c.ProcessID "
                                 + "AND h.OrderID = c.OrderID "
-                                + "AND h.CageID = c.CageID " +
-"								where h.ProcessID like  ? "
+                                + "AND h.CageID = c.CageID "
+                                + "inner join Users u "
+                                + "on h.UserIDUpdate = u.UserID " 
+                                +    "where h.ProcessID like  ? "
                                 + "AND h.OrderID like  ? "
                                 + "AND h.CageID like ?  ";
                         stm = con.prepareStatement(sql);
@@ -54,9 +56,12 @@ public class HistoryUpdateProcessDAO {
                               String ProcessName = rs.getString("ProcessName");                            
                               String Content = rs.getString("Content");
                               String typeUpdate = rs.getString("TypeOfUpdate");
-                              Date UpdateDate = rs.getDate("UpdateDate");                             
-
-                              HistoryUpdateProcessDTO history = new HistoryUpdateProcessDTO(ProcessName, processID, OrderID, CageID, Content, UpdateDate, typeUpdate);
+                              Date UpdateDate = rs.getDate("UpdateDate");  
+                              String UserIDUpdate = rs.getString("UserIDUpdate");
+                              String Username = rs.getString("Name");
+                              
+//                              HistoryUpdateProcessDTO history = new HistoryUpdateProcessDTO(ProcessName, processID, OrderID, CageID, Content, UpdateDate, typeUpdate);
+                                    HistoryUpdateProcessDTO history = new HistoryUpdateProcessDTO(ProcessName, processID, OrderID, CageID, Content,UpdateDate ,typeUpdate, UserIDUpdate, Username);
                               if (this.listHistoryUpdateProcess == null) {
                                     this.listHistoryUpdateProcess = new ArrayList<HistoryUpdateProcessDTO>();
                               }
@@ -76,7 +81,7 @@ public class HistoryUpdateProcessDAO {
             }
       }
       
-       public boolean insertHistory(String processID, String OrderID, String CageID, Date UpdateDate ,String Content, String TypeOfUpdate)
+       public boolean insertHistory(String processID, String OrderID, String CageID, Date UpdateDate ,String Content, String TypeOfUpdate, String userID)
               throws SQLException, NamingException {
             Connection con = null;
             PreparedStatement stm = null;
@@ -84,8 +89,8 @@ public class HistoryUpdateProcessDAO {
                   con = DBHelper.makeConnection();
                   // tra ra null or k.
                   if (con != null) {
-                        String sql = "Insert into HistoryUpdateProcess ( ProcessID, OrderID, CageID, UpdateDate , Content, TypeOfUpdate) " +
-"							Values ( ?, ?, ?, ?, ?, ? ) ";
+                        String sql = "Insert into HistoryUpdateProcess ( ProcessID, OrderID, CageID, UpdateDate , Content, TypeOfUpdate, UserIDUpdate) " +
+"							Values ( ?, ?, ?, ?, ?, ? , ?) ";
                         stm = con.prepareStatement(sql);
                         stm.setString(1, processID);
                         stm.setString(2, OrderID);
@@ -93,6 +98,7 @@ public class HistoryUpdateProcessDAO {
                         stm.setDate(4, UpdateDate);
                         stm.setString(5, Content);
                         stm.setString(6, TypeOfUpdate);
+                        stm.setString(7, userID);
                         int row = stm.executeUpdate();
                         if (row > 0) {
                               return true;

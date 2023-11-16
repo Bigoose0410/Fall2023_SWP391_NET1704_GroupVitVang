@@ -77,6 +77,7 @@ public class ProcessController extends HttpServlet {
             } catch (SQLException e) {
                   log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {
+//                  response.sendRedirect(url);
                   request.getRequestDispatcher(url).forward(request, response);
             }
       }

@@ -33,10 +33,8 @@ public class SearchOrderController extends HttpServlet {
                   HttpSession session  = request.getSession();
                   UserDTO currUser = (UserDTO) session.getAttribute("USER");
                   if (currUser == null) {
-                        System.out.println("null roi");
                         return;
                   }                
-                  System.out.println("current ko null");
                   OrderDAO dao = new OrderDAO();
                   if (searchValue == null) {
                         searchValue = "";
@@ -69,7 +67,7 @@ public class SearchOrderController extends HttpServlet {
                   }
                  
                   url = OrderSearch;
-                  request.setAttribute("TOTAL_ORDER", result.size());
+                  request.setAttribute("TOTAL_ORDER", dao.countAllOrder());
                   request.setAttribute("PROCESS_ORDER", dao.countProcessingOrder());
                   request.setAttribute("NEW_ORDER", dao.countNewOrder());
                   request.setAttribute("START", start);
