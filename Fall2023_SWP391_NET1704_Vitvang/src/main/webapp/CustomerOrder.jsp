@@ -1,19 +1,21 @@
 <%-- 
-    Document   : CustomerOrder
-    Created on : Nov 5, 2023, 6:41:42 PM
+    Document   : test
+    Created on : Nov 16, 2023, 11:50:18 AM
     Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 
      <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <!----======== CSS ======== -->
+          <!--          <link rel="stylesheet" href="css/CustomerOrder.css">
+                    <link rel="stylesheet" href="css/Dashboard.css">-->
           <link rel="stylesheet" href="css/CustomerOrder.css">
-          <link rel="stylesheet" href="css/Dashboard.css">
 
           <!----===== Iconscout CSS ===== -->
           <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -71,7 +73,7 @@
           </style>  
      </head>
 
-     <body>                    
+     <body>
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction" />
           </c:url>
@@ -118,111 +120,56 @@
           <c:set var="result" value="${requestScope.CUSTOMER_ORDER}" />
           <section class="dashboard">
                <div class="header">
-                    <h1>Danh Mục Sản Phẩm</h1>
-                    <div class="search">
-                         <input type="text" placeholder="Search...">
-                         <button type="button">Search</button>
-                    </div>
+                    <h1>Your Order</h1>
                </div>
                <c:if test="${not empty result}">
                     <div class="container">
-                         <c:forEach var="dto" items="${result}" >
-                              <form action="MainController" method="POST">
-                                   <div class="mySwiper">
-                                        <div class="swiper-slide" id="savanna">
-                                             <div class="main">
-                                                  <div class="left-side">
-                                                       <div class="main-wrapper">
-                                                            <h3 class="main-header" style="font-weight: bold">${dto.getCageID()}/       ${dto.getOrderID()}</h3>
-                                                            <input type="hidden" name="txtCageID" value="${dto.getCageID()}" />
-                                                            <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
-                                                            <h1 class="main-title">${dto.getName()}</h1>
-                                                            <h2 class="main-subtitle">Status: ${dto.getOrderDetailStatus()}</h2>
-                                                            <h3>Quantity: ${dto.getQuantityOrder()}</h3>
-                                                       </div>
-                                                       <div class="main-content">
-                                                            <div class="main-content__title">
-                                                                 Come from: ${dto.getOrigin()}
-                                                            </div>
-                                                            <div class="main-content__subtitle">
-                                                                 Description: ${dto.getDescription()}
-                                                            </div>
-                                                            <!--<a href="Process.html"> <button class="more-menu"><strong>Process</strong></button></a>-->
-                                                            <button type="submit" class="more-menu" name="btAction" value="CustomerTracking"><strong>Process</strong></button>
-                                                       </div>
-                                                  </div>
-                                                  <div class="center">
-                                                       <div class="right-side__img">
-                                                            <img class="bottle-bg"
-                                                                 src="https://i.pinimg.com/736x/d3/69/81/d36981aa38aec939c776717d0660a0d6.jpg" />
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                        </div>
+                         <div class="processing_table">
+                              <!--Design Processing table-->
+                              <div class="table-container1">
+                                   <table>
+                                        <thead>
+                                             <tr>
+                                                  <th>No.</th>
+                                                  <th>Order ID</th>
+                                                  <th>Start Date</th>
+                                                  <th>Total Price</th>
+                                                  <th>Order Status</th>
+                                                  <th>Detail</th>
+                                             </tr>
+                                        </thead>
 
-                                        <!--                    <div class="swiper-slide" id="savanna">
-                                                                 <div class="main">
-                                                                      <div class="left-side">
-                                                                           <div class="main-wrapper">
-                                                                                <h3 class="main-header">Closca Bottle</h3>
-                                                                                <h1 class="main-title">Savanna</h1>
-                                                                                <h2 class="main-subtitle">€ 39.90</h2>
-                                                                           </div>
-                                                                           <div class="main-content">
-                                                                                <div class="main-content__title">The Earth’s area affected by desertification is approx
-                                                                                     11 times India’s size.
-                                                                                </div>
-                                                                                <div class="main-content__subtitle">The Savannas act as a carbon sink, absorbing CO2
-                                                                                     from the atmosphere and helping to maintain the balance of global temperatures.
-                                                                                </div>
-                                                                                <div>
-                                                                                     <a href="Process.html"> <button class="more-menu"><strong>Process</strong></button></a>
-                                                                                </div>
-                                                                           </div>
-                                        
-                                                                      </div>
-                                                                      <div class="center">
-                                                                           <div class="right-side__img">
-                                                                                <img class="bottle-bg"
-                                                                                     src="https://i.pinimg.com/236x/dc/ab/eb/dcabeb04860e941fc2609278e95109c3.jpg" />
-                                                                           </div>
-                                                                      </div>
-                                                                 </div>
-                                                            </div>
-                                        
-                                                            <div class="swiper-slide" id="savanna">
-                                                                 <div class="main">
-                                                                      <div class="left-side">
-                                                                           <div class="main-wrapper">
-                                                                                <h3 class="main-header">Closca Bottle</h3>
-                                                                                <h1 class="main-title">Savanna</h1>
-                                                                                <h2 class="main-subtitle">€ 39.90</h2>
-                                                                           </div>
-                                                                           <div class="main-content">
-                                                                                <div class="main-content__title">The Earth’s area affected by desertification is approx
-                                                                                     11 times India’s size.
-                                                                                </div>
-                                                                                <div class="main-content__subtitle">The Savannas act as a carbon sink, absorbing CO2
-                                                                                     from the atmosphere and helping to maintain the balance of global temperatures.
-                                                                                </div>
-                                                                                <a href="Process.html"> <button class="more-menu"><strong>Process</strong></button></a>
-                                                                           </div>
-                                                                      </div>
-                                                                      <div class="center">
-                                                                           <div class="right-side__img">
-                                                                                <img class="bottle-bg"
-                                                                                     src="https://i.pinimg.com/564x/21/d3/dd/21d3ddfd618b42fe42ea96c69ff34892.jpg" />
-                                                                           </div>
-                                                                      </div>
-                                                                 </div>
-                                                            </div>-->
+                                        <tbody>
+                                        <form action="MainController">
+                                             <c:forEach var="dto" items="${result}" varStatus="counter">
+                                                  <tr>
+                                                       <td>${counter.count}</td>
 
-                                   </div>
-                              </form>
-                         </c:forEach>
+                                                       <td>${dto.getOrderID()}</td>
+
+                                                       <td>${dto.getStartDate()}</td>
+
+                                                       <td> <fmt:formatNumber currencySymbol="₫" value="${dto.getTotalPrice()}" type="number" pattern="#,##0"  /> ₫</td>
+
+                                                       <td>${dto.getOrderStatus()}</td>
+
+                                                  <input type="hidden" name="txtOrderID" value="${dto.getOrderID()}" />
+
+                                                  <td class="view_button">
+                                                       <button type="submit" value="View Order Detail" name="btAction"><i class="fa fa-list-alt"></i></button>
+
+                                                  </td>
+
+                                                  </tr>
+                                             </c:forEach>
+                                        </form>
+                                        </tbody>
+                                   </table>
+                              </div>
+                         </div>
                     </div>
                </c:if>
-               <c:if test="${empty result}" >
+               <c:if test="${empty result}">
                     <h1 style="color: red; font-style: italic"> You don't have any order !!!</h1>
                </c:if>
           </section>

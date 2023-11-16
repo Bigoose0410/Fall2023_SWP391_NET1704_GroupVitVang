@@ -27,12 +27,15 @@ import java.util.logging.Logger;
 public class CustomerOrderController extends HttpServlet {
 
       private final String CustomerOrder = "CustomerOrder.jsp";
+      private final String CustomerOrderDetail = "CustomerOrderDetail.jsp";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException {
             response.setContentType("text/html;charset=UTF-8");
             String url = "ErrorPage.html";
             try {
+                  String button = request.getParameter("btAction");
+                  String OrderID = request.getParameter("txtOrderID");
                   HttpSession session = request.getSession();// phai luon co san session
                   UserDTO currUser = (UserDTO) session.getAttribute("USER");
                   if (currUser == null) {
@@ -44,14 +47,21 @@ public class CustomerOrderController extends HttpServlet {
 //                        return;
 //                  }
                   /* TODO output your page here. You may use following sample code. */
-                  UserDTO user = (UserDTO) session.getAttribute("USER");
+
                   String UserID = user.getUserID();
 
                   CustomerDAO dao = new CustomerDAO();
-                  dao.getCustomerOrder(UserID);
-                  List<CageDTO> list = dao.getListOrder();
-                  request.setAttribute("CUSTOMER_ORDER", list);
-                  url = CustomerOrder;
+                  if (!button.equals("View Order Detail")) {
+                        dao.getCustomerOrder(UserID);
+                        List<CageDTO> list = dao.getListOrder();
+                        request.setAttribute("CUSTOMER_ORDER", list);
+                        url = CustomerOrder;
+                  } else {
+                        dao.getCustomerOrderDetail(UserID, OrderID);
+                        List<CageDTO> list = dao.getListOrder();
+                        request.setAttribute("CUSTOMER_ORDER_DETAIL", list);
+                        url = CustomerOrderDetail;
+                  }
             } catch (SQLException e) {
                   e.printStackTrace();
             } finally {

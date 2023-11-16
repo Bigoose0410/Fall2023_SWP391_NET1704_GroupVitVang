@@ -183,25 +183,16 @@
                                         <label for="gender">Gender: <i>${dto.getSex()}</i></label>    
                                    </div>
 
-
+                                   <div class="form-row2">
+                                        <label for="name">Username: <i>${dto.getUsername()}</i></label>                  
+                                   </div>
                                    <div class="form-row">
-                                        <label for="username">Username: </label>
-                                        <br>
-                                        <br>
-                                        <input type="text" id="username" name="txtUsername" value="${dto.getUsername()}" required="">
-                                        <c:if test="${not empty err.getUsernameExistErr()}">
-                                             <p>${err.getUsernameExistErr()}</p>
-                                        </c:if>
-                                        <br>
-                                        <br>
-                                        <c:if test="${not empty err.getUsernameFormatErr()}">
-                                             <p >${err.getUsernameFormatErr()}</p>
-                                        </c:if>
-                                        <br>
+
                                         <label for="password" >Password: </label>
-                                             <br>
-                                             <br>
-                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}""required="" placeholder="***************************">
+                                        <br>
+                                        <br>
+                                        <input type="password"  id="password" name="txtPassword" value="${param.txtPassword}" required="" placeholder="***************************">
+
                                         <br>
                                         <br>
                                         <c:if test="${not empty err.getPasswordFormatErr()}">

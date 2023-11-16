@@ -129,17 +129,17 @@ public class AccountDAO implements Serializable {
             }
       }
 
-      public boolean UpdateAccountWithPassowd(String UserID, String Username, String Password, String Email, String Address, String PhoneNumber) throws SQLException {
+      public boolean UpdateAccountWithPassowd(String UserID, String Password, String Email, String Address, String PhoneNumber) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
                         String sql = "UPDATE Users "
-                                + "SET Username = ?, Password= ?, Email= ?, Adress= ?, PhoneNumber= ? "
+                                + "SET Password= ?, Email= ?, Adress= ?, PhoneNumber= ? "
                                 + "WHERE UserID = ? ";
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, Username);
+//                        stm.setString(1, Username);
                         stm.setString(2, Password);
                         stm.setString(3, Email);
                         stm.setString(4, Address);
@@ -164,17 +164,17 @@ public class AccountDAO implements Serializable {
             return false;
       }
 
-      public boolean UpdateAccountWithoutPassword(String UserID, String Username, String Email, String Address, String PhoneNumber) throws SQLException {
+      public boolean UpdateAccountWithoutPassword(String UserID, String Email, String Address, String PhoneNumber) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
                         String sql = "UPDATE Users "
-                                + "SET Username = ?, Email= ?, Adress= ?, PhoneNumber= ? "
+                                + "SET Email= ?, Adress= ?, PhoneNumber= ? "
                                 + "WHERE UserID = ? ";
                         stm = con.prepareStatement(sql);
-                        stm.setString(1, Username);
+//                        stm.setString(1, Username);
                         stm.setString(2, Email);
                         stm.setString(3, Address);
                         stm.setString(4, PhoneNumber);

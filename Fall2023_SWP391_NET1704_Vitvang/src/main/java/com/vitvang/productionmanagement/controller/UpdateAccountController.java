@@ -115,10 +115,10 @@ public class UpdateAccountController extends HttpServlet {
                         List<AccountDTO> detail = dao.getListAccount();
                         request.setAttribute("ACCOUNT_DETAIL", detail);
                         if (Password.equalsIgnoreCase("")) {
-                              update = dao.UpdateAccountWithoutPassword(UserID, Username, Email, Address, PhoneNumber);
+                              update = dao.UpdateAccountWithoutPassword(UserID, Email, Address, PhoneNumber);
                         } else {
                               Password = userdao.EncodePass(Password);
-                              update = dao.UpdateAccountWithPassowd(UserID, Username, Password, Email, Address, PhoneNumber);
+                              update = dao.UpdateAccountWithPassowd(UserID, Password, Email, Address, PhoneNumber);
                         }
                         if (update) {
                               url = "MainController?btAction=ViewAccountDetail&UserID=" + UserID;
