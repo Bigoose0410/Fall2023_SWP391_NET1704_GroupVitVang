@@ -1,5 +1,4 @@
 package com.vitvang.productionmanagement.controller;
-
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
@@ -21,6 +20,7 @@ import java.util.logging.Logger;
 @WebServlet(name = "CustomerUpdateAccountController", urlPatterns = {"/CustomerUpdateAccountController"})
 public class CustomerUpdateAccountController extends HttpServlet {
 
+
       private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
       private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
@@ -41,9 +41,9 @@ public class CustomerUpdateAccountController extends HttpServlet {
             String Email = request.getParameter("txtEmail");
             String Address = request.getParameter("txtAddress");
             String PhoneNumber = request.getParameter("txtPhoneNumber");
-            Boolean update = false;
             boolean foundErr = false;
             CreateAccountError error = new CreateAccountError();
+            boolean update = false;
 
             try {
                   HttpSession session = request.getSession();// phai luon co san session
@@ -67,6 +67,9 @@ public class CustomerUpdateAccountController extends HttpServlet {
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         error.setPasswordFormatErr("Password (at least 1 upper letter, 1 lower letter, 1 number)");
                         foundErr = true;
+                        if(Password.equalsIgnoreCase("")){
+                              foundErr = false;
+                        }
                   }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {

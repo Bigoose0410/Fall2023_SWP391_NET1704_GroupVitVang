@@ -32,11 +32,14 @@
           <c:url var="productionList" value="MainController">
                <c:param value="SearchCage" name="btAction"/>
           </c:url>
-          <nav>
-               <div class="logo-name" style="
+          <c:set var="CageID" value="${param.txtCageID}"></c:set>
+          <c:set var="Design" value="${requestScope.DESIGN_PROCESS}"></c:set>
+               <nav>
+
+                    <div class="logo-name" style="
                     display: block;">
                     <div class="logo-image">
-                         <a src="HomePage.html"><img src="img/OIP.jpg" alt=""></a>
+                         <a src="HomePage.html"><img src="img/staff.png" alt=""></a>
                          <span class="logo_name">${sessionScope.USER.getName()}</span>
                     </div>
 

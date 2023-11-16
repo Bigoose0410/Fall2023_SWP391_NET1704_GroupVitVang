@@ -102,10 +102,10 @@ public class CreateAccountController extends HttpServlet {
                         foundErr = true;
                   }
 
-                  if (RoleID < 1 || RoleID > 4) {
-                        error.setRoleIDFormatErr("Role ID (1 - 4)");
-                        foundErr = true;
-                  }
+//                  if (RoleID < 1 || RoleID > 4) {
+//                        error.setRoleIDFormatErr("Role ID (1 - 4)");
+//                        foundErr = true;
+//                  }
 
                   if (Name.trim().length() < 6 || Name.trim().length() > 30) {
                         error.setNameFormatErr("Name (6 - 30 chars)");

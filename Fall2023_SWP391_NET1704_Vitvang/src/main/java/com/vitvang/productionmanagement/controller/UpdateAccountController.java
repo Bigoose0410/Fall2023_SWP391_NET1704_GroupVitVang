@@ -68,9 +68,13 @@ public class UpdateAccountController extends HttpServlet {
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         error.setPasswordFormatErr("Password (at least 1 upper letter, 1 lower letter, 1 number)");
                         foundErr = true;
-                  } else if (!checkFormat(Password, SPACE_PATTERN, true)) {
-                        error.setPasswordFormatErr("Password cannot inclue space");
-                        foundErr = true;
+                  }
+//                  } else if (!checkFormat(Password, SPACE_PATTERN, true)) {
+//                        error.setPasswordFormatErr("Password cannot inclue space");
+//                        foundErr = true;
+//                  }
+                  if(Password.equalsIgnoreCase("")){
+                         foundErr = false;
                   }
 
 //                  if (!ConfirmPassword.trim().equals(Password.trim())) {
@@ -94,10 +98,11 @@ public class UpdateAccountController extends HttpServlet {
                   if (Address.trim().length() < 6) {
                         error.setAddressFormatErr("Addrress too short (>6)");
                         foundErr = true;
-                  } else if (!checkFormat(Address, CHECK_SPACE_PATTERN, true)) {
-                        error.setAddressFormatErr("Wrong format about space");
-                        foundErr = true;
                   }
+//                  else if (!checkFormat(Address, CHECK_SPACE_PATTERN, true)) {
+//                        error.setAddressFormatErr("Wrong format about space");
+//                        foundErr = true;
+//                  }
                   
                   if (foundErr) {
                         request.setAttribute("UPDATE_ACCOUNT_ERR", error);
