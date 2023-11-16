@@ -291,8 +291,8 @@
                                         </c:forEach>
                                         </tr>         
                                    </table>
-                                   <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice}" type="number" pattern="#,##0" /> ₫</span> </p>
-                                   <input type="hidden" name="txtTotalPrice" value="${totalprice}" />
+                                   <p>Total Price: <span style="color: red"><fmt:formatNumber value="${totalprice * 10000}" type="number" pattern="#,##0" /> ₫</span> </p>
+                                   <input type="hidden" name="txtTotalPrice" value="${totalprice * 10000}" />
                               </c:if>
                               <%--</c:if>--%>
                          </fieldset>

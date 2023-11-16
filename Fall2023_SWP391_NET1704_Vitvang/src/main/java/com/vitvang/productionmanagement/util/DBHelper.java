@@ -16,7 +16,6 @@ import java.util.logging.Logger;
  */
 public class DBHelper {
 
-<<<<<<< HEAD
         public static Connection makeConnection() {
                 Connection conn = null;
                 try {
@@ -30,21 +29,7 @@ public class DBHelper {
                 }
                 return conn;
         }
-=======
-      public static Connection makeConnection() {
-            Connection conn = null;
-            try {
-                  String dbURL = "jdbc:sqlserver://ADMIN\\TEW_SQLEXPRESS:1433;databaseName=ProductionManagement;encrypt=true;trustServerCertificate=true;";
-                  String user = "sa";
-                  String pass = "123456";
-                  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                  conn = DriverManager.getConnection(dbURL, user, pass);
-            } catch (ClassNotFoundException | SQLException ex) {
-                  System.out.println("Error DB");
-            }
-            return conn;
-      }
->>>>>>> a65639080288c964ada3b8ca6f69ce5dca14f547
+
 
       public static void closeConnection(Connection conn) {
 

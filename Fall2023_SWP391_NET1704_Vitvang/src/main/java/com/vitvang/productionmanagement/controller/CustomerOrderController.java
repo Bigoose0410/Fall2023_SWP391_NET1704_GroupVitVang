@@ -40,17 +40,17 @@ public class CustomerOrderController extends HttpServlet {
                   String OrderID = request.getParameter("txtOrderID");
                   HttpSession session = request.getSession();// phai luon co san session
                   UserDTO user = (UserDTO) session.getAttribute("USER");
-                  if (user == null) {
-                        return;
-                  }
-                  int roleID = user.getRoleID();
-//                  0. check role 
-                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
-                        return;
-                  }
+//                  if (user == null) {
+//                        return;
+//                  }
+//                  int roleID = user.getRoleID();
+////                  0. check role 
+//                  if (!checkRole(roleID, Constant.isCustomer)) {
+//                        return;
+//                  }
                   /* TODO output your page here. You may use following sample code. */
 
-                  String UserID = currUser.getUserID();
+                  String UserID = user.getUserID();
 
                   CustomerDAO dao = new CustomerDAO();
                   if (!button.equals("View Order Detail")) {
