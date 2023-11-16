@@ -323,33 +323,56 @@ public class UserDAO implements Serializable {
             return listCustomerHaveOrder;
       }
 
-      public void getCustomerHaveOrder() throws SQLException {
+      public void getCustomerHaveOrder(String searchValue) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             ResultSet rs = null;
-
             try {
                   con = (Connection) DBHelper.makeConnection();
                   if (con != null) {
-                        String sql = "SELECT Users.* "
-                                + "FROM Users "
-                                + "WHERE Users.RoleID = 4";
-                        stm = con.prepareStatement(sql);
-                        rs = stm.executeQuery();
-                        while (rs.next()) {
-                              String UserID = rs.getString("UserID");
-                              String Name = rs.getString("Name");
-                              String PhoneNumber = rs.getString("PhoneNumber");
-                              String Sex = rs.getString("Sex");
-                              String Address = rs.getString("Adress");
-                              Date BirthDate = rs.getDate("BirthDate");
-                              String Email = rs.getString("Email");
-                              Boolean UserStatus = rs.getBoolean("UserStatus");
-                              UserInformationDTO cus_order = new UserInformationDTO(UserID, Name, PhoneNumber, Sex, Address, BirthDate, Email, UserStatus);
-                              if (this.listCustomerHaveOrder == null) {
-                                    this.listCustomerHaveOrder = new ArrayList<UserInformationDTO>();
+                        if (searchValue == null) {
+                              String sql = "SELECT Users.* "
+                                      + "FROM Users "
+                                      + "WHERE Users.RoleID = 4";
+                              stm = con.prepareStatement(sql);
+                              rs = stm.executeQuery();
+                              while (rs.next()) {
+                                    String UserID = rs.getString("UserID");
+                                    String Name = rs.getString("Name");
+                                    String PhoneNumber = rs.getString("PhoneNumber");
+                                    String Sex = rs.getString("Sex");
+                                    String Address = rs.getString("Adress");
+                                    Date BirthDate = rs.getDate("BirthDate");
+                                    String Email = rs.getString("Email");
+                                    Boolean UserStatus = rs.getBoolean("UserStatus");
+                                    UserInformationDTO cus_order = new UserInformationDTO(UserID, Name, PhoneNumber, Sex, Address, BirthDate, Email, UserStatus);
+                                    if (this.listCustomerHaveOrder == null) {
+                                          this.listCustomerHaveOrder = new ArrayList<UserInformationDTO>();
+                                    }
+                                    this.listCustomerHaveOrder.add(cus_order);
                               }
-                              this.listCustomerHaveOrder.add(cus_order);
+                        } else {
+                              String sql = "SELECT Users.* "
+                                      + "FROM Users "
+                                      + "WHERE Users.RoleID = 4 AND Name LIKE ?";
+                              stm = con.prepareStatement(sql);
+                              stm.setString(1, "%" + searchValue + "%");
+                              rs = stm.executeQuery();
+                              while (rs.next()) {
+                                    String UserID = rs.getString("UserID");
+                                    String Name = rs.getString("Name");
+                                    String PhoneNumber = rs.getString("PhoneNumber");
+                                    String Sex = rs.getString("Sex");
+                                    String Address = rs.getString("Adress");
+                                    Date BirthDate = rs.getDate("BirthDate");
+                                    String Email = rs.getString("Email");
+                                    Boolean UserStatus = rs.getBoolean("UserStatus");
+                                    UserInformationDTO cus_order = new UserInformationDTO(UserID, Name, PhoneNumber, Sex, Address, BirthDate, Email, UserStatus);
+                                    if (this.listCustomerHaveOrder == null) {
+                                          this.listCustomerHaveOrder = new ArrayList<UserInformationDTO>();
+                                    }
+                                    this.listCustomerHaveOrder.add(cus_order);
+                              }
                         }
                   }
             } finally {
@@ -366,7 +389,7 @@ public class UserDAO implements Serializable {
             }
       }
 
-      public void getCustomerHaveOrder(String UserID) throws SQLException {
+      public void getInforCustomerHaveOrder(String UserID) throws SQLException {
             Connection con = null;
             PreparedStatement stm = null;
             ResultSet rs = null;

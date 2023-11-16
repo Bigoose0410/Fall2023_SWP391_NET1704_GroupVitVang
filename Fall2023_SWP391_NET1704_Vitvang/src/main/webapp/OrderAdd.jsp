@@ -111,7 +111,7 @@
                <h1>PURCHASE</h1>
                <div class="form">
 
-                    <form action="MainController" method="GET" novalidate="novalidate">
+                    <form action="MainController" method="POST" novalidate="novalidate">
                          <fieldset id="info">
                               <legend>Order Info</legend>
 
@@ -240,7 +240,7 @@
                                         <tr>
                                              <c:set var="totalprice" value=""></c:set>
                                              <c:forEach items="${cartlist}" var="key" varStatus="counter">
-                                             <form action="MainController" method="GET">
+                                             <form action="MainController" method="POST">
                                                   <tr>
                                                        <td>
                                                             ${counter.count}

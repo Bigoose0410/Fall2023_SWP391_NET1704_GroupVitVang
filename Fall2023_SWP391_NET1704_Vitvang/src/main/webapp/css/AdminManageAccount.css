@@ -3,9 +3,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
 */
 /* 
-    Created on : Nov 6, 2023, 11:52:31 PM
+    Created on : Nov 10, 2023, 8:42:37 AM
     Author     : Admin
 */
+
 * {
      margin: 0;
      padding: 0;
@@ -105,6 +106,19 @@ nav {
      padding: 10px 0;
 }
 
+
+.nav-links {
+     flex: 1 1 auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}
+
+.nav-links li {
+     padding: 10px 0;
+}
+
 nav.close {
      width: 73px;
 }
@@ -158,7 +172,6 @@ nav .menu-items {
      text-decoration: none;
      position: relative;
 }
-
 .nav-links li a:hover:before {
      content: "";
      position: absolute;
@@ -278,62 +291,115 @@ body.dark nav {
 }
 
 /*Dashboard*/
-/*button add process*/
-h1 {
-     text-align: center;
-     font-size: 40px;
-     color: #007BFF;
+/* Search Styles */
+.search {
+     display: flex;
+     align-items: center;
 }
 
-.add_button button {
-     background: none;
-     border: none;
-     cursor: pointer;
-}
-
-.add_button button .fa {
-     font-size: 22px;
-     color: #757575; /* Adjust the color as needed */
-     transition: color 0.3s; /* Add transition for hover effect */
-}
-
-.add_button button .fa:focus {
+.search input {
+     width: 300px;
+     padding: 10px;
+     margin-right: 10px;
+     border: 1px solid #757575;
+     border-radius: 5px;
      outline: none;
 }
 
-.add_button button:hover .fa {
-     color: orange; /* Change color on hover if desired */
+.search input:hover {
+     border: 1px solid #333;
 }
 
-/*Design Processing table*/
-.table-container1 {
+.search button {
+     padding: 10px 10px;
+     border: none;
+     border-radius: 5px;
+     background-color: blue;
+     /* Change the button color as needed */
+     color: #fff;
+     cursor: pointer;
+}
+
+.search button:hover {
+     background-color: rgb(14, 14, 180);
+     /* Change the button color as needed */
+}
+
+
+h1 {
+     text-align: center;
+     margin: 10px;
+}
+
+/*account table*/
+.account_table,
+.processing_table {
+     margin-top: 20px;
+}
+
+.table-container {
      overflow-x: auto;
      border-radius: 10px;
      border: 1px solid black;
 }
 
-.table-container1 table {
+.table-container table {
      width: 100%;
      border-collapse: collapse;
 }
 
-.table-container1 th,
-.table-container1 td {
+.table-container th,
+.table-container td {
      padding: 10px;
      text-align: center;
 }
 
-.table-container1 th {
+.table-container th {
      color: white;
-     background-color: #007BFF;
+     background-color: #007bff;
 }
 
-.table-container1 tbody tr:nth-child(even) {
+.table-container tbody tr:nth-child(even) {
      background-color: #e6fcfa;
 }
 
-.table-container1 tbody tr:hover {
+.table-container tbody tr:hover {
      background-color: #ddd;
+}
+
+/* Button Styling */
+button {
+     cursor: pointer;
+     color: black;
+}
+
+/* Button Hover Effect */
+button:hover {
+     cursor: pointer;
+}
+
+.button a {
+     background-color: #007bff;
+     color: white;
+     padding: 5px 10px;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     text-decoration: none;
+     margin-right: 10px;
+     padding: 10px;
+}
+
+.button a:hover {
+     background-color: #206fc5;
+}
+
+.header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     /* Optional: Align elements vertically */
+     padding: 10px 0px;
 }
 
 /*button view processing*/
@@ -355,71 +421,4 @@ h1 {
 
 .view_button button:hover .fa {
      color: purple; /* Change color on hover if desired */
-}
-
-/*Show table*/
-
-.table-container {
-     margin: 10px 0px;
-}
-
-.table-container1 {
-     margin: 10px 0px;
-}
-
-/*Information*/
-/* Định dạng container chứa hình ảnh và thông tin */
-.information {
-     max-width: 85%;
-     display: flex;
-     align-items: center;
-     margin: 20px;
-     border: 1px solid #ccc;
-     padding: 15px;
-     box-shadow: -13px 20px 10px 5px rgba(0, 0, 0, 0.1); /* Thêm shadow */
-}
-
-h2 {
-     text-align: center;
-     margin-bottom: 40px;
-}
-
-/* Styles for the icon */
-.icon img {
-     max-width: 120px;
-     height: auto;
-     margin-right: 20px;
-     padding: 10px;
-     border: 2px solid #333;
-}
-
-/* Styles for the information section */
-.info {
-     flex: 1;
-}
-
-/* Styles for the form and table */
-.info form {
-     width: 100%;
-}
-
-.info table {
-     width: 100%;
-     border-collapse: collapse;
-     margin-top: 20px;
-}
-
-.info td {
-     padding: 0px 0px;
-     text-align: left;
-}
-
-.info label {
-     font-weight: bold;
-     margin-left: 20px;
-     margin: 0px 20px;
-}
-
-.info i {
-     margin-right: 50px;
 }

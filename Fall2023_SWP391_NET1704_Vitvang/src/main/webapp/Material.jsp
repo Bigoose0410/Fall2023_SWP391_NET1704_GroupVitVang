@@ -89,24 +89,6 @@
                               </li>
                          </ul>
                     </div>
-
-                    <ul class="logout-mode">
-                         <li><a href="${logout_query}">
-                                   <i class="uil uil-signout"></i>
-                                   <span class="link-name">Logout</span>
-                              </a></li>
-
-                         <li class="mode">
-                              <a href="#">
-                                   <i class="uil uil-moon"></i>
-                                   <span class="link-name">Dark Mode</span>
-                              </a>
-
-                              <div class="mode-toggle">
-                                   <span class="switch"></span>
-                              </div>
-                         </li>
-                    </ul>
                </div>
           </nav>
           <section class="dashboard">
@@ -120,7 +102,7 @@
                                    <th>Name / Unit</th>
                                    <th>Origin</th>
                                    <th>Price</th>
-                                   <th>Quantity</th>
+                                   <!--<th>Quantity</th>-->
                                    <th>Edit</th>
                               </tr>
                          </thead>
@@ -138,7 +120,7 @@
                                         </td>
 
                                         <td>
-                                                   ${dto.getNameMaterial()} / ${dto.getUnit()}
+                                                   ${dto.getNameMaterial()} (${dto.getUnit()})
                                         </td>
 
                                         <td>
@@ -152,13 +134,13 @@
                                                   <span class="input-highlight"></span>
                                              </div>
                                         </td>
-                                        <td>
+<!--                                        <td>
                                              <div class="input-container">
                                                   <input placeholder="Quantity" class="input-field" type="number" value="${dto.getQuantity()}" min="0"
                                                          max="1000000" name="txtQuantity"  oninput="this.value = Math.abs(this.value)">
                                                   <span class="input-highlight"></span>
                                              </div>
-                                        </td>
+                                        </td>-->
 
                                         
 
@@ -179,7 +161,7 @@
                <button class="custom-btn btn-1">New Material</button>
 
                <div class="tablesorter-custom1" style="display: none;">
-                    <form action="MainController">
+                   <form action="MainController" method="POST">
 
                          <div class="step">
                               <div class="step-header">

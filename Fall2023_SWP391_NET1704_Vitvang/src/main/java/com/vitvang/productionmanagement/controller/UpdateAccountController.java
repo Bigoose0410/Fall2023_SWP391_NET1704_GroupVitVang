@@ -4,6 +4,7 @@ import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
 import com.vitvang.productionmanagement.model.AccountDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,12 +21,15 @@ import java.util.logging.Logger;
 @WebServlet(name = "UpdateAccountController", urlPatterns = {"/UpdateAccountController"})
 public class UpdateAccountController extends HttpServlet {
 
+      private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
-      private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"; //check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
+      private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";//check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
-      private final String NAME_PATTERN = "^[^0-9]$"; //khong chua so
+      private final String NOT_NUMBER_PATTERN = "^[^0-9]*$"; //khong chua so
+      private final String CHECK_SPACE_PATTERN = "^(?!.*\\s{2})\\S+(\\s\\S+)?\\s{0,4}\\S+$"; //dau va cuoi khong co khoang trang, giua 2 tu khong qua 2 khoang trang, toi da 5 khoang trang
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
@@ -42,6 +47,16 @@ public class UpdateAccountController extends HttpServlet {
             CreateAccountError error = new CreateAccountError();
 
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;
@@ -53,13 +68,21 @@ public class UpdateAccountController extends HttpServlet {
                   if (!checkFormat(Password, PASSWORD_PATTERN, true)) {
                         error.setPasswordFormatErr("Password (at least 1 upper letter, 1 lower letter, 1 number)");
                         foundErr = true;
-                        if (Password.equalsIgnoreCase("")) {
-                              foundErr = false;
-                        }
+                  } else if (!checkFormat(Password, SPACE_PATTERN, true)) {
+                        error.setPasswordFormatErr("Password cannot inclue space");
+                        foundErr = true;
                   }
+
+//                  if (!ConfirmPassword.trim().equals(Password.trim())) {
+//                        error.setConfirmPasswordNotMatchErr("Confirm password not match");
+//                        foundErr = true;
+//                  }
 
                   if (!checkFormat(Email, EMAIL_PATTERN, true)) {
                         error.setEmailFormatErr("Wrong format email (***@gmail.com");
+                        foundErr = true;
+                  } else if (!checkFormat(Email, CHECK_SPACE_PATTERN, true)) {
+                        error.setEmailFormatErr("Email cannot inclue space");
                         foundErr = true;
                   }
 
@@ -69,9 +92,13 @@ public class UpdateAccountController extends HttpServlet {
                   }
 
                   if (Address.trim().length() < 6) {
-                        error.setAddressFormatErr("Address too short");
+                        error.setAddressFormatErr("Addrress too short (>6)");
+                        foundErr = true;
+                  } else if (!checkFormat(Address, CHECK_SPACE_PATTERN, true)) {
+                        error.setAddressFormatErr("Wrong format about space");
                         foundErr = true;
                   }
+                  
                   if (foundErr) {
                         request.setAttribute("UPDATE_ACCOUNT_ERR", error);
                         request.setAttribute("MESSAGE_CREATE_FAIL", "Update account failed!!!");

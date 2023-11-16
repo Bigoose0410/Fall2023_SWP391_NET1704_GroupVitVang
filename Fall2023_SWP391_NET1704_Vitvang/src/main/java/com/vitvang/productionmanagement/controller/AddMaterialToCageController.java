@@ -1,15 +1,19 @@
 
 package com.vitvang.productionmanagement.controller;
+import com.vitvang.productionmanagement.dao.material.MaterialDAO;
+import com.vitvang.productionmanagement.model.UserDTO;
+import com.vitvang.productionmanagement.util.Constant;
+import static com.vitvang.productionmanagement.util.tool.checkRole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.naming.NamingException;
-import com.vitvang.productionmanagement.dao.material.MaterialDAO;
 
 /**
  *
@@ -26,6 +30,16 @@ public class AddMaterialToCageController extends HttpServlet {
             String quantity = request.getParameter("txtQuantity");
             String url = ERROR_PAGE;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+                  int roleID = currUser.getRoleID();
+                  //0. check role 
+                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+                        return;
+                  }
                   int numadd;
                   numadd = (quantity != null) ? Integer.parseInt(quantity) : 1;
 

@@ -211,7 +211,7 @@
           </section>
                <div class="button-continue">
                <c:if test="${not empty InAddOrder}">
-                    <form action="MainController">
+                    <form action="MainController" method="POST">
                          <input type="hidden" name="txtOrderID" value="${param.txtOrderID}" />
                          <input type="hidden" name="txtCustomerID" value="${param.txtCustomerID}" />
                          <input type="hidden" name="txtEndDate" value="${param.txtEndDate}" />

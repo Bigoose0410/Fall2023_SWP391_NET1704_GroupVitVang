@@ -1,12 +1,14 @@
 package com.vitvang.productionmanagement.controller;
 import com.vitvang.productionmanagement.model.CageDTO;
 import com.vitvang.productionmanagement.dao.cage.CageDAO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,6 +29,11 @@ public class SearchCageController extends HttpServlet {
             String url = ERROR_PAGE;
             String searchCageValue = request.getParameter("txtSearchValue");
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }                
                   // 1.new dao
                   CageDAO dao = new CageDAO();
                   // 2. call method

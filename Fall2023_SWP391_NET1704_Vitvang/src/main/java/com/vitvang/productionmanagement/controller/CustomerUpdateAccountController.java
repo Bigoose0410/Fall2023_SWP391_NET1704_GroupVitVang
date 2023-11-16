@@ -1,9 +1,10 @@
- 
 package com.vitvang.productionmanagement.controller;
+
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.dao.users.UserDAO;
 import com.vitvang.productionmanagement.exception.account.CreateAccountError;
 import com.vitvang.productionmanagement.model.AccountDTO;
+import com.vitvang.productionmanagement.model.UserDTO;
 import static com.vitvang.productionmanagement.util.tool.checkFormat;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,12 +20,16 @@ import java.util.logging.Logger;
 
 @WebServlet(name = "CustomerUpdateAccountController", urlPatterns = {"/CustomerUpdateAccountController"})
 public class CustomerUpdateAccountController extends HttpServlet {
+
+      private final String AdminCreateAccount = "AdminCreateAccount.jsp";
       private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String USERID_PATTERN = "^(CS|ST|MG|AD)\\d{3}$";
       private final String PHONENUMBER_PATTERN = "((^(\\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$";
       private final String EMAIL_PATTERN = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$";
-      private final String PASSWORD_PATTERN ="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"; //check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
+      private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";//check 1 ky tu hoa, 1 ky tu thuong, 1 so, it nhat 8 ky tu
       private final String SPACE_PATTERN = "^[^\\s]+$"; //check neu khong co khoang trong
-      private final String NAME_PATTERN = "^[^0-9]$"; //khong chua so
+      private final String NOT_NUMBER_PATTERN = "^[^0-9]*$"; //khong chua so
+      private final String CHECK_SPACE_PATTERN = "^(?!.*\\s{2})\\S+(\\s\\S+)?\\s{0,4}\\S+$"; //dau va cuoi khong co khoang trang, giua 2 tu khong qua 2 khoang trang, toi da 5 khoang trang
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, Exception {
@@ -35,11 +41,21 @@ public class CustomerUpdateAccountController extends HttpServlet {
             String Email = request.getParameter("txtEmail");
             String Address = request.getParameter("txtAddress");
             String PhoneNumber = request.getParameter("txtPhoneNumber");
-
+            Boolean update = false;
             boolean foundErr = false;
             CreateAccountError error = new CreateAccountError();
 
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }
+//                  int roleID = currUser.getRoleID();
+//                  //0. check role 
+//                  if (!checkRole(roleID, Constant.isManager) && !checkRole(roleID, Constant.isStaff)) {
+//                        return;
+//                  }
                   if (!checkFormat(Username.trim(), SPACE_PATTERN, true)) {
                         error.setUsernameFormatErr("Username cannot inclue space");
                         foundErr = true;
@@ -71,14 +87,34 @@ public class CustomerUpdateAccountController extends HttpServlet {
                         request.setAttribute("UPDATE_ACCOUNT_ERR", error);
                         request.setAttribute("MESSAGE_CREATE_FAIL", "Update account failed!!!");
                         url = "MainController?btAction=CustomerAccount&UserID=" + UserID;
-                  } else {
+                  } else //else {
+                  //                        UserDAO userdao = new UserDAO();
+                  //                        AccountDAO dao = new AccountDAO();
+                  //                        dao.ViewAccountDetail(UserID);
+                  //                        List<AccountDTO> detail = dao.getListAccount();
+                  //                        request.setAttribute("ACCOUNT_DETAIL", detail);
+                  //                        Password = userdao.EncodePass(Password);
+                  //                        boolean update = dao.UpdateAccount(UserID, Username, Password, Email, Address, PhoneNumber);
+                  //                        if (update) {
+                  //                              url = "MainController?btAction=CustomerAccount&UserID=" + UserID;
+                  //                              request.setAttribute("MESSAGE", "Update successfully");
+                  //                        } else {
+                  //                              url = "MainController?btAction=CustomerAccount&UserID=" + UserID;
+                  //                              request.setAttribute("MESSAGE", "Update account failed");
+                  //                        }
+                  //                  }
+                  {
                         UserDAO userdao = new UserDAO();
                         AccountDAO dao = new AccountDAO();
                         dao.ViewAccountDetail(UserID);
                         List<AccountDTO> detail = dao.getListAccount();
                         request.setAttribute("ACCOUNT_DETAIL", detail);
-                        Password = userdao.EncodePass(Password);
-                        boolean update = dao.UpdateAccount(UserID, Username, Password, Email, Address, PhoneNumber);
+                        if (Password.equalsIgnoreCase("")) {
+                              update = dao.UpdateAccountWithoutPassword(UserID, Username, Email, Address, PhoneNumber);
+                        } else {
+                              Password = userdao.EncodePass(Password);
+                              update = dao.UpdateAccountWithPassowd(UserID, Username, Password, Email, Address, PhoneNumber);
+                        }
                         if (update) {
                               url = "MainController?btAction=CustomerAccount&UserID=" + UserID;
                               request.setAttribute("MESSAGE", "Update successfully");

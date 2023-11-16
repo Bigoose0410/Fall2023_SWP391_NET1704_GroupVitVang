@@ -121,7 +121,7 @@
                          </div>
                     <c:forEach var="dto" items="${result}">
                          <div class="info_form1">
-                              <form action="MainController">
+                             <form action="MainController" method="POST">
                                    <div class="form-row2">
                                         <label for="userID">User ID: <i>${dto.getUserID()}</i></label>
                                         <input type="hidden" id="userID" name="txtUserID" value="${dto.getUserID()}">

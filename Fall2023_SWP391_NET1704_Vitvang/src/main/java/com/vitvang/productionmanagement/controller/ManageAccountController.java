@@ -6,12 +6,14 @@ package com.vitvang.productionmanagement.controller;
 
 import com.vitvang.productionmanagement.dao.account.AccountDAO;
 import com.vitvang.productionmanagement.model.AccountDTO;
-import java.io.IOException;
+import com.vitvang.productionmanagement.model.UserDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,14 +27,20 @@ import javax.naming.NamingException;
 @WebServlet(name = "ManageAccountController", urlPatterns = {"/ManageAccountController"})
 public class ManageAccountController extends HttpServlet {
 
-      private final String AdminCustomerAccount = "AdminCustomerAccount.jsp";
-            private static final String ERROR_PAGE = "ErrorPage.html";
+      private final String AdminManageAccount = "AdminManageAccount.jsp";
+      private static final String ERROR_PAGE = "ErrorPage.html";
 
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
               throws ServletException, IOException, SQLException, NamingException {
             response.setContentType("text/html;charset=UTF-8");
             String url = ERROR_PAGE;
             try {
+                  HttpSession session = request.getSession();// phai luon co san session
+                  UserDTO currUser = (UserDTO) session.getAttribute("USER");
+                  if (currUser == null) {
+                        return;
+                  }                 
+                 
                   AccountDAO dao = new AccountDAO();
                   dao.showListAccount();
                   List<AccountDTO> list = dao.getListAccount();
@@ -42,7 +50,7 @@ public class ManageAccountController extends HttpServlet {
 //                        }
 //                  }
                   request.setAttribute("ACCOUNT_RESULT", list);
-                  url = AdminCustomerAccount;
+                  url = AdminManageAccount;
             } catch (SQLException e) {
                   log("LOGINSERVLET _ SQL" + e.getMessage());
             } finally {
